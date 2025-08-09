@@ -1,0 +1,712 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+---
+
+<MainLayout 
+  title="Calculadora de Probabilidades - Ruleta" 
+  description="Calcula las probabilidades exactas, pagos esperados y ventaja de la casa para cualquier tipo de apuesta en ruleta europea y americana."
+>
+  
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-br from-blue-600 via-indigo-700 to-blue-800 text-white py-12">
+    <div class="container mx-auto px-4 text-center">
+      <div class="max-w-4xl mx-auto">
+        <h1 class="text-3xl md:text-5xl font-bold mb-4">
+          🧮 Calculadora de Probabilidades
+        </h1>
+        <p class="text-lg md:text-xl mb-6 text-blue-100">
+          Conoce las probabilidades exactas y descubre 
+          <span class="text-yellow-300 font-semibold">cuánto favorecen realmente al casino</span>
+        </p>
+        <div class="bg-white/10 backdrop-blur-sm rounded-lg p-4 max-w-2xl mx-auto">
+          <p class="text-blue-100">
+            📊 <strong>Matemáticas transparentes:</strong> Todos los cálculos al descubierto
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Calculator -->
+  <section class="py-12 bg-gray-50">
+    <div class="container mx-auto px-4">
+      <div class="max-w-6xl mx-auto">
+        
+        <!-- Roulette Type Selector -->
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+          <h2 class="text-2xl font-bold text-gray-900 mb-4 text-center">Tipo de Ruleta</h2>
+          <div class="flex flex-col sm:flex-row justify-center gap-4">
+            <button id="europeanBtn" class="flex-1 max-w-xs mx-auto bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-200 active-roulette">
+              🇪🇺 Europea (37 números)
+              <div class="text-sm opacity-90">0, 1-36</div>
+            </button>
+            <button id="americanBtn" class="flex-1 max-w-xs mx-auto bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-200">
+              🇺🇸 Americana (38 números)
+              <div class="text-sm opacity-90">0, 00, 1-36</div>
+            </button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          
+          <!-- Bet Selector -->
+          <div class="bg-white rounded-lg shadow-lg p-6">
+            <h3 class="text-xl font-bold text-gray-900 mb-6">🎯 Selecciona Tipo de Apuesta</h3>
+            
+            <!-- Inside Bets -->
+            <div class="mb-6">
+              <h4 class="font-bold text-gray-800 mb-3">Apuestas Internas (Números específicos)</h4>
+              <div class="grid grid-cols-1 gap-3">
+                <button class="bet-type bg-red-500 hover:bg-red-600 text-white font-medium py-3 px-4 rounded-lg transition-all duration-200 text-left" data-bet="straight" data-numbers="1">
+                  <div class="flex justify-between items-center">
+                    <span>🎯 Pleno (1 número)</span>
+                    <span class="text-sm opacity-90">Paga 35:1</span>
+                  </div>
+                </button>
+                <button class="bet-type bg-orange-500 hover:bg-orange-600 text-white font-medium py-3 px-4 rounded-lg transition-all duration-200 text-left" data-bet="split" data-numbers="2">
+                  <div class="flex justify-between items-center">
+                    <span>🔗 Caballo (2 números)</span>
+                    <span class="text-sm opacity-90">Paga 17:1</span>
+                  </div>
+                </button>
+                <button class="bet-type bg-yellow-600 hover:bg-yellow-700 text-white font-medium py-3 px-4 rounded-lg transition-all duration-200 text-left" data-bet="street" data-numbers="3">
+                  <div class="flex justify-between items-center">
+                    <span>📐 Calle (3 números)</span>
+                    <span class="text-sm opacity-90">Paga 11:1</span>
+                  </div>
+                </button>
+                <button class="bet-type bg-green-600 hover:bg-green-700 text-white font-medium py-3 px-4 rounded-lg transition-all duration-200 text-left" data-bet="corner" data-numbers="4">
+                  <div class="flex justify-between items-center">
+                    <span>🔲 Cuadro (4 números)</span>
+                    <span class="text-sm opacity-90">Paga 8:1</span>
+                  </div>
+                </button>
+                <button class="bet-type bg-teal-600 hover:bg-teal-700 text-white font-medium py-3 px-4 rounded-lg transition-all duration-200 text-left" data-bet="line" data-numbers="6">
+                  <div class="flex justify-between items-center">
+                    <span>📏 Línea (6 números)</span>
+                    <span class="text-sm opacity-90">Paga 5:1</span>
+                  </div>
+                </button>
+              </div>
+            </div>
+
+            <!-- Outside Bets -->
+            <div class="mb-6">
+              <h4 class="font-bold text-gray-800 mb-3">Apuestas Externas (Grupos grandes)</h4>
+              <div class="grid grid-cols-1 gap-3">
+                <button class="bet-type bg-red-600 hover:bg-red-700 text-white font-medium py-3 px-4 rounded-lg transition-all duration-200 text-left active-bet" data-bet="red" data-numbers="18">
+                  <div class="flex justify-between items-center">
+                    <span>🔴 Rojo</span>
+                    <span class="text-sm opacity-90">Paga 1:1</span>
+                  </div>
+                </button>
+                <button class="bet-type bg-gray-800 hover:bg-gray-900 text-white font-medium py-3 px-4 rounded-lg transition-all duration-200 text-left" data-bet="black" data-numbers="18">
+                  <div class="flex justify-between items-center">
+                    <span>⚫ Negro</span>
+                    <span class="text-sm opacity-90">Paga 1:1</span>
+                  </div>
+                </button>
+                <button class="bet-type bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-lg transition-all duration-200 text-left" data-bet="even" data-numbers="18">
+                  <div class="flex justify-between items-center">
+                    <span>🔢 Par</span>
+                    <span class="text-sm opacity-90">Paga 1:1</span>
+                  </div>
+                </button>
+                <button class="bet-type bg-purple-600 hover:bg-purple-700 text-white font-medium py-3 px-4 rounded-lg transition-all duration-200 text-left" data-bet="odd" data-numbers="18">
+                  <div class="flex justify-between items-center">
+                    <span>🎯 Impar</span>
+                    <span class="text-sm opacity-90">Paga 1:1</span>
+                  </div>
+                </button>
+                <button class="bet-type bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-3 px-4 rounded-lg transition-all duration-200 text-left" data-bet="low" data-numbers="18">
+                  <div class="flex justify-between items-center">
+                    <span>📉 1-18 (Passe)</span>
+                    <span class="text-sm opacity-90">Paga 1:1</span>
+                  </div>
+                </button>
+                <button class="bet-type bg-pink-600 hover:bg-pink-700 text-white font-medium py-3 px-4 rounded-lg transition-all duration-200 text-left" data-bet="high" data-numbers="18">
+                  <div class="flex justify-between items-center">
+                    <span>📈 19-36 (Manque)</span>
+                    <span class="text-sm opacity-90">Paga 1:1</span>
+                  </div>
+                </button>
+                <button class="bet-type bg-cyan-600 hover:bg-cyan-700 text-white font-medium py-3 px-4 rounded-lg transition-all duration-200 text-left" data-bet="dozen1" data-numbers="12">
+                  <div class="flex justify-between items-center">
+                    <span>1️⃣ 1ª Docena (1-12)</span>
+                    <span class="text-sm opacity-90">Paga 2:1</span>
+                  </div>
+                </button>
+                <button class="bet-type bg-emerald-600 hover:bg-emerald-700 text-white font-medium py-3 px-4 rounded-lg transition-all duration-200 text-left" data-bet="dozen2" data-numbers="12">
+                  <div class="flex justify-between items-center">
+                    <span>2️⃣ 2ª Docena (13-24)</span>
+                    <span class="text-sm opacity-90">Paga 2:1</span>
+                  </div>
+                </button>
+                <button class="bet-type bg-lime-600 hover:bg-lime-700 text-white font-medium py-3 px-4 rounded-lg transition-all duration-200 text-left" data-bet="dozen3" data-numbers="12">
+                  <div class="flex justify-between items-center">
+                    <span>3️⃣ 3ª Docena (25-36)</span>
+                    <span class="text-sm opacity-90">Paga 2:1</span>
+                  </div>
+                </button>
+                <button class="bet-type bg-violet-600 hover:bg-violet-700 text-white font-medium py-3 px-4 rounded-lg transition-all duration-200 text-left" data-bet="column1" data-numbers="12">
+                  <div class="flex justify-between items-center">
+                    <span>📊 1ª Columna</span>
+                    <span class="text-sm opacity-90">Paga 2:1</span>
+                  </div>
+                </button>
+                <button class="bet-type bg-rose-600 hover:bg-rose-700 text-white font-medium py-3 px-4 rounded-lg transition-all duration-200 text-left" data-bet="column2" data-numbers="12">
+                  <div class="flex justify-between items-center">
+                    <span>📊 2ª Columna</span>
+                    <span class="text-sm opacity-90">Paga 2:1</span>
+                  </div>
+                </button>
+                <button class="bet-type bg-amber-600 hover:bg-amber-700 text-white font-medium py-3 px-4 rounded-lg transition-all duration-200 text-left" data-bet="column3" data-numbers="12">
+                  <div class="flex justify-between items-center">
+                    <span>📊 3ª Columna</span>
+                    <span class="text-sm opacity-90">Paga 2:1</span>
+                  </div>
+                </button>
+              </div>
+            </div>
+
+            <!-- Special Bets -->
+            <div>
+              <h4 class="font-bold text-gray-800 mb-3">Apuestas Especiales</h4>
+              <div class="grid grid-cols-1 gap-3">
+                <button class="bet-type bg-green-700 hover:bg-green-800 text-white font-medium py-3 px-4 rounded-lg transition-all duration-200 text-left" data-bet="zero" data-numbers="1">
+                  <div class="flex justify-between items-center">
+                    <span>🟢 Cero (0)</span>
+                    <span class="text-sm opacity-90">Paga 35:1</span>
+                  </div>
+                </button>
+                <button id="doubleZeroBtn" class="bet-type bg-green-800 hover:bg-green-900 text-white font-medium py-3 px-4 rounded-lg transition-all duration-200 text-left hidden" data-bet="double-zero" data-numbers="1">
+                  <div class="flex justify-between items-center">
+                    <span>🟢 Doble Cero (00)</span>
+                    <span class="text-sm opacity-90">Paga 35:1</span>
+                  </div>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Results Display -->
+          <div class="space-y-6">
+            
+            <!-- Current Calculation -->
+            <div class="bg-white rounded-lg shadow-lg p-6">
+              <h3 class="text-xl font-bold text-gray-900 mb-4">📊 Cálculo Actual</h3>
+              
+              <div id="currentBet" class="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-4">
+                <h4 class="font-bold text-blue-800 mb-2">🔴 Apuesta: Rojo</h4>
+                <p class="text-blue-700 text-sm">Cubre 18 números de un total de <span id="totalNumbers">37</span></p>
+              </div>
+
+              <div class="space-y-4">
+                <div class="grid grid-cols-2 gap-4">
+                  <div class="bg-green-50 border border-green-200 rounded-lg p-3">
+                    <h5 class="font-bold text-green-800 text-sm mb-1">✅ Probabilidad de Ganar</h5>
+                    <p id="winProbability" class="text-2xl font-bold text-green-600">48.65%</p>
+                    <p id="winOdds" class="text-xs text-green-700">Odds: 1.057 a 1</p>
+                  </div>
+                  <div class="bg-red-50 border border-red-200 rounded-lg p-3">
+                    <h5 class="font-bold text-red-800 text-sm mb-1">❌ Probabilidad de Perder</h5>
+                    <p id="loseProbability" class="text-2xl font-bold text-red-600">51.35%</p>
+                    <p id="loseOdds" class="text-xs text-red-700">Odds: 0.947 a 1</p>
+                  </div>
+                </div>
+
+                <div class="border-t pt-4">
+                  <h5 class="font-bold text-gray-800 mb-3">💰 Análisis Financiero (Apuesta de €100)</h5>
+                  <div class="space-y-2 text-sm">
+                    <div class="flex justify-between">
+                      <span class="text-gray-600">Pago si ganas:</span>
+                      <span id="payoutAmount" class="font-bold text-green-600">€200 (€100 ganancia)</span>
+                    </div>
+                    <div class="flex justify-between">
+                      <span class="text-gray-600">Pérdida si pierdes:</span>
+                      <span class="font-bold text-red-600">€100</span>
+                    </div>
+                    <div class="flex justify-between border-t pt-2">
+                      <span class="text-gray-600">Valor esperado:</span>
+                      <span id="expectedValue" class="font-bold text-red-600">-€2.70</span>
+                    </div>
+                    <div class="flex justify-between">
+                      <span class="text-gray-600">RTP (Return to Player):</span>
+                      <span id="rtpValue" class="font-bold text-red-600">97.30%</span>
+                    </div>
+                    <div class="flex justify-between">
+                      <span class="text-gray-600">Ventaja de la casa:</span>
+                      <span id="houseEdge" class="font-bold text-red-600">2.70%</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Comparison Tool -->
+            <div class="bg-white rounded-lg shadow-lg p-6">
+              <h3 class="text-xl font-bold text-gray-900 mb-4">⚖️ Comparador de Apuestas</h3>
+              <button id="addToComparisonBtn" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition-all duration-200 mb-4">
+                ➕ Añadir a Comparación
+              </button>
+              <div id="comparisonList" class="space-y-3">
+                <p class="text-gray-500 text-center text-sm">No hay apuestas en comparación</p>
+              </div>
+              <button id="clearComparisonBtn" class="bg-gray-500 hover:bg-gray-600 text-white font-medium py-2 px-4 rounded-lg transition-all duration-200 mt-4 hidden">
+                🗑️ Limpiar Todo
+              </button>
+            </div>
+
+            <!-- Mathematical Explanation -->
+            <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-6">
+              <h3 class="text-xl font-bold text-yellow-800 mb-4">🧮 Cómo se Calcula</h3>
+              <div id="mathExplanation" class="space-y-2 text-sm text-yellow-700">
+                <p><strong>Probabilidad de ganar:</strong> 18 números ganadores ÷ 37 números totales = 48.65%</p>
+                <p><strong>Probabilidad de perder:</strong> 19 números perdedores ÷ 37 números totales = 51.35%</p>
+                <p><strong>Valor esperado:</strong> (0.4865 × €100) - (0.5135 × €100) = -€2.70</p>
+                <p><strong>Ventaja de la casa:</strong> 100% - 97.30% = 2.70%</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Probability Table -->
+  <section class="py-12 bg-white">
+    <div class="container mx-auto px-4">
+      <div class="max-w-6xl mx-auto">
+        <h2 class="text-3xl font-bold text-center text-gray-900 mb-8">📈 Tabla Completa de Probabilidades</h2>
+        
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+          <div class="overflow-x-auto">
+            <table class="w-full">
+              <thead class="bg-gray-100">
+                <tr>
+                  <th class="px-6 py-3 text-left text-gray-900 font-bold">Tipo de Apuesta</th>
+                  <th class="px-6 py-3 text-center text-gray-900 font-bold">Números</th>
+                  <th class="px-6 py-3 text-center text-gray-900 font-bold">Pago</th>
+                  <th class="px-6 py-3 text-center text-gray-900 font-bold">Prob. Europea</th>
+                  <th class="px-6 py-3 text-center text-gray-900 font-bold">Prob. Americana</th>
+                  <th class="px-6 py-3 text-center text-gray-900 font-bold">Ventaja Casa (EUR)</th>
+                  <th class="px-6 py-3 text-center text-gray-900 font-bold">Ventaja Casa (USA)</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-gray-200" id="probabilityTable">
+                <!-- Will be populated by JavaScript -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Educational Content -->
+  <section class="py-12 bg-gray-50">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold text-center text-gray-900 mb-8">🎓 Entendiendo las Probabilidades</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div class="bg-white rounded-lg shadow-lg p-6">
+            <h3 class="text-xl font-bold text-blue-800 mb-4">🎯 Conceptos Clave</h3>
+            <ul class="space-y-3 text-sm">
+              <li class="flex items-start gap-2">
+                <span class="text-blue-600 font-bold">•</span>
+                <div>
+                  <strong>Probabilidad:</strong> Fracción de resultados favorables entre todos los posibles
+                </div>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-blue-600 font-bold">•</span>
+                <div>
+                  <strong>Odds:</strong> Relación entre probabilidades de ganar vs perder
+                </div>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-blue-600 font-bold">•</span>
+                <div>
+                  <strong>Valor Esperado:</strong> Ganancia/pérdida promedio a largo plazo
+                </div>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-blue-600 font-bold">•</span>
+                <div>
+                  <strong>RTP:</strong> Porcentaje del dinero apostado que se devuelve
+                </div>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-blue-600 font-bold">•</span>
+                <div>
+                  <strong>Ventaja de la Casa:</strong> Porcentaje que garantiza el casino
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="bg-white rounded-lg shadow-lg p-6">
+            <h3 class="text-xl font-bold text-red-800 mb-4">⚠️ Trampas Mentales</h3>
+            <ul class="space-y-3 text-sm">
+              <li class="flex items-start gap-2">
+                <span class="text-red-600 font-bold">•</span>
+                <div>
+                  <strong>Falacia del Jugador:</strong> Creer que resultados pasados afectan los futuros
+                </div>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-red-600 font-bold">•</span>
+                <div>
+                  <strong>Sesgo de Confirmación:</strong> Solo recordar las veces que ganaste
+                </div>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-red-600 font-bold">•</span>
+                <div>
+                  <strong>Ilusión de Control:</strong> Pensar que puedes influir en el resultado
+                </div>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-red-600 font-bold">•</span>
+                <div>
+                  <strong>Mano Caliente:</strong> Creer en "rachas" cuando todo es aleatorio
+                </div>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-red-600 font-bold">•</span>
+                <div>
+                  <strong>Números "Debidos":</strong> Ningún número tiene más probabilidad que otro
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="mt-8 bg-red-50 border border-red-200 rounded-lg p-6">
+          <h3 class="text-xl font-bold text-red-800 mb-4 text-center">🚨 La Verdad Incómoda</h3>
+          <p class="text-red-700 text-center mb-4">
+            Todas las apuestas en ruleta tienen valor esperado negativo. Esto significa que, matemáticamente, 
+            perderás dinero a largo plazo sin importar qué estrategia uses.
+          </p>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+            <div class="bg-white rounded-lg p-4">
+              <h4 class="font-bold text-red-800 mb-2">Ruleta Europea</h4>
+              <p class="text-red-600">Por cada €100 apostados, perderás €2.70 en promedio</p>
+            </div>
+            <div class="bg-white rounded-lg p-4">
+              <h4 class="font-bold text-red-800 mb-2">Ruleta Americana</h4>
+              <p class="text-red-600">Por cada €100 apostados, perderás €5.26 en promedio</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</MainLayout>
+
+<script>
+class RouletteCalculator {
+  constructor() {
+    this.isEuropean = true;
+    this.currentBet = {
+      type: 'red',
+      numbers: 18,
+      payout: 1,
+      name: 'Rojo'
+    };
+    this.comparison = [];
+    
+    this.betData = {
+      // Outside bets
+      'red': { numbers: 18, payout: 1, name: 'Rojo' },
+      'black': { numbers: 18, payout: 1, name: 'Negro' },
+      'even': { numbers: 18, payout: 1, name: 'Par' },
+      'odd': { numbers: 18, payout: 1, name: 'Impar' },
+      'low': { numbers: 18, payout: 1, name: '1-18' },
+      'high': { numbers: 18, payout: 1, name: '19-36' },
+      'dozen1': { numbers: 12, payout: 2, name: '1ª Docena' },
+      'dozen2': { numbers: 12, payout: 2, name: '2ª Docena' },
+      'dozen3': { numbers: 12, payout: 2, name: '3ª Docena' },
+      'column1': { numbers: 12, payout: 2, name: '1ª Columna' },
+      'column2': { numbers: 12, payout: 2, name: '2ª Columna' },
+      'column3': { numbers: 12, payout: 2, name: '3ª Columna' },
+      
+      // Inside bets
+      'straight': { numbers: 1, payout: 35, name: 'Pleno' },
+      'split': { numbers: 2, payout: 17, name: 'Caballo' },
+      'street': { numbers: 3, payout: 11, name: 'Calle' },
+      'corner': { numbers: 4, payout: 8, name: 'Cuadro' },
+      'line': { numbers: 6, payout: 5, name: 'Línea' },
+      
+      // Special bets
+      'zero': { numbers: 1, payout: 35, name: 'Cero' },
+      'double-zero': { numbers: 1, payout: 35, name: 'Doble Cero' }
+    };
+    
+    this.initializeElements();
+    this.attachEventListeners();
+    this.updateCalculation();
+    this.populateProbabilityTable();
+  }
+
+  initializeElements() {
+    this.elements = {
+      europeanBtn: document.getElementById('europeanBtn'),
+      americanBtn: document.getElementById('americanBtn'),
+      doubleZeroBtn: document.getElementById('doubleZeroBtn'),
+      betTypes: document.querySelectorAll('.bet-type'),
+      currentBet: document.getElementById('currentBet'),
+      totalNumbers: document.getElementById('totalNumbers'),
+      winProbability: document.getElementById('winProbability'),
+      loseProbability: document.getElementById('loseProbability'),
+      winOdds: document.getElementById('winOdds'),
+      loseOdds: document.getElementById('loseOdds'),
+      payoutAmount: document.getElementById('payoutAmount'),
+      expectedValue: document.getElementById('expectedValue'),
+      rtpValue: document.getElementById('rtpValue'),
+      houseEdge: document.getElementById('houseEdge'),
+      mathExplanation: document.getElementById('mathExplanation'),
+      addToComparisonBtn: document.getElementById('addToComparisonBtn'),
+      comparisonList: document.getElementById('comparisonList'),
+      clearComparisonBtn: document.getElementById('clearComparisonBtn'),
+      probabilityTable: document.getElementById('probabilityTable')
+    };
+  }
+
+  attachEventListeners() {
+    this.elements.europeanBtn.addEventListener('click', () => this.setRouletteType(true));
+    this.elements.americanBtn.addEventListener('click', () => this.setRouletteType(false));
+    
+    this.elements.betTypes.forEach(btn => {
+      btn.addEventListener('click', () => this.selectBet(btn));
+    });
+    
+    this.elements.addToComparisonBtn.addEventListener('click', () => this.addToComparison());
+    this.elements.clearComparisonBtn.addEventListener('click', () => this.clearComparison());
+  }
+
+  setRouletteType(isEuropean) {
+    this.isEuropean = isEuropean;
+    
+    // Update button styles
+    if (isEuropean) {
+      this.elements.europeanBtn.classList.add('active-roulette');
+      this.elements.americanBtn.classList.remove('active-roulette');
+      this.elements.doubleZeroBtn.classList.add('hidden');
+    } else {
+      this.elements.americanBtn.classList.add('active-roulette');
+      this.elements.europeanBtn.classList.remove('active-roulette');
+      this.elements.doubleZeroBtn.classList.remove('hidden');
+    }
+    
+    this.updateCalculation();
+    this.populateProbabilityTable();
+  }
+
+  selectBet(button) {
+    // Remove active class from all buttons
+    this.elements.betTypes.forEach(btn => btn.classList.remove('active-bet'));
+    
+    // Add active class to selected button
+    button.classList.add('active-bet');
+    
+    const betType = button.dataset.bet;
+    const betInfo = this.betData[betType];
+    
+    this.currentBet = {
+      type: betType,
+      numbers: parseInt(button.dataset.numbers),
+      payout: betInfo.payout,
+      name: betInfo.name
+    };
+    
+    this.updateCalculation();
+  }
+
+  updateCalculation() {
+    const totalNumbers = this.isEuropean ? 37 : 38;
+    const winningNumbers = this.currentBet.numbers;
+    const losingNumbers = totalNumbers - winningNumbers;
+    
+    // Probabilities
+    const winProb = winningNumbers / totalNumbers;
+    const loseProb = losingNumbers / totalNumbers;
+    
+    // Odds
+    const winOdds = loseProb / winProb;
+    const loseOdds = winProb / loseProb;
+    
+    // Financial analysis (for €100 bet)
+    const betAmount = 100;
+    const winAmount = betAmount * this.currentBet.payout; // Pure winnings
+    const totalReturn = winAmount + betAmount; // Total returned when winning
+    
+    // Expected value (what you get back on average minus what you bet)
+    const expectedValue = (winProb * totalReturn) - betAmount;
+    
+    // RTP and House Edge
+    const rtp = ((winProb * totalReturn) / betAmount) * 100;
+    const houseEdge = 100 - rtp;
+    
+    // Update display
+    this.elements.totalNumbers.textContent = totalNumbers;
+    
+    this.elements.currentBet.innerHTML = `
+      <h4 class="font-bold text-blue-800 mb-2">🎯 Apuesta: ${this.currentBet.name}</h4>
+      <p class="text-blue-700 text-sm">Cubre ${winningNumbers} números de un total de ${totalNumbers}</p>
+    `;
+    
+    this.elements.winProbability.textContent = `${(winProb * 100).toFixed(2)}%`;
+    this.elements.loseProbability.textContent = `${(loseProb * 100).toFixed(2)}%`;
+    this.elements.winOdds.textContent = `Odds: ${winOdds.toFixed(3)} a 1`;
+    this.elements.loseOdds.textContent = `Odds: ${loseOdds.toFixed(3)} a 1`;
+    
+    this.elements.payoutAmount.textContent = `€${totalReturn} (€${winAmount} ganancia)`;
+    this.elements.expectedValue.textContent = `€${expectedValue.toFixed(2)}`;
+    this.elements.rtpValue.textContent = `${rtp.toFixed(2)}%`;
+    this.elements.houseEdge.textContent = `${houseEdge.toFixed(2)}%`;
+    
+    // Update mathematical explanation
+    this.elements.mathExplanation.innerHTML = `
+      <p><strong>Probabilidad de ganar:</strong> ${winningNumbers} números ganadores ÷ ${totalNumbers} números totales = ${(winProb * 100).toFixed(2)}%</p>
+      <p><strong>Probabilidad de perder:</strong> ${losingNumbers} números perdedores ÷ ${totalNumbers} números totales = ${(loseProb * 100).toFixed(2)}%</p>
+      <p><strong>Valor esperado:</strong> (${winProb.toFixed(4)} × €${winAmount}) - (${loseProb.toFixed(4)} × €${betAmount}) = €${expectedValue.toFixed(2)}</p>
+      <p><strong>Ventaja de la casa:</strong> 100% - ${rtp.toFixed(2)}% = ${houseEdge.toFixed(2)}%</p>
+    `;
+  }
+
+  addToComparison() {
+    // Check if bet already in comparison
+    const exists = this.comparison.find(bet => bet.type === this.currentBet.type);
+    if (exists) {
+      alert('Esta apuesta ya está en la comparación');
+      return;
+    }
+    
+    // Calculate values for comparison
+    const totalNumbers = this.isEuropean ? 37 : 38;
+    const winProb = this.currentBet.numbers / totalNumbers;
+    const betAmount = 100;
+    const winAmount = betAmount * this.currentBet.payout;
+    const totalReturn = winAmount + betAmount;
+    const expectedValue = (winProb * totalReturn) - betAmount;
+    const houseEdge = 100 - ((winProb * totalReturn / betAmount) * 100);
+    
+    this.comparison.push({
+      ...this.currentBet,
+      winProb: winProb,
+      expectedValue: expectedValue,
+      houseEdge: houseEdge,
+      roulette: this.isEuropean ? 'Europea' : 'Americana'
+    });
+    
+    this.updateComparisonDisplay();
+  }
+
+  updateComparisonDisplay() {
+    if (this.comparison.length === 0) {
+      this.elements.comparisonList.innerHTML = '<p class="text-gray-500 text-center text-sm">No hay apuestas en comparación</p>';
+      this.elements.clearComparisonBtn.classList.add('hidden');
+      return;
+    }
+    
+    this.elements.clearComparisonBtn.classList.remove('hidden');
+    
+    this.elements.comparisonList.innerHTML = this.comparison.map((bet, index) => `
+      <div class="bg-gray-50 border border-gray-200 rounded-lg p-3">
+        <div class="flex justify-between items-start mb-2">
+          <h5 class="font-bold text-gray-800">${bet.name}</h5>
+          <button onclick="rouletteCalculator.removeFromComparison(${index})" class="text-red-500 hover:text-red-700 text-sm">❌</button>
+        </div>
+        <div class="grid grid-cols-2 gap-2 text-xs">
+          <div>
+            <span class="text-gray-600">Prob. ganar:</span>
+            <span class="font-medium">${(bet.winProb * 100).toFixed(2)}%</span>
+          </div>
+          <div>
+            <span class="text-gray-600">Pago:</span>
+            <span class="font-medium">${bet.payout}:1</span>
+          </div>
+          <div>
+            <span class="text-gray-600">Valor esperado:</span>
+            <span class="font-medium text-red-600">€${bet.expectedValue.toFixed(2)}</span>
+          </div>
+          <div>
+            <span class="text-gray-600">Ventaja casa:</span>
+            <span class="font-medium text-red-600">${bet.houseEdge.toFixed(2)}%</span>
+          </div>
+        </div>
+        <div class="text-xs text-gray-500 mt-1">${bet.roulette}</div>
+      </div>
+    `).join('');
+  }
+
+  removeFromComparison(index) {
+    this.comparison.splice(index, 1);
+    this.updateComparisonDisplay();
+  }
+
+  clearComparison() {
+    this.comparison = [];
+    this.updateComparisonDisplay();
+  }
+
+  populateProbabilityTable() {
+    const bets = [
+      { type: 'straight', name: 'Pleno (1 número)', numbers: 1, payout: 35 },
+      { type: 'split', name: 'Caballo (2 números)', numbers: 2, payout: 17 },
+      { type: 'street', name: 'Calle (3 números)', numbers: 3, payout: 11 },
+      { type: 'corner', name: 'Cuadro (4 números)', numbers: 4, payout: 8 },
+      { type: 'line', name: 'Línea (6 números)', numbers: 6, payout: 5 },
+      { type: 'dozen', name: 'Docena', numbers: 12, payout: 2 },
+      { type: 'column', name: 'Columna', numbers: 12, payout: 2 },
+      { type: 'red', name: 'Rojo/Negro', numbers: 18, payout: 1 },
+      { type: 'even', name: 'Par/Impar', numbers: 18, payout: 1 },
+      { type: 'low', name: 'Alto/Bajo', numbers: 18, payout: 1 }
+    ];
+
+    this.elements.probabilityTable.innerHTML = bets.map(bet => {
+      const probEur = (bet.numbers / 37) * 100;
+      const probUsa = (bet.numbers / 38) * 100;
+      const houseEdgeEur = (1 - (bet.numbers / 37) * (bet.payout + 1)) * 100;
+      const houseEdgeUsa = (1 - (bet.numbers / 38) * (bet.payout + 1)) * 100;
+      
+      return `
+        <tr class="hover:bg-gray-50">
+          <td class="px-6 py-3 font-medium text-gray-900">${bet.name}</td>
+          <td class="px-6 py-3 text-center text-gray-600">${bet.numbers}</td>
+          <td class="px-6 py-3 text-center text-gray-600">${bet.payout}:1</td>
+          <td class="px-6 py-3 text-center text-gray-600">${probEur.toFixed(2)}%</td>
+          <td class="px-6 py-3 text-center text-gray-600">${probUsa.toFixed(2)}%</td>
+          <td class="px-6 py-3 text-center text-red-600 font-medium">${houseEdgeEur.toFixed(2)}%</td>
+          <td class="px-6 py-3 text-center text-red-600 font-medium">${houseEdgeUsa.toFixed(2)}%</td>
+        </tr>
+      `;
+    }).join('');
+  }
+}
+
+// Add CSS for active states
+const style = document.createElement('style');
+style.textContent = `
+  .active-roulette {
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  }
+  
+  .active-bet {
+    transform: scale(1.02);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    border: 2px solid #fbbf24;
+  }
+`;
+document.head.appendChild(style);
+
+// Initialize calculator when page loads
+let rouletteCalculator;
+document.addEventListener('DOMContentLoaded', () => {
+  rouletteCalculator = new RouletteCalculator();
+});
+</script>

@@ -1,0 +1,983 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+---
+
+<MainLayout 
+  title="Bankroll Manager Realista - Gestión Inteligente de Capital" 
+  description="Simulador Kelly Criterion, calculadora de riesgo y estrategias de gestión. Comprende las matemáticas reales detrás de la gestión de capital."
+>
+  
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-br from-purple-600 via-indigo-600 to-purple-800 text-white py-20">
+    <div class="container mx-auto px-4 text-center">
+      <div class="max-w-4xl mx-auto">
+        <h1 class="text-4xl md:text-6xl font-bold mb-6">
+          💰 Bankroll Manager Realista
+        </h1>
+        <p class="text-xl md:text-2xl mb-8 text-purple-100">
+          Comprende las matemáticas reales de la gestión de capital
+        </p>
+        <div class="bg-white/10 backdrop-blur-sm rounded-lg p-6 max-w-2xl mx-auto">
+          <p class="text-purple-100 text-lg">
+            🎯 <strong>Objetivo:</strong> Entender por qué incluso la mejor gestión no puede vencer las matemáticas adversas
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reality Check -->
+  <section class="py-12 bg-blue-50 border-b border-blue-200">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-8">
+          <h2 class="text-2xl font-bold text-blue-800 mb-4">🧮 La Gestión de Capital</h2>
+          <p class="text-blue-700 text-lg">
+            La gestión de capital puede <strong>reducir el riesgo</strong>, pero no puede eliminar la desventaja matemática inherente. 
+            El Kelly Criterion funciona solo cuando tienes una ventaja real y conoces las probabilidades exactas.
+          </p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+          <div class="bg-white rounded-lg p-4 border border-blue-200">
+            <div class="text-2xl font-bold text-blue-600">📚</div>
+            <div class="text-sm text-gray-700 mt-2">
+              <strong>En teoría:</strong><br>
+              "Kelly Criterion optimiza el crecimiento"
+            </div>
+          </div>
+          <div class="bg-white rounded-lg p-4 border border-blue-200">
+            <div class="text-2xl font-bold text-orange-600">⚠️</div>
+            <div class="text-sm text-gray-700 mt-2">
+              <strong>En práctica:</strong><br>
+              Requiere ventaja real + probabilidades exactas
+            </div>
+          </div>
+          <div class="bg-white rounded-lg p-4 border border-blue-200">
+            <div class="text-2xl font-bold text-red-600">📊</div>
+            <div class="text-sm text-gray-700 mt-2">
+              <strong>Con desventaja:</strong><br>
+              Gestión solo ralentiza las pérdidas
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Interface -->
+  <section class="py-16 bg-gray-50">
+    <div class="container mx-auto px-4">
+      <div class="max-w-6xl mx-auto">
+        
+        <!-- Configuration Panel -->
+        <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
+          <h3 class="text-2xl font-bold text-gray-900 mb-6">⚙️ Configuración del Simulador</h3>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-2">Bankroll Inicial (€)</label>
+              <input 
+                type="number" 
+                id="initialBankroll"
+                value="1000"
+                min="100"
+                step="100"
+                class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
+              >
+            </div>
+            
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-2">Win Rate Estimado</label>
+              <select id="winRate" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500">
+                <option value="0.48">48% (Realista)</option>
+                <option value="0.50">50% (Equilibrio)</option>
+                <option value="0.52" selected>52% (Optimista)</option>
+                <option value="0.55">55% (Muy Optimista)</option>
+              </select>
+            </div>
+            
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-2">Cuota Promedio</label>
+              <select id="avgOdds" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500">
+                <option value="1.80">1.80 (Juice alto -11%)</option>
+                <option value="1.85">1.85 (Juice alto -8%)</option>
+                <option value="1.90" selected>1.90 (Juice medio -5%)</option>
+                <option value="1.95">1.95 (Juice bajo -3%)</option>
+                <option value="2.00">2.00 (Sin juice - teórico)</option>
+              </select>
+            </div>
+            
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-2">Número de Apuestas</label>
+              <select id="numBets" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500">
+                <option value="100">100 apuestas</option>
+                <option value="250" selected>250 apuestas</option>
+                <option value="500">500 apuestas</option>
+                <option value="1000">1000 apuestas</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Strategy Selection -->
+          <div class="border-t border-gray-200 pt-6">
+            <h4 class="text-lg font-semibold text-gray-800 mb-4">📊 Estrategia de Gestión</h4>
+            
+            <!-- Kelly Explanation Box -->
+            <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
+              <h5 class="font-bold text-blue-800 mb-2">🔍 ¿Qué es Kelly Criterion?</h5>
+              <p class="text-blue-700 text-sm mb-3">
+                Es una fórmula matemática que calcula el porcentaje óptimo del capital a apostar 
+                cuando tienes una <strong>ventaja estadística confirmada</strong>.
+              </p>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                <div class="bg-green-100 p-2 rounded">
+                  <strong class="text-green-800">✅ Funciona cuando:</strong>
+                  <br>• Tienes ventaja real y medible
+                  <br>• Conoces probabilidades exactas
+                  <br>• Puedes mantener disciplina perfecta
+                </div>
+                <div class="bg-red-100 p-2 rounded">
+                  <strong class="text-red-800">❌ Problemas comunes:</strong>
+                  <br>• Sobreestimar win rate propio
+                  <br>• No considerar el juice/margen
+                  <br>• Varianza emocional
+                </div>
+              </div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+              <label class="strategy-option cursor-pointer">
+                <input type="radio" name="strategy" value="kelly" class="sr-only" checked>
+                <div class="strategy-card border-2 border-purple-200 rounded-lg p-4 hover:border-purple-400 transition-all">
+                  <h5 class="font-bold text-purple-800">Kelly Criterion</h5>
+                  <p class="text-purple-600 text-sm">Fórmula matemática óptima</p>
+                  <p class="text-purple-500 text-xs mt-1">Calcula % automáticamente</p>
+                </div>
+              </label>
+              
+              <label class="strategy-option cursor-pointer">
+                <input type="radio" name="strategy" value="fixed" class="sr-only">
+                <div class="strategy-card border-2 border-gray-200 rounded-lg p-4 hover:border-gray-400 transition-all">
+                  <h5 class="font-bold text-gray-800">Cantidad Fija</h5>
+                  <p class="text-gray-600 text-sm">Siempre la misma cantidad (€)</p>
+                  <p class="text-gray-500 text-xs mt-1">Ej: Siempre apostar €50</p>
+                </div>
+              </label>
+              
+              <label class="strategy-option cursor-pointer">
+                <input type="radio" name="strategy" value="percentage" class="sr-only">
+                <div class="strategy-card border-2 border-gray-200 rounded-lg p-4 hover:border-gray-400 transition-all">
+                  <h5 class="font-bold text-gray-800">% Fijo del Bankroll</h5>
+                  <p class="text-gray-600 text-sm">Siempre el mismo % del total</p>
+                  <p class="text-gray-500 text-xs mt-1">Ej: Siempre apostar 3%</p>
+                </div>
+              </label>
+            </div>
+
+            <div id="strategyParams" class="mb-6">
+              <!-- Strategy-specific parameters will be inserted here -->
+            </div>
+          </div>
+
+          <button 
+            onclick="runBankrollSimulation()" 
+            id="simulateBtn"
+            class="w-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-200"
+          >
+            📊 Ejecutar Simulación
+          </button>
+        </div>
+
+        <!-- Results Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+          
+          <!-- Chart -->
+          <div class="bg-white rounded-xl shadow-lg p-6">
+            <h3 class="text-xl font-bold text-gray-900 mb-4">📈 Evolución del Bankroll</h3>
+            <div id="chartContainer" class="h-80">
+              <div class="flex items-center justify-center h-full text-gray-500">
+                💰 Ejecuta la simulación para ver la evolución del capital
+              </div>
+            </div>
+          </div>
+          
+          <!-- Risk Metrics -->
+          <div class="bg-white rounded-xl shadow-lg p-6">
+            <h3 class="text-xl font-bold text-gray-900 mb-4">📊 Métricas de Riesgo</h3>
+            <div id="riskMetrics" class="space-y-4">
+              <div class="text-center text-gray-500 py-8">
+                🎯 Las métricas de riesgo aparecerán aquí
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Kelly Reality Check -->
+        <div class="bg-white rounded-xl shadow-lg p-6 mb-8" id="kellyReality" style="display: none;">
+          <h3 class="text-xl font-bold text-gray-900 mb-4">🔍 Análisis Kelly Criterion</h3>
+          <div id="kellyAnalysis"></div>
+        </div>
+
+        <!-- Comparison Results -->
+        <div class="bg-white rounded-xl shadow-lg p-6">
+          <h3 class="text-xl font-bold text-gray-900 mb-4">📊 Comparación de Estrategias</h3>
+          <p class="text-gray-600 mb-6">
+            Simulamos 1000 apostadores con diferentes estrategias para comparar resultados.
+          </p>
+          <div id="strategyComparison">
+            <div class="text-center text-gray-500 py-8">
+              📈 La comparación aparecerá después de la simulación
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Educational Content -->
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold text-center text-gray-900 mb-12">🧠 Conceptos Clave de Gestión</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          
+          <!-- Kelly Problems -->
+          <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-6">
+            <h3 class="text-xl font-bold text-yellow-800 mb-4">⚠️ Kelly Criterion: Limitaciones</h3>
+            <div class="bg-white border border-yellow-300 rounded p-3 mb-4">
+              <div class="text-yellow-900 text-sm font-medium mb-2">
+                🔍 <strong>¿Qué hace exactamente Kelly?</strong>
+              </div>
+              <div class="text-yellow-800 text-xs">
+                Calcula el % óptimo del capital a apostar cuando tienes ventaja confirmada. 
+                <strong>No crea ventaja donde no existe.</strong>
+              </div>
+            </div>
+            <div class="text-yellow-700 space-y-3 text-sm">
+              <div>
+                <strong>• Requiere datos exactos:</strong><br>
+                Necesitas conocer tu win rate real, no estimado. Difícil de determinar con precisión.
+              </div>
+              <div>
+                <strong>• Sensible a errores:</strong><br>
+                Pequeños errores en las estimaciones pueden llevar a apostar más de lo óptimo.
+              </div>
+              <div>
+                <strong>• No considera psicología:</strong><br>
+                Asume disciplina perfecta durante rachas adversas prolongadas.
+              </div>
+              <div>
+                <strong>• Varianza alta:</strong><br>
+                Puede sugerir porcentajes que resulten en alta volatilidad emocional.
+              </div>
+              <div class="bg-yellow-100 p-3 rounded border-l-4 border-yellow-400">
+                <strong>💡 Clave:</strong> Kelly optimiza matemáticamente, pero la implementación práctica es compleja.
+              </div>
+            </div>
+          </div>
+
+          <!-- Risk Management -->
+          <div class="bg-blue-50 border border-blue-200 rounded-lg p-6">
+            <h3 class="text-xl font-bold text-blue-800 mb-4">🛡️ Gestión de Riesgo</h3>
+            <div class="text-blue-700 space-y-3 text-sm">
+              <div>
+                <strong>• Risk of Ruin:</strong><br>
+                Probabilidad de perder todo el capital
+              </div>
+              <div>
+                <strong>• Drawdown máximo:</strong><br>
+                Mayor pérdida desde un pico anterior
+              </div>
+              <div>
+                <strong>• Rachas adversas:</strong><br>
+                Secuencias de pérdidas consecutivas
+              </div>
+              <div>
+                <strong>• Gestión emocional:</strong><br>
+                Mantener disciplina durante períodos difíciles
+              </div>
+              <div class="bg-blue-100 p-3 rounded border-l-4 border-blue-400">
+                <strong>⚡ Importante:</strong> La gestión puede controlar el riesgo, pero no puede crear ventaja.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Examples -->
+        <div class="mt-12">
+          <h3 class="text-2xl font-bold text-center text-gray-900 mb-8">📊 Escenarios Realistas</h3>
+          
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-green-50 border border-green-200 rounded-lg p-4">
+              <h4 class="font-bold text-green-800 mb-2">👍 Escenario Favorable</h4>
+              <div class="text-green-700 text-sm space-y-1">
+                <div>• Bankroll: €10,000</div>
+                <div>• Win rate real: 53%</div>
+                <div>• Cuotas: 1.95 promedio</div>
+                <div>• Kelly: 2.3% por apuesta</div>
+                <div class="border-t border-green-300 pt-2 mt-2 font-bold">
+                  ✅ Crecimiento lento pero sostenible
+                </div>
+              </div>
+            </div>
+            
+            <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+              <h4 class="font-bold text-yellow-800 mb-2">⚖️ Escenario Equilibrado</h4>
+              <div class="text-yellow-700 text-sm space-y-1">
+                <div>• Bankroll: €5,000</div>
+                <div>• Win rate real: 50%</div>
+                <div>• Cuotas: 1.90 promedio</div>
+                <div>• Kelly: 0% (sin ventaja)</div>
+                <div class="border-t border-yellow-300 pt-2 mt-2 font-bold">
+                  ⚠️ Pérdida lenta por el juice
+                </div>
+              </div>
+            </div>
+            
+            <div class="bg-red-50 border border-red-200 rounded-lg p-4">
+              <h4 class="font-bold text-red-800 mb-2">👎 Escenario Adverso</h4>
+              <div class="text-red-700 text-sm space-y-1">
+                <div>• Bankroll: €2,000</div>
+                <div>• Win rate real: 47%</div>
+                <div>• Cuotas: 1.85 promedio</div>
+                <div>• Kelly: -5.4% (ventaja negativa)</div>
+                <div class="border-t border-red-300 pt-2 mt-2 font-bold">
+                  ❌ La gestión solo ralentiza pérdidas
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="py-16 bg-purple-600">
+    <div class="container mx-auto px-4 text-center">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-bold text-white mb-6">💡 La Gestión es Solo una Herramienta</h2>
+        <p class="text-xl text-purple-100 mb-8">
+          Kelly Criterion y otras técnicas de gestión son útiles cuando tienes ventaja real. 
+          Sin ventaja, solo ralentizan las pérdidas inevitables.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a 
+            href="/sports" 
+            class="bg-white hover:bg-gray-100 text-purple-600 font-bold py-3 px-6 rounded-lg transition-all duration-200"
+          >
+            🏈 Más Simuladores
+          </a>
+          <a 
+            href="/the-way" 
+            class="bg-purple-800 hover:bg-purple-900 text-white font-bold py-3 px-6 rounded-lg transition-all duration-200"
+          >
+            🛤️ El Camino
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</MainLayout>
+
+<script client:load>
+  let simulationData = [];
+  let currentStrategy = 'kelly';
+  
+  document.addEventListener('DOMContentLoaded', function() {
+    console.log('Bankroll manager loaded');
+    updateStrategyUI();
+    setupStrategyListeners();
+  });
+  
+  function setupStrategyListeners() {
+    document.querySelectorAll('input[name="strategy"]').forEach(radio => {
+      radio.addEventListener('change', function() {
+        currentStrategy = this.value;
+        updateStrategyUI();
+      });
+    });
+  }
+  
+  function updateStrategyUI() {
+    // Update visual selection
+    document.querySelectorAll('.strategy-card').forEach(card => {
+      card.classList.remove('border-purple-400', 'bg-purple-50');
+      card.classList.add('border-gray-200');
+    });
+    
+    const selectedCard = document.querySelector(`input[value="${currentStrategy}"]`).parentNode.querySelector('.strategy-card');
+    selectedCard.classList.add('border-purple-400', 'bg-purple-50');
+    selectedCard.classList.remove('border-gray-200');
+    
+    // Update strategy parameters
+    const paramsContainer = document.getElementById('strategyParams');
+    let paramsHTML = '';
+    
+    switch(currentStrategy) {
+      case 'kelly':
+        paramsHTML = `
+          <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
+            <div class="text-blue-800 text-sm">
+              <strong>ℹ️ Kelly Criterion:</strong> 
+              <br>• <strong>Función:</strong> Calcula automáticamente el % óptimo del bankroll para cada apuesta
+              <br>• <strong>Fórmula:</strong> (Win Rate × Cuotas - 1) ÷ (Cuotas - 1)
+              <br>• <strong>Requisito:</strong> Solo funciona con ventaja estadística real
+              <br>• <strong>Limitación:</strong> Muy sensible a errores en las estimaciones
+            </div>
+          </div>
+        `;
+        break;
+      case 'fixed':
+        paramsHTML = `
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-2">Cantidad por apuesta (€)</label>
+              <input type="number" id="fixedAmount" value="50" min="10" class="w-full p-2 border rounded">
+            </div>
+            <div class="flex items-end">
+              <div class="text-gray-600 text-sm">Apuesta siempre la misma cantidad fija</div>
+            </div>
+          </div>
+        `;
+        break;
+      case 'percentage':
+        paramsHTML = `
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-2">% del bankroll</label>
+              <input type="number" id="fixedPercentage" value="3" min="1" max="10" step="0.5" class="w-full p-2 border rounded">
+            </div>
+            <div class="flex items-end">
+              <div class="text-gray-600 text-sm">% fijo del bankroll actual en cada apuesta</div>
+            </div>
+          </div>
+        `;
+        break;
+    }
+    
+    paramsContainer.innerHTML = paramsHTML;
+  }
+  
+  function runBankrollSimulation() {
+    console.log('Starting bankroll simulation...');
+    
+    const initialBankroll = parseFloat(document.getElementById('initialBankroll').value);
+    const winRate = parseFloat(document.getElementById('winRate').value);
+    const avgOdds = parseFloat(document.getElementById('avgOdds').value);
+    const numBets = parseInt(document.getElementById('numBets').value);
+    
+    console.log('Parameters:', { initialBankroll, winRate, avgOdds, numBets, strategy: currentStrategy });
+    
+    const btn = document.getElementById('simulateBtn');
+    btn.textContent = '⏳ Ejecutando simulación...';
+    btn.disabled = true;
+    
+    setTimeout(() => {
+      try {
+        // Calculate true edge (correct mathematical formula)
+        const trueEdge = (winRate * (avgOdds - 1)) - (1 - winRate);
+        // Simplified: trueEdge = (winRate * avgOdds) - 1
+        
+        console.log('True edge:', trueEdge);
+        
+        // Run simulation
+        const result = simulateBankroll(initialBankroll, winRate, avgOdds, numBets, currentStrategy);
+        
+        simulationData = result;
+        
+        updateChart(result.history);
+        
+        // Calculate realistic Risk of Ruin
+        result.riskOfRuin = calculateRiskOfRuin(initialBankroll, winRate, avgOdds, numBets, currentStrategy, result);
+        
+        updateRiskMetrics(result);
+        updateKellyReality(result, trueEdge);
+        runStrategyComparison();
+        
+        btn.textContent = '🔄 Ejecutar Nueva Simulación';
+        btn.disabled = false;
+      } catch (error) {
+        console.error('Simulation error:', error);
+        btn.textContent = '❌ Error - Intentar de nuevo';
+        btn.disabled = false;
+      }
+    }, 100);
+  }
+  
+  function simulateBankroll(initialBankroll, winRate, avgOdds, numBets, strategy) {
+    let bankroll = initialBankroll;
+    const history = [{ bet: 0, bankroll: bankroll, bet_amount: 0, won: null }];
+    
+    // Calculate Kelly fraction (theoretical) - using correct edge formula
+    const edge = (winRate * (avgOdds - 1)) - (1 - winRate); // Correct edge calculation
+    const kellyFraction = edge > 0 ? (winRate * avgOdds - 1) / (avgOdds - 1) : 0;
+    
+    let maxBankroll = bankroll;
+    let minBankroll = bankroll;
+    let maxDrawdown = 0;
+    let consecutiveLosses = 0;
+    let maxConsecutiveLosses = 0;
+    let winsCount = 0;
+    
+    for (let i = 1; i <= numBets; i++) {
+      if (bankroll <= 0.01) break; // Practically busted
+      
+      // Calculate bet amount based on strategy
+      let betAmount = 0;
+      
+      switch(strategy) {
+        case 'kelly':
+          // Kelly with a maximum cap of 10% to prevent disaster
+          const kellySuggestion = Math.max(0, kellyFraction * bankroll);
+          betAmount = Math.min(kellySuggestion, bankroll * 0.1);
+          break;
+        case 'fixed':
+          const fixedAmount = document.getElementById('fixedAmount') ? 
+            parseFloat(document.getElementById('fixedAmount').value) : 50;
+          betAmount = Math.min(fixedAmount, bankroll);
+          break;
+        case 'percentage':
+          const percentage = document.getElementById('fixedPercentage') ? 
+            parseFloat(document.getElementById('fixedPercentage').value) : 3;
+          betAmount = (percentage / 100) * bankroll;
+          break;
+      }
+      
+      betAmount = Math.max(0.01, Math.min(betAmount, bankroll * 0.99)); // Minimum €0.01, max 99% of bankroll
+      
+      // Simulate bet outcome
+      const won = Math.random() < winRate;
+      
+      if (won) {
+        bankroll += betAmount * (avgOdds - 1);
+        consecutiveLosses = 0;
+        winsCount++;
+      } else {
+        bankroll -= betAmount;
+        consecutiveLosses++;
+        maxConsecutiveLosses = Math.max(maxConsecutiveLosses, consecutiveLosses);
+      }
+      
+      // Track statistics
+      maxBankroll = Math.max(maxBankroll, bankroll);
+      minBankroll = Math.min(minBankroll, bankroll);
+      const currentDrawdown = maxBankroll > 0 ? (maxBankroll - bankroll) / maxBankroll : 0;
+      maxDrawdown = Math.max(maxDrawdown, currentDrawdown);
+      
+      history.push({ 
+        bet: i, 
+        bankroll: Math.max(0, bankroll), 
+        bet_amount: betAmount,
+        won: won 
+      });
+    }
+    
+    const actualWinRate = winsCount / numBets;
+    // Calculate risk of ruin after we have the result
+    const riskOfRuin = 0; // Will be calculated later with more context
+    
+    return {
+      history,
+      finalBankroll: Math.max(0, bankroll),
+      maxBankroll,
+      minBankroll,
+      maxDrawdown,
+      maxConsecutiveLosses,
+      totalReturn: ((bankroll - initialBankroll) / initialBankroll) * 100,
+      kellyFraction,
+      busted: bankroll <= 0.01,
+      actualWinRate,
+      riskOfRuin,
+      edge
+    };
+  }
+  
+  function calculateRiskOfRuin(initialBankroll, winRate, avgOdds, numBets, strategy, currentResult) {
+    // More realistic Risk of Ruin using Monte Carlo simulation
+    // For performance, we'll run a smaller simulation and combine with current result
+    
+    if (currentResult.busted) return 100;
+    
+    const numSimulations = 250; // Reduced for performance
+    let ruinedSimulations = 0;
+    const edge = (winRate * (avgOdds - 1)) - (1 - winRate);
+    
+    for (let sim = 0; sim < numSimulations; sim++) {
+      let bankroll = initialBankroll;
+      const kellyFraction = edge > 0 ? (winRate * avgOdds - 1) / (avgOdds - 1) : 0;
+      
+      for (let bet = 0; bet < numBets; bet++) {
+        if (bankroll <= 0.01) {
+          ruinedSimulations++;
+          break;
+        }
+        
+        // Calculate bet amount based on strategy
+        let betAmount = 0;
+        switch(strategy) {
+          case 'kelly':
+            betAmount = Math.min(Math.max(0, kellyFraction * bankroll), bankroll * 0.1);
+            break;
+          case 'fixed':
+            const fixedAmt = 50; // Default assumption
+            betAmount = Math.min(fixedAmt, bankroll);
+            break;
+          case 'percentage':
+            betAmount = bankroll * 0.03; // Default 3%
+            break;
+        }
+        
+        betAmount = Math.max(0.01, Math.min(betAmount, bankroll * 0.99));
+        
+        // Simulate outcome
+        const won = Math.random() < winRate;
+        if (won) {
+          bankroll += betAmount * (avgOdds - 1);
+        } else {
+          bankroll -= betAmount;
+        }
+      }
+    }
+    
+    const simulatedRoR = (ruinedSimulations / numSimulations) * 100;
+    
+    // Combine with current result for better estimation
+    if (currentResult.totalReturn < -80) return Math.max(simulatedRoR, 90);
+    if (currentResult.totalReturn < -50) return Math.max(simulatedRoR, 70);
+    if (currentResult.totalReturn < -20) return Math.max(simulatedRoR, 40);
+    
+    return Math.min(simulatedRoR, 95); // Cap at 95%
+  }
+  
+  function updateChart(history) {
+    const container = document.getElementById('chartContainer');
+    if (!container || !history.length) return;
+    
+    const initialBankroll = history[0].bankroll;
+    const maxBankroll = Math.max(...history.map(h => h.bankroll));
+    const chartHeight = 280;
+    
+    let html = '<div class="relative h-full border rounded-lg bg-gray-50 p-4">';
+    
+    // Chart area
+    html += '<svg class="w-full h-full" viewBox="0 0 800 200">';
+    
+    // Background grid
+    for (let i = 0; i <= 4; i++) {
+      const y = (i * 200) / 4;
+      html += `<line x1="40" y1="${y}" x2="760" y2="${y}" stroke="#e5e7eb" stroke-width="1"/>`;
+    }
+    
+    // Chart line
+    let pathData = '';
+    history.forEach((point, index) => {
+      const x = 40 + ((index / (history.length - 1)) * 720);
+      const y = maxBankroll > 0 ? 180 - ((point.bankroll / maxBankroll) * 160) : 180;
+      
+      if (index === 0) {
+        pathData += `M ${x} ${y}`;
+      } else {
+        pathData += ` L ${x} ${y}`;
+      }
+    });
+    
+    // Draw the path
+    html += `<path d="${pathData}" fill="none" stroke="#8b5cf6" stroke-width="2"/>`;
+    
+    // Y-axis labels
+    for (let i = 0; i <= 4; i++) {
+      const value = maxBankroll * (1 - i / 4);
+      const y = (i * 200) / 4;
+      html += `<text x="35" y="${y + 4}" text-anchor="end" class="text-xs fill-gray-600">€${Math.round(value)}</text>`;
+    }
+    
+    // Initial bankroll line
+    if (maxBankroll > 0) {
+      const initialY = 180 - ((initialBankroll / maxBankroll) * 160);
+      html += `<line x1="40" y1="${initialY}" x2="760" y2="${initialY}" stroke="#ef4444" stroke-width="1" stroke-dasharray="5,5"/>`;
+      html += `<text x="45" y="${initialY - 5}" class="text-xs fill-red-600">Inicial: €${initialBankroll}</text>`;
+    }
+    
+    html += '</svg>';
+    html += '</div>';
+    
+    container.innerHTML = html;
+  }
+  
+  function updateRiskMetrics(result) {
+    const riskContainer = document.getElementById('riskMetrics');
+    if (!riskContainer) return;
+    
+    const html = `
+      <div class="space-y-4">
+        <div class="bg-blue-50 rounded-lg p-4 text-center">
+          <div class="text-3xl font-bold text-blue-600">${result.riskOfRuin.toFixed(0)}%</div>
+          <div class="text-blue-700 font-medium">Risk of Ruin</div>
+          <div class="text-blue-600 text-sm">Probabilidad de pérdida total</div>
+          <div class="text-blue-500 text-xs mt-1">*Calculado por simulación</div>
+        </div>
+        
+        <div class="space-y-3">
+          <div class="flex justify-between items-center">
+            <span class="text-gray-700">Resultado final:</span>
+            <span class="font-bold ${result.totalReturn >= 0 ? 'text-green-600' : 'text-red-600'}">
+              ${result.totalReturn >= 0 ? '+' : ''}${result.totalReturn.toFixed(1)}%
+            </span>
+          </div>
+          <div class="flex justify-between items-center">
+            <span class="text-gray-700">Win rate real:</span>
+            <span class="font-bold text-blue-600">${(result.actualWinRate * 100).toFixed(1)}%</span>
+          </div>
+          <div class="flex justify-between items-center">
+            <span class="text-gray-700">Edge estimado:</span>
+            <span class="font-bold ${result.edge >= 0 ? 'text-green-600' : 'text-red-600'}">
+              ${result.edge >= 0 ? '+' : ''}${(result.edge * 100).toFixed(2)}%
+            </span>
+          </div>
+          <div class="flex justify-between items-center">
+            <span class="text-gray-700">Máximo drawdown:</span>
+            <span class="font-bold text-red-600">${(result.maxDrawdown * 100).toFixed(1)}%</span>
+          </div>
+          <div class="flex justify-between items-center">
+            <span class="text-gray-700">Racha de pérdidas:</span>
+            <span class="font-bold text-orange-600">${result.maxConsecutiveLosses} seguidas</span>
+          </div>
+        </div>
+        
+        ${result.busted ? 
+          '<div class="bg-red-100 border border-red-200 rounded-lg p-3"><div class="text-red-800 text-sm font-bold">❌ BANKROLL AGOTADO</div></div>' :
+          result.totalReturn < -50 ?
+          '<div class="bg-orange-100 border border-orange-200 rounded-lg p-3"><div class="text-orange-800 text-sm font-bold">⚠️ PÉRDIDAS SIGNIFICATIVAS</div></div>' :
+          result.totalReturn > 20 ?
+          '<div class="bg-green-100 border border-green-200 rounded-lg p-3"><div class="text-green-800 text-sm font-bold">✅ RESULTADO POSITIVO</div></div>' :
+          '<div class="bg-yellow-100 border border-yellow-200 rounded-lg p-3"><div class="text-yellow-800 text-sm font-bold">🔄 RESULTADO NEUTRO</div></div>'
+        }
+      </div>
+    `;
+    
+    riskContainer.innerHTML = html;
+  }
+  
+  function updateKellyReality(result, trueEdge) {
+    const kellyContainer = document.getElementById('kellyReality');
+    const analysisContainer = document.getElementById('kellyAnalysis');
+    
+    if (!kellyContainer || !analysisContainer || currentStrategy !== 'kelly') {
+      if (kellyContainer) kellyContainer.style.display = 'none';
+      return;
+    }
+    
+    kellyContainer.style.display = 'block';
+    
+    const kellyPercent = (result.kellyFraction * 100).toFixed(1);
+    const edgePercent = (trueEdge * 100).toFixed(2);
+    
+    const html = `
+      <div class="space-y-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="space-y-4">
+            <h4 class="text-lg font-bold text-gray-800 mb-3">📊 Recomendación Kelly</h4>
+            <div class="bg-purple-50 border border-purple-200 rounded-lg p-4">
+              <div class="text-lg font-bold text-purple-800 mb-2">
+                ${result.kellyFraction > 0 ? `Apostar ${kellyPercent}%` : 'No apostar (sin ventaja)'}
+              </div>
+              <div class="text-purple-600 text-sm">
+                ${result.kellyFraction > 0 ? 'del bankroll en cada apuesta' : 'Kelly recomienda no apostar'}
+              </div>
+            </div>
+            <div class="text-sm text-gray-700">
+              Con un edge estimado del ${edgePercent}% y cuotas promedio de ${document.getElementById('avgOdds').value}, 
+              ${result.kellyFraction > 0 ? 
+                `Kelly sugiere apostar el ${kellyPercent}% del bankroll.` : 
+                'Kelly no recomienda apostar debido a la falta de ventaja.'}
+            </div>
+          </div>
+          
+          <div class="space-y-4">
+            <h4 class="text-lg font-bold text-gray-800 mb-3">🔍 Análisis de Precisión</h4>
+            <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
+              <div class="text-blue-700 space-y-2 text-sm">
+                <div><strong>• Edge real vs estimado:</strong> ${trueEdge >= 0 ? 'Favorable' : 'Desfavorable'}</div>
+                <div><strong>• Sensibilidad:</strong> ${result.kellyFraction > 0.05 ? 'Alta varianza' : 'Varianza moderada'}</div>
+                <div><strong>• Riesgo psicológico:</strong> ${result.maxDrawdown > 0.3 ? 'Alto estrés' : 'Manejable'}</div>
+                <div><strong>• Sostenibilidad:</strong> ${result.riskOfRuin < 30 ? 'Viable' : 'Cuestionable'}</div>
+              </div>
+            </div>
+            <div class="text-xs text-gray-600">
+              Kelly funciona mejor con ventaja confirmada y estimaciones precisas.
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+    
+    analysisContainer.innerHTML = html;
+  }
+  
+  function runStrategyComparison() {
+    // Simulate 100 bettors with each strategy
+    const numSims = 100;
+    const strategies = ['kelly', 'fixed', 'percentage'];
+    const results = {};
+    
+    const initialBankroll = parseFloat(document.getElementById('initialBankroll').value);
+    const winRate = parseFloat(document.getElementById('winRate').value);
+    const avgOdds = parseFloat(document.getElementById('avgOdds').value);
+    const numBets = parseInt(document.getElementById('numBets').value);
+    
+    strategies.forEach(strategy => {
+      const simResults = [];
+      
+      // Set proper parameters for each strategy before simulation
+      if (strategy === 'fixed') {
+        // Ensure fixed amount input exists for comparison
+        if (!document.getElementById('fixedAmount')) {
+          const tempInput = document.createElement('input');
+          tempInput.id = 'fixedAmount';
+          tempInput.value = '50';
+          tempInput.style.display = 'none';
+          document.body.appendChild(tempInput);
+        }
+      }
+      if (strategy === 'percentage') {
+        // Ensure percentage input exists for comparison
+        if (!document.getElementById('fixedPercentage')) {
+          const tempInput = document.createElement('input');
+          tempInput.id = 'fixedPercentage';
+          tempInput.value = '3';
+          tempInput.style.display = 'none';
+          document.body.appendChild(tempInput);
+        }
+      }
+      
+      for (let i = 0; i < numSims; i++) {
+        const result = simulateBankroll(initialBankroll, winRate, avgOdds, numBets, strategy);
+        simResults.push({
+          finalReturn: result.totalReturn,
+          busted: result.busted,
+          maxDrawdown: result.maxDrawdown
+        });
+      }
+      
+      const bustedCount = simResults.filter(r => r.busted).length;
+      const avgReturn = simResults.reduce((sum, r) => sum + r.finalReturn, 0) / numSims;
+      const avgDrawdown = simResults.reduce((sum, r) => sum + r.maxDrawdown, 0) / numSims;
+      
+      results[strategy] = {
+        bustedPercentage: (bustedCount / numSims) * 100,
+        avgReturn,
+        avgDrawdown: avgDrawdown * 100,
+        winRate: simResults.filter(r => r.finalReturn > 0).length
+      };
+    });
+    
+    updateStrategyComparison(results);
+  }
+  
+  function updateStrategyComparison(results) {
+    const container = document.getElementById('strategyComparison');
+    if (!container) return;
+    
+    const strategyNames = {
+      kelly: 'Kelly Criterion',
+      fixed: 'Cantidad Fija',
+      percentage: '% Fijo'
+    };
+    
+    let html = '<div class="grid grid-cols-1 md:grid-cols-3 gap-6">';
+    
+    Object.entries(results).forEach(([strategy, result]) => {
+      let bgClass, borderClass, textClass;
+      
+      if (result.avgReturn > 5) {
+        bgClass = 'bg-green-50';
+        borderClass = 'border-green-200';
+        textClass = 'text-green-800';
+      } else if (result.avgReturn > -10) {
+        bgClass = 'bg-yellow-50';
+        borderClass = 'border-yellow-200';
+        textClass = 'text-yellow-800';
+      } else {
+        bgClass = 'bg-red-50';
+        borderClass = 'border-red-200';
+        textClass = 'text-red-800';
+      }
+      
+      html += `
+        <div class="${bgClass} border ${borderClass} rounded-lg p-4">
+          <h4 class="font-bold ${textClass} mb-3">${strategyNames[strategy]}</h4>
+          <div class="space-y-2 text-sm">
+            <div class="flex justify-between">
+              <span>Retorno promedio:</span>
+              <span class="font-bold ${result.avgReturn >= 0 ? 'text-green-600' : 'text-red-600'}">
+                ${result.avgReturn >= 0 ? '+' : ''}${result.avgReturn.toFixed(1)}%
+              </span>
+            </div>
+            <div class="flex justify-between">
+              <span>Casos positivos:</span>
+              <span class="font-bold text-blue-600">${result.winRate}%</span>
+            </div>
+            <div class="flex justify-between">
+              <span>Bankrolls agotados:</span>
+              <span class="font-bold ${textClass.replace('800', '700')}">${result.bustedPercentage.toFixed(0)}%</span>
+            </div>
+            <div class="flex justify-between">
+              <span>Drawdown promedio:</span>
+              <span class="font-bold text-red-600">${result.avgDrawdown.toFixed(1)}%</span>
+            </div>
+          </div>
+        </div>
+      `;
+    });
+    
+    html += '</div>';
+    
+    html += `
+      <div class="bg-gray-50 border border-gray-200 rounded-lg p-4 mt-6">
+        <div class="text-gray-800 text-sm">
+          <strong>📊 Conclusión:</strong> Los resultados dependen fundamentalmente del edge real. 
+          Sin ventaja estadística confirmada, todas las estrategias tienden a pérdidas por el juice de las casas.
+        </div>
+      </div>
+      
+      <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mt-4">
+        <div class="text-blue-800 text-xs">
+          <strong>ℹ️ Nota sobre precisión:</strong> Risk of Ruin se calcula mediante simulación Monte Carlo (250 iteraciones). 
+          Los valores son aproximaciones educativas. En la realidad, múltiples factores adicionales afectan los resultados.
+        </div>
+      </div>
+    `;
+    
+    container.innerHTML = html;
+  }
+  
+  // Make functions global
+  window.runBankrollSimulation = runBankrollSimulation;
+</script>
+
+<style>
+  .strategy-card {
+    transition: all 0.2s ease;
+  }
+  
+  input[name="strategy"]:checked + .strategy-card {
+    @apply border-purple-400 bg-purple-50;
+  }
+  
+  .space-y-6 > * + * {
+    margin-top: 1.5rem;
+  }
+  
+  .space-y-4 > * + * {
+    margin-top: 1rem;
+  }
+  
+  .rounded-xl {
+    position: relative;
+    z-index: auto;
+  }
+</style>

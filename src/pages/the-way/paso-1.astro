@@ -1,0 +1,388 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import ProgressManager from '../../components/ProgressManager.astro';
+import Quiz from '../../components/Quiz.astro';
+
+// Quiz data for Paso 1
+const paso1Quiz = {
+  stepId: 'paso-1',
+  title: '🧠 Quiz: ¿Entendiste los Conceptos?',
+  description: 'Responde estas preguntas para consolidar tu aprendizaje:',
+  questions: [
+    {
+      id: 'q1',
+      question: '¿Cuál es el tipo de refuerzo más adictivo según la psicología?',
+      options: [
+        { value: 'a', text: 'Refuerzo continuo (cada vez que juegas ganas)' },
+        { value: 'b', text: 'Refuerzo de ratio variable (no sabes cuándo ganarás)' },
+        { value: 'c', text: 'Refuerzo de intervalo fijo (ganas cada 10 minutos)' }
+      ],
+      correctAnswer: 'b',
+      explanation: {
+        correct: 'Correcto: El refuerzo de ratio variable es el más adictivo porque no sabes cuándo llegará la recompensa.',
+        incorrect: 'Incorrecto: El refuerzo de ratio variable (impredecible) es más adictivo que el continuo o fijo.'
+      }
+    },
+    {
+      id: 'q2', 
+      question: '¿Cuándo se libera más dopamina?',
+      options: [
+        { value: 'a', text: 'Solo cuando ganas dinero' },
+        { value: 'b', text: 'Cuando anticipas ganar (antes y durante el juego)' },
+        { value: 'c', text: 'Solo cuando pierdes' }
+      ],
+      correctAnswer: 'b',
+      explanation: {
+        correct: 'Correcto: La dopamina se libera principalmente por la anticipación, no solo por ganar.',
+        incorrect: 'Incorrecto: La dopamina se libera más cuando anticipas ganar que cuando realmente ganas.'
+      }
+    },
+    {
+      id: 'q3',
+      question: '¿Qué técnica usan los casinos para distorsionar tu percepción del tiempo?',
+      options: [
+        { value: 'a', text: 'Ponen relojes gigantes por todas partes' },
+        { value: 'b', text: 'Eliminan relojes, ventanas y usan luces artificiales' },
+        { value: 'c', text: 'Te dan bebidas con cafeína' }
+      ],
+      correctAnswer: 'b',
+      explanation: {
+        correct: 'Correcto: Los casinos eliminan referencias temporales para que pierdas la noción del tiempo.',
+        incorrect: 'Incorrecto: Los casinos eliminan relojes y ventanas para distorsionar tu percepción del tiempo.'
+      }
+    }
+  ],
+  gradientColors: 'from-purple-600 to-indigo-600'
+};
+---
+
+<MainLayout 
+  title="Paso 1: ¿Por Qué los Juegos de Azar Son Tan Adictivos?" 
+  description="Descubre los mecanismos psicológicos que hacen que los juegos de azar sean adictivos: recompensa variable, dopamina y refuerzo positivo."
+  article={true}
+>
+  
+  <!-- Progress Header -->
+  <section class="bg-gradient-to-r from-purple-600 to-indigo-600 text-white py-8">
+    <div class="container mx-auto px-4">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center">
+          <a href="/the-way" class="text-purple-200 hover:text-white mr-4">
+            ← Volver al Camino
+          </a>
+          <div class="text-sm">
+            <span class="text-purple-200">Paso 1 de 6</span>
+          </div>
+        </div>
+        <div class="flex items-center space-x-2">
+          <div class="w-8 h-8 bg-purple-400 rounded-full flex items-center justify-center text-sm font-bold">1</div>
+          <div class="w-8 h-1 bg-purple-300"></div>
+          <div class="w-8 h-8 bg-purple-300/50 rounded-full flex items-center justify-center text-sm">2</div>
+          <div class="w-8 h-1 bg-purple-300/50"></div>
+          <div class="w-8 h-8 bg-purple-300/50 rounded-full flex items-center justify-center text-sm">3</div>
+          <div class="w-8 h-1 bg-purple-300/50"></div>
+          <div class="w-8 h-8 bg-purple-300/50 rounded-full flex items-center justify-center text-sm">4</div>
+          <div class="w-8 h-1 bg-purple-300/50"></div>
+          <div class="w-8 h-8 bg-purple-300/50 rounded-full flex items-center justify-center text-sm">5</div>
+          <div class="w-8 h-1 bg-purple-300/50"></div>
+          <div class="w-8 h-8 bg-purple-300/50 rounded-full flex items-center justify-center text-sm">6</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Hero -->
+  <section class="bg-gradient-to-br from-purple-500 to-indigo-600 text-white py-20">
+    <div class="container mx-auto px-4 text-center">
+      <div class="max-w-4xl mx-auto">
+        <span class="inline-block px-4 py-2 bg-purple-400/30 rounded-full text-sm font-medium mb-6">
+          Paso 1: Fundamentos Psicológicos
+        </span>
+        <h1 class="text-4xl md:text-5xl font-bold mb-6">
+          ¿Por Qué los Juegos de Azar Son Tan Adictivos?
+        </h1>
+        <p class="text-xl text-purple-100 max-w-2xl mx-auto">
+          Descubre los mecanismos psicológicos que hacen que tu cerebro se "enganche" 
+          a los juegos de azar y cómo reconocerlos.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Progress Manager -->
+  <section class="py-8 bg-gray-50">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto">
+        <ProgressManager />
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <article class="py-20 bg-white">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto prose prose-lg">
+        
+        <!-- Introduction -->
+        <div class="bg-purple-50 border-l-4 border-purple-400 p-6 rounded-r-lg mb-12">
+          <h2 class="text-2xl font-bold text-purple-900 mb-4">🧠 El Poder de la Recompensa Variable</h2>
+          <p class="text-purple-800">
+            Los juegos de azar son adictivos debido al concepto de <strong>"recompensa variable"</strong>. 
+            Este patrón de recompensas intermitentes es el más poderoso para enganchar nuestro cerebro. 
+            La dopamina juega un papel crucial, liberándose no solo cuando ganamos, sino también cuando 
+            <em>anticipamos</em> la posibilidad de ganar.
+          </p>
+        </div>
+
+        <!-- The Science -->
+        <section class="mb-16">
+          <h2 class="text-3xl font-bold text-gray-900 mb-8">🔬 La Ciencia Detrás de la Adicción</h2>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+            <div class="bg-gray-50 p-6 rounded-lg">
+              <h3 class="text-xl font-bold text-gray-900 mb-4">🧪 Dopamina: El Químico del Placer</h3>
+              <p class="text-gray-700 mb-4">
+                La dopamina no se libera solo cuando ganamos. El cerebro la libera cuando 
+                <strong>anticipa</strong> una recompensa. En los juegos de azar, esto ocurre:
+              </p>
+              <ul class="text-gray-700 space-y-2">
+                <li>• Antes de apostar</li>
+                <li>• Durante la espera del resultado</li>
+                <li>• Con los "casi premios"</li>
+                <li>• Incluso cuando perdemos (anticipando la próxima)</li>
+              </ul>
+            </div>
+
+            <div class="bg-gray-50 p-6 rounded-lg">
+              <h3 class="text-xl font-bold text-gray-900 mb-4">🔄 Refuerzo Variable</h3>
+              <p class="text-gray-700 mb-4">
+                Los psicólogos descubrieron que el patrón de refuerzo más adictivo es el 
+                <strong>refuerzo de ratio variable</strong>:
+              </p>
+              <ul class="text-gray-700 space-y-2">
+                <li>• No sabes cuándo llegará la recompensa</li>
+                <li>• No sabes qué tamaño tendrá</li>
+                <li>• Cada intento parece que "podría ser el bueno"</li>
+                <li>• Es más adictivo que recompensas constantes</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="bg-yellow-50 border-l-4 border-yellow-400 p-6 rounded-r-lg">
+            <h4 class="text-lg font-bold text-yellow-800 mb-3">💡 Dato Curioso</h4>
+            <p class="text-yellow-700">
+              Los experimentos con ratas muestran que presionan una palanca 
+              <strong>más intensamente</strong> cuando la recompensa es impredecible que cuando es constante. 
+              Los casinos han aplicado este principio durante décadas.
+            </p>
+          </div>
+        </section>
+
+        <!-- Psychological Mechanisms -->
+        <section class="mb-16">
+          <h2 class="text-3xl font-bold text-gray-900 mb-8">🎭 Mecanismos Psicológicos</h2>
+          
+          <div class="space-y-8">
+            <div class="border-l-4 border-blue-500 pl-6">
+              <h3 class="text-2xl font-bold text-gray-900 mb-4">1. La Ilusión de Control</h3>
+              <p class="text-gray-700 mb-4">
+                Tu cerebro te hace creer que puedes influir en el resultado de un juego completamente aleatorio. 
+                Esto se manifiesta como:
+              </p>
+              <ul class="text-gray-700 space-y-2 ml-4">
+                <li>• Tocar la pantalla de una slot "con suerte"</li>
+                <li>• Elegir números "especiales" en la lotería</li>
+                <li>• Creer que puedes "sentir" cuándo va a salir un premio</li>
+                <li>• Pensar que tu técnica influye en el resultado</li>
+              </ul>
+            </div>
+
+            <div class="border-l-4 border-green-500 pl-6">
+              <h3 class="text-2xl font-bold text-gray-900 mb-4">2. El Sesgo de Recuerdo</h3>
+              <p class="text-gray-700 mb-4">
+                Tu cerebro recuerda de manera selectiva las victorias y minimiza las derrotas:
+              </p>
+              <ul class="text-gray-700 space-y-2 ml-4">
+                <li>• Las ganancias se recuerdan vívidamente</li>
+                <li>• Las pérdidas se olvidan o minimizan</li>
+                <li>• Los "casi premios" se recuerdan como victorias parciales</li>
+                <li>• Se exageran las probabilidades de ganar</li>
+              </ul>
+            </div>
+
+            <div class="border-l-4 border-red-500 pl-6">
+              <h3 class="text-2xl font-bold text-gray-900 mb-4">3. El Estado de "Flow" Tóxico</h3>
+              <p class="text-gray-700 mb-4">
+                Los juegos crean un estado alterado de conciencia donde pierdes la noción del tiempo y el dinero:
+              </p>
+              <ul class="text-gray-700 space-y-2 ml-4">
+                <li>• Concentración total en el juego</li>
+                <li>• Pérdida de conciencia del entorno</li>
+                <li>• Sensación de que el tiempo se detiene</li>
+                <li>• Desconexión de las preocupaciones reales</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- Casino Design -->
+        <section class="mb-16">
+          <h2 class="text-3xl font-bold text-gray-900 mb-8">🎨 Diseño Deliberado para la Adicción</h2>
+          
+          <p class="text-lg text-gray-700 mb-8">
+            Los casinos y aplicaciones de juego están diseñados meticulosamente para explotar 
+            estos mecanismos psicológicos:
+          </p>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div class="bg-red-50 p-6 rounded-lg border border-red-200">
+              <h3 class="text-lg font-bold text-red-800 mb-3">🔊 Estímulos Sensoriales</h3>
+              <ul class="text-red-700 text-sm space-y-1">
+                <li>• Sonidos de victoria exagerados</li>
+                <li>• Luces parpadeantes</li>
+                <li>• Colores llamativos</li>
+                <li>• Vibraciones en móviles</li>
+              </ul>
+            </div>
+
+            <div class="bg-blue-50 p-6 rounded-lg border border-blue-200">
+              <h3 class="text-lg font-bold text-blue-800 mb-3">⏰ Distorsión Temporal</h3>
+              <ul class="text-blue-700 text-sm space-y-1">
+                <li>• Sin relojes ni ventanas</li>
+                <li>• Juego continuo sin pausas</li>
+                <li>• Auto-spin en slots</li>
+                <li>• Notificaciones constantes</li>
+              </ul>
+            </div>
+
+            <div class="bg-green-50 p-6 rounded-lg border border-green-200">
+              <h3 class="text-lg font-bold text-green-800 mb-3">🎁 Falsas Recompensas</h3>
+              <ul class="text-green-700 text-sm space-y-1">
+                <li>• Bonos que no son dinero real</li>
+                <li>• "Premios" menores a la apuesta</li>
+                <li>• Giros gratis con condiciones</li>
+                <li>• Celebraciones por pequeñas victorias</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- Recognition Exercise -->
+        <section class="mb-16">
+          <div class="bg-purple-900 text-white p-8 rounded-xl">
+            <h2 class="text-2xl font-bold mb-6">🎯 Ejercicio de Reconocimiento</h2>
+            <p class="text-purple-100 mb-6">
+              Piensa en tu última experiencia de juego y responde honestamente:
+            </p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div class="space-y-4">
+                <div class="flex items-start">
+                  <div class="w-2 h-2 bg-purple-400 rounded-full mt-3 mr-3 flex-shrink-0"></div>
+                  <p class="text-purple-100">¿Sentiste que "casi" ganabas frecuentemente?</p>
+                </div>
+                <div class="flex items-start">
+                  <div class="w-2 h-2 bg-purple-400 rounded-full mt-3 mr-3 flex-shrink-0"></div>
+                  <p class="text-purple-100">¿Perdiste la noción del tiempo?</p>
+                </div>
+                <div class="flex items-start">
+                  <div class="w-2 h-2 bg-purple-400 rounded-full mt-3 mr-3 flex-shrink-0"></div>
+                  <p class="text-purple-100">¿Creíste que podías influir en el resultado?</p>
+                </div>
+              </div>
+              <div class="space-y-4">
+                <div class="flex items-start">
+                  <div class="w-2 h-2 bg-purple-400 rounded-full mt-3 mr-3 flex-shrink-0"></div>
+                  <p class="text-purple-100">¿Te emocionaste más anticipando que ganando?</p>
+                </div>
+                <div class="flex items-start">
+                  <div class="w-2 h-2 bg-purple-400 rounded-full mt-3 mr-3 flex-shrink-0"></div>
+                  <p class="text-purple-100">¿Recordaste más las victorias que las derrotas?</p>
+                </div>
+                <div class="flex items-start">
+                  <div class="w-2 h-2 bg-purple-400 rounded-full mt-3 mr-3 flex-shrink-0"></div>
+                  <p class="text-purple-100">¿Sentiste que "la próxima podría ser la buena"?</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="mt-6 p-4 bg-purple-800/50 rounded-lg">
+              <p class="text-purple-100 text-sm">
+                <strong>Reflexión:</strong> Si respondiste "sí" a varias preguntas, 
+                has experimentado los mecanismos psicológicos que describimos. 
+                Reconocerlos es el primer paso para no ser manipulado por ellos.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Interactive Quiz Section -->
+        <Quiz 
+          stepId={paso1Quiz.stepId}
+          title={paso1Quiz.title}
+          description={paso1Quiz.description}
+          questions={paso1Quiz.questions}
+          gradientColors={paso1Quiz.gradientColors}
+        />
+
+        <!-- Key Takeaways -->
+        <section class="mb-16">
+          <h2 class="text-3xl font-bold text-gray-900 mb-8">📝 Puntos Clave del Paso 1</h2>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="bg-green-50 border border-green-200 p-6 rounded-lg">
+              <h3 class="text-lg font-bold text-green-800 mb-4">✅ Lo Que Has Aprendido</h3>
+              <ul class="text-green-700 space-y-2">
+                <li>• Los juegos de azar explotan vulnerabilidades neurológicas</li>
+                <li>• La recompensa variable es más adictiva que las recompensas constantes</li>
+                <li>• Tu cerebro te engaña con sesgos cognitivos</li>
+                <li>• El diseño de los casinos maximiza estos efectos</li>
+              </ul>
+            </div>
+
+            <div class="bg-blue-50 border border-blue-200 p-6 rounded-lg">
+              <h3 class="text-lg font-bold text-blue-800 mb-4">🎯 Próximo Paso</h3>
+              <p class="text-blue-700 mb-4">
+                Ahora que entiendes <em>por qué</em> los juegos son adictivos, 
+                es momento de aprender a <strong>reconocer las señales</strong> 
+                de que el juego se está convirtiendo en un problema.
+              </p>
+              <p class="text-blue-700 text-sm">
+                En el Paso 2 exploraremos las señales de advertencia del juego problemático.
+              </p>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </article>
+
+  <!-- Navigation -->
+  <section class="py-12 bg-gray-50">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto flex justify-between items-center">
+        <a 
+          href="/the-way" 
+          class="flex items-center text-gray-600 hover:text-gray-900 font-medium"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+          </svg>
+          Volver al Camino
+        </a>
+
+        <a 
+          href="/the-way/paso-2" 
+          class="flex items-center px-6 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 text-white font-semibold rounded-lg transition-all duration-200"
+        >
+          Paso 2: Reconocer el Problema
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+</MainLayout>

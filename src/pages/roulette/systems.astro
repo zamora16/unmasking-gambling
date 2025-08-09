@@ -1,0 +1,745 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+---
+
+<MainLayout 
+  title="Sistemas de Apuestas en Ruleta" 
+  description="Analiza los sistemas más populares como Martingala, Fibonacci y D'Alembert. Descubre por qué matemáticamente están condenados al fracaso."
+>
+  
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-br from-red-700 via-gray-900 to-red-900 text-white py-12">
+    <div class="container mx-auto px-4 text-center">
+      <div class="max-w-4xl mx-auto">
+        <h1 class="text-3xl md:text-5xl font-bold mb-4">
+          📈 Sistemas de Apuestas
+        </h1>
+        <p class="text-lg md:text-xl mb-6 text-red-100">
+          Prueba los sistemas más famosos y descubre 
+          <span class="text-yellow-300 font-semibold">por qué todos llevan a la ruina</span>
+        </p>
+        <div class="bg-white/10 backdrop-blur-sm rounded-lg p-4 max-w-2xl mx-auto">
+          <p class="text-red-100">
+            🚨 <strong>Advertencia:</strong> Los sistemas matemáticamente no pueden vencer la ventaja de la casa
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- System Selector -->
+  <section class="py-12 bg-gray-50">
+    <div class="container mx-auto px-4">
+      <div class="max-w-6xl mx-auto">
+        
+        <!-- System Selection -->
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+          <h2 class="text-2xl font-bold text-gray-900 mb-6 text-center">Selecciona un Sistema para Analizar</h2>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <button id="martingaleBtn" class="system-btn bg-red-600 hover:bg-red-700 text-white font-bold py-4 px-6 rounded-lg transition-all duration-200 active-system">
+              🎯 Martingala
+              <div class="text-sm opacity-90 mt-1">Dobla la apuesta tras perder</div>
+            </button>
+            <button id="fibonacciBtn" class="system-btn bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-6 rounded-lg transition-all duration-200">
+              🔢 Fibonacci
+              <div class="text-sm opacity-90 mt-1">Secuencia matemática</div>
+            </button>
+            <button id="dalembertBtn" class="system-btn bg-green-600 hover:bg-green-700 text-white font-bold py-4 px-6 rounded-lg transition-all duration-200">
+              ⚖️ D'Alembert
+              <div class="text-sm opacity-90 mt-1">Aumenta/disminuye de 1 en 1</div>
+            </button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          
+          <!-- Simulator -->
+          <div class="bg-white rounded-lg shadow-lg p-6">
+            
+            <!-- System Description -->
+            <div id="systemDescription" class="mb-6">
+              <!-- Will be populated by JavaScript -->
+            </div>
+
+            <!-- Configuration -->
+            <div class="mb-6">
+              <h3 class="text-xl font-bold text-gray-900 mb-4">⚙️ Configuración</h3>
+              <div class="grid grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-gray-700 font-medium mb-2">Apuesta base:</label>
+                  <input id="basebet" type="number" value="10" min="1" max="100" class="w-full px-3 py-2 border border-gray-300 rounded-lg">
+                </div>
+                <div>
+                  <label class="block text-gray-700 font-medium mb-2">Bankroll inicial:</label>
+                  <input id="bankroll" type="number" value="1000" min="100" max="10000" step="100" class="w-full px-3 py-2 border border-gray-300 rounded-lg">
+                </div>
+                <div>
+                  <label class="block text-gray-700 font-medium mb-2">Límite de mesa:</label>
+                  <input id="tableLimit" type="number" value="500" min="100" max="2000" step="50" class="w-full px-3 py-2 border border-gray-300 rounded-lg">
+                </div>
+                <div>
+                  <label class="block text-gray-700 font-medium mb-2">Objetivo ganancia:</label>
+                  <input id="targetProfit" type="number" value="100" min="10" max="1000" step="10" class="w-full px-3 py-2 border border-gray-300 rounded-lg">
+                </div>
+              </div>
+            </div>
+
+            <!-- Controls -->
+            <div class="mb-6">
+              <div class="flex flex-wrap gap-3">
+                <button id="singleSpinBtn" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition-all duration-200">
+                  🎲 1 Giro
+                </button>
+                <button id="runSessionBtn" class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-6 rounded-lg transition-all duration-200">
+                  🏃 Sesión Completa
+                </button>
+                <button id="simulate1000Btn" class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-6 rounded-lg transition-all duration-200">
+                  ⚡ 1000 Sesiones
+                </button>
+                <button id="resetBtn" class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-lg transition-all duration-200">
+                  🔄 Reset
+                </button>
+              </div>
+            </div>
+
+            <!-- Current Status -->
+            <div class="bg-gray-50 rounded-lg p-4">
+              <h4 class="font-bold text-gray-900 mb-3">Estado Actual</h4>
+              <div class="grid grid-cols-2 gap-4 text-sm">
+                <div class="flex justify-between">
+                  <span class="text-gray-600">Bankroll:</span>
+                  <span id="currentBankroll" class="font-bold">€1000</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-gray-600">Próxima apuesta:</span>
+                  <span id="nextBet" class="font-bold">€10</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-gray-600">Giros:</span>
+                  <span id="spinsCount" class="font-bold">0</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-gray-600">Estado:</span>
+                  <span id="sessionStatus" class="font-bold text-blue-600">Esperando</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Results and Charts -->
+          <div class="space-y-6">
+            
+            <!-- Live Chart -->
+            <div class="bg-white rounded-lg shadow-lg p-6">
+              <h3 class="text-xl font-bold text-gray-900 mb-4">📊 Evolución del Bankroll</h3>
+              <div class="h-64 relative">
+                <canvas id="bankrollChart" class="w-full h-full"></canvas>
+              </div>
+            </div>
+
+            <!-- Statistics -->
+            <div class="bg-white rounded-lg shadow-lg p-6">
+              <h3 class="text-xl font-bold text-gray-900 mb-4">📈 Estadísticas</h3>
+              <div class="space-y-3 text-sm">
+                <div class="flex justify-between">
+                  <span class="text-gray-600">Sesiones simuladas:</span>
+                  <span id="totalSessions" class="font-bold">0</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-gray-600">Sesiones ganadoras:</span>
+                  <span id="winningSessions" class="font-bold text-green-600">0</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-gray-600">Sesiones arruinadas:</span>
+                  <span id="bankruptSessions" class="font-bold text-red-600">0</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-gray-600">% Éxito:</span>
+                  <span id="successRate" class="font-bold">0%</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-gray-600">Ganancia promedio:</span>
+                  <span id="avgProfit" class="font-bold">€0</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-gray-600">Pérdida promedio:</span>
+                  <span id="avgLoss" class="font-bold">€0</span>
+                </div>
+                <div class="flex justify-between border-t pt-2">
+                  <span class="text-gray-600">ROI esperado:</span>
+                  <span id="expectedROI" class="font-bold text-red-600">-2.7%</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Warning -->
+            <div class="bg-red-50 border border-red-200 rounded-lg p-4">
+              <h4 class="font-bold text-red-800 mb-2">⚠️ Realidad Matemática</h4>
+              <p id="systemWarning" class="text-red-700 text-sm">
+                Ningún sistema puede vencer la ventaja de la casa a largo plazo.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Educational Content -->
+  <section class="py-12 bg-white">
+    <div class="container mx-auto px-4">
+      <div class="max-w-6xl mx-auto">
+        <h2 class="text-3xl font-bold text-center text-gray-900 mb-12">🧠 Por Qué Fallan Todos los Sistemas</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+          <div class="bg-red-50 border-l-4 border-red-400 p-6 rounded">
+            <h3 class="text-xl font-bold text-red-800 mb-3">🏠 Ventaja de la Casa</h3>
+            <p class="text-red-700 text-sm mb-3">
+              En ruleta europea, la casa tiene un 2.7% de ventaja en CADA giro. 
+              No importa cómo cambies las apuestas, esta ventaja siempre está ahí.
+            </p>
+            <ul class="text-red-600 text-xs space-y-1">
+              <li>• Cada giro es independiente</li>
+              <li>• El cero verde no paga en apuestas simples</li>
+              <li>• Las matemáticas son inmutables</li>
+            </ul>
+          </div>
+
+          <div class="bg-yellow-50 border-l-4 border-yellow-400 p-6 rounded">
+            <h3 class="text-xl font-bold text-yellow-800 mb-3">💰 Límites de Mesa</h3>
+            <p class="text-yellow-700 text-sm mb-3">
+              Los casinos ponen límites máximos precisamente para evitar que sistemas 
+              como Martingala funcionen indefinidamente.
+            </p>
+            <ul class="text-yellow-600 text-xs space-y-1">
+              <li>• Límite máximo de apuesta</li>
+              <li>• Tu bankroll es finito</li>
+              <li>• Progresiones exponenciales</li>
+            </ul>
+          </div>
+
+          <div class="bg-blue-50 border-l-4 border-blue-400 p-6 rounded">
+            <h3 class="text-xl font-bold text-blue-800 mb-3">🎲 Falacia del Jugador</h3>
+            <p class="text-blue-700 text-sm mb-3">
+              Creer que los resultados pasados afectan los futuros es un error fundamental. 
+              Cada giro tiene exactamente las mismas probabilidades.
+            </p>
+            <ul class="text-blue-600 text-xs space-y-1">
+              <li>• No hay "números debidos"</li>
+              <li>• No hay "rachas que romper"</li>
+              <li>• La ruleta no tiene memoria</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- System Comparison Table -->
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+          <div class="px-6 py-4 bg-gray-50 border-b">
+            <h3 class="text-xl font-bold text-gray-900">Comparación de Sistemas</h3>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="w-full">
+              <thead class="bg-gray-100">
+                <tr>
+                  <th class="px-6 py-3 text-left text-gray-900 font-bold">Sistema</th>
+                  <th class="px-6 py-3 text-left text-gray-900 font-bold">Progresión</th>
+                  <th class="px-6 py-3 text-left text-gray-900 font-bold">Ventaja Aparente</th>
+                  <th class="px-6 py-3 text-left text-gray-900 font-bold">Fallo Fatal</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-gray-200">
+                <tr>
+                  <td class="px-6 py-4 font-bold text-red-600">Martingala</td>
+                  <td class="px-6 py-4 text-sm">1, 2, 4, 8, 16, 32...</td>
+                  <td class="px-6 py-4 text-sm">"Recuperas todo + ganancia base"</td>
+                  <td class="px-6 py-4 text-sm text-red-600">Crecimiento exponencial + límites</td>
+                </tr>
+                <tr>
+                  <td class="px-6 py-4 font-bold text-blue-600">Fibonacci</td>
+                  <td class="px-6 py-4 text-sm">1, 1, 2, 3, 5, 8, 13...</td>
+                  <td class="px-6 py-4 text-sm">"Crecimiento más lento"</td>
+                  <td class="px-6 py-4 text-sm text-red-600">Sigue siendo exponencial</td>
+                </tr>
+                <tr>
+                  <td class="px-6 py-4 font-bold text-green-600">D'Alembert</td>
+                  <td class="px-6 py-4 text-sm">+1 si pierdes, -1 si ganas</td>
+                  <td class="px-6 py-4 text-sm">"Equilibrio natural"</td>
+                  <td class="px-6 py-4 text-sm text-red-600">No compensa la ventaja casa</td>
+                </tr>
+                <tr>
+                  <td class="px-6 py-4 font-bold text-purple-600">Labouchère</td>
+                  <td class="px-6 py-4 text-sm">Sistema de cancelación</td>
+                  <td class="px-6 py-4 text-sm">"Garantiza ganancia objetivo"</td>
+                  <td class="px-6 py-4 text-sm text-red-600">Rachas largas = apuestas enormes</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Real Examples -->
+  <section class="py-12 bg-gray-50">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold text-center text-gray-900 mb-8">📚 Ejemplos Reales</h2>
+        
+        <div class="space-y-8">
+          <div class="bg-white rounded-lg shadow-lg p-6">
+            <h3 class="text-xl font-bold text-red-800 mb-4">🔥 Martingala: El Ejemplo de los €10</h3>
+            <p class="text-gray-700 mb-4">
+              Empiezas con €10. Después de solo 8 pérdidas consecutivas (probabilidad ~0.4%), necesitarías apostar €2,560.
+            </p>
+            <div class="bg-gray-100 rounded-lg p-4">
+              <div class="text-sm font-mono space-y-1">
+                <div>Giro 1: Apuesta €10 → Pierdes → Total perdido: €10</div>
+                <div>Giro 2: Apuesta €20 → Pierdes → Total perdido: €30</div>
+                <div>Giro 3: Apuesta €40 → Pierdes → Total perdido: €70</div>
+                <div>Giro 4: Apuesta €80 → Pierdes → Total perdido: €150</div>
+                <div>Giro 5: Apuesta €160 → Pierdes → Total perdido: €310</div>
+                <div>Giro 6: Apuesta €320 → Pierdes → Total perdido: €630</div>
+                <div>Giro 7: Apuesta €640 → Pierdes → Total perdido: €1,270</div>
+                <div class="text-red-600 font-bold">Giro 8: Necesitas apostar €1,280 → ¡Límite de mesa alcanzado!</div>
+              </div>
+            </div>
+            <p class="text-red-600 font-bold mt-4">
+              Resultado: Has perdido €1,270 persiguiendo una ganancia de €10.
+            </p>
+          </div>
+
+          <div class="bg-white rounded-lg shadow-lg p-6">
+            <h3 class="text-xl font-bold text-blue-800 mb-4">📊 La Realidad Estadística</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <h4 class="font-bold text-gray-900 mb-2">Probabilidades de rachas perdedoras:</h4>
+                <ul class="text-sm space-y-1">
+                  <li>3 seguidas: <span class="font-bold text-red-600">12.5%</span></li>
+                  <li>5 seguidas: <span class="font-bold text-red-600">3.1%</span></li>
+                  <li>7 seguidas: <span class="font-bold text-red-600">0.8%</span></li>
+                  <li>10 seguidas: <span class="font-bold text-red-600">0.1%</span></li>
+                </ul>
+              </div>
+              <div>
+                <h4 class="font-bold text-gray-900 mb-2">En 1000 sesiones de juego:</h4>
+                <ul class="text-sm space-y-1">
+                  <li>125 tendrán 3+ pérdidas seguidas</li>
+                  <li>31 tendrán 5+ pérdidas seguidas</li>
+                  <li>8 tendrán 7+ pérdidas seguidas</li>
+                  <li>1 tendrá 10+ pérdidas seguidas</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</MainLayout>
+
+<script>
+class BettingSystemAnalyzer {
+  constructor() {
+    this.currentSystem = 'martingale';
+    this.basebet = 10;
+    this.bankroll = 1000;
+    this.initialBankroll = 1000;
+    this.tableLimit = 500;
+    this.targetProfit = 100;
+    this.nextBet = 10;
+    this.spinsCount = 0;
+    this.sessionStatus = 'waiting';
+    this.bankrollHistory = [];
+    this.totalSessions = 0;
+    this.winningSessions = 0;
+    this.bankruptSessions = 0;
+    this.profits = [];
+    this.losses = [];
+    this.fibonacciSequence = [1, 1];
+    this.currentFibIndex = 0;
+    this.dalembertBase = 1;
+    this.chart = null;
+    
+    this.initializeElements();
+    this.attachEventListeners();
+    this.updateSystemDescription();
+    this.updateDisplay();
+    this.initChart();
+  }
+
+  initializeElements() {
+    this.elements = {
+      martingaleBtn: document.getElementById('martingaleBtn'),
+      fibonacciBtn: document.getElementById('fibonacciBtn'),
+      dalembertBtn: document.getElementById('dalembertBtn'),
+      systemDescription: document.getElementById('systemDescription'),
+      basebet: document.getElementById('basebet'),
+      bankroll: document.getElementById('bankroll'),
+      tableLimit: document.getElementById('tableLimit'),
+      targetProfit: document.getElementById('targetProfit'),
+      singleSpinBtn: document.getElementById('singleSpinBtn'),
+      runSessionBtn: document.getElementById('runSessionBtn'),
+      simulate1000Btn: document.getElementById('simulate1000Btn'),
+      resetBtn: document.getElementById('resetBtn'),
+      currentBankroll: document.getElementById('currentBankroll'),
+      nextBet: document.getElementById('nextBet'),
+      spinsCount: document.getElementById('spinsCount'),
+      sessionStatus: document.getElementById('sessionStatus'),
+      totalSessions: document.getElementById('totalSessions'),
+      winningSessions: document.getElementById('winningSessions'),
+      bankruptSessions: document.getElementById('bankruptSessions'),
+      successRate: document.getElementById('successRate'),
+      avgProfit: document.getElementById('avgProfit'),
+      avgLoss: document.getElementById('avgLoss'),
+      expectedROI: document.getElementById('expectedROI'),
+      systemWarning: document.getElementById('systemWarning'),
+      bankrollChart: document.getElementById('bankrollChart')
+    };
+  }
+
+  attachEventListeners() {
+    this.elements.martingaleBtn.addEventListener('click', () => this.setSystem('martingale'));
+    this.elements.fibonacciBtn.addEventListener('click', () => this.setSystem('fibonacci'));
+    this.elements.dalembertBtn.addEventListener('click', () => this.setSystem('dalembert'));
+    
+    this.elements.basebet.addEventListener('input', (e) => this.updateConfig());
+    this.elements.bankroll.addEventListener('input', (e) => this.updateConfig());
+    this.elements.tableLimit.addEventListener('input', (e) => this.updateConfig());
+    this.elements.targetProfit.addEventListener('input', (e) => this.updateConfig());
+    
+    this.elements.singleSpinBtn.addEventListener('click', () => this.singleSpin());
+    this.elements.runSessionBtn.addEventListener('click', () => this.runSession());
+    this.elements.simulate1000Btn.addEventListener('click', () => this.simulate1000());
+    this.elements.resetBtn.addEventListener('click', () => this.reset());
+  }
+
+  setSystem(system) {
+    this.currentSystem = system;
+    
+    // Update button styles
+    document.querySelectorAll('.system-btn').forEach(btn => btn.classList.remove('active-system'));
+    this.elements[system + 'Btn'].classList.add('active-system');
+    
+    this.updateSystemDescription();
+    this.reset();
+  }
+
+  updateSystemDescription() {
+    const descriptions = {
+      martingale: {
+        title: '🎯 Sistema Martingala',
+        description: 'Dobla tu apuesta después de cada pérdida. Cuando ganes, recuperarás todas las pérdidas más una ganancia igual a tu apuesta base.',
+        warning: 'Peligro: El crecimiento exponencial puede agotar tu bankroll rápidamente. Solo 8 pérdidas consecutivas convertirían €10 en €2,560.',
+        howItWorks: 'Apuesta base → Si pierdes: x2 → Si ganas: vuelve a base'
+      },
+      fibonacci: {
+        title: '🔢 Sistema Fibonacci',
+        description: 'Sigues la secuencia de Fibonacci (1,1,2,3,5,8,13...). Después de perder, avanzas en la secuencia. Después de ganar, retrocedes dos posiciones.',
+        warning: 'Aunque crece más lento que Martingala, sigue siendo exponencial y puede llevar a apuestas enormes.',
+        howItWorks: '1,1,2,3,5,8,13,21,34,55... → +1 si pierdes, -2 si ganas'
+      },
+      dalembert: {
+        title: '⚖️ Sistema D\'Alembert',
+        description: 'Aumenta tu apuesta en 1 unidad después de perder, disminuye en 1 unidad después de ganar. Basado en la "ley del equilibrio".',
+        warning: 'Más conservador, pero aún no puede superar la ventaja de la casa. Las rachas perdedoras siguen siendo peligrosas.',
+        howItWorks: 'Base +1 si pierdes, -1 si ganas (mínimo = base)'
+      }
+    };
+
+    const desc = descriptions[this.currentSystem];
+    this.elements.systemDescription.innerHTML = `
+      <h3 class="text-xl font-bold text-gray-900 mb-3">${desc.title}</h3>
+      <p class="text-gray-700 mb-3">${desc.description}</p>
+      <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-3 mb-3">
+        <p class="text-yellow-800 text-sm"><strong>Cómo funciona:</strong> ${desc.howItWorks}</p>
+      </div>
+      <div class="bg-red-50 border border-red-200 rounded-lg p-3">
+        <p class="text-red-700 text-sm"><strong>⚠️ Realidad:</strong> ${desc.warning}</p>
+      </div>
+    `;
+
+    // Update warning text
+    this.elements.systemWarning.textContent = desc.warning;
+  }
+
+  updateConfig() {
+    this.basebet = parseInt(this.elements.basebet.value) || 10;
+    this.initialBankroll = parseInt(this.elements.bankroll.value) || 1000;
+    this.tableLimit = parseInt(this.elements.tableLimit.value) || 500;
+    this.targetProfit = parseInt(this.elements.targetProfit.value) || 100;
+    
+    this.reset();
+  }
+
+  singleSpin() {
+    if (this.sessionStatus === 'finished') return;
+    
+    const result = this.simulateSpin();
+    this.processSpin(result);
+    this.updateDisplay();
+    this.updateChart();
+  }
+
+  runSession() {
+    this.resetSession();
+    
+    while (this.sessionStatus === 'active') {
+      const result = this.simulateSpin();
+      this.processSpin(result);
+    }
+    
+    this.updateDisplay();
+    this.updateChart();
+  }
+
+  async simulate1000() {
+    this.elements.simulate1000Btn.disabled = true;
+    this.elements.simulate1000Btn.textContent = 'Simulando...';
+    
+    for (let i = 0; i < 1000; i++) {
+      this.resetSession();
+      
+      while (this.sessionStatus === 'active') {
+        const result = this.simulateSpin();
+        this.processSpin(result);
+      }
+      
+      // Update display every 100 sessions
+      if (i % 100 === 0) {
+        this.updateDisplay();
+        await new Promise(resolve => setTimeout(resolve, 10));
+      }
+    }
+    
+    this.updateDisplay();
+    this.elements.simulate1000Btn.disabled = false;
+    this.elements.simulate1000Btn.textContent = '⚡ 1000 Sesiones';
+  }
+
+  simulateSpin() {
+    // Simulate European roulette (2.7% house edge)
+    const random = Math.random();
+    return random < 18/37; // Win on red/black bet
+  }
+
+  processSpin(won) {
+    this.spinsCount++;
+    
+    // Primero, siempre se descuenta la apuesta del bankroll
+    this.bankroll -= this.nextBet;
+    
+    if (won) {
+      // Si gana: recibe el pago completo (apuesta original + ganancia para 1:1)
+      const totalPayout = this.nextBet * 2; // 1:1 payout means 2x return
+      this.bankroll += totalPayout;
+      
+      // Reset bet according to system
+      this.resetBetAfterWin();
+      
+      // Check if target reached
+      if (this.bankroll >= this.initialBankroll + this.targetProfit) {
+        this.sessionStatus = 'won';
+        this.winningSessions++;
+        this.totalSessions++;
+        this.profits.push(this.bankroll - this.initialBankroll);
+      }
+    } else {
+      // Si pierde: ya se descontó la apuesta, no se devuelve nada
+      
+      // Increase bet according to system
+      this.increaseBetAfterLoss();
+      
+      // Check bankruptcy or table limit
+      if (this.bankroll < this.nextBet || this.nextBet > this.tableLimit) {
+        this.sessionStatus = 'bust';
+        this.bankruptSessions++;
+        this.totalSessions++;
+        this.losses.push(this.initialBankroll - this.bankroll);
+      }
+    }
+    
+    this.bankrollHistory.push(this.bankroll);
+  }
+
+  resetBetAfterWin() {
+    switch (this.currentSystem) {
+      case 'martingale':
+        this.nextBet = this.basebet;
+        break;
+      case 'fibonacci':
+        this.currentFibIndex = Math.max(0, this.currentFibIndex - 2);
+        this.nextBet = this.basebet * this.getFibonacci(this.currentFibIndex);
+        break;
+      case 'dalembert':
+        this.dalembertBase = Math.max(1, this.dalembertBase - 1);
+        this.nextBet = this.basebet * this.dalembertBase;
+        break;
+    }
+  }
+
+  increaseBetAfterLoss() {
+    switch (this.currentSystem) {
+      case 'martingale':
+        this.nextBet *= 2;
+        break;
+      case 'fibonacci':
+        this.currentFibIndex++;
+        this.nextBet = this.basebet * this.getFibonacci(this.currentFibIndex);
+        break;
+      case 'dalembert':
+        this.dalembertBase++;
+        this.nextBet = this.basebet * this.dalembertBase;
+        break;
+    }
+  }
+
+  getFibonacci(index) {
+    while (this.fibonacciSequence.length <= index) {
+      const len = this.fibonacciSequence.length;
+      this.fibonacciSequence.push(this.fibonacciSequence[len - 1] + this.fibonacciSequence[len - 2]);
+    }
+    return this.fibonacciSequence[index];
+  }
+
+  resetSession() {
+    this.bankroll = this.initialBankroll;
+    this.nextBet = this.basebet;
+    this.spinsCount = 0;
+    this.sessionStatus = 'active';
+    this.bankrollHistory = [this.bankroll];
+    this.currentFibIndex = 0;
+    this.dalembertBase = 1;
+  }
+
+  reset() {
+    this.resetSession();
+    this.sessionStatus = 'waiting';
+    this.totalSessions = 0;
+    this.winningSessions = 0;
+    this.bankruptSessions = 0;
+    this.profits = [];
+    this.losses = [];
+    this.updateDisplay();
+    this.updateChart();
+  }
+
+  updateDisplay() {
+    this.elements.currentBankroll.textContent = `€${this.bankroll}`;
+    this.elements.nextBet.textContent = `€${this.nextBet}`;
+    this.elements.spinsCount.textContent = this.spinsCount;
+    
+    let statusText = 'Esperando';
+    let statusClass = 'text-blue-600';
+    
+    switch (this.sessionStatus) {
+      case 'active':
+        statusText = 'Jugando';
+        statusClass = 'text-green-600';
+        break;
+      case 'won':
+        statusText = 'Ganó';
+        statusClass = 'text-green-600';
+        break;
+      case 'bust':
+        statusText = 'Arruinado';
+        statusClass = 'text-red-600';
+        break;
+    }
+    
+    this.elements.sessionStatus.textContent = statusText;
+    this.elements.sessionStatus.className = `font-bold ${statusClass}`;
+    
+    // Statistics
+    this.elements.totalSessions.textContent = this.totalSessions;
+    this.elements.winningSessions.textContent = this.winningSessions;
+    this.elements.bankruptSessions.textContent = this.bankruptSessions;
+    
+    const successRate = this.totalSessions > 0 ? ((this.winningSessions / this.totalSessions) * 100).toFixed(1) : 0;
+    this.elements.successRate.textContent = `${successRate}%`;
+    
+    const avgProfit = this.profits.length > 0 ? (this.profits.reduce((a, b) => a + b, 0) / this.profits.length).toFixed(0) : 0;
+    this.elements.avgProfit.textContent = `€${avgProfit}`;
+    
+    const avgLoss = this.losses.length > 0 ? (this.losses.reduce((a, b) => a + b, 0) / this.losses.length).toFixed(0) : 0;
+    this.elements.avgLoss.textContent = `€${avgLoss}`;
+    
+    // Expected ROI (always negative due to house edge)
+    this.elements.expectedROI.textContent = '-2.7%';
+  }
+
+  initChart() {
+    const ctx = this.elements.bankrollChart.getContext('2d');
+    this.chart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: [0],
+        datasets: [{
+          label: 'Bankroll',
+          data: [this.initialBankroll],
+          borderColor: 'rgb(59, 130, 246)',
+          backgroundColor: 'rgba(59, 130, 246, 0.1)',
+          tension: 0.1
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          y: {
+            beginAtZero: true,
+            title: {
+              display: true,
+              text: 'Bankroll (€)'
+            }
+          },
+          x: {
+            title: {
+              display: true,
+              text: 'Giros'
+            }
+          }
+        },
+        plugins: {
+          legend: {
+            display: false
+          }
+        }
+      }
+    });
+  }
+
+  updateChart() {
+    if (!this.chart) return;
+    
+    const labels = this.bankrollHistory.map((_, index) => index);
+    
+    this.chart.data.labels = labels;
+    this.chart.data.datasets[0].data = this.bankrollHistory;
+    this.chart.update();
+  }
+}
+
+// Add CSS for active states
+const style = document.createElement('style');
+style.textContent = `
+  .active-system {
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    border: 2px solid #fbbf24;
+  }
+`;
+document.head.appendChild(style);
+
+// Load Chart.js and initialize analyzer
+document.addEventListener('DOMContentLoaded', () => {
+  // Load Chart.js
+  const script = document.createElement('script');
+  script.src = 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js';
+  script.onload = () => {
+    new BettingSystemAnalyzer();
+  };
+  document.head.appendChild(script);
+});
+</script>

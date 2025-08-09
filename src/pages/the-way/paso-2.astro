@@ -1,0 +1,690 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import ProgressManager from '../../components/ProgressManager.astro';
+---
+
+<MainLayout 
+  title="Paso 2: Reconociendo el Problema" 
+  description="Aprende a identificar las señales de advertencia del juego problemático y evalúa tu situación actual."
+  article={true}
+>
+  
+  <!-- Progress Header -->
+  <section class="bg-gradient-to-r from-indigo-600 to-blue-600 text-white py-8">
+    <div class="container mx-auto px-4">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center">
+          <a href="/the-way" class="text-indigo-200 hover:text-white mr-4">
+            ← Volver al Camino
+          </a>
+          <div class="text-sm">
+            <span class="text-indigo-200">Paso 2 de 6</span>
+          </div>
+        </div>
+        <div class="flex items-center space-x-2">
+          <div class="w-8 h-8 bg-indigo-300 rounded-full flex items-center justify-center text-sm">1</div>
+          <div class="w-8 h-1 bg-indigo-300"></div>
+          <div class="w-8 h-8 bg-indigo-400 rounded-full flex items-center justify-center text-sm font-bold">2</div>
+          <div class="w-8 h-1 bg-indigo-300/50"></div>
+          <div class="w-8 h-8 bg-indigo-300/50 rounded-full flex items-center justify-center text-sm">3</div>
+          <div class="w-8 h-1 bg-indigo-300/50"></div>
+          <div class="w-8 h-8 bg-indigo-300/50 rounded-full flex items-center justify-center text-sm">4</div>
+          <div class="w-8 h-1 bg-indigo-300/50"></div>
+          <div class="w-8 h-8 bg-indigo-300/50 rounded-full flex items-center justify-center text-sm">5</div>
+          <div class="w-8 h-1 bg-indigo-300/50"></div>
+          <div class="w-8 h-8 bg-indigo-300/50 rounded-full flex items-center justify-center text-sm">6</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Hero -->
+  <section class="bg-gradient-to-br from-indigo-500 to-blue-600 text-white py-20">
+    <div class="container mx-auto px-4 text-center">
+      <div class="max-w-4xl mx-auto">
+        <span class="inline-block px-4 py-2 bg-indigo-400/30 rounded-full text-sm font-medium mb-6">
+          Paso 2: Autoconocimiento
+        </span>
+        <h1 class="text-4xl md:text-5xl font-bold mb-6">
+          Reconociendo el Problema
+        </h1>
+        <p class="text-xl text-indigo-100 max-w-2xl mx-auto">
+          El juego patológico se caracteriza por señales específicas. 
+          Aprende a identificarlas y evalúa tu situación actual de manera objetiva.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Progress Manager -->
+  <section class="py-8 bg-gray-50">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto">
+        <ProgressManager />
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <article class="py-20 bg-white">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto">
+        
+        <!-- Warning Signs -->
+        <section class="mb-16">
+          <h2 class="text-3xl font-bold text-gray-900 mb-8">🚨 Señales de Advertencia</h2>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Behavioral Signs -->
+            <div class="bg-red-50 border border-red-200 p-6 rounded-lg">
+              <h3 class="text-xl font-bold text-red-800 mb-4">🎭 Cambios de Comportamiento</h3>
+              <ul class="text-red-700 space-y-3">
+                <li class="flex items-start">
+                  <span class="text-red-600 mr-2">•</span>
+                  <span>Incapacidad para dejar de jugar o controlar el tiempo/dinero</span>
+                </li>
+                <li class="flex items-start">
+                  <span class="text-red-600 mr-2">•</span>
+                  <span>Obsesión constante con el juego y estrategias para conseguir dinero</span>
+                </li>
+                <li class="flex items-start">
+                  <span class="text-red-600 mr-2">•</span>
+                  <span>Aumento de la tolerancia (necesidad de apostar más para sentir emoción)</span>
+                </li>
+                <li class="flex items-start">
+                  <span class="text-red-600 mr-2">•</span>
+                  <span>Intentos fallidos de reducir o parar el juego</span>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Emotional Signs -->
+            <div class="bg-orange-50 border border-orange-200 p-6 rounded-lg">
+              <h3 class="text-xl font-bold text-orange-800 mb-4">😰 Cambios Emocionales</h3>
+              <ul class="text-orange-700 space-y-3">
+                <li class="flex items-start">
+                  <span class="text-orange-600 mr-2">•</span>
+                  <span>Ansiedad e irritabilidad cuando no se puede jugar</span>
+                </li>
+                <li class="flex items-start">
+                  <span class="text-orange-600 mr-2">•</span>
+                  <span>Uso del juego para escapar de problemas o sentimientos negativos</span>
+                </li>
+                <li class="flex items-start">
+                  <span class="text-orange-600 mr-2">•</span>
+                  <span>Sentimientos de culpa, vergüenza o desesperanza</span>
+                </li>
+                <li class="flex items-start">
+                  <span class="text-orange-600 mr-2">•</span>
+                  <span>Cambios extremos de humor relacionados con el juego</span>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Social Signs -->
+            <div class="bg-blue-50 border border-blue-200 p-6 rounded-lg">
+              <h3 class="text-xl font-bold text-blue-800 mb-4">👥 Impacto Social</h3>
+              <ul class="text-blue-700 space-y-3">
+                <li class="flex items-start">
+                  <span class="text-blue-600 mr-2">•</span>
+                  <span>Mentir a familiares y amigos sobre el alcance del juego</span>
+                </li>
+                <li class="flex items-start">
+                  <span class="text-blue-600 mr-2">•</span>
+                  <span>Deterioro de relaciones importantes debido al juego</span>
+                </li>
+                <li class="flex items-start">
+                  <span class="text-blue-600 mr-2">•</span>
+                  <span>Aislamiento social y pérdida de interés en otras actividades</span>
+                </li>
+                <li class="flex items-start">
+                  <span class="text-blue-600 mr-2">•</span>
+                  <span>Impacto negativo en el trabajo, estudios o responsabilidades</span>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Financial Signs -->
+            <div class="bg-purple-50 border border-purple-200 p-6 rounded-lg">
+              <h3 class="text-xl font-bold text-purple-800 mb-4">💸 Problemas Financieros</h3>
+              <ul class="text-purple-700 space-y-3">
+                <li class="flex items-start">
+                  <span class="text-purple-600 mr-2">•</span>
+                  <span>Pedir dinero prestado para jugar o cubrir pérdidas</span>
+                </li>
+                <li class="flex items-start">
+                  <span class="text-purple-600 mr-2">•</span>
+                  <span>Vender posesiones personales para conseguir dinero para jugar</span>
+                </li>
+                <li class="flex items-start">
+                  <span class="text-purple-600 mr-2">•</span>
+                  <span>Descuidar obligaciones financieras básicas (alquiler, facturas)</span>
+                </li>
+                <li class="flex items-start">
+                  <span class="text-purple-600 mr-2">•</span>
+                  <span>Recurrir a actividades ilegales para financiar el juego</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- Interactive Self-Assessment Tool -->
+        <section class="mb-16">
+          <div class="bg-gradient-to-r from-indigo-600 to-blue-600 text-white p-8 rounded-xl">
+            <h2 class="text-2xl font-bold mb-6">📋 Evaluación Interactiva de Riesgo</h2>
+            <p class="text-indigo-100 mb-8">
+              Basado en criterios clínicos reconocidos. Responde honestamente para obtener tu perfil de riesgo personalizado:
+            </p>
+            
+            <div id="assessment-container">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm mb-8">
+                <div class="space-y-4">
+                  <div class="bg-white/10 p-4 rounded-lg question-card" data-question="1">
+                    <p class="font-medium mb-3">¿Has intentado parar de jugar pero no has podido?</p>
+                    <div class="space-y-2">
+                      <label class="flex items-center cursor-pointer hover:bg-white/5 p-2 rounded">
+                        <input type="radio" name="q1" value="yes" class="mr-3"> Sí
+                      </label>
+                      <label class="flex items-center cursor-pointer hover:bg-white/5 p-2 rounded">
+                        <input type="radio" name="q1" value="no" class="mr-3"> No
+                      </label>
+                    </div>
+                  </div>
+                  
+                  <div class="bg-white/10 p-4 rounded-lg question-card" data-question="2">
+                    <p class="font-medium mb-3">¿Juegas más tiempo o dinero del planeado?</p>
+                    <div class="space-y-2">
+                      <label class="flex items-center cursor-pointer hover:bg-white/5 p-2 rounded">
+                        <input type="radio" name="q2" value="yes" class="mr-3"> Sí
+                      </label>
+                      <label class="flex items-center cursor-pointer hover:bg-white/5 p-2 rounded">
+                        <input type="radio" name="q2" value="no" class="mr-3"> No
+                      </label>
+                    </div>
+                  </div>
+
+                  <div class="bg-white/10 p-4 rounded-lg question-card" data-question="3">
+                    <p class="font-medium mb-3">¿Has mentido sobre cuánto juegas?</p>
+                    <div class="space-y-2">
+                      <label class="flex items-center cursor-pointer hover:bg-white/5 p-2 rounded">
+                        <input type="radio" name="q3" value="yes" class="mr-3"> Sí
+                      </label>
+                      <label class="flex items-center cursor-pointer hover:bg-white/5 p-2 rounded">
+                        <input type="radio" name="q3" value="no" class="mr-3"> No
+                      </label>
+                    </div>
+                  </div>
+
+                  <div class="bg-white/10 p-4 rounded-lg question-card" data-question="4">
+                    <p class="font-medium mb-3">¿Te sientes ansioso o irritable cuando no puedes jugar?</p>
+                    <div class="space-y-2">
+                      <label class="flex items-center cursor-pointer hover:bg-white/5 p-2 rounded">
+                        <input type="radio" name="q4" value="yes" class="mr-3"> Sí
+                      </label>
+                      <label class="flex items-center cursor-pointer hover:bg-white/5 p-2 rounded">
+                        <input type="radio" name="q4" value="no" class="mr-3"> No
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="space-y-4">
+                  <div class="bg-white/10 p-4 rounded-lg question-card" data-question="5">
+                    <p class="font-medium mb-3">¿El juego está afectando tu trabajo o relaciones?</p>
+                    <div class="space-y-2">
+                      <label class="flex items-center cursor-pointer hover:bg-white/5 p-2 rounded">
+                        <input type="radio" name="q5" value="yes" class="mr-3"> Sí
+                      </label>
+                      <label class="flex items-center cursor-pointer hover:bg-white/5 p-2 rounded">
+                        <input type="radio" name="q5" value="no" class="mr-3"> No
+                      </label>
+                    </div>
+                  </div>
+
+                  <div class="bg-white/10 p-4 rounded-lg question-card" data-question="6">
+                    <p class="font-medium mb-3">¿Has pedido dinero prestado para jugar?</p>
+                    <div class="space-y-2">
+                      <label class="flex items-center cursor-pointer hover:bg-white/5 p-2 rounded">
+                        <input type="radio" name="q6" value="yes" class="mr-3"> Sí
+                      </label>
+                      <label class="flex items-center cursor-pointer hover:bg-white/5 p-2 rounded">
+                        <input type="radio" name="q6" value="no" class="mr-3"> No
+                      </label>
+                    </div>
+                  </div>
+
+                  <div class="bg-white/10 p-4 rounded-lg question-card" data-question="7">
+                    <p class="font-medium mb-3">¿Juegas para escapar de problemas o sentimientos negativos?</p>
+                    <div class="space-y-2">
+                      <label class="flex items-center cursor-pointer hover:bg-white/5 p-2 rounded">
+                        <input type="radio" name="q7" value="yes" class="mr-3"> Sí
+                      </label>
+                      <label class="flex items-center cursor-pointer hover:bg-white/5 p-2 rounded">
+                        <input type="radio" name="q7" value="no" class="mr-3"> No
+                      </label>
+                    </div>
+                  </div>
+
+                  <div class="bg-white/10 p-4 rounded-lg question-card" data-question="8">
+                    <p class="font-medium mb-3">¿Después de perder, vuelves otro día para "recuperar"?</p>
+                    <div class="space-y-2">
+                      <label class="flex items-center cursor-pointer hover:bg-white/5 p-2 rounded">
+                        <input type="radio" name="q8" value="yes" class="mr-3"> Sí
+                      </label>
+                      <label class="flex items-center cursor-pointer hover:bg-white/5 p-2 rounded">
+                        <input type="radio" name="q8" value="no" class="mr-3"> No
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Progress indicator -->
+              <div class="mb-6">
+                <div class="flex justify-between items-center mb-2">
+                  <span class="text-sm text-indigo-200">Progreso de la evaluación</span>
+                  <span class="text-sm text-indigo-200" id="progress-text">0/8 respondidas</span>
+                </div>
+                <div class="w-full bg-white/20 rounded-full h-2">
+                  <div id="assessment-progress" class="bg-yellow-400 h-2 rounded-full transition-all duration-300" style="width: 0%"></div>
+                </div>
+              </div>
+
+              <button 
+                id="calculate-risk" 
+                class="w-full px-6 py-3 bg-yellow-500 hover:bg-yellow-600 text-indigo-900 font-bold rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                disabled
+              >
+                📊 Calcular Mi Nivel de Riesgo
+              </button>
+
+              <!-- Results section (initially hidden) -->
+              <div id="assessment-results" class="hidden mt-8 space-y-6">
+                <!-- Risk Level Indicator -->
+                <div class="bg-white/20 p-6 rounded-lg text-center">
+                  <h3 class="font-bold mb-4 text-xl">Tu Nivel de Riesgo</h3>
+                  <div class="relative w-48 h-24 mx-auto mb-4">
+                    <!-- Speedometer visual -->
+                    <div class="w-48 h-24 border-8 border-gray-300 rounded-t-full relative overflow-hidden">
+                      <div id="risk-needle" class="absolute bottom-0 left-1/2 w-1 h-20 bg-white origin-bottom transform -rotate-90 transition-transform duration-1000"></div>
+                      <div class="absolute bottom-0 left-0 w-16 h-20 bg-green-400 rounded-tl-full"></div>
+                      <div class="absolute bottom-0 left-16 w-16 h-20 bg-yellow-400"></div>
+                      <div class="absolute bottom-0 right-0 w-16 h-20 bg-red-400 rounded-tr-full"></div>
+                    </div>
+                    <div class="flex justify-between text-xs mt-2">
+                      <span>Bajo</span>
+                      <span>Moderado</span>
+                      <span>Alto</span>
+                    </div>
+                  </div>
+                  <div id="risk-level-text" class="text-2xl font-bold"></div>
+                  <div id="risk-description" class="text-indigo-100 mt-2"></div>
+                </div>
+
+                <!-- Personalized Recommendations -->
+                <div id="recommendations" class="bg-white/20 p-6 rounded-lg">
+                  <h3 class="font-bold mb-4 text-lg">Recomendaciones Personalizadas</h3>
+                  <div id="recommendation-content" class="space-y-3"></div>
+                </div>
+
+                <!-- Complete step button -->
+                <button 
+                  id="complete-assessment" 
+                  class="w-full px-6 py-3 bg-green-500 hover:bg-green-600 text-white font-bold rounded-lg transition-colors"
+                >
+                  ✅ Completar Evaluación y Continuar
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Cost Calculator Tool -->
+        <section class="mb-16">
+          <div class="bg-gradient-to-r from-purple-600 to-pink-600 text-white p-8 rounded-xl">
+            <h2 class="text-2xl font-bold mb-6">💰 Calculadora de Costo Real</h2>
+            <p class="text-purple-100 mb-6">
+              Descubre qué podrías haber comprado con el dinero invertido en juegos:
+            </p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div class="space-y-4">
+                <div class="bg-white/10 p-4 rounded-lg">
+                  <label class="block text-sm font-medium mb-2">Dinero gastado en juegos (mensual)</label>
+                  <input type="number" id="monthly-spending" class="w-full p-3 bg-white/20 border border-white/30 rounded-lg text-white placeholder-white/70" placeholder="Ej: 200" min="0">
+                </div>
+                <div class="bg-white/10 p-4 rounded-lg">
+                  <label class="block text-sm font-medium mb-2">Durante cuántos meses</label>
+                  <input type="number" id="time-period" class="w-full p-3 bg-white/20 border border-white/30 rounded-lg text-white placeholder-white/70" placeholder="Ej: 6" min="1">
+                </div>
+                <button id="calculate-cost" class="w-full px-4 py-3 bg-pink-500 hover:bg-pink-600 text-white font-bold rounded-lg transition-colors">
+                  📊 Calcular Costo Real
+                </button>
+              </div>
+              
+              <div id="cost-results" class="hidden space-y-4">
+                <div class="bg-white/20 p-4 rounded-lg">
+                  <h3 class="font-bold mb-2">Total gastado:</h3>
+                  <div id="total-cost" class="text-2xl font-bold text-yellow-300"></div>
+                </div>
+                <div class="bg-white/20 p-4 rounded-lg">
+                  <h3 class="font-bold mb-2">Podrías haber comprado:</h3>
+                  <div id="alternative-purchases" class="space-y-2 text-sm"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- The Problem Recognition Process -->
+        <section class="mb-16">
+          <h2 class="text-3xl font-bold text-gray-900 mb-8">🔍 El Proceso de Reconocimiento</h2>
+          
+          <div class="space-y-8">
+            <div class="border-l-4 border-indigo-500 pl-6">
+              <h3 class="text-xl font-bold text-gray-900 mb-4">1. Negación → Reconocimiento</h3>
+              <p class="text-gray-700 mb-4">
+                La negación es común en los problemas de juego. Es normal pasar por estas fases:
+              </p>
+              <div class="bg-gray-50 p-4 rounded-lg">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 text-sm">
+                  <div class="text-center">
+                    <div class="w-8 h-8 bg-red-500 text-white rounded-full flex items-center justify-center mx-auto mb-2">1</div>
+                    <p class="font-medium">Negación total</p>
+                    <p class="text-gray-600">"No tengo problema"</p>
+                  </div>
+                  <div class="text-center">
+                    <div class="w-8 h-8 bg-orange-500 text-white rounded-full flex items-center justify-center mx-auto mb-2">2</div>
+                    <p class="font-medium">Minimización</p>
+                    <p class="text-gray-600">"No es tan grave"</p>
+                  </div>
+                  <div class="text-center">
+                    <div class="w-8 h-8 bg-yellow-500 text-white rounded-full flex items-center justify-center mx-auto mb-2">3</div>
+                    <p class="font-medium">Reconocimiento parcial</p>
+                    <p class="text-gray-600">"Quizás sea un problema"</p>
+                  </div>
+                  <div class="text-center">
+                    <div class="w-8 h-8 bg-green-500 text-white rounded-full flex items-center justify-center mx-auto mb-2">4</div>
+                    <p class="font-medium">Aceptación</p>
+                    <p class="text-gray-600">"Necesito ayuda"</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="border-l-4 border-blue-500 pl-6">
+              <h3 class="text-xl font-bold text-gray-900 mb-4">2. Romper la Barrera del Estigma</h3>
+              <p class="text-gray-700 mb-4">
+                Reconocer un problema con el juego no significa que seas débil o mala persona. Es importante entender:
+              </p>
+              <ul class="text-gray-700 space-y-2">
+                <li>• El juego patológico es un trastorno reconocido médicamente</li>
+                <li>• Afecta a personas de todos los niveles socioeconómicos</li>
+                <li>• No es una cuestión de falta de voluntad o carácter</li>
+                <li>• La recuperación es posible con el apoyo adecuado</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- Next Steps -->
+        <section class="mb-16">
+          <div class="bg-green-50 border border-green-200 p-8 rounded-xl">
+            <h2 class="text-2xl font-bold text-green-800 mb-6">🎯 Próximos Pasos</h2>
+            <p class="text-green-700 mb-6">
+              Has dado un paso importante al evaluar tu situación. Independientemente de tus resultados, 
+              el siguiente paso es entender los sesgos mentales que pueden estar influyendo en tu comportamiento.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <h3 class="font-bold text-green-800 mb-3">Si identificaste señales de riesgo:</h3>
+                <ul class="text-green-700 space-y-1">
+                  <li>• No te alarmes, es normal</li>
+                  <li>• Continúa con el Paso 3 para entender mejor</li>
+                  <li>• Considera hablar con alguien de confianza</li>
+                  <li>• Ten presente la página de ayuda</li>
+                </ul>
+              </div>
+              <div>
+                <h3 class="font-bold text-green-800 mb-3">Si no identificaste señales:</h3>
+                <ul class="text-green-700 space-y-1">
+                  <li>• Perfecto, mantén esa consciencia</li>
+                  <li>• Continúa aprendiendo para prevenir</li>
+                  <li>• Comparte este conocimiento</li>
+                  <li>• Mantén límites saludables</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </article>
+
+  <!-- Navigation -->
+  <section class="py-12 bg-gray-50">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto flex justify-between items-center">
+        <a 
+          href="/the-way/paso-1" 
+          class="flex items-center text-gray-600 hover:text-gray-900 font-medium"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+          </svg>
+          Paso 1: ¿Por Qué Adictivo?
+        </a>
+
+        <a 
+          href="/the-way/paso-3" 
+          class="flex items-center px-6 py-3 bg-gradient-to-r from-blue-600 to-sky-600 hover:from-blue-700 hover:to-sky-700 text-white font-semibold rounded-lg transition-all duration-200"
+        >
+          Paso 3: Sesgos Mentales
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+</MainLayout>
+
+<script>
+// JavaScript para el Paso 2: Evaluación interactiva y calculadora de costos
+document.addEventListener('DOMContentLoaded', () => {
+  // Assessment functionality
+  const totalQuestions = 8;
+  let answeredQuestions = 0;
+
+  // Update progress as user answers questions
+  function updateProgress() {
+    const answered = document.querySelectorAll('input[type="radio"]:checked').length;
+    answeredQuestions = answered;
+    
+    const progressPercentage = (answered / totalQuestions) * 100;
+    document.getElementById('progress-text').textContent = `${answered}/${totalQuestions} respondidas`;
+    document.getElementById('assessment-progress').style.width = `${progressPercentage}%`;
+    
+    const calculateBtn = document.getElementById('calculate-risk');
+    if (answered === totalQuestions) {
+      calculateBtn.disabled = false;
+      calculateBtn.textContent = '📊 Calcular Mi Nivel de Riesgo';
+    } else {
+      calculateBtn.disabled = true;
+      calculateBtn.textContent = `📊 Responde ${totalQuestions - answered} preguntas más`;
+    }
+  }
+
+  // Add event listeners to all radio buttons
+  document.querySelectorAll('input[type="radio"]').forEach(radio => {
+    radio.addEventListener('change', updateProgress);
+  });
+
+  // Risk calculation logic
+  document.getElementById('calculate-risk').addEventListener('click', () => {
+    let riskScore = 0;
+    const responses = {};
+    
+    // Calculate risk score
+    for (let i = 1; i <= totalQuestions; i++) {
+      const answer = document.querySelector(`input[name="q${i}"]:checked`);
+      if (answer && answer.value === 'yes') {
+        riskScore++;
+      }
+      responses[`q${i}`] = answer ? answer.value : null;
+    }
+
+    // Determine risk level
+    let riskLevel, riskColor, riskDescription, needleRotation, recommendations;
+    
+    if (riskScore <= 2) {
+      riskLevel = 'BAJO RIESGO';
+      riskColor = 'text-green-400';
+      riskDescription = 'Mantienes un patrón de juego controlado';
+      needleRotation = -60; // Green zone
+      recommendations = [
+        '✅ Continúa manteniendo límites claros de tiempo y dinero',
+        '📚 Sigue aprendiendo sobre juego responsable',
+        '👥 Comparte este conocimiento con otros',
+        '🎯 Establece objetivos financieros alternativos'
+      ];
+    } else if (riskScore <= 4) {
+      riskLevel = 'RIESGO MODERADO';
+      riskColor = 'text-yellow-400';
+      riskDescription = 'Algunas señales de advertencia presentes';
+      needleRotation = 0; // Yellow zone
+      recommendations = [
+        '⚠️ Establece límites más estrictos de tiempo y dinero',
+        '📱 Considera usar herramientas de autoexclusión',
+        '🗣️ Habla con alguien de confianza sobre tus hábitos',
+        '🧘 Busca actividades alternativas para el estrés',
+        '📞 Ten a mano números de ayuda profesional'
+      ];
+    } else {
+      riskLevel = 'ALTO RIESGO';
+      riskColor = 'text-red-400';
+      riskDescription = 'Múltiples indicadores de juego problemático';
+      needleRotation = 60; // Red zone
+      recommendations = [
+        '🚨 Te recomendamos buscar ayuda profesional inmediatamente',
+        '📞 Contacta líneas de crisis: 900 200 999 (gratuita 24h)',
+        '🛡️ Considera la autoexclusión de plataformas de juego',
+        '👨‍⚕️ Habla con tu médico de cabecera',
+        '👥 Informa a familiares cercanos de tu situación',
+        '💪 Recuerda: buscar ayuda es un signo de fortaleza'
+      ];
+    }
+
+    // Display results
+    const resultsDiv = document.getElementById('assessment-results');
+    const riskLevelText = document.getElementById('risk-level-text');
+    const riskDesc = document.getElementById('risk-description');
+    const needle = document.getElementById('risk-needle');
+    const recommendationContent = document.getElementById('recommendation-content');
+
+    riskLevelText.textContent = riskLevel;
+    riskLevelText.className = `text-2xl font-bold ${riskColor}`;
+    riskDesc.textContent = riskDescription;
+    needle.style.transform = `rotate(${needleRotation}deg)`;
+    
+    recommendationContent.innerHTML = recommendations
+      .map(rec => `<p class="p-3 bg-white/10 rounded-lg flex items-start"><span class="mr-2">${rec.substring(0, 2)}</span><span>${rec.substring(2)}</span></p>`)
+      .join('');
+
+    resultsDiv.classList.remove('hidden');
+    resultsDiv.scrollIntoView({ behavior: 'smooth' });
+
+    // Save assessment data
+    const assessmentData = {
+      score: riskScore,
+      level: riskLevel,
+      responses: responses,
+      timestamp: new Date().toISOString()
+    };
+
+    if (window.progressManager) {
+      window.progressManager.saveRiskAssessment('paso-2', assessmentData);
+    }
+
+    // Disable the calculate button
+    document.getElementById('calculate-risk').disabled = true;
+    document.getElementById('calculate-risk').textContent = '✅ Evaluación Completada';
+    document.getElementById('calculate-risk').classList.add('opacity-50');
+  });
+
+  // Complete assessment button
+  document.getElementById('complete-assessment').addEventListener('click', () => {
+    if (window.progressManager) {
+      window.progressManager.completeStep('paso-2');
+    }
+    
+    setTimeout(() => {
+      if (confirm('¡Evaluación completada! ¿Quieres continuar con el Paso 3?')) {
+        window.location.href = '/the-way/paso-3';
+      }
+    }, 3000);
+  });
+
+  // Cost Calculator functionality
+  const alternatives = [
+    { item: '📱 iPhone 15', price: 900 },
+    { item: '💻 MacBook Air', price: 1200 },
+    { item: '🏖️ Viaje a Bali (7 días)', price: 800 },
+    { item: '🚗 Coche usado decente', price: 8000 },
+    { item: '🎓 Curso universitario', price: 3000 },
+    { item: '🏠 Pago inicial apartamento', price: 15000 },
+    { item: '📚 Biblioteca personal completa', price: 500 },
+    { item: '🎸 Guitarra profesional', price: 1500 },
+    { item: '🍕 725 pizzas familiares', price: 1450 },
+    { item: '☕ 2000 cafés', price: 4000 },
+    { item: '🎬 40 noches de cine', price: 400 },
+    { item: '🏋️ Gimnasio por 2 años', price: 720 },
+    { item: '🧑‍🎓 Máster online', price: 2500 },
+    { item: '🦷 Tratamiento dental completo', price: 2000 }
+  ];
+
+  document.getElementById('calculate-cost').addEventListener('click', () => {
+    const monthlySpending = parseFloat(document.getElementById('monthly-spending').value);
+    const timePeriod = parseInt(document.getElementById('time-period').value);
+    
+    if (!monthlySpending || !timePeriod || monthlySpending <= 0 || timePeriod <= 0) {
+      alert('Por favor, introduce valores válidos mayores a 0');
+      return;
+    }
+
+    const totalCost = monthlySpending * timePeriod;
+    
+    // Find alternatives within budget
+    const affordableItems = alternatives
+      .filter(item => item.price <= totalCost)
+      .sort((a, b) => b.price - a.price)
+      .slice(0, 6);
+    
+    // Display results
+    document.getElementById('total-cost').textContent = `€${totalCost.toLocaleString()}`;
+    
+    const alternativesHTML = affordableItems
+      .map(item => `
+        <div class="flex justify-between items-center p-2 bg-white/5 rounded">
+          <span>${item.item}</span>
+          <span class="font-bold">€${item.price.toLocaleString()}</span>
+        </div>
+      `)
+      .join('');
+    
+    if (affordableItems.length === 0) {
+      document.getElementById('alternative-purchases').innerHTML = '<p class="text-purple-200">Con €' + totalCost.toLocaleString() + ' podrías empezar a ahorrar para objetivos importantes.</p>';
+    } else {
+      document.getElementById('alternative-purchases').innerHTML = alternativesHTML;
+    }
+    
+    document.getElementById('cost-results').classList.remove('hidden');
+  });
+
+  // Initialize progress on page load
+  updateProgress();
+});
+</script>

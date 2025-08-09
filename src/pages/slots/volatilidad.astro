@@ -1,0 +1,294 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import VolatilityAnalyzer from '../../components/simulators/VolatilityAnalyzer.tsx';
+---
+
+<MainLayout 
+  title="Analizador de Volatilidad de Slots" 
+  description="Descubre la diferencia entre slots de alta y baja volatilidad y cómo afecta tu experiencia de juego."
+>
+  
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-br from-orange-500 via-red-500 to-pink-600 text-white py-16">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto text-center">
+        <h1 class="text-4xl md:text-5xl font-bold mb-6">
+          ⚡ Analizador de Volatilidad
+        </h1>
+        <p class="text-xl mb-8 text-orange-100">
+          Comprende cómo la volatilidad afecta tu experiencia de juego y 
+          <span class="text-yellow-300 font-semibold">por qué ninguna te da ventaja sobre la casa</span>
+        </p>
+        <div class="bg-white/10 backdrop-blur-sm rounded-lg p-6 max-w-2xl mx-auto">
+          <p class="text-orange-100 text-lg">
+            🧠 <strong>Dato clave:</strong> Las slots de alta volatilidad pueden parecer más emocionantes, 
+            pero también son las más peligrosas para tu bankroll y bienestar mental.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Educational Introduction -->
+  <section class="py-16 bg-gray-50">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6">¿Qué es la Volatilidad?</h2>
+          <p class="text-xl text-gray-600">
+            La volatilidad determina la frecuencia y el tamaño de los premios en las máquinas tragaperras
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-12">
+          <div>
+            <h3 class="text-2xl font-bold text-gray-900 mb-6">🔄 Cómo Funciona</h3>
+            <p class="text-lg text-gray-700 mb-4">
+              Imagina dos máquinas con el <strong>mismo RTP del 95%</strong>:
+            </p>
+            <div class="space-y-4">
+              <div class="bg-green-100 p-4 rounded-lg">
+                <p class="text-green-800">
+                  <strong>Baja Volatilidad:</strong> Te da €1.90 de vuelta por cada €2 que apuestas, 
+                  de forma bastante consistente.
+                </p>
+              </div>
+              <div class="bg-red-100 p-4 rounded-lg">
+                <p class="text-red-800">
+                  <strong>Alta Volatilidad:</strong> Te quita €2 diez veces seguidas, 
+                  pero luego te da €19 de una vez.
+                </p>
+              </div>
+            </div>
+            <p class="text-gray-600 mt-4">
+              Al final, <strong>ambas te quitan los mismos €5</strong>, pero la experiencia es completamente diferente.
+            </p>
+          </div>
+          
+          <div class="bg-white p-8 rounded-lg shadow-lg">
+            <h3 class="text-xl font-bold text-center mb-6">Comparación Visual</h3>
+            <div class="space-y-6">
+              <!-- Baja Volatilidad -->
+              <div>
+                <h4 class="text-lg font-semibold text-green-600 mb-3">🟢 Baja Volatilidad</h4>
+                <div class="flex space-x-1 mb-2">
+                  <div class="w-8 h-8 bg-green-400 rounded flex items-center justify-center text-xs text-white">+1</div>
+                  <div class="w-8 h-8 bg-red-400 rounded flex items-center justify-center text-xs text-white">-1</div>
+                  <div class="w-8 h-8 bg-green-400 rounded flex items-center justify-center text-xs text-white">+1</div>
+                  <div class="w-8 h-8 bg-red-400 rounded flex items-center justify-center text-xs text-white">-1</div>
+                  <div class="w-8 h-8 bg-green-400 rounded flex items-center justify-center text-xs text-white">+2</div>
+                </div>
+                <p class="text-sm text-gray-600">Ganancias pequeñas y frecuentes</p>
+              </div>
+              
+              <!-- Alta Volatilidad -->
+              <div>
+                <h4 class="text-lg font-semibold text-red-600 mb-3">🔴 Alta Volatilidad</h4>
+                <div class="flex space-x-1 mb-2">
+                  <div class="w-8 h-8 bg-red-400 rounded flex items-center justify-center text-xs text-white">-5</div>
+                  <div class="w-8 h-8 bg-red-400 rounded flex items-center justify-center text-xs text-white">-5</div>
+                  <div class="w-8 h-8 bg-red-400 rounded flex items-center justify-center text-xs text-white">-5</div>
+                  <div class="w-8 h-8 bg-red-400 rounded flex items-center justify-center text-xs text-white">-5</div>
+                  <div class="w-8 h-8 bg-green-500 rounded flex items-center justify-center text-xs text-white">+25</div>
+                </div>
+                <p class="text-sm text-gray-600">Ganancias grandes pero muy raras</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Impacto Psicológico -->
+        <div class="bg-yellow-50 border-l-4 border-yellow-400 p-6 rounded-lg">
+          <h3 class="text-xl font-bold text-yellow-800 mb-4">🧠 Impacto Psicológico</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <h4 class="font-semibold text-yellow-700 mb-2">Alta Volatilidad - Más Peligrosa</h4>
+              <ul class="text-yellow-700 space-y-1 text-sm">
+                <li>• Crea expectativa de "gran premio"</li>
+                <li>• Genera más adrenalina y dopamina</li>
+                <li>• Fomenta el juego compulsivo</li>
+                <li>• Puede vaciar tu bankroll rápidamente</li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="font-semibold text-yellow-700 mb-2">Baja Volatilidad - Aparentemente "Segura"</h4>
+              <ul class="text-yellow-700 space-y-1 text-sm">
+                <li>• Parece menos arriesgada</li>
+                <li>• Permite sesiones más largas</li>
+                <li>• Puede generar falsa sensación de control</li>
+                <li>• Igualmente te hace perder dinero</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Analyzer -->
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">Prueba el Analizador Interactivo</h2>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+          Simula múltiples sesiones de juego comparando slots de baja y alta volatilidad. 
+          Observa cómo, independientemente de la volatilidad, el resultado final favorece al casino.
+        </p>
+      </div>
+      
+      <!-- React Component -->
+      <VolatilityAnalyzer client:load />
+    </div>
+  </section>
+
+  <!-- Reality Check -->
+  <section class="py-16 bg-red-50">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold text-center text-red-800 mb-12">🚨 La Realidad que Nadie Te Cuenta</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div class="bg-white p-6 rounded-lg shadow-lg border-l-4 border-red-500">
+            <div class="text-4xl mb-4 text-center">💸</div>
+            <h3 class="text-xl font-bold text-gray-900 mb-3">Misma Pérdida Final</h3>
+            <p class="text-gray-600 text-sm">
+              Sin importar la volatilidad, las matemáticas garantizan que pierdes el mismo porcentaje 
+              de tu dinero a largo plazo. La volatilidad solo cambia cómo se distribuyen las pérdidas.
+            </p>
+          </div>
+
+          <div class="bg-white p-6 rounded-lg shadow-lg border-l-4 border-orange-500">
+            <div class="text-4xl mb-4 text-center">🧠</div>
+            <h3 class="text-xl font-bold text-gray-900 mb-3">Diseño Manipulativo</h3>
+            <p class="text-gray-600 text-sm">
+              Las slots de alta volatilidad están específicamente diseñadas para crear adicción. 
+              Los "casi premios" y las grandes ganancias ocasionales liberan dopamina y te enganchan.
+            </p>
+          </div>
+
+          <div class="bg-white p-6 rounded-lg shadow-lg border-l-4 border-yellow-500">
+            <div class="text-4xl mb-4 text-center">⚡</div>
+            <h3 class="text-xl font-bold text-gray-900 mb-3">Riesgo Emocional</h3>
+            <p class="text-gray-600 text-sm">
+              La alta volatilidad no solo es riesgosa financieramente. También puede provocar 
+              ansiedad, depresión y comportamiento compulsivo más rápidamente.
+            </p>
+          </div>
+        </div>
+
+        <!-- Testimonios Educativos -->
+        <div class="mt-12 bg-white p-8 rounded-lg shadow-lg">
+          <h3 class="text-2xl font-bold text-gray-900 mb-6 text-center">🎭 Escenarios Típicos</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="border-l-4 border-green-400 pl-6">
+              <h4 class="text-lg font-bold text-green-700 mb-2">Jugador de Baja Volatilidad</h4>
+              <p class="text-gray-600 italic mb-3">
+                "Esta máquina me parece más segura, siempre gano algo pequeño. 
+                Puedo jugar horas sin perder mucho..."
+              </p>
+              <p class="text-gray-700 text-sm">
+                <strong>Realidad:</strong> Aunque las pérdidas son graduales, al final del día 
+                ha perdido la misma cantidad que esperaba matemáticamente. La sensación de "seguridad" es una ilusión.
+              </p>
+            </div>
+
+            <div class="border-l-4 border-red-400 pl-6">
+              <h4 class="text-lg font-bold text-red-700 mb-2">Jugador de Alta Volatilidad</h4>
+              <p class="text-gray-600 italic mb-3">
+                "Perdí €200 en 10 minutos, pero luego gané €150 de golpe. 
+                Casi recupero todo, seguro que la próxima vez..."
+              </p>
+              <p class="text-gray-700 text-sm">
+                <strong>Realidad:</strong> La ganancia grande refuerza el comportamiento de riesgo. 
+                El cerebro recuerda la emoción del premio, no las pérdidas constantes.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Practical Tips -->
+  <section class="py-16 bg-indigo-50">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold text-center text-indigo-900 mb-12">💡 Consejos Prácticos</h2>
+        
+        <div class="space-y-8">
+          <div class="bg-white p-6 rounded-lg shadow-lg">
+            <h3 class="text-xl font-bold text-indigo-800 mb-4">🛡️ Si Decides Jugar (Solo como Entretenimiento)</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <ul class="space-y-3">
+                <li class="flex items-start">
+                  <span class="text-green-500 mr-2">✓</span>
+                  <span class="text-gray-700">Establece límites de dinero y tiempo <strong>antes</strong> de empezar</span>
+                </li>
+                <li class="flex items-start">
+                  <span class="text-green-500 mr-2">✓</span>
+                  <span class="text-gray-700">Considera cualquier dinero apostado como <strong>gastado</strong></span>
+                </li>
+                <li class="flex items-start">
+                  <span class="text-green-500 mr-2">✓</span>
+                  <span class="text-gray-700">Nunca juegues para "recuperar" pérdidas</span>
+                </li>
+              </ul>
+              <ul class="space-y-3">
+                <li class="flex items-start">
+                  <span class="text-red-500 mr-2">✗</span>
+                  <span class="text-gray-700">No uses dinero destinado a gastos esenciales</span>
+                </li>
+                <li class="flex items-start">
+                  <span class="text-red-500 mr-2">✗</span>
+                  <span class="text-gray-700">No juegues cuando estés emocionalmente vulnerable</span>
+                </li>
+                <li class="flex items-start">
+                  <span class="text-red-500 mr-2">✗</span>
+                  <span class="text-gray-700">No persigas las ganancias grandes de alta volatilidad</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="bg-yellow-50 border-l-4 border-yellow-400 p-6 rounded-lg">
+            <h3 class="text-lg font-bold text-yellow-800 mb-3">🎯 Recuerda Siempre</h3>
+            <p class="text-yellow-700">
+              La volatilidad es solo una característica del juego, no una estrategia para ganar dinero. 
+              <strong>Independientemente de la volatilidad que elijas, la ventaja de la casa permanece constante.</strong> 
+              La única forma garantizada de no perder dinero en las tragaperras es no jugar.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to Action -->
+  <section class="py-16 bg-gray-900 text-white">
+    <div class="container mx-auto px-4 text-center">
+      <h2 class="text-3xl font-bold mb-6">¿Quieres Aprender Más Sobre Juego Responsable?</h2>
+      <p class="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
+        Explora nuestro camino interactivo de 6 pasos para entender mejor los riesgos del gambling 
+        y desarrollar herramientas de autocontrol efectivas.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a 
+          href="/the-way" 
+          class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-gray-900 font-bold rounded-full transition-all duration-300"
+        >
+          🚀 Iniciar El Camino
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M12 5l7 7-7 7" />
+          </svg>
+        </a>
+        <a 
+          href="/slots" 
+          class="inline-flex items-center px-8 py-4 bg-transparent border-2 border-white text-white font-semibold rounded-full hover:bg-white hover:text-gray-900 transition-all duration-300"
+        >
+          🎰 Más sobre Slots
+        </a>
+      </div>
+    </div>
+  </section>
+
+</MainLayout>

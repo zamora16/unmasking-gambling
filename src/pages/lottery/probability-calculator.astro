@@ -1,0 +1,580 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+---
+
+<MainLayout 
+  title="Calculadora de Probabilidades de Lotería" 
+  description="Calcula las probabilidades reales de ganar en diferentes loterías y compáralas con eventos cotidianos."
+>
+  
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-br from-purple-600 via-indigo-600 to-purple-800 text-white py-20">
+    <div class="container mx-auto px-4 text-center">
+      <div class="max-w-4xl mx-auto">
+        <h1 class="text-4xl md:text-6xl font-bold mb-6">
+          🎯 Calculadora de Probabilidades
+        </h1>
+        <p class="text-xl md:text-2xl mb-8 text-purple-100">
+          Descubre las probabilidades reales y compáralas con 
+          <span class="text-yellow-300 font-semibold">eventos de la vida real</span>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Calculator Section -->
+  <section class="py-20 bg-gray-50">
+    <div class="container mx-auto px-4">
+      <div class="max-w-6xl mx-auto">
+        
+        <!-- Lottery Type Selector -->
+        <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6 text-center">Selecciona el Tipo de Lotería</h2>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+            <button id="btn-6-49" class="lottery-btn bg-purple-500 hover:bg-purple-600 text-white p-4 rounded-lg transition-all duration-200 transform hover:scale-105">
+              <div class="text-lg font-bold">6/49</div>
+              <div class="text-sm opacity-90">Lotería Nacional</div>
+            </button>
+            <button id="btn-euromillions" class="lottery-btn bg-indigo-500 hover:bg-indigo-600 text-white p-4 rounded-lg transition-all duration-200 transform hover:scale-105">
+              <div class="text-lg font-bold">5/50 + 2</div>
+              <div class="text-sm opacity-90">Euromillones</div>
+            </button>
+            <button id="btn-powerball" class="lottery-btn bg-pink-500 hover:bg-pink-600 text-white p-4 rounded-lg transition-all duration-200 transform hover:scale-105">
+              <div class="text-lg font-bold">5/69 + 1/26</div>
+              <div class="text-sm opacity-90">Powerball</div>
+            </button>
+            <button id="btn-custom" class="lottery-btn bg-gray-500 hover:bg-gray-600 text-white p-4 rounded-lg transition-all duration-200 transform hover:scale-105">
+              <div class="text-lg font-bold">Personalizar</div>
+              <div class="text-sm opacity-90">Tu configuración</div>
+            </button>
+          </div>
+
+          <!-- Custom Lottery Settings -->
+          <div id="customSettings" class="hidden">
+            <div class="bg-gray-50 p-6 rounded-lg mb-6">
+              <h3 class="text-xl font-bold text-gray-900 mb-4">Configuración Personalizada</h3>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-2">Números principales</label>
+                  <div class="flex space-x-2">
+                    <input type="number" id="mainNumbers" min="1" max="10" value="6" class="w-16 px-3 py-2 border border-gray-300 rounded-md">
+                    <span class="self-center text-gray-600">números de</span>
+                    <input type="number" id="mainPool" min="10" max="100" value="49" class="w-16 px-3 py-2 border border-gray-300 rounded-md">
+                  </div>
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-2">Números bonus (opcional)</label>
+                  <div class="flex space-x-2">
+                    <input type="number" id="bonusNumbers" min="0" max="5" value="0" class="w-16 px-3 py-2 border border-gray-300 rounded-md">
+                    <span class="self-center text-gray-600">números de</span>
+                    <input type="number" id="bonusPool" min="0" max="100" value="0" class="w-16 px-3 py-2 border border-gray-300 rounded-md">
+                  </div>
+                </div>
+              </div>
+              <button id="btn-calculate-custom" class="mt-4 bg-purple-600 hover:bg-purple-700 text-white px-6 py-2 rounded-lg">
+                Calcular Probabilidades
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Results Section -->
+        <div id="resultsSection" class="hidden">
+          
+          <!-- Main Result -->
+          <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
+            <div class="text-center">
+              <h3 class="text-2xl font-bold text-gray-900 mb-4">Probabilidad de Ganar el Premio Mayor</h3>
+              <div id="mainProbability" class="text-6xl font-bold text-red-600 mb-4">
+                1 en 14,000,000
+              </div>
+              <div id="percentageProbability" class="text-xl text-gray-600 mb-6">
+                0.000007% de probabilidad
+              </div>
+              <div class="bg-red-50 p-4 rounded-lg">
+                <p id="timeToWin" class="text-lg text-red-800">
+                  Si compras 1 billete cada semana, estadísticamente tardarías <strong>269,230 años</strong> en ganar.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Comparison with Real Events -->
+          <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
+            <h3 class="text-2xl font-bold text-gray-900 mb-6 text-center">Comparación con Eventos Reales</h3>
+            <div class="space-y-4">
+              
+              <div class="flex items-center justify-between bg-gray-50 p-4 rounded-lg">
+                <div class="flex items-center">
+                  <span class="text-2xl mr-3">🏆</span>
+                  <span class="font-medium">Ganar una medalla olímpica</span>
+                </div>
+                <div class="text-right">
+                  <div class="font-bold text-blue-600">1 en 662,000</div>
+                  <div class="text-sm text-gray-600" id="olympicComparison">21 veces más probable</div>
+                </div>
+              </div>
+
+              <div class="flex items-center justify-between bg-gray-50 p-4 rounded-lg">
+                <div class="flex items-center">
+                  <span class="text-2xl mr-3">🎬</span>
+                  <span class="font-medium">Convertirse en actor famoso</span>
+                </div>
+                <div class="text-right">
+                  <div class="font-bold text-blue-600">1 en 1,500,000</div>
+                  <div class="text-sm text-gray-600" id="actorComparison">9.3 veces más probable</div>
+                </div>
+              </div>
+
+              <div class="flex items-center justify-between bg-gray-50 p-4 rounded-lg">
+                <div class="flex items-center">
+                  <span class="text-2xl mr-3">🎸</span>
+                  <span class="font-medium">Tener oído absoluto</span>
+                </div>
+                <div class="text-right">
+                  <div class="font-bold text-blue-600">1 en 10,000</div>
+                  <div class="text-sm text-gray-600" id="perfectPitchComparison">1,400 veces más probable</div>
+                </div>
+              </div>
+
+              <div class="flex items-center justify-between bg-gray-50 p-4 rounded-lg">
+                <div class="flex items-center">
+                  <span class="text-2xl mr-3">👶</span>
+                  <span class="font-medium">Tener gemelos idénticos</span>
+                </div>
+                <div class="text-right">
+                  <div class="font-bold text-blue-600">1 en 250</div>
+                  <div class="text-sm text-gray-600" id="twinsComparison">56,000 veces más probable</div>
+                </div>
+              </div>
+
+              <div class="flex items-center justify-between bg-gray-50 p-4 rounded-lg">
+                <div class="flex items-center">
+                  <span class="text-2xl mr-3">⚡</span>
+                  <span class="font-medium">Ser alcanzado por un rayo</span>
+                </div>
+                <div class="text-right">
+                  <div class="font-bold text-blue-600">1 en 1,000,000</div>
+                  <div class="text-sm text-gray-600" id="lightningComparison">14 veces más probable</div>
+                </div>
+              </div>
+
+              <div class="flex items-center justify-between bg-red-100 p-4 rounded-lg border-2 border-red-300">
+                <div class="flex items-center">
+                  <span class="text-2xl mr-3">🎟️</span>
+                  <span class="font-medium font-bold">Ganar la lotería</span>
+                </div>
+                <div class="text-right">
+                  <div class="font-bold text-red-600" id="lotteryOdds">1 en 14,000,000</div>
+                  <div class="text-sm text-red-600 font-bold">LA MENOS PROBABLE</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Multiple Tickets Calculator -->
+          <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
+            <h3 class="text-2xl font-bold text-gray-900 mb-6 text-center">¿Y si Compro Más Billetes?</h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Número de billetes por semana</label>
+                <input type="range" id="ticketsSlider" min="1" max="100" value="1" class="w-full mb-4">
+                <div class="text-center">
+                  <span id="ticketsValue" class="text-2xl font-bold text-purple-600">1</span>
+                  <span class="text-gray-600"> billetes/semana</span>
+                </div>
+              </div>
+              <div>
+                <div class="bg-gray-50 p-6 rounded-lg text-center">
+                  <div class="text-sm text-gray-600 mb-2">Tiempo estimado para ganar</div>
+                  <div id="multipleTicketsTime" class="text-3xl font-bold text-red-600">269,230 años</div>
+                  <div class="text-sm text-gray-600 mt-2">Coste total estimado</div>
+                  <div id="totalCost" class="text-xl font-bold text-orange-600">€28,012,380</div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="mt-6 p-4 bg-yellow-100 rounded-lg">
+              <p class="text-yellow-800 text-center">
+                <strong>💡 Realidad:</strong> Incluso comprando 100 billetes por semana, 
+                seguirías necesitando <span id="realisticTime">2,692 años</span> para ganar estadísticamente.
+              </p>
+            </div>
+          </div>
+
+          <!-- Visual Probability - NUEVA VERSIÓN MÁS REPRESENTATIVA -->
+          <div class="bg-white rounded-xl shadow-lg p-8">
+            <h3 class="text-2xl font-bold text-gray-900 mb-6 text-center">Visualización Real de la Probabilidad</h3>
+            
+            <!-- Escala más realista -->
+            <div class="mb-8">
+              <div class="bg-red-50 p-6 rounded-lg mb-6">
+                <h4 class="text-xl font-bold text-red-800 mb-3 text-center">🏟️ Imagina el Camp Nou (99,354 asientos)</h4>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-center">
+                  <div class="bg-white p-4 rounded-lg">
+                    <div class="text-3xl font-bold text-red-600" id="stadiumsNeeded">141</div>
+                    <div class="text-sm text-gray-600">Camp Nous llenos necesarios</div>
+                  </div>
+                  <div class="bg-white p-4 rounded-lg">
+                    <div class="text-3xl font-bold text-red-600" id="totalPeople">14 millones</div>
+                    <div class="text-sm text-gray-600">de personas para 1 ganador</div>
+                  </div>
+                </div>
+                <p class="text-center text-red-700 mt-4">
+                  Solo <strong>1 persona</strong> de todas esas ganaría el premio mayor.
+                </p>
+              </div>
+              
+              <!-- Visualización con píxeles -->
+              <div class="mb-6">
+                <h4 class="text-lg font-bold text-gray-800 mb-3 text-center">Representación Visual (cada píxel = 10,000 billetes)</h4>
+                <div class="bg-gray-100 p-4 rounded-lg">
+                  <div class="grid gap-1" id="pixelGrid" style="grid-template-columns: repeat(50, 1fr);">
+                    <!-- Píxeles generados por JavaScript -->
+                  </div>
+                  <div class="mt-4 text-center text-sm text-gray-600">
+                    <div class="flex justify-center items-center space-x-4">
+                      <div class="flex items-center">
+                        <div class="w-3 h-3 bg-red-500 mr-2"></div>
+                        <span>Billetes perdedores</span>
+                      </div>
+                      <div class="flex items-center">
+                        <div class="w-3 h-3 bg-green-500 mr-2"></div>
+                        <span>Billete ganador (1 entre todos)</span>
+                      </div>
+                    </div>
+                    <p class="mt-2 text-xs">
+                      En esta cuadrícula de 70x20 = 1,400 píxeles, cada píxel representa 10,000 billetes.<br>
+                      Solo 1 píxel verde representa al ganador entre 14 millones de billetes.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+
+            </div>
+            
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Educational Insights -->
+  <section class="py-20 bg-white">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8">💡 Conclusiones Importantes</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div class="bg-red-50 p-6 rounded-lg">
+            <h3 class="text-xl font-bold text-red-800 mb-3">Las Probabilidades No Mienten</h3>
+            <p class="text-red-700">
+              No importa cuántos billetes compres o qué números elijas, las probabilidades 
+              matemáticas son inmutables. La lotería está diseñada para que pierdas.
+            </p>
+          </div>
+          
+          <div class="bg-blue-50 p-6 rounded-lg">
+            <h3 class="text-xl font-bold text-blue-800 mb-3">Perspectiva Temporal</h3>
+            <p class="text-blue-700">
+              El tiempo que estadísticamente necesitarías para ganar es tan largo que 
+              la civilización humana podría haber evolucionado completamente.
+            </p>
+          </div>
+          
+          <div class="bg-green-50 p-6 rounded-lg">
+            <h3 class="text-xl font-bold text-green-800 mb-3">Alternativas Inteligentes</h3>
+            <p class="text-green-700">
+              El dinero que gastas en lotería, invertido en un fondo indexado, 
+              te daría retornos reales y garantizados a largo plazo.
+            </p>
+          </div>
+          
+          <div class="bg-yellow-50 p-6 rounded-lg">
+            <h3 class="text-xl font-bold text-yellow-800 mb-3">Entretenimiento Caro</h3>
+            <p class="text-yellow-700">
+              Si juegas por diversión, está bien, pero nunca veas la lotería como 
+              una inversión o una forma de solucionar problemas económicos.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</MainLayout>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Lottery configurations
+  const lotteryTypes = {
+    '6-49': { main: 6, mainPool: 49, bonus: 0, bonusPool: 0, name: 'Lotería 6/49' },
+    'euromillions': { main: 5, mainPool: 50, bonus: 2, bonusPool: 12, name: 'Euromillones (5/50 + 2/12)' },
+    'powerball': { main: 5, mainPool: 69, bonus: 1, bonusPool: 26, name: 'Powerball (5/69 + 1/26)' }
+  };
+
+  let currentOdds = 13983816; // Default for 6/49
+
+  // Calculate combination (n choose k) - MEJORADO para mayor precisión
+  function combination(n, k) {
+    if (k > n) return 0;
+    if (k === 0 || k === n) return 1;
+    if (k > n - k) k = n - k; // Optimize for efficiency
+    
+    let result = 1;
+    for (let i = 0; i < k; i++) {
+      result = result * (n - i) / (i + 1);
+    }
+    return Math.round(result);
+  }
+
+  // Calculate lottery probability - VERIFICADO
+  function calculateProbability(main, mainPool, bonus, bonusPool) {
+    const mainCombinations = combination(mainPool, main);
+    const bonusCombinations = bonus > 0 ? combination(bonusPool, bonus) : 1;
+    return mainCombinations * bonusCombinations;
+  }
+
+  // Format large numbers
+  function formatNumber(num) {
+    return num.toLocaleString('es-ES');
+  }
+
+  // Format percentage properly - CORREGIDO para evitar notación científica
+  function formatPercentage(decimal) {
+    if (decimal >= 0.01) {
+      return decimal.toFixed(2) + '%';
+    } else if (decimal >= 0.001) {
+      return decimal.toFixed(3) + '%';
+    } else if (decimal >= 0.0001) {
+      return decimal.toFixed(4) + '%';
+    } else if (decimal >= 0.00001) {
+      return decimal.toFixed(5) + '%';
+    } else if (decimal >= 0.000001) {
+      return decimal.toFixed(6) + '%';
+    } else if (decimal >= 0.0000001) {
+      return decimal.toFixed(7) + '%';
+    } else {
+      // Para probabilidades extremadamente pequeñas, usar formato fraccionario
+      const odds = Math.round(1 / decimal);
+      return `menos de 0.0000001% (1 en ${formatNumber(odds)})`;
+    }
+  }
+
+  // Update comparison texts
+  function updateComparisons(lotteryOdds) {
+    const olympic = 662000;
+    const actor = 1500000;
+    const perfectPitch = 10000;
+    const twins = 250;
+    const lightning = 1000000;
+
+    const olympicElement = document.getElementById('olympicComparison');
+    const actorElement = document.getElementById('actorComparison');
+    const perfectPitchElement = document.getElementById('perfectPitchComparison');
+    const twinsElement = document.getElementById('twinsComparison');
+    const lightningElement = document.getElementById('lightningComparison');
+
+    if (olympicElement) olympicElement.textContent = `${Math.round(lotteryOdds / olympic)} veces más probable`;
+    if (actorElement) actorElement.textContent = `${(lotteryOdds / actor).toFixed(1)} veces más probable`;
+    if (perfectPitchElement) perfectPitchElement.textContent = `${Math.round(lotteryOdds / perfectPitch).toLocaleString()} veces más probable`;
+    if (twinsElement) twinsElement.textContent = `${Math.round(lotteryOdds / twins).toLocaleString()} veces más probable`;
+    if (lightningElement) lightningElement.textContent = `${Math.round(lotteryOdds / lightning)} veces más probable`;
+  }
+
+  // Generate realistic probability visualization - COMPLETAMENTE NUEVA
+  function generateRealisticVisualization(odds) {
+    // Actualizar estadísticas del estadio
+    const campNouCapacity = 99354;
+    const stadiumsNeeded = Math.ceil(odds / campNouCapacity);
+    
+    const stadiumsElement = document.getElementById('stadiumsNeeded');
+    const totalPeopleElement = document.getElementById('totalPeople');
+    
+    if (stadiumsElement) stadiumsElement.textContent = formatNumber(stadiumsNeeded);
+    if (totalPeopleElement) totalPeopleElement.textContent = `${formatNumber(Math.round(odds / 1000000))} millones`;
+
+    // Generar cuadrícula de píxeles más representativa
+    const pixelGrid = document.getElementById('pixelGrid');
+    if (!pixelGrid) return;
+    
+    pixelGrid.innerHTML = '';
+    
+    // 70x20 = 1,400 píxeles, cada uno representa 10,000 billetes
+    const totalPixels = 1400; // 70x20
+    const ticketsPerPixel = 10000;
+    const totalTicketsRepresented = totalPixels * ticketsPerPixel; // 14,000,000
+    
+    // Determinar si hay un ganador en esta representación
+    const hasWinner = odds <= totalTicketsRepresented;
+    const winnerPosition = hasWinner ? Math.floor(Math.random() * totalPixels) : -1;
+    
+    for (let i = 0; i < totalPixels; i++) {
+      const pixel = document.createElement('div');
+      pixel.className = `w-1 h-1 ${i === winnerPosition ? 'bg-green-500' : 'bg-red-500'}`;
+      pixelGrid.appendChild(pixel);
+    }
+  }
+
+  // Calculate and display results - MEJORADO
+  function displayResults(config) {
+    const odds = calculateProbability(config.main, config.mainPool, config.bonus, config.bonusPool);
+    currentOdds = odds;
+    
+    // Usar el nuevo formato de porcentaje
+    const decimal = (1 / odds * 100);
+    const formattedPercentage = formatPercentage(decimal);
+    
+    const yearsToWin = Math.round(odds / 52);
+    
+    const mainProbElement = document.getElementById('mainProbability');
+    const percentageElement = document.getElementById('percentageProbability');
+    const timeToWinElement = document.getElementById('timeToWin');
+    const lotteryOddsElement = document.getElementById('lotteryOdds');
+
+    if (mainProbElement) mainProbElement.textContent = `1 en ${formatNumber(odds)}`;
+    if (percentageElement) percentageElement.textContent = `${formattedPercentage} de probabilidad`;
+    if (timeToWinElement) {
+      timeToWinElement.innerHTML = 
+        `Si compras 1 billete cada semana, estadísticamente tardarías <strong>${formatNumber(yearsToWin)} años</strong> en ganar.`;
+    }
+    if (lotteryOddsElement) lotteryOddsElement.textContent = `1 en ${formatNumber(odds)}`;
+    
+    updateComparisons(odds);
+    generateRealisticVisualization(odds);
+    updateTicketsCalculation();
+    
+    const resultsSection = document.getElementById('resultsSection');
+    if (resultsSection) resultsSection.classList.remove('hidden');
+  }
+
+  // Handle lottery type selection
+  function calculateLottery(type) {
+    const customSettings = document.getElementById('customSettings');
+    
+    if (type === 'custom') {
+      if (customSettings) customSettings.classList.remove('hidden');
+      return;
+    }
+    
+    if (customSettings) customSettings.classList.add('hidden');
+    const config = lotteryTypes[type];
+    if (config) displayResults(config);
+  }
+
+  // Handle custom lottery calculation
+  function calculateCustom() {
+    const mainElement = document.getElementById('mainNumbers');
+    const mainPoolElement = document.getElementById('mainPool');
+    const bonusElement = document.getElementById('bonusNumbers');
+    const bonusPoolElement = document.getElementById('bonusPool');
+
+    if (!mainElement || !mainPoolElement || !bonusElement || !bonusPoolElement) return;
+
+    const main = parseInt(mainElement.value);
+    const mainPool = parseInt(mainPoolElement.value);
+    const bonus = parseInt(bonusElement.value);
+    const bonusPool = parseInt(bonusPoolElement.value);
+    
+    // Validación mejorada
+    if (main > mainPool || bonus > bonusPool || main < 1 || mainPool < main) {
+      alert('Configuración inválida. Revisa los números ingresados.');
+      return;
+    }
+    
+    const config = { main, mainPool, bonus, bonusPool, name: 'Lotería Personalizada' };
+    displayResults(config);
+  }
+
+  // Update multiple tickets calculation
+  function updateTicketsCalculation() {
+    const ticketsSlider = document.getElementById('ticketsSlider');
+    const ticketsValue = document.getElementById('ticketsValue');
+    const multipleTicketsTime = document.getElementById('multipleTicketsTime');
+    const totalCost = document.getElementById('totalCost');
+    const realisticTime = document.getElementById('realisticTime');
+
+    if (!ticketsSlider || !ticketsValue || !multipleTicketsTime || !totalCost || !realisticTime) return;
+
+    const tickets = parseInt(ticketsSlider.value);
+    const odds = currentOdds;
+    
+    const weeksToWin = Math.round(odds / tickets);
+    const yearsToWin = Math.round(weeksToWin / 52);
+    const totalCostValue = weeksToWin * tickets * 2; // Assuming €2 per ticket
+    
+    ticketsValue.textContent = tickets;
+    multipleTicketsTime.textContent = `${formatNumber(yearsToWin)} años`;
+    totalCost.textContent = `€${formatNumber(totalCostValue)}`;
+    realisticTime.textContent = `${formatNumber(yearsToWin)} años`;
+  }
+
+  // Event listeners
+  const btn649 = document.getElementById('btn-6-49');
+  const btnEuromillions = document.getElementById('btn-euromillions');
+  const btnPowerball = document.getElementById('btn-powerball');
+  const btnCustom = document.getElementById('btn-custom');
+  const btnCalculateCustom = document.getElementById('btn-calculate-custom');
+  const ticketsSlider = document.getElementById('ticketsSlider');
+
+  if (btn649) btn649.addEventListener('click', () => calculateLottery('6-49'));
+  if (btnEuromillions) btnEuromillions.addEventListener('click', () => calculateLottery('euromillions'));
+  if (btnPowerball) btnPowerball.addEventListener('click', () => calculateLottery('powerball'));
+  if (btnCustom) btnCustom.addEventListener('click', () => calculateLottery('custom'));
+  if (btnCalculateCustom) btnCalculateCustom.addEventListener('click', calculateCustom);
+  if (ticketsSlider) ticketsSlider.addEventListener('input', updateTicketsCalculation);
+
+  // Initialize with default lottery
+  calculateLottery('6-49');
+});
+</script>
+
+<style>
+  .lottery-btn {
+    text-align: center;
+    cursor: pointer;
+  }
+  
+  .lottery-btn:hover {
+    transform: scale(1.05);
+  }
+  
+  input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 8px;
+    background: #ddd;
+    border-radius: 4px;
+    outline: none;
+  }
+  
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background: #8b5cf6;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  
+  input[type="range"]::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    background: #8b5cf6;
+    border-radius: 50%;
+    cursor: pointer;
+    border: none;
+  }
+
+  #pixelGrid {
+    min-height: 80px;
+    display: grid;
+    grid-template-columns: repeat(70, 1fr);
+    gap: 1px;
+  }
+</style>

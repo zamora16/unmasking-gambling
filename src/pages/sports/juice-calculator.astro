@@ -1,0 +1,711 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+---
+
+<MainLayout 
+  title="Calculadora de Juice - El Impuesto Invisible" 
+  description="Descubre el margen oculto de las casas de apuestas. Calcula el 'juice' y compara cuál casa te roba menos dinero en cada apuesta."
+>
+  
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-br from-blue-600 via-indigo-600 to-blue-800 text-white py-20">
+    <div class="container mx-auto px-4 text-center">
+      <div class="max-w-4xl mx-auto">
+        <h1 class="text-4xl md:text-6xl font-bold mb-6">
+          🧮 Calculadora de Juice
+        </h1>
+        <p class="text-xl md:text-2xl mb-8 text-blue-100">
+          El "impuesto invisible" que pagas en 
+          <span class="text-yellow-300 font-semibold">cada apuesta que haces</span>
+        </p>
+        <div class="bg-white/10 backdrop-blur-sm rounded-lg p-6 max-w-2xl mx-auto">
+          <p class="text-blue-100 text-lg">
+            💰 <strong>Descubre:</strong> Cómo las casas ganan incluso cuando pierden
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Calculator -->
+  <section class="py-16 bg-gray-50">
+    <div class="container mx-auto px-4">
+      <div class="max-w-6xl mx-auto">
+        
+        <!-- Explanation -->
+        <div class="bg-blue-50 border-l-4 border-blue-400 p-6 rounded-lg mb-8">
+          <h2 class="text-2xl font-bold text-blue-800 mb-4">🎯 ¿Qué es el "Juice"?</h2>
+          <p class="text-blue-700 mb-4">
+            El <strong>"juice"</strong> (también llamado "overround" o "vigorish") es el margen de beneficio oculto que las casas de apuestas incorporan en todas las cuotas. 
+            Es como un impuesto invisible que pagas en cada apuesta, sin importar si ganas o pierdes.
+          </p>
+          <p class="text-blue-700">
+            <strong>Ejemplo:</strong> Si las probabilidades reales de un partido son 50%-50%, las cuotas justas serían 2.00-2.00. 
+            Pero las casas ofrecen 1.85-1.85, quedándose con un margen del ~8.1%.
+          </p>
+        </div>
+
+        <!-- Calculator Interface -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+          
+          <!-- Input Section -->
+          <div class="bg-white rounded-xl shadow-lg p-6">
+            <h3 class="text-2xl font-bold text-gray-900 mb-6">📝 Introduce las Cuotas</h3>
+            
+            <!-- Match Info -->
+            <div class="mb-6">
+              <label class="block text-sm font-medium text-gray-700 mb-2">Partido (opcional)</label>
+              <input 
+                type="text" 
+                id="matchInfo"
+                placeholder="Ej: Real Madrid vs Barcelona"
+                class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              >
+            </div>
+
+            <!-- Two-way bet (most common) -->
+            <div class="mb-6" id="twoWaySection">
+              <h4 class="text-lg font-semibold text-gray-800 mb-4">Apuesta a 2 Bandas (1X2 sin empate)</h4>
+              <div class="grid grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-2">Cuota Opción 1</label>
+                  <input 
+                    type="number" 
+                    id="odds1"
+                    step="0.01" 
+                    min="1.01"
+                    placeholder="1.85"
+                    class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent two-way-input"
+                  >
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-2">Cuota Opción 2</label>
+                  <input 
+                    type="number" 
+                    id="odds2"
+                    step="0.01" 
+                    min="1.01"
+                    placeholder="1.95"
+                    class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent two-way-input"
+                  >
+                </div>
+              </div>
+            </div>
+
+            <!-- Three-way bet -->
+            <div class="mb-6" id="threeWaySection">
+              <h4 class="text-lg font-semibold text-gray-800 mb-4">Apuesta a 3 Bandas (1X2 completo)</h4>
+              <div class="grid grid-cols-3 gap-3">
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-2">Local (1)</label>
+                  <input 
+                    type="number" 
+                    id="odds3way1"
+                    step="0.01" 
+                    min="1.01"
+                    placeholder="2.10"
+                    class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent three-way-input"
+                  >
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-2">Empate (X)</label>
+                  <input 
+                    type="number" 
+                    id="odds3way2"
+                    step="0.01" 
+                    min="1.01"
+                    placeholder="3.40"
+                    class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent three-way-input"
+                  >
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-2">Visitante (2)</label>
+                  <input 
+                    type="number" 
+                    id="odds3way3"
+                    step="0.01" 
+                    min="1.01"
+                    placeholder="3.60"
+                    class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent three-way-input"
+                  >
+                </div>
+              </div>
+            </div>
+
+            <div class="flex gap-3">
+              <button 
+                onclick="calculateJuice()" 
+                class="flex-1 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-200"
+              >
+                🧮 Calcular Juice
+              </button>
+              <button 
+                onclick="clearAllFields()" 
+                class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-4 rounded-lg transition-all duration-200"
+                title="Limpiar todos los campos"
+              >
+                🗑️
+              </button>
+            </div>
+          </div>
+
+          <!-- Results Section -->
+          <div class="bg-white rounded-xl shadow-lg p-6">
+            <h3 class="text-2xl font-bold text-gray-900 mb-6">📊 Resultados</h3>
+            
+            <div id="results" class="space-y-4">
+              <div class="text-center text-gray-500 py-8">
+                👆 Introduce las cuotas para ver los resultados
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- House Comparison -->
+        <div class="bg-white rounded-xl shadow-lg p-6 mb-12">
+          <h3 class="text-2xl font-bold text-gray-900 mb-6">🏠 Comparador de Casas</h3>
+          <p class="text-gray-600 mb-6">
+            Compara el margen de diferentes casas de apuestas para el mismo evento. ¿Cuál te roba menos?
+          </p>
+          
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+              <thead>
+                <tr class="bg-gray-50">
+                  <th class="text-left p-3 font-semibold">Casa de Apuestas</th>
+                  <th class="text-center p-3 font-semibold">Cuota 1</th>
+                  <th class="text-center p-3 font-semibold">Cuota 2</th>
+                  <th class="text-center p-3 font-semibold">Juice</th>
+                  <th class="text-center p-3 font-semibold">¿Mejor?</th>
+                </tr>
+              </thead>
+              <tbody id="houseComparison">
+                <tr class="border-b">
+                  <td class="p-3">
+                    <input type="text" placeholder="Ej: Bet365" class="house-name w-full p-2 border rounded">
+                  </td>
+                  <td class="p-3">
+                    <input type="number" step="0.01" placeholder="1.85" class="house-odds1 w-full p-2 border rounded text-center">
+                  </td>
+                  <td class="p-3">
+                    <input type="number" step="0.01" placeholder="1.95" class="house-odds2 w-full p-2 border rounded text-center">
+                  </td>
+                  <td class="p-3 text-center house-juice">-</td>
+                  <td class="p-3 text-center house-best">-</td>
+                </tr>
+                <tr class="border-b">
+                  <td class="p-3">
+                    <input type="text" placeholder="Ej: Betfair" class="house-name w-full p-2 border rounded">
+                  </td>
+                  <td class="p-3">
+                    <input type="number" step="0.01" placeholder="1.90" class="house-odds1 w-full p-2 border rounded text-center">
+                  </td>
+                  <td class="p-3">
+                    <input type="number" step="0.01" placeholder="1.90" class="house-odds2 w-full p-2 border rounded text-center">
+                  </td>
+                  <td class="p-3 text-center house-juice">-</td>
+                  <td class="p-3 text-center house-best">-</td>
+                </tr>
+                <tr class="border-b">
+                  <td class="p-3">
+                    <input type="text" placeholder="Ej: Pinnacle" class="house-name w-full p-2 border rounded">
+                  </td>
+                  <td class="p-3">
+                    <input type="number" step="0.01" placeholder="1.92" class="house-odds1 w-full p-2 border rounded text-center">
+                  </td>
+                  <td class="p-3">
+                    <input type="number" step="0.01" placeholder="1.88" class="house-odds2 w-full p-2 border rounded text-center">
+                  </td>
+                  <td class="p-3 text-center house-juice">-</td>
+                  <td class="p-3 text-center house-best">-</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          
+          <button 
+            onclick="compareHouses()" 
+            class="mt-4 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-bold py-2 px-4 rounded-lg transition-all duration-200"
+          >
+            🔍 Comparar Casas
+          </button>
+        </div>
+
+        <!-- Educational Content -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          
+          <!-- How it works -->
+          <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-6">
+            <h3 class="text-xl font-bold text-yellow-800 mb-4">⚙️ ¿Cómo Funciona?</h3>
+            <div class="text-yellow-700 space-y-3 text-sm">
+              <div>
+                <strong>1. Probabilidades Implícitas:</strong>
+                <br>Cuota 1.85 = 54.05% de probabilidad implícita
+              </div>
+              <div>
+                <strong>2. Suma de Probabilidades:</strong>
+                <br>54.05% + 51.28% = 105.33%
+              </div>
+              <div>
+                <strong>3. Cálculo del Juice:</strong>
+                <br>105.33% - 100% = 5.33% de margen
+              </div>
+              <div class="bg-yellow-100 p-3 rounded border-l-4 border-yellow-400">
+                <strong>💡 Esto significa:</strong> La casa tiene una ventaja del 5.33% en cada apuesta, sin importar el resultado.
+              </div>
+            </div>
+          </div>
+
+          <!-- Why it matters -->
+          <div class="bg-red-50 border border-red-200 rounded-lg p-6">
+            <h3 class="text-xl font-bold text-red-800 mb-4">🚨 ¿Por Qué Importa?</h3>
+            <div class="text-red-700 space-y-3 text-sm">
+              <div>
+                <strong>• Necesitas >52.65% aciertos</strong>
+                <br>Solo para no perder dinero con juice del 5%
+              </div>
+              <div>
+                <strong>• Cuotas engañosas:</strong>
+                <br>1.85 parece "bueno" pero incluye 8.1% de margen
+              </div>
+              <div>
+                <strong>• Pérdida garantizada:</strong>
+                <br>A largo plazo, el juice te come las ganancias
+              </div>
+              <div class="bg-red-100 p-3 rounded border-l-4 border-red-400">
+                <strong>⚠️ Realidad:</strong> Incluso acertando el 60% de tus apuestas, puedes perder dinero por culpa del juice.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Examples Section -->
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold text-center text-gray-900 mb-12">📝 Ejemplos Reales</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          
+          <!-- Low juice example -->
+          <div class="bg-green-50 border border-green-200 rounded-lg p-6">
+            <h3 class="text-lg font-bold text-green-800 mb-3">✅ Juice Bajo (Bueno)</h3>
+            <div class="text-green-700 text-sm space-y-2">
+              <div><strong>Pinnacle:</strong> 1.95 vs 1.87</div>
+              <div><strong>Juice:</strong> 2.6%</div>
+              <div><strong>Necesitas acertar:</strong> 51.3%</div>
+              <div class="border-t border-green-300 pt-2 mt-3">
+                <strong>🎯 Lo mejor que encontrarás</strong>
+              </div>
+            </div>
+          </div>
+
+          <!-- Medium juice example -->
+          <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-6">
+            <h3 class="text-lg font-bold text-yellow-800 mb-3">⚠️ Juice Medio (Normal)</h3>
+            <div class="text-yellow-700 text-sm space-y-2">
+              <div><strong>Bet365:</strong> 1.85 vs 1.85</div>
+              <div><strong>Juice:</strong> 8.1%</div>
+              <div><strong>Necesitas acertar:</strong> 54.1%</div>
+              <div class="border-t border-yellow-300 pt-2 mt-3">
+                <strong>📊 Estándar de la industria</strong>
+              </div>
+            </div>
+          </div>
+
+          <!-- High juice example -->
+          <div class="bg-red-50 border border-red-200 rounded-lg p-6">
+            <h3 class="text-lg font-bold text-red-800 mb-3">❌ Juice Alto (Malo)</h3>
+            <div class="text-red-700 text-sm space-y-2">
+              <div><strong>Casa Local:</strong> 1.75 vs 1.75</div>
+              <div><strong>Juice:</strong> 14.3%</div>
+              <div><strong>Necesitas acertar:</strong> 57.1%</div>
+              <div class="border-t border-red-300 pt-2 mt-3">
+                <strong>🚫 Evita estas casas</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="py-16 bg-blue-600">
+    <div class="container mx-auto px-4 text-center">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-bold text-white mb-6">💡 Ahora Ya Lo Sabes</h2>
+        <p class="text-xl text-blue-100 mb-8">
+          El juice es el impuesto invisible que hace que incluso los buenos apostadores pierdan dinero. 
+          Usa esta calculadora antes de cada apuesta para saber cuánto te están robando.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a 
+            href="/sports" 
+            class="bg-white hover:bg-gray-100 text-blue-600 font-bold py-3 px-6 rounded-lg transition-all duration-200"
+          >
+            🏈 Más Simuladores
+          </a>
+          <a 
+            href="/the-way" 
+            class="bg-blue-800 hover:bg-blue-900 text-white font-bold py-3 px-6 rounded-lg transition-all duration-200"
+          >
+            🛤️ El Camino (Salir del Juego)
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</MainLayout>
+
+<script>
+  function calculateJuice() {
+    // Get two-way odds
+    const odds1 = parseFloat(document.getElementById('odds1').value);
+    const odds2 = parseFloat(document.getElementById('odds2').value);
+    
+    // Get three-way odds
+    const odds3way1 = parseFloat(document.getElementById('odds3way1').value);
+    const odds3way2 = parseFloat(document.getElementById('odds3way2').value);
+    const odds3way3 = parseFloat(document.getElementById('odds3way3').value);
+    
+    const resultsDiv = document.getElementById('results');
+    let html = '';
+    
+    // Calculate for two-way bet
+    if (odds1 && odds2 && odds1 > 1 && odds2 > 1) {
+      const prob1 = (1 / odds1) * 100;
+      const prob2 = (1 / odds2) * 100;
+      const totalProb = prob1 + prob2;
+      const juice = totalProb - 100;
+      const winRateNeeded = totalProb / 2;
+      
+      html += `
+        <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-4">
+          <h4 class="text-lg font-bold text-blue-800 mb-3">📊 Apuesta a 2 Bandas</h4>
+          <div class="grid grid-cols-2 gap-4 text-sm">
+            <div>
+              <div class="text-blue-700"><strong>Probabilidades Implícitas:</strong></div>
+              <div>Opción 1: ${prob1.toFixed(2)}%</div>
+              <div>Opción 2: ${prob2.toFixed(2)}%</div>
+              <div class="font-bold">Total: ${totalProb.toFixed(2)}%</div>
+            </div>
+            <div>
+              <div class="text-blue-700"><strong>Análisis:</strong></div>
+              <div class="text-2xl font-bold ${juice > 10 ? 'text-red-600' : juice > 5 ? 'text-yellow-600' : 'text-green-600'}">
+                ${juice.toFixed(2)}% Juice
+              </div>
+              <div class="text-xs text-gray-600">Necesitas acertar ${winRateNeeded.toFixed(1)}%</div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+    
+    // Calculate for three-way bet
+    if (odds3way1 && odds3way2 && odds3way3 && odds3way1 > 1 && odds3way2 > 1 && odds3way3 > 1) {
+      const prob1 = (1 / odds3way1) * 100;
+      const prob2 = (1 / odds3way2) * 100;
+      const prob3 = (1 / odds3way3) * 100;
+      const totalProb = prob1 + prob2 + prob3;
+      const juice = totalProb - 100;
+      const winRateNeeded = totalProb / 3;
+      
+      html += `
+        <div class="bg-green-50 border border-green-200 rounded-lg p-4 mb-4">
+          <h4 class="text-lg font-bold text-green-800 mb-3">⚽ Apuesta a 3 Bandas (1X2)</h4>
+          <div class="grid grid-cols-2 gap-4 text-sm">
+            <div>
+              <div class="text-green-700"><strong>Probabilidades Implícitas:</strong></div>
+              <div>Local (1): ${prob1.toFixed(2)}%</div>
+              <div>Empate (X): ${prob2.toFixed(2)}%</div>
+              <div>Visitante (2): ${prob3.toFixed(2)}%</div>
+              <div class="font-bold">Total: ${totalProb.toFixed(2)}%</div>
+            </div>
+            <div>
+              <div class="text-green-700"><strong>Análisis:</strong></div>
+              <div class="text-2xl font-bold ${juice > 10 ? 'text-red-600' : juice > 5 ? 'text-yellow-600' : 'text-green-600'}">
+                ${juice.toFixed(2)}% Juice
+              </div>
+              <div class="text-xs text-gray-600">Cada resultado ~${winRateNeeded.toFixed(1)}%</div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+    
+    if (!html) {
+      html = `
+        <div class="text-center text-red-500 py-4">
+          ⚠️ Por favor, introduce cuotas válidas (> 1.00)
+        </div>
+      `;
+    } else {
+      // Add explanation
+      html += `
+        <div class="bg-gray-50 border border-gray-200 rounded-lg p-4">
+          <h4 class="text-lg font-bold text-gray-800 mb-2">💡 ¿Qué Significa?</h4>
+          <div class="text-gray-700 text-sm space-y-1">
+            <div><strong>Juice < 3%:</strong> Excelente (muy raro)</div>
+            <div><strong>Juice 3-7%:</strong> Bueno (busca estas casas)</div>
+            <div><strong>Juice 7-12%:</strong> Normal (estándar industria)</div>
+            <div><strong>Juice > 12%:</strong> Malo (evita estas casas)</div>
+          </div>
+        </div>
+      `;
+    }
+    
+    resultsDiv.innerHTML = html;
+  }
+  
+  function clearAllFields() {
+    // Clear main calculator fields
+    const fieldsToReset = ['matchInfo', 'odds1', 'odds2', 'odds3way1', 'odds3way2', 'odds3way3'];
+    fieldsToReset.forEach(id => {
+      const field = document.getElementById(id);
+      if (field) {
+        field.value = '';
+      }
+    });
+    
+    // Clear results
+    const resultsDiv = document.getElementById('results');
+    resultsDiv.innerHTML = `
+      <div class="text-center text-gray-500 py-8">
+        👆 Introduce las cuotas para ver los resultados
+      </div>
+    `;
+    
+    // Clear house comparison
+    const houseInputs = document.querySelectorAll('.house-name, .house-odds1, .house-odds2');
+    houseInputs.forEach(input => {
+      input.value = '';
+    });
+    
+    const houseResults = document.querySelectorAll('.house-juice, .house-best');
+    houseResults.forEach(result => {
+      result.innerHTML = '-';
+    });
+    
+    // Manually re-enable all sections
+    const twoWayInputs = document.querySelectorAll('.two-way-input');
+    const threeWayInputs = document.querySelectorAll('.three-way-input');
+    const twoWaySection = document.getElementById('twoWaySection');
+    const threeWaySection = document.getElementById('threeWaySection');
+    
+    // Enable all inputs
+    twoWayInputs.forEach(input => {
+      input.disabled = false;
+      input.style.opacity = '1';
+      input.style.cursor = 'text';
+    });
+    threeWayInputs.forEach(input => {
+      input.disabled = false;
+      input.style.opacity = '1';
+      input.style.cursor = 'text';
+    });
+    twoWaySection.style.opacity = '1';
+    threeWaySection.style.opacity = '1';
+    
+    // Remove visual indicators
+    const twoWayMsg = document.getElementById('twoWayDisabledMsg');
+    const threeWayMsg = document.getElementById('threeWayDisabledMsg');
+    if (twoWayMsg) twoWayMsg.remove();
+    if (threeWayMsg) threeWayMsg.remove();
+  }
+  
+  function compareHouses() {
+    const rows = document.querySelectorAll('#houseComparison tr');
+    const houses = [];
+    
+    rows.forEach(row => {
+      const name = row.querySelector('.house-name').value;
+      const odds1 = parseFloat(row.querySelector('.house-odds1').value);
+      const odds2 = parseFloat(row.querySelector('.house-odds2').value);
+      
+      if (name && odds1 && odds2 && odds1 > 1 && odds2 > 1) {
+        const prob1 = (1 / odds1) * 100;
+        const prob2 = (1 / odds2) * 100;
+        const totalProb = prob1 + prob2;
+        const juice = totalProb - 100;
+        
+        houses.push({
+          row,
+          name,
+          odds1,
+          odds2,
+          juice
+        });
+      }
+    });
+    
+    if (houses.length === 0) return;
+    
+    // Find best house (lowest juice)
+    const bestHouse = houses.reduce((min, house) => 
+      house.juice < min.juice ? house : min
+    );
+    
+    // Update display
+    houses.forEach(house => {
+      const juiceCell = house.row.querySelector('.house-juice');
+      const bestCell = house.row.querySelector('.house-best');
+      
+      juiceCell.innerHTML = `
+        <span class="font-bold ${house.juice > 10 ? 'text-red-600' : house.juice > 5 ? 'text-yellow-600' : 'text-green-600'}">
+          ${house.juice.toFixed(2)}%
+        </span>
+      `;
+      
+      if (house === bestHouse) {
+        bestCell.innerHTML = '<span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs font-bold">✅ MEJOR</span>';
+      } else {
+        const difference = house.juice - bestHouse.juice;
+        bestCell.innerHTML = `<span class="text-red-600 text-xs">+${difference.toFixed(2)}%</span>`;
+      }
+    });
+  }
+  
+  // Function to check if two-way inputs have values
+  function hasTwoWayValues() {
+    const odds1 = document.getElementById('odds1').value.trim();
+    const odds2 = document.getElementById('odds2').value.trim();
+    return odds1 !== '' || odds2 !== '';
+  }
+  
+  // Function to check if three-way inputs have values
+  function hasThreeWayValues() {
+    const odds1 = document.getElementById('odds3way1').value.trim();
+    const odds2 = document.getElementById('odds3way2').value.trim();
+    const odds3 = document.getElementById('odds3way3').value.trim();
+    return odds1 !== '' || odds2 !== '' || odds3 !== '';
+  }
+  
+  // Function to enable/disable sections
+  function toggleSections() {
+    const twoWayInputs = document.querySelectorAll('.two-way-input');
+    const threeWayInputs = document.querySelectorAll('.three-way-input');
+    const twoWaySection = document.getElementById('twoWaySection');
+    const threeWaySection = document.getElementById('threeWaySection');
+    
+    if (hasTwoWayValues()) {
+      // Disable three-way inputs
+      threeWayInputs.forEach(input => {
+        input.disabled = true;
+        input.style.opacity = '0.5';
+        input.style.cursor = 'not-allowed';
+      });
+      threeWaySection.style.opacity = '0.6';
+      
+      // Add visual indicator
+      if (!document.getElementById('threeWayDisabledMsg')) {
+        const msg = document.createElement('div');
+        msg.id = 'threeWayDisabledMsg';
+        msg.className = 'text-sm text-gray-500 italic mt-2 p-2 bg-gray-100 rounded';
+        msg.innerHTML = '⚠️ Deshabilitado: Ya tienes cuotas en apuesta de 2 bandas';
+        threeWaySection.appendChild(msg);
+      }
+    } else if (hasThreeWayValues()) {
+      // Disable two-way inputs
+      twoWayInputs.forEach(input => {
+        input.disabled = true;
+        input.style.opacity = '0.5';
+        input.style.cursor = 'not-allowed';
+      });
+      twoWaySection.style.opacity = '0.6';
+      
+      // Add visual indicator
+      if (!document.getElementById('twoWayDisabledMsg')) {
+        const msg = document.createElement('div');
+        msg.id = 'twoWayDisabledMsg';
+        msg.className = 'text-sm text-gray-500 italic mt-2 p-2 bg-gray-100 rounded';
+        msg.innerHTML = '⚠️ Deshabilitado: Ya tienes cuotas en apuesta de 3 bandas';
+        twoWaySection.appendChild(msg);
+      }
+    } else {
+      // Enable all inputs
+      twoWayInputs.forEach(input => {
+        input.disabled = false;
+        input.style.opacity = '1';
+        input.style.cursor = 'text';
+      });
+      threeWayInputs.forEach(input => {
+        input.disabled = false;
+        input.style.opacity = '1';
+        input.style.cursor = 'text';
+      });
+      twoWaySection.style.opacity = '1';
+      threeWaySection.style.opacity = '1';
+      
+      // Remove visual indicators
+      const twoWayMsg = document.getElementById('twoWayDisabledMsg');
+      const threeWayMsg = document.getElementById('threeWayDisabledMsg');
+      if (twoWayMsg) twoWayMsg.remove();
+      if (threeWayMsg) threeWayMsg.remove();
+    }
+  }
+  
+  // Auto-calculate on input change and toggle sections
+  document.addEventListener('DOMContentLoaded', function() {
+    const inputs = ['odds1', 'odds2', 'odds3way1', 'odds3way2', 'odds3way3'];
+    inputs.forEach(id => {
+      const input = document.getElementById(id);
+      if (input) {
+        input.addEventListener('input', function() {
+          toggleSections();
+          calculateJuice();
+        });
+      }
+    });
+    
+    // Auto-compare houses on input change
+    const houseInputs = document.querySelectorAll('.house-odds1, .house-odds2');
+    houseInputs.forEach(input => {
+      input.addEventListener('input', compareHouses);
+    });
+    
+    // Initial toggle check
+    toggleSections();
+  });
+</script>
+
+<style>
+  /* Custom styles for inputs */
+  input:focus {
+    outline: none;
+  }
+  
+  /* Disabled input styles */
+  input:disabled {
+    background-color: #f9fafb !important;
+    color: #9ca3af !important;
+    border-color: #e5e7eb !important;
+  }
+  
+  /* Disabled section transition */
+  #twoWaySection, #threeWaySection {
+    transition: opacity 0.3s ease;
+  }
+  
+  /* Visual indicator for disabled sections */
+  .section-disabled {
+    opacity: 0.6;
+    pointer-events: none;
+  }
+  
+  /* Responsive table */
+  @media (max-width: 768px) {
+    table {
+      font-size: 12px;
+    }
+    
+    input {
+      padding: 8px !important;
+      font-size: 12px;
+    }
+  }
+</style>

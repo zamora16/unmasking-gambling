@@ -1,0 +1,502 @@
+---
+// Componente de gestión de progreso sin necesidad de login
+// Utiliza localStorage para persistencia y códigos de recuperación para backup
+---
+
+<div id="progress-container" class="bg-white rounded-xl shadow-lg p-6 mb-8 border border-gray-200">
+  <div class="flex justify-between items-center mb-6">
+    <h3 class="text-xl font-bold text-gray-900 flex items-center">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 mr-2 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+      </svg>
+      Tu Progreso en El Camino
+    </h3>
+    <div class="flex space-x-2">
+      <button id="backup-btn" class="text-sm px-3 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+        </svg>
+        Respaldo
+      </button>
+      <button id="restore-btn" class="text-sm px-3 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors flex items-center">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+        </svg>
+        Restaurar
+      </button>
+    </div>
+  </div>
+  
+  <!-- Barra de progreso principal -->
+  <div class="mb-6">
+    <div class="flex justify-between items-center mb-3">
+      <span class="text-lg font-semibold text-gray-700">
+        Pasos completados: <span id="progress-text" class="text-purple-600">0/6</span>
+      </span>
+      <span class="text-sm text-gray-500 font-medium">
+        <span id="progress-percentage">0</span>% completado
+      </span>
+    </div>
+    <div class="w-full bg-gray-200 rounded-full h-4 overflow-hidden">
+      <div 
+        id="progress-bar" 
+        class="bg-gradient-to-r from-purple-500 via-indigo-500 via-blue-500 via-sky-500 via-cyan-500 to-teal-500 h-4 rounded-full transition-all duration-1000 ease-out" 
+        style="width: 0%"
+      ></div>
+    </div>
+  </div>
+  
+  <!-- Estadísticas del usuario -->
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+    <div class="text-center p-4 bg-purple-50 rounded-lg border border-purple-200">
+      <div class="font-bold text-2xl text-purple-600" id="completed-count">0</div>
+      <div class="text-sm text-purple-700">Pasos completados</div>
+    </div>
+    <div class="text-center p-4 bg-blue-50 rounded-lg border border-blue-200">
+      <div class="font-bold text-2xl text-blue-600" id="time-spent">0m</div>
+      <div class="text-sm text-blue-700">Tiempo invertido</div>
+    </div>
+    <div class="text-center p-4 bg-green-50 rounded-lg border border-green-200">
+      <div class="font-bold text-2xl text-green-600" id="days-count">0</div>
+      <div class="text-sm text-green-700">Días en el camino</div>
+    </div>
+    <div class="text-center p-4 bg-orange-50 rounded-lg border border-orange-200">
+      <div class="font-bold text-2xl text-orange-600" id="streak-count">0</div>
+      <div class="text-sm text-orange-700">Racha actual</div>
+    </div>
+  </div>
+
+  <!-- Indicador del paso actual -->
+  <div id="current-step-indicator" class="hidden bg-gradient-to-r from-yellow-50 to-orange-50 border border-yellow-200 rounded-lg p-4">
+    <div class="flex items-center">
+      <div class="w-3 h-3 bg-yellow-500 rounded-full animate-pulse mr-3"></div>
+      <span class="text-yellow-800 font-medium">
+        Actualmente en: <span id="current-step-name">Paso 1</span>
+      </span>
+    </div>
+  </div>
+</div>
+
+<!-- Modal para códigos de respaldo -->
+<div id="backup-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+  <div class="bg-white rounded-xl max-w-md w-full mx-4 p-6">
+    <div class="flex justify-between items-center mb-4">
+      <h3 class="text-xl font-bold text-gray-900">🔒 Código de Respaldo</h3>
+      <button id="close-modal" class="text-gray-400 hover:text-gray-600">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+    <p class="text-gray-600 mb-4">
+      Guarda este código para recuperar tu progreso en otro dispositivo:
+    </p>
+    <div class="bg-gray-100 p-4 rounded-lg font-mono text-center text-lg tracking-wider mb-4 break-all" id="backup-code-display">
+      <!-- El código se mostrará aquí -->
+    </div>
+    <p class="text-sm text-gray-500 mb-6">
+      <strong>Importante:</strong> Este código contiene tu progreso encriptado. Guárdalo en un lugar seguro.
+    </p>
+    <div class="flex space-x-3">
+      <button
+        id="copy-code"
+        class="flex-1 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center justify-center"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+        </svg>
+        Copiar
+      </button>
+      <button
+        id="close-modal-btn"
+        class="flex-1 px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors"
+      >
+        Cerrar
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+class ProgressManager {
+  constructor() {
+    this.storageKey = 'gambling-recovery-progress';
+    this.progress = this.loadProgress();
+    this.stepNames = {
+      'paso-1': 'Paso 1: ¿Por qué Adictivo?',
+      'paso-2': 'Paso 2: Reconocer el Problema', 
+      'paso-3': 'Paso 3: Sesgos Mentales',
+      'paso-4': 'Paso 4: Autocontrol',
+      'paso-5': 'Paso 5: Diseña tu Plan',
+      'paso-6': 'Paso 6: Busca Apoyo'
+    };
+    this.initializeEventListeners();
+    this.updateUI();
+    this.detectCurrentStep();
+  }
+
+  loadProgress() {
+    const saved = localStorage.getItem(this.storageKey);
+    if (saved) {
+      return JSON.parse(saved);
+    } else {
+      // Primera vez - crear progreso inicial
+      const initial = {
+        steps: {
+          'paso-1': { completed: false, timeSpent: 0, startTime: null, quizScore: null },
+          'paso-2': { completed: false, timeSpent: 0, startTime: null, quizScore: null, riskScore: null },
+          'paso-3': { completed: false, timeSpent: 0, startTime: null, quizScore: null },
+          'paso-4': { completed: false, timeSpent: 0, startTime: null, quizScore: null },
+          'paso-5': { completed: false, timeSpent: 0, startTime: null, quizScore: null, personalPlan: null },
+          'paso-6': { completed: false, timeSpent: 0, startTime: null, quizScore: null }
+        },
+        totalTimeSpent: 0,
+        startDate: new Date().toISOString(),
+        lastVisit: new Date().toISOString(),
+        completedSteps: 0,
+        streak: 1,
+        achievements: []
+      };
+      this.saveProgress(initial);
+      return initial;
+    }
+  }
+
+  saveProgress(progress = this.progress) {
+    localStorage.setItem(this.storageKey, JSON.stringify(progress));
+  }
+
+  // Detectar en qué paso estamos actualmente
+  detectCurrentStep() {
+    const currentPath = window.location.pathname;
+    const stepMatch = currentPath.match(/\/the-way\/(paso-\d)/);
+    
+    if (stepMatch) {
+      const stepId = stepMatch[1];
+      this.startStep(stepId);
+      
+      // Mostrar indicador del paso actual
+      const indicator = document.getElementById('current-step-indicator');
+      const stepName = document.getElementById('current-step-name');
+      if (indicator && stepName) {
+        stepName.textContent = this.stepNames[stepId] || stepId;
+        indicator.classList.remove('hidden');
+      }
+    }
+  }
+
+  // Marcar paso como empezado (cuando entra a la página)
+  startStep(stepId) {
+    if (this.progress.steps[stepId] && !this.progress.steps[stepId].startTime) {
+      this.progress.steps[stepId].startTime = Date.now();
+      this.progress.lastVisit = new Date().toISOString();
+      this.saveProgress();
+    }
+  }
+
+  // Marcar paso como completado
+  completeStep(stepId) {
+    const step = this.progress.steps[stepId];
+    if (!step.completed) {
+      step.completed = true;
+      
+      // Calcular tiempo invertido si tiene startTime
+      if (step.startTime) {
+        const additionalTime = Math.round((Date.now() - step.startTime) / 60000); // minutos
+        step.timeSpent += additionalTime;
+        step.startTime = null; // Reset start time
+      }
+      
+      // Actualizar contadores globales
+      this.progress.completedSteps = Object.values(this.progress.steps).filter(s => s.completed).length;
+      this.progress.totalTimeSpent = Object.values(this.progress.steps).reduce((sum, s) => sum + s.timeSpent, 0);
+      this.progress.lastVisit = new Date().toISOString();
+      
+      // Actualizar racha (simplificado por ahora)
+      this.updateStreak();
+      
+      this.saveProgress();
+      this.updateUI();
+      this.showCelebration(stepId);
+    }
+  }
+
+  // Actualizar racha de días
+  updateStreak() {
+    const lastVisit = new Date(this.progress.lastVisit);
+    const today = new Date();
+    const daysDiff = Math.floor((today - lastVisit) / (1000 * 60 * 60 * 24));
+    
+    if (daysDiff === 0) {
+      // Mismo día, mantener racha
+    } else if (daysDiff === 1) {
+      // Día consecutivo, incrementar racha
+      this.progress.streak += 1;
+    } else {
+      // Más de un día, reset racha
+      this.progress.streak = 1;
+    }
+  }
+
+  // Actualizar tiempo en paso actual cada minuto
+  updateTimeInStep(stepId) {
+    const step = this.progress.steps[stepId];
+    if (step && step.startTime && !step.completed) {
+      const currentTime = Math.round((Date.now() - step.startTime) / 60000);
+      const newTotalTime = Object.values(this.progress.steps).reduce((sum, s) => {
+        return sum + (s === step ? currentTime : s.timeSpent);
+      }, 0);
+      
+      // Actualizar UI sin guardar (para que sea más fluido)
+      document.getElementById('time-spent').textContent = `${newTotalTime}m`;
+    }
+  }
+
+  updateUI() {
+    const progressPercentage = (this.progress.completedSteps / 6) * 100;
+    const daysCount = Math.floor((Date.now() - new Date(this.progress.startDate)) / (1000 * 60 * 60 * 24));
+    
+    // Actualizar elementos del DOM con verificación de existencia
+    const elements = {
+      'progress-text': `${this.progress.completedSteps}/6`,
+      'progress-percentage': Math.round(progressPercentage),
+      'completed-count': this.progress.completedSteps,
+      'time-spent': `${this.progress.totalTimeSpent}m`,
+      'days-count': daysCount,
+      'streak-count': this.progress.streak
+    };
+
+    Object.entries(elements).forEach(([id, value]) => {
+      const element = document.getElementById(id);
+      if (element) {
+        element.textContent = value;
+      }
+    });
+
+    // Actualizar barra de progreso
+    const progressBar = document.getElementById('progress-bar');
+    if (progressBar) {
+      progressBar.style.width = `${progressPercentage}%`;
+    }
+  }
+
+  generateBackupCode() {
+    // Crear un código más legible y seguro
+    const timestamp = Date.now().toString(36);
+    const random = Math.random().toString(36).substring(2, 8);
+    const checksum = (timestamp + random).split('').reduce((a, b) => a + b.charCodeAt(0), 0).toString(36);
+    const code = `${timestamp}-${random}-${checksum}`.toUpperCase();
+    
+    // Guardar el progreso con este código
+    const backup = {
+      code: code,
+      progress: this.progress,
+      created: new Date().toISOString(),
+      version: '1.0'
+    };
+    
+    localStorage.setItem(`backup-${code}`, JSON.stringify(backup));
+    return code;
+  }
+
+  restoreFromCode(code) {
+    const cleanCode = code.toUpperCase().trim();
+    const backup = localStorage.getItem(`backup-${cleanCode}`);
+    
+    if (backup) {
+      try {
+        const data = JSON.parse(backup);
+        this.progress = data.progress;
+        this.saveProgress();
+        this.updateUI();
+        return true;
+      } catch (error) {
+        console.error('Error parsing backup:', error);
+        return false;
+      }
+    }
+    return false;
+  }
+
+  showCelebration(stepId) {
+    const stepNumber = stepId.split('-')[1];
+    const isComplete = this.progress.completedSteps === 6;
+    
+    const celebration = document.createElement('div');
+    celebration.innerHTML = `
+      <div style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); 
+                  background: white; padding: 30px; border-radius: 15px; box-shadow: 0 20px 40px rgba(0,0,0,0.3); 
+                  z-index: 1000; text-align: center; max-width: 400px; width: 90%;">
+        <div style="font-size: 64px; margin-bottom: 15px;">
+          ${isComplete ? '🏆' : '🎉'}
+        </div>
+        <h3 style="margin: 15px 0; color: #10b981; font-size: 24px; font-weight: bold;">
+          ${isComplete ? '¡Camino Completado!' : `¡Paso ${stepNumber} Completado!`}
+        </h3>
+        <p style="color: #6b7280; margin-bottom: 20px; line-height: 1.5;">
+          ${isComplete 
+            ? 'Has completado todos los pasos hacia el juego responsable. ¡Felicitaciones por tu dedicación!' 
+            : 'Has avanzado un paso más en tu camino hacia el juego responsable. ¡Sigue así!'}
+        </p>
+        <div style="background: #f3f4f6; padding: 15px; border-radius: 10px; margin-bottom: 20px;">
+          <div style="color: #374151; font-weight: bold;">Progreso total: ${this.progress.completedSteps}/6 pasos</div>
+          <div style="width: 100%; background: #e5e7eb; border-radius: 10px; height: 8px; margin-top: 8px;">
+            <div style="background: linear-gradient(90deg, #8b5cf6, #06b6d4); height: 8px; border-radius: 10px; width: ${(this.progress.completedSteps / 6) * 100}%;"></div>
+          </div>
+        </div>
+        <button onclick="this.parentElement.parentElement.remove()" 
+                style="padding: 12px 24px; background: #10b981; color: white; 
+                       border: none; border-radius: 8px; cursor: pointer; font-weight: bold;
+                       font-size: 16px; transition: background 0.2s;">
+          ${isComplete ? '🎊 ¡Increíble!' : 'Continuar 🚀'}
+        </button>
+      </div>
+      <div style="position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 999;" 
+           onclick="this.parentElement.remove()"></div>
+    `;
+    
+    document.body.appendChild(celebration);
+    
+    // Auto-cerrar después de 5 segundos
+    setTimeout(() => {
+      if (celebration.parentElement) {
+        celebration.remove();
+      }
+    }, 5000);
+  }
+
+  initializeEventListeners() {
+    // Botón de respaldo
+    const backupBtn = document.getElementById('backup-btn');
+    if (backupBtn) {
+      backupBtn.addEventListener('click', () => {
+        const code = this.generateBackupCode();
+        document.getElementById('backup-code-display').textContent = code;
+        document.getElementById('backup-modal').classList.remove('hidden');
+      });
+    }
+
+    // Botón de restaurar
+    const restoreBtn = document.getElementById('restore-btn');
+    if (restoreBtn) {
+      restoreBtn.addEventListener('click', () => {
+        const code = prompt('Introduce tu código de respaldo:');
+        if (code && this.restoreFromCode(code)) {
+          alert('¡Progreso restaurado exitosamente! 🎉');
+        } else if (code) {
+          alert('Código inválido. Verifica que esté bien escrito e inténtalo de nuevo.');
+        }
+      });
+    }
+
+    // Modal controls
+    const closeModalBtns = document.querySelectorAll('#close-modal, #close-modal-btn');
+    closeModalBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.getElementById('backup-modal').classList.add('hidden');
+      });
+    });
+
+    // Copiar código
+    const copyBtn = document.getElementById('copy-code');
+    if (copyBtn) {
+      copyBtn.addEventListener('click', async () => {
+        const code = document.getElementById('backup-code-display').textContent;
+        try {
+          await navigator.clipboard.writeText(code);
+          copyBtn.innerHTML = `
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+            ¡Copiado!
+          `;
+          setTimeout(() => {
+            copyBtn.innerHTML = `
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+              </svg>
+              Copiar
+            `;
+          }, 2000);
+        } catch (err) {
+          alert('No se pudo copiar automáticamente. Selecciona y copia el código manualmente.');
+        }
+      });
+    }
+
+    // Actualizar tiempo cada minuto
+    setInterval(() => {
+      const currentPath = window.location.pathname;
+      const stepMatch = currentPath.match(/\/the-way\/(paso-\d)/);
+      if (stepMatch) {
+        this.updateTimeInStep(stepMatch[1]);
+      }
+    }, 60000); // Cada minuto
+  }
+
+  // Métodos públicos para usar desde las páginas
+  getCurrentStepInfo(stepId) {
+    return this.progress.steps[stepId] || null;
+  }
+
+  completeQuiz(stepId, score) {
+    if (this.progress.steps[stepId]) {
+      this.progress.steps[stepId].quizScore = score;
+      this.saveProgress();
+    }
+  }
+
+  saveRiskAssessment(stepId, riskData) {
+    if (this.progress.steps[stepId]) {
+      this.progress.steps[stepId].riskScore = riskData;
+      this.saveProgress();
+    }
+  }
+
+  savePersonalPlan(stepId, planData) {
+    if (this.progress.steps[stepId]) {
+      this.progress.steps[stepId].personalPlan = planData;
+      this.saveProgress();
+    }
+  }
+}
+
+// Inicializar el manager globalmente
+document.addEventListener('DOMContentLoaded', () => {
+  window.progressManager = new ProgressManager();
+});
+</script>
+
+<style>
+/* Animaciones suaves para el progreso */
+#progress-bar {
+  transition: width 1s ease-out;
+}
+
+/* Hover effects para botones */
+button:hover {
+  transform: translateY(-1px);
+}
+
+/* Animación para el indicador de paso actual */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* Mejoras visuales para móviles */
+@media (max-width: 768px) {
+  #progress-container {
+    padding: 1rem;
+  }
+  
+  .grid-cols-2.md\\:grid-cols-4 {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+  }
+}
+</style>

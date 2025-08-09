@@ -1,0 +1,494 @@
+---
+// Sistema de Gestión de Crisis para Unmasking Gambling
+// Prioriza la seguridad del usuario con recursos inmediatos
+---
+
+<div id="crisis-management-system">
+  <!-- Botón de Crisis Flotante -->
+  <div id="crisis-floating-button" class="fixed bottom-6 right-6 z-50">
+    <button 
+      id="crisis-help-btn"
+      class="bg-red-600 hover:bg-red-700 text-white p-4 rounded-full shadow-lg transition-all duration-300 animate-pulse"
+      title="¿Necesitas ayuda inmediata?"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192L5.636 18.364M12 2.25a9.75 9.75 0 11-9.75 9.75A9.75 9.75 0 0112 2.25z" />
+      </svg>
+    </button>
+  </div>
+
+  <!-- Modal de Crisis -->
+  <div id="crisis-modal" class="hidden fixed inset-0 bg-black bg-opacity-75 z-[100] flex items-center justify-center p-4">
+    <div class="bg-white rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+      
+      <!-- Header de Emergencia -->
+      <div class="bg-red-600 text-white p-6">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z" />
+            </svg>
+            <h2 class="text-2xl font-bold">🆘 Ayuda Inmediata</h2>
+          </div>
+          <button id="close-crisis-modal" class="text-white hover:text-gray-200 p-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Selector de Urgencia -->
+      <div class="p-6 border-b border-gray-200">
+        <h3 class="text-lg font-bold text-gray-900 mb-4">¿Cómo te sientes ahora mismo?</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <button class="crisis-level-btn p-4 border-2 rounded-lg text-left hover:bg-gray-50 transition-colors" data-level="low">
+            <div class="flex items-center mb-2">
+              <div class="w-4 h-4 bg-yellow-400 rounded-full mr-2"></div>
+              <span class="font-semibold">Necesito orientación</span>
+            </div>
+            <p class="text-sm text-gray-600">Busco información y apoyo general</p>
+          </button>
+          
+          <button class="crisis-level-btn p-4 border-2 rounded-lg text-left hover:bg-gray-50 transition-colors" data-level="medium">
+            <div class="flex items-center mb-2">
+              <div class="w-4 h-4 bg-orange-500 rounded-full mr-2"></div>
+              <span class="font-semibold">Estoy en dificultades</span>
+            </div>
+            <p class="text-sm text-gray-600">Siento ansiedad, estrés o impulsos fuertes</p>
+          </button>
+          
+          <button class="crisis-level-btn p-4 border-2 rounded-lg text-left hover:bg-gray-50 transition-colors" data-level="high">
+            <div class="flex items-center mb-2">
+              <div class="w-4 h-4 bg-red-500 rounded-full mr-2"></div>
+              <span class="font-semibold">Es una emergencia</span>
+            </div>
+            <p class="text-sm text-gray-600">Pensamientos de autolesión o crisis severa</p>
+          </button>
+        </div>
+      </div>
+
+      <!-- Selector de Ubicación -->
+      <div class="p-6 border-b border-gray-200">
+        <h3 class="text-lg font-bold text-gray-900 mb-4">Tu ubicación:</h3>
+        <select id="crisis-location" class="w-full md:w-auto p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+          <option value="spain">🇪🇸 España</option>
+          <option value="mexico">🇲🇽 México</option>
+          <option value="argentina">🇦🇷 Argentina</option>
+          <option value="colombia">🇨🇴 Colombia</option>
+          <option value="uk">🇬🇧 Reino Unido</option>
+          <option value="us">🇺🇸 Estados Unidos</option>
+          <option value="other">🌍 Otro país</option>
+        </select>
+      </div>
+
+      <!-- Contenido de Crisis por Nivel -->
+      <div id="crisis-content" class="p-6">
+        <!-- Contenido dinámico se carga aquí -->
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Recursos de Crisis Inmediata -->
+  <div id="emergency-resources" class="hidden bg-red-50 border-l-4 border-red-400 p-6 rounded-r-lg mb-8">
+    <div class="flex items-center mb-4">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-red-600 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z" />
+      </svg>
+      <h2 class="text-xl font-bold text-red-800">Si estás en crisis, busca ayuda inmediatamente</h2>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <a href="tel:024" class="flex items-center p-4 bg-white rounded-lg border border-red-200 hover:bg-red-50 transition-colors">
+        <div class="flex-shrink-0 w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mr-4">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+          </svg>
+        </div>
+        <div>
+          <div class="font-bold text-red-800">024 - Línea de la Esperanza</div>
+          <div class="text-sm text-red-600">Atención suicidio • 24 horas • Gratuita</div>
+        </div>
+      </a>
+      
+      <a href="tel:112" class="flex items-center p-4 bg-white rounded-lg border border-red-200 hover:bg-red-50 transition-colors">
+        <div class="flex-shrink-0 w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mr-4">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+          </svg>
+        </div>
+        <div>
+          <div class="font-bold text-red-800">112 - Emergencias</div>
+          <div class="text-sm text-red-600">Servicios de emergencia • 24 horas</div>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+// Crisis Management System - JavaScript
+document.addEventListener('DOMContentLoaded', () => {
+  // Recursos por país
+  const crisisResources = {
+    spain: {
+      emergency: { phone: '112', name: 'Emergencias', description: 'Servicios de emergencia' },
+      suicide: { phone: '024', name: 'Línea de la Esperanza', description: 'Prevención del suicidio • 24h • Gratuita' },
+      gambling: { phone: '900 200 999', name: 'Juego Responsable', description: 'Línea nacional • 24h • Gratuita' },
+      mental: { phone: '717 003 717', name: 'Teléfono de la Esperanza', description: 'Crisis emocionales • 24h' }
+    },
+    mexico: {
+      emergency: { phone: '911', name: 'Emergencias', description: 'Servicios de emergencia' },
+      suicide: { phone: '800 290 0024', name: 'Línea de la Vida', description: 'Prevención del suicidio • 24h • Gratuita' },
+      mental: { phone: '800 911 2000', name: 'SAPTEL', description: 'Sistema Nacional de Apoyo • 24h' }
+    },
+    argentina: {
+      emergency: { phone: '911', name: 'Emergencias', description: 'Servicios de emergencia' },
+      suicide: { phone: '135', name: 'Centro de Asistencia al Suicida', description: 'Prevención • 24h • Gratuita' },
+      mental: { phone: '(011) 4758-2554', name: 'Asociación Argentina de Prevención del Suicidio', description: 'Crisis emocionales' }
+    },
+    colombia: {
+      emergency: { phone: '123', name: 'Emergencias', description: 'Servicios de emergencia' },
+      suicide: { phone: '106', name: 'Línea 106', description: 'Línea Nacional • 24h • Gratuita' },
+      mental: { phone: '(601) 594 9999', name: 'Teléfono de la Esperanza Colombia', description: 'Apoyo emocional • 24h' }
+    },
+    uk: {
+      emergency: { phone: '999', name: 'Emergency Services', description: 'Emergency services' },
+      suicide: { phone: '116 123', name: 'Samaritans', description: 'Suicide prevention • 24h • Free' },
+      gambling: { phone: '0808 8020 133', name: 'GamCare', description: 'Gambling helpline • 24h • Free' }
+    },
+    us: {
+      emergency: { phone: '911', name: 'Emergency Services', description: 'Emergency services' },
+      suicide: { phone: '988', name: 'Suicide & Crisis Lifeline', description: 'Suicide prevention • 24h • Free' },
+      gambling: { phone: '1-800-522-4700', name: 'Problem Gambling Helpline', description: 'National helpline • 24h • Free' }
+    }
+  };
+
+  // Contenido por nivel de crisis
+  const crisisContent = {
+    low: {
+      title: '💙 Recursos de Apoyo General',
+      description: 'Estás buscando orientación y apoyo. Estos recursos pueden ayudarte:',
+      color: 'blue',
+      actions: [
+        'Explora más pasos de El Camino',
+        'Considera hablar con un profesional',
+        'Conecta con grupos de apoyo locales',
+        'Usa las herramientas de autocontrol'
+      ]
+    },
+    medium: {
+      title: '🧡 Apoyo para Momentos Difíciles', 
+      description: 'Entiendo que estás pasando por un momento complicado. No estás solo:',
+      color: 'orange',
+      actions: [
+        'Habla con alguien de confianza ahora',
+        'Usa técnicas de respiración inmediatas',
+        'Considera contactar líneas de apoyo',
+        'Evita estar solo si es posible'
+      ]
+    },
+    high: {
+      title: '🚨 Ayuda Inmediata - Crisis',
+      description: 'Si estás pensando en hacerte daño, busca ayuda profesional AHORA:',
+      color: 'red',
+      actions: [
+        'Llama a emergencias inmediatamente',
+        'Ve al hospital más cercano',
+        'No te quedes solo',
+        'Contacta a líneas de crisis especializadas'
+      ]
+    }
+  };
+
+  // Palabras clave que pueden indicar crisis
+  const crisisKeywords = [
+    'suicidio', 'suicide', 'quiero morir', 'want to die', 'ending it all',
+    'no puedo más', 'can\'t take it', 'hurt myself', 'hacerme daño',
+    'acabar con todo', 'better off dead', 'sin esperanza', 'hopeless'
+  ];
+
+  // Variables de estado
+  let currentLocation = 'spain';
+  let currentCrisisLevel = null;
+
+  // Elementos del DOM
+  const crisisBtn = document.getElementById('crisis-help-btn');
+  const crisisModal = document.getElementById('crisis-modal');
+  const closeModalBtn = document.getElementById('close-crisis-modal');
+  const locationSelector = document.getElementById('crisis-location');
+  const crisisContent_div = document.getElementById('crisis-content');
+  const emergencyResources = document.getElementById('emergency-resources');
+
+  // Event Listeners
+  crisisBtn.addEventListener('click', openCrisisModal);
+  closeModalBtn.addEventListener('click', closeCrisisModal);
+  locationSelector.addEventListener('change', (e) => {
+    currentLocation = e.target.value;
+    if (currentCrisisLevel) {
+      updateCrisisContent(currentCrisisLevel);
+    }
+  });
+
+  // Agregar event listeners a botones de nivel de crisis
+  document.querySelectorAll('.crisis-level-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const level = e.currentTarget.getAttribute('data-level');
+      selectCrisisLevel(level);
+    });
+  });
+
+  // Detectar palabras clave de crisis en inputs de texto
+  function setupCrisisDetection() {
+    document.querySelectorAll('textarea, input[type="text"]').forEach(input => {
+      input.addEventListener('input', (e) => {
+        const text = e.target.value.toLowerCase();
+        const hasCrisisKeywords = crisisKeywords.some(keyword => text.includes(keyword));
+        
+        if (hasCrisisKeywords) {
+          showEmergencyAlert();
+        }
+      });
+    });
+  }
+
+  function openCrisisModal() {
+    crisisModal.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+    
+    // Track analytics
+    if (window.progressManager) {
+      const event = {
+        type: 'crisis_help_accessed',
+        timestamp: new Date().toISOString(),
+        page: window.location.pathname
+      };
+      localStorage.setItem('crisis-events', JSON.stringify([
+        ...(JSON.parse(localStorage.getItem('crisis-events') || '[]')),
+        event
+      ]));
+    }
+  }
+
+  function closeCrisisModal() {
+    crisisModal.classList.add('hidden');
+    document.body.style.overflow = 'auto';
+  }
+
+  function selectCrisisLevel(level) {
+    currentCrisisLevel = level;
+    
+    // Visual feedback
+    document.querySelectorAll('.crisis-level-btn').forEach(btn => {
+      btn.classList.remove('border-blue-500', 'bg-blue-50');
+    });
+    document.querySelector(`[data-level="${level}"]`).classList.add('border-blue-500', 'bg-blue-50');
+    
+    updateCrisisContent(level);
+  }
+
+  function updateCrisisContent(level) {
+    const content = crisisContent[level];
+    const resources = crisisResources[currentLocation] || crisisResources.spain;
+    
+    let html = `
+      <div class="mb-6">
+        <h3 class="text-2xl font-bold text-${content.color}-600 mb-3">${content.title}</h3>
+        <p class="text-gray-700 mb-4">${content.description}</p>
+      </div>
+    `;
+
+    // Recursos de contacto inmediato
+    html += `<div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">`;
+    
+    if (level === 'high') {
+      // Para crisis alta, mostrar emergencias primero
+      html += `
+        <a href="tel:${resources.emergency.phone}" class="flex items-center p-4 bg-red-100 border-2 border-red-500 rounded-lg hover:bg-red-200 transition-colors">
+          <div class="flex-shrink-0 w-12 h-12 bg-red-500 rounded-full flex items-center justify-center mr-4 text-white font-bold">
+            !
+          </div>
+          <div>
+            <div class="font-bold text-red-800 text-lg">${resources.emergency.phone}</div>
+            <div class="text-sm text-red-600">${resources.emergency.name}</div>
+          </div>
+        </a>
+      `;
+    }
+    
+    // Línea de suicidio/crisis
+    if (resources.suicide) {
+      html += `
+        <a href="tel:${resources.suicide.phone}" class="flex items-center p-4 bg-blue-100 border-2 border-blue-500 rounded-lg hover:bg-blue-200 transition-colors">
+          <div class="flex-shrink-0 w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center mr-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+            </svg>
+          </div>
+          <div>
+            <div class="font-bold text-blue-800 text-lg">${resources.suicide.phone}</div>
+            <div class="text-sm text-blue-600">${resources.suicide.description}</div>
+          </div>
+        </a>
+      `;
+    }
+    
+    // Línea específica de gambling si existe
+    if (resources.gambling && level !== 'high') {
+      html += `
+        <a href="tel:${resources.gambling.phone}" class="flex items-center p-4 bg-purple-100 border-2 border-purple-500 rounded-lg hover:bg-purple-200 transition-colors">
+          <div class="flex-shrink-0 w-12 h-12 bg-purple-500 rounded-full flex items-center justify-center mr-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <div>
+            <div class="font-bold text-purple-800 text-lg">${resources.gambling.phone}</div>
+            <div class="text-sm text-purple-600">${resources.gambling.description}</div>
+          </div>
+        </a>
+      `;
+    }
+    
+    html += `</div>`;
+
+    // Acciones recomendadas
+    html += `
+      <div class="bg-gray-50 p-4 rounded-lg mb-6">
+        <h4 class="font-bold text-gray-900 mb-3">Acciones recomendadas:</h4>
+        <ul class="space-y-2">
+    `;
+    
+    content.actions.forEach(action => {
+      html += `<li class="flex items-center text-gray-700">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+        </svg>
+        ${action}
+      </li>`;
+    });
+    
+    html += `</ul></div>`;
+
+    // Botones de acción
+    html += `
+      <div class="flex flex-col sm:flex-row gap-3">
+        <button onclick="window.location.href='/the-way/paso-4'" class="flex-1 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+          🧘 Técnicas de Autocontrol
+        </button>
+        <button onclick="window.location.href='/ayuda'" class="flex-1 px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors">
+          📞 Más Recursos de Ayuda
+        </button>
+      </div>
+    `;
+
+    crisisContent_div.innerHTML = html;
+  }
+
+  function showEmergencyAlert() {
+    // Solo mostrar una vez por sesión
+    if (sessionStorage.getItem('crisis-alert-shown')) return;
+    
+    const alertDiv = document.createElement('div');
+    alertDiv.className = 'fixed top-4 right-4 bg-red-600 text-white p-4 rounded-lg shadow-lg z-50 max-w-sm';
+    alertDiv.innerHTML = `
+      <div class="flex items-start">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 mr-3 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z" />
+        </svg>
+        <div class="flex-1">
+          <h4 class="font-bold mb-1">¿Necesitas ayuda?</h4>
+          <p class="text-sm mb-3">Si estás en crisis, hay recursos disponibles.</p>
+          <button onclick="document.getElementById('crisis-help-btn').click(); this.parentElement.parentElement.parentElement.remove();" 
+                  class="bg-white text-red-600 px-3 py-1 rounded text-sm font-semibold hover:bg-gray-100">
+            Ver recursos
+          </button>
+        </div>
+        <button onclick="this.parentElement.parentElement.remove(); sessionStorage.setItem('crisis-alert-shown', 'true');" 
+                class="text-white hover:text-gray-200 ml-2">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+    `;
+    
+    document.body.appendChild(alertDiv);
+    sessionStorage.setItem('crisis-alert-shown', 'true');
+    
+    // Auto-remove después de 10 segundos
+    setTimeout(() => {
+      if (alertDiv.parentElement) {
+        alertDiv.remove();
+      }
+    }, 10000);
+  }
+
+  // Cerrar modal con Escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !crisisModal.classList.contains('hidden')) {
+      closeCrisisModal();
+    }
+  });
+
+  // Cerrar modal si hace click fuera
+  crisisModal.addEventListener('click', (e) => {
+    if (e.target === crisisModal) {
+      closeCrisisModal();
+    }
+  });
+
+  // Configurar detección de crisis en todos los inputs
+  setupCrisisDetection();
+
+  // Mostrar recursos de emergencia si es necesario
+  const urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.get('crisis') === 'true') {
+    emergencyResources.classList.remove('hidden');
+  }
+});
+</script>
+
+<style>
+/* Crisis Management Styles */
+#crisis-floating-button button {
+  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.4);
+}
+
+#crisis-floating-button button:hover {
+  transform: scale(1.05);
+}
+
+.crisis-level-btn {
+  transition: all 0.2s ease;
+}
+
+.crisis-level-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Hacer el modal responsivo */
+@media (max-width: 768px) {
+  #crisis-modal .bg-white {
+    margin: 1rem;
+    max-height: calc(100vh - 2rem);
+  }
+}
+
+/* Animación de entrada del modal */
+#crisis-modal:not(.hidden) {
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+</style>

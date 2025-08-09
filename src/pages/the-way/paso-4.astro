@@ -1,0 +1,427 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+---
+
+<MainLayout 
+  title="Paso 4: Técnicas de Autocontrol" 
+  description="Aprende estrategias efectivas de autoregulación: límites, autoexclusión, herramientas digitales y técnicas de mindfulness."
+  article={true}
+>
+  
+  <!-- Progress Header -->
+  <section class="bg-gradient-to-r from-sky-600 to-cyan-600 text-white py-8">
+    <div class="container mx-auto px-4">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center">
+          <a href="/the-way" class="text-sky-200 hover:text-white mr-4">
+            ← Volver al Camino
+          </a>
+          <div class="text-sm">
+            <span class="text-sky-200">Paso 4 de 6</span>
+          </div>
+        </div>
+        <div class="flex items-center space-x-2">
+          <div class="w-8 h-8 bg-sky-300 rounded-full flex items-center justify-center text-sm">1</div>
+          <div class="w-8 h-1 bg-sky-300"></div>
+          <div class="w-8 h-8 bg-sky-300 rounded-full flex items-center justify-center text-sm">2</div>
+          <div class="w-8 h-1 bg-sky-300"></div>
+          <div class="w-8 h-8 bg-sky-300 rounded-full flex items-center justify-center text-sm">3</div>
+          <div class="w-8 h-1 bg-sky-300"></div>
+          <div class="w-8 h-8 bg-sky-400 rounded-full flex items-center justify-center text-sm font-bold">4</div>
+          <div class="w-8 h-1 bg-sky-300/50"></div>
+          <div class="w-8 h-8 bg-sky-300/50 rounded-full flex items-center justify-center text-sm">5</div>
+          <div class="w-8 h-1 bg-sky-300/50"></div>
+          <div class="w-8 h-8 bg-sky-300/50 rounded-full flex items-center justify-center text-sm">6</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Hero -->
+  <section class="bg-gradient-to-br from-sky-500 to-cyan-600 text-white py-20">
+    <div class="container mx-auto px-4 text-center">
+      <div class="max-w-4xl mx-auto">
+        <span class="inline-block px-4 py-2 bg-sky-400/30 rounded-full text-sm font-medium mb-6">
+          Paso 4: Autorregulación
+        </span>
+        <h1 class="text-4xl md:text-5xl font-bold mb-6">
+          Técnicas de Autocontrol
+        </h1>
+        <p class="text-xl text-sky-100 max-w-2xl mx-auto">
+          Desarrolla herramientas prácticas y efectivas para mantener el control 
+          sobre tu comportamiento de juego. El autocontrol se puede entrenar.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <article class="py-20 bg-white">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto">
+        
+        <!-- Introduction -->
+        <div class="bg-sky-50 border-l-4 border-sky-400 p-6 rounded-r-lg mb-12">
+          <h2 class="text-2xl font-bold text-sky-900 mb-4">🛡️ El Autocontrol Es Una Habilidad</h2>
+          <p class="text-sky-800">
+            Las técnicas de autocontrol no son sobre "fuerza de voluntad". Son <strong>estrategias prácticas</strong> 
+            que puedes implementar para crear barreras entre tú y el comportamiento impulsivo. 
+            Como cualquier habilidad, mejoran con la práctica.
+          </p>
+        </div>
+
+        <!-- Setting Limits -->
+        <section class="mb-16">
+          <h2 class="text-3xl font-bold text-gray-900 mb-8">⏰ Establecimiento de Límites</h2>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="bg-gradient-to-br from-green-50 to-emerald-50 border border-green-200 p-6 rounded-xl">
+              <h3 class="text-xl font-bold text-green-800 mb-4">💰 Límites de Dinero</h3>
+              <div class="space-y-4">
+                <div>
+                  <h4 class="font-semibold text-green-700 mb-2">Límite de pérdida diario:</h4>
+                  <p class="text-green-600 text-sm mb-2">Cantidad máxima que puedes permitirte perder sin afectar tu vida</p>
+                  <div class="bg-white p-3 rounded border">
+                    <input type="number" placeholder="€50" class="w-full border-0 focus:outline-none" />
+                  </div>
+                </div>
+                <div>
+                  <h4 class="font-semibold text-green-700 mb-2">Límite de depósito mensual:</h4>
+                  <p class="text-green-600 text-sm mb-2">Total máximo para actividades de juego al mes</p>
+                  <div class="bg-white p-3 rounded border">
+                    <input type="number" placeholder="€200" class="w-full border-0 focus:outline-none" />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-gradient-to-br from-blue-50 to-sky-50 border border-blue-200 p-6 rounded-xl">
+              <h3 class="text-xl font-bold text-blue-800 mb-4">⏱️ Límites de Tiempo</h3>
+              <div class="space-y-4">
+                <div>
+                  <h4 class="font-semibold text-blue-700 mb-2">Sesión máxima:</h4>
+                  <p class="text-blue-600 text-sm mb-2">Tiempo máximo por sesión de juego</p>
+                  <div class="bg-white p-3 rounded border">
+                    <select class="w-full border-0 focus:outline-none">
+                      <option>30 minutos</option>
+                      <option>1 hora</option>
+                      <option>2 horas</option>
+                    </select>
+                  </div>
+                </div>
+                <div>
+                  <h4 class="font-semibold text-blue-700 mb-2">Frecuencia semanal:</h4>
+                  <p class="text-blue-600 text-sm mb-2">Máximo de días por semana</p>
+                  <div class="bg-white p-3 rounded border">
+                    <select class="w-full border-0 focus:outline-none">
+                      <option>1 día por semana</option>
+                      <option>2 días por semana</option>
+                      <option>3 días por semana</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-8 bg-yellow-50 border border-yellow-200 p-6 rounded-lg">
+            <h4 class="text-lg font-bold text-yellow-800 mb-3">🔑 Reglas de Oro para los Límites</h4>
+            <ul class="text-yellow-700 space-y-2">
+              <li>• <strong>Establécelos cuando estés calmado</strong>, nunca durante o después de jugar</li>
+              <li>• <strong>Escríbelos</strong> y ponlos en un lugar visible</li>
+              <li>• <strong>No los cambies</strong> en el momento del juego, sin excepciones</li>
+              <li>• <strong>Cuando los alcances, para inmediatamente</strong>, no "solo una más"</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- Self-Exclusion -->
+        <section class="mb-16">
+          <h2 class="text-3xl font-bold text-gray-900 mb-8">🚫 Autoexclusión</h2>
+          
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div class="lg:col-span-2">
+              <div class="space-y-6">
+                <div class="border border-gray-200 p-6 rounded-lg">
+                  <h3 class="text-xl font-bold text-gray-900 mb-4">🏛️ Autoexclusión Oficial (España)</h3>
+                  <p class="text-gray-700 mb-4">
+                    El Registro General de Autoexclusión (RGEA) te impide legalmente acceder a todos los 
+                    operadores de juego licenciados en España.
+                  </p>
+                  <div class="bg-gray-50 p-4 rounded">
+                    <h4 class="font-semibold mb-2">Cómo funciona:</h4>
+                    <ul class="text-sm text-gray-600 space-y-1">
+                      <li>• Te registras online en autoexclusion.es</li>
+                      <li>• Eliges el período (6 meses a permanente)</li>
+                      <li>• Se aplica automáticamente a todos los operadores</li>
+                      <li>• No puedes cancelarlo hasta que expire el período</li>
+                    </ul>
+                  </div>
+                  <a href="https://www.autoexclusion.es" target="_blank" class="inline-flex items-center mt-4 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700">
+                    Acceder al RGEA
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    </svg>
+                  </a>
+                </div>
+
+                <div class="border border-gray-200 p-6 rounded-lg">
+                  <h3 class="text-xl font-bold text-gray-900 mb-4">📱 Autoexclusión de Aplicaciones</h3>
+                  <p class="text-gray-700 mb-4">
+                    Puedes autoexcluirte individualmente de cada aplicación o sitio web de juego.
+                  </p>
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-blue-50 p-4 rounded">
+                      <h4 class="font-semibold text-blue-800 mb-2">Ventajas:</h4>
+                      <ul class="text-sm text-blue-700 space-y-1">
+                        <li>• Control granular</li>
+                        <li>• Períodos flexibles</li>
+                        <li>• Específico por operador</li>
+                      </ul>
+                    </div>
+                    <div class="bg-red-50 p-4 rounded">
+                      <h4 class="font-semibold text-red-800 mb-2">Desventajas:</h4>
+                      <ul class="text-sm text-red-700 space-y-1">
+                        <li>• Hay que hacerlo uno por uno</li>
+                        <li>• Nuevos sitios no incluidos</li>
+                        <li>• Más fácil de evadir</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <div class="bg-purple-50 border border-purple-200 p-6 rounded-lg sticky top-8">
+                <h3 class="text-lg font-bold text-purple-800 mb-4">💡 Consejo Profesional</h3>
+                <p class="text-purple-700 text-sm mb-4">
+                  La autoexclusión es más efectiva cuando se combina con otras estrategias. 
+                  No es una solución mágica, pero es una barrera muy valiosa.
+                </p>
+                <div class="bg-white p-3 rounded">
+                  <h4 class="font-semibold text-purple-800 text-sm mb-2">Recomendación:</h4>
+                  <p class="text-purple-600 text-xs">
+                    Combina la autoexclusión oficial con herramientas digitales y apoyo social para máxima efectividad.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Digital Tools -->
+        <section class="mb-16">
+          <h2 class="text-3xl font-bold text-gray-900 mb-8">📲 Herramientas Digitales</h2>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Blocking Apps -->
+            <div class="border border-gray-200 p-6 rounded-xl">
+              <h3 class="text-xl font-bold text-gray-900 mb-4">🚧 Apps de Bloqueo</h3>
+              <div class="space-y-4">
+                <div class="bg-green-50 p-4 rounded-lg">
+                  <h4 class="font-semibold text-green-800 mb-2">Cold Turkey (PC/Mac)</h4>
+                  <p class="text-green-700 text-sm mb-2">Bloquea sitios web y aplicaciones durante períodos específicos</p>
+                  <span class="text-xs bg-green-200 text-green-800 px-2 py-1 rounded">Gratuito</span>
+                </div>
+                <div class="bg-blue-50 p-4 rounded-lg">
+                  <h4 class="font-semibold text-blue-800 mb-2">Freedom (Multiplataforma)</h4>
+                  <p class="text-blue-700 text-sm mb-2">Sincroniza bloqueos entre todos tus dispositivos</p>
+                  <span class="text-xs bg-blue-200 text-blue-800 px-2 py-1 rounded">Suscripción</span>
+                </div>
+                <div class="bg-purple-50 p-4 rounded-lg">
+                  <h4 class="font-semibold text-purple-800 mb-2">Screen Time (iOS) / Digital Wellbeing (Android)</h4>
+                  <p class="text-purple-700 text-sm mb-2">Controles parentales aplicados a ti mismo</p>
+                  <span class="text-xs bg-purple-200 text-purple-800 px-2 py-1 rounded">Nativo</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Financial Tools -->
+            <div class="border border-gray-200 p-6 rounded-xl">
+              <h3 class="text-xl font-bold text-gray-900 mb-4">💳 Herramientas Financieras</h3>
+              <div class="space-y-4">
+                <div class="bg-orange-50 p-4 rounded-lg">
+                  <h4 class="font-semibold text-orange-800 mb-2">Bloqueo de Transacciones</h4>
+                  <p class="text-orange-700 text-sm mb-2">Muchos bancos permiten bloquear transacciones a casinos</p>
+                  <ul class="text-xs text-orange-600 space-y-1">
+                    <li>• Contacta con tu banco</li>
+                    <li>• Solicita bloqueo de MCC 7995 (casinos)</li>
+                    <li>• Pide que requiera llamada para desbloquear</li>
+                  </ul>
+                </div>
+                <div class="bg-teal-50 p-4 rounded-lg">
+                  <h4 class="font-semibold text-teal-800 mb-2">Apps de Presupuesto</h4>
+                  <p class="text-teal-700 text-sm mb-2">Controla tus gastos y detecta patrones</p>
+                  <ul class="text-xs text-teal-600 space-y-1">
+                    <li>• YNAB (You Need A Budget)</li>
+                    <li>• Mint</li>
+                    <li>• Fintonic (España)</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Mindfulness Techniques -->
+        <section class="mb-16">
+          <h2 class="text-3xl font-bold text-gray-900 mb-8">🧘 Técnicas de Mindfulness</h2>
+          
+          <div class="bg-gradient-to-r from-indigo-50 to-purple-50 border border-indigo-200 p-8 rounded-xl">
+            <h3 class="text-xl font-bold text-indigo-900 mb-6">🌊 La Técnica STOP</h3>
+            <p class="text-indigo-800 mb-6">
+              Cuando sientes el impulso de jugar, usa esta técnica antes de actuar:
+            </p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+              <div class="text-center">
+                <div class="w-16 h-16 bg-red-500 text-white rounded-full flex items-center justify-center mx-auto mb-4 text-2xl font-bold">
+                  S
+                </div>
+                <h4 class="font-bold text-indigo-900 mb-2">STOP</h4>
+                <p class="text-indigo-700 text-sm">Para lo que estás haciendo inmediatamente</p>
+              </div>
+              <div class="text-center">
+                <div class="w-16 h-16 bg-yellow-500 text-white rounded-full flex items-center justify-center mx-auto mb-4 text-2xl font-bold">
+                  T
+                </div>
+                <h4 class="font-bold text-indigo-900 mb-2">TAKE A BREATH</h4>
+                <p class="text-indigo-700 text-sm">Respira profundamente 3 veces</p>
+              </div>
+              <div class="text-center">
+                <div class="w-16 h-16 bg-blue-500 text-white rounded-full flex items-center justify-center mx-auto mb-4 text-2xl font-bold">
+                  O
+                </div>
+                <h4 class="font-bold text-indigo-900 mb-2">OBSERVE</h4>
+                <p class="text-indigo-700 text-sm">Observa tus pensamientos y sensaciones sin juzgar</p>
+              </div>
+              <div class="text-center">
+                <div class="w-16 h-16 bg-green-500 text-white rounded-full flex items-center justify-center mx-auto mb-4 text-2xl font-bold">
+                  P
+                </div>
+                <h4 class="font-bold text-indigo-900 mb-2">PROCEED</h4>
+                <p class="text-indigo-700 text-sm">Elige conscientemente tu próxima acción</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="bg-green-50 border border-green-200 p-6 rounded-lg">
+              <h3 class="text-lg font-bold text-green-800 mb-4">🕐 La Regla de los 10 Minutos</h3>
+              <p class="text-green-700 mb-4">
+                Cuando sientes el impulso de jugar, comprométete a esperar 10 minutos antes de actuar.
+              </p>
+              <div class="bg-white p-4 rounded">
+                <h4 class="font-semibold text-green-800 mb-2">Durante esos 10 minutos:</h4>
+                <ul class="text-green-700 text-sm space-y-1">
+                  <li>• Sal a caminar</li>
+                  <li>• Llama a un amigo</li>
+                  <li>• Haz ejercicio</li>
+                  <li>• Medita o respira profundamente</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="bg-blue-50 border border-blue-200 p-6 rounded-lg">
+              <h3 class="text-lg font-bold text-blue-800 mb-4">💭 Surfear la Urgencia</h3>
+              <p class="text-blue-700 mb-4">
+                Las urgencias de jugar son como olas: crecen, alcanzan un pico y luego disminuyen naturalmente.
+              </p>
+              <div class="bg-white p-4 rounded">
+                <h4 class="font-semibold text-blue-800 mb-2">Técnica:</h4>
+                <ul class="text-blue-700 text-sm space-y-1">
+                  <li>• Reconoce la urgencia sin resistirla</li>
+                  <li>• Obsérva cómo cambia con el tiempo</li>
+                  <li>• No actúes mientras esté en el pico</li>
+                  <li>• Espera a que pase naturalmente</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Emergency Plan -->
+        <section class="mb-16">
+          <div class="bg-red-900 text-white p-8 rounded-xl">
+            <h2 class="text-2xl font-bold mb-6">🚨 Plan de Emergencia</h2>
+            <p class="text-red-100 mb-6">
+              Crea un plan específico para momentos de crisis cuando sientes que vas a perder el control.
+            </p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div class="bg-white/10 p-6 rounded-lg">
+                <h3 class="font-bold mb-4">📞 Contactos de Emergencia</h3>
+                <div class="space-y-3">
+                  <div class="bg-white/5 p-3 rounded">
+                    <label class="block text-sm mb-1">Amigo/Familiar de confianza:</label>
+                    <input type="text" placeholder="Nombre y teléfono" class="w-full bg-white/10 border border-white/20 rounded px-3 py-2 text-white placeholder-white/50" />
+                  </div>
+                  <div class="bg-white/5 p-3 rounded">
+                    <label class="block text-sm mb-1">Línea de ayuda 24h:</label>
+                    <input type="text" value="900 200 999" readonly class="w-full bg-white/10 border border-white/20 rounded px-3 py-2 text-white" />
+                  </div>
+                </div>
+              </div>
+              
+              <div class="bg-white/10 p-6 rounded-lg">
+                <h3 class="font-bold mb-4">🎯 Acciones Inmediatas</h3>
+                <ul class="space-y-2 text-sm">
+                  <li class="flex items-start">
+                    <span class="text-red-300 mr-2">1.</span>
+                    <span>Sal inmediatamente del lugar/app</span>
+                  </li>
+                  <li class="flex items-start">
+                    <span class="text-red-300 mr-2">2.</span>
+                    <span>Llama a tu contacto de confianza</span>
+                  </li>
+                  <li class="flex items-start">
+                    <span class="text-red-300 mr-2">3.</span>
+                    <span>Ve a un lugar público</span>
+                  </li>
+                  <li class="flex items-start">
+                    <span class="text-red-300 mr-2">4.</span>
+                    <span>Usa la técnica STOP</span>
+                  </li>
+                  <li class="flex items-start">
+                    <span class="text-red-300 mr-2">5.</span>
+                    <span>Revisa tus límites y motivaciones</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </article>
+
+  <!-- Navigation -->
+  <section class="py-12 bg-gray-50">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto flex justify-between items-center">
+        <a 
+          href="/the-way/paso-3" 
+          class="flex items-center text-gray-600 hover:text-gray-900 font-medium"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+          </svg>
+          Paso 3: Sesgos Mentales
+        </a>
+
+        <a 
+          href="/the-way/paso-5" 
+          class="flex items-center px-6 py-3 bg-gradient-to-r from-cyan-600 to-teal-600 hover:from-cyan-700 hover:to-teal-700 text-white font-semibold rounded-lg transition-all duration-200"
+        >
+          Paso 5: Diseña tu Plan
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+</MainLayout>

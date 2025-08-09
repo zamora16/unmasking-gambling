@@ -1,0 +1,544 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+---
+
+<MainLayout 
+  title="Paso 5: Diseña tu Plan Personalizado" 
+  description="Crea un plan de acción personalizado para mantener un comportamiento de juego responsable adaptado a tus necesidades."
+  article={true}
+>
+  
+  <!-- Progress Header -->
+  <section class="bg-gradient-to-r from-cyan-600 to-teal-600 text-white py-8">
+    <div class="container mx-auto px-4">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center">
+          <a href="/the-way" class="text-cyan-200 hover:text-white mr-4">
+            ← Volver al Camino
+          </a>
+          <div class="text-sm">
+            <span class="text-cyan-200">Paso 5 de 6</span>
+          </div>
+        </div>
+        <div class="flex items-center space-x-2">
+          <div class="w-8 h-8 bg-cyan-300 rounded-full flex items-center justify-center text-sm">1</div>
+          <div class="w-8 h-1 bg-cyan-300"></div>
+          <div class="w-8 h-8 bg-cyan-300 rounded-full flex items-center justify-center text-sm">2</div>
+          <div class="w-8 h-1 bg-cyan-300"></div>
+          <div class="w-8 h-8 bg-cyan-300 rounded-full flex items-center justify-center text-sm">3</div>
+          <div class="w-8 h-1 bg-cyan-300"></div>
+          <div class="w-8 h-8 bg-cyan-300 rounded-full flex items-center justify-center text-sm">4</div>
+          <div class="w-8 h-1 bg-cyan-300"></div>
+          <div class="w-8 h-8 bg-cyan-400 rounded-full flex items-center justify-center text-sm font-bold">5</div>
+          <div class="w-8 h-1 bg-cyan-300/50"></div>
+          <div class="w-8 h-8 bg-cyan-300/50 rounded-full flex items-center justify-center text-sm">6</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Hero -->
+  <section class="bg-gradient-to-br from-cyan-500 to-teal-600 text-white py-20">
+    <div class="container mx-auto px-4 text-center">
+      <div class="max-w-4xl mx-auto">
+        <span class="inline-block px-4 py-2 bg-cyan-400/30 rounded-full text-sm font-medium mb-6">
+          Paso 5: Planificación Personal
+        </span>
+        <h1 class="text-4xl md:text-5xl font-bold mb-6">
+          Diseña tu Plan Personalizado
+        </h1>
+        <p class="text-xl text-cyan-100 max-w-2xl mx-auto">
+          Un plan personalizado aumenta significativamente las posibilidades de mantener 
+          un comportamiento de juego saludable. Vamos a crear el tuyo.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <article class="py-20 bg-white">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto">
+        
+        <!-- Introduction -->
+        <div class="bg-cyan-50 border-l-4 border-cyan-400 p-6 rounded-r-lg mb-12">
+          <h2 class="text-2xl font-bold text-cyan-900 mb-4">📋 Tu Plan, Tu Éxito</h2>
+          <p class="text-cyan-800">
+            Un plan personalizado es más que una lista de buenas intenciones. Es una <strong>hoja de ruta específica</strong> 
+            que incluye objetivos claros, estrategias adaptadas a tu situación y mecanismos de seguimiento. 
+            Tómate el tiempo necesario para completar cada sección.
+          </p>
+        </div>
+
+        <!-- Personal Assessment -->
+        <section class="mb-16">
+          <h2 class="text-3xl font-bold text-gray-900 mb-8">🔍 Evaluación Personal</h2>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-200 p-6 rounded-xl">
+              <h3 class="text-xl font-bold text-blue-800 mb-4">🎯 Tu Situación Actual</h3>
+              <div class="space-y-4">
+                <div>
+                  <label class="block text-blue-700 font-medium mb-2">¿Con qué frecuencia juegas actualmente?</label>
+                  <select class="w-full p-3 border border-blue-200 rounded-lg focus:outline-none focus:border-blue-400">
+                    <option>Selecciona una opción</option>
+                    <option>Diariamente</option>
+                    <option>Varias veces por semana</option>
+                    <option>Semanalmente</option>
+                    <option>Ocasionalmente</option>
+                    <option>Raramente</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-blue-700 font-medium mb-2">¿Cuánto gastas aproximadamente al mes?</label>
+                  <input type="number" placeholder="€" class="w-full p-3 border border-blue-200 rounded-lg focus:outline-none focus:border-blue-400" />
+                </div>
+                <div>
+                  <label class="block text-blue-700 font-medium mb-2">¿Qué tipo de juego prefieres?</label>
+                  <select class="w-full p-3 border border-blue-200 rounded-lg focus:outline-none focus:border-blue-400">
+                    <option>Selecciona una opción</option>
+                    <option>Slots/Tragaperras</option>
+                    <option>Apuestas deportivas</option>
+                    <option>Casino (ruleta, blackjack)</option>
+                    <option>Lotería/Primitiva</option>
+                    <option>Poker</option>
+                    <option>Otros</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-gradient-to-br from-green-50 to-emerald-50 border border-green-200 p-6 rounded-xl">
+              <h3 class="text-xl font-bold text-green-800 mb-4">💪 Tus Fortalezas</h3>
+              <p class="text-green-700 mb-4">Identifica qué recursos tienes a tu favor:</p>
+              <div class="space-y-3">
+                <label class="flex items-center">
+                  <input type="checkbox" class="mr-3">
+                  <span class="text-green-700">Tengo apoyo familiar/social</span>
+                </label>
+                <label class="flex items-center">
+                  <input type="checkbox" class="mr-3">
+                  <span class="text-green-700">Soy consciente de mi problema</span>
+                </label>
+                <label class="flex items-center">
+                  <input type="checkbox" class="mr-3">
+                  <span class="text-green-700">Tengo estabilidad económica</span>
+                </label>
+                <label class="flex items-center">
+                  <input type="checkbox" class="mr-3">
+                  <span class="text-green-700">Practico otras actividades de ocio</span>
+                </label>
+                <label class="flex items-center">
+                  <input type="checkbox" class="mr-3">
+                  <span class="text-green-700">Tengo experiencia controlando otros hábitos</span>
+                </label>
+                <label class="flex items-center">
+                  <input type="checkbox" class="mr-3">
+                  <span class="text-green-700">Soy bueno estableciendo metas</span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Goal Setting -->
+        <section class="mb-16">
+          <h2 class="text-3xl font-bold text-gray-900 mb-8">🎯 Establecimiento de Objetivos</h2>
+          
+          <div class="bg-gradient-to-r from-purple-600 to-indigo-600 text-white p-8 rounded-xl mb-8">
+            <h3 class="text-xl font-bold mb-4">🏆 Tu Objetivo Principal</h3>
+            <p class="text-purple-100 mb-6">
+              Elige un objetivo principal claro y específico. Debe ser realista y medible:
+            </p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <label class="bg-white/10 p-4 rounded-lg cursor-pointer hover:bg-white/20 transition-colors">
+                <input type="radio" name="main-goal" class="mr-3">
+                <div>
+                  <div class="font-bold">Reducir Frecuencia</div>
+                  <div class="text-sm text-purple-200">Jugar menos veces por semana</div>
+                </div>
+              </label>
+              <label class="bg-white/10 p-4 rounded-lg cursor-pointer hover:bg-white/20 transition-colors">
+                <input type="radio" name="main-goal" class="mr-3">
+                <div>
+                  <div class="font-bold">Reducir Gasto</div>
+                  <div class="text-sm text-purple-200">Establecer límites de dinero</div>
+                </div>
+              </label>
+              <label class="bg-white/10 p-4 rounded-lg cursor-pointer hover:bg-white/20 transition-colors">
+                <input type="radio" name="main-goal" class="mr-3">
+                <div>
+                  <div class="font-bold">Dejar Completamente</div>
+                  <div class="text-sm text-purple-200">Abstinencia total del juego</div>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <!-- SMART Goals Framework -->
+          <div class="border border-gray-200 p-8 rounded-xl">
+            <h3 class="text-xl font-bold text-gray-900 mb-6">📏 Objetivos SMART</h3>
+            <p class="text-gray-700 mb-6">
+              Convierte tu objetivo en un plan SMART (Específico, Medible, Alcanzable, Relevante, Temporal):
+            </p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
+              <div class="bg-blue-50 p-4 rounded-lg">
+                <h4 class="font-bold text-blue-800 mb-2">S - Específico</h4>
+                <textarea placeholder="¿Qué exactamente quieres lograr?" class="w-full h-20 p-2 border border-blue-200 rounded text-sm resize-none"></textarea>
+              </div>
+              <div class="bg-green-50 p-4 rounded-lg">
+                <h4 class="font-bold text-green-800 mb-2">M - Medible</h4>
+                <textarea placeholder="¿Cómo vas a medir el progreso?" class="w-full h-20 p-2 border border-green-200 rounded text-sm resize-none"></textarea>
+              </div>
+              <div class="bg-yellow-50 p-4 rounded-lg">
+                <h4 class="font-bold text-yellow-800 mb-2">A - Alcanzable</h4>
+                <textarea placeholder="¿Es realista para ti?" class="w-full h-20 p-2 border border-yellow-200 rounded text-sm resize-none"></textarea>
+              </div>
+              <div class="bg-purple-50 p-4 rounded-lg">
+                <h4 class="font-bold text-purple-800 mb-2">R - Relevante</h4>
+                <textarea placeholder="¿Por qué es importante?" class="w-full h-20 p-2 border border-purple-200 rounded text-sm resize-none"></textarea>
+              </div>
+              <div class="bg-red-50 p-4 rounded-lg">
+                <h4 class="font-bold text-red-800 mb-2">T - Temporal</h4>
+                <textarea placeholder="¿Cuándo lo vas a lograr?" class="w-full h-20 p-2 border border-red-200 rounded text-sm resize-none"></textarea>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Strategy Selection -->
+        <section class="mb-16">
+          <h2 class="text-3xl font-bold text-gray-900 mb-8">🛠️ Selección de Estrategias</h2>
+          
+          <p class="text-gray-700 mb-8">
+            Basándote en lo que has aprendido en los pasos anteriores, selecciona las estrategias que vas a implementar:
+          </p>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Limits -->
+            <div class="bg-green-50 border border-green-200 p-6 rounded-lg">
+              <h3 class="text-lg font-bold text-green-800 mb-4">💰 Límites Financieros</h3>
+              <div class="space-y-3">
+                <label class="flex items-start">
+                  <input type="checkbox" class="mr-3 mt-1">
+                  <div>
+                    <div class="font-medium text-green-700">Límite diario</div>
+                    <input type="number" placeholder="€" class="w-full mt-1 p-2 border border-green-200 rounded text-sm">
+                  </div>
+                </label>
+                <label class="flex items-start">
+                  <input type="checkbox" class="mr-3 mt-1">
+                  <div>
+                    <div class="font-medium text-green-700">Límite mensual</div>
+                    <input type="number" placeholder="€" class="w-full mt-1 p-2 border border-green-200 rounded text-sm">
+                  </div>
+                </label>
+                <label class="flex items-center">
+                  <input type="checkbox" class="mr-3">
+                  <span class="text-green-700">Bloqueo bancario de transacciones</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Time Limits -->
+            <div class="bg-blue-50 border border-blue-200 p-6 rounded-lg">
+              <h3 class="text-lg font-bold text-blue-800 mb-4">⏰ Límites de Tiempo</h3>
+              <div class="space-y-3">
+                <label class="flex items-start">
+                  <input type="checkbox" class="mr-3 mt-1">
+                  <div>
+                    <div class="font-medium text-blue-700">Máximo por sesión</div>
+                    <select class="w-full mt-1 p-2 border border-blue-200 rounded text-sm">
+                      <option>30 min</option>
+                      <option>1 hora</option>
+                      <option>2 horas</option>
+                    </select>
+                  </div>
+                </label>
+                <label class="flex items-start">
+                  <input type="checkbox" class="mr-3 mt-1">
+                  <div>
+                    <div class="font-medium text-blue-700">Días por semana</div>
+                    <select class="w-full mt-1 p-2 border border-blue-200 rounded text-sm">
+                      <option>1 día</option>
+                      <option>2 días</option>
+                      <option>3 días</option>
+                    </select>
+                  </div>
+                </label>
+              </div>
+            </div>
+
+            <!-- Self-Exclusion -->
+            <div class="bg-red-50 border border-red-200 p-6 rounded-lg">
+              <h3 class="text-lg font-bold text-red-800 mb-4">🚫 Autoexclusión</h3>
+              <div class="space-y-3">
+                <label class="flex items-center">
+                  <input type="checkbox" class="mr-3">
+                  <span class="text-red-700">Registro oficial (RGEA)</span>
+                </label>
+                <label class="flex items-center">
+                  <input type="checkbox" class="mr-3">
+                  <span class="text-red-700">Autoexclusión por apps</span>
+                </label>
+                <label class="flex items-center">
+                  <input type="checkbox" class="mr-3">
+                  <span class="text-red-700">Bloqueo de sitios web</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Mindfulness -->
+            <div class="bg-purple-50 border border-purple-200 p-6 rounded-lg">
+              <h3 class="text-lg font-bold text-purple-800 mb-4">🧘 Mindfulness</h3>
+              <div class="space-y-3">
+                <label class="flex items-center">
+                  <input type="checkbox" class="mr-3">
+                  <span class="text-purple-700">Técnica STOP</span>
+                </label>
+                <label class="flex items-center">
+                  <input type="checkbox" class="mr-3">
+                  <span class="text-purple-700">Regla de 10 minutos</span>
+                </label>
+                <label class="flex items-center">
+                  <input type="checkbox" class="mr-3">
+                  <span class="text-purple-700">Meditación diaria</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Support -->
+            <div class="bg-yellow-50 border border-yellow-200 p-6 rounded-lg">
+              <h3 class="text-lg font-bold text-yellow-800 mb-4">👥 Apoyo Social</h3>
+              <div class="space-y-3">
+                <label class="flex items-center">
+                  <input type="checkbox" class="mr-3">
+                  <span class="text-yellow-700">Contarle a la familia</span>
+                </label>
+                <label class="flex items-center">
+                  <input type="checkbox" class="mr-3">
+                  <span class="text-yellow-700">Buscar terapia profesional</span>
+                </label>
+                <label class="flex items-center">
+                  <input type="checkbox" class="mr-3">
+                  <span class="text-yellow-700">Unirse a un grupo de apoyo</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Alternatives -->
+            <div class="bg-teal-50 border border-teal-200 p-6 rounded-lg">
+              <h3 class="text-lg font-bold text-teal-800 mb-4">🎨 Actividades Alternativas</h3>
+              <div class="space-y-3">
+                <label class="flex items-center">
+                  <input type="checkbox" class="mr-3">
+                  <span class="text-teal-700">Ejercicio físico</span>
+                </label>
+                <label class="flex items-center">
+                  <input type="checkbox" class="mr-3">
+                  <span class="text-teal-700">Hobbies creativos</span>
+                </label>
+                <label class="flex items-center">
+                  <input type="checkbox" class="mr-3">
+                  <span class="text-teal-700">Actividades sociales</span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Implementation Timeline -->
+        <section class="mb-16">
+          <h2 class="text-3xl font-bold text-gray-900 mb-8">📅 Cronograma de Implementación</h2>
+          
+          <div class="bg-gradient-to-r from-indigo-50 to-purple-50 border border-indigo-200 p-8 rounded-xl">
+            <h3 class="text-xl font-bold text-indigo-900 mb-6">⏱️ Plan de 30 Días</h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div class="bg-white p-6 rounded-lg border border-indigo-200">
+                <h4 class="font-bold text-indigo-800 mb-4">Semana 1-2: Preparación</h4>
+                <ul class="text-indigo-700 space-y-2 text-sm">
+                  <li>• Establecer límites en todas las plataformas</li>
+                  <li>• Configurar herramientas de bloqueo</li>
+                  <li>• Informar a personas de confianza</li>
+                  <li>• Eliminar apps de juego del móvil</li>
+                </ul>
+              </div>
+              
+              <div class="bg-white p-6 rounded-lg border border-indigo-200">
+                <h4 class="font-bold text-indigo-800 mb-4">Semana 3-4: Implementación</h4>
+                <ul class="text-indigo-700 space-y-2 text-sm">
+                  <li>• Comenzar con límites establecidos</li>
+                  <li>• Practicar técnicas de mindfulness</li>
+                  <li>• Desarrollar actividades alternativas</li>
+                  <li>• Registrar progreso diario</li>
+                </ul>
+              </div>
+              
+              <div class="bg-white p-6 rounded-lg border border-indigo-200">
+                <h4 class="font-bold text-indigo-800 mb-4">Mes 2+: Mantenimiento</h4>
+                <ul class="text-indigo-700 space-y-2 text-sm">
+                  <li>• Evaluación semanal del progreso</li>
+                  <li>• Ajustar estrategias según necesidad</li>
+                  <li>• Celebrar logros pequeños</li>
+                  <li>• Planificar a largo plazo</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Monitoring and Adjustment -->
+        <section class="mb-16">
+          <h2 class="text-3xl font-bold text-gray-900 mb-8">📊 Seguimiento y Ajuste</h2>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="border border-gray-200 p-6 rounded-xl">
+              <h3 class="text-xl font-bold text-gray-900 mb-4">📈 Métricas de Seguimiento</h3>
+              <p class="text-gray-700 mb-4">Lleva un registro de estos indicadores:</p>
+              <div class="space-y-3">
+                <div class="bg-gray-50 p-3 rounded">
+                  <label class="flex items-center">
+                    <input type="checkbox" class="mr-3">
+                    <span>Días sin jugar consecutivos</span>
+                  </label>
+                </div>
+                <div class="bg-gray-50 p-3 rounded">
+                  <label class="flex items-center">
+                    <input type="checkbox" class="mr-3">
+                    <span>Dinero ahorrado vs. gastado</span>
+                  </label>
+                </div>
+                <div class="bg-gray-50 p-3 rounded">
+                  <label class="flex items-center">
+                    <input type="checkbox" class="mr-3">
+                    <span>Estado de ánimo general (1-10)</span>
+                  </label>
+                </div>
+                <div class="bg-gray-50 p-3 rounded">
+                  <label class="flex items-center">
+                    <input type="checkbox" class="mr-3">
+                    <span>Calidad del sueño</span>
+                  </label>
+                </div>
+                <div class="bg-gray-50 p-3 rounded">
+                  <label class="flex items-center">
+                    <input type="checkbox" class="mr-3">
+                    <span>Relaciones interpersonales</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+            
+            <div class="border border-gray-200 p-6 rounded-xl">
+              <h3 class="text-xl font-bold text-gray-900 mb-4">🔄 Protocolo de Ajuste</h3>
+              <div class="space-y-4">
+                <div class="bg-green-50 border-l-4 border-green-400 p-4">
+                  <h4 class="font-bold text-green-800 mb-2">Si vas bien (2+ semanas):</h4>
+                  <ul class="text-green-700 text-sm space-y-1">
+                    <li>• Mantén las estrategias actuales</li>
+                    <li>• Considera hacer límites más estrictos</li>
+                    <li>• Celebra tu progreso</li>
+                  </ul>
+                </div>
+                <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4">
+                  <h4 class="font-bold text-yellow-800 mb-2">Si hay recaídas ocasionales:</h4>
+                  <ul class="text-yellow-700 text-sm space-y-1">
+                    <li>• Analiza qué llevó a la recaída</li>
+                    <li>• Refuerza las estrategias débiles</li>
+                    <li>• No te castigues, aprende y continúa</li>
+                  </ul>
+                </div>
+                <div class="bg-red-50 border-l-4 border-red-400 p-4">
+                  <h4 class="font-bold text-red-800 mb-2">Si el plan no funciona:</h4>
+                  <ul class="text-red-700 text-sm space-y-1">
+                    <li>• Busca ayuda profesional inmediata</li>
+                    <li>• Considera autoexclusión completa</li>
+                    <li>• Involucra más apoyo social</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Plan Summary -->
+        <section class="mb-16">
+          <div class="bg-gradient-to-r from-teal-600 to-green-600 text-white p-8 rounded-xl">
+            <h2 class="text-2xl font-bold mb-6">📋 Resumen de tu Plan</h2>
+            <p class="text-teal-100 mb-6">
+              Completa esta sección como compromiso contigo mismo:
+            </p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div class="bg-white/10 p-6 rounded-lg">
+                <h3 class="font-bold mb-4">Mi objetivo principal es:</h3>
+                <textarea class="w-full h-20 p-3 bg-white/5 border border-white/20 rounded text-white placeholder-white/50 resize-none" placeholder="Escribe tu objetivo específico aquí..."></textarea>
+              </div>
+              
+              <div class="bg-white/10 p-6 rounded-lg">
+                <h3 class="font-bold mb-4">Mis 3 estrategias principales son:</h3>
+                <div class="space-y-2">
+                  <input type="text" placeholder="1. " class="w-full p-2 bg-white/5 border border-white/20 rounded text-white placeholder-white/50" />
+                  <input type="text" placeholder="2. " class="w-full p-2 bg-white/5 border border-white/20 rounded text-white placeholder-white/50" />
+                  <input type="text" placeholder="3. " class="w-full p-2 bg-white/5 border border-white/20 rounded text-white placeholder-white/50" />
+                </div>
+              </div>
+              
+              <div class="bg-white/10 p-6 rounded-lg">
+                <h3 class="font-bold mb-4">Mi contacto de apoyo es:</h3>
+                <input type="text" placeholder="Nombre y teléfono" class="w-full p-3 bg-white/5 border border-white/20 rounded text-white placeholder-white/50" />
+              </div>
+              
+              <div class="bg-white/10 p-6 rounded-lg">
+                <h3 class="font-bold mb-4">Me comprometo a revisar mi plan cada:</h3>
+                <select class="w-full p-3 bg-white/5 border border-white/20 rounded text-white">
+                  <option>Semana</option>
+                  <option>2 semanas</option>
+                  <option>Mes</option>
+                </select>
+              </div>
+            </div>
+            
+            <div class="mt-6 text-center">
+              <button class="px-8 py-3 bg-white text-teal-600 font-bold rounded-lg hover:bg-gray-100 transition-colors">
+                Guardar Mi Plan
+              </button>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </article>
+
+  <!-- Navigation -->
+  <section class="py-12 bg-gray-50">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto flex justify-between items-center">
+        <a 
+          href="/the-way/paso-4" 
+          class="flex items-center text-gray-600 hover:text-gray-900 font-medium"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+          </svg>
+          Paso 4: Autocontrol
+        </a>
+
+        <a 
+          href="/the-way/paso-6" 
+          class="flex items-center px-6 py-3 bg-gradient-to-r from-teal-600 to-green-600 hover:from-teal-700 hover:to-green-700 text-white font-semibold rounded-lg transition-all duration-200"
+        >
+          Paso 6: Busca Apoyo
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+</MainLayout>

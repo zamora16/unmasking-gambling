@@ -1,0 +1,754 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+---
+
+<MainLayout 
+  title="Simulador de Rascas y Ganas" 
+  description="Simula la compra de rascas y descubre cómo están distribuidos los premios de forma predeterminada."
+>
+  
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-br from-green-600 via-blue-600 to-green-800 text-white py-20">
+    <div class="container mx-auto px-4 text-center">
+      <div class="max-w-4xl mx-auto">
+        <h1 class="text-4xl md:text-6xl font-bold mb-6">
+          🎫 Simulador de Rascas
+        </h1>
+        <p class="text-xl md:text-2xl mb-8 text-green-100">
+          Descubre cómo funcionan realmente los
+          <span class="text-yellow-300 font-semibold">rascas y ganas</span>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Batch Selector -->
+  <section class="py-10 bg-gray-50">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto">
+        <div class="bg-white rounded-xl shadow-lg p-8">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6 text-center">Selecciona un Lote de Rascas</h2>
+          
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Budget Batch -->
+            <div id="batch-budget" class="batch-card border-2 border-gray-200 hover:border-blue-500 rounded-lg p-6 cursor-pointer transition-all duration-200">
+              <div class="text-center">
+                <div class="text-4xl mb-3">💸</div>
+                <h3 class="text-xl font-bold text-gray-900 mb-2">Lote Económico</h3>
+                <div class="text-sm text-gray-600 mb-3">€1 por rasca</div>
+                <div class="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-bold mb-3">
+                  RTP: 60%
+                </div>
+                <ul class="text-sm text-gray-600 text-left space-y-1">
+                  <li>• 1,000 rascas en el lote</li>
+                  <li>• 1 premio de €300</li>
+                  <li>• 3 premios de €50</li>
+                  <li>• 10 premios de €10</li>
+                  <li>• 25 premios de €2</li>
+                  <li>• 961 sin premio</li>
+                </ul>
+                <div class="mt-4 text-blue-600 font-bold text-sm animate-pulse">
+                  👆 Haz clic para simular
+                </div>
+              </div>
+            </div>
+
+            <!-- Standard Batch -->
+            <div id="batch-standard" class="batch-card border-2 border-gray-200 hover:border-blue-500 rounded-lg p-6 cursor-pointer transition-all duration-200">
+              <div class="text-center">
+                <div class="text-4xl mb-3">🎯</div>
+                <h3 class="text-xl font-bold text-gray-900 mb-2">Lote Estándar</h3>
+                <div class="text-sm text-gray-600 mb-3">€2 por rasca</div>
+                <div class="bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm font-bold mb-3">
+                  RTP: 70%
+                </div>
+                <ul class="text-sm text-gray-600 text-left space-y-1">
+                  <li>• 500 rascas en el lote</li>
+                  <li>• 1 premio de €400</li>
+                  <li>• 2 premios de €60</li>
+                  <li>• 5 premios de €20</li>
+                  <li>• 20 premios de €4</li>
+                  <li>• 472 sin premio</li>
+                </ul>
+                <div class="mt-4 text-blue-600 font-bold text-sm animate-pulse">
+                  👆 Haz clic para simular
+                </div>
+              </div>
+            </div>
+
+            <!-- Premium Batch -->
+            <div id="batch-premium" class="batch-card border-2 border-gray-200 hover:border-blue-500 rounded-lg p-6 cursor-pointer transition-all duration-200">
+              <div class="text-center">
+                <div class="text-4xl mb-3">💎</div>
+                <h3 class="text-xl font-bold text-gray-900 mb-2">Lote Premium</h3>
+                <div class="text-sm text-gray-600 mb-3">€5 por rasca</div>
+                <div class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm font-bold mb-3">
+                  RTP: 75%
+                </div>
+                <ul class="text-sm text-gray-600 text-left space-y-1">
+                  <li>• 200 rascas en el lote</li>
+                  <li>• 1 premio de €500</li>
+                  <li>• 1 premio de €100</li>
+                  <li>• 3 premios de €30</li>
+                  <li>• 6 premios de €10</li>
+                  <li>• 189 sin premio</li>
+                </ul>
+                <div class="mt-4 text-blue-600 font-bold text-sm animate-pulse">
+                  👆 Haz clic para simular
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="text-center mt-6">
+            <p class="text-gray-600">
+              💡 <strong>Nota importante:</strong> Cada lote tiene un número fijo de premios distribuidos aleatoriamente.
+              <br>Una vez que se venden todos los premios mayores, ¡ya no quedan más en ese lote!
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Simulator Section -->
+  <section id="simulatorSection" class="py-20 bg-white hidden">
+    <div class="container mx-auto px-4">
+      <div class="max-w-6xl mx-auto">
+        
+        <!-- Batch Status -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
+          
+          <!-- Batch Info -->
+          <div class="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-6">
+            <h3 class="text-xl font-bold text-gray-900 mb-4">📊 Estado del Lote</h3>
+            <div class="space-y-3">
+              <div class="flex justify-between">
+                <span class="text-gray-600">Tipo de lote:</span>
+                <span id="batchType" class="font-bold">-</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-gray-600">Precio por rasca:</span>
+                <span id="ticketPrice" class="font-bold">-</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-gray-600">RTP del lote:</span>
+                <span id="batchRTP" class="font-bold">-</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-gray-600">Rascas vendidas:</span>
+                <span id="ticketsSold" class="font-bold">0</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-gray-600">Rascas restantes:</span>
+                <span id="ticketsRemaining" class="font-bold">-</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Your Stats -->
+          <div class="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-6">
+            <h3 class="text-xl font-bold text-gray-900 mb-4">💰 Tus Estadísticas</h3>
+            <div class="space-y-3">
+              <div class="flex justify-between">
+                <span class="text-gray-600">Rascas compradas:</span>
+                <span id="myTickets" class="font-bold">0</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-gray-600">Dinero gastado:</span>
+                <span id="moneySpent" class="font-bold text-red-600">€0</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-gray-600">Dinero ganado:</span>
+                <span id="moneyWon" class="font-bold text-green-600">€0</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-gray-600">Balance neto:</span>
+                <span id="netBalance" class="font-bold">€0</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-gray-600">Tu RTP real:</span>
+                <span id="realRTP" class="font-bold">0%</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Remaining Prizes -->
+          <div class="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-xl p-6">
+            <h3 class="text-xl font-bold text-gray-900 mb-4">🎁 Premios Restantes</h3>
+            <div id="remainingPrizes" class="space-y-2">
+              <!-- Will be populated by JavaScript -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Scratch Action -->
+        <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
+          <div class="text-center">
+            <h3 class="text-2xl font-bold text-gray-900 mb-6">🎫 Comprar y Rascar</h3>
+            
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
+              <button id="buyOneBtn" class="bg-blue-500 hover:bg-blue-600 text-white px-8 py-3 rounded-lg font-bold transition-all duration-200 hover:scale-105">
+                Comprar 1 Rasca
+              </button>
+              <button id="buyFiveBtn" class="bg-purple-500 hover:bg-purple-600 text-white px-8 py-3 rounded-lg font-bold transition-all duration-200 hover:scale-105">
+                Comprar 5 Rascas
+              </button>
+              <button id="buyTenBtn" class="bg-green-500 hover:bg-green-600 text-white px-8 py-3 rounded-lg font-bold transition-all duration-200 hover:scale-105">
+                Comprar 10 Rascas
+              </button>
+              <button id="buyTwentyBtn" class="bg-red-500 hover:bg-red-600 text-white px-8 py-3 rounded-lg font-bold transition-all duration-200 hover:scale-105">
+                Comprar 20 Rascas
+              </button>
+            </div>
+
+            <div id="scratchResult" class="hidden">
+              <div class="bg-gray-50 rounded-lg p-6 mb-6">
+                <h4 class="text-xl font-bold mb-4">🎯 Resultado de tu Compra</h4>
+                <div id="resultDetails" class="space-y-2">
+                  <!-- Results will be populated here -->
+                </div>
+              </div>
+            </div>
+
+            <button id="resetBtn" class="bg-gray-500 hover:bg-gray-600 text-white px-6 py-2 rounded-lg transition-colors hover:scale-105">
+              🔄 Reiniciar Lote
+            </button>
+          </div>
+        </div>
+
+        <!-- Batch Visualization -->
+        <div class="bg-white rounded-xl shadow-lg p-8">
+          <h3 class="text-2xl font-bold text-gray-900 mb-6 text-center">📈 Progreso del Lote</h3>
+          
+          <!-- Progress Bar -->
+          <div class="mb-6">
+            <div class="flex justify-between text-sm text-gray-600 mb-2">
+              <span>Rascas vendidas</span>
+              <span id="progressPercentage">0%</span>
+            </div>
+            <div class="w-full bg-gray-200 rounded-full h-4">
+              <div id="progressBar" class="bg-gradient-to-r from-blue-500 to-purple-500 h-4 rounded-full transition-all duration-300" style="width: 0%"></div>
+            </div>
+          </div>
+
+          <!-- Prize Distribution Chart -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div>
+              <h4 class="text-lg font-bold text-gray-900 mb-4">🎁 Distribución de Premios</h4>
+              <div id="prizeChart" class="space-y-3">
+                <!-- Prize bars will be generated by JavaScript -->
+              </div>
+            </div>
+            
+            <div>
+              <h4 class="text-lg font-bold text-gray-900 mb-4">📊 Estadísticas del Lote</h4>
+              <div class="space-y-3">
+                <div class="flex justify-between">
+                  <span class="text-gray-600">Total recaudado:</span>
+                  <span id="totalRevenue" class="font-bold">€0</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-gray-600">Total en premios:</span>
+                  <span id="totalPrizes" class="font-bold">€0</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-gray-600">Beneficio casa:</span>
+                  <span id="houseProfitCalc" class="font-bold text-green-600">€0</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-gray-600">RTP real actual:</span>
+                  <span id="currentRealRTP" class="font-bold">0%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Educational Section -->
+  <section class="py-20 bg-gray-50">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6">🧠 Lo Que Este Simulador Te Enseña</h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div class="bg-white p-6 rounded-lg shadow-lg">
+            <h3 class="text-xl font-bold text-red-800 mb-3">🎯 Premios Predeterminados</h3>
+            <p class="text-gray-600">
+              Los premios no se generan aleatoriamente cuando rascas. Están predeterminados y 
+              distribuidos de forma fija en cada lote. Si el premio mayor ya se vendió, 
+              ¡es imposible que salga otro!
+            </p>
+          </div>
+
+          <div class="bg-white p-6 rounded-lg shadow-lg">
+            <h3 class="text-xl font-bold text-orange-800 mb-3">📊 RTP Falso a Corto Plazo</h3>
+            <p class="text-gray-600">
+              Aunque el RTP teórico sea del 70%, tu RTP real puede ser del 0% si tienes mala suerte, 
+              o del 200% si tienes suerte. El RTP solo se cumple a nivel de todo el lote.
+            </p>
+          </div>
+
+          <div class="bg-white p-6 rounded-lg shadow-lg">
+            <h3 class="text-xl font-bold text-blue-800 mb-3">🏠 La Casa Siempre Gana</h3>
+            <p class="text-gray-600">
+              Independientemente de quién gane qué premio, la casa tiene garantizado un beneficio 
+              del 25-40% del total vendido. Los premios están calculados para asegurar esto.
+            </p>
+          </div>
+
+          <div class="bg-white p-6 rounded-lg shadow-lg">
+            <h3 class="text-xl font-bold text-green-800 mb-3">🎰 Peores Odds que Casinos</h3>
+            <p class="text-gray-600">
+              Con RTPs del 60-75%, los rascas tienen peores probabilidades que las tragaperras 
+              de casino (95%+). Están diseñados para generar máximo beneficio con mínimo pago.
+            </p>
+          </div>
+        </div>
+
+        <div class="mt-12 p-6 bg-red-100 rounded-lg text-center">
+          <h3 class="text-xl font-bold text-red-800 mb-3">⚠️ Reflexión Final</h3>
+          <p class="text-red-700">
+            Cada vez que compras un rasca, estás comprando un producto que ya tiene determinado 
+            si es ganador o perdedor. No hay habilidad, no hay suerte en el momento de rascar. 
+            <strong>Tu destino ya está sellado cuando lo compras.</strong>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</MainLayout>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  console.log('Simulador de rascas cargando...');
+  
+  // Configuraciones de lotes - CORREGIDAS para RTPs reales
+  const batchConfigs = {
+    budget: {
+      name: 'Económico',
+      price: 1,
+      total: 1000,
+      rtp: 60,
+      prizes: [
+        { amount: 300, count: 1 },    // €300
+        { amount: 50, count: 3 },     // €150  
+        { amount: 10, count: 10 },    // €100
+        { amount: 2, count: 25 }      // €50
+        // Total premios: €600 (60% de €1000)
+        // Beneficio casa: €400 (40%)
+      ]
+    },
+    standard: {
+      name: 'Estándar',
+      price: 2,
+      total: 500,
+      rtp: 70,
+      prizes: [
+        { amount: 400, count: 1 },    // €400
+        { amount: 60, count: 2 },     // €120
+        { amount: 20, count: 5 },     // €100
+        { amount: 4, count: 20 }      // €80
+        // Total premios: €700 (70% de €1000)
+        // Beneficio casa: €300 (30%)
+      ]
+    },
+    premium: {
+      name: 'Premium',
+      price: 5,
+      total: 200,
+      rtp: 75,
+      prizes: [
+        { amount: 500, count: 1 },    // €500
+        { amount: 100, count: 1 },    // €100
+        { amount: 30, count: 3 },     // €90
+        { amount: 10, count: 6 }      // €60
+        // Total premios: €750 (75% de €1000) 
+        // Beneficio casa: €250 (25%)
+      ]
+    }
+  };
+
+  let currentBatch = null;
+  let ticketsSold = 0;
+  let playerStats = {
+    tickets: 0,
+    spent: 0,
+    won: 0
+  };
+
+  // Función para mostrar notificación simple
+  function showAlert(message) {
+    const alertDiv = document.createElement('div');
+    alertDiv.className = 'fixed top-4 right-4 bg-blue-500 text-white p-4 rounded-lg shadow-lg z-50 max-w-sm';
+    alertDiv.textContent = message;
+    document.body.appendChild(alertDiv);
+    
+    setTimeout(() => {
+      if (alertDiv.parentElement) {
+        alertDiv.remove();
+      }
+    }, 4000);
+  }
+
+  // Función para verificar si quedan premios
+  function hayPremiosRestantes() {
+    if (!currentBatch) return false;
+    
+    const remaining = currentBatch.tickets.slice(ticketsSold);
+    return remaining.some(prize => prize > 0);
+  }
+
+  // Función para actualizar estado de botones
+  function actualizarEstadoBotones() {
+    const buttons = ['buyOneBtn', 'buyFiveBtn', 'buyTenBtn', 'buyTwentyBtn'];
+    const hayPremios = hayPremiosRestantes();
+    const loteAgotado = ticketsSold >= currentBatch.total;
+    
+    buttons.forEach(id => {
+      const btn = document.getElementById(id);
+      if (btn) {
+        const shouldDisable = !hayPremios || loteAgotado;
+        btn.disabled = shouldDisable;
+        
+        if (shouldDisable) {
+          btn.classList.add('opacity-50', 'cursor-not-allowed');
+          btn.style.pointerEvents = 'none';
+        } else {
+          btn.classList.remove('opacity-50', 'cursor-not-allowed');
+          btn.style.pointerEvents = 'auto';
+        }
+      }
+    });
+  }
+
+  // Función para seleccionar lote
+  function selectBatch(type) {
+    console.log('Seleccionando lote:', type);
+    
+    // Cambiar estilos visuales
+    document.querySelectorAll('.batch-card').forEach(card => {
+      card.classList.remove('border-blue-500', 'bg-blue-50');
+      card.classList.add('border-gray-200');
+    });
+    
+    const selectedCard = document.getElementById('batch-' + type);
+    if (selectedCard) {
+      selectedCard.classList.remove('border-gray-200');
+      selectedCard.classList.add('border-blue-500', 'bg-blue-50');
+    }
+    
+    // Configurar lote actual
+    currentBatch = Object.assign({}, batchConfigs[type]);
+    
+    // Crear array de tickets mezclados
+    currentBatch.tickets = [];
+    
+    // Añadir tickets ganadores
+    currentBatch.prizes.forEach(prize => {
+      for (let i = 0; i < prize.count; i++) {
+        currentBatch.tickets.push(prize.amount);
+      }
+    });
+    
+    // Añadir tickets perdedores
+    const winningTickets = currentBatch.tickets.length;
+    for (let i = winningTickets; i < currentBatch.total; i++) {
+      currentBatch.tickets.push(0);
+    }
+    
+    // Mezclar tickets
+    for (let i = currentBatch.tickets.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      const temp = currentBatch.tickets[i];
+      currentBatch.tickets[i] = currentBatch.tickets[j];
+      currentBatch.tickets[j] = temp;
+    }
+    
+    // Reiniciar contadores
+    ticketsSold = 0;
+    playerStats = { tickets: 0, spent: 0, won: 0 };
+    
+    // Actualizar UI
+    updateUI();
+    
+    // Mostrar simulador
+    const simulatorSection = document.getElementById('simulatorSection');
+    if (simulatorSection) {
+      simulatorSection.classList.remove('hidden');
+      simulatorSection.scrollIntoView({ behavior: 'smooth' });
+    }
+    
+    showAlert('¡Lote ' + currentBatch.name + ' seleccionado! Ahora puedes comprar rascas.');
+  }
+
+  // Función para actualizar toda la UI
+  function updateUI() {
+    if (!currentBatch) return;
+    
+    // Actualizar información del lote
+    const batchType = document.getElementById('batchType');
+    const ticketPrice = document.getElementById('ticketPrice');
+    const batchRTP = document.getElementById('batchRTP');
+    const ticketsSoldEl = document.getElementById('ticketsSold');
+    const ticketsRemaining = document.getElementById('ticketsRemaining');
+    
+    if (batchType) batchType.textContent = currentBatch.name;
+    if (ticketPrice) ticketPrice.textContent = '€' + currentBatch.price;
+    if (batchRTP) batchRTP.textContent = currentBatch.rtp + '%';
+    if (ticketsSoldEl) ticketsSoldEl.textContent = ticketsSold;
+    if (ticketsRemaining) ticketsRemaining.textContent = currentBatch.total - ticketsSold;
+    
+    // Actualizar estadísticas del jugador
+    const myTickets = document.getElementById('myTickets');
+    const moneySpent = document.getElementById('moneySpent');
+    const moneyWon = document.getElementById('moneyWon');
+    const netBalance = document.getElementById('netBalance');
+    const realRTP = document.getElementById('realRTP');
+    
+    if (myTickets) myTickets.textContent = playerStats.tickets;
+    if (moneySpent) moneySpent.textContent = '€' + playerStats.spent;
+    if (moneyWon) moneyWon.textContent = '€' + playerStats.won;
+    
+    const net = playerStats.won - playerStats.spent;
+    if (netBalance) {
+      netBalance.textContent = '€' + net;
+      netBalance.className = 'font-bold ' + (net >= 0 ? 'text-green-600' : 'text-red-600');
+    }
+    
+    const rtp = playerStats.spent > 0 ? (playerStats.won / playerStats.spent * 100).toFixed(1) : 0;
+    if (realRTP) realRTP.textContent = rtp + '%';
+    
+    // Actualizar barra de progreso
+    const percentage = (ticketsSold / currentBatch.total) * 100;
+    const progressPercentage = document.getElementById('progressPercentage');
+    const progressBar = document.getElementById('progressBar');
+    
+    if (progressPercentage) progressPercentage.textContent = percentage.toFixed(1) + '%';
+    if (progressBar) progressBar.style.width = percentage + '%';
+    
+    // Actualizar premios restantes
+    updateRemainingPrizes();
+    updatePrizeChart();
+    updateBatchStats();
+    
+    // IMPORTANTE: Actualizar estado de botones al final
+    actualizarEstadoBotones();
+  }
+
+  // Función para actualizar premios restantes
+  function updateRemainingPrizes() {
+    if (!currentBatch) return;
+    
+    const remaining = currentBatch.tickets.slice(ticketsSold);
+    const prizeCount = {};
+    
+    remaining.forEach(prize => {
+      if (prize > 0) {
+        prizeCount[prize] = (prizeCount[prize] || 0) + 1;
+      }
+    });
+    
+    const container = document.getElementById('remainingPrizes');
+    if (!container) return;
+    
+    container.innerHTML = '';
+    
+    const sortedPrizes = Object.keys(prizeCount).sort((a, b) => b - a);
+    sortedPrizes.forEach(prize => {
+      const div = document.createElement('div');
+      div.className = 'flex justify-between text-sm';
+      div.innerHTML = '<span class="text-gray-600">€' + prize + ':</span><span class="font-bold text-green-600">' + prizeCount[prize] + ' restantes</span>';
+      container.appendChild(div);
+    });
+    
+    if (sortedPrizes.length === 0) {
+      const div = document.createElement('div');
+      div.className = 'text-red-600 font-bold text-center p-3 bg-red-50 rounded-lg border border-red-200';
+      div.innerHTML = '⚠️ ¡No quedan premios!<br><span class="text-sm font-normal">Solo rascas sin premio</span>';
+      container.appendChild(div);
+    }
+  }
+
+  // Función para actualizar gráfico de premios
+  function updatePrizeChart() {
+    if (!currentBatch) return;
+    
+    const container = document.getElementById('prizeChart');
+    if (!container) return;
+    
+    container.innerHTML = '';
+    
+    currentBatch.prizes.forEach(prize => {
+      const remaining = currentBatch.tickets.slice(ticketsSold).filter(t => t === prize.amount).length;
+      const sold = prize.count - remaining;
+      const percentage = (sold / prize.count) * 100;
+      
+      const div = document.createElement('div');
+      div.innerHTML = '<div class="flex justify-between text-sm mb-1"><span>€' + prize.amount + ' (' + prize.count + ' total)</span><span>' + sold + '/' + prize.count + ' vendidos</span></div><div class="w-full bg-gray-200 rounded-full h-3"><div class="bg-gradient-to-r from-green-500 to-red-500 h-3 rounded-full transition-all duration-300" style="width: ' + percentage + '%"></div></div>';
+      container.appendChild(div);
+    });
+  }
+
+  // Función para actualizar estadísticas del lote
+  function updateBatchStats() {
+    if (!currentBatch) return;
+    
+    const totalRevenue = ticketsSold * currentBatch.price;
+    const totalPaid = currentBatch.tickets.slice(0, ticketsSold).reduce((sum, prize) => sum + prize, 0);
+    const houseProfit = totalRevenue - totalPaid;
+    const currentRealRTP = totalRevenue > 0 ? (totalPaid / totalRevenue * 100).toFixed(1) : 0;
+    
+    const totalRevenueEl = document.getElementById('totalRevenue');
+    const totalPrizesEl = document.getElementById('totalPrizes');
+    const houseProfitEl = document.getElementById('houseProfitCalc');
+    const currentRealRTPEl = document.getElementById('currentRealRTP');
+    
+    if (totalRevenueEl) totalRevenueEl.textContent = '€' + totalRevenue;
+    if (totalPrizesEl) totalPrizesEl.textContent = '€' + totalPaid;
+    if (houseProfitEl) houseProfitEl.textContent = '€' + houseProfit;
+    if (currentRealRTPEl) currentRealRTPEl.textContent = currentRealRTP + '%';
+  }
+
+  // Función para comprar tickets - MEJORADA
+  function buyTickets(count) {
+    if (!currentBatch) {
+      showAlert('¡Primero selecciona un lote!');
+      return;
+    }
+    
+    if (ticketsSold + count > currentBatch.total) {
+      showAlert('¡No quedan suficientes rascas en este lote!');
+      return;
+    }
+    
+    // VERIFICAR SI QUEDAN PREMIOS ANTES DE PERMITIR COMPRA
+    if (!hayPremiosRestantes()) {
+      showAlert('⚠️ ¡Ya no quedan premios en este lote! No puedes comprar más rascas.');
+      return;
+    }
+    
+    const results = [];
+    let totalWon = 0;
+    
+    for (let i = 0; i < count; i++) {
+      const prize = currentBatch.tickets[ticketsSold + i];
+      results.push(prize);
+      totalWon += prize;
+    }
+    
+    // Actualizar estadísticas
+    ticketsSold += count;
+    playerStats.tickets += count;
+    playerStats.spent += count * currentBatch.price;
+    playerStats.won += totalWon;
+    
+    // Mostrar resultados
+    showResults(results, totalWon, count);
+    
+    // Actualizar UI
+    updateUI();
+    
+    // Verificar estado después de la compra
+    if (!hayPremiosRestantes() && ticketsSold < currentBatch.total) {
+      showAlert('🎯 ¡Has encontrado todos los premios! Las ' + (currentBatch.total - ticketsSold) + ' rascas restantes no tienen premio.');
+    }
+  }
+
+  // Función para mostrar resultados
+  function showResults(results, totalWon, count) {
+    const container = document.getElementById('resultDetails');
+    if (!container) return;
+    
+    const cost = count * currentBatch.price;
+    const net = totalWon - cost;
+    
+    container.innerHTML = '';
+    
+    // Resumen
+    const summary = document.createElement('div');
+    summary.className = 'p-4 rounded-lg ' + (net >= 0 ? 'bg-green-100' : 'bg-red-100');
+    summary.innerHTML = '<div class="text-center"><div class="text-lg font-bold ' + (net >= 0 ? 'text-green-800' : 'text-red-800') + '">' + (net >= 0 ? '🎉 ¡Ganancia!' : '💸 Pérdida') + '</div><div class="text-sm text-gray-600">Gastado: €' + cost + ' | Ganado: €' + totalWon + ' | Neto: €' + net + '</div></div>';
+    container.appendChild(summary);
+    
+    // Resultados individuales
+    if (count <= 10) {
+      const details = document.createElement('div');
+      details.innerHTML = '<div class="mt-4 text-sm"><strong>Resultados individuales:</strong></div>';
+      
+      results.forEach((prize, index) => {
+        const div = document.createElement('div');
+        div.className = 'flex justify-between py-1 ' + (prize > 0 ? 'text-green-600 font-bold' : 'text-gray-600');
+        div.innerHTML = '<span>Rasca #' + (index + 1) + ':</span><span>' + (prize > 0 ? '€' + prize + ' 🎉' : 'Sin premio') + '</span>';
+        details.appendChild(div);
+      });
+      
+      container.appendChild(details);
+    }
+    
+    document.getElementById('scratchResult').classList.remove('hidden');
+  }
+
+  // Función para reiniciar lote
+  function resetBatch() {
+    if (currentBatch) {
+      const currentType = Object.keys(batchConfigs).find(key => 
+        batchConfigs[key].name === currentBatch.name
+      );
+      if (currentType) {
+        selectBatch(currentType);
+        document.getElementById('scratchResult').classList.add('hidden');
+      }
+    }
+  }
+
+  // Event listeners
+  document.getElementById('batch-budget').addEventListener('click', () => selectBatch('budget'));
+  document.getElementById('batch-standard').addEventListener('click', () => selectBatch('standard'));
+  document.getElementById('batch-premium').addEventListener('click', () => selectBatch('premium'));
+  
+  document.getElementById('buyOneBtn').addEventListener('click', () => buyTickets(1));
+  document.getElementById('buyFiveBtn').addEventListener('click', () => buyTickets(5));
+  document.getElementById('buyTenBtn').addEventListener('click', () => buyTickets(10));
+  document.getElementById('buyTwentyBtn').addEventListener('click', () => buyTickets(20));
+  
+  document.getElementById('resetBtn').addEventListener('click', resetBatch);
+
+  console.log('Simulador de rascas listo!');
+});
+</script>
+
+<style>
+  .batch-card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  }
+  
+  button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  button:disabled:hover {
+    transform: none !important;
+  }
+  
+  .animate-pulse {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+  
+  @keyframes pulse {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: .5;
+    }
+  }
+</style>

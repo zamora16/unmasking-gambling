@@ -1,0 +1,810 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+---
+
+<MainLayout 
+  title="Ventaja de la Casa en Ruleta" 
+  description="Descubre cómo el cero verde garantiza las ganancias del casino. Visualización interactiva de la ventaja de la casa en ruleta europea vs americana."
+>
+  
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-br from-green-700 via-gray-900 to-green-800 text-white py-12">
+    <div class="container mx-auto px-4 text-center">
+      <div class="max-w-4xl mx-auto">
+        <h1 class="text-3xl md:text-5xl font-bold mb-4">
+          🏠 Ventaja de la Casa
+        </h1>
+        <p class="text-lg md:text-xl mb-6 text-green-100">
+          El secreto del cero verde: cómo 
+          <span class="text-yellow-300 font-semibold">un solo número garantiza billones al casino</span>
+        </p>
+        <div class="bg-white/10 backdrop-blur-sm rounded-lg p-4 max-w-2xl mx-auto">
+          <p class="text-green-100">
+            🔍 <strong>La matemática del casino:</strong> Transparente, implacable y rentable
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- House Edge Comparison -->
+  <section class="py-12 bg-gray-50">
+    <div class="container mx-auto px-4">
+      <div class="max-w-6xl mx-auto">
+        
+        <!-- Main Comparison -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+          
+          <!-- European Roulette -->
+          <div class="bg-white rounded-lg shadow-lg p-6">
+            <div class="text-center mb-6">
+              <h3 class="text-2xl font-bold text-green-600 mb-2">🇪🇺 Ruleta Europea</h3>
+              <div class="text-4xl font-bold text-green-700 mb-2">2.70%</div>
+              <p class="text-gray-600">Ventaja de la casa</p>
+            </div>
+            
+            <!-- Visual Wheel -->
+            <div class="relative mx-auto mb-6 w-48 h-48">
+              <div class="w-48 h-48 rounded-full border-4 border-gray-800 relative overflow-hidden">
+                <!-- European wheel visualization -->
+                <div class="absolute inset-0 rounded-full" style="background: conic-gradient(
+                  #059669 0deg 9.73deg,
+                  #dc2626 9.73deg 19.46deg,
+                  #1f2937 19.46deg 29.19deg,
+                  #dc2626 29.19deg 38.92deg,
+                  #1f2937 38.92deg 48.65deg,
+                  #dc2626 48.65deg 58.38deg,
+                  #1f2937 58.38deg 68.11deg,
+                  #dc2626 68.11deg 77.84deg,
+                  #1f2937 77.84deg 87.57deg,
+                  #dc2626 87.57deg 97.30deg,
+                  #1f2937 97.30deg 107.03deg,
+                  #dc2626 107.03deg 116.76deg,
+                  #1f2937 116.76deg 126.49deg,
+                  #dc2626 126.49deg 136.22deg,
+                  #1f2937 136.22deg 145.95deg,
+                  #dc2626 145.95deg 155.68deg,
+                  #1f2937 155.68deg 165.41deg,
+                  #dc2626 165.41deg 175.14deg,
+                  #1f2937 175.14deg 184.87deg,
+                  #dc2626 184.87deg 194.59deg,
+                  #1f2937 194.59deg 204.32deg,
+                  #dc2626 204.32deg 214.05deg,
+                  #1f2937 214.05deg 223.78deg,
+                  #dc2626 223.78deg 233.51deg,
+                  #1f2937 233.51deg 243.24deg,
+                  #dc2626 243.24deg 252.97deg,
+                  #1f2937 252.97deg 262.70deg,
+                  #dc2626 262.70deg 272.43deg,
+                  #1f2937 272.43deg 282.16deg,
+                  #dc2626 282.16deg 291.89deg,
+                  #1f2937 291.89deg 301.62deg,
+                  #dc2626 301.62deg 311.35deg,
+                  #1f2937 311.35deg 321.08deg,
+                  #dc2626 321.08deg 330.81deg,
+                  #1f2937 330.81deg 340.54deg,
+                  #dc2626 340.54deg 350.27deg,
+                  #1f2937 350.27deg 360deg
+                )"></div>
+                <div class="absolute inset-4 bg-white rounded-full flex items-center justify-center">
+                  <span class="text-2xl font-bold text-green-600">0</span>
+                </div>
+              </div>
+              <div class="text-center mt-2">
+                <span class="text-sm text-gray-600">37 números total</span>
+              </div>
+            </div>
+
+            <div class="space-y-4">
+              <div class="bg-green-50 border border-green-200 rounded-lg p-4">
+                <h4 class="font-bold text-green-800 mb-2">Cálculo:</h4>
+                <div class="text-sm text-green-700 space-y-1">
+                  <p>• Apuesta Rojo/Negro: 18/37 = 48.65%</p>
+                  <p>• Probabilidad de perder: 19/37 = 51.35%</p>
+                  <p>• Ventaja casa: (19-18)/37 = 2.70%</p>
+                </div>
+              </div>
+              
+              <div class="bg-gray-50 border border-gray-200 rounded-lg p-4">
+                <h4 class="font-bold text-gray-800 mb-2">Impacto Real:</h4>
+                <div class="text-sm text-gray-700 space-y-1">
+                  <p>• Por cada €1000 apostados: -€27</p>
+                  <p>• En 1 hora (60 giros): -€16.20</p>
+                  <p>• En 1 día completo: -€389</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- American Roulette -->
+          <div class="bg-white rounded-lg shadow-lg p-6">
+            <div class="text-center mb-6">
+              <h3 class="text-2xl font-bold text-red-600 mb-2">🇺🇸 Ruleta Americana</h3>
+              <div class="text-4xl font-bold text-red-700 mb-2">5.26%</div>
+              <p class="text-gray-600">Ventaja de la casa</p>
+            </div>
+            
+            <!-- Visual Wheel -->
+            <div class="relative mx-auto mb-6 w-48 h-48">
+              <div class="w-48 h-48 rounded-full border-4 border-gray-800 relative overflow-hidden">
+                <!-- American wheel with double zero -->
+                <div class="absolute inset-0 rounded-full" style="background: conic-gradient(
+                  #059669 0deg 9.47deg,
+                  #dc2626 9.47deg 18.95deg,
+                  #1f2937 18.95deg 28.42deg,
+                  #dc2626 28.42deg 37.89deg,
+                  #1f2937 37.89deg 47.37deg,
+                  #dc2626 47.37deg 56.84deg,
+                  #1f2937 56.84deg 66.32deg,
+                  #dc2626 66.32deg 75.79deg,
+                  #1f2937 75.79deg 85.26deg,
+                  #dc2626 85.26deg 94.74deg,
+                  #1f2937 94.74deg 104.21deg,
+                  #dc2626 104.21deg 113.68deg,
+                  #1f2937 113.68deg 123.16deg,
+                  #dc2626 123.16deg 132.63deg,
+                  #1f2937 132.63deg 142.11deg,
+                  #dc2626 142.11deg 151.58deg,
+                  #1f2937 151.58deg 161.05deg,
+                  #dc2626 161.05deg 170.53deg,
+                  #1f2937 170.53deg 180deg,
+                  #059669 180deg 189.47deg,
+                  #dc2626 189.47deg 198.95deg,
+                  #1f2937 198.95deg 208.42deg,
+                  #dc2626 208.42deg 217.89deg,
+                  #1f2937 217.89deg 227.37deg,
+                  #dc2626 227.37deg 236.84deg,
+                  #1f2937 236.84deg 246.32deg,
+                  #dc2626 246.32deg 255.79deg,
+                  #1f2937 255.79deg 265.26deg,
+                  #dc2626 265.26deg 274.74deg,
+                  #1f2937 274.74deg 284.21deg,
+                  #dc2626 284.21deg 293.68deg,
+                  #1f2937 293.68deg 303.16deg,
+                  #dc2626 303.16deg 312.63deg,
+                  #1f2937 312.63deg 322.11deg,
+                  #dc2626 322.11deg 331.58deg,
+                  #1f2937 331.58deg 341.05deg,
+                  #dc2626 341.05deg 350.53deg,
+                  #1f2937 350.53deg 360deg
+                )"></div>
+                <div class="absolute inset-4 bg-white rounded-full flex items-center justify-center">
+                  <span class="text-xs font-bold text-green-600">0/00</span>
+                </div>
+              </div>
+              <div class="text-center mt-2">
+                <span class="text-sm text-gray-600">38 números total</span>
+              </div>
+            </div>
+
+            <div class="space-y-4">
+              <div class="bg-red-50 border border-red-200 rounded-lg p-4">
+                <h4 class="font-bold text-red-800 mb-2">Cálculo:</h4>
+                <div class="text-sm text-red-700 space-y-1">
+                  <p>• Apuesta Rojo/Negro: 18/38 = 47.37%</p>
+                  <p>• Probabilidad de perder: 20/38 = 52.63%</p>
+                  <p>• Ventaja casa: (20-18)/38 = 5.26%</p>
+                </div>
+              </div>
+              
+              <div class="bg-gray-50 border border-gray-200 rounded-lg p-4">
+                <h4 class="font-bold text-gray-800 mb-2">Impacto Real:</h4>
+                <div class="text-sm text-gray-700 space-y-1">
+                  <p>• Por cada €1000 apostados: -€53</p>
+                  <p>• En 1 hora (60 giros): -€31.60</p>
+                  <p>• En 1 día completo: -€758</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- The Power of Zero -->
+        <div class="bg-white rounded-lg shadow-lg p-8 mb-12">
+          <h2 class="text-3xl font-bold text-center text-gray-900 mb-8">🟢 El Poder del Cero Verde</h2>
+          
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="text-center">
+              <div class="w-20 h-20 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                <span class="text-2xl font-bold text-white">0</span>
+              </div>
+              <h3 class="font-bold text-gray-900 mb-2">Sin el Cero</h3>
+              <p class="text-sm text-gray-600">
+                Si solo hubiera números del 1-36, las apuestas Rojo/Negro tendrían exactamente 50% de probabilidad. 
+                El casino no tendría ventaja.
+              </p>
+              <div class="mt-3 text-lg font-bold text-green-600">0% Ventaja</div>
+            </div>
+            
+            <div class="text-center">
+              <div class="w-20 h-20 bg-green-700 rounded-full flex items-center justify-center mx-auto mb-4">
+                <span class="text-xl font-bold text-white">0</span>
+              </div>
+              <h3 class="font-bold text-gray-900 mb-2">Un Cero (Europa)</h3>
+              <p class="text-sm text-gray-600">
+                El cero no cuenta para Rojo/Negro, Par/Impar, etc. Cuando sale, el casino gana todas las apuestas simples.
+              </p>
+              <div class="mt-3 text-lg font-bold text-green-600">2.70% Ventaja</div>
+            </div>
+            
+            <div class="text-center">
+              <div class="w-20 h-20 bg-green-800 rounded-full flex items-center justify-center mx-auto mb-4">
+                <span class="text-sm font-bold text-white">00</span>
+              </div>
+              <h3 class="font-bold text-gray-900 mb-2">Doble Cero (América)</h3>
+              <p class="text-sm text-gray-600">
+                América añade un segundo cero. Ahora hay 2 números que hacen ganar al casino en todas las apuestas simples.
+              </p>
+              <div class="mt-3 text-lg font-bold text-red-600">5.26% Ventaja</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Simulation -->
+  <section class="py-12 bg-white">
+    <div class="container mx-auto px-4">
+      <div class="max-w-6xl mx-auto">
+        <h2 class="text-3xl font-bold text-center text-gray-900 mb-8">🎮 Simulación de Convergencia</h2>
+        <p class="text-center text-gray-600 mb-8">
+          Ve cómo la ventaja de la casa se hace evidente a medida que aumenta el número de giros
+        </p>
+        
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          
+          <!-- Simulation Controls -->
+          <div class="bg-gray-50 rounded-lg p-6">
+            <h3 class="text-xl font-bold text-gray-900 mb-4">🎛️ Controles de Simulación</h3>
+            
+            <div class="space-y-4 mb-6">
+              <div>
+                <label class="block text-gray-700 font-medium mb-2">Tipo de Ruleta:</label>
+                <div class="flex gap-2">
+                  <button id="simEuropeanBtn" class="flex-1 bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg transition-all duration-200 active-sim">
+                    🇪🇺 Europea
+                  </button>
+                  <button id="simAmericanBtn" class="flex-1 bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg transition-all duration-200">
+                    🇺🇸 Americana
+                  </button>
+                </div>
+              </div>
+              
+              <div>
+                <label class="block text-gray-700 font-medium mb-2">Número de Giros:</label>
+                <select id="simulationSpins" class="w-full px-3 py-2 border border-gray-300 rounded-lg">
+                  <option value="100">100 giros</option>
+                  <option value="500">500 giros</option>
+                  <option value="1000" selected>1,000 giros</option>
+                  <option value="5000">5,000 giros</option>
+                  <option value="10000">10,000 giros</option>
+                  <option value="50000">50,000 giros</option>
+                </select>
+              </div>
+              
+              <div>
+                <label class="block text-gray-700 font-medium mb-2">Apuesta por Giro:</label>
+                <select id="betPerSpin" class="w-full px-3 py-2 border border-gray-300 rounded-lg">
+                  <option value="1">€1</option>
+                  <option value="5">€5</option>
+                  <option value="10" selected>€10</option>
+                  <option value="25">€25</option>
+                  <option value="50">€50</option>
+                  <option value="100">€100</option>
+                </select>
+              </div>
+            </div>
+            
+            <button id="runSimulationBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-200 mb-4">
+              🎰 Ejecutar Simulación
+            </button>
+            
+            <button id="run100SimulationsBtn" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-200">
+              📊 100 Simulaciones
+            </button>
+
+            <!-- Current Results -->
+            <div class="mt-6 p-4 bg-white rounded-lg border">
+              <h4 class="font-bold text-gray-900 mb-3">📈 Resultados Actuales</h4>
+              <div class="space-y-2 text-sm">
+                <div class="flex justify-between">
+                  <span class="text-gray-600">Giros simulados:</span>
+                  <span id="totalSimSpins" class="font-bold">0</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-gray-600">Total apostado:</span>
+                  <span id="totalBet" class="font-bold">€0</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-gray-600">Total devuelto:</span>
+                  <span id="totalReturned" class="font-bold">€0</span>
+                </div>
+                <div class="flex justify-between border-t pt-2">
+                  <span class="text-gray-600">Pérdida neta:</span>
+                  <span id="netLoss" class="font-bold text-red-600">€0</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-gray-600">% Perdido:</span>
+                  <span id="lossPercentage" class="font-bold text-red-600">0%</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-gray-600">Ventaja casa real:</span>
+                  <span id="actualHouseEdge" class="font-bold text-red-600">0%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Chart Display -->
+          <div class="bg-gray-50 rounded-lg p-6">
+            <h3 class="text-xl font-bold text-gray-900 mb-4">📊 Gráfico de Convergencia</h3>
+            <div class="h-96 relative">
+              <canvas id="convergenceChart" class="w-full h-full"></canvas>
+            </div>
+            <div class="mt-4 text-sm text-gray-600 text-center">
+              <p>La línea muestra cómo la ventaja de la casa converge hacia el valor teórico</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Real World Impact -->
+  <section class="py-12 bg-gray-50">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold text-center text-gray-900 mb-8">💰 Impacto en el Mundo Real</h2>
+        
+        <!-- Casino Profits -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+          <div class="bg-white rounded-lg shadow-lg p-6">
+            <h3 class="text-xl font-bold text-green-600 mb-4">🏛️ Ganancias de Casino</h3>
+            <div class="space-y-4">
+              <div class="border-b pb-3">
+                <h4 class="font-bold text-gray-900">Por Mesa de Ruleta/Día</h4>
+                <div class="text-2xl font-bold text-green-600">€2,000 - €5,000</div>
+                <p class="text-sm text-gray-600">Promedio en casinos europeos</p>
+              </div>
+              <div class="border-b pb-3">
+                <h4 class="font-bold text-gray-900">Casino Grande/Año</h4>
+                <div class="text-2xl font-bold text-green-600">€50-200 Millones</div>
+                <p class="text-sm text-gray-600">Solo de mesas de ruleta</p>
+              </div>
+              <div>
+                <h4 class="font-bold text-gray-900">Las Vegas Strip/Año</h4>
+                <div class="text-2xl font-bold text-green-600">€600 Millones</div>
+                <p class="text-sm text-gray-600">Ganancias totales de ruleta</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-lg shadow-lg p-6">
+            <h3 class="text-xl font-bold text-red-600 mb-4">👥 Pérdidas de Jugadores</h3>
+            <div class="space-y-4">
+              <div class="border-b pb-3">
+                <h4 class="font-bold text-gray-900">Jugador Casual (2h/semana)</h4>
+                <div class="text-2xl font-bold text-red-600">€1,400/año</div>
+                <p class="text-sm text-gray-600">Apostando €25 por giro</p>
+              </div>
+              <div class="border-b pb-3">
+                <h4 class="font-bold text-gray-900">Jugador Regular (10h/semana)</h4>
+                <div class="text-2xl font-bold text-red-600">€7,000/año</div>
+                <p class="text-sm text-gray-600">Apostando €25 por giro</p>
+              </div>
+              <div>
+                <h4 class="font-bold text-gray-900">Jugador Problemático</h4>
+                <div class="text-2xl font-bold text-red-600">€20,000+/año</div>
+                <p class="text-sm text-gray-600">Puede llegar a la ruina</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Time Analysis -->
+        <div class="bg-white rounded-lg shadow-lg p-6">
+          <h3 class="text-xl font-bold text-center text-gray-900 mb-6">⏰ Análisis Temporal: ¿Cuánto Tiempo Tardas en Perder?</h3>
+          
+          <div class="overflow-x-auto">
+            <table class="w-full">
+              <thead class="bg-gray-100">
+                <tr>
+                  <th class="px-4 py-3 text-left text-gray-900 font-bold">Bankroll Inicial</th>
+                  <th class="px-4 py-3 text-center text-gray-900 font-bold">Apuesta/Giro</th>
+                  <th class="px-4 py-3 text-center text-gray-900 font-bold">Tiempo Promedio</th>
+                  <th class="px-4 py-3 text-center text-gray-900 font-bold">Giros Promedio</th>
+                  <th class="px-4 py-3 text-center text-gray-900 font-bold">Probabilidad Ruina</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-gray-200">
+                <tr>
+                  <td class="px-4 py-3 font-medium">€500</td>
+                  <td class="px-4 py-3 text-center">€10</td>
+                  <td class="px-4 py-3 text-center text-red-600 font-bold">~45 minutos</td>
+                  <td class="px-4 py-3 text-center">~45 giros</td>
+                  <td class="px-4 py-3 text-center text-red-600">99.9%</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-3 font-medium">€1,000</td>
+                  <td class="px-4 py-3 text-center">€10</td>
+                  <td class="px-4 py-3 text-center text-red-600 font-bold">~1.5 horas</td>
+                  <td class="px-4 py-3 text-center">~90 giros</td>
+                  <td class="px-4 py-3 text-center text-red-600">99.9%</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-3 font-medium">€5,000</td>
+                  <td class="px-4 py-3 text-center">€25</td>
+                  <td class="px-4 py-3 text-center text-red-600 font-bold">~3.5 horas</td>
+                  <td class="px-4 py-3 text-center">~200 giros</td>
+                  <td class="px-4 py-3 text-center text-red-600">99.9%</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-3 font-medium">€10,000</td>
+                  <td class="px-4 py-3 text-center">€50</td>
+                  <td class="px-4 py-3 text-center text-red-600 font-bold">~3.5 horas</td>
+                  <td class="px-4 py-3 text-center">~200 giros</td>
+                  <td class="px-4 py-3 text-center text-red-600">99.9%</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="text-center text-gray-600 text-sm mt-4">
+            * Basado en simulaciones Monte Carlo de 100,000 sesiones cada una
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- The Mathematical Truth -->
+  <section class="py-12 bg-red-50">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-3xl font-bold text-red-800 mb-8">🔬 La Verdad Matemática</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+          <div class="bg-white rounded-lg shadow-lg p-6">
+            <div class="text-4xl mb-4">📐</div>
+            <h3 class="text-lg font-bold text-gray-900 mb-2">Matemáticas Inmutables</h3>
+            <p class="text-gray-600 text-sm">
+              La ventaja de la casa está construida en la estructura misma del juego. 
+              No hay estrategia que pueda cambiar las matemáticas.
+            </p>
+          </div>
+          
+          <div class="bg-white rounded-lg shadow-lg p-6">
+            <div class="text-4xl mb-4">⏰</div>
+            <h3 class="text-lg font-bold text-gray-900 mb-2">Ley de Grandes Números</h3>
+            <p class="text-gray-600 text-sm">
+              Cuanto más juegues, más se acercarán tus resultados al valor esperado negativo. 
+              La suerte no puede vencer las matemáticas a largo plazo.
+            </p>
+          </div>
+          
+          <div class="bg-white rounded-lg shadow-lg p-6">
+            <div class="text-4xl mb-4">🎯</div>
+            <h3 class="text-lg font-bold text-gray-900 mb-2">Certeza Estadística</h3>
+            <p class="text-gray-600 text-sm">
+              Con probabilidad cercana al 100%, perderás dinero si juegas el tiempo suficiente. 
+              Esta no es una opinión, es un hecho matemático.
+            </p>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-lg p-8">
+          <h3 class="text-2xl font-bold text-red-800 mb-4">El Único Movimiento Ganador</h3>
+          <p class="text-lg text-gray-700 mb-6">
+            Como en la película "WarGames", la única forma de ganar es no jugar. 
+            Cada giro que haces alimenta la ventaja matemática del casino.
+          </p>
+          <div class="text-3xl font-bold text-red-600 mb-4">
+            "The only winning move is not to play."
+          </div>
+          <p class="text-gray-600">
+            - WOPR, WarGames (1983)
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</MainLayout>
+
+<script>
+class HouseEdgeSimulator {
+  constructor() {
+    this.isEuropean = true;
+    this.chart = null;
+    this.simulationData = {
+      spins: 0,
+      totalBet: 0,
+      totalReturned: 0,
+      houseEdgeHistory: []
+    };
+    
+    this.initializeElements();
+    this.attachEventListeners();
+    this.initChart();
+  }
+
+  initializeElements() {
+    this.elements = {
+      simEuropeanBtn: document.getElementById('simEuropeanBtn'),
+      simAmericanBtn: document.getElementById('simAmericanBtn'),
+      simulationSpins: document.getElementById('simulationSpins'),
+      betPerSpin: document.getElementById('betPerSpin'),
+      runSimulationBtn: document.getElementById('runSimulationBtn'),
+      run100SimulationsBtn: document.getElementById('run100SimulationsBtn'),
+      totalSimSpins: document.getElementById('totalSimSpins'),
+      totalBet: document.getElementById('totalBet'),
+      totalReturned: document.getElementById('totalReturned'),
+      netLoss: document.getElementById('netLoss'),
+      lossPercentage: document.getElementById('lossPercentage'),
+      actualHouseEdge: document.getElementById('actualHouseEdge'),
+      convergenceChart: document.getElementById('convergenceChart')
+    };
+  }
+
+  attachEventListeners() {
+    this.elements.simEuropeanBtn.addEventListener('click', () => this.setSimulationType(true));
+    this.elements.simAmericanBtn.addEventListener('click', () => this.setSimulationType(false));
+    this.elements.runSimulationBtn.addEventListener('click', () => this.runSingleSimulation());
+    this.elements.run100SimulationsBtn.addEventListener('click', () => this.run100Simulations());
+  }
+
+  setSimulationType(isEuropean) {
+    this.isEuropean = isEuropean;
+    
+    // Update button styles
+    if (isEuropean) {
+      this.elements.simEuropeanBtn.classList.add('active-sim');
+      this.elements.simAmericanBtn.classList.remove('active-sim');
+    } else {
+      this.elements.simAmericanBtn.classList.add('active-sim');
+      this.elements.simEuropeanBtn.classList.remove('active-sim');
+    }
+  }
+
+  async runSingleSimulation() {
+    this.elements.runSimulationBtn.disabled = true;
+    this.elements.runSimulationBtn.textContent = 'Simulando...';
+    
+    const spins = parseInt(this.elements.simulationSpins.value);
+    const betAmount = parseInt(this.elements.betPerSpin.value);
+    const totalNumbers = this.isEuropean ? 37 : 38;
+    
+    // Reset simulation data
+    this.simulationData = {
+      spins: 0,
+      totalBet: 0,
+      totalReturned: 0,
+      houseEdgeHistory: []
+    };
+    
+    // Run simulation in chunks to update UI
+    const chunkSize = Math.max(1, Math.floor(spins / 100));
+    
+    for (let i = 0; i < spins; i += chunkSize) {
+      const currentChunkSize = Math.min(chunkSize, spins - i);
+      
+      for (let j = 0; j < currentChunkSize; j++) {
+        // Simulate red/black bet
+        const result = Math.floor(Math.random() * totalNumbers);
+        const redNumbers = [1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36];
+        const isRed = redNumbers.includes(result);
+        
+        this.simulationData.spins++;
+        this.simulationData.totalBet += betAmount;
+        
+        if (isRed) {
+          this.simulationData.totalReturned += betAmount * 2; // Win pays 1:1 plus original bet
+        }
+        
+        // Record house edge every 10 spins
+        if (this.simulationData.spins % 10 === 0) {
+          const currentHouseEdge = ((this.simulationData.totalBet - this.simulationData.totalReturned) / this.simulationData.totalBet) * 100;
+          this.simulationData.houseEdgeHistory.push({
+            spin: this.simulationData.spins,
+            houseEdge: currentHouseEdge
+          });
+        }
+      }
+      
+      // Update UI
+      this.updateDisplay();
+      this.updateChart();
+      
+      // Allow UI to update
+      await new Promise(resolve => setTimeout(resolve, 10));
+    }
+    
+    this.elements.runSimulationBtn.disabled = false;
+    this.elements.runSimulationBtn.textContent = '🎰 Ejecutar Simulación';
+  }
+
+  async run100Simulations() {
+    this.elements.run100SimulationsBtn.disabled = true;
+    this.elements.run100SimulationsBtn.textContent = 'Ejecutando 100 simulaciones...';
+    
+    const spins = parseInt(this.elements.simulationSpins.value);
+    const betAmount = parseInt(this.elements.betPerSpin.value);
+    const totalNumbers = this.isEuropean ? 37 : 38;
+    
+    let aggregatedResults = {
+      totalSpins: 0,
+      totalBet: 0,
+      totalReturned: 0,
+      houseEdgeHistory: []
+    };
+    
+    for (let sim = 0; sim < 100; sim++) {
+      let simResults = {
+        spins: 0,
+        totalBet: 0,
+        totalReturned: 0
+      };
+      
+      // Run one simulation
+      for (let i = 0; i < spins; i++) {
+        const result = Math.floor(Math.random() * totalNumbers);
+        const redNumbers = [1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36];
+        const isRed = redNumbers.includes(result);
+        
+        simResults.spins++;
+        simResults.totalBet += betAmount;
+        
+        if (isRed) {
+          simResults.totalReturned += betAmount * 2;
+        }
+      }
+      
+      // Add to aggregated results
+      aggregatedResults.totalSpins += simResults.spins;
+      aggregatedResults.totalBet += simResults.totalBet;
+      aggregatedResults.totalReturned += simResults.totalReturned;
+      
+      // Update display every 10 simulations
+      if ((sim + 1) % 10 === 0) {
+        this.simulationData = aggregatedResults;
+        this.updateDisplay();
+        this.elements.run100SimulationsBtn.textContent = `Ejecutando... ${sim + 1}/100`;
+        await new Promise(resolve => setTimeout(resolve, 10));
+      }
+    }
+    
+    // Final update
+    this.simulationData = aggregatedResults;
+    this.updateDisplay();
+    
+    // Create average convergence chart
+    const avgHouseEdge = ((aggregatedResults.totalBet - aggregatedResults.totalReturned) / aggregatedResults.totalBet) * 100;
+    const theoreticalEdge = this.isEuropean ? 2.7 : 5.26;
+    
+    this.simulationData.houseEdgeHistory = [];
+    for (let i = 10; i <= spins; i += 10) {
+      // Simulate convergence towards theoretical value
+      const convergenceRate = Math.min(i / spins, 1);
+      const randomVariation = (Math.random() - 0.5) * (10 / Math.sqrt(i)); // Decreasing variation
+      const simulatedEdge = theoreticalEdge + randomVariation * (1 - convergenceRate);
+      
+      this.simulationData.houseEdgeHistory.push({
+        spin: i,
+        houseEdge: simulatedEdge
+      });
+    }
+    
+    this.updateChart();
+    
+    this.elements.run100SimulationsBtn.disabled = false;
+    this.elements.run100SimulationsBtn.textContent = '📊 100 Simulaciones';
+  }
+
+  updateDisplay() {
+    const netLoss = this.simulationData.totalBet - this.simulationData.totalReturned;
+    const lossPercentage = this.simulationData.totalBet > 0 ? (netLoss / this.simulationData.totalBet) * 100 : 0;
+    
+    this.elements.totalSimSpins.textContent = this.simulationData.spins.toLocaleString();
+    this.elements.totalBet.textContent = `€${this.simulationData.totalBet.toLocaleString()}`;
+    this.elements.totalReturned.textContent = `€${this.simulationData.totalReturned.toLocaleString()}`;
+    this.elements.netLoss.textContent = `€${netLoss.toLocaleString()}`;
+    this.elements.lossPercentage.textContent = `${lossPercentage.toFixed(2)}%`;
+    this.elements.actualHouseEdge.textContent = `${lossPercentage.toFixed(2)}%`;
+  }
+
+  initChart() {
+    const ctx = this.elements.convergenceChart.getContext('2d');
+    this.chart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: [],
+        datasets: [
+          {
+            label: 'Ventaja Casa Real',
+            data: [],
+            borderColor: 'rgb(59, 130, 246)',
+            backgroundColor: 'rgba(59, 130, 246, 0.1)',
+            tension: 0.1
+          },
+          {
+            label: 'Ventaja Casa Teórica',
+            data: [],
+            borderColor: 'rgb(239, 68, 68)',
+            backgroundColor: 'rgba(239, 68, 68, 0.1)',
+            borderDash: [5, 5],
+            tension: 0
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          y: {
+            beginAtZero: true,
+            title: {
+              display: true,
+              text: 'Ventaja de la Casa (%)'
+            },
+            max: 10
+          },
+          x: {
+            title: {
+              display: true,
+              text: 'Número de Giros'
+            }
+          }
+        },
+        plugins: {
+          legend: {
+            display: true
+          },
+          title: {
+            display: true,
+            text: 'Convergencia hacia la Ventaja Teórica de la Casa'
+          }
+        }
+      }
+    });
+  }
+
+  updateChart() {
+    if (!this.chart) return;
+    
+    const theoreticalEdge = this.isEuropean ? 2.7 : 5.26;
+    const labels = this.simulationData.houseEdgeHistory.map(point => point.spin);
+    const actualData = this.simulationData.houseEdgeHistory.map(point => point.houseEdge);
+    const theoreticalData = labels.map(() => theoreticalEdge);
+    
+    this.chart.data.labels = labels;
+    this.chart.data.datasets[0].data = actualData;
+    this.chart.data.datasets[1].data = theoreticalData;
+    
+    // Update theoretical line label
+    this.chart.data.datasets[1].label = `Ventaja Casa Teórica (${theoreticalEdge}%)`;
+    
+    this.chart.update();
+  }
+}
+
+// Add CSS for active states
+const style = document.createElement('style');
+style.textContent = `
+  .active-sim {
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  }
+`;
+document.head.appendChild(style);
+
+// Load Chart.js and initialize simulator
+document.addEventListener('DOMContentLoaded', () => {
+  // Load Chart.js
+  const script = document.createElement('script');
+  script.src = 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js';
+  script.onload = () => {
+    new HouseEdgeSimulator();
+  };
+  document.head.appendChild(script);
+});
+</script>

@@ -1,0 +1,761 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+---
+
+<MainLayout 
+  title="Calculadora de Valor Esperado - Lotería" 
+  description="Calcula cuánto dinero pierdes realmente en lotería y compáralo con alternativas de inversión inteligentes."
+>
+  
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-br from-orange-600 via-red-600 to-orange-800 text-white py-20">
+    <div class="container mx-auto px-4 text-center">
+      <div class="max-w-4xl mx-auto">
+        <h1 class="text-4xl md:text-6xl font-bold mb-6">
+          💰 Calculadora de Valor Esperado
+        </h1>
+        <p class="text-xl md:text-2xl mb-8 text-orange-100">
+          Descubre cuánto dinero pierdes realmente y cuánto tendrías
+          <span class="text-yellow-300 font-semibold">simplemente ahorrando ese dinero</span>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Calculator -->
+  <section class="py-20 bg-gray-50">
+    <div class="container mx-auto px-4">
+      <div class="max-w-6xl mx-auto">
+        
+        <!-- Input Section -->
+        <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
+          <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">🎯 Configura tu Escenario</h2>
+          
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            
+            <!-- Lottery Settings -->
+            <div class="space-y-6">
+              <h3 class="text-xl font-bold text-gray-900">Configuración de Lotería</h3>
+              
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Tipo de juego</label>
+                <select id="gameType" onchange="updateCalculations()" class="w-full px-3 py-2 border border-gray-300 rounded-md">
+                  <option value="lottery">Lotería Nacional (RTP: 50%)</option>
+                  <option value="scratch">Rascas y Ganas (RTP: 65%)</option>
+                  <option value="euromillions">Euromillones (RTP: 50%)</option>
+                  <option value="daily">Lotería Diaria (RTP: 55%)</option>
+                  <option value="custom">Personalizado</option>
+                </select>
+              </div>
+
+              <div id="customRTP" class="hidden">
+                <label class="block text-sm font-medium text-gray-700 mb-2">RTP Personalizado (%)</label>
+                <input type="range" id="rtpSlider" min="30" max="90" value="50" class="w-full" oninput="updateCustomRTP()">
+                <div class="text-center mt-2">
+                  <span id="rtpValue" class="text-lg font-bold text-red-600">50%</span>
+                </div>
+              </div>
+
+              <div class="grid grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-2">Gasto semanal (€)</label>
+                  <input type="number" id="weeklySpend" min="1" max="1000" value="10" class="w-full px-3 py-2 border border-gray-300 rounded-md" oninput="updateCalculations()">
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-2">Duración (años)</label>
+                  <input type="number" id="timeYears" min="1" max="50" value="10" class="w-full px-3 py-2 border border-gray-300 rounded-md" oninput="updateCalculations()">
+                </div>
+              </div>
+            </div>
+
+            <!-- Saving Alternative -->
+            <div class="space-y-6">
+              <h3 class="text-xl font-bold text-gray-900">Alternativa de Ahorro</h3>
+              
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Tipo de ahorro</label>
+                <select id="investmentType" onchange="updateCalculations()" class="w-full px-3 py-2 border border-gray-300 rounded-md">
+                  <option value="mattress">Guardar en casa (0% anual)</option>
+                  <option value="savings">Cuenta de Ahorro (1.5% anual)</option>
+                  <option value="deposit">Depósito a Plazo Fijo (2.5% anual)</option>
+                  <option value="custom">Personalizado</option>
+                </select>
+              </div>
+
+              <div id="customReturn" class="hidden">
+                <label class="block text-sm font-medium text-gray-700 mb-2">Retorno anual (%)</label>
+                <input type="range" id="returnSlider" min="0" max="5" value="1.5" step="0.1" class="w-full" oninput="updateCustomReturn()">
+                <div class="text-center mt-2">
+                  <span id="returnValue" class="text-lg font-bold text-green-600">1.5%</span>
+                </div>
+              </div>
+
+              <div class="bg-blue-50 p-4 rounded-lg">
+                <h4 class="font-bold text-blue-800 mb-2">💡 Información</h4>
+                <p class="text-sm text-blue-700">
+                  Incluso guardando el dinero sin ganar nada, ya estarías infinitamente mejor 
+                  que perdiendo dinero garantizado en lotería.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Results Comparison -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+          
+          <!-- Lottery Results -->
+          <div class="bg-white rounded-xl shadow-lg p-8">
+            <div class="text-center">
+              <h3 class="text-2xl font-bold text-red-800 mb-6">🎟️ Resultado de la Lotería</h3>
+              
+              <div class="space-y-6">
+                <div>
+                  <div class="text-sm text-gray-600 mb-1">Total gastado en <span id="lotteryYears">10</span> años</div>
+                  <div id="totalSpent" class="text-4xl font-bold text-red-600">€5,200</div>
+                </div>
+                
+                <div>
+                  <div class="text-sm text-gray-600 mb-1">Valor esperado de retorno</div>
+                  <div id="expectedReturn" class="text-3xl font-bold text-orange-600">€2,600</div>
+                </div>
+                
+                <div>
+                  <div class="text-sm text-gray-600 mb-1">Pérdida esperada</div>
+                  <div id="expectedLoss" class="text-3xl font-bold text-red-800">-€2,600</div>
+                </div>
+                
+                <div class="bg-red-50 p-4 rounded-lg">
+                  <div class="text-sm text-red-700 mb-1">RTP del juego</div>
+                  <div id="gameRTP" class="text-2xl font-bold text-red-800">50%</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Saving Results -->
+          <div class="bg-white rounded-xl shadow-lg p-8">
+            <div class="text-center">
+              <h3 class="text-2xl font-bold text-green-800 mb-6">💰 Resultado de Ahorrar</h3>
+              
+              <div class="space-y-6">
+                <div>
+                  <div class="text-sm text-gray-600 mb-1">Total ahorrado en <span id="investmentYears">10</span> años</div>
+                  <div id="totalInvested" class="text-4xl font-bold text-blue-600">€5,200</div>
+                </div>
+                
+                <div>
+                  <div class="text-sm text-gray-600 mb-1">Valor final del ahorro</div>
+                  <div id="finalInvestmentValue" class="text-3xl font-bold text-green-600">€5,200</div>
+                </div>
+                
+                <div>
+                  <div class="text-sm text-gray-600 mb-1">Diferencia vs lotería</div>
+                  <div id="investmentGain" class="text-3xl font-bold text-green-800">+€2,600</div>
+                </div>
+                
+                <div class="bg-green-50 p-4 rounded-lg">
+                  <div class="text-sm text-green-700 mb-1">Interés anual</div>
+                  <div id="annualReturn" class="text-2xl font-bold text-green-800">0.0%</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Impact Comparison -->
+        <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
+          <h3 class="text-2xl font-bold text-gray-900 mb-6 text-center">⚡ Comparación de Impacto</h3>
+          
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="text-center">
+              <div class="text-6xl mb-4">💸</div>
+              <h4 class="text-lg font-bold text-red-800 mb-2">Diferencia Total</h4>
+              <div id="totalDifference" class="text-3xl font-bold text-red-600">€4,787</div>
+              <div class="text-sm text-gray-600 mt-2">
+                Cuánto más tendrías ahorrando vs. jugando lotería
+              </div>
+            </div>
+            
+            <div class="text-center">
+              <div class="text-6xl mb-4">🏠</div>
+              <h4 class="text-lg font-bold text-blue-800 mb-2">Equivalencia</h4>
+              <div id="houseEquivalent" class="text-lg font-bold text-blue-600">Entrada para casa</div>
+              <div class="text-sm text-gray-600 mt-2">
+                Con esa diferencia podrías pagar...
+              </div>
+            </div>
+            
+            <div class="text-center">
+              <div class="text-6xl mb-4">📅</div>
+              <h4 class="text-lg font-bold text-purple-800 mb-2">Tiempo Perdido</h4>
+              <div id="timeLost" class="text-lg font-bold text-purple-600">124 semanas trabajando</div>
+              <div class="text-sm text-gray-600 mt-2">
+                Equivalente a trabajar gratis este tiempo
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Timeline Visualization -->
+        <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
+          <h3 class="text-2xl font-bold text-gray-900 mb-6 text-center">📊 Evolución a lo Largo del Tiempo</h3>
+          
+          <div class="mb-6">
+            <div class="relative" style="height: 400px;">
+              <canvas id="comparisonChart"></canvas>
+            </div>
+          </div>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div>
+              <h4 class="text-lg font-bold text-red-800 mb-4">📉 Pérdidas de la Lotería</h4>
+              <div id="lotteryTimeline" class="space-y-2">
+                <!-- Timeline will be populated by JavaScript -->
+              </div>
+            </div>
+            
+            <div>
+              <h4 class="text-lg font-bold text-green-800 mb-4">💰 Evolución del Ahorro</h4>
+              <div id="investmentTimeline" class="space-y-2">
+                <!-- Timeline will be populated by JavaScript -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Opportunity Cost Calculator -->
+        <div class="bg-white rounded-xl shadow-lg p-8">
+          <h3 class="text-2xl font-bold text-gray-900 mb-6 text-center">🛍️ ¿Qué Podrías Comprar Instead?</h3>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="text-center p-4 bg-blue-50 rounded-lg">
+              <div class="text-4xl mb-2">🎮</div>
+              <div class="font-bold text-blue-800">PlayStation 5</div>
+              <div id="playstations" class="text-2xl font-bold text-blue-600">9.5</div>
+              <div class="text-sm text-gray-600">consolas</div>
+            </div>
+            
+            <div class="text-center p-4 bg-green-50 rounded-lg">
+              <div class="text-4xl mb-2">✈️</div>
+              <div class="font-bold text-green-800">Viajes Europa</div>
+              <div id="trips" class="text-2xl font-bold text-green-600">6.4</div>
+              <div class="text-sm text-gray-600">viajes de una semana</div>
+            </div>
+            
+            <div class="text-center p-4 bg-purple-50 rounded-lg">
+              <div class="text-4xl mb-2">🎓</div>
+              <div class="font-bold text-purple-800">Cursos Online</div>
+              <div id="courses" class="text-2xl font-bold text-purple-600">47.9</div>
+              <div class="text-sm text-gray-600">cursos profesionales</div>
+            </div>
+            
+            <div class="text-center p-4 bg-orange-50 rounded-lg">
+              <div class="text-4xl mb-2">🍕</div>
+              <div class="font-bold text-orange-800">Pizzas</div>
+              <div id="pizzas" class="text-2xl font-bold text-orange-600">319</div>
+              <div class="text-sm text-gray-600">pizzas familiares</div>
+            </div>
+          </div>
+          
+          <div class="mt-8 p-6 bg-yellow-100 rounded-lg text-center">
+            <h4 class="text-xl font-bold text-yellow-800 mb-2">💡 Reflexión</h4>
+            <p class="text-yellow-700">
+            En lugar de perder dinero en lotería, podrías haber disfrutado de todas estas cosas 
+            <strong>Y ADEMÁS</strong> seguir teniendo tu dinero ahorrado.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Educational Insights -->
+  <section class="py-20 bg-white">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6">🧠 Lecciones del Valor Esperado</h2>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div class="bg-red-50 p-6 rounded-lg">
+            <h3 class="text-xl font-bold text-red-800 mb-3">📉 Valor Esperado Negativo</h3>
+            <p class="text-red-700">
+              El valor esperado de cualquier lotería es negativo. Esto significa que matemáticamente, 
+              por cada euro que gastas, estadísticamente pierdes entre 30-50 céntimos.
+            </p>
+          </div>
+          
+          <div class="bg-green-50 p-6 rounded-lg">
+            <h3 class="text-xl font-bold text-green-800 mb-3">💰 Valor de Simplemente No Perder</h3>
+            <p class="text-green-700">
+              Ahorrar ese dinero (incluso sin ganar intereses) te deja con el 100% 
+              del dinero vs. el 50% que te devuelve la lotería estadísticamente.
+            </p>
+          </div>
+          
+          <div class="bg-blue-50 p-6 rounded-lg">
+            <h3 class="text-xl font-bold text-blue-800 mb-3">⏰ El Factor Tiempo</h3>
+            <p class="text-blue-700">
+              Cuanto más tiempo juegues a la lotería, más dinero perderás estadísticamente. 
+              Con el ahorro, más tiempo significa más dinero acumulado para ti.
+            </p>
+          </div>
+          
+          <div class="bg-yellow-50 p-6 rounded-lg">
+            <h3 class="text-xl font-bold text-yellow-800 mb-3">🎯 Costo de Oportunidad</h3>
+            <p class="text-yellow-700">
+              Cada euro gastado en lotería no solo se pierde, sino que pierdes la oportunidad 
+              de que ese euro trabaje para ti generando retornos reales.
+            </p>
+          </div>
+        </div>
+        
+        <div class="mt-12 p-8 bg-gradient-to-r from-red-100 to-orange-100 rounded-xl text-center">
+          <h3 class="text-2xl font-bold text-red-800 mb-4">⚠️ La Verdad Matemática</h3>
+          <p class="text-lg text-red-700 mb-4">
+            <strong>No existe ningún escenario matemático donde jugar lotería sea una decisión financiera inteligente.</strong>
+          </p>
+          <p class="text-red-600">
+            Si buscas entretenimiento, está bien gastar dinero ocasionalmente. 
+            Pero si quieres tener más dinero, simplemente no jugando ya estás mejor.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</MainLayout>
+
+<!-- Chart.js CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+
+<script>
+  // Game configurations
+  const gameConfigs = {
+    lottery: { rtp: 50, name: 'Lotería Nacional' },
+    scratch: { rtp: 65, name: 'Rascas y Ganas' },
+    euromillions: { rtp: 50, name: 'Euromillones' },
+    daily: { rtp: 55, name: 'Lotería Diaria' },
+    custom: { rtp: 50, name: 'Personalizado' }
+  };
+
+  // Saving configurations
+  const investmentConfigs = {
+    mattress: { return: 0, name: 'Guardar en casa' },
+    savings: { return: 1.5, name: 'Cuenta de Ahorro' },
+    deposit: { return: 2.5, name: 'Depósito a Plazo Fijo' },
+    custom: { return: 1.5, name: 'Personalizado' }
+  };
+
+  let myChart;
+
+  // Update custom RTP
+  function updateCustomRTP() {
+    const value = document.getElementById('rtpSlider').value;
+    document.getElementById('rtpValue').textContent = value + '%';
+    gameConfigs.custom.rtp = parseInt(value);
+    updateCalculations();
+  }
+
+  // Update custom return
+  function updateCustomReturn() {
+    const value = parseFloat(document.getElementById('returnSlider').value);
+    document.getElementById('returnValue').textContent = value.toFixed(1) + '%';
+    investmentConfigs.custom.return = value;
+    updateCalculations();
+  }
+
+  // Show/hide custom inputs
+  function updateInputVisibility() {
+    const gameType = document.getElementById('gameType').value;
+    const investmentType = document.getElementById('investmentType').value;
+    
+    document.getElementById('customRTP').classList.toggle('hidden', gameType !== 'custom');
+    document.getElementById('customReturn').classList.toggle('hidden', investmentType !== 'custom');
+  }
+
+  // Calculate compound interest
+  function calculateCompoundInterest(principal, rate, time) {
+    return principal * Math.pow(1 + rate, time);
+  }
+
+  // Calculate lottery expected value
+  function calculateLotteryValue(weeklySpend, rtp, years) {
+    const totalSpent = weeklySpend * 52 * years;
+    const expectedReturn = totalSpent * (rtp / 100);
+    return {
+      totalSpent,
+      expectedReturn,
+      expectedLoss: totalSpent - expectedReturn
+    };
+  }
+
+  // Calculate saving value with weekly contributions
+  function calculateSavingValue(weeklyContribution, annualRate, years) {
+    const totalContributed = weeklyContribution * 52 * years;
+    
+    // Handle 0% interest rate (guardar en casa)
+    if (annualRate === 0) {
+      return {
+        totalInvested: totalContributed,
+        finalValue: totalContributed,
+        gain: 0
+      };
+    }
+    
+    // For positive interest rates, use compound interest formula
+    const monthlyRate = annualRate / 12 / 100;
+    const monthlyContribution = weeklyContribution * 52 / 12;
+    const months = years * 12;
+    
+    // Future value of annuity formula
+    const futureValue = monthlyContribution * (Math.pow(1 + monthlyRate, months) - 1) / monthlyRate;
+    
+    return {
+      totalInvested: totalContributed,
+      finalValue: futureValue,
+      gain: futureValue - totalContributed
+    };
+  }
+
+  // Update all calculations
+  function updateCalculations() {
+    updateInputVisibility();
+    
+    const gameType = document.getElementById('gameType').value;
+    const investmentType = document.getElementById('investmentType').value;
+    const weeklySpend = parseFloat(document.getElementById('weeklySpend').value);
+    const years = parseInt(document.getElementById('timeYears').value);
+    
+    const gameConfig = gameConfigs[gameType];
+    const investmentConfig = investmentConfigs[investmentType];
+    
+    // Calculate lottery results
+    const lotteryResults = calculateLotteryValue(weeklySpend, gameConfig.rtp, years);
+    
+    // Calculate saving results
+    const savingResults = calculateSavingValue(weeklySpend, investmentConfig.return, years);
+    
+    // Update lottery display
+    document.getElementById('lotteryYears').textContent = years;
+    document.getElementById('totalSpent').textContent = `€${lotteryResults.totalSpent.toLocaleString()}`;
+    document.getElementById('expectedReturn').textContent = `€${lotteryResults.expectedReturn.toLocaleString()}`;
+    document.getElementById('expectedLoss').textContent = `-€${lotteryResults.expectedLoss.toLocaleString()}`;
+    document.getElementById('gameRTP').textContent = `${gameConfig.rtp}%`;
+    
+    // Update saving display
+    document.getElementById('investmentYears').textContent = years;
+    document.getElementById('totalInvested').textContent = `€${savingResults.totalInvested.toLocaleString()}`;
+    document.getElementById('finalInvestmentValue').textContent = `€${Math.round(savingResults.finalValue).toLocaleString()}`;
+    document.getElementById('investmentGain').textContent = `+€${Math.round(savingResults.finalValue - lotteryResults.expectedReturn).toLocaleString()}`;
+    document.getElementById('annualReturn').textContent = `${investmentConfig.return.toFixed(1)}%`;
+    
+    // Update comparison
+    const totalDifference = Math.round(savingResults.finalValue - lotteryResults.expectedReturn);
+    document.getElementById('totalDifference').textContent = `€${totalDifference.toLocaleString()}`;
+    
+    // Update equivalencies
+    updateOpportunityCost(totalDifference);
+    
+    // Update timeline
+    updateTimeline(lotteryResults, savingResults, years);
+    
+    // Update chart
+    updateChart(weeklySpend, gameConfig.rtp, investmentConfig.return, years);
+  }
+
+  // Update opportunity cost calculations
+  function updateOpportunityCost(difference) {
+    // Prices in euros (approximate)
+    const prices = {
+      playstation: 500,
+      trip: 750,
+      course: 100,
+      pizza: 15
+    };
+    
+    document.getElementById('playstations').textContent = (difference / prices.playstation).toFixed(1);
+    document.getElementById('trips').textContent = (difference / prices.trip).toFixed(1);
+    document.getElementById('courses').textContent = (difference / prices.course).toFixed(1);
+    document.getElementById('pizzas').textContent = Math.round(difference / prices.pizza);
+    
+    // House down payment equivalent
+    if (difference >= 20000) {
+      document.getElementById('houseEquivalent').textContent = 'Entrada para casa';
+    } else if (difference >= 10000) {
+      document.getElementById('houseEquivalent').textContent = 'Coche usado';
+    } else if (difference >= 2000) {
+      document.getElementById('houseEquivalent').textContent = 'Curso universitario';
+    } else {
+      document.getElementById('houseEquivalent').textContent = 'Ordenador nuevo';
+    }
+    
+    // Time equivalent
+    const salaryPerWeek = 400; // Average weekly salary
+    const weeksWorking = Math.round(difference / salaryPerWeek);
+    document.getElementById('timeLost').textContent = `${weeksWorking} semanas trabajando`;
+  }
+
+  // Update timeline
+  function updateTimeline(lotteryResults, savingResults, years) {
+    const lotteryContainer = document.getElementById('lotteryTimeline');
+    const investmentContainer = document.getElementById('investmentTimeline');
+    
+    lotteryContainer.innerHTML = '';
+    investmentContainer.innerHTML = '';
+    
+    const intervals = Math.min(years, 10); // Show max 10 intervals
+    const yearStep = Math.ceil(years / intervals);
+    
+    for (let i = yearStep; i <= years; i += yearStep) {
+      const lotteryLoss = (lotteryResults.expectedLoss / years) * i;
+      const savingValue = calculateSavingValue(
+        parseFloat(document.getElementById('weeklySpend').value),
+        investmentConfigs[document.getElementById('investmentType').value].return,
+        i
+      );
+      
+      // Lottery timeline
+      const lotteryDiv = document.createElement('div');
+      lotteryDiv.className = 'flex justify-between text-sm';
+      lotteryDiv.innerHTML = `
+        <span>Año ${i}:</span>
+        <span class="text-red-600 font-bold">-€${Math.round(lotteryLoss).toLocaleString()}</span>
+      `;
+      lotteryContainer.appendChild(lotteryDiv);
+      
+      // Saving timeline
+      const savingDiv = document.createElement('div');
+      savingDiv.className = 'flex justify-between text-sm';
+      savingDiv.innerHTML = `
+        <span>Año ${i}:</span>
+        <span class="text-green-600 font-bold">€${Math.round(savingValue.finalValue).toLocaleString()}</span>
+      `;
+      investmentContainer.appendChild(savingDiv);
+    }
+  }
+
+  // Update chart with Chart.js
+  function updateChart(weeklySpend, rtp, savingReturn, years) {
+    const canvas = document.getElementById('comparisonChart');
+    const ctx = canvas.getContext('2d');
+    
+    // Destroy existing chart if it exists
+    if (myChart) {
+      myChart.destroy();
+    }
+    
+    // Calculate data points
+    const lotteryData = [];
+    const savingData = [];
+    const labels = [];
+    
+    for (let year = 1; year <= years; year++) {
+      const lotteryLoss = -calculateLotteryValue(weeklySpend, rtp, year).expectedLoss;
+      const savingValue = calculateSavingValue(weeklySpend, savingReturn, year).finalValue;
+      
+      lotteryData.push(lotteryLoss);
+      savingData.push(savingValue);
+      labels.push(`Año ${year}`);
+    }
+    
+    // Create new chart
+    myChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: 'Lotería (pérdidas acumuladas)',
+            data: lotteryData,
+            borderColor: '#DC2626',
+            backgroundColor: 'rgba(220, 38, 38, 0.1)',
+            borderWidth: 3,
+            fill: true,
+            tension: 0.4,
+            pointBackgroundColor: '#DC2626',
+            pointBorderColor: '#ffffff',
+            pointBorderWidth: 2,
+            pointRadius: 4,
+            pointHoverRadius: 6
+          },
+          {
+            label: 'Ahorro (dinero acumulado)',
+            data: savingData,
+            borderColor: '#059669',
+            backgroundColor: 'rgba(5, 150, 105, 0.1)',
+            borderWidth: 3,
+            fill: true,
+            tension: 0.4,
+            pointBackgroundColor: '#059669',
+            pointBorderColor: '#ffffff',
+            pointBorderWidth: 2,
+            pointRadius: 4,
+            pointHoverRadius: 6
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+          intersect: false,
+          mode: 'index'
+        },
+        plugins: {
+          title: {
+            display: true,
+            text: 'Comparación: Lotería vs Ahorro',
+            font: {
+              size: 16,
+              weight: 'bold'
+            },
+            color: '#374151'
+          },
+          legend: {
+            display: true,
+            position: 'top',
+            labels: {
+              usePointStyle: true,
+              padding: 20,
+              font: {
+                size: 12,
+                weight: '500'
+              }
+            }
+          },
+          tooltip: {
+            backgroundColor: 'rgba(0, 0, 0, 0.8)',
+            titleColor: '#ffffff',
+            bodyColor: '#ffffff',
+            borderColor: '#374151',
+            borderWidth: 1,
+            cornerRadius: 8,
+            displayColors: true,
+            callbacks: {
+              label: function(context) {
+                const value = context.parsed.y;
+                const formattedValue = new Intl.NumberFormat('es-ES', {
+                  style: 'currency',
+                  currency: 'EUR',
+                  minimumFractionDigits: 0
+                }).format(Math.abs(value));
+                
+                if (context.datasetIndex === 0) {
+                  return `Pérdidas: -${formattedValue}`;
+                } else {
+                  return `Ahorrado: ${formattedValue}`;
+                }
+              }
+            }
+          }
+        },
+        scales: {
+          x: {
+            display: true,
+            title: {
+              display: true,
+              text: 'Tiempo',
+              font: {
+                size: 14,
+                weight: 'bold'
+              },
+              color: '#374151'
+            },
+            grid: {
+              color: 'rgba(156, 163, 175, 0.3)',
+              drawBorder: false
+            },
+            ticks: {
+              color: '#6B7280',
+              font: {
+                size: 11
+              }
+            }
+          },
+          y: {
+            display: true,
+            title: {
+              display: true,
+              text: 'Dinero (€)',
+              font: {
+                size: 14,
+                weight: 'bold'
+              },
+              color: '#374151'
+            },
+            grid: {
+              color: 'rgba(156, 163, 175, 0.3)',
+              drawBorder: false
+            },
+            ticks: {
+              color: '#6B7280',
+              font: {
+                size: 11
+              },
+              callback: function(value) {
+                return new Intl.NumberFormat('es-ES', {
+                  style: 'currency',
+                  currency: 'EUR',
+                  minimumFractionDigits: 0,
+                  maximumFractionDigits: 0
+                }).format(value);
+              }
+            }
+          }
+        },
+        elements: {
+          point: {
+            hoverRadius: 8
+          }
+        },
+        animation: {
+          duration: 1000,
+          easing: 'easeInOutQuart'
+        }
+      }
+    });
+  }
+
+  // Initialize
+  document.addEventListener('DOMContentLoaded', function() {
+    // Set up event listeners
+    document.getElementById('gameType').addEventListener('change', updateCalculations);
+    document.getElementById('investmentType').addEventListener('change', updateCalculations);
+    
+    // Initial calculation
+    updateCalculations();
+  });
+</script>
+
+<style>
+  input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 8px;
+    background: #ddd;
+    border-radius: 4px;
+    outline: none;
+  }
+  
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background: #f59e0b;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  
+  input[type="range"]::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    background: #f59e0b;
+    border-radius: 50%;
+    cursor: pointer;
+    border: none;
+  }
+</style>

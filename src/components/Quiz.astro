@@ -1,0 +1,251 @@
+---
+// Componente reutilizable de Quiz para los pasos de El Camino
+interface Props {
+  stepId: string;
+  title: string;
+  description: string;
+  questions: Array<{
+    id: string;
+    question: string;
+    options: Array<{
+      value: string;
+      text: string;
+    }>;
+    correctAnswer: string;
+    explanation: {
+      correct: string;
+      incorrect: string;
+    };
+  }>;
+  gradientColors?: string;
+  onComplete?: string; // JavaScript function name to call on completion
+}
+
+const { 
+  stepId, 
+  title, 
+  description, 
+  questions, 
+  gradientColors = "from-purple-600 to-indigo-600",
+  onComplete 
+} = Astro.props;
+
+const quizId = `quiz-${stepId}`;
+---
+
+<section class="mb-16">
+  <div class={`bg-gradient-to-r ${gradientColors} text-white p-8 rounded-xl`}>
+    <h2 class="text-2xl font-bold mb-6">{title}</h2>
+    <p class="text-opacity-90 text-white mb-8">
+      {description}
+    </p>
+    
+    <div id={`${quizId}-container`} class="space-y-6">
+      <!-- Questions -->
+      {questions.map((question, index) => (
+        <div class={`quiz-question bg-white/10 p-6 rounded-lg question-${index + 1}`}>
+          <h3 class="font-semibold mb-4">{index + 1}. {question.question}</h3>
+          <div class="space-y-2">
+            {question.options.map((option, optionIndex) => (
+              <label class="flex items-center cursor-pointer hover:bg-white/5 p-2 rounded">
+                <input 
+                  type="radio" 
+                  name={question.id} 
+                  value={option.value} 
+                  class="mr-3"
+                  data-question={index + 1}
+                >
+                <span>{option.text}</span>
+              </label>
+            ))}
+          </div>
+        </div>
+      ))}
+
+      <!-- Progress indicator -->
+      <div class="mb-6">
+        <div class="flex justify-between items-center mb-2">
+          <span class="text-sm text-white/70">Progreso del quiz</span>
+          <span class="text-sm text-white/70" id={`${quizId}-progress-text`}>0/{questions.length} respondidas</span>
+        </div>
+        <div class="w-full bg-white/20 rounded-full h-2">
+          <div id={`${quizId}-progress-bar`} class="bg-yellow-400 h-2 rounded-full transition-all duration-300" style="width: 0%"></div>
+        </div>
+      </div>
+
+      <!-- Submit button -->
+      <button 
+        id={`${quizId}-submit`}
+        class="w-full px-6 py-3 bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+        disabled
+      >
+        ✅ Enviar Respuestas
+      </button>
+
+      <!-- Results section (initially hidden) -->
+      <div id={`${quizId}-results`} class="hidden bg-white/20 p-6 rounded-lg">
+        <h3 class="font-bold mb-4">📊 Resultados:</h3>
+        <div id={`${quizId}-score`} class="text-2xl font-bold mb-4"></div>
+        <div id={`${quizId}-explanations`} class="space-y-3 text-sm"></div>
+        <button 
+          id={`${quizId}-complete`}
+          class="mt-6 w-full px-6 py-3 bg-green-500 hover:bg-green-600 text-white font-bold rounded-lg transition-colors"
+        >
+          🎉 Completar {stepId.replace('paso-', 'Paso ')}
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script define:vars={{ stepId, questions, quizId, onComplete }}>
+// Quiz functionality
+document.addEventListener('DOMContentLoaded', () => {
+  const totalQuestions = questions.length;
+  let answeredQuestions = 0;
+
+  // Map correct answers for easy access
+  const correctAnswers = {};
+  const explanations = {};
+  questions.forEach(q => {
+    correctAnswers[q.id] = q.correctAnswer;
+    explanations[q.id] = q.explanation;
+  });
+
+  // Update progress as user answers questions
+  function updateProgress() {
+    const answered = document.querySelectorAll(`#${quizId}-container input[type="radio"]:checked`).length;
+    answeredQuestions = answered;
+    
+    const progressPercentage = (answered / totalQuestions) * 100;
+    const progressText = document.getElementById(`${quizId}-progress-text`);
+    const progressBar = document.getElementById(`${quizId}-progress-bar`);
+    const submitBtn = document.getElementById(`${quizId}-submit`);
+    
+    if (progressText) progressText.textContent = `${answered}/${totalQuestions} respondidas`;
+    if (progressBar) progressBar.style.width = `${progressPercentage}%`;
+    
+    if (submitBtn) {
+      if (answered === totalQuestions) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = '✅ Enviar Respuestas';
+      } else {
+        submitBtn.disabled = true;
+        submitBtn.textContent = `✅ Responde ${totalQuestions - answered} preguntas más`;
+      }
+    }
+  }
+
+  // Add event listeners to all radio buttons in this quiz
+  document.querySelectorAll(`#${quizId}-container input[type="radio"]`).forEach(radio => {
+    radio.addEventListener('change', updateProgress);
+  });
+
+  // Submit quiz
+  const submitBtn = document.getElementById(`${quizId}-submit`);
+  if (submitBtn) {
+    submitBtn.addEventListener('click', () => {
+      let score = 0;
+      let results = [];
+
+      // Check answers
+      questions.forEach((question, index) => {
+        const answer = document.querySelector(`input[name="${question.id}"]:checked`);
+        const questionNum = index + 1;
+        
+        if (answer) {
+          if (answer.value === correctAnswers[question.id]) {
+            score++;
+            results.push(`✅ Pregunta ${questionNum}: ${explanations[question.id].correct}`);
+          } else {
+            results.push(`❌ Pregunta ${questionNum}: ${explanations[question.id].incorrect}`);
+          }
+        } else {
+          results.push(`⚠️ Pregunta ${questionNum}: No respondida - ${explanations[question.id].incorrect}`);
+        }
+      });
+
+      // Display results
+      const percentage = Math.round((score / totalQuestions) * 100);
+      const scoreDisplay = document.getElementById(`${quizId}-score`);
+      const explanationsDiv = document.getElementById(`${quizId}-explanations`);
+      const resultsDiv = document.getElementById(`${quizId}-results`);
+      
+      if (scoreDisplay) scoreDisplay.innerHTML = `${score}/${totalQuestions} (${percentage}%)`;
+      if (explanationsDiv) {
+        explanationsDiv.innerHTML = results.map(r => 
+          `<p class="p-2 bg-white/10 rounded">${r}</p>`
+        ).join('');
+      }
+      if (resultsDiv) {
+        resultsDiv.classList.remove('hidden');
+        resultsDiv.scrollIntoView({ behavior: 'smooth' });
+      }
+
+      // Save result in progress manager
+      if (window.progressManager) {
+        window.progressManager.completeQuiz(stepId, percentage);
+      }
+
+      // Disable submit button
+      submitBtn.disabled = true;
+      submitBtn.textContent = '✅ Quiz Completado';
+      submitBtn.classList.add('opacity-50', 'cursor-not-allowed');
+
+      // Call custom completion function if provided
+      if (onComplete && typeof window[onComplete] === 'function') {
+        window[onComplete](score, percentage);
+      }
+    });
+  }
+
+  // Complete step button
+  const completeBtn = document.getElementById(`${quizId}-complete`);
+  if (completeBtn) {
+    completeBtn.addEventListener('click', () => {
+      if (window.progressManager) {
+        window.progressManager.completeStep(stepId);
+      }
+      
+      // Determine next step
+      const stepNumber = parseInt(stepId.split('-')[1]);
+      const nextStep = stepNumber < 6 ? `paso-${stepNumber + 1}` : null;
+      
+      setTimeout(() => {
+        if (nextStep) {
+          if (confirm(`¡Felicitaciones! ¿Quieres continuar con el Paso ${stepNumber + 1}?`)) {
+            window.location.href = `/the-way/${nextStep}`;
+          }
+        } else {
+          alert('¡Has completado todo El Camino! 🎉');
+        }
+      }, 3000);
+    });
+  }
+
+  // Initialize progress
+  updateProgress();
+});
+</script>
+
+<style>
+  /* Quiz-specific styles */
+  .quiz-question {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  .quiz-question:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Radio button custom styling */
+  .quiz-question input[type="radio"] {
+    accent-color: #fbbf24; /* yellow-400 */
+  }
+  
+  /* Progress bar animation */
+  #quiz-progress-bar {
+    transition: width 0.5s ease-out;
+  }
+</style>

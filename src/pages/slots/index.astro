@@ -1,0 +1,264 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+---
+
+<MainLayout 
+  title="Simuladores de Slots" 
+  description="Aprende sobre las máquinas tragaperras, el RTP y cómo funcionan realmente los algoritmos de casino."
+>
+  
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-br from-indigo-600 via-purple-600 to-indigo-800 text-white py-20">
+    <div class="container mx-auto px-4 text-center">
+      <div class="max-w-4xl mx-auto">
+        <h1 class="text-4xl md:text-6xl font-bold mb-6">
+          🎰 Máquinas Tragaperras
+        </h1>
+        <p class="text-xl md:text-2xl mb-8 text-indigo-100">
+          Descubre cómo funcionan realmente las slots y por qué 
+          <span class="text-yellow-300 font-semibold">la casa siempre gana</span>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Navigation Cards -->
+  <section class="py-20 bg-gray-50">
+    <div class="container mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        
+        <!-- RTP Simulator - Main Feature -->
+        <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden transform hover:scale-105">
+          <div class="h-48 bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center relative">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-16 h-16 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+            </svg>
+            <div class="absolute top-4 right-4 bg-green-400 text-green-900 px-3 py-1 rounded-full text-sm font-bold">
+              POPULAR
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-2xl font-bold text-gray-900 mb-3">Simulador RTP</h3>
+            <p class="text-gray-600 mb-4">
+              Experimenta con diferentes configuraciones de RTP y entiende por qué las matemáticas favorecen al casino.
+            </p>
+            <div class="mb-4">
+              <span class="inline-block bg-indigo-100 text-indigo-800 text-xs px-2 py-1 rounded mr-2">Interactivo</span>
+              <span class="inline-block bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded mr-2">Gráficos</span>
+              <span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded">Educativo</span>
+            </div>
+            <a 
+              href="/slots/rtp" 
+              class="inline-flex items-center w-full justify-center px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-semibold rounded-lg transition-all duration-200"
+            >
+              Probar Simulador
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Volatility Analyzer - Now Available -->
+        <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden transform hover:scale-105">
+          <div class="h-48 bg-gradient-to-br from-orange-400 to-red-500 flex items-center justify-center relative">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-16 h-16 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+            </svg>
+            <div class="absolute top-4 right-4 bg-yellow-400 text-yellow-900 px-3 py-1 rounded-full text-sm font-bold">
+              NUEVO
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-2xl font-bold text-gray-900 mb-3">Analizador de Volatilidad</h3>
+            <p class="text-gray-600 mb-4">
+              Comprende la diferencia entre alta y baja volatilidad en las tragaperras y cómo afecta tu experiencia.
+            </p>
+            <div class="mb-4">
+              <span class="inline-block bg-orange-100 text-orange-800 text-xs px-2 py-1 rounded mr-2">Comparativo</span>
+              <span class="inline-block bg-red-100 text-red-800 text-xs px-2 py-1 rounded mr-2">Gráficos</span>
+              <span class="inline-block bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded">Interactivo</span>
+            </div>
+            <a 
+              href="/slots/volatilidad" 
+              class="inline-flex items-center w-full justify-center px-6 py-3 bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white font-semibold rounded-lg transition-all duration-200"
+            >
+              Analizar Volatilidad
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Payline Calculator - Now Available -->
+        <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden transform hover:scale-105">
+          <div class="h-48 bg-gradient-to-br from-green-400 to-blue-500 flex items-center justify-center relative">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-16 h-16 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01m3 0h.01m0-3h.01m-3 0h.01m3-3h.01m-3 0h.01M5 8a2 2 0 012-2h10a2 2 0 012 2v8a2 2 0 01-2 2H7a2 2 0 01-2-2V8z" />
+            </svg>
+            <div class="absolute top-4 right-4 bg-green-400 text-green-900 px-3 py-1 rounded-full text-sm font-bold">
+              NUEVO
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-2xl font-bold text-gray-900 mb-3">Calculadora de Líneas</h3>
+            <p class="text-gray-600 mb-4">
+              Analiza cómo las líneas de pago afectan tus probabilidades y coste total por tirada.
+            </p>
+            <div class="mb-4">
+              <span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded mr-2">Calculadora</span>
+              <span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded mr-2">Comparativo</span>
+              <span class="inline-block bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded">Educativo</span>
+            </div>
+            <a 
+              href="/slots/lineas-pago" 
+              class="inline-flex items-center w-full justify-center px-6 py-3 bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600 text-white font-semibold rounded-lg transition-all duration-200"
+            >
+              Calcular Líneas
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Educational Content -->
+  <section class="py-20 bg-white">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl font-bold text-gray-900 mb-6">¿Cómo Funcionan las Tragaperras?</h2>
+          <p class="text-xl text-gray-600">
+            Conoce la ciencia y las matemáticas detrás de las máquinas de casino
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-16">
+          <div>
+            <h3 class="text-2xl font-bold text-gray-900 mb-4">🎲 Generador de Números Aleatorios (RNG)</h3>
+            <p class="text-gray-600 mb-4">
+              Cada milisegundo, el RNG genera números completamente aleatorios que determinan el resultado de cada tirada. 
+              Esto significa que no hay patrones, no hay "máquinas calientes" y no hay forma de predecir el resultado.
+            </p>
+            <p class="text-gray-600">
+              <strong>Realidad:</strong> Tu resultado se decide en el momento exacto en que presionas el botón, 
+              no cuando los rodillos se detienen.
+            </p>
+          </div>
+          <div class="bg-gray-100 p-8 rounded-lg">
+            <div class="text-center">
+              <div class="text-6xl mb-4">🎰</div>
+              <div class="text-sm text-gray-600">Cada giro es independiente</div>
+              <div class="mt-4 grid grid-cols-3 gap-2">
+                <div class="bg-red-200 h-8 rounded animate-pulse"></div>
+                <div class="bg-blue-200 h-8 rounded animate-pulse delay-150"></div>
+                <div class="bg-green-200 h-8 rounded animate-pulse delay-300"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-16">
+          <div class="bg-gray-100 p-8 rounded-lg order-2 md:order-1">
+            <div class="text-center">
+              <div class="text-6xl mb-4">📊</div>
+              <div class="text-lg font-bold text-red-600 mb-2">RTP: 95%</div>
+              <div class="text-sm text-gray-600 mb-4">Return to Player</div>
+              <div class="bg-red-500 h-4 rounded-full">
+                <div class="bg-green-500 h-4 rounded-full w-[95%]"></div>
+              </div>
+              <div class="text-xs text-gray-500 mt-2">El casino se queda con 5% garantizado</div>
+            </div>
+          </div>
+          <div class="order-1 md:order-2">
+            <h3 class="text-2xl font-bold text-gray-900 mb-4">📈 Return to Player (RTP)</h3>
+            <p class="text-gray-600 mb-4">
+              El RTP es el porcentaje del dinero apostado que la máquina devuelve a los jugadores <strong>a muy largo plazo</strong>. 
+              Un RTP del 95% significa que por cada €100 apostados, la máquina devuelve €95 en premios.
+            </p>
+            <p class="text-gray-600">
+              <strong>Importante:</strong> Esto es una media estadística de millones de tiradas. 
+              En el corto plazo, puedes ganar mucho o perder todo.
+            </p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+          <div>
+            <h3 class="text-2xl font-bold text-gray-900 mb-4">⚡ Volatilidad</h3>
+            <p class="text-gray-600 mb-4">
+              La volatilidad determina la frecuencia y el tamaño de los premios:
+            </p>
+            <ul class="text-gray-600 space-y-2">
+              <li><strong>Baja volatilidad:</strong> Premios pequeños y frecuentes</li>
+              <li><strong>Alta volatilidad:</strong> Premios grandes pero muy raros</li>
+            </ul>
+            <p class="text-gray-600 mt-4">
+              <strong>Truco psicológico:</strong> Las máquinas de alta volatilidad crean más emoción 
+              y pueden generar más adicción debido a los "casi premios".
+            </p>
+          </div>
+          <div class="bg-gray-100 p-8 rounded-lg">
+            <div class="space-y-4">
+              <div>
+                <div class="flex justify-between text-sm mb-1">
+                  <span>Baja Volatilidad</span>
+                  <span>Frecuente</span>
+                </div>
+                <div class="bg-green-200 h-3 rounded-full">
+                  <div class="bg-green-500 h-3 rounded-full w-[80%]"></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex justify-between text-sm mb-1">
+                  <span>Alta Volatilidad</span>
+                  <span>Raro</span>
+                </div>
+                <div class="bg-red-200 h-3 rounded-full">
+                  <div class="bg-red-500 h-3 rounded-full w-[20%]"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Warning Section -->
+  <section class="py-16 bg-red-50">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-3xl font-bold text-red-800 mb-6">⚠️ La Realidad que Debes Conocer</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div class="bg-white p-6 rounded-lg shadow-lg">
+            <div class="text-4xl mb-4">🏠</div>
+            <h3 class="text-lg font-bold text-gray-900 mb-2">La Casa Siempre Gana</h3>
+            <p class="text-gray-600 text-sm">
+              Las matemáticas garantizan que el casino obtenga beneficios. No hay sistema ni estrategia que pueda vencer esto.
+            </p>
+          </div>
+          <div class="bg-white p-6 rounded-lg shadow-lg">
+            <div class="text-4xl mb-4">🧠</div>
+            <h3 class="text-lg font-bold text-gray-900 mb-2">Diseñadas para Adicción</h3>
+            <p class="text-gray-600 text-sm">
+              Sonidos, luces y "casi premios" están diseñados para liberar dopamina y mantenerte jugando.
+            </p>
+          </div>
+          <div class="bg-white p-6 rounded-lg shadow-lg">
+            <div class="text-4xl mb-4">💸</div>
+            <h3 class="text-lg font-bold text-gray-900 mb-2">Nunca una Inversión</h3>
+            <p class="text-gray-600 text-sm">
+              El juego debe ser entretenimiento, nunca una forma de ganar dinero o solucionar problemas financieros.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</MainLayout>

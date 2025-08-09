@@ -1,0 +1,233 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+---
+
+<MainLayout title="Inicio" description="Descubre los secretos detrás de las máquinas tragaperras y aprende sobre juego responsable con Unmasking Gambling.">
+  
+  <!-- Hero Section -->
+  <section class="relative bg-gradient-to-br from-indigo-900 via-purple-900 to-indigo-800 text-white overflow-hidden">
+    <div class="absolute inset-0 bg-black/20"></div>
+    <div class="relative container mx-auto px-4 py-20 md:py-32">
+      <div class="max-w-4xl mx-auto text-center">
+        <h1 class="text-4xl md:text-6xl font-bold mb-6 fade-in">
+          <span class="bg-gradient-to-r from-yellow-400 to-orange-400 bg-clip-text text-transparent">
+            Unmasking
+          </span>
+          <br />
+          Gambling
+        </h1>
+        <p class="text-xl md:text-2xl mb-8 text-gray-200 fade-in">
+          Descubre los secretos detrás de las máquinas tragaperras y aprende sobre 
+          <span class="text-yellow-400 font-semibold">juego responsable</span>
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center fade-in">
+          <a 
+            href="/the-way" 
+            class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-gray-900 font-bold rounded-full transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
+          >
+            🚀 Comienza tu camino
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </a>
+          <a 
+            href="/slots" 
+            class="inline-flex items-center px-8 py-4 bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20 text-white font-semibold rounded-full transition-all duration-300"
+          >
+            🎰 Simuladores
+          </a>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Floating elements for visual interest -->
+    <div class="absolute top-20 left-10 w-20 h-20 bg-yellow-400/20 rounded-full animate-pulse"></div>
+    <div class="absolute bottom-32 right-16 w-16 h-16 bg-orange-400/20 rounded-full animate-pulse delay-300"></div>
+    <div class="absolute top-1/2 right-32 w-12 h-12 bg-purple-400/20 rounded-full animate-pulse delay-700"></div>
+  </section>
+
+  <!-- Featured Content -->
+  <section class="py-20 bg-gray-50">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl font-bold text-gray-900 mb-4 fade-in">Contenido Destacado</h2>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto fade-in">
+          Explora nuestras herramientas educativas y simuladores para entender mejor 
+          los mecanismos detrás de los juegos de azar
+        </p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Simulador de Slots -->
+        <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden fade-in">
+          <div class="h-48 bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-16 h-16 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01m3 0h.01m0-3h.01m-3 0h.01m3-3h.01m-3 0h.01M5 8a2 2 0 012-2h10a2 2 0 012 2v8a2 2 0 01-2 2H7a2 2 0 01-2-2V8z" />
+            </svg>
+          </div>
+          <div class="p-6">
+            <h3 class="text-2xl font-bold text-gray-900 mb-3">Simulador de Slots</h3>
+            <p class="text-gray-600 mb-4">
+              Experimenta con el RTP y entiende por qué la casa siempre gana a largo plazo.
+            </p>
+            <a 
+              href="/slots/rtp" 
+              class="inline-flex items-center text-indigo-600 hover:text-indigo-800 font-semibold"
+            >
+              Probar simulador
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- El Camino -->
+        <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden fade-in">
+          <div class="h-48 bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-16 h-16 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+            </svg>
+          </div>
+          <div class="p-6">
+            <h3 class="text-2xl font-bold text-gray-900 mb-3">El Camino</h3>
+            <p class="text-gray-600 mb-4">
+              Una guía interactiva de 6 pasos para el juego responsable y la prevención de la adicción.
+            </p>
+            <a 
+              href="/the-way" 
+              class="inline-flex items-center text-yellow-600 hover:text-yellow-800 font-semibold"
+            >
+              Iniciar el camino
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Loterías y Rascas -->
+        <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden fade-in">
+          <div class="h-48 bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-16 h-16 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
+            </svg>
+          </div>
+          <div class="p-6">
+            <h3 class="text-2xl font-bold text-gray-900 mb-3">Loterías y Rascas</h3>
+            <p class="text-gray-600 mb-4">
+              Descubre las probabilidades reales de ganar y por qué las matemáticas no están de tu lado.
+            </p>
+            <a 
+              href="/lottery" 
+              class="inline-flex items-center text-purple-600 hover:text-purple-800 font-semibold"
+            >
+              Explorar simuladores
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Statistics Section -->
+  <section class="py-20 bg-white">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl font-bold text-gray-900 mb-4 fade-in">La Realidad de los Números</h2>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto fade-in">
+          Datos que todo jugador debería conocer antes de apostar
+        </p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+        <div class="text-center fade-in">
+          <div class="text-5xl font-bold text-red-600 mb-4">5%</div>
+          <h3 class="text-xl font-semibold text-gray-900 mb-2">Ventaja de la Casa</h3>
+          <p class="text-gray-600">Promedio de ventaja que tienen los casinos en las tragaperras</p>
+        </div>
+        
+        <div class="text-center fade-in">
+          <div class="text-5xl font-bold text-orange-600 mb-4">1.6%</div>
+          <h3 class="text-xl font-semibold text-gray-900 mb-2">Población Afectada</h3>
+          <p class="text-gray-600">Porcentaje de adultos con problemas de juego patológico</p>
+        </div>
+        
+        <div class="text-center fade-in">
+          <div class="text-5xl font-bold text-indigo-600 mb-4">90%</div>
+          <h3 class="text-xl font-semibold text-gray-900 mb-2">Pérdidas a Largo Plazo</h3>
+          <p class="text-gray-600">De jugadores que pierden dinero en el tiempo</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to Action -->
+  <section class="py-20 bg-gradient-to-r from-red-500 to-pink-600 text-white">
+    <div class="container mx-auto px-4 text-center">
+      <h2 class="text-4xl font-bold mb-6 fade-in">¿Necesitas Ayuda?</h2>
+      <p class="text-xl mb-8 max-w-2xl mx-auto fade-in">
+        Si sientes que el juego está afectando tu vida, no estás solo. 
+        Hay recursos disponibles para ayudarte.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center fade-in">
+        <a 
+          href="/ayuda" 
+          class="inline-flex items-center px-8 py-4 bg-white text-red-600 font-bold rounded-full hover:bg-gray-100 transition-colors duration-300"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+          </svg>
+          Buscar Ayuda
+        </a>
+        <a 
+          href="tel:900200999" 
+          class="inline-flex items-center px-8 py-4 bg-transparent border-2 border-white text-white font-semibold rounded-full hover:bg-white hover:text-red-600 transition-all duration-300"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+          </svg>
+          Línea de Crisis: 900 200 999
+        </a>
+      </div>
+    </div>
+  </section>
+
+</MainLayout>
+
+<style>
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+  
+  .fade-in.animate-fade-in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Slider personalizado */
+  .slider::-webkit-slider-thumb {
+    appearance: none;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    background: #3b82f6;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+
+  .slider::-moz-range-thumb {
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    background: #3b82f6;
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+</style>

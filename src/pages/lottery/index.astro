@@ -1,0 +1,329 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+---
+
+<MainLayout 
+  title="Simuladores de Loterías" 
+  description="Aprende sobre las loterías, rascas y probabilidades reales. Descubre por qué las matemáticas no están de tu lado."
+>
+  
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-br from-purple-600 via-pink-600 to-purple-800 text-white py-20">
+    <div class="container mx-auto px-4 text-center">
+      <div class="max-w-4xl mx-auto">
+        <h1 class="text-4xl md:text-6xl font-bold mb-6">
+          🎟️ Loterías y Rascas
+        </h1>
+        <p class="text-xl md:text-2xl mb-8 text-purple-100">
+          Descubre las probabilidades reales y por qué 
+          <span class="text-yellow-300 font-semibold">las matemáticas no mienten</span>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Navigation Cards -->
+  <section class="py-20 bg-gray-50">
+    <div class="container mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        
+        <!-- Probability Calculator - Main Feature -->
+        <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden transform hover:scale-105">
+          <div class="h-48 bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center relative">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-16 h-16 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01m3 0h.01m0-3h.01m-3 0h.01m3-3h.01m-3 0h.01M5 8a2 2 0 012-2h10a2 2 0 012 2v8a2 2 0 01-2 2H7a2 2 0 01-2-2V8z" />
+            </svg>
+            <div class="absolute top-4 right-4 bg-yellow-400 text-yellow-900 px-3 py-1 rounded-full text-sm font-bold">
+              NUEVO
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-2xl font-bold text-gray-900 mb-3">Calculadora de Probabilidades</h3>
+            <p class="text-gray-600 mb-4">
+              Calcula las probabilidades reales de ganar en diferentes tipos de lotería y compáralas con eventos cotidianos.
+            </p>
+            <div class="mb-4">
+              <span class="inline-block bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded mr-2">Calculadora</span>
+              <span class="inline-block bg-pink-100 text-pink-800 text-xs px-2 py-1 rounded mr-2">Comparativo</span>
+              <span class="inline-block bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded">Educativo</span>
+            </div>
+            <a 
+              href="/lottery/probability-calculator" 
+              class="inline-flex items-center w-full justify-center px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-semibold rounded-lg transition-all duration-200"
+            >
+              Calcular Probabilidades
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Scratch Cards Simulator -->
+        <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden transform hover:scale-105">
+          <div class="h-48 bg-gradient-to-br from-green-400 to-blue-500 flex items-center justify-center relative">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-16 h-16 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
+            </svg>
+            <div class="absolute top-4 right-4 bg-green-400 text-green-900 px-3 py-1 rounded-full text-sm font-bold">
+              NUEVO
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-2xl font-bold text-gray-900 mb-3">Simulador de Rascas</h3>
+            <p class="text-gray-600 mb-4">
+              Simula la compra de múltiples rascas del mismo lote y descubre cómo están distribuidos los premios.
+            </p>
+            <div class="mb-4">
+              <span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded mr-2">Simulador</span>
+              <span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded mr-2">Interactivo</span>
+              <span class="inline-block bg-orange-100 text-orange-800 text-xs px-2 py-1 rounded">Visual</span>
+            </div>
+            <a 
+              href="/lottery/scratch-cards" 
+              class="inline-flex items-center w-full justify-center px-6 py-3 bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600 text-white font-semibold rounded-lg transition-all duration-200"
+            >
+              Simular Rascas
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Expected Value Calculator -->
+        <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden transform hover:scale-105">
+          <div class="h-48 bg-gradient-to-br from-orange-400 to-red-500 flex items-center justify-center relative">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-16 h-16 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <div class="absolute top-4 right-4 bg-orange-400 text-orange-900 px-3 py-1 rounded-full text-sm font-bold">
+              NUEVO
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-2xl font-bold text-gray-900 mb-3">Calculadora de Valor Esperado</h3>
+            <p class="text-gray-600 mb-4">
+              Calcula cuánto dinero pierdes realmente por cada euro que gastas en lotería y compáralo con alternativas.
+            </p>
+            <div class="mb-4">
+              <span class="inline-block bg-orange-100 text-orange-800 text-xs px-2 py-1 rounded mr-2">Matemático</span>
+              <span class="inline-block bg-red-100 text-red-800 text-xs px-2 py-1 rounded mr-2">Revelador</span>
+              <span class="inline-block bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded">Educativo</span>
+            </div>
+            <a 
+              href="/lottery/expected-value" 
+              class="inline-flex items-center w-full justify-center px-6 py-3 bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white font-semibold rounded-lg transition-all duration-200"
+            >
+              Calcular Valor Esperado
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Educational Content -->
+  <section class="py-20 bg-white">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl font-bold text-gray-900 mb-6">¿Cómo Funcionan Realmente las Loterías?</h2>
+          <p class="text-xl text-gray-600">
+            La verdad matemática detrás de los billetes y los sueños
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-16">
+          <div>
+            <h3 class="text-2xl font-bold text-gray-900 mb-4">🎯 Probabilidades Extremas</h3>
+            <p class="text-gray-600 mb-4">
+              La probabilidad de ganar una lotería típica (como 6/49) es de aproximadamente 1 entre 14 millones. 
+              Esto significa que tienes más probabilidades de ser alcanzado por un rayo múltiples veces.
+            </p>
+            <p class="text-gray-600">
+              <strong>Perspectiva:</strong> Si compraras un billete cada semana, estadísticamente tardarías 
+              más de 250,000 años en ganar el premio mayor.
+            </p>
+          </div>
+          <div class="bg-gray-100 p-8 rounded-lg">
+            <div class="text-center">
+              <div class="text-6xl mb-4">⚡</div>
+              <div class="text-sm text-gray-600 mb-2">Probabilidad de ser alcanzado por un rayo</div>
+              <div class="text-lg font-bold text-blue-600">1 en 1,000,000</div>
+              <div class="text-sm text-gray-600 mt-4 mb-2">Probabilidad de ganar la lotería</div>
+              <div class="text-lg font-bold text-red-600">1 en 14,000,000</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-16">
+          <div class="bg-gray-100 p-8 rounded-lg order-2 md:order-1">
+            <div class="text-center">
+              <div class="text-6xl mb-4">💸</div>
+              <div class="text-lg font-bold text-red-600 mb-2">RTP: 50%</div>
+              <div class="text-sm text-gray-600 mb-4">Return to Player</div>
+              <div class="bg-red-500 h-4 rounded-full">
+                <div class="bg-green-500 h-4 rounded-full w-[50%]"></div>
+              </div>
+              <div class="text-xs text-gray-500 mt-2">El peor RTP de todos los juegos</div>
+            </div>
+          </div>
+          <div class="order-1 md:order-2">
+            <h3 class="text-2xl font-bold text-gray-900 mb-4">📉 Valor Esperado Negativo</h3>
+            <p class="text-gray-600 mb-4">
+              Las loterías tienen el peor RTP (Return to Player) de todos los juegos de azar, típicamente entre 40-50%. 
+              Esto significa que por cada €1 que gastas, solo recuperas €0.50 en premios.
+            </p>
+            <p class="text-gray-600">
+              <strong>En otras palabras:</strong> Cada billete que compras pierde automáticamente la mitad de su valor.
+            </p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+          <div>
+            <h3 class="text-2xl font-bold text-gray-900 mb-4">🎫 Rascas y Ganas</h3>
+            <p class="text-gray-600 mb-4">
+              Los rascas son especialmente engañosos porque dan la sensación de control e inmediatez. 
+              Cada "lote" tiene un número fijo de premios distribuidos aleatoriamente.
+            </p>
+            <ul class="text-gray-600 space-y-2">
+              <li><strong>Premio mayor:</strong> Solo 1 o 2 por lote completo</li>
+              <li><strong>Premios menores:</strong> Distribuidos para crear "falsas esperanzas"</li>
+              <li><strong>Pérdidas garantizadas:</strong> 70-80% de los billetes no tienen premio</li>
+            </ul>
+          </div>
+          <div class="bg-gray-100 p-8 rounded-lg">
+            <div class="space-y-4">
+              <div class="text-center">
+                <div class="text-3xl mb-2">🎫</div>
+                <div class="text-sm text-gray-600">Lote de 1000 rascas</div>
+              </div>
+              <div>
+                <div class="flex justify-between text-sm mb-1">
+                  <span>Premios mayores</span>
+                  <span>2 billetes</span>
+                </div>
+                <div class="bg-green-200 h-2 rounded-full">
+                  <div class="bg-green-500 h-2 rounded-full w-[0.2%]"></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex justify-between text-sm mb-1">
+                  <span>Premios menores</span>
+                  <span>150 billetes</span>
+                </div>
+                <div class="bg-yellow-200 h-2 rounded-full">
+                  <div class="bg-yellow-500 h-2 rounded-full w-[15%]"></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex justify-between text-sm mb-1">
+                  <span>Sin premio</span>
+                  <span>848 billetes</span>
+                </div>
+                <div class="bg-red-200 h-2 rounded-full">
+                  <div class="bg-red-500 h-2 rounded-full w-[85%]"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Psychological Tricks Section -->
+  <section class="py-20 bg-gray-50">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl font-bold text-gray-900 mb-6">🧠 Trucos Psicológicos</h2>
+          <p class="text-xl text-gray-600">
+            Cómo las loterías manipulan tu mente para seguir jugando
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div class="bg-white p-6 rounded-lg shadow-lg">
+            <h3 class="text-xl font-bold text-gray-900 mb-3">🔢 "Números de la Suerte"</h3>
+            <p class="text-gray-600">
+              No existen números con más probabilidad de salir. Cada combinación tiene exactamente 
+              las mismas probabilidades, pero nuestro cerebro busca patrones donde no los hay.
+            </p>
+          </div>
+
+          <div class="bg-white p-6 rounded-lg shadow-lg">
+            <h3 class="text-xl font-bold text-gray-900 mb-3">📺 Sesgo del Superviviente</h3>
+            <p class="text-gray-600">
+              Solo vemos a los ganadores en los medios, no a los millones que perdieron. 
+              Esto crea una falsa sensación de que ganar es más común de lo que realmente es.
+            </p>
+          </div>
+
+          <div class="bg-white p-6 rounded-lg shadow-lg">
+            <h3 class="text-xl font-bold text-gray-900 mb-3">🎯 "Casi Gané"</h3>
+            <p class="text-gray-600">
+              Tener números cercanos a los ganadores no significa nada, pero activa las mismas 
+              áreas del cerebro que una victoria real, manteniéndote enganchado.
+            </p>
+          </div>
+
+          <div class="bg-white p-6 rounded-lg shadow-lg">
+            <h3 class="text-xl font-bold text-gray-900 mb-3">🔄 Falacia del Jugador</h3>
+            <p class="text-gray-600">
+              Creer que los números que no han salido tienen más probabilidad de salir. 
+              Cada sorteo es independiente, no hay "números que deben salir".
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Warning Section -->
+  <section class="py-16 bg-red-50">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-3xl font-bold text-red-800 mb-6">⚠️ La Realidad Matemática</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div class="bg-white p-6 rounded-lg shadow-lg">
+            <div class="text-4xl mb-4">📚</div>
+            <h3 class="text-lg font-bold text-gray-900 mb-2">Impuesto a la Ignorancia</h3>
+            <p class="text-gray-600 text-sm">
+              Las loterías son llamadas "impuesto a los que no saben matemáticas" por una razón: 
+              las probabilidades están completamente en tu contra.
+            </p>
+          </div>
+          <div class="bg-white p-6 rounded-lg shadow-lg">
+            <div class="text-4xl mb-4">💰</div>
+            <h3 class="text-lg font-bold text-gray-900 mb-2">Peor "Inversión" Posible</h3>
+            <p class="text-gray-600 text-sm">
+              Con un RTP del 50%, las loterías son la peor forma posible de "invertir" tu dinero. 
+              Incluso los casinos ofrecen mejores probabilidades.
+            </p>
+          </div>
+          <div class="bg-white p-6 rounded-lg shadow-lg">
+            <div class="text-4xl mb-4">🎯</div>
+            <h3 class="text-lg font-bold text-gray-900 mb-2">Matemáticas Inmutables</h3>
+            <p class="text-gray-600 text-sm">
+              No hay sistema, estrategia o "método" que pueda cambiar las probabilidades. 
+              Las matemáticas no mienten, no negocian y no hacen excepciones.
+            </p>
+          </div>
+        </div>
+        <div class="mt-8 p-6 bg-yellow-100 rounded-lg">
+          <p class="text-lg text-yellow-800">
+            <strong>💡 Alternativa inteligente:</strong> Ese dinero que gastas en lotería cada semana, 
+            inviértelo en un fondo de inversión. En 20 años tendrás un "premio" garantizado.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</MainLayout>

@@ -1,0 +1,334 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+---
+
+<MainLayout 
+  title="Ruleta" 
+  description="Simuladores y análisis completos de ruleta europea y americana. Descubre por qué ningún sistema puede vencer a las matemáticas."
+>
+  
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-br from-red-600 via-black to-red-800 text-white py-20">
+    <div class="container mx-auto px-4 text-center">
+      <div class="max-w-4xl mx-auto">
+        <h1 class="text-4xl md:text-6xl font-bold mb-6">
+          🎲 Ruleta
+        </h1>
+        <p class="text-xl md:text-2xl mb-8 text-red-100">
+          Analiza las probabilidades de la ruleta y descubre 
+          <span class="text-yellow-300 font-semibold">por qué ningún sistema puede vencer a las matemáticas</span>
+        </p>
+        <div class="bg-white/10 backdrop-blur-sm rounded-lg p-6 max-w-2xl mx-auto">
+          <p class="text-red-100 text-lg">
+            🎯 <strong>Simuladores completos:</strong> Desde probabilidades básicas hasta sistemas avanzados
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Navigation Cards -->
+  <section class="py-20 bg-gray-50">
+    <div class="container mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        
+        <!-- Main Simulator -->
+        <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden transform hover:scale-105">
+          <div class="h-48 bg-gradient-to-br from-red-600 to-red-800 flex items-center justify-center relative">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-16 h-16 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
+            </svg>
+            <div class="absolute top-4 right-4 bg-yellow-400 text-yellow-900 px-3 py-1 rounded-full text-sm font-bold">
+              PRINCIPAL
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-2xl font-bold text-gray-900 mb-3">🎯 Simulador Interactivo</h3>
+            <p class="text-gray-600 mb-4">
+              Experimenta con diferentes tipos de apuestas en ruleta europea y americana. Ve en tiempo real cómo las matemáticas favorecen al casino.
+            </p>
+            <div class="mb-4">
+              <span class="inline-block bg-red-100 text-red-800 text-xs px-2 py-1 rounded mr-2">Ruleta Visual</span>
+              <span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded mr-2">Auto-play</span>
+              <span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">Estadísticas</span>
+            </div>
+            <a 
+              href="/roulette/simulator" 
+              class="inline-flex items-center w-full justify-center px-6 py-3 bg-gradient-to-r from-red-600 to-red-800 hover:from-red-700 hover:to-red-900 text-white font-semibold rounded-lg transition-all duration-200"
+            >
+              Simular Ruleta
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Systems Analysis -->
+        <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden transform hover:scale-105">
+          <div class="h-48 bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center relative">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-16 h-16 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+            </svg>
+            <div class="absolute top-4 right-4 bg-red-400 text-red-900 px-3 py-1 rounded-full text-sm font-bold">
+              DEVASTADOR
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-2xl font-bold text-gray-900 mb-3">📈 Análisis de Sistemas</h3>
+            <p class="text-gray-600 mb-4">
+              Prueba Martingala, Fibonacci y D'Alembert. Descubre por qué todos los sistemas están matemáticamente condenados al fracaso.
+            </p>
+            <div class="mb-4">
+              <span class="inline-block bg-red-100 text-red-800 text-xs px-2 py-1 rounded mr-2">Martingala</span>
+              <span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded mr-2">Fibonacci</span>
+              <span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded">D'Alembert</span>
+            </div>
+            <a 
+              href="/roulette/systems" 
+              class="inline-flex items-center w-full justify-center px-6 py-3 bg-gradient-to-r from-gray-700 to-gray-900 hover:from-gray-800 hover:to-black text-white font-semibold rounded-lg transition-all duration-200"
+            >
+              Analizar Sistemas
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Probability Calculator -->
+        <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden transform hover:scale-105">
+          <div class="h-48 bg-gradient-to-br from-blue-600 to-indigo-700 flex items-center justify-center relative">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-16 h-16 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01m3 0h.01m0-3h.01m-3 0h.01m3-3h.01m-3 0h.01M5 8a2 2 0 012-2h10a2 2 0 012 2v8a2 2 0 01-2 2H7a2 2 0 01-2-2V8z" />
+            </svg>
+            <div class="absolute top-4 right-4 bg-blue-400 text-blue-900 px-3 py-1 rounded-full text-sm font-bold">
+              PRECISO
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-2xl font-bold text-gray-900 mb-3">🧮 Calculadora de Probabilidades</h3>
+            <p class="text-gray-600 mb-4">
+              Calcula las probabilidades exactas, pagos esperados y ventaja de la casa para cualquier tipo de apuesta en ruleta.
+            </p>
+            <div class="mb-4">
+              <span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded mr-2">13 Tipos Apuesta</span>
+              <span class="inline-block bg-indigo-100 text-indigo-800 text-xs px-2 py-1 rounded mr-2">Comparador</span>
+              <span class="inline-block bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded">Matemáticas</span>
+            </div>
+            <a 
+              href="/roulette/calculator" 
+              class="inline-flex items-center w-full justify-center px-6 py-3 bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 text-white font-semibold rounded-lg transition-all duration-200"
+            >
+              Calcular Probabilidades
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- House Edge Demo -->
+        <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden transform hover:scale-105">
+          <div class="h-48 bg-gradient-to-br from-green-600 to-green-800 flex items-center justify-center relative">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-16 h-16 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+            </svg>
+            <div class="absolute top-4 right-4 bg-green-400 text-green-900 px-3 py-1 rounded-full text-sm font-bold">
+              REVELADOR
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-2xl font-bold text-gray-900 mb-3">🏠 Ventaja de la Casa</h3>
+            <p class="text-gray-600 mb-4">
+              Visualiza cómo el cero verde garantiza billones al casino. Simulación de convergencia e impacto en el mundo real.
+            </p>
+            <div class="mb-4">
+              <span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded mr-2">Convergencia</span>
+              <span class="inline-block bg-red-100 text-red-800 text-xs px-2 py-1 rounded mr-2">Tiempo Ruina</span>
+              <span class="inline-block bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded">Ganancias Casino</span>
+            </div>
+            <a 
+              href="/roulette/house-edge" 
+              class="inline-flex items-center w-full justify-center px-6 py-3 bg-gradient-to-r from-green-600 to-green-800 hover:from-green-700 hover:to-green-900 text-white font-semibold rounded-lg transition-all duration-200"
+            >
+              Ver Ventaja Casa
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick Facts -->
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-12">
+          <h2 class="text-4xl font-bold text-gray-900 mb-6">🎯 Datos Clave sobre la Ruleta</h2>
+          <p class="text-xl text-gray-600">
+            Conoce los hechos antes de apostar
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+          <div class="bg-green-50 border border-green-200 rounded-lg p-6">
+            <h3 class="text-xl font-bold text-green-800 mb-4">🇪🇺 Ruleta Europea</h3>
+            <div class="space-y-3 text-sm">
+              <div class="flex justify-between">
+                <span class="text-green-700">Números totales:</span>
+                <span class="font-bold">37 (0, 1-36)</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-green-700">Ventaja de la casa:</span>
+                <span class="font-bold">2.70%</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-green-700">Prob. Rojo/Negro:</span>
+                <span class="font-bold">48.65%</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-green-700">RTP promedio:</span>
+                <span class="font-bold">97.30%</span>
+              </div>
+              <div class="flex justify-between border-t pt-2">
+                <span class="text-green-700">Pérdida por €100:</span>
+                <span class="font-bold text-red-600">€2.70</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-red-50 border border-red-200 rounded-lg p-6">
+            <h3 class="text-xl font-bold text-red-800 mb-4">🇺🇸 Ruleta Americana</h3>
+            <div class="space-y-3 text-sm">
+              <div class="flex justify-between">
+                <span class="text-red-700">Números totales:</span>
+                <span class="font-bold">38 (0, 00, 1-36)</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-red-700">Ventaja de la casa:</span>
+                <span class="font-bold">5.26%</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-red-700">Prob. Rojo/Negro:</span>
+                <span class="font-bold">47.37%</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-red-700">RTP promedio:</span>
+                <span class="font-bold">94.74%</span>
+              </div>
+              <div class="flex justify-between border-t pt-2">
+                <span class="text-red-700">Pérdida por €100:</span>
+                <span class="font-bold text-red-600">€5.26</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-6">
+          <h3 class="text-xl font-bold text-yellow-800 mb-4 text-center">⚡ Comparación Rápida</h3>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+            <div>
+              <div class="text-2xl font-bold text-gray-900 mb-2">95%</div>
+              <p class="text-yellow-700 text-sm">Peor para el jugador: Ruleta americana tiene casi el doble de ventaja de casa</p>
+            </div>
+            <div>
+              <div class="text-2xl font-bold text-gray-900 mb-2">€2.56</div>
+              <p class="text-yellow-700 text-sm">Diferencia por cada €100 apostados entre europea vs americana</p>
+            </div>
+            <div>
+              <div class="text-2xl font-bold text-gray-900 mb-2">100%</div>
+              <p class="text-yellow-700 text-sm">Probabilidad de que pierdas dinero si juegas el tiempo suficiente</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Educational Content -->
+  <section class="py-16 bg-gray-50">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-12">
+          <h2 class="text-4xl font-bold text-gray-900 mb-6">🧠 Lo Que Debes Entender</h2>
+          <p class="text-xl text-gray-600">
+            Conocimiento que puede salvarte dinero
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div class="bg-blue-50 border-l-4 border-blue-400 p-6 rounded">
+            <h3 class="text-xl font-bold text-blue-800 mb-3">✅ VERDADES Matemáticas</h3>
+            <ul class="text-blue-700 space-y-2 text-sm">
+              <li><strong>• Cada giro es independiente</strong> - Los resultados pasados no afectan los futuros</li>
+              <li><strong>• El RNG es aleatorio</strong> - No hay patrones, secuencias o máquinas "calientes"</li>
+              <li><strong>• La ventaja es inmutable</strong> - Está en la estructura misma del juego</li>
+              <li><strong>• Los límites de mesa existen</strong> - Para evitar que sistemas como Martingala funcionen</li>
+              <li><strong>• El cero es clave</strong> - Es lo que garantiza las ganancias del casino</li>
+            </ul>
+          </div>
+          
+          <div class="bg-red-50 border-l-4 border-red-400 p-6 rounded">
+            <h3 class="text-xl font-bold text-red-800 mb-3">❌ MITOS Peligrosos</h3>
+            <ul class="text-red-700 space-y-2 text-sm">
+              <li><strong>• "Los números tienen memoria"</strong> - Falacia del jugador clásica</li>
+              <li><strong>• "Martingala siempre funciona"</strong> - Solo hasta que no funciona y pierdes todo</li>
+              <li><strong>• "Puedo predecir patrones"</strong> - Imposible con verdadera aleatoriedad</li>
+              <li><strong>• "Esta mesa está trucada"</strong> - Las matemáticas ya favorecen al casino</li>
+              <li><strong>• "Con suficiente dinero ganaré"</strong> - Límites de mesa y tiempo te detendrán</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="mt-12 bg-white rounded-lg shadow-lg p-8">
+          <h3 class="text-2xl font-bold text-center text-gray-900 mb-6">🎲 La Única Certeza en la Ruleta</h3>
+          <div class="text-center">
+            <div class="text-4xl font-bold text-red-600 mb-4">2.70% - 5.26%</div>
+            <p class="text-lg text-gray-700 mb-4">
+              Esta es la ventaja matemática garantizada del casino en cada giro. 
+              No importa qué estrategia uses, esta ventaja siempre está presente.
+            </p>
+            <div class="bg-gray-100 rounded-lg p-4 max-w-2xl mx-auto">
+              <p class="text-gray-700 font-medium">
+                "La ruleta es un juego perfecto desde la perspectiva del casino: 
+                ofrece la ilusión de que puedes ganar mientras garantiza matemáticamente que ellos ganen."
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="py-16 bg-red-600">
+    <div class="container mx-auto px-4 text-center">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-bold text-white mb-6">🎯 Usa Nuestros Simuladores</h2>
+        <p class="text-xl text-red-100 mb-8">
+          No arriesgues tu dinero real. Usa nuestros simuladores para entender las matemáticas 
+          antes de que te cuesten dinero real.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a 
+            href="/roulette/simulator" 
+            class="bg-white hover:bg-gray-100 text-red-600 font-bold py-3 px-8 rounded-lg transition-all duration-200"
+          >
+            🎯 Simular Ahora
+          </a>
+          <a 
+            href="/roulette/systems" 
+            class="bg-red-800 hover:bg-red-900 text-white font-bold py-3 px-8 rounded-lg transition-all duration-200"
+          >
+            📈 Probar Sistemas
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</MainLayout>

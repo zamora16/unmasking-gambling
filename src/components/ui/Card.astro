@@ -1,0 +1,36 @@
+---
+interface Props {
+  title?: string;
+  subtitle?: string;
+  gradient?: boolean;
+  hover?: boolean;
+  class?: string;
+}
+
+const { 
+  title, 
+  subtitle, 
+  gradient = false, 
+  hover = true, 
+  class: className = '' 
+} = Astro.props;
+
+const baseClasses = 'bg-white rounded-xl shadow-lg overflow-hidden';
+const hoverClasses = hover ? 'hover:shadow-xl transition-shadow duration-300' : '';
+const gradientClasses = gradient ? 'bg-gradient-to-br from-indigo-50 to-purple-50 border border-indigo-200' : '';
+
+const classes = `${baseClasses} ${hoverClasses} ${gradientClasses} ${className}`;
+---
+
+<div class={classes}>
+  {(title || subtitle) && (
+    <div class="p-6 border-b border-gray-200">
+      {title && <h3 class="text-xl font-bold text-gray-900 mb-2">{title}</h3>}
+      {subtitle && <p class="text-gray-600">{subtitle}</p>}
+    </div>
+  )}
+  
+  <div class="p-6">
+    <slot />
+  </div>
+</div>

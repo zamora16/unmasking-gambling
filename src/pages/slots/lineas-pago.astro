@@ -1,0 +1,443 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import PaylineCalculator from '../../components/simulators/PaylineCalculator.tsx';
+---
+
+<MainLayout 
+  title="Calculadora de Líneas de Pago - Slots" 
+  description="Descubre cómo las líneas de pago afectan tu apuesta total y probabilidades en las máquinas tragaperras."
+>
+  
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-br from-green-500 via-blue-500 to-purple-600 text-white py-16">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto text-center">
+        <h1 class="text-4xl md:text-5xl font-bold mb-6">
+          🔢 Calculadora de Líneas de Pago
+        </h1>
+        <p class="text-xl mb-8 text-green-100">
+          Entiende cómo las líneas de pago afectan tu apuesta y 
+          <span class="text-yellow-300 font-semibold">por qué más líneas no significa mejor oportunidad</span>
+        </p>
+        <div class="bg-white/10 backdrop-blur-sm rounded-lg p-6 max-w-2xl mx-auto">
+          <p class="text-green-100 text-lg">
+            💡 <strong>Verdad oculta:</strong> Activar más líneas no mejora tu RTP, 
+            solo multiplica tu apuesta por tirada.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Educational Introduction -->
+  <section class="py-16 bg-gray-50">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6">¿Qué son las Líneas de Pago?</h2>
+          <p class="text-xl text-gray-600">
+            Las líneas de pago son patrones predefinidos que determinan las combinaciones ganadoras en una tragaperras
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-12">
+          <div>
+            <h3 class="text-2xl font-bold text-gray-900 mb-6">🎯 Cómo Funcionan</h3>
+            <p class="text-lg text-gray-700 mb-4">
+              Imagina una slot de 5 rodillos y 3 filas. Las <strong>líneas de pago</strong> 
+              son caminos específicos que conectan símbolos desde el primer rodillo hasta el último.
+            </p>
+            <div class="space-y-4">
+              <div class="bg-blue-100 p-4 rounded-lg">
+                <p class="text-blue-800">
+                  <strong>Línea 1:</strong> Horizontal superior
+                  <br />🍒-🍒-🍒-🍒-🍒 = ¡Ganancia!
+                </p>
+              </div>
+              <div class="bg-green-100 p-4 rounded-lg">
+                <p class="text-green-800">
+                  <strong>Línea 2:</strong> Horizontal central
+                  <br />⭐-⭐-⭐-💎-7️⃣ = ¡3 estrellas ganan!
+                </p>
+              </div>
+              <div class="bg-purple-100 p-4 rounded-lg">
+                <p class="text-purple-800">
+                  <strong>Línea 3:</strong> Diagonal
+                  <br />🍋-💎-🍒-⭐-🍒 = Sin combinación
+                </p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="bg-white p-8 rounded-lg shadow-lg">
+            <h3 class="text-xl font-bold text-center mb-6">Ejemplo Visual 5x3</h3>
+            <div class="grid grid-cols-5 gap-2 mb-4">
+              <div class="w-12 h-12 bg-red-200 rounded flex items-center justify-center text-2xl">🍒</div>
+              <div class="w-12 h-12 bg-red-200 rounded flex items-center justify-center text-2xl">🍒</div>
+              <div class="w-12 h-12 bg-red-200 rounded flex items-center justify-center text-2xl">🍒</div>
+              <div class="w-12 h-12 bg-gray-200 rounded flex items-center justify-center text-2xl">💎</div>
+              <div class="w-12 h-12 bg-gray-200 rounded flex items-center justify-center text-2xl">7️⃣</div>
+              
+              <div class="w-12 h-12 bg-blue-200 rounded flex items-center justify-center text-2xl">⭐</div>
+              <div class="w-12 h-12 bg-blue-200 rounded flex items-center justify-center text-2xl">⭐</div>
+              <div class="w-12 h-12 bg-blue-200 rounded flex items-center justify-center text-2xl">⭐</div>
+              <div class="w-12 h-12 bg-gray-200 rounded flex items-center justify-center text-2xl">🍋</div>
+              <div class="w-12 h-12 bg-gray-200 rounded flex items-center justify-center text-2xl">🍒</div>
+              
+              <div class="w-12 h-12 bg-gray-200 rounded flex items-center justify-center text-2xl">💎</div>
+              <div class="w-12 h-12 bg-gray-200 rounded flex items-center justify-center text-2xl">🍋</div>
+              <div class="w-12 h-12 bg-gray-200 rounded flex items-center justify-center text-2xl">7️⃣</div>
+              <div class="w-12 h-12 bg-gray-200 rounded flex items-center justify-center text-2xl">⭐</div>
+              <div class="w-12 h-12 bg-gray-200 rounded flex items-center justify-center text-2xl">💎</div>
+            </div>
+            <div class="space-y-2 text-sm">
+              <div class="flex items-center">
+                <div class="w-3 h-3 bg-red-400 rounded mr-2"></div>
+                <span>Línea 1: 3 cerezas = €5</span>
+              </div>
+              <div class="flex items-center">
+                <div class="w-3 h-3 bg-blue-400 rounded mr-2"></div>
+                <span>Línea 2: 3 estrellas = €8</span>
+              </div>
+              <div class="flex items-center">
+                <div class="w-3 h-3 bg-gray-400 rounded mr-2"></div>
+                <span>Otras líneas: Sin premio</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- El gran engaño -->
+        <div class="bg-red-50 border-l-4 border-red-400 p-6 rounded-lg mb-12">
+          <h3 class="text-xl font-bold text-red-800 mb-4">🚨 El Gran Engaño de las Líneas</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <h4 class="font-semibold text-red-700 mb-2">Lo que la industria te dice:</h4>
+              <ul class="text-red-700 space-y-1 text-sm">
+                <li>• "¡Más líneas = más oportunidades de ganar!"</li>
+                <li>• "Activa todas las líneas para no perderte premios"</li>
+                <li>• "Solo €0.01 por línea... ¡muy barato!"</li>
+                <li>• "Maximiza tus posibilidades"</li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="font-semibold text-red-700 mb-2">La realidad matemática:</h4>
+              <ul class="text-red-700 space-y-1 text-sm">
+                <li>• Más líneas = mayor coste total por tirada</li>
+                <li>• El RTP se mantiene igual con 1 o 50 líneas</li>
+                <li>• Las ganancias se distribuyen entre más líneas</li>
+                <li>• Pierdes dinero más rápidamente</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Impacto en el gasto -->
+        <div class="bg-yellow-50 border-l-4 border-yellow-400 p-6 rounded-lg">
+          <h3 class="text-xl font-bold text-yellow-800 mb-4">💸 Impacto Real en tu Gasto</h3>
+          <div class="overflow-x-auto">
+            <table class="w-full bg-white rounded border">
+              <thead class="bg-gray-50">
+                <tr>
+                  <th class="border p-3 text-left">Líneas activas</th>
+                  <th class="border p-3 text-center">Apuesta por línea</th>
+                  <th class="border p-3 text-center">Coste por tirada</th>
+                  <th class="border p-3 text-center">100 tiradas</th>
+                  <th class="border p-3 text-center">1 hora (600 tiradas)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="border p-3 font-semibold">1 línea</td>
+                  <td class="border p-3 text-center">€0.10</td>
+                  <td class="border p-3 text-center text-green-600">€0.10</td>
+                  <td class="border p-3 text-center">€10</td>
+                  <td class="border p-3 text-center">€60</td>
+                </tr>
+                <tr class="bg-gray-50">
+                  <td class="border p-3 font-semibold">10 líneas</td>
+                  <td class="border p-3 text-center">€0.10</td>
+                  <td class="border p-3 text-center text-yellow-600">€1.00</td>
+                  <td class="border p-3 text-center">€100</td>
+                  <td class="border p-3 text-center">€600</td>
+                </tr>
+                <tr>
+                  <td class="border p-3 font-semibold">25 líneas</td>
+                  <td class="border p-3 text-center">€0.10</td>
+                  <td class="border p-3 text-center text-orange-600">€2.50</td>
+                  <td class="border p-3 text-center">€250</td>
+                  <td class="border p-3 text-center">€1,500</td>
+                </tr>
+                <tr class="bg-gray-50">
+                  <td class="border p-3 font-semibold">50 líneas</td>
+                  <td class="border p-3 text-center">€0.10</td>
+                  <td class="border p-3 text-center text-red-600">€5.00</td>
+                  <td class="border p-3 text-center">€500</td>
+                  <td class="border p-3 text-center">€3,000</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="text-yellow-700 mt-4 text-sm">
+            <strong>⚠️ Nota:</strong> Con 50 líneas puedes gastar €3,000 en una hora 
+            pensando que solo apuestas "€0.10 por línea".
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Calculator -->
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">Prueba la Calculadora Interactiva</h2>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+          Experimenta con diferentes configuraciones de líneas y observa cómo afecta tu coste total 
+          y la distribución de ganancias. Verás que el RTP permanece constante.
+        </p>
+      </div>
+      
+      <!-- React Component -->
+      <PaylineCalculator client:load />
+    </div>
+  </section>
+
+  <!-- Advanced Concepts -->
+  <section class="py-16 bg-indigo-50">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold text-center text-indigo-900 mb-12">🎓 Conceptos Avanzados</h2>
+        
+        <div class="space-y-8">
+          <div class="bg-white p-6 rounded-lg shadow-lg">
+            <h3 class="text-2xl font-bold text-gray-900 mb-4">📊 Hit Frequency vs Tamaño de Premio</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <h4 class="font-bold text-indigo-700 mb-3">Con Pocas Líneas (1-5):</h4>
+                <ul class="space-y-2 text-gray-700">
+                  <li>• <strong>Hit frequency baja:</strong> Ganas menos frecuentemente</li>
+                  <li>• <strong>Premios más grandes:</strong> Cuando ganas, la cantidad es mayor</li>
+                  <li>• <strong>Sesiones más largas:</strong> Tu dinero dura más tiempo</li>
+                  <li>• <strong>Mayor volatilidad:</strong> Resultados más impredecibles</li>
+                </ul>
+              </div>
+              <div>
+                <h4 class="font-bold text-indigo-700 mb-3">Con Muchas Líneas (20+):</h4>
+                <ul class="space-y-2 text-gray-700">
+                  <li>• <strong>Hit frequency alta:</strong> Ganas más frecuentemente</li>
+                  <li>• <strong>Premios más pequeños:</strong> Ganancias divididas entre líneas</li>
+                  <li>• <strong>Sesiones más cortas:</strong> Tu dinero se agota rápidamente</li>
+                  <li>• <strong>Menor volatilidad:</strong> Pérdidas más consistentes</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white p-6 rounded-lg shadow-lg">
+            <h3 class="text-2xl font-bold text-gray-900 mb-4">🧠 Psicología de las Líneas Múltiples</h3>
+            <p class="text-gray-700 mb-4">
+              Los casinos promueven las líneas múltiples por razones psicológicas específicas:
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div class="bg-red-100 p-4 rounded-lg">
+                <h4 class="font-bold text-red-700 mb-2">Ilusión de Control</h4>
+                <p class="text-red-600 text-sm">
+                  Te hace sentir que "controlas" más el resultado al activar más líneas.
+                </p>
+              </div>
+              <div class="bg-orange-100 p-4 rounded-lg">
+                <h4 class="font-bold text-orange-700 mb-2">Pequeñas Ganancias Frecuentes</h4>
+                <p class="text-orange-600 text-sm">
+                  Las mini-ganancias liberan dopamina y te mantienen jugando.
+                </p>
+              </div>
+              <div class="bg-yellow-100 p-4 rounded-lg">
+                <h4 class="font-bold text-yellow-700 mb-2">Confusión del Coste Real</h4>
+                <p class="text-yellow-600 text-sm">
+                  €0.01 × 50 líneas parece "barato" pero son €0.50 por tirada.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white p-6 rounded-lg shadow-lg">
+            <h3 class="text-2xl font-bold text-gray-900 mb-4">⚖️ Estrategias Comunes (y por qué no funcionan)</h3>
+            <div class="space-y-4">
+              <div class="border-l-4 border-red-400 pl-4">
+                <h4 class="font-bold text-red-700">"Todas las líneas para no perder premios"</h4>
+                <p class="text-gray-600 text-sm">
+                  <strong>Problema:</strong> No "pierdes" premios, simplemente pagas más por la misma experiencia. 
+                  El RNG decide si ganas antes de mostrar los símbolos.
+                </p>
+              </div>
+              
+              <div class="border-l-4 border-orange-400 pl-4">
+                <h4 class="font-bold text-orange-700">"Solo una línea para premios grandes"</h4>
+                <p class="text-gray-600 text-sm">
+                  <strong>Problema:</strong> Los premios no son "más grandes", solo no se dividen. 
+                  El valor esperado por euro apostado es el mismo.
+                </p>
+              </div>
+              
+              <div class="border-l-4 border-yellow-400 pl-4">
+                <h4 class="font-bold text-yellow-700">"Líneas alternas para confundir al RNG"</h4>
+                <p class="text-gray-600 text-sm">
+                  <strong>Problema:</strong> El RNG no se puede "confundir". Es un algoritmo matemático 
+                  que no sabe ni le importa qué líneas tienes activas.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reality Check -->
+  <section class="py-16 bg-red-50">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-3xl font-bold text-red-800 mb-8">🎯 La Verdad Incómoda</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+          <div class="bg-white p-6 rounded-lg shadow-lg">
+            <div class="text-4xl mb-4">📈</div>
+            <h3 class="text-xl font-bold text-gray-900 mb-3">Mismo RTP</h3>
+            <p class="text-gray-600 text-sm">
+              Con 1 línea o 50 líneas, el RTP es idéntico. 
+              Las matemáticas no cambian por activar más líneas.
+            </p>
+          </div>
+
+          <div class="bg-white p-6 rounded-lg shadow-lg">
+            <div class="text-4xl mb-4">💸</div>
+            <h3 class="text-xl font-bold text-gray-900 mb-3">Gasto Multiplicado</h3>
+            <p class="text-gray-600 text-sm">
+              Más líneas significa multiplicar tu apuesta. 
+              Puedes gastar 50 veces más para la misma experiencia.
+            </p>
+          </div>
+
+          <div class="bg-white p-6 rounded-lg shadow-lg">
+            <div class="text-4xl mb-4">🎭</div>
+            <h3 class="text-xl font-bold text-gray-900 mb-3">Ilusión de Oportunidad</h3>
+            <p class="text-gray-600 text-sm">
+              Más líneas te hace sentir que tienes "más oportunidades", 
+              pero solo dispersan las mismas pérdidas.
+            </p>
+          </div>
+        </div>
+
+        <div class="bg-white p-8 rounded-lg shadow-lg">
+          <h3 class="text-2xl font-bold text-gray-900 mb-4">💡 La Fórmula de la Realidad</h3>
+          <div class="text-lg text-gray-700 space-y-4">
+            <p>
+              <strong>Pérdida esperada</strong> = (Líneas × Apuesta por línea) × (100% - RTP) × Número de tiradas
+            </p>
+            <div class="bg-gray-50 p-4 rounded text-sm">
+              <p><strong>Ejemplo:</strong></p>
+              <p>• 1 línea × €0.50 × 5% pérdida × 100 tiradas = <span class="text-green-600">€2.50 perdidos</span></p>
+              <p>• 25 líneas × €0.50 × 5% pérdida × 100 tiradas = <span class="text-red-600">€62.50 perdidos</span></p>
+            </div>
+            <p class="font-semibold text-red-600">
+              Mismo RTP, pero 25 veces más pérdidas totales.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Practical Advice -->
+  <section class="py-16 bg-gray-900 text-white">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold text-center mb-12">💡 Consejos Prácticos</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+          <div class="bg-white/10 p-6 rounded-lg">
+            <h3 class="text-xl font-bold text-green-400 mb-4">✅ Si decides jugar (solo entretenimiento)</h3>
+            <ul class="space-y-3">
+              <li class="flex items-start">
+                <span class="text-green-400 mr-2">•</span>
+                <span>Calcula siempre tu <strong>apuesta total</strong> por tirada</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-green-400 mr-2">•</span>
+                <span>Establece un presupuesto máximo antes de empezar</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-green-400 mr-2">•</span>
+                <span>Elige líneas basándote en tu presupuesto, no en la esperanza</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-green-400 mr-2">•</span>
+                <span>Menos líneas = sesiones más largas con el mismo dinero</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="bg-white/10 p-6 rounded-lg">
+            <h3 class="text-xl font-bold text-red-400 mb-4">❌ Evita estos errores</h3>
+            <ul class="space-y-3">
+              <li class="flex items-start">
+                <span class="text-red-400 mr-2">•</span>
+                <span>No actives todas las líneas "por si acaso"</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-red-400 mr-2">•</span>
+                <span>No te focuses solo en la apuesta por línea</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-red-400 mr-2">•</span>
+                <span>No busques estrategias de líneas "ganadoras"</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-red-400 mr-2">•</span>
+                <span>No creas que más líneas mejoran tus posibilidades</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="bg-yellow-500/20 border border-yellow-400 p-6 rounded-lg text-center">
+          <h3 class="text-xl font-bold text-yellow-300 mb-3">🎯 Recuerda Siempre</h3>
+          <p class="text-lg">
+            Las líneas de pago son parte del diseño del juego, no una estrategia para ganar dinero. 
+            <strong>La única forma garantizada de no perder dinero en las tragaperras es no jugar.</strong>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to Action -->
+  <section class="py-16 bg-gray-100">
+    <div class="container mx-auto px-4 text-center">
+      <h2 class="text-3xl font-bold mb-6 text-gray-900">¿Quieres Entender Más Sobre el Gambling?</h2>
+      <p class="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+        Explora nuestro camino completo de educación sobre gambling responsable 
+        y aprende a protegerte de los riesgos.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a 
+          href="/the-way" 
+          class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-gray-900 font-bold rounded-full transition-all duration-300"
+        >
+          🚀 Iniciar El Camino
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M12 5l7 7-7 7" />
+          </svg>
+        </a>
+        <a 
+          href="/slots" 
+          class="inline-flex items-center px-8 py-4 bg-transparent border-2 border-gray-600 text-gray-700 font-semibold rounded-full hover:bg-gray-600 hover:text-white transition-all duration-300"
+        >
+          🎰 Más sobre Slots
+        </a>
+      </div>
+    </div>
+  </section>
+
+</MainLayout>

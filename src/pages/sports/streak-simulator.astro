@@ -1,0 +1,666 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+---
+
+<MainLayout 
+  title="Simulador de Rachas - El Survivorship Bias" 
+  description="Simula 1000 apostadores aleatorios y descubre por qué tu racha de 10 aciertos no significa nada. El survivorship bias explicado."
+>
+  
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-br from-green-600 via-emerald-600 to-green-800 text-white py-20">
+    <div class="container mx-auto px-4 text-center">
+      <div class="max-w-4xl mx-auto">
+        <h1 class="text-4xl md:text-6xl font-bold mb-6">
+          📈 Simulador de Rachas
+        </h1>
+        <p class="text-xl md:text-2xl mb-8 text-green-100">
+          ¿Tu racha de 10 aciertos demuestra habilidad? 
+          <span class="text-yellow-300 font-semibold">Simula 1000 apostadores y descúbrelo</span>
+        </p>
+        <div class="bg-white/10 backdrop-blur-sm rounded-lg p-6 max-w-2xl mx-auto">
+          <p class="text-green-100 text-lg">
+            🎭 <strong>Survivorship Bias:</strong> Solo oyes de los que tuvieron suerte
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick Explanation -->
+  <section class="py-12 bg-yellow-50 border-b border-yellow-200">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-8">
+          <h2 class="text-2xl font-bold text-yellow-800 mb-4">🤔 ¿Qué Vamos a Demostrar?</h2>
+          <p class="text-yellow-700 text-lg">
+            Que las rachas ganadoras son <strong>completamente normales</strong> estadísticamente, 
+            incluso con apuestas aleatorias. Tu racha de 8-10 aciertos no te convierte en experto.
+          </p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+          <div class="bg-white rounded-lg p-4 border border-yellow-200">
+            <div class="text-2xl font-bold text-green-600">✅</div>
+            <div class="text-sm text-gray-700 mt-2">
+              <strong>Lo que ves:</strong><br>
+              "Este tipster acertó 12 seguidas"
+            </div>
+          </div>
+          <div class="bg-white rounded-lg p-4 border border-yellow-200">
+            <div class="text-2xl font-bold text-red-600">❌</div>
+            <div class="text-sm text-gray-700 mt-2">
+              <strong>Lo que NO ves:</strong><br>
+              Los 999 que fallaron antes
+            </div>
+          </div>
+          <div class="bg-white rounded-lg p-4 border border-yellow-200">
+            <div class="text-2xl font-bold text-blue-600">🧠</div>
+            <div class="text-sm text-gray-700 mt-2">
+              <strong>La realidad:</strong><br>
+              Pura suerte matemática
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Simulator Interface -->
+  <section class="py-16 bg-gray-50">
+    <div class="container mx-auto px-4">
+      <div class="max-w-6xl mx-auto">
+        
+        <!-- Controls -->
+        <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
+          <h3 class="text-2xl font-bold text-gray-900 mb-6">⚙️ Configuración de la Simulación</h3>
+          
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-2">Número de Apostadores</label>
+              <select id="numBettors" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500">
+                <option value="100">100 apostadores</option>
+                <option value="500">500 apostadores</option>
+                <option value="1000" selected>1000 apostadores</option>
+                <option value="2000">2000 apostadores</option>
+              </select>
+            </div>
+            
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-2">Apuestas por Apostador</label>
+              <select id="betsPerBettor" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500">
+                <option value="20">20 apuestas</option>
+                <option value="50" selected>50 apuestas</option>
+                <option value="100">100 apuestas</option>
+                <option value="200">200 apuestas</option>
+              </select>
+            </div>
+            
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-2">Probabilidad de Acierto</label>
+              <select id="winRate" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500">
+                <option value="0.45">45% (Malo)</option>
+                <option value="0.50" selected>50% (Aleatorio)</option>
+                <option value="0.55">55% (Bueno)</option>
+                <option value="0.60">60% (Muy Bueno)</option>
+              </select>
+            </div>
+            
+            <div class="flex items-end">
+              <button 
+                onclick="runSimulation()" 
+                id="simulateBtn"
+                class="w-full bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-200"
+              >
+                🎲 Simular
+              </button>
+            </div>
+          </div>
+          
+          <!-- Survivorship Filter -->
+          <div class="border-t border-gray-200 pt-6">
+            <h4 class="text-lg font-semibold text-gray-800 mb-4">🎭 Filtro de Survivorship Bias</h4>
+            <div class="flex flex-wrap gap-3">
+              <button onclick="showAll()" class="filter-btn active bg-gray-600 text-white px-4 py-2 rounded-lg text-sm font-medium">
+                👁️ Mostrar Todos
+              </button>
+              <button onclick="filterByStreak(5)" class="filter-btn bg-blue-100 text-blue-800 px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-200">
+                Solo Racha 5+
+              </button>
+              <button onclick="filterByStreak(8)" class="filter-btn bg-green-100 text-green-800 px-4 py-2 rounded-lg text-sm font-medium hover:bg-green-200">
+                Solo Racha 8+
+              </button>
+              <button onclick="filterByStreak(10)" class="filter-btn bg-yellow-100 text-yellow-800 px-4 py-2 rounded-lg text-sm font-medium hover:bg-yellow-200">
+                Solo Racha 10+
+              </button>
+              <button onclick="filterByStreak(15)" class="filter-btn bg-red-100 text-red-800 px-4 py-2 rounded-lg text-sm font-medium hover:bg-red-200">
+                Solo Racha 15+
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Results -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          
+          <!-- Main Chart -->
+          <div class="bg-white rounded-xl shadow-lg p-6">
+            <h3 class="text-xl font-bold text-gray-900 mb-4">📊 Distribución de Rachas Máximas</h3>
+            <div id="chartContainer" class="h-80">
+              <div class="flex items-center justify-center h-full text-gray-500">
+                👆 Ejecuta la simulación para ver los resultados
+              </div>
+            </div>
+          </div>
+          
+          <!-- Statistics -->
+          <div class="bg-white rounded-xl shadow-lg p-6">
+            <h3 class="text-xl font-bold text-gray-900 mb-4">📈 Estadísticas de Rachas</h3>
+            <div id="streakStats" class="space-y-4">
+              <div class="text-center text-gray-500 py-8">
+                📊 Las estadísticas aparecerán después de la simulación
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Survivorship Analysis -->
+        <div class="bg-white rounded-xl shadow-lg p-6 mt-8" id="survivorshipAnalysis" style="display: none;">
+          <h3 class="text-xl font-bold text-gray-900 mb-4">🎭 Análisis de Survivorship Bias</h3>
+          <div id="biasAnalysis"></div>
+        </div>
+
+        <!-- Live Feed -->
+        <div class="bg-white rounded-xl shadow-lg p-6 mt-8">
+          <h3 class="text-xl font-bold text-gray-900 mb-4">📺 Feed en Vivo de "Expertos"</h3>
+          <p class="text-gray-600 mb-4">
+            Así es como verías a estos apostadores en redes sociales (solo se promocionan los que tienen rachas):
+          </p>
+          <div id="liveFeed" class="space-y-3 max-h-60 overflow-y-auto bg-gray-50 p-4 rounded-lg">
+            <div class="text-center text-gray-500 py-4">
+              🎪 El "feed de expertos" aparecerá durante la simulación
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Educational Content -->
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold text-center text-gray-900 mb-12">🧠 ¿Por Qué Funciona Este Engaño?</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          
+          <!-- Survivorship Bias -->
+          <div class="bg-red-50 border border-red-200 rounded-lg p-6">
+            <h3 class="text-xl font-bold text-red-800 mb-4">🎭 Survivorship Bias</h3>
+            <div class="text-red-700 space-y-3 text-sm">
+              <div>
+                <strong>• Solo ves a los "ganadores":</strong><br>
+                Los tipsters que fallan desaparecen
+              </div>
+              <div>
+                <strong>• Sesgo de supervivencia:</strong><br>
+                Solo quedan los que tuvieron suerte
+              </div>
+              <div>
+                <strong>• Ilusión de habilidad:</strong><br>
+                Confundes suerte con talento
+              </div>
+              <div class="bg-red-100 p-3 rounded border-l-4 border-red-400">
+                <strong>⚠️ Realidad:</strong> De 1000 apostadores aleatorios, algunos tendrán rachas de 15+ por pura suerte.
+              </div>
+            </div>
+          </div>
+
+          <!-- Mathematical Reality -->
+          <div class="bg-blue-50 border border-blue-200 rounded-lg p-6">
+            <h3 class="text-xl font-bold text-blue-800 mb-4">🔢 Realidad Matemática</h3>
+            <div class="text-blue-700 space-y-3 text-sm">
+              <div>
+                <strong>• Probabilidad de racha de 10:</strong><br>
+                ~0.1% (1 de cada 1000)
+              </div>
+              <div>
+                <strong>• Con 1000 apostadores:</strong><br>
+                Estadísticamente, 1 tendrá racha de 10
+              </div>
+              <div>
+                <strong>• Ese 1 se promociona:</strong><br>
+                "¡Acerté 10 seguidas!"
+              </div>
+              <div class="bg-blue-100 p-3 rounded border-l-4 border-blue-400">
+                <strong>💡 Conclusión:</strong> Las rachas largas son inevitables con suficientes intentos.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Examples -->
+        <div class="mt-12">
+          <h3 class="text-2xl font-bold text-center text-gray-900 mb-8">📱 Ejemplos Reales del Survivorship Bias</h3>
+          
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+              <h4 class="font-bold text-yellow-800 mb-2">📈 Crypto "Expertos"</h4>
+              <p class="text-yellow-700 text-sm">
+                De 10,000 que predicen Bitcoin, algunos aciertan 5 veces seguidas por suerte. 
+                Esos se vuelven "gurús".
+              </p>
+            </div>
+            
+            <div class="bg-green-50 border border-green-200 rounded-lg p-4">
+              <h4 class="font-bold text-green-800 mb-2">🏆 Fondos de Inversión</h4>
+              <p class="text-green-700 text-sm">
+                Solo promocionan los fondos que tuvieron años buenos. 
+                Los malos se cierran silenciosamente.
+              </p>
+            </div>
+            
+            <div class="bg-purple-50 border border-purple-200 rounded-lg p-4">
+              <h4 class="font-bold text-purple-800 mb-2">⚽ Tipsters Deportivos</h4>
+              <p class="text-purple-700 text-sm">
+                Crean 100 cuentas, promocionan solo la que tuvo suerte. 
+                "¡Racha de 12 aciertos!"
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="py-16 bg-green-600">
+    <div class="container mx-auto px-4 text-center">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-bold text-white mb-6">🎯 La Próxima Vez que Veas una Racha...</h2>
+        <p class="text-xl text-green-100 mb-8">
+          Recuerda: por cada "experto" con racha de 10 aciertos, hay 1000 que fallaron y no los ves. 
+          Las rachas no demuestran habilidad, solo suerte estadística.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a 
+            href="/sports" 
+            class="bg-white hover:bg-gray-100 text-green-600 font-bold py-3 px-6 rounded-lg transition-all duration-200"
+          >
+            🏈 Más Simuladores
+          </a>
+          <a 
+            href="/the-way" 
+            class="bg-green-800 hover:bg-green-900 text-white font-bold py-3 px-6 rounded-lg transition-all duration-200"
+          >
+            🛤️ El Camino (Salir del Juego)
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</MainLayout>
+
+<script client:load>
+  let simulationData = [];
+  let currentFilter = 'all';
+  
+  // Wait for DOM to be fully loaded
+  document.addEventListener('DOMContentLoaded', function() {
+    console.log('Streak simulator loaded');
+  });
+  
+  function runSimulation() {
+    console.log('Starting simulation...');
+    const numBettors = parseInt(document.getElementById('numBettors').value);
+    const betsPerBettor = parseInt(document.getElementById('betsPerBettor').value);
+    const winRate = parseFloat(document.getElementById('winRate').value);
+    
+    console.log('Parameters:', { numBettors, betsPerBettor, winRate });
+    
+    const btn = document.getElementById('simulateBtn');
+    btn.textContent = '🔄 Simulando...';
+    btn.disabled = true;
+    
+    // Clear previous results
+    document.getElementById('liveFeed').innerHTML = '<div class="text-center text-gray-500 py-4">🎪 Simulando apostadores...</div>';
+    
+    setTimeout(() => {
+      try {
+        simulationData = simulateBettors(numBettors, betsPerBettor, winRate);
+        console.log('Simulation data:', simulationData.length, 'bettors');
+        updateChart();
+        updateStats();
+        updateLiveFeed();
+        showAll(); // Reset filter
+        
+        btn.textContent = '🎲 Simular Otra Vez';
+        btn.disabled = false;
+      } catch (error) {
+        console.error('Simulation error:', error);
+        btn.textContent = '❌ Error - Intentar de nuevo';
+        btn.disabled = false;
+      }
+    }, 100);
+  }
+  
+  function simulateBettors(numBettors, betsPerBettor, winRate) {
+    const bettors = [];
+    
+    for (let i = 0; i < numBettors; i++) {
+      const bettor = {
+        id: i + 1,
+        bets: [],
+        maxStreak: 0,
+        currentStreak: 0,
+        totalWins: 0
+      };
+      
+      // Simulate bets for this bettor
+      for (let j = 0; j < betsPerBettor; j++) {
+        const won = Math.random() < winRate;
+        bettor.bets.push(won);
+        
+        if (won) {
+          bettor.currentStreak++;
+          bettor.totalWins++;
+          bettor.maxStreak = Math.max(bettor.maxStreak, bettor.currentStreak);
+        } else {
+          bettor.currentStreak = 0;
+        }
+      }
+      
+      bettors.push(bettor);
+    }
+    
+    return bettors;
+  }
+  
+  function updateChart() {
+    // Create histogram of max streaks
+    const streakCounts = {};
+    simulationData.forEach(bettor => {
+      const streak = bettor.maxStreak;
+      streakCounts[streak] = (streakCounts[streak] || 0) + 1;
+    });
+    
+    // Create chart data
+    const maxStreak = Math.max(...Object.keys(streakCounts).map(Number));
+    const chartData = [];
+    
+    for (let i = 0; i <= maxStreak; i++) {
+      chartData.push({
+        streak: i,
+        count: streakCounts[i] || 0
+      });
+    }
+    
+    renderChart(chartData);
+  }
+  
+  function renderChart(data) {
+    const container = document.getElementById('chartContainer');
+    if (!container) {
+      console.error('Chart container not found');
+      return;
+    }
+    
+    const maxCount = Math.max(...data.map(d => d.count));
+    
+    let html = '<div class="space-y-1">';
+    
+    data.forEach(d => {
+      if (d.count > 0) {
+        const percentage = maxCount > 0 ? (d.count / maxCount) * 100 : 0;
+        const barColor = getStreakColor(d.streak);
+        
+        html += `
+          <div class="flex items-center space-x-3">
+            <div class="w-8 text-xs text-gray-600 text-right">${d.streak}</div>
+            <div class="flex-1 bg-gray-200 rounded-full h-6 relative">
+              <div 
+                class="${barColor} h-6 rounded-full flex items-center justify-end pr-2" 
+                style="width: ${percentage}%"
+              >
+                <span class="text-xs font-bold text-white">${d.count}</span>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+    });
+    
+    html += '</div>';
+    html += '<div class="text-xs text-gray-500 mt-4 text-center">Racha máxima → Número de apostadores</div>';
+    
+    container.innerHTML = html;
+  }
+  
+  function getStreakColor(streak) {
+    if (streak >= 15) return 'bg-red-600';
+    if (streak >= 10) return 'bg-red-500';
+    if (streak >= 8) return 'bg-yellow-500';
+    if (streak >= 5) return 'bg-green-500';
+    return 'bg-gray-400';
+  }
+  
+  function updateStats() {
+    const totalBettors = simulationData.length;
+    const streaks = simulationData.map(b => b.maxStreak);
+    
+    const stats = {
+      total: totalBettors,
+      streak5Plus: streaks.filter(s => s >= 5).length,
+      streak8Plus: streaks.filter(s => s >= 8).length,
+      streak10Plus: streaks.filter(s => s >= 10).length,
+      streak15Plus: streaks.filter(s => s >= 15).length,
+      maxStreak: Math.max(...streaks),
+      avgStreak: (streaks.reduce((a, b) => a + b, 0) / totalBettors).toFixed(1)
+    };
+    
+    const html = `
+      <div class="space-y-4">
+        <div class="bg-gray-50 rounded-lg p-4">
+          <div class="text-2xl font-bold text-gray-900">${stats.total}</div>
+          <div class="text-gray-600">Total apostadores</div>
+        </div>
+        
+        <div class="space-y-3">
+          <div class="flex justify-between items-center">
+            <span class="text-gray-700">Racha 5+ aciertos:</span>
+            <span class="font-bold text-green-600">${stats.streak5Plus} (${((stats.streak5Plus/stats.total)*100).toFixed(1)}%)</span>
+          </div>
+          <div class="flex justify-between items-center">
+            <span class="text-gray-700">Racha 8+ aciertos:</span>
+            <span class="font-bold text-yellow-600">${stats.streak8Plus} (${((stats.streak8Plus/stats.total)*100).toFixed(1)}%)</span>
+          </div>
+          <div class="flex justify-between items-center">
+            <span class="text-gray-700">Racha 10+ aciertos:</span>
+            <span class="font-bold text-orange-600">${stats.streak10Plus} (${((stats.streak10Plus/stats.total)*100).toFixed(1)}%)</span>
+          </div>
+          <div class="flex justify-between items-center">
+            <span class="text-gray-700">Racha 15+ aciertos:</span>
+            <span class="font-bold text-red-600">${stats.streak15Plus} (${((stats.streak15Plus/stats.total)*100).toFixed(1)}%)</span>
+          </div>
+        </div>
+        
+        <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
+          <div class="text-lg font-bold text-blue-800">Racha más larga: ${stats.maxStreak} aciertos</div>
+          <div class="text-blue-600 text-sm">Promedio: ${stats.avgStreak} aciertos</div>
+        </div>
+        
+        <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-3">
+          <div class="text-yellow-800 text-sm">
+            <strong>💡 Recuerda:</strong> Estas rachas son con apuestas completamente aleatorias. 
+            ${stats.streak10Plus > 0 ? `${stats.streak10Plus} apostador(es) tuvieron rachas de 10+ por pura suerte.` : 'Con más apostadores, algunos tendrían rachas de 10+.'}
+          </div>
+        </div>
+      </div>
+    `;
+    
+    const statsContainer = document.getElementById('streakStats');
+    if (statsContainer) {
+      statsContainer.innerHTML = html;
+    }
+  }
+  
+  function updateLiveFeed() {
+    // Show only bettors with streaks of 5+, sorted by max streak
+    const influencers = simulationData
+      .filter(b => b.maxStreak >= 5)
+      .sort((a, b) => b.maxStreak - a.maxStreak)
+      .slice(0, 10); // Top 10
+    
+    let html = '';
+    
+    if (influencers.length === 0) {
+      html = '<div class="text-center text-gray-500 py-4">🤷 Ningún "experto" emergió en esta simulación. ¡Prueba con más apostadores!</div>';
+    } else {
+      html = '<div class="space-y-3">';
+      
+      influencers.forEach((bettor, index) => {
+        const emoji = index === 0 ? '👑' : index < 3 ? '🌟' : '💎';
+        const winRate = ((bettor.totalWins / bettor.bets.length) * 100).toFixed(1);
+        
+        html += `
+          <div class="bg-gradient-to-r from-blue-50 to-green-50 border border-blue-200 rounded-lg p-3">
+            <div class="flex items-start justify-between">
+              <div class="flex-1">
+                <div class="font-bold text-gray-900">
+                  ${emoji} @ExpertoApuestas${bettor.id}
+                </div>
+                <div class="text-green-600 font-semibold">
+                  🔥 ¡${bettor.maxStreak} ACIERTOS SEGUIDOS! 
+                </div>
+                <div class="text-gray-600 text-sm">
+                  ${winRate}% de aciertos en ${bettor.bets.length} apuestas
+                </div>
+              </div>
+              <div class="text-blue-600 text-xs">
+                💬 ${Math.floor(Math.random() * 500) + 100} respuestas
+              </div>
+            </div>
+          </div>
+        `;
+      });
+      
+      html += '</div>';
+      
+      html += `
+        <div class="bg-red-50 border border-red-200 rounded-lg p-4 mt-4">
+          <div class="text-red-800 text-sm">
+            <strong>🎭 Survivorship Bias en acción:</strong> 
+            Solo ves a estos ${influencers.length} "expertos" de ${simulationData.length} apostadores totales. 
+            Los otros ${simulationData.length - influencers.length} que no tuvieron suerte simplemente no se promocionan.
+          </div>
+        </div>
+      `;
+    }
+    
+    const feedContainer = document.getElementById('liveFeed');
+    if (feedContainer) {
+      feedContainer.innerHTML = html;
+    }
+  }
+  
+  function filterByStreak(minStreak) {
+    currentFilter = minStreak;
+    updateFilterButtons();
+    showSurvivorshipAnalysis(minStreak);
+  }
+  
+  function showAll() {
+    currentFilter = 'all';
+    updateFilterButtons();
+    const analysisContainer = document.getElementById('survivorshipAnalysis');
+    if (analysisContainer) {
+      analysisContainer.style.display = 'none';
+    }
+  }
+  
+  function updateFilterButtons() {
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.classList.remove('active', 'bg-gray-600', 'text-white');
+      btn.classList.add('bg-gray-100', 'text-gray-800', 'hover:bg-gray-200');
+    });
+    
+    if (currentFilter === 'all') {
+      const showAllBtn = document.querySelector('button[onclick="showAll()"]');
+      if (showAllBtn) {
+        showAllBtn.classList.add('active', 'bg-gray-600', 'text-white');
+      }
+    } else {
+      const filterBtn = document.querySelector(`button[onclick="filterByStreak(${currentFilter})"]`);
+      if (filterBtn) {
+        filterBtn.classList.add('active', 'bg-gray-600', 'text-white');
+      }
+    }
+  }
+  
+  function showSurvivorshipAnalysis(minStreak) {
+    if (!simulationData.length) return;
+    
+    const total = simulationData.length;
+    const filtered = simulationData.filter(b => b.maxStreak >= minStreak);
+    const percentage = ((filtered.length / total) * 100).toFixed(1);
+    
+    const html = `
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <h4 class="text-lg font-bold text-gray-800 mb-3">📊 Filtro Aplicado: Racha ${minStreak}+</h4>
+          <div class="space-y-3">
+            <div class="bg-gray-100 rounded-lg p-4">
+              <div class="text-2xl font-bold text-gray-900">${filtered.length} de ${total}</div>
+              <div class="text-gray-600">Apostadores "exitosos" (${percentage}%)</div>
+            </div>
+            <div class="text-sm text-gray-700">
+              Si solo vieras a estos ${filtered.length} apostadores, pensarías que las rachas de ${minStreak}+ son comunes y demuestran habilidad.
+            </div>
+          </div>
+        </div>
+        
+        <div>
+          <h4 class="text-lg font-bold text-gray-800 mb-3">🎭 El Engaño</h4>
+          <div class="bg-red-50 border border-red-200 rounded-lg p-4">
+            <div class="text-red-700 space-y-2 text-sm">
+              <div><strong>• Ocultaste:</strong> ${total - filtered.length} apostadores (${(100 - parseFloat(percentage)).toFixed(1)}%)</div>
+              <div><strong>• Solo muestras:</strong> Los ${filtered.length} "afortunados"</div>
+              <div><strong>• Conclusión falsa:</strong> "Las rachas demuestran habilidad"</div>
+            </div>
+          </div>
+          <div class="mt-3 text-xs text-gray-600">
+            Esto es exactamente lo que hacen los tipsters: solo promocionan los éxitos, ocultan los fallos.
+          </div>
+        </div>
+      </div>
+    `;
+    
+    const biasContainer = document.getElementById('biasAnalysis');
+    const analysisContainer = document.getElementById('survivorshipAnalysis');
+    
+    if (biasContainer && analysisContainer) {
+      biasContainer.innerHTML = html;
+      analysisContainer.style.display = 'block';
+    }
+  }
+  
+  // Make functions global so onclick handlers work
+  window.runSimulation = runSimulation;
+  window.filterByStreak = filterByStreak;
+  window.showAll = showAll;
+</script>
+
+<style>
+  .filter-btn.active {
+    @apply bg-gray-600 text-white;
+  }
+  
+  .filter-btn:not(.active) {
+    @apply bg-gray-100 text-gray-800 hover:bg-gray-200;
+  }
+  
+  .filter-btn {
+    transition: all 0.2s ease;
+  }
+</style>
