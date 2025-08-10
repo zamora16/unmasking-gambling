@@ -48,3 +48,40 @@ temp/
 
 # Astro
 .astro
+
+# === ARCHIVOS TEMPORALES Y SCRIPTS DE DESARROLLO ===
+# Scripts temporales de desarrollo
+*.bat
+*.sh
+!deploy.sh
+
+# Documentación temporal (mantener solo README.md)
+DEPLOY.md
+INSTALACION.md
+INSTRUCCIONES-*.md
+GITHUB-PAGES-*.md
+NAVIGATION-*.md
+RESUMEN-*.md
+RUTAS-*.md
+LOTTERY-*.md
+*-FIX.md
+*-PROBLEM-*.md
+
+# Archivos de limpieza
+clean-repo.bat
+fix-*.bat
+test-*.bat
+deploy-*.bat
+commit-*.bat
+build-*.bat
+check-*.bat
+diagnose-*.bat
+explain-*.bat
+recreate-*.bat
+verificar-*.bat
+activate-*.bat
+complete-*.bat
+
+# Archivos de shell temporales
+fix-*.sh
+check-*.sh

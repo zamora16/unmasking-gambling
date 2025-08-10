@@ -1,169 +1,101 @@
-# 🎰 Unmasking Gambling - Astro
+# 🎯 Unmasking Gambling
 
-Una plataforma educativa moderna sobre los riesgos del gambling y juego responsable, construida con Astro, React y Tailwind CSS.
+Una plataforma educativa interactiva diseñada para ayudar a las personas a entender los riesgos del gambling y promover decisiones informadas.
 
-## 🚀 Características
+## 🌟 Características
 
-- **🎯 Simulador interactivo de slots** con gráficos en tiempo real
-- **🛤️ "El Camino"** - Guía interactiva de 6 pasos para juego responsable
-- **📊 Visualizaciones de datos** sobre RTP y probabilidades
-- **🆘 Recursos de ayuda** completos y actualizados
-- **📱 Diseño responsive** optimizado para móviles
-- **⚡ Rendimiento excepcional** gracias a Astro
-- **🔍 SEO optimizado** para máxima visibilidad
+- **Simuladores Interactivos**: Demuestra matemáticamente por qué la casa siempre gana
+- **El Camino**: Guía paso a paso para la recuperación y prevención
+- **Recursos Educativos**: Información basada en evidencia sobre gambling responsable
+- **Herramientas de Autoayuda**: Calculadoras y evaluaciones personalizadas
+- **Recursos de Apoyo**: Enlaces a organizaciones profesionales de ayuda
+
+## 🚀 Inicio Rápido
+
+### Prerrequisitos
+- Node.js 18+ 
+- npm o yarn
+
+### Instalación
+
+```bash
+# Clonar el repositorio
+git clone https://github.com/tu-usuario/unmasking-gambling.git
+
+# Entrar al directorio
+cd unmasking-gambling
+
+# Instalar dependencias
+npm install
+
+# Ejecutar en desarrollo
+npm run dev
+```
+
+### Scripts Disponibles
+
+```bash
+npm run dev          # Servidor de desarrollo
+npm run build        # Build para producción
+npm run preview      # Preview del build
+npm run astro        # CLI de Astro
+```
 
 ## 🛠️ Tecnologías
 
 - **[Astro](https://astro.build/)** - Framework web moderno
-- **[React](https://reactjs.org/)** - Para componentes interactivos
-- **[TypeScript](https://www.typescriptlang.org/)** - Tipado estático
-- **[Tailwind CSS](https://tailwindcss.com/)** - Estilos utilitarios
-- **[Lightweight Charts](https://tradingview.github.io/lightweight-charts/)** - Gráficos financieros
-
-## 📦 Instalación
-
-1. **Instala las dependencias:**
-   ```bash
-   npm install
-   ```
-
-2. **Inicia el servidor de desarrollo:**
-   ```bash
-   npm run dev
-   ```
-
-3. **Construye para producción:**
-   ```bash
-   npm run build
-   ```
-
-4. **Preview de la build:**
-   ```bash
-   npm run preview
-   ```
+- **[Tailwind CSS](https://tailwindcss.com/)** - Framework de CSS
+- **[TypeScript](https://www.typescriptlang.org/)** - JavaScript tipado
+- **[Chart.js](https://www.chartjs.org/)** - Gráficos interactivos
 
 ## 📁 Estructura del Proyecto
 
 ```
-unmasking-gambling-astro/
-├── src/
-│   ├── layouts/
-│   │   └── MainLayout.astro          # Layout principal
-│   ├── components/
-│   │   ├── layout/
-│   │   │   ├── Header.astro          # Navegación principal
-│   │   │   └── Footer.astro          # Pie de página
-│   │   └── simulators/
-│   │       └── SlotSimulator.tsx     # Simulador interactivo
-│   ├── pages/
-│   │   ├── index.astro               # Página principal
-│   │   ├── ayuda.astro               # Recursos de ayuda
-│   │   ├── slots/
-│   │   │   ├── index.astro           # Sección de slots
-│   │   │   └── rtp.astro             # Simulador RTP
-│   │   ├── sports/
-│   │   │   └── index.astro           # Apuestas deportivas
-│   │   ├── roulette/
-│   │   │   └── index.astro           # Ruleta
-│   │   └── the-way/
-│   │       ├── index.astro           # El Camino - Principal
-│   │       ├── paso-1.astro          # Paso 1: ¿Por qué adictivo?
-│   │       ├── paso-2.astro          # Paso 2: Reconocer problema
-│   │       ├── paso-3.astro          # Paso 3: Sesgos mentales
-│   │       ├── paso-4.astro          # Paso 4: Autocontrol
-│   │       ├── paso-5.astro          # Paso 5: Plan personal
-│   │       └── paso-6.astro          # Paso 6: Red de apoyo
-│   └── public/
-│       └── images/                   # Imágenes y assets
-├── package.json
-├── astro.config.mjs
-├── tailwind.config.mjs
-└── tsconfig.json
+src/
+├── components/     # Componentes reutilizables
+├── layouts/        # Layouts de página
+├── pages/          # Páginas del sitio
+├── styles/         # Estilos globales
+└── utils/          # Utilidades y helpers
+
+public/
+├── images/         # Imágenes estáticas
+└── favicon.ico     # Favicon
 ```
 
-## 🎯 Funcionalidades Principales
+## 🌍 Despliegue
 
-### 🎰 Simulador de Slots
-- Configuración interactiva de RTP, apuesta y número de tiradas
-- Gráficos en tiempo real de evolución del saldo
-- Cálculos matemáticos precisos sobre valor esperado
-- Interfaz educativa que muestra por qué la casa siempre gana
+El sitio se despliega automáticamente en GitHub Pages cuando se hace push a la rama `main`.
 
-### 🛤️ El Camino (6 Pasos)
-1. **¿Por qué adictivo?** - Psicología de la adicción
-2. **Reconocer el problema** - Señales de advertencia
-3. **Sesgos mentales** - Trampas cognitivas
-4. **Autocontrol** - Técnicas de autorregulación
-5. **Plan personal** - Estrategias adaptadas
-6. **Red de apoyo** - Recursos y comunidad
-
-### 🆘 Recursos de Ayuda
-- Autoevaluación interactiva
-- Directorio completo de organizaciones
-- Líneas de ayuda 24/7
-- Protocolos de emergencia
-- Información para familias
-
-## 🎨 Diseño y UX
-
-- **Responsive Design**: Optimizado para móviles, tablets y desktop
-- **Accesibilidad**: Cumple estándares WCAG
-- **Navegación intuitiva**: Flujo claro y lógico
-- **Carga rápida**: Optimizado para rendimiento
-- **Interactividad**: Elementos que mejoran la experiencia
-
-## 📈 SEO y Performance
-
-- **Meta tags optimizados** para cada página
-- **Sitemap automático** generado por Astro
-- **Estructura semántica** HTML5
-- **Core Web Vitals** optimizados
-- **Lazy loading** de imágenes y componentes pesados
-
-## 🚀 Despliegue
-
-El proyecto está configurado para desplegarse fácilmente en:
-
-- **Netlify**: `npm run build` + deploy de `dist/`
-- **Vercel**: Configuración automática para Astro
-- **GitHub Pages**: Con GitHub Actions
-- **Cloudflare Pages**: Deploy directo desde repo
-
-### Variables de Entorno (Opcionales)
-
-Crea un archivo `.env` para configuraciones específicas:
-
-```env
-PUBLIC_SITE_URL=https://tu-dominio.com
-PUBLIC_ANALYTICS_ID=tu-google-analytics-id
-```
+**URL del sitio**: [https://tu-usuario.github.io/unmasking-gambling](https://tu-usuario.github.io/unmasking-gambling)
 
 ## 🤝 Contribuir
 
-1. Fork el repositorio
-2. Crea una rama para tu feature (`git checkout -b feature/amazing-feature`)
-3. Commit tus cambios (`git commit -m 'Add amazing feature'`)
-4. Push a la rama (`git push origin feature/amazing-feature`)
+Las contribuciones son bienvenidas. Por favor:
+
+1. Fork el proyecto
+2. Crea una rama para tu feature (`git checkout -b feature/AmazingFeature`)
+3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
+4. Push a la rama (`git push origin feature/AmazingFeature`)
 5. Abre un Pull Request
-
-## 📞 Recursos de Ayuda
-
-Si tú o alguien conocido necesita ayuda con problemas de juego:
-
-- **Línea Nacional**: 900 200 999 (24h, gratuito)
-- **FEJAR**: www.fejar.org
-- **Autoexclusión**: www.autoexclusion.es
-- **Jugar Bien**: www.jugarbien.es
 
 ## 📄 Licencia
 
-Este proyecto está bajo la Licencia MIT. Ver `LICENSE` para más detalles.
+Este proyecto está bajo la Licencia MIT - ver el archivo [LICENSE](LICENSE) para detalles.
 
-## 👨‍💻 Autor
+## 🆘 Recursos de Ayuda
 
-**Ángel Zamora Martínez**  
-Experto en psicología clínica y adicciones comportamentales
+Si tú o alguien que conoces necesita ayuda con problemas de gambling:
+
+### España
+- **Teléfono**: 900 200 225 (Línea de Ayuda)
+- **Web**: [Federación Española de Jugadores de Azar Rehabilitados](https://www.fejar.org/)
+
+### Internacional
+- **Reino Unido**: [GamCare](https://www.gamcare.org.uk/)
+- **Estados Unidos**: [National Council on Problem Gambling](https://www.ncpgambling.org/)
+- **Canadá**: [Responsible Gambling Council](https://www.responsiblegambling.org/)
 
 ---
 
-⚠️ **Importante**: Este sitio web tiene fines educativos. Si sientes que tienes problemas con el juego, busca ayuda profesional inmediatamente.
+**⚠️ Nota**: Esta plataforma tiene fines educativos y no sustituye la ayuda profesional. Si experimentas problemas graves con el gambling, busca ayuda profesional inmediatamente.
