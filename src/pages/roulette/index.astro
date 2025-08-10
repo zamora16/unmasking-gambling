@@ -1,5 +1,11 @@
 ---
 import MainLayout from '../../layouts/MainLayout.astro';
+
+// Función helper para generar URLs correctas con base path
+const getUrl = (path: string) => {
+  const base = import.meta.env.BASE_URL || '/';
+  return base === '/' ? path : `${base.replace(/\/$/, '')}${path}`;
+};
 ---
 
 <MainLayout 
@@ -53,7 +59,7 @@ import MainLayout from '../../layouts/MainLayout.astro';
               <span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">Estadísticas</span>
             </div>
             <a 
-              href="/roulette/simulator" 
+              href={getUrl('/roulette/simulator')} 
               class="inline-flex items-center w-full justify-center px-6 py-3 bg-gradient-to-r from-red-600 to-red-800 hover:from-red-700 hover:to-red-900 text-white font-semibold rounded-lg transition-all duration-200"
             >
               Simular Ruleta
@@ -85,7 +91,7 @@ import MainLayout from '../../layouts/MainLayout.astro';
               <span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded">D'Alembert</span>
             </div>
             <a 
-              href="/roulette/systems" 
+              href={getUrl('/roulette/systems')} 
               class="inline-flex items-center w-full justify-center px-6 py-3 bg-gradient-to-r from-gray-700 to-gray-900 hover:from-gray-800 hover:to-black text-white font-semibold rounded-lg transition-all duration-200"
             >
               Analizar Sistemas
@@ -117,7 +123,7 @@ import MainLayout from '../../layouts/MainLayout.astro';
               <span class="inline-block bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded">Matemáticas</span>
             </div>
             <a 
-              href="/roulette/calculator" 
+              href={getUrl('/roulette/calculator')} 
               class="inline-flex items-center w-full justify-center px-6 py-3 bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 text-white font-semibold rounded-lg transition-all duration-200"
             >
               Calcular Probabilidades
@@ -149,7 +155,7 @@ import MainLayout from '../../layouts/MainLayout.astro';
               <span class="inline-block bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded">Ganancias Casino</span>
             </div>
             <a 
-              href="/roulette/house-edge" 
+              href={getUrl('/roulette/house-edge')} 
               class="inline-flex items-center w-full justify-center px-6 py-3 bg-gradient-to-r from-green-600 to-green-800 hover:from-green-700 hover:to-green-900 text-white font-semibold rounded-lg transition-all duration-200"
             >
               Ver Ventaja Casa
@@ -315,13 +321,13 @@ import MainLayout from '../../layouts/MainLayout.astro';
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
           <a 
-            href="/roulette/simulator" 
+            href={getUrl('/roulette/simulator')} 
             class="bg-white hover:bg-gray-100 text-red-600 font-bold py-3 px-8 rounded-lg transition-all duration-200"
           >
             🎯 Simular Ahora
           </a>
           <a 
-            href="/roulette/systems" 
+            href={getUrl('/roulette/systems')} 
             class="bg-red-800 hover:bg-red-900 text-white font-bold py-3 px-8 rounded-lg transition-all duration-200"
           >
             📈 Probar Sistemas

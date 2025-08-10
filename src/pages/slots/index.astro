@@ -1,5 +1,11 @@
 ---
 import MainLayout from '../../layouts/MainLayout.astro';
+
+// Función helper para generar URLs correctas con base path
+const getUrl = (path: string) => {
+  const base = import.meta.env.BASE_URL || '/';
+  return base === '/' ? path : `${base.replace(/\/$/, '')}${path}`;
+};
 ---
 
 <MainLayout 
@@ -48,7 +54,7 @@ import MainLayout from '../../layouts/MainLayout.astro';
               <span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded">Educativo</span>
             </div>
             <a 
-              href="/slots/rtp" 
+              href={getUrl('/slots/rtp')} 
               class="inline-flex items-center w-full justify-center px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-semibold rounded-lg transition-all duration-200"
             >
               Probar Simulador
@@ -80,7 +86,7 @@ import MainLayout from '../../layouts/MainLayout.astro';
               <span class="inline-block bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded">Interactivo</span>
             </div>
             <a 
-              href="/slots/volatilidad" 
+              href={getUrl('/slots/volatilidad')} 
               class="inline-flex items-center w-full justify-center px-6 py-3 bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white font-semibold rounded-lg transition-all duration-200"
             >
               Analizar Volatilidad
@@ -112,7 +118,7 @@ import MainLayout from '../../layouts/MainLayout.astro';
               <span class="inline-block bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded">Educativo</span>
             </div>
             <a 
-              href="/slots/lineas-pago" 
+              href={getUrl('/slots/lineas-pago')} 
               class="inline-flex items-center w-full justify-center px-6 py-3 bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600 text-white font-semibold rounded-lg transition-all duration-200"
             >
               Calcular Líneas

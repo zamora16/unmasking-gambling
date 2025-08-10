@@ -1,5 +1,11 @@
 ---
 import MainLayout from '../../layouts/MainLayout.astro';
+
+// Función helper para generar URLs correctas con base path
+const getUrl = (path: string) => {
+  const base = import.meta.env.BASE_URL || '/';
+  return base === '/' ? path : `${base.replace(/\/$/, '')}${path}`;
+};
 ---
 
 <MainLayout 
@@ -53,7 +59,7 @@ import MainLayout from '../../layouts/MainLayout.astro';
               <span class="inline-block bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded">Múltiples Estrategias</span>
             </div>
             <a 
-              href="/sports/season-simulator" 
+              href={getUrl('/sports/season-simulator')} 
               class="inline-flex items-center w-full justify-center px-6 py-3 bg-gradient-to-r from-red-600 to-red-800 hover:from-red-700 hover:to-red-900 text-white font-semibold rounded-lg transition-all duration-200"
             >
               Simular Temporada
@@ -85,7 +91,7 @@ import MainLayout from '../../layouts/MainLayout.astro';
               <span class="inline-block bg-cyan-100 text-cyan-800 text-xs px-2 py-1 rounded">Probabilidades</span>
             </div>
             <a 
-              href="/sports/juice-calculator" 
+              href={getUrl('/sports/juice-calculator')} 
               class="inline-flex items-center w-full justify-center px-6 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-semibold rounded-lg transition-all duration-200"
             >
               Calcular Juice
@@ -117,7 +123,7 @@ import MainLayout from '../../layouts/MainLayout.astro';
               <span class="inline-block bg-teal-100 text-teal-800 text-xs px-2 py-1 rounded">Survival Bias</span>
             </div>
             <a 
-              href="/sports/streak-simulator" 
+              href={getUrl('/sports/streak-simulator')} 
               class="inline-flex items-center w-full justify-center px-6 py-3 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-semibold rounded-lg transition-all duration-200"
             >
               Simular Rachas
@@ -149,7 +155,7 @@ import MainLayout from '../../layouts/MainLayout.astro';
               <span class="inline-block bg-violet-100 text-violet-800 text-xs px-2 py-1 rounded">Gestión Falsa</span>
             </div>
             <a 
-              href="/sports/bankroll-manager" 
+              href={getUrl('/sports/bankroll-manager')} 
               class="inline-flex items-center w-full justify-center px-6 py-3 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-semibold rounded-lg transition-all duration-200"
             >
               Gestionar Bankroll
@@ -261,25 +267,25 @@ import MainLayout from '../../layouts/MainLayout.astro';
         </p>
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-4xl mx-auto">
           <a 
-            href="/sports/season-simulator" 
+            href={getUrl('/sports/season-simulator')} 
             class="bg-white hover:bg-gray-100 text-green-600 font-bold py-2 px-4 rounded-lg transition-all duration-200 text-center text-sm"
           >
             🏈 Temporada
           </a>
           <a 
-            href="/sports/juice-calculator" 
+            href={getUrl('/sports/juice-calculator')} 
             class="bg-green-800 hover:bg-green-900 text-white font-bold py-2 px-4 rounded-lg transition-all duration-200 text-center text-sm"
           >
             🧮 Juice
           </a>
           <a 
-            href="/sports/streak-simulator" 
+            href={getUrl('/sports/streak-simulator')} 
             class="bg-green-700 hover:bg-green-800 text-white font-bold py-2 px-4 rounded-lg transition-all duration-200 text-center text-sm"
           >
             📈 Rachas
           </a>
           <a 
-            href="/sports/bankroll-manager" 
+            href={getUrl('/sports/bankroll-manager')} 
             class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg transition-all duration-200 text-center text-sm"
           >
             💰 Bankroll
