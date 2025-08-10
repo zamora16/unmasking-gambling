@@ -1,12 +1,8 @@
 ---
+import { getUrl } from '../../utils/url';
+
 // Obtener la ruta actual para resaltar el enlace activo
 const currentPath = Astro.url.pathname;
-
-// Función helper para generar URLs correctas con base path
-const getUrl = (path: string) => {
-  const base = import.meta.env.BASE_URL || '/';
-  return base === '/' ? path : `${base.replace(/\/$/, '')}${path}`;
-};
 
 const navItems = [
   { name: 'Inicio', href: getUrl('/'), icon: 'home' },

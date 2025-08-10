@@ -1,11 +1,6 @@
 ---
 import MainLayout from '../../layouts/MainLayout.astro';
-
-// Función helper para generar URLs correctas con base path
-const getUrl = (path: string) => {
-  const base = import.meta.env.BASE_URL || '/';
-  return base === '/' ? path : `${base.replace(/\/$/, '')}${path}`;
-};
+import { getUrl } from '../../utils/url';
 ---
 
 <MainLayout 

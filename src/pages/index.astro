@@ -1,5 +1,6 @@
 ---
 import MainLayout from '../layouts/MainLayout.astro';
+import { getUrl } from '../utils/url';
 ---
 
 <MainLayout title="Inicio" description="Descubre los secretos detrás de las máquinas tragaperras y aprende sobre juego responsable con Unmasking Gambling.">
@@ -22,7 +23,7 @@ import MainLayout from '../layouts/MainLayout.astro';
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center fade-in">
           <a 
-            href="/the-way" 
+            href={getUrl('/the-way')} 
             class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-gray-900 font-bold rounded-full transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
           >
             🚀 Comienza tu camino
@@ -31,7 +32,7 @@ import MainLayout from '../layouts/MainLayout.astro';
             </svg>
           </a>
           <a 
-            href="/slots" 
+            href={getUrl('/slots')} 
             class="inline-flex items-center px-8 py-4 bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20 text-white font-semibold rounded-full transition-all duration-300"
           >
             🎰 Simuladores
@@ -71,7 +72,7 @@ import MainLayout from '../layouts/MainLayout.astro';
               Experimenta con el RTP y entiende por qué la casa siempre gana a largo plazo.
             </p>
             <a 
-              href="/slots/rtp" 
+              href={getUrl('/slots/rtp')} 
               class="inline-flex items-center text-indigo-600 hover:text-indigo-800 font-semibold"
             >
               Probar simulador
@@ -95,7 +96,7 @@ import MainLayout from '../layouts/MainLayout.astro';
               Una guía interactiva de 6 pasos para el juego responsable y la prevención de la adicción.
             </p>
             <a 
-              href="/the-way" 
+              href={getUrl('/the-way')} 
               class="inline-flex items-center text-yellow-600 hover:text-yellow-800 font-semibold"
             >
               Iniciar el camino
@@ -119,7 +120,7 @@ import MainLayout from '../layouts/MainLayout.astro';
               Descubre las probabilidades reales de ganar y por qué las matemáticas no están de tu lado.
             </p>
             <a 
-              href="/lottery" 
+              href={getUrl('/lottery')} 
               class="inline-flex items-center text-purple-600 hover:text-purple-800 font-semibold"
             >
               Explorar simuladores
@@ -175,7 +176,7 @@ import MainLayout from '../layouts/MainLayout.astro';
       </p>
       <div class="flex flex-col sm:flex-row gap-4 justify-center fade-in">
         <a 
-          href="/ayuda" 
+          href={getUrl('/ayuda')} 
           class="inline-flex items-center px-8 py-4 bg-white text-red-600 font-bold rounded-full hover:bg-gray-100 transition-colors duration-300"
         >
           <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">

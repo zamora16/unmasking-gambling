@@ -1,6 +1,7 @@
 ---
 import MainLayout from '../../layouts/MainLayout.astro';
 import VolatilityAnalyzer from '../../components/simulators/VolatilityAnalyzer.tsx';
+import { getUrl } from '../../utils/url';
 ---
 
 <MainLayout 
@@ -273,7 +274,7 @@ import VolatilityAnalyzer from '../../components/simulators/VolatilityAnalyzer.t
       </p>
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
         <a 
-          href="/the-way" 
+          href={getUrl('/the-way')} 
           class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-gray-900 font-bold rounded-full transition-all duration-300"
         >
           🚀 Iniciar El Camino
@@ -282,7 +283,7 @@ import VolatilityAnalyzer from '../../components/simulators/VolatilityAnalyzer.t
           </svg>
         </a>
         <a 
-          href="/slots" 
+          href={getUrl('/slots')} 
           class="inline-flex items-center px-8 py-4 bg-transparent border-2 border-white text-white font-semibold rounded-full hover:bg-white hover:text-gray-900 transition-all duration-300"
         >
           🎰 Más sobre Slots
