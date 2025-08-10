@@ -9,7 +9,8 @@ export default defineConfig({
     react()
   ],
   site: 'https://zamora16.github.io',
-  base: '/unmasking-gambling',
+  // Solo usar base en producción para GitHub Pages
+  base: process.env.NODE_ENV === 'production' ? '/unmasking-gambling' : undefined,
   output: 'static',
   
   // Optimización para mejor SEO
