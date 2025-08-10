@@ -2,13 +2,19 @@
 // Obtener la ruta actual para resaltar el enlace activo
 const currentPath = Astro.url.pathname;
 
+// Función helper para generar URLs correctas con base path
+const getUrl = (path: string) => {
+  const base = import.meta.env.BASE_URL || '/';
+  return base === '/' ? path : `${base.replace(/\/$/, '')}${path}`;
+};
+
 const navItems = [
-  { name: 'Inicio', href: '/', icon: 'home' },
-  { name: 'Slots', href: '/slots', icon: 'dices' },
-  { name: 'Loterías', href: '/lottery', icon: 'ticket' },
-  { name: 'Deportes', href: '/sports', icon: 'trophy' },
-  { name: 'Ruleta', href: '/roulette', icon: 'circle' },
-  { name: 'El Camino', href: '/the-way', icon: 'map', highlight: true }
+  { name: 'Inicio', href: getUrl('/'), icon: 'home' },
+  { name: 'Slots', href: getUrl('/slots'), icon: 'dices' },
+  { name: 'Loterías', href: getUrl('/lottery'), icon: 'ticket' },
+  { name: 'Deportes', href: getUrl('/sports'), icon: 'trophy' },
+  { name: 'Ruleta', href: getUrl('/roulette'), icon: 'circle' },
+  { name: 'El Camino', href: getUrl('/the-way'), icon: 'map', highlight: true }
 ];
 ---
 
@@ -17,7 +23,7 @@ const navItems = [
     <div class="flex items-center justify-between h-16">
       
       <!-- Logo -->
-      <a href="/" class="flex items-center space-x-3 group">
+      <a href={getUrl('/')} class="flex items-center space-x-3 group">
         <div class="flex items-center justify-center w-10 h-10 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-full group-hover:scale-110 transition-transform duration-200">
           <svg 
             xmlns="http://www.w3.org/2000/svg" 
@@ -61,7 +67,7 @@ const navItems = [
       <!-- CTA Button -->
       <div class="hidden md:flex items-center space-x-4">
         <a 
-          href="/ayuda"
+          href={getUrl('/ayuda')}
           class="inline-flex items-center px-4 py-2 bg-red-500 hover:bg-red-600 text-white font-medium rounded-lg transition-colors duration-200"
         >
           <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -108,7 +114,7 @@ const navItems = [
         ))}
         <div class="pt-4 border-t border-gray-200">
           <a 
-            href="/ayuda"
+            href={getUrl('/ayuda')}
             class="flex items-center justify-center w-full px-4 py-3 bg-red-500 hover:bg-red-600 text-white font-medium rounded-lg transition-colors duration-200"
           >
             <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">

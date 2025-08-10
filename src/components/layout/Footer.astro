@@ -1,5 +1,11 @@
 ---
 // Footer component
+
+// Función helper para generar URLs correctas con base path
+const getUrl = (path: string) => {
+  const base = import.meta.env.BASE_URL || '/';
+  return base === '/' ? path : `${base.replace(/\/$/, '')}${path}`;
+};
 ---
 
 <footer class="bg-gray-900 text-white">
@@ -32,10 +38,10 @@
       <div>
         <h3 class="text-lg font-semibold mb-4">Navegación</h3>
         <ul class="space-y-2">
-          <li><a href="/" class="text-gray-300 hover:text-white transition-colors duration-200">Inicio</a></li>
-          <li><a href="/slots" class="text-gray-300 hover:text-white transition-colors duration-200">Simulador Slots</a></li>
-          <li><a href="/the-way" class="text-gray-300 hover:text-white transition-colors duration-200">El Camino</a></li>
-          <li><a href="/sports" class="text-gray-300 hover:text-white transition-colors duration-200">Apuestas Deportivas</a></li>
+          <li><a href={getUrl('/')} class="text-gray-300 hover:text-white transition-colors duration-200">Inicio</a></li>
+          <li><a href={getUrl('/slots')} class="text-gray-300 hover:text-white transition-colors duration-200">Simulador Slots</a></li>
+          <li><a href={getUrl('/the-way')} class="text-gray-300 hover:text-white transition-colors duration-200">El Camino</a></li>
+          <li><a href={getUrl('/sports')} class="text-gray-300 hover:text-white transition-colors duration-200">Apuestas Deportivas</a></li>
         </ul>
       </div>
 
@@ -43,7 +49,7 @@
       <div>
         <h3 class="text-lg font-semibold mb-4">Ayuda y Recursos</h3>
         <ul class="space-y-2">
-          <li><a href="/ayuda" class="text-gray-300 hover:text-white transition-colors duration-200">Buscar Ayuda</a></li>
+          <li><a href={getUrl('/ayuda')} class="text-gray-300 hover:text-white transition-colors duration-200">Buscar Ayuda</a></li>
           <li><a href="tel:900200999" class="text-gray-300 hover:text-white transition-colors duration-200">Línea de Crisis</a></li>
           <li><a href="https://www.autoexclusion.es" target="_blank" class="text-gray-300 hover:text-white transition-colors duration-200">Autoexclusión</a></li>
           <li><a href="https://www.jugarbien.es" target="_blank" class="text-gray-300 hover:text-white transition-colors duration-200">Jugar Bien</a></li>
@@ -84,10 +90,10 @@
           © 2024 Unmasking Gambling. Todos los derechos reservados.
         </p>
         <div class="flex space-x-6 mt-4 md:mt-0">
-          <a href="/privacidad" class="text-gray-400 hover:text-white text-sm transition-colors duration-200">
+          <a href={getUrl('/privacidad')} class="text-gray-400 hover:text-white text-sm transition-colors duration-200">
             Política de Privacidad
           </a>
-          <a href="/terminos" class="text-gray-400 hover:text-white text-sm transition-colors duration-200">
+          <a href={getUrl('/terminos')} class="text-gray-400 hover:text-white text-sm transition-colors duration-200">
             Términos de Uso
           </a>
         </div>
