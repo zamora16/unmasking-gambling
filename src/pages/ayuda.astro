@@ -1,5 +1,6 @@
 ---
 import MainLayout from '../layouts/MainLayout.astro';
+import { getExternalLink, getEmergencyPhone } from '../utils/links';
 ---
 
 <style>
@@ -68,7 +69,7 @@ import MainLayout from '../layouts/MainLayout.astro';
             <span class="text-sm sm:text-base">📞 900 200 225</span>
             <span class="ml-2 text-xs sm:text-sm hidden xs:inline">(FEJAR - Línea Nacional)</span>
           </a>
-          <a href="https://www.ordenacionjuego.es/participantes-juego/juego-seguro/rgiaj" target="_blank" class="inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 bg-transparent border-2 border-white text-white font-semibold rounded-full hover:bg-white hover:text-red-600 transition-all duration-300 text-sm sm:text-base">
+          <a href={getExternalLink('spain', 'rgiaj')} target="_blank" class="inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 bg-transparent border-2 border-white text-white font-semibold rounded-full hover:bg-white hover:text-red-600 transition-all duration-300 text-sm sm:text-base">
             🚫 Autoexclusión
           </a>
         </div>
@@ -215,7 +216,7 @@ import MainLayout from '../layouts/MainLayout.astro';
                 📞 900 200 225
               </a>
               <div class="mt-3 sm:mt-4">
-                <a href="https://www.fejar.org" target="_blank" class="text-blue-800 hover:text-blue-900 font-semibold text-sm sm:text-base">
+                <a href={getExternalLink('spain', 'fejar')} target="_blank" class="text-blue-800 hover:text-blue-900 font-semibold text-sm sm:text-base">
                   🌐 www.fejar.org
                 </a>
               </div>
@@ -228,10 +229,10 @@ import MainLayout from '../layouts/MainLayout.astro';
                 <h3 class="text-lg sm:text-xl font-bold text-green-800">Gobierno</h3>
               </div>
               <p class="text-green-700 mb-3 sm:mb-4 text-sm sm:text-base">Recursos oficiales y autoexclusión</p>
-              <a href="https://www.ordenacionjuego.es/participantes-juego/juego-seguro" target="_blank" class="text-green-800 hover:text-green-900 font-semibold block mb-2 text-sm sm:text-base">
+              <a href={getExternalLink('spain', 'jugarBien')} target="_blank" class="text-green-800 hover:text-green-900 font-semibold block mb-2 text-sm sm:text-base">
                 🌐 JugarBien.es
               </a>
-              <a href="https://www.ordenacionjuego.es/participantes-juego/juego-seguro/rgiaj" target="_blank" class="text-green-800 hover:text-green-900 font-semibold text-sm sm:text-base">
+              <a href={getExternalLink('spain', 'rgiaj')} target="_blank" class="text-green-800 hover:text-green-900 font-semibold text-sm sm:text-base">
                 🚫 Autoexclusión RGIAJ
               </a>
             </div>
@@ -264,7 +265,7 @@ import MainLayout from '../layouts/MainLayout.astro';
                 <h3 class="text-xl font-bold text-red-800">NCPG</h3>
               </div>
               <p class="text-red-700 mb-4">National Council on Problem Gambling</p>
-              <a href="https://www.ncpgambling.org" target="_blank" class="text-red-800 hover:text-red-900 font-semibold">
+              <a href={getExternalLink('international', 'ncpg')} target="_blank" class="text-red-800 hover:text-red-900 font-semibold">
                 🌐 ncpgambling.org
               </a>
               <p class="text-sm text-red-600 mt-2">Resources & Treatment Referrals</p>
@@ -299,7 +300,7 @@ import MainLayout from '../layouts/MainLayout.astro';
                 📞 0808 8020 133
               </a>
               <div class="mt-4">
-                <a href="https://www.gamcare.org.uk" target="_blank" class="text-blue-800 hover:text-blue-900 font-semibold">
+                <a href={getExternalLink('international', 'gamcare')} target="_blank" class="text-blue-800 hover:text-blue-900 font-semibold">
                   🌐 gamcare.org.uk
                 </a>
               </div>
@@ -313,7 +314,7 @@ import MainLayout from '../layouts/MainLayout.astro';
                 <h3 class="text-xl font-bold text-green-800">GambleAware</h3>
               </div>
               <p class="text-green-700 mb-4">Information & Support</p>
-              <a href="https://www.gambleaware.org" target="_blank" class="text-green-800 hover:text-green-900 font-semibold">
+              <a href={getExternalLink('international', 'gambleAware')} target="_blank" class="text-green-800 hover:text-green-900 font-semibold">
                 🌐 gambleaware.org
               </a>
               <p class="text-sm text-green-600 mt-2">Live Chat Available</p>
@@ -421,7 +422,7 @@ import MainLayout from '../layouts/MainLayout.astro';
                 📞 +56 9 4407 2802
               </a>
               <div class="mt-4">
-                <a href="mailto:contacto@jugadoresanonimos.cl" class="text-green-800 hover:text-green-900 font-semibold">
+                <a href={getExternalLink('contact', 'jugadoresAnonimosChile')} class="text-green-800 hover:text-green-900 font-semibold">
                   📮 contacto@jugadoresanonimos.cl
                 </a>
               </div>
@@ -465,7 +466,7 @@ import MainLayout from '../layouts/MainLayout.astro';
                 <h3 class="text-xl font-bold text-green-800">Gobierno Federal</h3>
               </div>
               <p class="text-green-700 mb-4">Recursos oficiales</p>
-              <a href="https://www.gob.mx/conasama" target="_blank" class="text-green-800 hover:text-green-900 font-semibold">
+              <a href={getExternalLink('international', 'mexicoConadic')} target="_blank" class="text-green-800 hover:text-green-900 font-semibold">
                 🌐 gob.mx/conadic
               </a>
               <p class="text-sm text-green-600 mt-2">Información y prevención</p>
@@ -480,10 +481,10 @@ import MainLayout from '../layouts/MainLayout.astro';
             Si estás en otro país, puedes contactar con organizaciones internacionales:
           </p>
           <div class="flex flex-wrap justify-center gap-4">
-            <a href="https://www.jugadoresanonimos.org" target="_blank" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+            <a href={getExternalLink('international', 'jugadoresAnonimos')} target="_blank" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
               Jugadores Anónimos Internacional
             </a>
-            <a href="https://www.gamblersanonymous.org" target="_blank" class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors">
+            <a href={getExternalLink('international', 'gamblersAnonymous')} target="_blank" class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors">
               Gamblers Anonymous (English)
             </a>
           </div>
