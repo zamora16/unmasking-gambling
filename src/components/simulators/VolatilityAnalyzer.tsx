@@ -53,7 +53,7 @@ const VolatilityAnalyzer: React.FC = () => {
           textColor: '#374151',
         },
         width: container.clientWidth,
-        height: 300,
+        height: window.innerWidth < 768 ? 200 : 300,
         rightPriceScale: {
           borderColor: '#e5e7eb',
           textColor: '#6b7280',
@@ -80,10 +80,18 @@ const VolatilityAnalyzer: React.FC = () => {
 
     const handleResize = () => {
       if (lowVolChartRef.current && lowVolChart.current) {
-        lowVolChart.current.applyOptions({ width: lowVolChartRef.current.clientWidth });
+        const isMobile = window.innerWidth < 768;
+        lowVolChart.current.applyOptions({ 
+          width: lowVolChartRef.current.clientWidth,
+          height: isMobile ? 200 : 300
+        });
       }
       if (highVolChartRef.current && highVolChart.current) {
-        highVolChart.current.applyOptions({ width: highVolChartRef.current.clientWidth });
+        const isMobile = window.innerWidth < 768;
+        highVolChart.current.applyOptions({ 
+          width: highVolChartRef.current.clientWidth,
+          height: isMobile ? 200 : 300
+        });
       }
     };
 
@@ -354,7 +362,7 @@ const VolatilityAnalyzer: React.FC = () => {
         lowVolChart.current = createChart(lowVolChartRef.current, {
           layout: { background: { type: ColorType.Solid, color: '#ffffff' }, textColor: '#374151' },
           width: lowVolChartRef.current.clientWidth,
-          height: 300,
+          height: window.innerWidth < 768 ? 200 : 300,
           rightPriceScale: { borderColor: '#e5e7eb', textColor: '#6b7280' },
           timeScale: { borderColor: '#e5e7eb', timeVisible: false, secondsVisible: false },
           grid: { vertLines: { color: '#f3f4f6' }, horzLines: { color: '#f3f4f6' } },
@@ -363,7 +371,7 @@ const VolatilityAnalyzer: React.FC = () => {
         highVolChart.current = createChart(highVolChartRef.current, {
           layout: { background: { type: ColorType.Solid, color: '#ffffff' }, textColor: '#374151' },
           width: highVolChartRef.current.clientWidth,
-          height: 300,
+          height: window.innerWidth < 768 ? 200 : 300,
           rightPriceScale: { borderColor: '#e5e7eb', textColor: '#6b7280' },
           timeScale: { borderColor: '#e5e7eb', timeVisible: false, secondsVisible: false },
           grid: { vertLines: { color: '#f3f4f6' }, horzLines: { color: '#f3f4f6' } },
@@ -405,7 +413,7 @@ const VolatilityAnalyzer: React.FC = () => {
         lowVolChart.current = createChart(lowVolChartRef.current, {
           layout: { background: { type: ColorType.Solid, color: '#ffffff' }, textColor: '#374151' },
           width: lowVolChartRef.current.clientWidth,
-          height: 300,
+          height: window.innerWidth < 768 ? 200 : 300,
           rightPriceScale: { borderColor: '#e5e7eb', textColor: '#6b7280' },
           timeScale: { borderColor: '#e5e7eb', timeVisible: false, secondsVisible: false },
           grid: { vertLines: { color: '#f3f4f6' }, horzLines: { color: '#f3f4f6' } },
@@ -416,7 +424,7 @@ const VolatilityAnalyzer: React.FC = () => {
         highVolChart.current = createChart(highVolChartRef.current, {
           layout: { background: { type: ColorType.Solid, color: '#ffffff' }, textColor: '#374151' },
           width: highVolChartRef.current.clientWidth,
-          height: 300,
+          height: window.innerWidth < 768 ? 200 : 300,
           rightPriceScale: { borderColor: '#e5e7eb', textColor: '#6b7280' },
           timeScale: { borderColor: '#e5e7eb', timeVisible: false, secondsVisible: false },
           grid: { vertLines: { color: '#f3f4f6' }, horzLines: { color: '#f3f4f6' } },
@@ -438,7 +446,7 @@ const VolatilityAnalyzer: React.FC = () => {
       </div>
 
       {/* Controles */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mb-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-6 mb-8">
         <div className="space-y-3">
           <label className="block text-sm font-medium text-gray-700">
             💰 Saldo por sesión: <span className="font-bold text-orange-600">€{initialBalance}</span>
@@ -450,7 +458,7 @@ const VolatilityAnalyzer: React.FC = () => {
             step="100"
             value={initialBalance}
             onChange={(e) => setInitialBalance(Number(e.target.value))}
-            className="w-full h-3 bg-gray-200 rounded-lg appearance-none cursor-pointer"
+            className="w-full h-6 md:h-3 bg-gray-200 rounded-lg appearance-none cursor-pointer"
           />
         </div>
 
@@ -465,7 +473,7 @@ const VolatilityAnalyzer: React.FC = () => {
             step="5"
             value={sessions}
             onChange={(e) => setSessions(Number(e.target.value))}
-            className="w-full h-3 bg-gray-200 rounded-lg appearance-none cursor-pointer"
+            className="w-full h-6 md:h-3 bg-gray-200 rounded-lg appearance-none cursor-pointer"
           />
         </div>
 
@@ -480,7 +488,7 @@ const VolatilityAnalyzer: React.FC = () => {
             step="25"
             value={spinsPerSession}
             onChange={(e) => setSpinsPerSession(Number(e.target.value))}
-            className="w-full h-3 bg-gray-200 rounded-lg appearance-none cursor-pointer"
+            className="w-full h-6 md:h-3 bg-gray-200 rounded-lg appearance-none cursor-pointer"
           />
         </div>
 
@@ -495,7 +503,7 @@ const VolatilityAnalyzer: React.FC = () => {
             step="1"
             value={bet}
             onChange={(e) => setBet(Number(e.target.value))}
-            className="w-full h-3 bg-gray-200 rounded-lg appearance-none cursor-pointer"
+            className="w-full h-6 md:h-3 bg-gray-200 rounded-lg appearance-none cursor-pointer"
           />
         </div>
 
@@ -510,7 +518,7 @@ const VolatilityAnalyzer: React.FC = () => {
             step="1"
             value={targetRTP}
             onChange={(e) => setTargetRTP(Number(e.target.value))}
-            className="w-full h-3 bg-gray-200 rounded-lg appearance-none cursor-pointer"
+            className="w-full h-6 md:h-3 bg-gray-200 rounded-lg appearance-none cursor-pointer"
           />
         </div>
       </div>
@@ -526,7 +534,7 @@ const VolatilityAnalyzer: React.FC = () => {
       </div>
 
       {/* Información teórica */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mb-8">
         <div className="bg-green-50 p-6 rounded-lg border-l-4 border-green-400">
           <h3 className="text-xl font-bold text-green-800 mb-3">🟢 Baja Volatilidad</h3>
           <ul className="text-green-700 space-y-2">
@@ -555,7 +563,7 @@ const VolatilityAnalyzer: React.FC = () => {
         <button
           onClick={runAnalysis}
           disabled={isAnalyzing}
-          className="flex items-center px-8 py-4 bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 disabled:from-gray-400 disabled:to-gray-500 text-white font-semibold rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl"
+          className="flex items-center px-6 py-4 md:px-8 md:py-4 min-h-[48px] bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 disabled:from-gray-400 disabled:to-gray-500 text-white font-semibold rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl"
         >
           {isAnalyzing ? (
             <>
@@ -573,7 +581,7 @@ const VolatilityAnalyzer: React.FC = () => {
         {results && (
           <button
             onClick={resetAnalysis}
-            className="px-6 py-4 bg-gray-500 hover:bg-gray-600 text-white font-semibold rounded-lg transition-colors duration-200"
+            className="px-6 py-4 min-h-[48px] bg-gray-500 hover:bg-gray-600 text-white font-semibold rounded-lg transition-colors duration-200"
           >
             🔄 Reiniciar
           </button>
@@ -586,7 +594,7 @@ const VolatilityAnalyzer: React.FC = () => {
           {/* Comparación de RTP - LO MÁS IMPORTANTE */}
           <div className="bg-yellow-50 p-6 rounded-lg border-l-4 border-yellow-400">
             <h3 className="text-xl font-bold text-yellow-800 mb-4">🎯 Verificación de RTP</h3>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4">
               <div className="text-center">
                 <p className="text-sm text-yellow-700">RTP Objetivo</p>
                 <p className="text-2xl font-bold text-yellow-800">{targetRTP}%</p>
@@ -612,7 +620,7 @@ const VolatilityAnalyzer: React.FC = () => {
           {/* Comparación de resultados */}
           <div>
             <h3 className="text-2xl font-bold text-gray-800 mb-6">📊 Comparación de Experiencia de Juego</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
               {/* Baja Volatilidad */}
               <div className="bg-green-50 p-6 rounded-lg border border-green-200">
                 <h4 className="text-xl font-bold text-green-800 mb-4">🟢 Baja Volatilidad</h4>
@@ -676,7 +684,7 @@ const VolatilityAnalyzer: React.FC = () => {
           {/* Gráficos de evolución */}
           <div>
             <h3 className="text-2xl font-bold text-gray-800 mb-6">📈 Evolución del Saldo (Primera Sesión)</h3>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
               <div className="bg-green-50 p-4 rounded-lg">
                 <h4 className="text-lg font-bold text-green-800 mb-3 text-center">Baja Volatilidad - Más Predecible</h4>
                 <div ref={lowVolChartRef} className="w-full" />
@@ -691,7 +699,7 @@ const VolatilityAnalyzer: React.FC = () => {
           {/* Distribución de resultados */}
           <div>
             <h3 className="text-2xl font-bold text-gray-800 mb-6">📊 Distribución de Resultados por Tirada</h3>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
               <div className="bg-green-50 p-6 rounded-lg">
                 <h4 className="text-lg font-bold text-green-800 mb-4">🟢 Baja Volatilidad</h4>
                 <div className="space-y-2">
@@ -739,7 +747,7 @@ const VolatilityAnalyzer: React.FC = () => {
       {/* Lecciones importantes */}
       <div className="mt-8 p-6 bg-blue-50 rounded-lg border-l-4 border-blue-400">
         <h4 className="text-lg font-semibold text-blue-800 mb-3">🎓 Lecciones Clave sobre Volatilidad</h4>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
           <ul className="text-blue-700 space-y-2">
             <li>• <strong>Ambos tienen exactamente el mismo RTP</strong> a largo plazo</li>
             <li>• La volatilidad <strong>no cambia las matemáticas</strong> fundamentales</li>

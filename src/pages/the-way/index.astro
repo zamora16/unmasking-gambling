@@ -17,23 +17,23 @@ const getUrl = (path: string) => {
   <!-- Hero Section -->
   <section class="relative bg-gradient-to-br from-yellow-400 via-orange-500 to-red-500 text-white overflow-hidden">
     <div class="absolute inset-0 bg-black/20"></div>
-    <div class="relative container mx-auto px-4 py-20 md:py-32">
+    <div class="relative container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-20 lg:py-32">
       <div class="max-w-4xl mx-auto text-center">
-        <h1 class="text-4xl md:text-6xl font-bold mb-6 fade-in">
+        <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 fade-in">
           🛤️ El Camino
         </h1>
-        <p class="text-xl md:text-2xl mb-8 text-orange-100 fade-in">
+        <p class="text-lg sm:text-xl md:text-2xl lg:text-3xl mb-8 text-orange-100 fade-in leading-relaxed">
           Una guía interactiva de <span class="text-white font-bold">6 pasos</span> hacia el 
           <span class="text-yellow-200 font-semibold">juego responsable</span>
         </p>
-        <p class="text-lg mb-8 text-orange-200 max-w-2xl mx-auto fade-in">
+        <p class="text-base sm:text-lg mb-8 text-orange-200 max-w-2xl mx-auto fade-in">
           Diseñado por expertos en psicología clínica para ayudarte a entender los riesgos del gambling 
           y desarrollar estrategias de autocontrol efectivas.
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center fade-in">
           <a 
             href="#paso-1" 
-            class="inline-flex items-center px-8 py-4 bg-white text-orange-600 font-bold rounded-full hover:bg-gray-100 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
+            class="inline-flex items-center px-6 py-4 md:px-8 md:py-4 min-h-[48px] bg-white text-orange-600 font-bold rounded-full hover:bg-gray-100 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
           >
             🚀 Comenzar el Camino
             <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -42,7 +42,7 @@ const getUrl = (path: string) => {
           </a>
           <a 
             href="#sobre-el-camino" 
-            class="inline-flex items-center px-8 py-4 bg-transparent border-2 border-white text-white font-semibold rounded-full hover:bg-white hover:text-orange-600 transition-all duration-300"
+            class="inline-flex items-center px-6 py-4 md:px-8 md:py-4 min-h-[48px] bg-transparent border-2 border-white text-white font-semibold rounded-full hover:bg-white hover:text-orange-600 transition-all duration-300"
           >
             📖 Más Información
           </a>
@@ -57,8 +57,8 @@ const getUrl = (path: string) => {
   </section>
 
   <!-- Progress Manager Component -->
-  <section class="py-8 bg-gray-50">
-    <div class="container mx-auto px-4">
+  <section class="py-6 sm:py-8 bg-gray-50">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
       <div class="max-w-6xl mx-auto">
         <ProgressManager />
       </div>
@@ -66,12 +66,12 @@ const getUrl = (path: string) => {
   </section>
 
   <!-- Progress Overview -->
-  <section class="py-16 bg-white">
-    <div class="container mx-auto px-4">
+  <section class="py-12 sm:py-16 bg-white">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
       <div class="max-w-6xl mx-auto">
-        <div class="text-center mb-12">
-          <h2 class="text-3xl font-bold text-gray-900 mb-4">Los 6 Pasos del Camino</h2>
-          <p class="text-xl text-gray-600">Un recorrido estructurado hacia el autoconocimiento y el control</p>
+        <div class="text-center mb-8 sm:mb-12">
+          <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4">Los 6 Pasos del Camino</h2>
+          <p class="text-base sm:text-lg md:text-xl text-gray-600">Un recorrido estructurado hacia el autoconocimiento y el control</p>
         </div>
         
         <!-- Steps Progress -->
@@ -80,7 +80,7 @@ const getUrl = (path: string) => {
           <div class="absolute top-16 left-0 w-full h-1 bg-gray-200 hidden lg:block"></div>
           <div class="absolute top-16 left-0 w-full h-1 bg-gradient-to-r from-purple-500 via-indigo-500 via-blue-500 via-sky-500 via-cyan-500 to-teal-500 hidden lg:block"></div>
           
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8">
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-6 sm:gap-8">
             <!-- Paso 1 -->
             <div id="paso-1" class="text-center group">
               <div class="relative mb-6">
@@ -89,7 +89,7 @@ const getUrl = (path: string) => {
                 </div>
                 <div class="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-8 h-8 bg-purple-500 rounded-full opacity-20 animate-ping"></div>
               </div>
-              <h3 class="text-lg font-bold text-gray-900 mb-2">¿Por qué Adictivo?</h3>
+              <h3 class="text-base sm:text-lg font-bold text-gray-900 mb-2">¿Por qué Adictivo?</h3>
               <p class="text-sm text-gray-600 mb-4">Entiende los mecanismos psicológicos de la adicción al juego</p>
               <a href={getUrl('/the-way/paso-1')} class="inline-flex items-center text-purple-600 hover:text-purple-800 font-semibold text-sm">
                 Explorar →
@@ -103,7 +103,7 @@ const getUrl = (path: string) => {
                   2
                 </div>
               </div>
-              <h3 class="text-lg font-bold text-gray-900 mb-2">Reconocer el Problema</h3>
+              <h3 class="text-base sm:text-lg font-bold text-gray-900 mb-2">Reconocer el Problema</h3>
               <p class="text-sm text-gray-600 mb-4">Identifica las señales de advertencia del juego problemático</p>
               <a href={getUrl('/the-way/paso-2')} class="inline-flex items-center text-indigo-600 hover:text-indigo-800 font-semibold text-sm">
                 Explorar →
@@ -117,7 +117,7 @@ const getUrl = (path: string) => {
                   3
                 </div>
               </div>
-              <h3 class="text-lg font-bold text-gray-900 mb-2">Sesgos Mentales</h3>
+              <h3 class="text-base sm:text-lg font-bold text-gray-900 mb-2">Sesgos Mentales</h3>
               <p class="text-sm text-gray-600 mb-4">Descubre las trampas cognitivas que perpetúan el juego</p>
               <a href={getUrl('/the-way/paso-3')} class="inline-flex items-center text-blue-600 hover:text-blue-800 font-semibold text-sm">
                 Explorar →
@@ -131,7 +131,7 @@ const getUrl = (path: string) => {
                   4
                 </div>
               </div>
-              <h3 class="text-lg font-bold text-gray-900 mb-2">Autocontrol</h3>
+              <h3 class="text-base sm:text-lg font-bold text-gray-900 mb-2">Autocontrol</h3>
               <p class="text-sm text-gray-600 mb-4">Aprende técnicas efectivas de autorregulación</p>
               <a href={getUrl('/the-way/paso-4')} class="inline-flex items-center text-sky-600 hover:text-sky-800 font-semibold text-sm">
                 Explorar →
@@ -145,7 +145,7 @@ const getUrl = (path: string) => {
                   5
                 </div>
               </div>
-              <h3 class="text-lg font-bold text-gray-900 mb-2">Diseña tu Plan</h3>
+              <h3 class="text-base sm:text-lg font-bold text-gray-900 mb-2">Diseña tu Plan</h3>
               <p class="text-sm text-gray-600 mb-4">Crea un plan personalizado de acción</p>
               <a href={getUrl('/the-way/paso-5')} class="inline-flex items-center text-cyan-600 hover:text-cyan-800 font-semibold text-sm">
                 Explorar →
@@ -159,7 +159,7 @@ const getUrl = (path: string) => {
                   6
                 </div>
               </div>
-              <h3 class="text-lg font-bold text-gray-900 mb-2">Busca Apoyo</h3>
+              <h3 class="text-base sm:text-lg font-bold text-gray-900 mb-2">Busca Apoyo</h3>
               <p class="text-sm text-gray-600 mb-4">Conecta con recursos y redes de apoyo</p>
               <a href={getUrl('/the-way/paso-6')} class="inline-flex items-center text-teal-600 hover:text-teal-800 font-semibold text-sm">
                 Explorar →
@@ -172,24 +172,24 @@ const getUrl = (path: string) => {
   </section>
 
   <!-- About the Path -->
-  <section id="sobre-el-camino" class="py-20 bg-gray-50">
+  <section id="sobre-el-camino" class="py-12 sm:py-16 md:py-20 bg-gray-50">
     <div class="container mx-auto px-4">
       <div class="max-w-4xl mx-auto">
-        <div class="text-center mb-16">
-          <h2 class="text-4xl font-bold text-gray-900 mb-6">Las Claves del Camino</h2>
-          <p class="text-xl text-gray-600">
+        <div class="text-center mb-12 sm:mb-16">
+          <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">Las Claves del Camino</h2>
+          <p class="text-base sm:text-lg md:text-xl text-gray-600">
             Metodología basada en evidencia científica y mejores prácticas clínicas
           </p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div class="bg-white p-8 rounded-xl shadow-lg text-center">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+          <div class="bg-white p-6 sm:p-8 rounded-xl shadow-lg text-center">
             <div class="w-16 h-16 mx-auto mb-6 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
               <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
               </svg>
             </div>
-            <h3 class="text-xl font-bold text-gray-900 mb-4">Conocimiento como Herramienta</h3>
+            <h3 class="text-lg sm:text-xl font-bold text-gray-900 mb-4">Conocimiento como Herramienta</h3>
             <p class="text-gray-600">
               El principal objetivo del camino es ofrecerte una guía interactiva que te hará conocer 
               en profundidad cómo funciona la adicción a los juegos de azar.
@@ -202,7 +202,7 @@ const getUrl = (path: string) => {
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
               </svg>
             </div>
-            <h3 class="text-xl font-bold text-gray-900 mb-4">Diseña tu Camino</h3>
+            <h3 class="text-lg sm:text-xl font-bold text-gray-900 mb-4">Diseña tu Camino</h3>
             <p class="text-gray-600">
               Entendemos que cada persona tiene sus tiempos y necesidades. El camino está diseñado 
               para ayudarte a crear un plan que se ajuste a tus necesidades.
@@ -216,7 +216,7 @@ const getUrl = (path: string) => {
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.879 16.121A3 3 0 1012.015 11L11 14H9c0 .768.293 1.536.879 2.121z" />
               </svg>
             </div>
-            <h3 class="text-xl font-bold text-gray-900 mb-4">El Impulso que Necesitas</h3>
+            <h3 class="text-lg sm:text-xl font-bold text-gray-900 mb-4">El Impulso que Necesitas</h3>
             <p class="text-gray-600">
               Hemos condensado la información más importante para ayudarte a iniciar el camino. 
               ¡Empieza ahora, nunca es tarde!
@@ -228,10 +228,10 @@ const getUrl = (path: string) => {
   </section>
 
   <!-- Author Section -->
-  <section class="py-20 bg-white">
+  <section class="py-12 sm:py-16 md:py-20 bg-white">
     <div class="container mx-auto px-4">
       <div class="max-w-4xl mx-auto">
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 items-center">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 sm:gap-12 items-center">
           <div class="lg:col-span-1">
             <div class="text-center">
               <div class="w-48 h-48 mx-auto mb-6 rounded-full overflow-hidden bg-gradient-to-br from-indigo-500 to-purple-600 p-2">
@@ -245,13 +245,13 @@ const getUrl = (path: string) => {
           </div>
           
           <div class="lg:col-span-2">
-            <h2 class="text-3xl font-bold text-gray-900 mb-6">Dr. Ángel Zamora Martínez</h2>
-            <p class="text-lg text-gray-700 mb-6">
+            <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-6">Dr. Ángel Zamora Martínez</h2>
+            <p class="text-base sm:text-lg text-gray-700 mb-6">
               Soy experto en psicología clínica y me apasiona la investigación en adicciones comportamentales. 
               Mi formación incluye un doctorado en Psicología Clínica y múltiples certificaciones en terapias 
               cognitivo-conductuales para el tratamiento de adicciones.
             </p>
-            <p class="text-lg text-gray-700 mb-6">
+            <p class="text-base sm:text-lg text-gray-700 mb-6">
               He desarrollado este camino interactivo basándome en las últimas investigaciones y mejores prácticas 
               en la prevención y tratamiento del juego problemático.
             </p>
@@ -268,17 +268,17 @@ const getUrl = (path: string) => {
   </section>
 
   <!-- Call to Action -->
-  <section class="py-20 bg-gradient-to-br from-purple-900 via-indigo-900 to-blue-900 text-white">
-    <div class="container mx-auto px-4 text-center">
-      <h2 class="text-4xl font-bold mb-6">¿Listo para Comenzar?</h2>
-      <p class="text-xl mb-8 max-w-2xl mx-auto text-purple-100">
+  <section class="py-12 sm:py-16 md:py-20 bg-gradient-to-br from-purple-900 via-indigo-900 to-blue-900 text-white">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-6">¿Listo para Comenzar?</h2>
+      <p class="text-base sm:text-lg md:text-xl mb-8 max-w-2xl mx-auto text-purple-100">
         El primer paso es siempre el más difícil, pero también el más importante. 
         Tu futuro yo te lo agradecerá.
       </p>
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
         <a 
           href={getUrl('/the-way/paso-1')} 
-          class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-gray-900 font-bold rounded-full transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
+          class="inline-flex items-center px-6 py-4 md:px-8 md:py-4 min-h-[48px] bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-gray-900 font-bold rounded-full transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
         >
           🚀 Empezar Paso 1
           <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -287,7 +287,7 @@ const getUrl = (path: string) => {
         </a>
         <a 
           href={getUrl('/ayuda')} 
-          class="inline-flex items-center px-8 py-4 bg-transparent border-2 border-white text-white font-semibold rounded-full hover:bg-white hover:text-purple-900 transition-all duration-300"
+          class="inline-flex items-center px-6 py-4 md:px-8 md:py-4 min-h-[48px] bg-transparent border-2 border-white text-white font-semibold rounded-full hover:bg-white hover:text-purple-900 transition-all duration-300"
         >
           🆘 Necesito Ayuda Ya
         </a>

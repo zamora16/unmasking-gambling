@@ -9,18 +9,18 @@ import { getUrl } from '../../utils/url';
 >
   
   <!-- Hero Section -->
-  <section class="bg-gradient-to-br from-red-600 via-black to-red-800 text-white py-20">
-    <div class="container mx-auto px-4 text-center">
+  <section class="bg-gradient-to-br from-red-600 via-black to-red-800 text-white py-12 sm:py-16 md:py-20 lg:py-24">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
       <div class="max-w-4xl mx-auto">
-        <h1 class="text-4xl md:text-6xl font-bold mb-6">
+        <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
           🎲 Ruleta
         </h1>
-        <p class="text-xl md:text-2xl mb-8 text-red-100">
+        <p class="text-lg sm:text-xl md:text-2xl lg:text-3xl mb-8 text-red-100 leading-relaxed">
           Analiza las probabilidades de la ruleta y descubre 
           <span class="text-yellow-300 font-semibold">por qué ningún sistema puede vencer a las matemáticas</span>
         </p>
-        <div class="bg-white/10 backdrop-blur-sm rounded-lg p-6 max-w-2xl mx-auto">
-          <p class="text-red-100 text-lg">
+        <div class="bg-white/10 backdrop-blur-sm rounded-lg p-4 sm:p-6 max-w-2xl mx-auto">
+          <p class="text-red-100 text-base sm:text-lg">
             🎯 <strong>Simuladores completos:</strong> Desde probabilidades básicas hasta sistemas avanzados
           </p>
         </div>
@@ -29,9 +29,9 @@ import { getUrl } from '../../utils/url';
   </section>
 
   <!-- Navigation Cards -->
-  <section class="py-20 bg-gray-50">
-    <div class="container mx-auto px-4">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+  <section class="py-12 sm:py-16 md:py-20 lg:py-24 bg-gray-50">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
         
         <!-- Main Simulator -->
         <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden transform hover:scale-105">
@@ -44,7 +44,7 @@ import { getUrl } from '../../utils/url';
             </div>
           </div>
           <div class="p-6">
-            <h3 class="text-2xl font-bold text-gray-900 mb-3">🎯 Simulador Interactivo</h3>
+            <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-3">🎯 Simulador Interactivo</h3>
             <p class="text-gray-600 mb-4">
               Experimenta con diferentes tipos de apuestas en ruleta europea y americana. Ve en tiempo real cómo las matemáticas favorecen al casino.
             </p>
@@ -55,7 +55,7 @@ import { getUrl } from '../../utils/url';
             </div>
             <a 
               href={getUrl('/roulette/simulator')} 
-              class="inline-flex items-center w-full justify-center px-6 py-3 bg-gradient-to-r from-red-600 to-red-800 hover:from-red-700 hover:to-red-900 text-white font-semibold rounded-lg transition-all duration-200"
+              class="inline-flex items-center w-full justify-center px-6 py-4 md:px-8 md:py-4 min-h-[48px] bg-gradient-to-r from-red-600 to-red-800 hover:from-red-700 hover:to-red-900 text-white font-semibold rounded-lg transition-all duration-200"
             >
               Simular Ruleta
               <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -76,7 +76,7 @@ import { getUrl } from '../../utils/url';
             </div>
           </div>
           <div class="p-6">
-            <h3 class="text-2xl font-bold text-gray-900 mb-3">📈 Análisis de Sistemas</h3>
+            <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-3">📈 Análisis de Sistemas</h3>
             <p class="text-gray-600 mb-4">
               Prueba Martingala, Fibonacci y D'Alembert. Descubre por qué todos los sistemas están matemáticamente condenados al fracaso.
             </p>
@@ -87,7 +87,7 @@ import { getUrl } from '../../utils/url';
             </div>
             <a 
               href={getUrl('/roulette/systems')} 
-              class="inline-flex items-center w-full justify-center px-6 py-3 bg-gradient-to-r from-gray-700 to-gray-900 hover:from-gray-800 hover:to-black text-white font-semibold rounded-lg transition-all duration-200"
+              class="inline-flex items-center w-full justify-center px-6 py-4 md:px-8 md:py-4 min-h-[48px] bg-gradient-to-r from-gray-700 to-gray-900 hover:from-gray-800 hover:to-black text-white font-semibold rounded-lg transition-all duration-200"
             >
               Analizar Sistemas
               <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -108,7 +108,7 @@ import { getUrl } from '../../utils/url';
             </div>
           </div>
           <div class="p-6">
-            <h3 class="text-2xl font-bold text-gray-900 mb-3">🧮 Calculadora de Probabilidades</h3>
+            <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-3">🧮 Calculadora de Probabilidades</h3>
             <p class="text-gray-600 mb-4">
               Calcula las probabilidades exactas, pagos esperados y ventaja de la casa para cualquier tipo de apuesta en ruleta.
             </p>
@@ -119,7 +119,7 @@ import { getUrl } from '../../utils/url';
             </div>
             <a 
               href={getUrl('/roulette/calculator')} 
-              class="inline-flex items-center w-full justify-center px-6 py-3 bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 text-white font-semibold rounded-lg transition-all duration-200"
+              class="inline-flex items-center w-full justify-center px-6 py-4 md:px-8 md:py-4 min-h-[48px] bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 text-white font-semibold rounded-lg transition-all duration-200"
             >
               Calcular Probabilidades
               <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -140,7 +140,7 @@ import { getUrl } from '../../utils/url';
             </div>
           </div>
           <div class="p-6">
-            <h3 class="text-2xl font-bold text-gray-900 mb-3">🏠 Ventaja de la Casa</h3>
+            <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-3">🏠 Ventaja de la Casa</h3>
             <p class="text-gray-600 mb-4">
               Visualiza cómo el cero verde garantiza billones al casino. Simulación de convergencia e impacto en el mundo real.
             </p>
@@ -151,7 +151,7 @@ import { getUrl } from '../../utils/url';
             </div>
             <a 
               href={getUrl('/roulette/house-edge')} 
-              class="inline-flex items-center w-full justify-center px-6 py-3 bg-gradient-to-r from-green-600 to-green-800 hover:from-green-700 hover:to-green-900 text-white font-semibold rounded-lg transition-all duration-200"
+              class="inline-flex items-center w-full justify-center px-6 py-4 md:px-8 md:py-4 min-h-[48px] bg-gradient-to-r from-green-600 to-green-800 hover:from-green-700 hover:to-green-900 text-white font-semibold rounded-lg transition-all duration-200"
             >
               Ver Ventaja Casa
               <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -165,19 +165,19 @@ import { getUrl } from '../../utils/url';
   </section>
 
   <!-- Quick Facts -->
-  <section class="py-16 bg-white">
-    <div class="container mx-auto px-4">
+  <section class="py-12 sm:py-16 bg-white">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
       <div class="max-w-4xl mx-auto">
-        <div class="text-center mb-12">
-          <h2 class="text-4xl font-bold text-gray-900 mb-6">🎯 Datos Clave sobre la Ruleta</h2>
-          <p class="text-xl text-gray-600">
+        <div class="text-center mb-8 sm:mb-12">
+          <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">🎯 Datos Clave sobre la Ruleta</h2>
+          <p class="text-base sm:text-lg md:text-xl text-gray-600">
             Conoce los hechos antes de apostar
           </p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-          <div class="bg-green-50 border border-green-200 rounded-lg p-6">
-            <h3 class="text-xl font-bold text-green-800 mb-4">🇪🇺 Ruleta Europea</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 mb-8 sm:mb-12">
+          <div class="bg-green-50 border border-green-200 rounded-lg p-4 sm:p-6">
+            <h3 class="text-lg sm:text-xl font-bold text-green-800 mb-4">🇪🇺 Ruleta Europea</h3>
             <div class="space-y-3 text-sm">
               <div class="flex justify-between">
                 <span class="text-green-700">Números totales:</span>
@@ -202,8 +202,8 @@ import { getUrl } from '../../utils/url';
             </div>
           </div>
 
-          <div class="bg-red-50 border border-red-200 rounded-lg p-6">
-            <h3 class="text-xl font-bold text-red-800 mb-4">🇺🇸 Ruleta Americana</h3>
+          <div class="bg-red-50 border border-red-200 rounded-lg p-4 sm:p-6">
+            <h3 class="text-lg sm:text-xl font-bold text-red-800 mb-4">🇺🇸 Ruleta Americana</h3>
             <div class="space-y-3 text-sm">
               <div class="flex justify-between">
                 <span class="text-red-700">Números totales:</span>
@@ -229,19 +229,19 @@ import { getUrl } from '../../utils/url';
           </div>
         </div>
 
-        <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-6">
-          <h3 class="text-xl font-bold text-yellow-800 mb-4 text-center">⚡ Comparación Rápida</h3>
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+        <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4 sm:p-6">
+          <h3 class="text-lg sm:text-xl font-bold text-yellow-800 mb-4 text-center">⚡ Comparación Rápida</h3>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 text-center">
             <div>
-              <div class="text-2xl font-bold text-gray-900 mb-2">95%</div>
+              <div class="text-xl sm:text-2xl font-bold text-gray-900 mb-2">95%</div>
               <p class="text-yellow-700 text-sm">Peor para el jugador: Ruleta americana tiene casi el doble de ventaja de casa</p>
             </div>
             <div>
-              <div class="text-2xl font-bold text-gray-900 mb-2">€2.56</div>
+              <div class="text-xl sm:text-2xl font-bold text-gray-900 mb-2">€2.56</div>
               <p class="text-yellow-700 text-sm">Diferencia por cada €100 apostados entre europea vs americana</p>
             </div>
             <div>
-              <div class="text-2xl font-bold text-gray-900 mb-2">100%</div>
+              <div class="text-xl sm:text-2xl font-bold text-gray-900 mb-2">100%</div>
               <p class="text-yellow-700 text-sm">Probabilidad de que pierdas dinero si juegas el tiempo suficiente</p>
             </div>
           </div>
@@ -251,19 +251,19 @@ import { getUrl } from '../../utils/url';
   </section>
 
   <!-- Educational Content -->
-  <section class="py-16 bg-gray-50">
-    <div class="container mx-auto px-4">
+  <section class="py-12 sm:py-16 bg-gray-50">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
       <div class="max-w-4xl mx-auto">
-        <div class="text-center mb-12">
-          <h2 class="text-4xl font-bold text-gray-900 mb-6">🧠 Lo Que Debes Entender</h2>
-          <p class="text-xl text-gray-600">
+        <div class="text-center mb-8 sm:mb-12">
+          <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">🧠 Lo Que Debes Entender</h2>
+          <p class="text-base sm:text-lg md:text-xl text-gray-600">
             Conocimiento que puede salvarte dinero
           </p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div class="bg-blue-50 border-l-4 border-blue-400 p-6 rounded">
-            <h3 class="text-xl font-bold text-blue-800 mb-3">✅ VERDADES Matemáticas</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+          <div class="bg-blue-50 border-l-4 border-blue-400 p-4 sm:p-6 rounded">
+            <h3 class="text-lg sm:text-xl font-bold text-blue-800 mb-3">✅ VERDADES Matemáticas</h3>
             <ul class="text-blue-700 space-y-2 text-sm">
               <li><strong>• Cada giro es independiente</strong> - Los resultados pasados no afectan los futuros</li>
               <li><strong>• El RNG es aleatorio</strong> - No hay patrones, secuencias o máquinas "calientes"</li>
@@ -273,8 +273,8 @@ import { getUrl } from '../../utils/url';
             </ul>
           </div>
           
-          <div class="bg-red-50 border-l-4 border-red-400 p-6 rounded">
-            <h3 class="text-xl font-bold text-red-800 mb-3">❌ MITOS Peligrosos</h3>
+          <div class="bg-red-50 border-l-4 border-red-400 p-4 sm:p-6 rounded">
+            <h3 class="text-lg sm:text-xl font-bold text-red-800 mb-3">❌ MITOS Peligrosos</h3>
             <ul class="text-red-700 space-y-2 text-sm">
               <li><strong>• "Los números tienen memoria"</strong> - Falacia del jugador clásica</li>
               <li><strong>• "Martingala siempre funciona"</strong> - Solo hasta que no funciona y pierdes todo</li>
@@ -285,11 +285,11 @@ import { getUrl } from '../../utils/url';
           </div>
         </div>
 
-        <div class="mt-12 bg-white rounded-lg shadow-lg p-8">
-          <h3 class="text-2xl font-bold text-center text-gray-900 mb-6">🎲 La Única Certeza en la Ruleta</h3>
+        <div class="mt-8 sm:mt-12 bg-white rounded-lg shadow-lg p-6 sm:p-8">
+          <h3 class="text-xl sm:text-2xl font-bold text-center text-gray-900 mb-6">🎲 La Única Certeza en la Ruleta</h3>
           <div class="text-center">
-            <div class="text-4xl font-bold text-red-600 mb-4">2.70% - 5.26%</div>
-            <p class="text-lg text-gray-700 mb-4">
+            <div class="text-3xl sm:text-4xl font-bold text-red-600 mb-4">2.70% - 5.26%</div>
+            <p class="text-base sm:text-lg text-gray-700 mb-4">
               Esta es la ventaja matemática garantizada del casino en cada giro. 
               No importa qué estrategia uses, esta ventaja siempre está presente.
             </p>
@@ -306,24 +306,24 @@ import { getUrl } from '../../utils/url';
   </section>
 
   <!-- Final CTA -->
-  <section class="py-16 bg-red-600">
-    <div class="container mx-auto px-4 text-center">
+  <section class="py-12 sm:py-16 bg-red-600">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
       <div class="max-w-3xl mx-auto">
-        <h2 class="text-3xl font-bold text-white mb-6">🎯 Usa Nuestros Simuladores</h2>
-        <p class="text-xl text-red-100 mb-8">
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-6">🎯 Usa Nuestros Simuladores</h2>
+        <p class="text-base sm:text-lg md:text-xl text-red-100 mb-8">
           No arriesgues tu dinero real. Usa nuestros simuladores para entender las matemáticas 
           antes de que te cuesten dinero real.
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
           <a 
             href={getUrl('/roulette/simulator')} 
-            class="bg-white hover:bg-gray-100 text-red-600 font-bold py-3 px-8 rounded-lg transition-all duration-200"
+            class="bg-white hover:bg-gray-100 text-red-600 font-bold py-4 px-6 md:px-8 min-h-[48px] rounded-lg transition-all duration-200"
           >
             🎯 Simular Ahora
           </a>
           <a 
             href={getUrl('/roulette/systems')} 
-            class="bg-red-800 hover:bg-red-900 text-white font-bold py-3 px-8 rounded-lg transition-all duration-200"
+            class="bg-red-800 hover:bg-red-900 text-white font-bold py-4 px-6 md:px-8 min-h-[48px] rounded-lg transition-all duration-200"
           >
             📈 Probar Sistemas
           </a>

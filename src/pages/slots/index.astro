@@ -9,13 +9,13 @@ import { getUrl } from '../../utils/url';
 >
   
   <!-- Hero Section -->
-  <section class="bg-gradient-to-br from-indigo-600 via-purple-600 to-indigo-800 text-white py-20">
-    <div class="container mx-auto px-4 text-center">
+  <section class="bg-gradient-to-br from-indigo-600 via-purple-600 to-indigo-800 text-white py-12 sm:py-16 md:py-20 lg:py-24">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
       <div class="max-w-4xl mx-auto">
-        <h1 class="text-4xl md:text-6xl font-bold mb-6">
+        <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
           🎰 Máquinas Tragaperras
         </h1>
-        <p class="text-xl md:text-2xl mb-8 text-indigo-100">
+        <p class="text-lg sm:text-xl md:text-2xl lg:text-3xl mb-8 text-indigo-100 leading-relaxed">
           Descubre cómo funcionan realmente las slots y por qué 
           <span class="text-yellow-300 font-semibold">la casa siempre gana</span>
         </p>
@@ -24,9 +24,9 @@ import { getUrl } from '../../utils/url';
   </section>
 
   <!-- Navigation Cards -->
-  <section class="py-20 bg-gray-50">
-    <div class="container mx-auto px-4">
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+  <section class="py-12 sm:py-16 md:py-20 lg:py-24 bg-gray-50">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
         
         <!-- RTP Simulator - Main Feature -->
         <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden transform hover:scale-105">
@@ -39,7 +39,7 @@ import { getUrl } from '../../utils/url';
             </div>
           </div>
           <div class="p-6">
-            <h3 class="text-2xl font-bold text-gray-900 mb-3">Simulador RTP</h3>
+            <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-3">Simulador RTP</h3>
             <p class="text-gray-600 mb-4">
               Experimenta con diferentes configuraciones de RTP y entiende por qué las matemáticas favorecen al casino.
             </p>
@@ -50,7 +50,7 @@ import { getUrl } from '../../utils/url';
             </div>
             <a 
               href={getUrl('/slots/rtp')} 
-              class="inline-flex items-center w-full justify-center px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-semibold rounded-lg transition-all duration-200"
+              class="inline-flex items-center w-full justify-center px-6 py-4 md:px-8 md:py-4 min-h-[48px] bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-semibold rounded-lg transition-all duration-200"
             >
               Probar Simulador
               <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -71,7 +71,7 @@ import { getUrl } from '../../utils/url';
             </div>
           </div>
           <div class="p-6">
-            <h3 class="text-2xl font-bold text-gray-900 mb-3">Analizador de Volatilidad</h3>
+            <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-3">Analizador de Volatilidad</h3>
             <p class="text-gray-600 mb-4">
               Comprende la diferencia entre alta y baja volatilidad en las tragaperras y cómo afecta tu experiencia.
             </p>
@@ -82,7 +82,7 @@ import { getUrl } from '../../utils/url';
             </div>
             <a 
               href={getUrl('/slots/volatilidad')} 
-              class="inline-flex items-center w-full justify-center px-6 py-3 bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white font-semibold rounded-lg transition-all duration-200"
+              class="inline-flex items-center w-full justify-center px-6 py-4 md:px-8 md:py-4 min-h-[48px] bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white font-semibold rounded-lg transition-all duration-200"
             >
               Analizar Volatilidad
               <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -103,7 +103,7 @@ import { getUrl } from '../../utils/url';
             </div>
           </div>
           <div class="p-6">
-            <h3 class="text-2xl font-bold text-gray-900 mb-3">Calculadora de Líneas</h3>
+            <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-3">Calculadora de Líneas</h3>
             <p class="text-gray-600 mb-4">
               Analiza cómo las líneas de pago afectan tus probabilidades y coste total por tirada.
             </p>
@@ -114,7 +114,7 @@ import { getUrl } from '../../utils/url';
             </div>
             <a 
               href={getUrl('/slots/lineas-pago')} 
-              class="inline-flex items-center w-full justify-center px-6 py-3 bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600 text-white font-semibold rounded-lg transition-all duration-200"
+              class="inline-flex items-center w-full justify-center px-6 py-4 md:px-8 md:py-4 min-h-[48px] bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600 text-white font-semibold rounded-lg transition-all duration-200"
             >
               Calcular Líneas
               <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -128,19 +128,19 @@ import { getUrl } from '../../utils/url';
   </section>
 
   <!-- Educational Content -->
-  <section class="py-20 bg-white">
-    <div class="container mx-auto px-4">
+  <section class="py-12 sm:py-16 md:py-20 lg:py-24 bg-white">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
       <div class="max-w-4xl mx-auto">
-        <div class="text-center mb-16">
-          <h2 class="text-4xl font-bold text-gray-900 mb-6">¿Cómo Funcionan las Tragaperras?</h2>
-          <p class="text-xl text-gray-600">
+        <div class="text-center mb-12 sm:mb-16">
+          <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">¿Cómo Funcionan las Tragaperras?</h2>
+          <p class="text-base sm:text-lg md:text-xl text-gray-600">
             Conoce la ciencia y las matemáticas detrás de las máquinas de casino
           </p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-16">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12 items-center mb-12 sm:mb-16">
           <div>
-            <h3 class="text-2xl font-bold text-gray-900 mb-4">🎲 Generador de Números Aleatorios (RNG)</h3>
+            <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-4">🎲 Generador de Números Aleatorios (RNG)</h3>
             <p class="text-gray-600 mb-4">
               Cada milisegundo, el RNG genera números completamente aleatorios que determinan el resultado de cada tirada. 
               Esto significa que no hay patrones, no hay "máquinas calientes" y no hay forma de predecir el resultado.
@@ -163,7 +163,7 @@ import { getUrl } from '../../utils/url';
           </div>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-16">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12 items-center mb-12 sm:mb-16">
           <div class="bg-gray-100 p-8 rounded-lg order-2 md:order-1">
             <div class="text-center">
               <div class="text-6xl mb-4">📊</div>
@@ -176,7 +176,7 @@ import { getUrl } from '../../utils/url';
             </div>
           </div>
           <div class="order-1 md:order-2">
-            <h3 class="text-2xl font-bold text-gray-900 mb-4">📈 Return to Player (RTP)</h3>
+            <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-4">📈 Return to Player (RTP)</h3>
             <p class="text-gray-600 mb-4">
               El RTP es el porcentaje del dinero apostado que la máquina devuelve a los jugadores <strong>a muy largo plazo</strong>. 
               Un RTP del 95% significa que por cada €100 apostados, la máquina devuelve €95 en premios.
@@ -188,9 +188,9 @@ import { getUrl } from '../../utils/url';
           </div>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12 items-center">
           <div>
-            <h3 class="text-2xl font-bold text-gray-900 mb-4">⚡ Volatilidad</h3>
+            <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-4">⚡ Volatilidad</h3>
             <p class="text-gray-600 mb-4">
               La volatilidad determina la frecuencia y el tamaño de los premios:
             </p>
@@ -231,28 +231,28 @@ import { getUrl } from '../../utils/url';
   </section>
 
   <!-- Warning Section -->
-  <section class="py-16 bg-red-50">
-    <div class="container mx-auto px-4">
+  <section class="py-12 sm:py-16 bg-red-50">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
       <div class="max-w-4xl mx-auto text-center">
-        <h2 class="text-3xl font-bold text-red-800 mb-6">⚠️ La Realidad que Debes Conocer</h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div class="bg-white p-6 rounded-lg shadow-lg">
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-red-800 mb-6">⚠️ La Realidad que Debes Conocer</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+          <div class="bg-white p-4 sm:p-6 rounded-lg shadow-lg">
             <div class="text-4xl mb-4">🏠</div>
-            <h3 class="text-lg font-bold text-gray-900 mb-2">La Casa Siempre Gana</h3>
+            <h3 class="text-base sm:text-lg font-bold text-gray-900 mb-2">La Casa Siempre Gana</h3>
             <p class="text-gray-600 text-sm">
               Las matemáticas garantizan que el casino obtenga beneficios. No hay sistema ni estrategia que pueda vencer esto.
             </p>
           </div>
-          <div class="bg-white p-6 rounded-lg shadow-lg">
+          <div class="bg-white p-4 sm:p-6 rounded-lg shadow-lg">
             <div class="text-4xl mb-4">🧠</div>
-            <h3 class="text-lg font-bold text-gray-900 mb-2">Diseñadas para Adicción</h3>
+            <h3 class="text-base sm:text-lg font-bold text-gray-900 mb-2">Diseñadas para Adicción</h3>
             <p class="text-gray-600 text-sm">
               Sonidos, luces y "casi premios" están diseñados para liberar dopamina y mantenerte jugando.
             </p>
           </div>
-          <div class="bg-white p-6 rounded-lg shadow-lg">
+          <div class="bg-white p-4 sm:p-6 rounded-lg shadow-lg">
             <div class="text-4xl mb-4">💸</div>
-            <h3 class="text-lg font-bold text-gray-900 mb-2">Nunca una Inversión</h3>
+            <h3 class="text-base sm:text-lg font-bold text-gray-900 mb-2">Nunca una Inversión</h3>
             <p class="text-gray-600 text-sm">
               El juego debe ser entretenimiento, nunca una forma de ganar dinero o solucionar problemas financieros.
             </p>

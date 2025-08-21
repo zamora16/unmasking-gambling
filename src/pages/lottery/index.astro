@@ -9,13 +9,13 @@ import { getUrl } from '../../utils/url';
 >
   
   <!-- Hero Section -->
-  <section class="bg-gradient-to-br from-purple-600 via-pink-600 to-purple-800 text-white py-20">
+  <section class="bg-gradient-to-br from-purple-600 via-pink-600 to-purple-800 text-white py-16 sm:py-20">
     <div class="container mx-auto px-4 text-center">
       <div class="max-w-4xl mx-auto">
-        <h1 class="text-4xl md:text-6xl font-bold mb-6">
+        <h1 class="text-3xl sm:text-4xl md:text-6xl font-bold mb-6 leading-tight">
           🎟️ Loterías y Rascas
         </h1>
-        <p class="text-xl md:text-2xl mb-8 text-purple-100">
+        <p class="text-lg sm:text-xl md:text-2xl mb-8 text-purple-100 leading-relaxed">
           Descubre las probabilidades reales y por qué 
           <span class="text-yellow-300 font-semibold">las matemáticas no mienten</span>
         </p>
@@ -24,9 +24,9 @@ import { getUrl } from '../../utils/url';
   </section>
 
   <!-- Navigation Cards -->
-  <section class="py-20 bg-gray-50">
+  <section class="py-16 sm:py-20 bg-gray-50">
     <div class="container mx-auto px-4">
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
         
         <!-- Probability Calculator - Main Feature -->
         <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden transform hover:scale-105">
@@ -38,22 +38,22 @@ import { getUrl } from '../../utils/url';
               NUEVO
             </div>
           </div>
-          <div class="p-6">
-            <h3 class="text-2xl font-bold text-gray-900 mb-3">Calculadora de Probabilidades</h3>
-            <p class="text-gray-600 mb-4">
+          <div class="p-4 sm:p-6">
+            <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-3 leading-tight">Calculadora de Probabilidades</h3>
+            <p class="text-gray-600 mb-4 text-sm sm:text-base leading-relaxed">
               Calcula las probabilidades reales de ganar en diferentes tipos de lotería y compáralas con eventos cotidianos.
             </p>
-            <div class="mb-4">
-              <span class="inline-block bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded mr-2">Calculadora</span>
-              <span class="inline-block bg-pink-100 text-pink-800 text-xs px-2 py-1 rounded mr-2">Comparativo</span>
+            <div class="mb-4 flex flex-wrap gap-2">
+              <span class="inline-block bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded">Calculadora</span>
+              <span class="inline-block bg-pink-100 text-pink-800 text-xs px-2 py-1 rounded">Comparativo</span>
               <span class="inline-block bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded">Educativo</span>
             </div>
             <a 
               href={getUrl('/lottery/probability-calculator')} 
-              class="inline-flex items-center w-full justify-center px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-semibold rounded-lg transition-all duration-200"
+              class="inline-flex items-center w-full justify-center px-4 sm:px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-semibold rounded-lg transition-all duration-200 text-sm sm:text-base"
             >
               Calcular Probabilidades
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 ml-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M12 5l7 7-7 7" />
               </svg>
             </a>
@@ -70,22 +70,22 @@ import { getUrl } from '../../utils/url';
               NUEVO
             </div>
           </div>
-          <div class="p-6">
-            <h3 class="text-2xl font-bold text-gray-900 mb-3">Simulador de Rascas</h3>
-            <p class="text-gray-600 mb-4">
+          <div class="p-4 sm:p-6">
+            <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-3 leading-tight">Simulador de Rascas</h3>
+            <p class="text-gray-600 mb-4 text-sm sm:text-base leading-relaxed">
               Simula la compra de múltiples rascas del mismo lote y descubre cómo están distribuidos los premios.
             </p>
-            <div class="mb-4">
-              <span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded mr-2">Simulador</span>
-              <span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded mr-2">Interactivo</span>
+            <div class="mb-4 flex flex-wrap gap-2">
+              <span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded">Simulador</span>
+              <span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">Interactivo</span>
               <span class="inline-block bg-orange-100 text-orange-800 text-xs px-2 py-1 rounded">Visual</span>
             </div>
             <a 
               href={getUrl('/lottery/scratch-cards')} 
-              class="inline-flex items-center w-full justify-center px-6 py-3 bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600 text-white font-semibold rounded-lg transition-all duration-200"
+              class="inline-flex items-center w-full justify-center px-4 sm:px-6 py-3 bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600 text-white font-semibold rounded-lg transition-all duration-200 text-sm sm:text-base"
             >
               Simular Rascas
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 ml-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M12 5l7 7-7 7" />
               </svg>
             </a>
@@ -102,22 +102,22 @@ import { getUrl } from '../../utils/url';
               NUEVO
             </div>
           </div>
-          <div class="p-6">
-            <h3 class="text-2xl font-bold text-gray-900 mb-3">Calculadora de Valor Esperado</h3>
-            <p class="text-gray-600 mb-4">
+          <div class="p-4 sm:p-6">
+            <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-3 leading-tight">Calculadora de Valor Esperado</h3>
+            <p class="text-gray-600 mb-4 text-sm sm:text-base leading-relaxed">
               Calcula cuánto dinero pierdes realmente por cada euro que gastas en lotería y compáralo con alternativas.
             </p>
-            <div class="mb-4">
-              <span class="inline-block bg-orange-100 text-orange-800 text-xs px-2 py-1 rounded mr-2">Matemático</span>
-              <span class="inline-block bg-red-100 text-red-800 text-xs px-2 py-1 rounded mr-2">Revelador</span>
+            <div class="mb-4 flex flex-wrap gap-2">
+              <span class="inline-block bg-orange-100 text-orange-800 text-xs px-2 py-1 rounded">Matemático</span>
+              <span class="inline-block bg-red-100 text-red-800 text-xs px-2 py-1 rounded">Revelador</span>
               <span class="inline-block bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded">Educativo</span>
             </div>
             <a 
               href={getUrl('/lottery/expected-value')} 
-              class="inline-flex items-center w-full justify-center px-6 py-3 bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white font-semibold rounded-lg transition-all duration-200"
+              class="inline-flex items-center w-full justify-center px-4 sm:px-6 py-3 bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white font-semibold rounded-lg transition-all duration-200 text-sm sm:text-base"
             >
               Calcular Valor Esperado
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 ml-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M12 5l7 7-7 7" />
               </svg>
             </a>
@@ -128,84 +128,84 @@ import { getUrl } from '../../utils/url';
   </section>
 
   <!-- Educational Content -->
-  <section class="py-20 bg-white">
+  <section class="py-16 sm:py-20 bg-white">
     <div class="container mx-auto px-4">
       <div class="max-w-4xl mx-auto">
-        <div class="text-center mb-16">
-          <h2 class="text-4xl font-bold text-gray-900 mb-6">¿Cómo Funcionan Realmente las Loterías?</h2>
-          <p class="text-xl text-gray-600">
+        <div class="text-center mb-12 sm:mb-16">
+          <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-6 leading-tight">¿Cómo Funcionan Realmente las Loterías?</h2>
+          <p class="text-lg sm:text-xl text-gray-600 leading-relaxed">
             La verdad matemática detrás de los billetes y los sueños
           </p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-16">
-          <div>
-            <h3 class="text-2xl font-bold text-gray-900 mb-4">🎯 Probabilidades Extremas</h3>
-            <p class="text-gray-600 mb-4">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-center mb-12 sm:mb-16">
+          <div class="order-2 lg:order-1">
+            <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-4 leading-tight">🎯 Probabilidades Extremas</h3>
+            <p class="text-gray-600 mb-4 text-sm sm:text-base leading-relaxed">
               La probabilidad de ganar una lotería típica (como 6/49) es de aproximadamente 1 entre 14 millones. 
               Esto significa que tienes más probabilidades de ser alcanzado por un rayo múltiples veces.
             </p>
-            <p class="text-gray-600">
+            <p class="text-gray-600 text-sm sm:text-base leading-relaxed">
               <strong>Perspectiva:</strong> Si compraras un billete cada semana, estadísticamente tardarías 
               más de 250,000 años en ganar el premio mayor.
             </p>
           </div>
-          <div class="bg-gray-100 p-8 rounded-lg">
+          <div class="bg-gray-100 p-6 sm:p-8 rounded-lg order-1 lg:order-2">
             <div class="text-center">
-              <div class="text-6xl mb-4">⚡</div>
-              <div class="text-sm text-gray-600 mb-2">Probabilidad de ser alcanzado por un rayo</div>
-              <div class="text-lg font-bold text-blue-600">1 en 1,000,000</div>
-              <div class="text-sm text-gray-600 mt-4 mb-2">Probabilidad de ganar la lotería</div>
-              <div class="text-lg font-bold text-red-600">1 en 14,000,000</div>
+              <div class="text-4xl sm:text-6xl mb-4">⚡</div>
+              <div class="text-xs sm:text-sm text-gray-600 mb-2">Probabilidad de ser alcanzado por un rayo</div>
+              <div class="text-base sm:text-lg font-bold text-blue-600">1 en 1,000,000</div>
+              <div class="text-xs sm:text-sm text-gray-600 mt-4 mb-2">Probabilidad de ganar la lotería</div>
+              <div class="text-base sm:text-lg font-bold text-red-600">1 en 14,000,000</div>
             </div>
           </div>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-16">
-          <div class="bg-gray-100 p-8 rounded-lg order-2 md:order-1">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-center mb-12 sm:mb-16">
+          <div class="bg-gray-100 p-6 sm:p-8 rounded-lg order-2 lg:order-1">
             <div class="text-center">
-              <div class="text-6xl mb-4">💸</div>
-              <div class="text-lg font-bold text-red-600 mb-2">RTP: 50%</div>
-              <div class="text-sm text-gray-600 mb-4">Return to Player</div>
-              <div class="bg-red-500 h-4 rounded-full">
-                <div class="bg-green-500 h-4 rounded-full w-[50%]"></div>
+              <div class="text-4xl sm:text-6xl mb-4">💸</div>
+              <div class="text-base sm:text-lg font-bold text-red-600 mb-2">RTP: 50%</div>
+              <div class="text-xs sm:text-sm text-gray-600 mb-4">Return to Player</div>
+              <div class="bg-red-500 h-3 sm:h-4 rounded-full">
+                <div class="bg-green-500 h-3 sm:h-4 rounded-full w-[50%]"></div>
               </div>
               <div class="text-xs text-gray-500 mt-2">El peor RTP de todos los juegos</div>
             </div>
           </div>
-          <div class="order-1 md:order-2">
-            <h3 class="text-2xl font-bold text-gray-900 mb-4">📉 Valor Esperado Negativo</h3>
-            <p class="text-gray-600 mb-4">
+          <div class="order-1 lg:order-2">
+            <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-4 leading-tight">📉 Valor Esperado Negativo</h3>
+            <p class="text-gray-600 mb-4 text-sm sm:text-base leading-relaxed">
               Las loterías tienen el peor RTP (Return to Player) de todos los juegos de azar, típicamente entre 40-50%. 
               Esto significa que por cada €1 que gastas, solo recuperas €0.50 en premios.
             </p>
-            <p class="text-gray-600">
+            <p class="text-gray-600 text-sm sm:text-base leading-relaxed">
               <strong>En otras palabras:</strong> Cada billete que compras pierde automáticamente la mitad de su valor.
             </p>
           </div>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-          <div>
-            <h3 class="text-2xl font-bold text-gray-900 mb-4">🎫 Rascas y Ganas</h3>
-            <p class="text-gray-600 mb-4">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-center">
+          <div class="order-2 lg:order-1">
+            <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-4 leading-tight">🎫 Rascas y Ganas</h3>
+            <p class="text-gray-600 mb-4 text-sm sm:text-base leading-relaxed">
               Los rascas son especialmente engañosos porque dan la sensación de control e inmediatez. 
               Cada "lote" tiene un número fijo de premios distribuidos aleatoriamente.
             </p>
-            <ul class="text-gray-600 space-y-2">
+            <ul class="text-gray-600 space-y-2 text-sm sm:text-base">
               <li><strong>Premio mayor:</strong> Solo 1 o 2 por lote completo</li>
               <li><strong>Premios menores:</strong> Distribuidos para crear "falsas esperanzas"</li>
               <li><strong>Pérdidas garantizadas:</strong> 70-80% de los billetes no tienen premio</li>
             </ul>
           </div>
-          <div class="bg-gray-100 p-8 rounded-lg">
+          <div class="bg-gray-100 p-6 sm:p-8 rounded-lg order-1 lg:order-2">
             <div class="space-y-4">
               <div class="text-center">
-                <div class="text-3xl mb-2">🎫</div>
-                <div class="text-sm text-gray-600">Lote de 1000 rascas</div>
+                <div class="text-2xl sm:text-3xl mb-2">🎫</div>
+                <div class="text-xs sm:text-sm text-gray-600">Lote de 1000 rascas</div>
               </div>
               <div>
-                <div class="flex justify-between text-sm mb-1">
+                <div class="flex justify-between text-xs sm:text-sm mb-1">
                   <span>Premios mayores</span>
                   <span>2 billetes</span>
                 </div>
@@ -214,7 +214,7 @@ import { getUrl } from '../../utils/url';
                 </div>
               </div>
               <div>
-                <div class="flex justify-between text-sm mb-1">
+                <div class="flex justify-between text-xs sm:text-sm mb-1">
                   <span>Premios menores</span>
                   <span>150 billetes</span>
                 </div>
@@ -223,7 +223,7 @@ import { getUrl } from '../../utils/url';
                 </div>
               </div>
               <div>
-                <div class="flex justify-between text-sm mb-1">
+                <div class="flex justify-between text-xs sm:text-sm mb-1">
                   <span>Sin premio</span>
                   <span>848 billetes</span>
                 </div>

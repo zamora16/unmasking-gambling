@@ -34,13 +34,17 @@ const SlotSimulator: React.FC = () => {
   useEffect(() => {
     if (!chartContainerRef.current) return;
 
+    // 📱 Altura adaptativa para móvil
+    const isMobile = window.innerWidth < 768;
+    const chartHeight = isMobile ? 250 : 400;
+
     const chart = createChart(chartContainerRef.current, {
       layout: {
         background: { type: ColorType.Solid, color: '#ffffff' },
         textColor: '#374151',
       },
       width: chartContainerRef.current.clientWidth,
-      height: 400,
+      height: chartHeight,
       rightPriceScale: {
         borderColor: '#e5e7eb',
         textColor: '#6b7280',
@@ -68,11 +72,15 @@ const SlotSimulator: React.FC = () => {
     chartRef.current = chart;
     seriesRef.current = lineSeries;
 
-    // Responsive
+    // Responsive mejorado
     const handleResize = () => {
       if (chartContainerRef.current && chartRef.current) {
+        const isMobile = window.innerWidth < 768;
+        const newHeight = isMobile ? 250 : 400;
+        
         chartRef.current.applyOptions({
           width: chartContainerRef.current.clientWidth,
+          height: newHeight,
         });
       }
     };
@@ -254,7 +262,7 @@ const SlotSimulator: React.FC = () => {
             step="100"
             value={initialBalance}
             onChange={(e) => setInitialBalance(Number(e.target.value))}
-            className="w-full h-3 bg-gray-200 rounded-lg appearance-none cursor-pointer slider"
+            className="w-full h-6 md:h-3 bg-gray-200 rounded-lg appearance-none cursor-pointer slider"
           />
           <div className="flex justify-between text-xs text-gray-500">
             <span>€100</span>
@@ -273,7 +281,7 @@ const SlotSimulator: React.FC = () => {
             step="1"
             value={rtp}
             onChange={(e) => setRtp(Number(e.target.value))}
-            className="w-full h-3 bg-gray-200 rounded-lg appearance-none cursor-pointer slider"
+            className="w-full h-6 md:h-3 bg-gray-200 rounded-lg appearance-none cursor-pointer slider"
           />
           <div className="flex justify-between text-xs text-gray-500">
             <span>75%</span>
@@ -292,7 +300,7 @@ const SlotSimulator: React.FC = () => {
             step="0.5"
             value={bet}
             onChange={(e) => setBet(Number(e.target.value))}
-            className="w-full h-3 bg-gray-200 rounded-lg appearance-none cursor-pointer slider"
+            className="w-full h-6 md:h-3 bg-gray-200 rounded-lg appearance-none cursor-pointer slider"
           />
           <div className="flex justify-between text-xs text-gray-500">
             <span>€0.5</span>
@@ -311,7 +319,7 @@ const SlotSimulator: React.FC = () => {
             step="50"
             value={spins}
             onChange={(e) => setSpins(Number(e.target.value))}
-            className="w-full h-3 bg-gray-200 rounded-lg appearance-none cursor-pointer slider"
+            className="w-full h-6 md:h-3 bg-gray-200 rounded-lg appearance-none cursor-pointer slider"
           />
           <div className="flex justify-between text-xs text-gray-500">
             <span>50</span>
@@ -354,7 +362,7 @@ const SlotSimulator: React.FC = () => {
         <button
           onClick={simulateSpins}
           disabled={isSimulating}
-          className="flex items-center px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 disabled:from-gray-400 disabled:to-gray-500 text-white font-semibold rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105 disabled:transform-none"
+          className="flex items-center px-6 py-4 md:px-8 md:py-4 min-h-[48px] bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 disabled:from-gray-400 disabled:to-gray-500 text-white font-semibold rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105 disabled:transform-none"
         >
           {isSimulating ? (
             <>
@@ -374,7 +382,7 @@ const SlotSimulator: React.FC = () => {
         {result && (
           <button
             onClick={resetSimulation}
-            className="px-6 py-4 bg-gray-500 hover:bg-gray-600 text-white font-semibold rounded-lg transition-colors duration-200"
+            className="px-6 py-4 min-h-[48px] bg-gray-500 hover:bg-gray-600 text-white font-semibold rounded-lg transition-colors duration-200"
           >
             🔄 Reiniciar
           </button>
@@ -439,11 +447,11 @@ const SlotSimulator: React.FC = () => {
       )}
 
       {/* Gráfico */}
-      <div className="bg-gray-50 p-6 rounded-lg border">
-        <h3 className="text-xl font-semibold text-gray-800 mb-4">📈 Evolución del Saldo</h3>
-        <div ref={chartContainerRef} className="w-full h-96 rounded" />
+      <div className="bg-gray-50 p-4 sm:p-6 rounded-lg border">
+        <h3 className="text-lg sm:text-xl font-semibold text-gray-800 mb-4">📈 Evolución del Saldo</h3>
+        <div ref={chartContainerRef} className="w-full h-64 sm:h-80 md:h-96 rounded" />
         {!result && (
-          <div className="flex items-center justify-center h-96 text-gray-500">
+          <div className="flex items-center justify-center h-64 sm:h-80 md:h-96 text-gray-500">
             <div className="text-center">
               <svg className="w-16 h-16 mx-auto mb-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />

@@ -14,18 +14,18 @@ const getUrl = (path: string) => {
 >
   
   <!-- Hero Section -->
-  <section class="bg-gradient-to-br from-green-600 via-blue-600 to-green-800 text-white py-20">
-    <div class="container mx-auto px-4 text-center">
+  <section class="bg-gradient-to-br from-green-600 via-blue-600 to-green-800 text-white py-12 sm:py-16 md:py-20 lg:py-24">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
       <div class="max-w-4xl mx-auto">
-        <h1 class="text-4xl md:text-6xl font-bold mb-6">
+        <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
           🏆 Apuestas Deportivas
         </h1>
-        <p class="text-xl md:text-2xl mb-8 text-green-100">
+        <p class="text-lg sm:text-xl md:text-2xl lg:text-3xl mb-8 text-green-100 leading-relaxed">
           Descubre por qué incluso acertando el 70% de tus apuestas 
           <span class="text-yellow-300 font-semibold">puedes seguir perdiendo dinero</span>
         </p>
-        <div class="bg-white/10 backdrop-blur-sm rounded-lg p-6 max-w-2xl mx-auto">
-          <p class="text-green-100 text-lg">
+        <div class="bg-white/10 backdrop-blur-sm rounded-lg p-4 sm:p-6 max-w-2xl mx-auto">
+          <p class="text-green-100 text-base sm:text-lg">
             📊 <strong>Simuladores reales:</strong> Matemáticas brutales del betting deportivo
           </p>
         </div>
@@ -34,9 +34,9 @@ const getUrl = (path: string) => {
   </section>
 
   <!-- Navigation Cards -->
-  <section class="py-20 bg-gray-50">
-    <div class="container mx-auto px-4">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+  <section class="py-12 sm:py-16 md:py-20 lg:py-24 bg-gray-50">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
         
         <!-- Season Simulator - Main Feature -->
         <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden transform hover:scale-105">
@@ -49,7 +49,7 @@ const getUrl = (path: string) => {
             </div>
           </div>
           <div class="p-6">
-            <h3 class="text-2xl font-bold text-gray-900 mb-3">🏈 Simulador de Temporada</h3>
+            <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-3">🏈 Simulador de Temporada</h3>
             <p class="text-gray-600 mb-4">
               Simula una temporada completa de fútbol. Elige tu % de aciertos (50%-80%) y descubre por qué incluso siendo muy bueno, pierdes dinero.
             </p>
@@ -60,7 +60,7 @@ const getUrl = (path: string) => {
             </div>
             <a 
               href={getUrl('/sports/season-simulator')} 
-              class="inline-flex items-center w-full justify-center px-6 py-3 bg-gradient-to-r from-red-600 to-red-800 hover:from-red-700 hover:to-red-900 text-white font-semibold rounded-lg transition-all duration-200"
+              class="inline-flex items-center w-full justify-center px-6 py-4 md:px-8 md:py-4 min-h-[48px] bg-gradient-to-r from-red-600 to-red-800 hover:from-red-700 hover:to-red-900 text-white font-semibold rounded-lg transition-all duration-200"
             >
               Simular Temporada
               <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -81,7 +81,7 @@ const getUrl = (path: string) => {
             </div>
           </div>
           <div class="p-6">
-            <h3 class="text-2xl font-bold text-gray-900 mb-3">🧮 Calculadora de Juice</h3>
+            <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-3">🧮 Calculadora de Juice</h3>
             <p class="text-gray-600 mb-4">
               Descubre el "impuesto invisible" en cada apuesta. Calcula el margen oculto de las casas de apuestas y compara cuál te roba menos.
             </p>
@@ -92,7 +92,7 @@ const getUrl = (path: string) => {
             </div>
             <a 
               href={getUrl('/sports/juice-calculator')} 
-              class="inline-flex items-center w-full justify-center px-6 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-semibold rounded-lg transition-all duration-200"
+              class="inline-flex items-center w-full justify-center px-6 py-4 md:px-8 md:py-4 min-h-[48px] bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-semibold rounded-lg transition-all duration-200"
             >
               Calcular Juice
               <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -113,7 +113,7 @@ const getUrl = (path: string) => {
             </div>
           </div>
           <div class="p-6">
-            <h3 class="text-2xl font-bold text-gray-900 mb-3">📈 Simulador de Rachas</h3>
+            <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-3">📈 Simulador de Rachas</h3>
             <p class="text-gray-600 mb-4">
               ¿Tu racha de 10 aciertos demuestra habilidad? Simula 1000 apostadores aleatorios y descubre que las rachas son normales estadísticamente.
             </p>
@@ -124,7 +124,7 @@ const getUrl = (path: string) => {
             </div>
             <a 
               href={getUrl('/sports/streak-simulator')} 
-              class="inline-flex items-center w-full justify-center px-6 py-3 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-semibold rounded-lg transition-all duration-200"
+              class="inline-flex items-center w-full justify-center px-6 py-4 md:px-8 md:py-4 min-h-[48px] bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-semibold rounded-lg transition-all duration-200"
             >
               Simular Rachas
               <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -145,7 +145,7 @@ const getUrl = (path: string) => {
             </div>
           </div>
           <div class="p-6">
-            <h3 class="text-2xl font-bold text-gray-900 mb-3">💰 Bankroll Manager</h3>
+            <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-3">💰 Bankroll Manager</h3>
             <p class="text-gray-600 mb-4">
               "Yo gestiono bien el dinero". Descubre por qué Kelly Criterion, gestión de riesgo y estrategias no te salvarán de las matemáticas brutales.
             </p>
@@ -156,7 +156,7 @@ const getUrl = (path: string) => {
             </div>
             <a 
               href={getUrl('/sports/bankroll-manager')} 
-              class="inline-flex items-center w-full justify-center px-6 py-3 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-semibold rounded-lg transition-all duration-200"
+              class="inline-flex items-center w-full justify-center px-6 py-4 md:px-8 md:py-4 min-h-[48px] bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-semibold rounded-lg transition-all duration-200"
             >
               Gestionar Bankroll
               <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -170,37 +170,37 @@ const getUrl = (path: string) => {
   </section>
 
   <!-- Eye-Opening Stats -->
-  <section class="py-16 bg-white">
-    <div class="container mx-auto px-4">
+  <section class="py-12 sm:py-16 bg-white">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
       <div class="max-w-4xl mx-auto">
-        <div class="text-center mb-12">
-          <h2 class="text-4xl font-bold text-gray-900 mb-6">🚨 Estadísticas Que Debes Conocer</h2>
-          <p class="text-xl text-gray-600">
+        <div class="text-center mb-8 sm:mb-12">
+          <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">🚨 Estadísticas Que Debes Conocer</h2>
+          <p class="text-base sm:text-lg md:text-xl text-gray-600">
             La realidad de las apuestas deportivas
           </p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 mb-8 sm:mb-12">
           <div class="text-center">
-            <div class="text-4xl font-bold text-red-600 mb-2">96%</div>
+            <div class="text-3xl sm:text-4xl font-bold text-red-600 mb-2">96%</div>
             <p class="text-gray-700 font-medium mb-2">De apostadores pierde dinero</p>
             <p class="text-gray-500 text-sm">Solo 4% tiene beneficios a largo plazo</p>
           </div>
           <div class="text-center">
-            <div class="text-4xl font-bold text-red-600 mb-2">5-10%</div>
+            <div class="text-3xl sm:text-4xl font-bold text-red-600 mb-2">5-10%</div>
             <p class="text-gray-700 font-medium mb-2">Margen típico de la casa</p>
             <p class="text-gray-500 text-sm">Ventaja matemática en cada apuesta</p>
           </div>
           <div class="text-center">
-            <div class="text-4xl font-bold text-red-600 mb-2">2-5%</div>
+            <div class="text-3xl sm:text-4xl font-bold text-red-600 mb-2">2-5%</div>
             <p class="text-gray-700 font-medium mb-2">ROI de profesionales</p>
             <p class="text-gray-500 text-sm">Incluso los mejores ganan poco</p>
           </div>
         </div>
 
-        <div class="bg-red-50 border border-red-200 rounded-lg p-6">
-          <h3 class="text-xl font-bold text-red-800 mb-4 text-center">⚠️ La Verdad Incómoda</h3>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
+        <div class="bg-red-50 border border-red-200 rounded-lg p-4 sm:p-6">
+          <h3 class="text-lg sm:text-xl font-bold text-red-800 mb-4 text-center">⚠️ La Verdad Incómoda</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 text-sm">
             <div>
               <h4 class="font-bold text-red-800 mb-2">Incluso Acertando Mucho...</h4>
               <ul class="text-red-700 space-y-1">
@@ -226,13 +226,13 @@ const getUrl = (path: string) => {
   </section>
 
   <!-- Educational Content -->
-  <section class="py-16 bg-gray-50">
+  <section class="py-12 sm:py-16 bg-gray-50">
     <div class="container mx-auto px-4">
       <div class="max-w-4xl mx-auto">
-        <h2 class="text-3xl font-bold text-center text-gray-900 mb-12">🎓 Lo Que Aprenderás</h2>
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center text-gray-900 mb-8 sm:mb-12">🎓 Lo Que Aprenderás</h2>
         
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div class="bg-blue-50 border-l-4 border-blue-400 p-6 rounded">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+          <div class="bg-blue-50 border-l-4 border-blue-400 p-4 sm:p-6 rounded">
             <h3 class="text-xl font-bold text-blue-800 mb-3">📊 Matemáticas Reales</h3>
             <ul class="text-blue-700 space-y-2 text-sm">
               <li><strong>• Margen de la casa</strong> - Cómo se calcula el "juice"</li>
@@ -242,7 +242,7 @@ const getUrl = (path: string) => {
             </ul>
           </div>
           
-          <div class="bg-red-50 border-l-4 border-red-400 p-6 rounded">
+          <div class="bg-red-50 border-l-4 border-red-400 p-4 sm:p-6 rounded">
             <h3 class="text-xl font-bold text-red-800 mb-3">🧠 Sesgos Mentales</h3>
             <ul class="text-red-700 space-y-2 text-sm">
               <li><strong>• Sesgo de confirmación</strong> - Solo recuerdas los aciertos</li>
@@ -257,36 +257,36 @@ const getUrl = (path: string) => {
   </section>
 
   <!-- Final CTA -->
-  <section class="py-16 bg-green-600">
-    <div class="container mx-auto px-4 text-center">
+  <section class="py-12 sm:py-16 bg-green-600">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
       <div class="max-w-3xl mx-auto">
-        <h2 class="text-3xl font-bold text-white mb-6">🎯 Usa Los 4 Simuladores</h2>
-        <p class="text-xl text-green-100 mb-8">
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-6">🎯 Usa Los 4 Simuladores</h2>
+        <p class="text-base sm:text-lg md:text-xl text-green-100 mb-8">
           No arriesgues dinero real. Usa nuestros simuladores para entender las matemáticas brutales 
           y los sesgos psicológicos antes de apostar tu dinero real.
         </p>
-        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-4xl mx-auto">
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 max-w-4xl mx-auto">
           <a 
             href={getUrl('/sports/season-simulator')} 
-            class="bg-white hover:bg-gray-100 text-green-600 font-bold py-2 px-4 rounded-lg transition-all duration-200 text-center text-sm"
+            class="bg-white hover:bg-gray-100 text-green-600 font-bold py-3 px-2 sm:px-4 min-h-[48px] rounded-lg transition-all duration-200 text-center text-xs sm:text-sm"
           >
             🏈 Temporada
           </a>
           <a 
             href={getUrl('/sports/juice-calculator')} 
-            class="bg-green-800 hover:bg-green-900 text-white font-bold py-2 px-4 rounded-lg transition-all duration-200 text-center text-sm"
+            class="bg-green-800 hover:bg-green-900 text-white font-bold py-3 px-2 sm:px-4 min-h-[48px] rounded-lg transition-all duration-200 text-center text-xs sm:text-sm"
           >
             🧮 Juice
           </a>
           <a 
             href={getUrl('/sports/streak-simulator')} 
-            class="bg-green-700 hover:bg-green-800 text-white font-bold py-2 px-4 rounded-lg transition-all duration-200 text-center text-sm"
+            class="bg-green-700 hover:bg-green-800 text-white font-bold py-3 px-2 sm:px-4 min-h-[48px] rounded-lg transition-all duration-200 text-center text-xs sm:text-sm"
           >
             📈 Rachas
           </a>
           <a 
             href={getUrl('/sports/bankroll-manager')} 
-            class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg transition-all duration-200 text-center text-sm"
+            class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-2 sm:px-4 min-h-[48px] rounded-lg transition-all duration-200 text-center text-xs sm:text-sm"
           >
             💰 Bankroll
           </a>
