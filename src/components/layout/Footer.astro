@@ -1,11 +1,6 @@
 ---
 // Footer component
-
-// Función helper para generar URLs correctas con base path
-const getUrl = (path: string) => {
-  const base = import.meta.env.BASE_URL || '/';
-  return base === '/' ? path : `${base.replace(/\/$/, '')}${path}`;
-};
+import { getUrl } from '../utils/url';
 ---
 
 <footer class="bg-gray-900 text-white">

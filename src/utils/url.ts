@@ -5,7 +5,7 @@
  */
 export function getUrl(path: string): string {
   // En development, BASE_URL es '/' 
-  // En production (GitHub Pages), BASE_URL es '/unmasking-gambling'
+  // En production (GitHub Pages), BASE_URL es '/unmasking-gambling-astro'
   const base = import.meta.env.BASE_URL || '/';
   
   // Si ya es la base, no duplicar

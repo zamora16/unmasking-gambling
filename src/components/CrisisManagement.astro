@@ -126,8 +126,41 @@
   </div>
 </div>
 
-<script>
+<script define:vars={{ BASE_URL: import.meta.env.BASE_URL }}>
 // Crisis Management System - JavaScript
+
+// Función helper para navegar correctamente con base URL - Versión mejorada
+function navigateToPath(path) {
+  const baseUrl = BASE_URL || '';
+  // Asegurar que el path comience con /
+  const normalizedPath = path.startsWith('/') ? path : '/' + path;
+  // Construir la URL completa
+  let fullPath;
+  if (baseUrl === '/' || baseUrl === '') {
+    fullPath = normalizedPath;
+  } else {
+    fullPath = baseUrl.replace(/\/$/, '') + normalizedPath;
+  }
+  window.location.href = fullPath;
+}
+
+// Hacer la función global para que esté disponible en los onclick
+window.navigateToPath = navigateToPath;
+
+// Función helper para obtener URLs correctas
+function getGlobalUrl(path) {
+  const baseUrl = BASE_URL || '';
+  const normalizedPath = path.startsWith('/') ? path : '/' + path;
+  if (baseUrl === '/' || baseUrl === '') {
+    return normalizedPath;
+  } else {
+    return baseUrl.replace(/\/$/, '') + normalizedPath;
+  }
+}
+
+// Hacer la función global
+window.getGlobalUrl = getGlobalUrl;
+
 document.addEventListener('DOMContentLoaded', () => {
   // Recursos por país
   const crisisResources = {
@@ -373,10 +406,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // Botones de acción
     html += `
       <div class="flex flex-col sm:flex-row gap-3">
-        <button onclick="window.location.href='/the-way/paso-4'" class="flex-1 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+        <button onclick="navigateToPath('/the-way/paso-4')" class="flex-1 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
           🧘 Técnicas de Autocontrol
         </button>
-        <button onclick="window.location.href='/ayuda'" class="flex-1 px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors">
+        <button onclick="navigateToPath('/ayuda')" class="flex-1 px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors">
           📞 Más Recursos de Ayuda
         </button>
       </div>
