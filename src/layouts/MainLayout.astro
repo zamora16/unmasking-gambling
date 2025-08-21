@@ -2,7 +2,6 @@
 import Header from '../components/layout/Header.astro';
 import Footer from '../components/layout/Footer.astro';
 import CrisisManagement from '../components/CrisisManagement.astro';
-import '../styles/globals.css';
 
 interface Props {
   title: string;
@@ -80,5 +79,11 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
     });
   </script>
+  
+  <style>
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+    }
+  </style>
 </body>
 </html>
