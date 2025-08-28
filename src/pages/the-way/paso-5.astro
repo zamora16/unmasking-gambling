@@ -47,10 +47,15 @@ import MainLayout from '../../layouts/MainLayout.astro';
         <h1 class="text-4xl md:text-5xl font-bold mb-6">
           Diseña tu Plan Personalizado
         </h1>
-        <p class="text-xl text-cyan-100 max-w-2xl mx-auto">
-          Un plan personalizado aumenta significativamente las posibilidades de mantener 
-          un comportamiento de juego saludable. Vamos a crear el tuyo.
+        <p class="text-xl text-cyan-100 max-w-2xl mx-auto mb-8">
+          Crea tu estrategia personalizada que podrás visualizar en una página 
+          premium optimizada para imprimir desde cualquier navegador.
         </p>
+        
+        <!-- Status indicator -->
+        <div id="save-status" class="hidden bg-green-500/20 border border-green-300 text-green-100 px-4 py-2 rounded-lg inline-block">
+          ✓ Plan guardado automáticamente
+        </div>
       </div>
     </div>
   </section>
@@ -60,455 +65,501 @@ import MainLayout from '../../layouts/MainLayout.astro';
     <div class="container mx-auto px-4">
       <div class="max-w-4xl mx-auto">
         
-        <!-- Introduction -->
-        <div class="bg-cyan-50 border-l-4 border-cyan-400 p-6 rounded-r-lg mb-12">
-          <h2 class="text-2xl font-bold text-cyan-900 mb-4">📋 Tu Plan, Tu Éxito</h2>
-          <p class="text-cyan-800">
-            Un plan personalizado es más que una lista de buenas intenciones. Es una <strong>hoja de ruta específica</strong> 
-            que incluye objetivos claros, estrategias adaptadas a tu situación y mecanismos de seguimiento. 
-            Tómate el tiempo necesario para completar cada sección.
-          </p>
-        </div>
-
-        <!-- Personal Assessment -->
-        <section class="mb-16">
-          <h2 class="text-3xl font-bold text-gray-900 mb-8">🔍 Evaluación Personal</h2>
+        <!-- Form Container -->
+        <form id="personal-plan-form" class="space-y-16">
           
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div class="bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-200 p-6 rounded-xl">
-              <h3 class="text-xl font-bold text-blue-800 mb-4">🎯 Tu Situación Actual</h3>
-              <div class="space-y-4">
-                <div>
-                  <label class="block text-blue-700 font-medium mb-2">¿Con qué frecuencia juegas actualmente?</label>
-                  <select class="w-full p-3 border border-blue-200 rounded-lg focus:outline-none focus:border-blue-400">
-                    <option>Selecciona una opción</option>
-                    <option>Diariamente</option>
-                    <option>Varias veces por semana</option>
-                    <option>Semanalmente</option>
-                    <option>Ocasionalmente</option>
-                    <option>Raramente</option>
-                  </select>
-                </div>
-                <div>
-                  <label class="block text-blue-700 font-medium mb-2">¿Cuánto gastas aproximadamente al mes?</label>
-                  <input type="number" placeholder="€" class="w-full p-3 border border-blue-200 rounded-lg focus:outline-none focus:border-blue-400" />
-                </div>
-                <div>
-                  <label class="block text-blue-700 font-medium mb-2">¿Qué tipo de juego prefieres?</label>
-                  <select class="w-full p-3 border border-blue-200 rounded-lg focus:outline-none focus:border-blue-400">
-                    <option>Selecciona una opción</option>
-                    <option>Slots/Tragaperras</option>
-                    <option>Apuestas deportivas</option>
-                    <option>Casino (ruleta, blackjack)</option>
-                    <option>Lotería/Primitiva</option>
-                    <option>Poker</option>
-                    <option>Otros</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-
-            <div class="bg-gradient-to-br from-green-50 to-emerald-50 border border-green-200 p-6 rounded-xl">
-              <h3 class="text-xl font-bold text-green-800 mb-4">💪 Tus Fortalezas</h3>
-              <p class="text-green-700 mb-4">Identifica qué recursos tienes a tu favor:</p>
-              <div class="space-y-3">
-                <label class="flex items-center">
-                  <input type="checkbox" class="mr-3">
-                  <span class="text-green-700">Tengo apoyo familiar/social</span>
-                </label>
-                <label class="flex items-center">
-                  <input type="checkbox" class="mr-3">
-                  <span class="text-green-700">Soy consciente de mi problema</span>
-                </label>
-                <label class="flex items-center">
-                  <input type="checkbox" class="mr-3">
-                  <span class="text-green-700">Tengo estabilidad económica</span>
-                </label>
-                <label class="flex items-center">
-                  <input type="checkbox" class="mr-3">
-                  <span class="text-green-700">Practico otras actividades de ocio</span>
-                </label>
-                <label class="flex items-center">
-                  <input type="checkbox" class="mr-3">
-                  <span class="text-green-700">Tengo experiencia controlando otros hábitos</span>
-                </label>
-                <label class="flex items-center">
-                  <input type="checkbox" class="mr-3">
-                  <span class="text-green-700">Soy bueno estableciendo metas</span>
-                </label>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- Goal Setting -->
-        <section class="mb-16">
-          <h2 class="text-3xl font-bold text-gray-900 mb-8">🎯 Establecimiento de Objetivos</h2>
-          
-          <div class="bg-gradient-to-r from-purple-600 to-indigo-600 text-white p-8 rounded-xl mb-8">
-            <h3 class="text-xl font-bold mb-4">🏆 Tu Objetivo Principal</h3>
-            <p class="text-purple-100 mb-6">
-              Elige un objetivo principal claro y específico. Debe ser realista y medible:
-            </p>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <label class="bg-white/10 p-4 rounded-lg cursor-pointer hover:bg-white/20 transition-colors">
-                <input type="radio" name="main-goal" class="mr-3">
-                <div>
-                  <div class="font-bold">Reducir Frecuencia</div>
-                  <div class="text-sm text-purple-200">Jugar menos veces por semana</div>
-                </div>
-              </label>
-              <label class="bg-white/10 p-4 rounded-lg cursor-pointer hover:bg-white/20 transition-colors">
-                <input type="radio" name="main-goal" class="mr-3">
-                <div>
-                  <div class="font-bold">Reducir Gasto</div>
-                  <div class="text-sm text-purple-200">Establecer límites de dinero</div>
-                </div>
-              </label>
-              <label class="bg-white/10 p-4 rounded-lg cursor-pointer hover:bg-white/20 transition-colors">
-                <input type="radio" name="main-goal" class="mr-3">
-                <div>
-                  <div class="font-bold">Dejar Completamente</div>
-                  <div class="text-sm text-purple-200">Abstinencia total del juego</div>
-                </div>
-              </label>
-            </div>
-          </div>
-
-          <!-- SMART Goals Framework -->
-          <div class="border border-gray-200 p-8 rounded-xl">
-            <h3 class="text-xl font-bold text-gray-900 mb-6">📏 Objetivos SMART</h3>
-            <p class="text-gray-700 mb-6">
-              Convierte tu objetivo en un plan SMART (Específico, Medible, Alcanzable, Relevante, Temporal):
-            </p>
-            
-            <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
-              <div class="bg-blue-50 p-4 rounded-lg">
-                <h4 class="font-bold text-blue-800 mb-2">S - Específico</h4>
-                <textarea placeholder="¿Qué exactamente quieres lograr?" class="w-full h-20 p-2 border border-blue-200 rounded text-sm resize-none"></textarea>
-              </div>
-              <div class="bg-green-50 p-4 rounded-lg">
-                <h4 class="font-bold text-green-800 mb-2">M - Medible</h4>
-                <textarea placeholder="¿Cómo vas a medir el progreso?" class="w-full h-20 p-2 border border-green-200 rounded text-sm resize-none"></textarea>
-              </div>
-              <div class="bg-yellow-50 p-4 rounded-lg">
-                <h4 class="font-bold text-yellow-800 mb-2">A - Alcanzable</h4>
-                <textarea placeholder="¿Es realista para ti?" class="w-full h-20 p-2 border border-yellow-200 rounded text-sm resize-none"></textarea>
-              </div>
-              <div class="bg-purple-50 p-4 rounded-lg">
-                <h4 class="font-bold text-purple-800 mb-2">R - Relevante</h4>
-                <textarea placeholder="¿Por qué es importante?" class="w-full h-20 p-2 border border-purple-200 rounded text-sm resize-none"></textarea>
-              </div>
-              <div class="bg-red-50 p-4 rounded-lg">
-                <h4 class="font-bold text-red-800 mb-2">T - Temporal</h4>
-                <textarea placeholder="¿Cuándo lo vas a lograr?" class="w-full h-20 p-2 border border-red-200 rounded text-sm resize-none"></textarea>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- Strategy Selection -->
-        <section class="mb-16">
-          <h2 class="text-3xl font-bold text-gray-900 mb-8">🛠️ Selección de Estrategias</h2>
-          
-          <p class="text-gray-700 mb-8">
-            Basándote en lo que has aprendido en los pasos anteriores, selecciona las estrategias que vas a implementar:
-          </p>
-
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <!-- Limits -->
-            <div class="bg-green-50 border border-green-200 p-6 rounded-lg">
-              <h3 class="text-lg font-bold text-green-800 mb-4">💰 Límites Financieros</h3>
-              <div class="space-y-3">
-                <label class="flex items-start">
-                  <input type="checkbox" class="mr-3 mt-1">
-                  <div>
-                    <div class="font-medium text-green-700">Límite diario</div>
-                    <input type="number" placeholder="€" class="w-full mt-1 p-2 border border-green-200 rounded text-sm">
-                  </div>
-                </label>
-                <label class="flex items-start">
-                  <input type="checkbox" class="mr-3 mt-1">
-                  <div>
-                    <div class="font-medium text-green-700">Límite mensual</div>
-                    <input type="number" placeholder="€" class="w-full mt-1 p-2 border border-green-200 rounded text-sm">
-                  </div>
-                </label>
-                <label class="flex items-center">
-                  <input type="checkbox" class="mr-3">
-                  <span class="text-green-700">Bloqueo bancario de transacciones</span>
-                </label>
-              </div>
-            </div>
-
-            <!-- Time Limits -->
-            <div class="bg-blue-50 border border-blue-200 p-6 rounded-lg">
-              <h3 class="text-lg font-bold text-blue-800 mb-4">⏰ Límites de Tiempo</h3>
-              <div class="space-y-3">
-                <label class="flex items-start">
-                  <input type="checkbox" class="mr-3 mt-1">
-                  <div>
-                    <div class="font-medium text-blue-700">Máximo por sesión</div>
-                    <select class="w-full mt-1 p-2 border border-blue-200 rounded text-sm">
-                      <option>30 min</option>
-                      <option>1 hora</option>
-                      <option>2 horas</option>
-                    </select>
-                  </div>
-                </label>
-                <label class="flex items-start">
-                  <input type="checkbox" class="mr-3 mt-1">
-                  <div>
-                    <div class="font-medium text-blue-700">Días por semana</div>
-                    <select class="w-full mt-1 p-2 border border-blue-200 rounded text-sm">
-                      <option>1 día</option>
-                      <option>2 días</option>
-                      <option>3 días</option>
-                    </select>
-                  </div>
-                </label>
-              </div>
-            </div>
-
-            <!-- Self-Exclusion -->
-            <div class="bg-red-50 border border-red-200 p-6 rounded-lg">
-              <h3 class="text-lg font-bold text-red-800 mb-4">🚫 Autoexclusión</h3>
-              <div class="space-y-3">
-                <label class="flex items-center">
-                  <input type="checkbox" class="mr-3">
-                  <span class="text-red-700">Registro oficial (RGEA)</span>
-                </label>
-                <label class="flex items-center">
-                  <input type="checkbox" class="mr-3">
-                  <span class="text-red-700">Autoexclusión por apps</span>
-                </label>
-                <label class="flex items-center">
-                  <input type="checkbox" class="mr-3">
-                  <span class="text-red-700">Bloqueo de sitios web</span>
-                </label>
-              </div>
-            </div>
-
-            <!-- Mindfulness -->
-            <div class="bg-purple-50 border border-purple-200 p-6 rounded-lg">
-              <h3 class="text-lg font-bold text-purple-800 mb-4">🧘 Mindfulness</h3>
-              <div class="space-y-3">
-                <label class="flex items-center">
-                  <input type="checkbox" class="mr-3">
-                  <span class="text-purple-700">Técnica STOP</span>
-                </label>
-                <label class="flex items-center">
-                  <input type="checkbox" class="mr-3">
-                  <span class="text-purple-700">Regla de 10 minutos</span>
-                </label>
-                <label class="flex items-center">
-                  <input type="checkbox" class="mr-3">
-                  <span class="text-purple-700">Meditación diaria</span>
-                </label>
-              </div>
-            </div>
-
-            <!-- Support -->
-            <div class="bg-yellow-50 border border-yellow-200 p-6 rounded-lg">
-              <h3 class="text-lg font-bold text-yellow-800 mb-4">👥 Apoyo Social</h3>
-              <div class="space-y-3">
-                <label class="flex items-center">
-                  <input type="checkbox" class="mr-3">
-                  <span class="text-yellow-700">Contarle a la familia</span>
-                </label>
-                <label class="flex items-center">
-                  <input type="checkbox" class="mr-3">
-                  <span class="text-yellow-700">Buscar terapia profesional</span>
-                </label>
-                <label class="flex items-center">
-                  <input type="checkbox" class="mr-3">
-                  <span class="text-yellow-700">Unirse a un grupo de apoyo</span>
-                </label>
-              </div>
-            </div>
-
-            <!-- Alternatives -->
-            <div class="bg-teal-50 border border-teal-200 p-6 rounded-lg">
-              <h3 class="text-lg font-bold text-teal-800 mb-4">🎨 Actividades Alternativas</h3>
-              <div class="space-y-3">
-                <label class="flex items-center">
-                  <input type="checkbox" class="mr-3">
-                  <span class="text-teal-700">Ejercicio físico</span>
-                </label>
-                <label class="flex items-center">
-                  <input type="checkbox" class="mr-3">
-                  <span class="text-teal-700">Hobbies creativos</span>
-                </label>
-                <label class="flex items-center">
-                  <input type="checkbox" class="mr-3">
-                  <span class="text-teal-700">Actividades sociales</span>
-                </label>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- Implementation Timeline -->
-        <section class="mb-16">
-          <h2 class="text-3xl font-bold text-gray-900 mb-8">📅 Cronograma de Implementación</h2>
-          
-          <div class="bg-gradient-to-r from-indigo-50 to-purple-50 border border-indigo-200 p-8 rounded-xl">
-            <h3 class="text-xl font-bold text-indigo-900 mb-6">⏱️ Plan de 30 Días</h3>
-            
+          <!-- Personal Info -->
+          <section class="bg-indigo-50 border border-indigo-200 p-8 rounded-xl">
+            <h2 class="text-2xl font-bold text-indigo-900 mb-6 flex items-center">
+              <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+              </svg>
+              1. Información Personal
+            </h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div class="bg-white p-6 rounded-lg border border-indigo-200">
-                <h4 class="font-bold text-indigo-800 mb-4">Semana 1-2: Preparación</h4>
-                <ul class="text-indigo-700 space-y-2 text-sm">
-                  <li>• Establecer límites en todas las plataformas</li>
-                  <li>• Configurar herramientas de bloqueo</li>
-                  <li>• Informar a personas de confianza</li>
-                  <li>• Eliminar apps de juego del móvil</li>
-                </ul>
+              <div>
+                <label class="block text-indigo-700 font-medium mb-2">Nombre (opcional)</label>
+                <input 
+                  type="text" 
+                  name="userName" 
+                  placeholder="Tu nombre"
+                  class="w-full p-3 border border-indigo-200 rounded-lg focus:outline-none focus:border-indigo-400" 
+                />
               </div>
-              
-              <div class="bg-white p-6 rounded-lg border border-indigo-200">
-                <h4 class="font-bold text-indigo-800 mb-4">Semana 3-4: Implementación</h4>
-                <ul class="text-indigo-700 space-y-2 text-sm">
-                  <li>• Comenzar con límites establecidos</li>
-                  <li>• Practicar técnicas de mindfulness</li>
-                  <li>• Desarrollar actividades alternativas</li>
-                  <li>• Registrar progreso diario</li>
-                </ul>
+              <div>
+                <label class="block text-indigo-700 font-medium mb-2">Edad</label>
+                <input 
+                  type="number" 
+                  name="userAge" 
+                  min="18" 
+                  max="99"
+                  class="w-full p-3 border border-indigo-200 rounded-lg focus:outline-none focus:border-indigo-400" 
+                />
               </div>
-              
-              <div class="bg-white p-6 rounded-lg border border-indigo-200">
-                <h4 class="font-bold text-indigo-800 mb-4">Mes 2+: Mantenimiento</h4>
-                <ul class="text-indigo-700 space-y-2 text-sm">
-                  <li>• Evaluación semanal del progreso</li>
-                  <li>• Ajustar estrategias según necesidad</li>
-                  <li>• Celebrar logros pequeños</li>
-                  <li>• Planificar a largo plazo</li>
-                </ul>
+              <div>
+                <label class="block text-indigo-700 font-medium mb-2">Fecha de hoy</label>
+                <input 
+                  type="date" 
+                  name="planDate" 
+                  class="w-full p-3 border border-indigo-200 rounded-lg focus:outline-none focus:border-indigo-400" 
+                />
               </div>
             </div>
-          </div>
-        </section>
+          </section>
 
-        <!-- Monitoring and Adjustment -->
-        <section class="mb-16">
-          <h2 class="text-3xl font-bold text-gray-900 mb-8">📊 Seguimiento y Ajuste</h2>
-          
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div class="border border-gray-200 p-6 rounded-xl">
-              <h3 class="text-xl font-bold text-gray-900 mb-4">📈 Métricas de Seguimiento</h3>
-              <p class="text-gray-700 mb-4">Lleva un registro de estos indicadores:</p>
-              <div class="space-y-3">
-                <div class="bg-gray-50 p-3 rounded">
-                  <label class="flex items-center">
-                    <input type="checkbox" class="mr-3">
-                    <span>Días sin jugar consecutivos</span>
-                  </label>
-                </div>
-                <div class="bg-gray-50 p-3 rounded">
-                  <label class="flex items-center">
-                    <input type="checkbox" class="mr-3">
-                    <span>Dinero ahorrado vs. gastado</span>
-                  </label>
-                </div>
-                <div class="bg-gray-50 p-3 rounded">
-                  <label class="flex items-center">
-                    <input type="checkbox" class="mr-3">
-                    <span>Estado de ánimo general (1-10)</span>
-                  </label>
-                </div>
-                <div class="bg-gray-50 p-3 rounded">
-                  <label class="flex items-center">
-                    <input type="checkbox" class="mr-3">
-                    <span>Calidad del sueño</span>
-                  </label>
-                </div>
-                <div class="bg-gray-50 p-3 rounded">
-                  <label class="flex items-center">
-                    <input type="checkbox" class="mr-3">
-                    <span>Relaciones interpersonales</span>
-                  </label>
-                </div>
-              </div>
-            </div>
-            
-            <div class="border border-gray-200 p-6 rounded-xl">
-              <h3 class="text-xl font-bold text-gray-900 mb-4">🔄 Protocolo de Ajuste</h3>
+          <!-- Current Situation -->
+          <section class="bg-blue-50 border border-blue-200 p-8 rounded-xl">
+            <h2 class="text-2xl font-bold text-blue-900 mb-6 flex items-center">
+              <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+              </svg>
+              2. Mi Situación Actual
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div class="space-y-4">
-                <div class="bg-green-50 border-l-4 border-green-400 p-4">
-                  <h4 class="font-bold text-green-800 mb-2">Si vas bien (2+ semanas):</h4>
-                  <ul class="text-green-700 text-sm space-y-1">
-                    <li>• Mantén las estrategias actuales</li>
-                    <li>• Considera hacer límites más estrictos</li>
-                    <li>• Celebra tu progreso</li>
-                  </ul>
+                <div>
+                  <label class="block text-blue-700 font-medium mb-2">Frecuencia actual de juego</label>
+                  <select name="frequency" class="w-full p-3 border border-blue-200 rounded-lg focus:outline-none focus:border-blue-400">
+                    <option value="">Selecciona una opción</option>
+                    <option value="daily">Diariamente</option>
+                    <option value="several-week">Varias veces por semana</option>
+                    <option value="weekly">Semanalmente</option>
+                    <option value="monthly">Mensualmente</option>
+                    <option value="rarely">Raramente</option>
+                  </select>
                 </div>
-                <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4">
-                  <h4 class="font-bold text-yellow-800 mb-2">Si hay recaídas ocasionales:</h4>
-                  <ul class="text-yellow-700 text-sm space-y-1">
-                    <li>• Analiza qué llevó a la recaída</li>
-                    <li>• Refuerza las estrategias débiles</li>
-                    <li>• No te castigues, aprende y continúa</li>
-                  </ul>
+                <div>
+                  <label class="block text-blue-700 font-medium mb-2">Gasto mensual aproximado (€)</label>
+                  <input type="number" name="monthlySpend" min="0" class="w-full p-3 border border-blue-200 rounded-lg focus:outline-none focus:border-blue-400" />
                 </div>
-                <div class="bg-red-50 border-l-4 border-red-400 p-4">
-                  <h4 class="font-bold text-red-800 mb-2">Si el plan no funciona:</h4>
-                  <ul class="text-red-700 text-sm space-y-1">
-                    <li>• Busca ayuda profesional inmediata</li>
-                    <li>• Considera autoexclusión completa</li>
-                    <li>• Involucra más apoyo social</li>
-                  </ul>
+                <div>
+                  <label class="block text-blue-700 font-medium mb-2">Dinero total perdido aproximadamente (€)</label>
+                  <input type="number" name="totalLost" min="0" class="w-full p-3 border border-blue-200 rounded-lg focus:outline-none focus:border-blue-400" />
+                </div>
+              </div>
+              <div class="space-y-4">
+                <div>
+                  <label class="block text-blue-700 font-medium mb-2">Tipo de juego principal</label>
+                  <select name="gameType" class="w-full p-3 border border-blue-200 rounded-lg focus:outline-none focus:border-blue-400">
+                    <option value="">Selecciona una opción</option>
+                    <option value="slots">Slots/Tragaperras</option>
+                    <option value="sports">Apuestas deportivas</option>
+                    <option value="casino">Casino (ruleta, blackjack)</option>
+                    <option value="lottery">Lotería/Primitiva</option>
+                    <option value="poker">Poker</option>
+                    <option value="other">Otros</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-blue-700 font-medium mb-2">Mis principales triggers (elige hasta 3)</label>
+                  <div class="space-y-2">
+                    <label class="flex items-center">
+                      <input type="checkbox" name="triggers" value="stress" class="mr-2">
+                      <span>Estrés o ansiedad</span>
+                    </label>
+                    <label class="flex items-center">
+                      <input type="checkbox" name="triggers" value="boredom" class="mr-2">
+                      <span>Aburrimiento</span>
+                    </label>
+                    <label class="flex items-center">
+                      <input type="checkbox" name="triggers" value="alcohol" class="mr-2">
+                      <span>Después de beber alcohol</span>
+                    </label>
+                    <label class="flex items-center">
+                      <input type="checkbox" name="triggers" value="social" class="mr-2">
+                      <span>Presión social</span>
+                    </label>
+                    <label class="flex items-center">
+                      <input type="checkbox" name="triggers" value="financial" class="mr-2">
+                      <span>Problemas económicos</span>
+                    </label>
+                    <label class="flex items-center">
+                      <input type="checkbox" name="triggers" value="emotional" class="mr-2">
+                      <span>Bajón emocional</span>
+                    </label>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </section>
+          </section>
 
-        <!-- Plan Summary -->
-        <section class="mb-16">
-          <div class="bg-gradient-to-r from-teal-600 to-green-600 text-white p-8 rounded-xl">
-            <h2 class="text-2xl font-bold mb-6">📋 Resumen de tu Plan</h2>
-            <p class="text-teal-100 mb-6">
-              Completa esta sección como compromiso contigo mismo:
-            </p>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div class="bg-white/10 p-6 rounded-lg">
-                <h3 class="font-bold mb-4">Mi objetivo principal es:</h3>
-                <textarea class="w-full h-20 p-3 bg-white/5 border border-white/20 rounded text-white placeholder-white/50 resize-none" placeholder="Escribe tu objetivo específico aquí..."></textarea>
+          <!-- Main Goal -->
+          <section class="bg-purple-50 border border-purple-200 p-8 rounded-xl">
+            <h2 class="text-2xl font-bold text-purple-900 mb-6 flex items-center">
+              <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+              </svg>
+              3. Mi Objetivo Principal
+            </h2>
+            <div class="space-y-6">
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <label class="bg-white p-6 border-2 border-purple-200 rounded-lg cursor-pointer hover:border-purple-400 transition-colors">
+                  <input type="radio" name="mainGoal" value="reduce-frequency" class="mb-3">
+                  <div class="font-bold text-purple-800">Reducir Frecuencia</div>
+                  <div class="text-sm text-purple-600">Jugar menos veces por semana</div>
+                </label>
+                <label class="bg-white p-6 border-2 border-purple-200 rounded-lg cursor-pointer hover:border-purple-400 transition-colors">
+                  <input type="radio" name="mainGoal" value="reduce-amount" class="mb-3">
+                  <div class="font-bold text-purple-800">Reducir Gasto</div>
+                  <div class="text-sm text-purple-600">Establecer límites de dinero</div>
+                </label>
+                <label class="bg-white p-6 border-2 border-purple-200 rounded-lg cursor-pointer hover:border-purple-400 transition-colors">
+                  <input type="radio" name="mainGoal" value="quit" class="mb-3">
+                  <div class="font-bold text-purple-800">Dejar Completamente</div>
+                  <div class="text-sm text-purple-600">Abstinencia total del juego</div>
+                </label>
               </div>
-              
-              <div class="bg-white/10 p-6 rounded-lg">
-                <h3 class="font-bold mb-4">Mis 3 estrategias principales son:</h3>
-                <div class="space-y-2">
-                  <input type="text" placeholder="1. " class="w-full p-2 bg-white/5 border border-white/20 rounded text-white placeholder-white/50" />
-                  <input type="text" placeholder="2. " class="w-full p-2 bg-white/5 border border-white/20 rounded text-white placeholder-white/50" />
-                  <input type="text" placeholder="3. " class="w-full p-2 bg-white/5 border border-white/20 rounded text-white placeholder-white/50" />
+              <div>
+                <label class="block text-purple-700 font-medium mb-2">Describe tu objetivo específico</label>
+                <textarea 
+                  name="specificGoal" 
+                  rows="3" 
+                  placeholder="Ej: Reducir a máximo 50€/mes y solo los fines de semana"
+                  class="w-full p-3 border border-purple-200 rounded-lg focus:outline-none focus:border-purple-400 resize-none"
+                ></textarea>
+              </div>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-purple-700 font-medium mb-2">Fecha límite para conseguirlo</label>
+                  <input type="date" name="goalDate" class="w-full p-3 border border-purple-200 rounded-lg focus:outline-none focus:border-purple-400" />
+                </div>
+                <div>
+                  <label class="block text-purple-700 font-medium mb-2">¿Por qué es importante para ti?</label>
+                  <input 
+                    type="text" 
+                    name="goalWhy" 
+                    placeholder="Ej: Recuperar la confianza de mi familia"
+                    class="w-full p-3 border border-purple-200 rounded-lg focus:outline-none focus:border-purple-400" 
+                  />
                 </div>
               </div>
+            </div>
+          </section>
+
+          <!-- Strategies -->
+          <section class="bg-green-50 border border-green-200 p-8 rounded-xl">
+            <h2 class="text-2xl font-bold text-green-900 mb-6 flex items-center">
+              <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+              </svg>
+              4. Mis Estrategias (elige las más importantes para ti)
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               
-              <div class="bg-white/10 p-6 rounded-lg">
-                <h3 class="font-bold mb-4">Mi contacto de apoyo es:</h3>
-                <input type="text" placeholder="Nombre y teléfono" class="w-full p-3 bg-white/5 border border-white/20 rounded text-white placeholder-white/50" />
+              <!-- Limits -->
+              <div class="bg-white p-6 border border-green-200 rounded-lg">
+                <h3 class="font-bold text-green-800 mb-4 flex items-center">
+                  <span class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mr-3 text-sm">💰</span>
+                  Límites
+                </h3>
+                <div class="space-y-3">
+                  <label class="flex items-start">
+                    <input type="checkbox" name="strategies" value="daily-limit" class="mr-3 mt-1">
+                    <div class="flex-1">
+                      <span class="text-green-700">Límite diario: </span>
+                      <input type="number" name="dailyLimit" placeholder="€" class="w-16 p-1 border border-green-200 rounded text-sm ml-1">
+                    </div>
+                  </label>
+                  <label class="flex items-start">
+                    <input type="checkbox" name="strategies" value="monthly-limit" class="mr-3 mt-1">
+                    <div class="flex-1">
+                      <span class="text-green-700">Límite mensual: </span>
+                      <input type="number" name="monthlyLimit" placeholder="€" class="w-16 p-1 border border-green-200 rounded text-sm ml-1">
+                    </div>
+                  </label>
+                  <label class="flex items-center">
+                    <input type="checkbox" name="strategies" value="bank-block" class="mr-3">
+                    <span class="text-green-700">Bloqueo bancario</span>
+                  </label>
+                </div>
               </div>
-              
-              <div class="bg-white/10 p-6 rounded-lg">
-                <h3 class="font-bold mb-4">Me comprometo a revisar mi plan cada:</h3>
-                <select class="w-full p-3 bg-white/5 border border-white/20 rounded text-white">
-                  <option>Semana</option>
-                  <option>2 semanas</option>
-                  <option>Mes</option>
-                </select>
+
+              <!-- Time Control -->
+              <div class="bg-white p-6 border border-green-200 rounded-lg">
+                <h3 class="font-bold text-green-800 mb-4 flex items-center">
+                  <span class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mr-3 text-sm">⏰</span>
+                  Control de Tiempo
+                </h3>
+                <div class="space-y-3">
+                  <label class="flex items-center">
+                    <input type="checkbox" name="strategies" value="time-limits" class="mr-3">
+                    <span class="text-green-700">Límites de tiempo</span>
+                  </label>
+                  <label class="flex items-center">
+                    <input type="checkbox" name="strategies" value="specific-days" class="mr-3">
+                    <span class="text-green-700">Solo días específicos</span>
+                  </label>
+                  <label class="flex items-center">
+                    <input type="checkbox" name="strategies" value="cooling-period" class="mr-3">
+                    <span class="text-green-700">Periodos de reflexión</span>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Self-Exclusion -->
+              <div class="bg-white p-6 border border-green-200 rounded-lg">
+                <h3 class="font-bold text-green-800 mb-4 flex items-center">
+                  <span class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mr-3 text-sm">🚫</span>
+                  Autoexclusión
+                </h3>
+                <div class="space-y-3">
+                  <label class="flex items-center">
+                    <input type="checkbox" name="strategies" value="official-registry" class="mr-3">
+                    <span class="text-green-700">Registro oficial DGOJ</span>
+                  </label>
+                  <label class="flex items-center">
+                    <input type="checkbox" name="strategies" value="app-exclusion" class="mr-3">
+                    <span class="text-green-700">Autoexclusión en apps</span>
+                  </label>
+                  <label class="flex items-center">
+                    <input type="checkbox" name="strategies" value="website-blocking" class="mr-3">
+                    <span class="text-green-700">Bloqueo de sitios web</span>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Mindfulness -->
+              <div class="bg-white p-6 border border-green-200 rounded-lg">
+                <h3 class="font-bold text-green-800 mb-4 flex items-center">
+                  <span class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mr-3 text-sm">🧘</span>
+                  Autocontrol
+                </h3>
+                <div class="space-y-3">
+                  <label class="flex items-center">
+                    <input type="checkbox" name="strategies" value="stop-technique" class="mr-3">
+                    <span class="text-green-700">Técnica STOP</span>
+                  </label>
+                  <label class="flex items-center">
+                    <input type="checkbox" name="strategies" value="10-minute-rule" class="mr-3">
+                    <span class="text-green-700">Regla de 10 minutos</span>
+                  </label>
+                  <label class="flex items-center">
+                    <input type="checkbox" name="strategies" value="meditation" class="mr-3">
+                    <span class="text-green-700">Meditación diaria</span>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Support -->
+              <div class="bg-white p-6 border border-green-200 rounded-lg">
+                <h3 class="font-bold text-green-800 mb-4 flex items-center">
+                  <span class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mr-3 text-sm">👥</span>
+                  Apoyo
+                </h3>
+                <div class="space-y-3">
+                  <label class="flex items-center">
+                    <input type="checkbox" name="strategies" value="tell-family" class="mr-3">
+                    <span class="text-green-700">Contarle a la familia</span>
+                  </label>
+                  <label class="flex items-center">
+                    <input type="checkbox" name="strategies" value="therapy" class="mr-3">
+                    <span class="text-green-700">Buscar terapia</span>
+                  </label>
+                  <label class="flex items-center">
+                    <input type="checkbox" name="strategies" value="support-group" class="mr-3">
+                    <span class="text-green-700">Grupo de apoyo</span>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Alternatives -->
+              <div class="bg-white p-6 border border-green-200 rounded-lg">
+                <h3 class="font-bold text-green-800 mb-4 flex items-center">
+                  <span class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mr-3 text-sm">🎨</span>
+                  Alternativas
+                </h3>
+                <div class="space-y-3">
+                  <label class="flex items-center">
+                    <input type="checkbox" name="strategies" value="exercise" class="mr-3">
+                    <span class="text-green-700">Ejercicio físico</span>
+                  </label>
+                  <label class="flex items-center">
+                    <input type="checkbox" name="strategies" value="hobbies" class="mr-3">
+                    <span class="text-green-700">Hobbies creativos</span>
+                  </label>
+                  <label class="flex items-center">
+                    <input type="checkbox" name="strategies" value="social-activities" class="mr-3">
+                    <span class="text-green-700">Actividades sociales</span>
+                  </label>
+                </div>
               </div>
             </div>
-            
-            <div class="mt-6 text-center">
-              <button class="px-8 py-3 bg-white text-teal-600 font-bold rounded-lg hover:bg-gray-100 transition-colors">
-                Guardar Mi Plan
-              </button>
+          </section>
+
+          <!-- Support Network -->
+          <section class="bg-yellow-50 border border-yellow-200 p-8 rounded-xl">
+            <h2 class="text-2xl font-bold text-yellow-900 mb-6 flex items-center">
+              <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+              </svg>
+              5. Mi Red de Apoyo
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div>
+                <label class="block text-yellow-700 font-medium mb-2">Persona de confianza principal</label>
+                <input 
+                  type="text" 
+                  name="supportPerson" 
+                  placeholder="Nombre y teléfono"
+                  class="w-full p-3 border border-yellow-200 rounded-lg focus:outline-none focus:border-yellow-400" 
+                />
+              </div>
+              <div>
+                <label class="block text-yellow-700 font-medium mb-2">Contacto de emergencia</label>
+                <input 
+                  type="text" 
+                  name="emergencyContact" 
+                  placeholder="Nombre y teléfono"
+                  class="w-full p-3 border border-yellow-200 rounded-lg focus:outline-none focus:border-yellow-400" 
+                />
+              </div>
+              <div class="md:col-span-2">
+                <label class="block text-yellow-700 font-medium mb-2">¿A quién más vas a contarle sobre tu plan?</label>
+                <textarea 
+                  name="supportNetwork" 
+                  rows="3" 
+                  placeholder="Familiares, amigos, profesionales..."
+                  class="w-full p-3 border border-yellow-200 rounded-lg focus:outline-none focus:border-yellow-400 resize-none"
+                ></textarea>
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
+
+          <!-- Emergency Protocol -->
+          <section class="bg-red-50 border border-red-200 p-8 rounded-xl">
+            <h2 class="text-2xl font-bold text-red-900 mb-6 flex items-center">
+              <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.664-.833-2.464 0L4.35 15.5c-.77.833.192 2.5 1.732 2.5z" />
+              </svg>
+              6. Protocolo de Emergencia
+            </h2>
+            <div class="bg-white p-6 border border-red-200 rounded-lg">
+              <p class="text-red-700 mb-4 font-medium">
+                Si sientes una urgencia muy fuerte de jugar, seguiré estos pasos en orden:
+              </p>
+              <div class="space-y-4">
+                <div class="flex items-start">
+                  <span class="bg-red-100 text-red-800 w-8 h-8 rounded-full flex items-center justify-center mr-4 font-bold text-sm">1</span>
+                  <div class="flex-1">
+                    <label class="block text-red-700 font-medium mb-2">Acción inmediata</label>
+                    <select name="emergencyStep1" class="w-full p-3 border border-red-200 rounded-lg">
+                      <option value="">Selecciona una acción</option>
+                      <option value="call-support">Llamar a mi persona de confianza</option>
+                      <option value="physical-activity">Hacer ejercicio físico inmediato</option>
+                      <option value="leave-environment">Salir del lugar donde estoy</option>
+                      <option value="breathing">Hacer ejercicios de respiración</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="flex items-start">
+                  <span class="bg-red-100 text-red-800 w-8 h-8 rounded-full flex items-center justify-center mr-4 font-bold text-sm">2</span>
+                  <div class="flex-1">
+                    <label class="block text-red-700 font-medium mb-2">Si persiste la urgencia</label>
+                    <select name="emergencyStep2" class="w-full p-3 border border-red-200 rounded-lg">
+                      <option value="">Selecciona una acción</option>
+                      <option value="call-hotline">Llamar línea de ayuda 900 200 225</option>
+                      <option value="go-to-person">Ir físicamente donde mi persona de confianza</option>
+                      <option value="remove-access">Eliminar acceso inmediato (dar dinero/tarjetas)</option>
+                      <option value="distraction-activity">Actividad de distracción intensa</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="flex items-start">
+                  <span class="bg-red-100 text-red-800 w-8 h-8 rounded-full flex items-center justify-center mr-4 font-bold text-sm">3</span>
+                  <div class="flex-1">
+                    <label class="block text-red-700 font-medium mb-2">Recordatorio personal</label>
+                    <input 
+                      type="text" 
+                      name="personalReminder" 
+                      placeholder="Ej: Piensa en tu familia, en tus objetivos..."
+                      class="w-full p-3 border border-red-200 rounded-lg focus:outline-none focus:border-red-400" 
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Commitment -->
+          <section class="bg-gradient-to-r from-teal-600 to-green-600 text-white p-8 rounded-xl">
+            <h2 class="text-2xl font-bold mb-6 flex items-center">
+              <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+              </svg>
+              7. Mi Compromiso Personal
+            </h2>
+            <div class="bg-white/10 p-6 rounded-lg">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div>
+                  <label class="block text-teal-100 font-medium mb-2">Me comprometo a revisar este plan cada:</label>
+                  <select name="reviewFrequency" id="reviewFrequency" class="w-full p-3 bg-white border border-gray-300 rounded text-gray-800" style="color: black;">
+                    <option value="" style="color: black;">Selecciona frecuencia</option>
+                    <option value="weekly" style="color: black;">Semana</option>
+                    <option value="biweekly" style="color: black;">2 semanas</option>
+                    <option value="monthly" style="color: black;">Mes</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-teal-100 font-medium mb-2">Próxima fecha de revisión:</label>
+                  <input type="date" name="nextReview" id="nextReview" class="w-full p-3 bg-white border border-gray-300 rounded text-gray-800" readonly />
+                </div>
+              </div>
+              <div class="mb-6">
+                <label class="block text-teal-100 font-medium mb-2">Mi motivación principal para cambiar es:</label>
+                <textarea 
+                  name="mainMotivation" 
+                  rows="3" 
+                  placeholder="Escribe qué te motiva realmente a seguir este plan..."
+                  class="w-full p-3 bg-white/10 border border-white/20 rounded text-white placeholder-white/50 resize-none"
+                ></textarea>
+              </div>
+              <div class="text-center">
+                <label class="flex items-center justify-center text-teal-100 mb-4">
+                  <input type="checkbox" name="commitment" required class="mr-3">
+                  <span>Me comprometo a seguir este plan y a buscar ayuda si no puedo hacerlo solo/a</span>
+                </label>
+              </div>
+            </div>
+          </section>
+
+        </form>
+
+        <!-- Action Buttons -->
+        <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mt-16 p-8 bg-gray-50 rounded-xl">
+          <button 
+            type="button" 
+            id="save-plan-btn"
+            class="px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-colors flex items-center"
+          >
+            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3-3m0 0l-3 3m3-3v12" />
+            </svg>
+            Guardar Plan
+          </button>
+          
+          <button 
+            type="button" 
+            id="view-plan-btn"
+            class="px-8 py-3 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg transition-colors flex items-center"
+          >
+            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+            </svg>
+            Ver Plan para Imprimir
+          </button>
+          
+          <button 
+            type="button" 
+            id="load-plan-btn"
+            class="px-6 py-3 bg-gray-600 hover:bg-gray-700 text-white font-medium rounded-lg transition-colors flex items-center"
+          >
+            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+            </svg>
+            Cargar Plan Guardado
+          </button>
+        </div>
 
       </div>
     </div>
@@ -540,5 +591,171 @@ import MainLayout from '../../layouts/MainLayout.astro';
       </div>
     </div>
   </section>
+
+</MainLayout>
+
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const form = document.getElementById('personal-plan-form');
+  const saveBtn = document.getElementById('save-plan-btn');
+  const viewPlanBtn = document.getElementById('view-plan-btn');
+  const loadBtn = document.getElementById('load-plan-btn');
+  const saveStatus = document.getElementById('save-status');
+
+  // Set today's date by default
+  const today = new Date().toISOString().split('T')[0];
+  document.querySelector('input[name="planDate"]').value = today;
+
+  // Calculate next review date automatically
+  const reviewFrequencySelect = document.getElementById('reviewFrequency');
+  const nextReviewInput = document.getElementById('nextReview');
+  
+  reviewFrequencySelect.addEventListener('change', function() {
+    const frequency = this.value;
+    const today = new Date();
+    let nextReviewDate;
+    
+    switch(frequency) {
+      case 'weekly':
+        nextReviewDate = new Date(today.getTime() + (7 * 24 * 60 * 60 * 1000));
+        break;
+      case 'biweekly':
+        nextReviewDate = new Date(today.getTime() + (14 * 24 * 60 * 60 * 1000));
+        break;
+      case 'monthly':
+        nextReviewDate = new Date(today.getFullYear(), today.getMonth() + 1, today.getDate());
+        break;
+      default:
+        nextReviewDate = null;
+    }
+    
+    if (nextReviewDate) {
+      nextReviewInput.value = nextReviewDate.toISOString().split('T')[0];
+    } else {
+      nextReviewInput.value = '';
+    }
+  });
+
+  // Auto-save functionality
+  let saveTimeout;
+  form.addEventListener('input', function() {
+    clearTimeout(saveTimeout);
+    saveTimeout = setTimeout(() => {
+      savePlanToStorage();
+      showSaveStatus();
+    }, 2000);
+  });
+
+  // Save plan to localStorage
+  function savePlanToStorage() {
+    const formData = new FormData(form);
+    const planData = {};
+    
+    for (let [key, value] of formData.entries()) {
+      if (planData[key]) {
+        if (Array.isArray(planData[key])) {
+          planData[key].push(value);
+        } else {
+          planData[key] = [planData[key], value];
+        }
+      } else {
+        planData[key] = value;
+      }
+    }
+    
+    // Handle checkboxes specially
+    const checkboxes = form.querySelectorAll('input[type="checkbox"]');
+    checkboxes.forEach(cb => {
+      if (cb.name && !planData[cb.name]) {
+        planData[cb.name] = [];
+      }
+    });
+
+    localStorage.setItem('personalGamblingPlan', JSON.stringify(planData));
+  }
+
+  // Load plan from localStorage
+  function loadPlanFromStorage() {
+    const savedPlan = localStorage.getItem('personalGamblingPlan');
+    if (savedPlan) {
+      const planData = JSON.parse(savedPlan);
+      
+      Object.keys(planData).forEach(key => {
+        const elements = form.querySelectorAll(`[name="${key}"]`);
+        elements.forEach(el => {
+          if (el.type === 'checkbox' || el.type === 'radio') {
+            el.checked = Array.isArray(planData[key]) 
+              ? planData[key].includes(el.value)
+              : planData[key] === el.value;
+          } else {
+            el.value = Array.isArray(planData[key]) ? planData[key][0] : planData[key];
+          }
+        });
+      });
+      
+      showSaveStatus('Plan cargado correctamente');
+    }
+  }
+
+  function showSaveStatus(message = 'Plan guardado automáticamente') {
+    saveStatus.textContent = `✓ ${message}`;
+    saveStatus.classList.remove('hidden');
+    setTimeout(() => {
+      saveStatus.classList.add('hidden');
+    }, 3000);
+  }
+
+  // View Plan for Printing - Nueva funcionalidad
+  function openPrintView() {
+    // Primero guardar el plan actual
+    savePlanToStorage();
+    
+    // Verificar que hay datos guardados
+    const savedPlan = localStorage.getItem('personalGamblingPlan');
+    if (!savedPlan || savedPlan === '{}') {
+      alert('Por favor, completa al menos algunos campos del plan antes de visualizarlo.');
+      return;
+    }
+    
+    // Abrir la página de impresión
+    window.open('/the-way/plan-print', '_blank');
+  }
+
+  // Event listeners
+  saveBtn.addEventListener('click', function() {
+    savePlanToStorage();
+    showSaveStatus('Plan guardado correctamente');
+  });
+
+  viewPlanBtn.addEventListener('click', openPrintView);
+
+  loadBtn.addEventListener('click', function() {
+    if (localStorage.getItem('personalGamblingPlan')) {
+      if (confirm('¿Cargar el plan guardado? Esto sobrescribirá los datos actuales.')) {
+        loadPlanFromStorage();
+      }
+    } else {
+      alert('No hay ningún plan guardado previamente.');
+    }
+  });
+
+  // Load saved plan on page load
+  loadPlanFromStorage();
+
+  // Limit trigger checkboxes to 3
+  const triggerCheckboxes = document.querySelectorAll('input[name="triggers"]');
+  triggerCheckboxes.forEach(cb => {
+    cb.addEventListener('change', function() {
+      const checked = document.querySelectorAll('input[name="triggers"]:checked');
+      if (checked.length > 3) {
+        this.checked = false;
+        alert('Puedes seleccionar máximo 3 triggers principales.');
+      }
+    });
+  });
+});
+</script>
 
 </MainLayout>

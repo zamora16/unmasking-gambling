@@ -1,12 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { createChart, ColorType, type IChartApi, type ISeriesApi } from 'lightweight-charts';
 
 interface SimulationResult {
   initialBalance: number;
   finalBalance: number;
   netProfit: number;
   expectedValue: number;
-  balanceHistory: { time: number; value: number }[];
+  balanceHistory: { spin: number; value: number }[];
   actualRTP: number;
   totalWins: number;
   bigWins: number;
@@ -26,72 +25,119 @@ const SlotSimulator: React.FC = () => {
   const [result, setResult] = useState<SimulationResult | null>(null);
   const [isSimulating, setIsSimulating] = useState(false);
   
-  const chartContainerRef = useRef<HTMLDivElement>(null);
-  const chartRef = useRef<IChartApi | null>(null);
-  const seriesRef = useRef<ISeriesApi<'line'> | null>(null);
+  const chartContainerRef = useRef<HTMLCanvasElement>(null);
+  const chartInstanceRef = useRef<any>(null);
 
-  // Inicializar el gráfico
+  // Cargar Chart.js dinámicamente
   useEffect(() => {
-    if (!chartContainerRef.current) return;
-
-    // 📱 Altura adaptativa para móvil
-    const isMobile = window.innerWidth < 768;
-    const chartHeight = isMobile ? 250 : 400;
-
-    const chart = createChart(chartContainerRef.current, {
-      layout: {
-        background: { type: ColorType.Solid, color: '#ffffff' },
-        textColor: '#374151',
-      },
-      width: chartContainerRef.current.clientWidth,
-      height: chartHeight,
-      rightPriceScale: {
-        borderColor: '#e5e7eb',
-        textColor: '#6b7280',
-      },
-      timeScale: {
-        borderColor: '#e5e7eb',
-        timeVisible: false,
-        secondsVisible: false,
-      },
-      grid: {
-        vertLines: { color: '#f3f4f6' },
-        horzLines: { color: '#f3f4f6' },
-      },
-    });
-
-    const lineSeries = chart.addLineSeries({
-      color: '#3b82f6',
-      lineWidth: 3,
-      priceFormat: {
-        type: 'custom',
-        formatter: (price: number) => `€${price.toFixed(2)}`,
-      },
-    });
-
-    chartRef.current = chart;
-    seriesRef.current = lineSeries;
-
-    // Responsive mejorado
-    const handleResize = () => {
-      if (chartContainerRef.current && chartRef.current) {
-        const isMobile = window.innerWidth < 768;
-        const newHeight = isMobile ? 250 : 400;
+    const loadChartJS = async () => {
+      if (typeof window !== 'undefined' && !window.Chart) {
+        const script = document.createElement('script');
+        script.src = 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js';
+        document.head.appendChild(script);
         
-        chartRef.current.applyOptions({
-          width: chartContainerRef.current.clientWidth,
-          height: newHeight,
+        await new Promise((resolve) => {
+          script.onload = resolve;
         });
       }
+      initChart();
     };
 
-    window.addEventListener('resize', handleResize);
-
+    loadChartJS();
+    
     return () => {
-      window.removeEventListener('resize', handleResize);
-      chart.remove();
+      if (chartInstanceRef.current) {
+        chartInstanceRef.current.destroy();
+      }
     };
   }, []);
+
+  const initChart = () => {
+    if (!chartContainerRef.current || !window.Chart) return;
+
+    const ctx = chartContainerRef.current.getContext('2d');
+    if (!ctx) return;
+
+    if (chartInstanceRef.current) {
+      chartInstanceRef.current.destroy();
+    }
+
+    chartInstanceRef.current = new window.Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: [],
+        datasets: [{
+          label: 'Balance',
+          data: [],
+          borderColor: 'rgb(59, 130, 246)',
+          backgroundColor: 'rgba(59, 130, 246, 0.1)',
+          tension: 0.1,
+          fill: true,
+          pointRadius: 0,
+          pointHoverRadius: 5,
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+          intersect: false,
+          mode: 'index'
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            title: {
+              display: true,
+              text: 'Balance (€)'
+            },
+            ticks: {
+              callback: function(value: any) {
+                return '€' + value.toFixed(0);
+              }
+            }
+          },
+          x: {
+            title: {
+              display: true,
+              text: 'Tiradas'
+            }
+          }
+        },
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+            callbacks: {
+              label: function(context: any) {
+                return `Balance: €${context.parsed.y.toFixed(2)}`;
+              }
+            }
+          }
+        }
+      }
+    });
+  };
+
+  const updateChart = (balanceHistory: { spin: number; value: number }[]) => {
+    if (!chartInstanceRef.current) return;
+
+    const labels = balanceHistory.map(point => point.spin);
+    const data = balanceHistory.map(point => point.value);
+
+    // Cambiar color basado en performance
+    const isProfit = data[data.length - 1] >= initialBalance;
+    const borderColor = isProfit ? 'rgb(34, 197, 94)' : 'rgb(239, 68, 68)';
+    const backgroundColor = isProfit ? 'rgba(34, 197, 94, 0.1)' : 'rgba(239, 68, 68, 0.1)';
+
+    chartInstanceRef.current.data.labels = labels;
+    chartInstanceRef.current.data.datasets[0].data = data;
+    chartInstanceRef.current.data.datasets[0].borderColor = borderColor;
+    chartInstanceRef.current.data.datasets[0].backgroundColor = backgroundColor;
+    
+    chartInstanceRef.current.update();
+  };
 
   // Crear tabla de pagos calibrada matemáticamente según RTP
   const createPayoutTable = (targetRTP: number): PayoutEntry[] => {
@@ -154,7 +200,7 @@ const SlotSimulator: React.FC = () => {
     
     const payoutTable = createPayoutTable(rtp);
     let balance = initialBalance;
-    const balanceHistory: { time: number; value: number }[] = [{ time: 0, value: balance }];
+    const balanceHistory: { spin: number; value: number }[] = [{ spin: 0, value: balance }];
     let totalWinAmount = 0;
     let totalWagered = 0;
     let totalWins = 0;
@@ -188,7 +234,7 @@ const SlotSimulator: React.FC = () => {
       
       // Guardar puntos para el gráfico (cada pocos spins para performance)
       if (i % Math.max(1, Math.floor(spins / 100)) === 0 || i === spins) {
-        balanceHistory.push({ time: i, value: balance });
+        balanceHistory.push({ spin: i, value: balance });
       }
       
       // Si se queda sin dinero, parar
@@ -213,17 +259,19 @@ const SlotSimulator: React.FC = () => {
     setResult(simulationResult);
 
     // Actualizar gráfico
-    if (seriesRef.current) {
-      seriesRef.current.setData(balanceHistory);
-    }
+    updateChart(balanceHistory);
 
     setIsSimulating(false);
   };
 
   const resetSimulation = () => {
     setResult(null);
-    if (seriesRef.current) {
-      seriesRef.current.setData([]);
+    if (chartInstanceRef.current) {
+      chartInstanceRef.current.data.labels = [];
+      chartInstanceRef.current.data.datasets[0].data = [];
+      chartInstanceRef.current.data.datasets[0].borderColor = 'rgb(59, 130, 246)';
+      chartInstanceRef.current.data.datasets[0].backgroundColor = 'rgba(59, 130, 246, 0.1)';
+      chartInstanceRef.current.update();
     }
   };
 
@@ -449,17 +497,19 @@ const SlotSimulator: React.FC = () => {
       {/* Gráfico */}
       <div className="bg-gray-50 p-4 sm:p-6 rounded-lg border">
         <h3 className="text-lg sm:text-xl font-semibold text-gray-800 mb-4">📈 Evolución del Saldo</h3>
-        <div ref={chartContainerRef} className="w-full h-64 sm:h-80 md:h-96 rounded" />
-        {!result && (
-          <div className="flex items-center justify-center h-64 sm:h-80 md:h-96 text-gray-500">
-            <div className="text-center">
-              <svg className="w-16 h-16 mx-auto mb-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-              </svg>
-              <p>Ejecuta una simulación para ver el gráfico</p>
+        <div className="relative w-full h-64 sm:h-80 md:h-96">
+          <canvas ref={chartContainerRef} className="w-full h-full rounded" />
+          {!result && (
+            <div className="absolute inset-0 flex items-center justify-center text-gray-500">
+              <div className="text-center">
+                <svg className="w-16 h-16 mx-auto mb-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                </svg>
+                <p>Ejecuta una simulación para ver el gráfico</p>
+              </div>
             </div>
-          </div>
-        )}
+          )}
+        </div>
       </div>
 
       {/* Información educativa */}

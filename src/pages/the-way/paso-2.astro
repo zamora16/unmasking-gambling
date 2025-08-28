@@ -284,7 +284,6 @@ import ProgressManager from '../../components/ProgressManager.astro';
               <div class="mb-6">
                 <div class="flex justify-between items-center mb-2">
                   <span class="text-sm text-indigo-200">Progreso de la evaluación</span>
-                  <span class="text-sm text-indigo-200" id="progress-text">0/8 respondidas</span>
                 </div>
                 <div class="w-full bg-white/20 rounded-full h-2">
                   <div id="assessment-progress" class="bg-yellow-400 h-2 rounded-full transition-all duration-300" style="width: 0%"></div>
@@ -301,40 +300,75 @@ import ProgressManager from '../../components/ProgressManager.astro';
 
               <!-- Results section (initially hidden) -->
               <div id="assessment-results" class="hidden mt-8 space-y-6">
-                <!-- Risk Level Indicator -->
+                <!-- Enhanced Risk Level Indicator -->
                 <div class="bg-white/20 p-6 rounded-lg text-center">
-                  <h3 class="font-bold mb-4 text-xl">Tu Nivel de Riesgo</h3>
-                  <div class="relative w-48 h-24 mx-auto mb-4">
-                    <!-- Speedometer visual -->
-                    <div class="w-48 h-24 border-8 border-gray-300 rounded-t-full relative overflow-hidden">
-                      <div id="risk-needle" class="absolute bottom-0 left-1/2 w-1 h-20 bg-white origin-bottom transform -rotate-90 transition-transform duration-1000"></div>
-                      <div class="absolute bottom-0 left-0 w-16 h-20 bg-green-400 rounded-tl-full"></div>
-                      <div class="absolute bottom-0 left-16 w-16 h-20 bg-yellow-400"></div>
-                      <div class="absolute bottom-0 right-0 w-16 h-20 bg-red-400 rounded-tr-full"></div>
+                  <h3 class="font-bold mb-6 text-xl">Tu Nivel de Riesgo</h3>
+                  
+                  <!-- Enhanced Risk Meter -->
+                  <div class="relative w-64 h-32 mx-auto mb-8">
+                    <!-- Background meter with fixed gradient -->
+                    <div class="risk-meter w-64 h-32 rounded-t-full relative overflow-hidden">
+                      <!-- Green zone -->
+                      <div class="absolute bottom-0 left-0 w-20 h-32 bg-green-400 rounded-tl-full"></div>
+                      <!-- Yellow zone -->
+                      <div class="absolute bottom-0 left-20 w-24 h-32 bg-yellow-400"></div>
+                      <!-- Red zone -->
+                      <div class="absolute bottom-0 right-0 w-20 h-32 bg-red-400 rounded-tr-full"></div>
+                      
+                      <!-- Enhanced needle -->
+                      <div id="risk-needle" class="needle absolute bottom-0 left-1/2 w-1 h-28 bg-white origin-bottom transform -translate-x-1/2 -rotate-90 transition-all duration-1000 z-20" style="filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));">
+                        <div class="w-4 h-4 bg-white rounded-full absolute -top-2 -left-1.5"></div>
+                      </div>
+                      <!-- Center dot -->
+                      <div class="absolute bottom-0 left-1/2 w-6 h-6 bg-white rounded-full transform -translate-x-1/2 translate-y-3 z-30 border-2 border-gray-400"></div>
                     </div>
-                    <div class="flex justify-between text-xs mt-2">
-                      <span>Bajo</span>
-                      <span>Moderado</span>
-                      <span>Alto</span>
+                    
+                    <!-- Labels -->
+                    <div class="flex justify-between text-sm mt-2">
+                      <span class="text-green-300">Bajo</span>
+                      <span class="text-yellow-300">Moderado</span>
+                      <span class="text-red-300">Alto</span>
+                    </div>
+                    
+                    <!-- Score indicators -->
+                    <div class="flex justify-between text-xs mt-1 text-white/60">
+                      <span>0-2</span>
+                      <span>3-4</span>
+                      <span>5-8</span>
                     </div>
                   </div>
-                  <div id="risk-level-text" class="text-2xl font-bold"></div>
-                  <div id="risk-description" class="text-indigo-100 mt-2"></div>
+
+                  <!-- Dynamic Risk Level Display -->
+                  <div id="risk-level-container" class="mb-6">
+                    <div id="risk-level-badge" class="inline-block px-6 py-3 rounded-full text-sm font-bold mb-4 risk-indicator">
+                      <!-- Dynamic content -->
+                    </div>
+                    <div id="risk-level-text" class="text-3xl font-bold risk-indicator mb-2"></div>
+                    <div id="risk-description" class="text-indigo-100 text-lg risk-indicator"></div>
+                  </div>
+
+                  <!-- Risk Score Visual -->
+                  <div id="score-visualization" class="mt-6">
+                    <div class="text-sm text-indigo-200 mb-2">Puntuación obtenida</div>
+                    <div class="flex justify-center items-center space-x-2 mb-4">
+                      <div id="score-dots" class="flex space-x-1">
+                        <!-- Dynamic dots -->
+                      </div>
+                      <span class="text-2xl font-bold ml-4" id="score-text">0/8</span>
+                    </div>
+                  </div>
                 </div>
 
-                <!-- Personalized Recommendations -->
+                <!-- Enhanced Recommendations Section -->
                 <div id="recommendations" class="bg-white/20 p-6 rounded-lg">
-                  <h3 class="font-bold mb-4 text-lg">Recomendaciones Personalizadas</h3>
-                  <div id="recommendation-content" class="space-y-3"></div>
+                  <div class="flex items-center mb-4">
+                    <div id="rec-icon" class="text-2xl mr-3">📋</div>
+                    <h3 class="font-bold text-lg">Recomendaciones Personalizadas</h3>
+                  </div>
+                  <div id="recommendation-content" class="space-y-3">
+                    <!-- Dynamic recommendations -->
+                  </div>
                 </div>
-
-                <!-- Complete step button -->
-                <button 
-                  id="complete-assessment" 
-                  class="w-full px-6 py-3 bg-green-500 hover:bg-green-600 text-white font-bold rounded-lg transition-colors"
-                >
-                  ✅ Completar Evaluación y Continuar
-                </button>
               </div>
             </div>
           </div>
@@ -505,25 +539,37 @@ document.addEventListener('DOMContentLoaded', () => {
     answeredQuestions = answered;
     
     const progressPercentage = (answered / totalQuestions) * 100;
-    document.getElementById('progress-text').textContent = `${answered}/${totalQuestions} respondidas`;
-    document.getElementById('assessment-progress').style.width = `${progressPercentage}%`;
+    const progressBar = document.getElementById('assessment-progress');
+    
+    if (progressBar) {
+      progressBar.style.width = `${progressPercentage}%`;
+    }
     
     const calculateBtn = document.getElementById('calculate-risk');
-    if (answered === totalQuestions) {
-      calculateBtn.disabled = false;
-      calculateBtn.textContent = '📊 Calcular Mi Nivel de Riesgo';
-    } else {
-      calculateBtn.disabled = true;
-      calculateBtn.textContent = `📊 Responde ${totalQuestions - answered} preguntas más`;
+    if (calculateBtn) {
+      if (answered === totalQuestions) {
+        calculateBtn.disabled = false;
+        calculateBtn.textContent = '📊 Calcular Mi Nivel de Riesgo';
+      } else {
+        calculateBtn.disabled = true;
+        calculateBtn.textContent = `📊 Responde ${totalQuestions - answered} preguntas más`;
+      }
     }
   }
 
   // Add event listeners to all radio buttons
-  document.querySelectorAll('input[type="radio"]').forEach(radio => {
-    radio.addEventListener('change', updateProgress);
-  });
+  setTimeout(() => {
+    const radioButtons = document.querySelectorAll('input[type="radio"]');
+    
+    radioButtons.forEach((radio) => {
+      radio.addEventListener('change', updateProgress);
+    });
+    
+    // Initial progress update
+    updateProgress();
+  }, 100);
 
-  // Risk calculation logic
+  // Enhanced Risk calculation logic with dynamic visualization
   document.getElementById('calculate-risk').addEventListener('click', () => {
     let riskScore = 0;
     const responses = {};
@@ -537,63 +583,127 @@ document.addEventListener('DOMContentLoaded', () => {
       responses[`q${i}`] = answer ? answer.value : null;
     }
 
-    // Determine risk level
-    let riskLevel, riskColor, riskDescription, needleRotation, recommendations;
+    // Determine risk level with enhanced visual feedback
+    let riskLevel, riskColor, bgColor, riskDescription, needleRotation, recommendations, icon;
     
     if (riskScore <= 2) {
       riskLevel = 'BAJO RIESGO';
       riskColor = 'text-green-400';
-      riskDescription = 'Mantienes un patrón de juego controlado';
-      needleRotation = -60; // Green zone
+      bgColor = 'bg-green-500/20 border-green-400';
+      riskDescription = 'Mantienes un patrón de juego controlado. ¡Excelente!';
+      needleRotation = -60;
+      icon = '✅';
       recommendations = [
-        '✅ Continúa manteniendo límites claros de tiempo y dinero',
-        '📚 Sigue aprendiendo sobre juego responsable',
-        '👥 Comparte este conocimiento con otros',
-        '🎯 Establece objetivos financieros alternativos'
+        { icon: '✅', text: 'Continúa manteniendo límites claros de tiempo y dinero', priority: 'high' },
+        { icon: '📚', text: 'Sigue aprendiendo sobre juego responsable', priority: 'medium' },
+        { icon: '👥', text: 'Comparte este conocimiento con otros', priority: 'medium' },
+        { icon: '🎯', text: 'Establece objetivos financieros alternativos', priority: 'low' }
       ];
     } else if (riskScore <= 4) {
       riskLevel = 'RIESGO MODERADO';
       riskColor = 'text-yellow-400';
-      riskDescription = 'Algunas señales de advertencia presentes';
-      needleRotation = 0; // Yellow zone
+      bgColor = 'bg-yellow-500/20 border-yellow-400';
+      riskDescription = 'Algunas señales de advertencia presentes. Actúa ahora.';
+      needleRotation = 0;
+      icon = '⚠️';
       recommendations = [
-        '⚠️ Establece límites más estrictos de tiempo y dinero',
-        '📱 Considera usar herramientas de autoexclusión',
-        '🗣️ Habla con alguien de confianza sobre tus hábitos',
-        '🧘 Busca actividades alternativas para el estrés',
-        '📞 Ten a mano números de ayuda profesional'
+        { icon: '🛡️', text: 'Establece límites más estrictos de tiempo y dinero', priority: 'high' },
+        { icon: '📱', text: 'Considera usar herramientas de autoexclusión', priority: 'high' },
+        { icon: '🗣️', text: 'Habla con alguien de confianza sobre tus hábitos', priority: 'medium' },
+        { icon: '🧘', text: 'Busca actividades alternativas para el estrés', priority: 'medium' },
+        { icon: '📞', text: 'Ten a mano números de ayuda profesional', priority: 'low' }
       ];
     } else {
       riskLevel = 'ALTO RIESGO';
       riskColor = 'text-red-400';
-      riskDescription = 'Múltiples indicadores de juego problemático';
-      needleRotation = 60; // Red zone
+      bgColor = 'bg-red-500/20 border-red-400';
+      riskDescription = 'Múltiples indicadores de juego problemático. Busca ayuda.';
+      needleRotation = 60;
+      icon = '🚨';
       recommendations = [
-        '🚨 Te recomendamos buscar ayuda profesional inmediatamente',
-        '📞 Contacta líneas de crisis: 900 200 999 (gratuita 24h)',
-        '🛡️ Considera la autoexclusión de plataformas de juego',
-        '👨‍⚕️ Habla con tu médico de cabecera',
-        '👥 Informa a familiares cercanos de tu situación',
-        '💪 Recuerda: buscar ayuda es un signo de fortaleza'
+        { icon: '🚨', text: 'Te recomendamos buscar ayuda profesional inmediatamente', priority: 'critical' },
+        { icon: '📞', text: 'Contacta líneas de crisis: 900 200 999 (gratuita 24h)', priority: 'critical' },
+        { icon: '🛡️', text: 'Considera la autoexclusión de plataformas de juego', priority: 'high' },
+        { icon: '👨‍⚕️', text: 'Habla con tu médico de cabecera', priority: 'high' },
+        { icon: '👥', text: 'Informa a familiares cercanos de tu situación', priority: 'medium' },
+        { icon: '💪', text: 'Recuerda: buscar ayuda es un signo de fortaleza', priority: 'low' }
       ];
     }
 
-    // Display results
+    // Enhanced visual feedback with animations
     const resultsDiv = document.getElementById('assessment-results');
+    const needle = document.getElementById('risk-needle');
+    const badge = document.getElementById('risk-level-badge');
     const riskLevelText = document.getElementById('risk-level-text');
     const riskDesc = document.getElementById('risk-description');
-    const needle = document.getElementById('risk-needle');
     const recommendationContent = document.getElementById('recommendation-content');
+    const recIcon = document.getElementById('rec-icon');
+    const scoreDots = document.getElementById('score-dots');
+    const scoreText = document.getElementById('score-text');
 
-    riskLevelText.textContent = riskLevel;
-    riskLevelText.className = `text-2xl font-bold ${riskColor}`;
-    riskDesc.textContent = riskDescription;
-    needle.style.transform = `rotate(${needleRotation}deg)`;
+    // Animate needle with enhanced transform
+    needle.style.transform = `translate(-50%, 0) rotate(${needleRotation}deg)`;
+
+    // Update badge with enhanced styling
+    badge.className = `inline-block px-6 py-3 rounded-full text-sm font-bold mb-4 risk-indicator ${bgColor} ${riskColor}`;
+    badge.innerHTML = `${icon} ${riskScore}/8 respuestas positivas`;
     
-    recommendationContent.innerHTML = recommendations
-      .map(rec => `<p class="p-3 bg-white/10 rounded-lg flex items-start"><span class="mr-2">${rec.substring(0, 2)}</span><span>${rec.substring(2)}</span></p>`)
-      .join('');
+    // Add bounce animation
+    badge.style.animation = 'none';
+    badge.offsetHeight; // Trigger reflow
+    badge.style.animation = 'bounceIn 0.6s ease-out';
 
+    // Update main text with enhanced styling
+    riskLevelText.className = `text-3xl font-bold risk-indicator mb-2 ${riskColor}`;
+    riskLevelText.textContent = riskLevel;
+    riskLevelText.style.animation = 'fadeInUp 0.6s ease-out';
+
+    // Update description
+    riskDesc.textContent = riskDescription;
+    riskDesc.className = 'text-indigo-100 text-lg risk-indicator';
+    riskDesc.style.animation = 'fadeInUp 0.6s ease-out 0.2s both';
+
+    // Create enhanced score dots visualization
+    let dotsHTML = '';
+    for (let i = 0; i < 8; i++) {
+      if (i < riskScore) {
+        const color = riskScore <= 2 ? 'bg-green-400' : riskScore <= 4 ? 'bg-yellow-400' : 'bg-red-400';
+        dotsHTML += `<div class="w-4 h-4 ${color} rounded-full" style="animation: bounceIn 0.4s ease-out ${i * 0.05}s both"></div>`;
+      } else {
+        dotsHTML += `<div class="w-4 h-4 bg-white/30 rounded-full"></div>`;
+      }
+    }
+    scoreDots.innerHTML = dotsHTML;
+    scoreText.textContent = `${riskScore}/8`;
+    scoreText.className = `text-2xl font-bold ml-4 ${riskColor}`;
+
+    // Update recommendations with enhanced layout and priorities
+    recIcon.textContent = icon;
+
+    const priorityColors = {
+      'critical': 'bg-red-500/30 border-l-4 border-red-400 text-red-100',
+      'high': 'bg-orange-500/30 border-l-4 border-orange-400 text-orange-100',
+      'medium': 'bg-blue-500/30 border-l-4 border-blue-400 text-blue-100',
+      'low': 'bg-green-500/30 border-l-4 border-green-400 text-green-100'
+    };
+
+    recommendationContent.innerHTML = recommendations
+      .map((rec, index) => `
+        <div class="p-4 rounded-lg ${priorityColors[rec.priority]}" style="animation: fadeInUp 0.6s ease-out ${index * 0.1 + 0.3}s both">
+          <div class="flex items-start">
+            <span class="text-xl mr-3">${rec.icon}</span>
+            <span class="flex-1">${rec.text}</span>
+          </div>
+        </div>
+      `).join('');
+
+    // Add pulse effect for high risk
+    if (riskScore > 4) {
+      badge.style.animation += ', pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite';
+      riskLevelText.style.animation += ', pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite';
+    }
+
+    // Show results with smooth animation
     resultsDiv.classList.remove('hidden');
     resultsDiv.scrollIntoView({ behavior: 'smooth' });
 
@@ -615,18 +725,16 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('calculate-risk').classList.add('opacity-50');
   });
 
-  // Complete assessment button
-  document.getElementById('complete-assessment').addEventListener('click', () => {
-    if (window.progressManager) {
-      window.progressManager.completeStep('paso-2');
-    }
-    
-    setTimeout(() => {
-      if (confirm('¡Evaluación completada! ¿Quieres continuar con el Paso 3?')) {
-        window.location.href = '/the-way/paso-3';
+  // Complete assessment functionality removed - auto advance after showing results
+  setTimeout(() => {
+    const resultsDiv = document.getElementById('assessment-results');
+    if (resultsDiv && !resultsDiv.classList.contains('hidden')) {
+      // Auto-complete the step after results are shown
+      if (window.progressManager) {
+        window.progressManager.completeStep('paso-2');
       }
-    }, 3000);
-  });
+    }
+  }, 2000);
 
   // Cost Calculator functionality
   const alternatives = [
@@ -684,7 +792,38 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('cost-results').classList.remove('hidden');
   });
 
-  // Initialize progress on page load
-  updateProgress();
+  // Initialize assessment
+  console.log('Assessment initialized');
 });
+
+// Add CSS animations dynamically
+const style = document.createElement('style');
+style.textContent = `
+  @keyframes bounceIn {
+    0% { transform: scale(0.3); opacity: 0; }
+    50% { transform: scale(1.05); }
+    70% { transform: scale(0.9); }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .risk-indicator {
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .pulse-effect {
+    box-shadow: 0 0 20px currentColor;
+  }
+`;
+document.head.appendChild(style);
 </script>

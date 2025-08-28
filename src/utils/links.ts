@@ -30,9 +30,10 @@ export const EXTERNAL_LINKS = {
   // Recursos oficiales España
   spain: {
     fejar: 'https://www.fejar.org',
-    autoexclusion: 'https://www.autoexclusion.es',
+    autoexclusion: 'https://www.ordenacionjuego.es/participantes-juego/juego-seguro/rgiaj',
     jugarBien: 'https://www.ordenacionjuego.es/participantes-juego/juego-seguro',
     rgiaj: 'https://www.ordenacionjuego.es/participantes-juego/juego-seguro/rgiaj',
+    rgea: 'https://www.ordenacionjuego.es/participantes-juego/juego-seguro/rgiaj',
   },
   
   // Recursos internacionales

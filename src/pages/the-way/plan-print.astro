@@ -1,0 +1,847 @@
+---
+// Plan de Impresión Premium
+---
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi Plan Personal de Juego Responsable</title>
+  <style>
+    /* Reset y fuentes base */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      color: #1f2937;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+    }
+
+    /* Contenedor principal con glassmorphism */
+    .plan-container {
+      max-width: 800px;
+      margin: 2rem auto;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      border-radius: 24px;
+      box-shadow: 
+        0 25px 50px -12px rgba(0, 0, 0, 0.25),
+        0 0 0 1px rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Efecto de brillo sutil */
+    .plan-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
+    }
+
+    /* Header con gradiente premium */
+    .plan-header {
+      background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a855f7 100%);
+      padding: 3rem 2rem 2rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Efectos decorativos en el header */
+    .plan-header::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-20px) rotate(180deg); }
+    }
+
+    .logo {
+      width: 80px;
+      height: 80px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      margin: 0 auto 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      backdrop-filter: blur(10px);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .logo::before {
+      content: '';
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 8px;
+      position: relative;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    }
+
+    .plan-title {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: white;
+      margin-bottom: 0.5rem;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      letter-spacing: -0.02em;
+    }
+
+    .plan-subtitle {
+      font-size: 1.2rem;
+      color: rgba(255, 255, 255, 0.9);
+      font-weight: 400;
+      margin-bottom: 1rem;
+    }
+
+    .plan-date {
+      background: rgba(255, 255, 255, 0.15);
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      display: inline-block;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    /* Contenido principal */
+    .plan-content {
+      padding: 2rem;
+    }
+
+    /* Secciones con diseño moderno */
+    .plan-section {
+      margin-bottom: 2.5rem;
+      position: relative;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid transparent;
+      background: linear-gradient(90deg, #f3f4f6, #f3f4f6) padding-box,
+                  linear-gradient(90deg, #6366f1, #8b5cf6) border-box;
+      border-image: linear-gradient(90deg, #6366f1, #8b5cf6) 1;
+    }
+
+    .section-icon {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 1rem;
+      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+      position: relative;
+    }
+
+    .section-icon::before {
+      content: attr(data-icon);
+      font-size: 1.5rem;
+      color: white;
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #374151;
+      letter-spacing: -0.01em;
+    }
+
+    /* Cards para contenido */
+    .content-card {
+      background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+      border-radius: 16px;
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+      border: 1px solid rgba(226, 232, 240, 0.8);
+      box-shadow: 
+        0 4px 6px rgba(0, 0, 0, 0.05),
+        0 1px 3px rgba(0, 0, 0, 0.1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .content-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: linear-gradient(180deg, #6366f1, #8b5cf6);
+      border-radius: 0 2px 2px 0;
+    }
+
+    .card-title {
+      font-weight: 600;
+      color: #4f46e5;
+      margin-bottom: 0.5rem;
+      font-size: 1.1rem;
+    }
+
+    .card-content {
+      color: #6b7280;
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+
+    /* Listas con estilo */
+    .styled-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .styled-list li {
+      position: relative;
+      padding: 0.75rem 0 0.75rem 2rem;
+      border-bottom: 1px solid rgba(226, 232, 240, 0.5);
+    }
+
+    .styled-list li:last-child {
+      border-bottom: none;
+    }
+
+    .styled-list li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 8px;
+      height: 8px;
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      border-radius: 50%;
+      box-shadow: 0 2px 4px rgba(99, 102, 241, 0.3);
+    }
+
+    /* Protocolo de emergencia con estilo especial */
+    .emergency-protocol {
+      background: linear-gradient(135deg, #fef7f7 0%, #fdf2f2 100%);
+      border: 2px solid #fca5a5;
+      border-radius: 16px;
+      padding: 2rem;
+      position: relative;
+    }
+
+    .emergency-protocol::before {
+      content: '🚨';
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      font-size: 1.5rem;
+    }
+
+    .emergency-steps {
+      display: grid;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .emergency-step {
+      background: white;
+      border-radius: 12px;
+      padding: 1rem;
+      border-left: 4px solid #ef4444;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    .step-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      background: #ef4444;
+      color: white;
+      border-radius: 50%;
+      font-weight: 600;
+      font-size: 0.875rem;
+      margin-right: 0.75rem;
+    }
+
+    /* Compromiso final con diseño especial */
+    .commitment-section {
+      background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+      color: white;
+      border-radius: 20px;
+      padding: 2.5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      margin-top: 3rem;
+    }
+
+    .commitment-section::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+    }
+
+    .commitment-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      position: relative;
+    }
+
+    .signature-area {
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 12px;
+      padding: 2rem;
+      margin-top: 2rem;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .signature-line {
+      width: 300px;
+      height: 2px;
+      background: rgba(255, 255, 255, 0.5);
+      margin: 1rem auto;
+      border-radius: 1px;
+    }
+
+    /* Botones de acción */
+    .action-buttons {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      display: flex;
+      gap: 1rem;
+      z-index: 1000;
+    }
+
+    .btn {
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      color: white;
+      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(99, 102, 241, 0.5);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.9);
+      color: #374151;
+      border: 1px solid rgba(226, 232, 240, 0.8);
+      backdrop-filter: blur(10px);
+    }
+
+    .btn-secondary:hover {
+      background: white;
+      transform: translateY(-1px);
+    }
+
+    /* Estilos de impresión */
+    @media print {
+      body {
+        background: white !important;
+        -webkit-print-color-adjust: exact;
+        color-adjust: exact;
+      }
+
+      .action-buttons {
+        display: none !important;
+      }
+
+      .plan-container {
+        box-shadow: none !important;
+        border: none !important;
+        margin: 0 !important;
+        max-width: none !important;
+        background: white !important;
+      }
+
+      .plan-header {
+        background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a855f7 100%) !important;
+        -webkit-print-color-adjust: exact;
+        color-adjust: exact;
+      }
+
+      .section-icon,
+      .commitment-section {
+        -webkit-print-color-adjust: exact;
+        color-adjust: exact;
+      }
+
+      /* Evitar saltos de página en elementos importantes */
+      .plan-section,
+      .content-card,
+      .emergency-protocol {
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
+
+      /* Ajustes de espaciado para impresión */
+      .plan-content {
+        padding: 1rem;
+      }
+
+      .plan-section {
+        margin-bottom: 1.5rem;
+      }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .plan-container {
+        margin: 1rem;
+        border-radius: 16px;
+      }
+
+      .plan-header {
+        padding: 2rem 1rem 1.5rem;
+      }
+
+      .plan-title {
+        font-size: 2rem;
+      }
+
+      .plan-content {
+        padding: 1.5rem;
+      }
+
+      .action-buttons {
+        position: relative;
+        top: auto;
+        right: auto;
+        margin-bottom: 2rem;
+        justify-content: center;
+      }
+
+      .btn {
+        padding: 0.5rem 1rem;
+        font-size: 0.85rem;
+      }
+    }
+
+    /* Animaciones suaves */
+    .plan-container {
+      animation: fadeInUp 0.8s ease-out;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .content-card {
+      animation: fadeIn 0.6s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Botones de acción -->
+  <div class="action-buttons">
+    <button onclick="window.print()" class="btn btn-primary">
+      🖨️ Imprimir Plan
+    </button>
+    <a href="/the-way/paso-5" class="btn btn-secondary">
+      ← Volver al Editor
+    </a>
+  </div>
+
+  <div class="plan-container">
+    <!-- Header Premium -->
+    <div class="plan-header">
+      <div class="logo"></div>
+      <h1 class="plan-title">MI PLAN PERSONAL</h1>
+      <p class="plan-subtitle">Juego Responsable y Recuperación</p>
+      <div class="plan-date" id="plan-date">Creado el: <span id="current-date"></span></div>
+    </div>
+
+    <div class="plan-content">
+      <!-- Información Personal -->
+      <section class="plan-section">
+        <div class="section-header">
+          <div class="section-icon" data-icon="👤"></div>
+          <h2 class="section-title">Información Personal</h2>
+        </div>
+        <div class="content-card">
+          <div class="card-title">Mis Datos</div>
+          <div class="card-content">
+            <p><strong>Nombre:</strong> <span id="display-name">-</span></p>
+            <p><strong>Edad:</strong> <span id="display-age">-</span></p>
+            <p><strong>Fecha del plan:</strong> <span id="display-plan-date">-</span></p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Situación Actual -->
+      <section class="plan-section">
+        <div class="section-header">
+          <div class="section-icon" data-icon="📊"></div>
+          <h2 class="section-title">Mi Situación Actual</h2>
+        </div>
+        <div class="content-card">
+          <div class="card-title">Patrones de Juego</div>
+          <div class="card-content">
+            <p><strong>Frecuencia:</strong> <span id="display-frequency">-</span></p>
+            <p><strong>Gasto mensual:</strong> <span id="display-monthly">-</span></p>
+            <p><strong>Total perdido:</strong> <span id="display-total">-</span></p>
+            <p><strong>Tipo de juego principal:</strong> <span id="display-game-type">-</span></p>
+          </div>
+        </div>
+        <div class="content-card">
+          <div class="card-title">Mis Principales Triggers</div>
+          <div class="card-content">
+            <ul class="styled-list" id="display-triggers">
+              <li>No se han identificado triggers específicos</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Objetivo Principal -->
+      <section class="plan-section">
+        <div class="section-header">
+          <div class="section-icon" data-icon="🎯"></div>
+          <h2 class="section-title">Mi Objetivo Principal</h2>
+        </div>
+        <div class="content-card">
+          <div class="card-title">Mi Meta</div>
+          <div class="card-content">
+            <p><strong>Tipo de objetivo:</strong> <span id="display-main-goal">-</span></p>
+            <p><strong>Objetivo específico:</strong> <span id="display-specific-goal">-</span></p>
+            <p><strong>Fecha límite:</strong> <span id="display-goal-date">-</span></p>
+            <p><strong>Por qué es importante:</strong> <span id="display-goal-why">-</span></p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Estrategias -->
+      <section class="plan-section">
+        <div class="section-header">
+          <div class="section-icon" data-icon="⚡"></div>
+          <h2 class="section-title">Mis Estrategias</h2>
+        </div>
+        <div class="content-card">
+          <div class="card-title">Herramientas y Técnicas Seleccionadas</div>
+          <div class="card-content">
+            <ul class="styled-list" id="display-strategies">
+              <li>No se han seleccionado estrategias específicas</li>
+            </ul>
+          </div>
+        </div>
+        <div class="content-card" id="limits-card" style="display: none;">
+          <div class="card-title">Límites Establecidos</div>
+          <div class="card-content">
+            <p><strong>Límite diario:</strong> <span id="display-daily-limit">-</span></p>
+            <p><strong>Límite mensual:</strong> <span id="display-monthly-limit">-</span></p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Red de Apoyo -->
+      <section class="plan-section">
+        <div class="section-header">
+          <div class="section-icon" data-icon="👥"></div>
+          <h2 class="section-title">Mi Red de Apoyo</h2>
+        </div>
+        <div class="content-card">
+          <div class="card-title">Personas de Confianza</div>
+          <div class="card-content">
+            <p><strong>Persona de confianza principal:</strong> <span id="display-support-person">-</span></p>
+            <p><strong>Contacto de emergencia:</strong> <span id="display-emergency-contact">-</span></p>
+            <p><strong>Red de apoyo:</strong> <span id="display-support-network">-</span></p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Protocolo de Emergencia -->
+      <section class="plan-section">
+        <div class="section-header">
+          <div class="section-icon" data-icon="🚨"></div>
+          <h2 class="section-title">Protocolo de Emergencia</h2>
+        </div>
+        <div class="emergency-protocol">
+          <h3 style="color: #dc2626; font-weight: 700; margin-bottom: 1rem;">
+            Si siento una urgencia muy fuerte de jugar, seguiré estos pasos:
+          </h3>
+          <div class="emergency-steps">
+            <div class="emergency-step">
+              <span class="step-number">1</span>
+              <strong>Acción inmediata:</strong> <span id="display-emergency-1">-</span>
+            </div>
+            <div class="emergency-step">
+              <span class="step-number">2</span>
+              <strong>Si persiste:</strong> <span id="display-emergency-2">-</span>
+            </div>
+            <div class="emergency-step">
+              <span class="step-number">3</span>
+              <strong>Recordatorio personal:</strong> <span id="display-reminder">-</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Compromiso -->
+      <div class="commitment-section">
+        <h2 class="commitment-title">MI COMPROMISO PERSONAL</h2>
+        <div style="position: relative;">
+          <p style="font-size: 1.1rem; margin-bottom: 1rem;">
+            <strong>Frecuencia de revisión:</strong> <span id="display-review-frequency">-</span>
+          </p>
+          <p style="font-size: 1.1rem; margin-bottom: 1.5rem;">
+            <strong>Próxima revisión:</strong> <span id="display-next-review">-</span>
+          </p>
+          <div style="background: rgba(255, 255, 255, 0.1); padding: 1.5rem; border-radius: 12px; margin-bottom: 2rem;">
+            <p style="font-weight: 600; margin-bottom: 0.5rem;">Mi motivación principal es:</p>
+            <p style="font-style: italic; font-size: 1.1rem;" id="display-motivation">-</p>
+          </div>
+        </div>
+        
+        <div class="signature-area">
+          <p style="font-weight: 600; margin-bottom: 1rem;">
+            Me comprometo a seguir este plan y a buscar ayuda profesional si es necesario.
+          </p>
+          <div class="signature-line"></div>
+          <p style="font-size: 0.9rem; opacity: 0.8;">Firma y fecha</p>
+        </div>
+      </div>
+
+      <!-- Footer con recursos -->
+      <div style="margin-top: 3rem; padding: 2rem; background: linear-gradient(135deg, #f8fafc, #f1f5f9); border-radius: 16px; text-align: center; border-top: 3px solid #6366f1;">
+        <p style="color: #6b7280; font-size: 0.9rem; margin-bottom: 0.5rem;">
+          📞 <strong>Línea de ayuda 24h:</strong> 900 200 225 (gratuita y confidencial)
+        </p>
+        <p style="color: #6b7280; font-size: 0.85rem;">
+          Este plan fue generado en <strong>unmaskinggambling.com</strong> • 
+          Recuerda: buscar ayuda profesional es siempre una decisión inteligente
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Cargar datos del plan desde localStorage al cargar la página
+    document.addEventListener('DOMContentLoaded', function() {
+      // Establecer fecha actual
+      document.getElementById('current-date').textContent = new Date().toLocaleDateString('es-ES', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      });
+
+      // Cargar datos guardados
+      const savedPlan = localStorage.getItem('personalGamblingPlan');
+      if (savedPlan) {
+        const planData = JSON.parse(savedPlan);
+        populatePlan(planData);
+      } else {
+        // Si no hay datos, mostrar mensaje de alerta
+        alert('No se encontraron datos del plan. Por favor, vuelve al editor para crear tu plan.');
+        window.location.href = '/the-way/paso-5';
+      }
+    });
+
+    function populatePlan(data) {
+      // Mapeos para mostrar valores legibles
+      const frequencyMap = {
+        'daily': 'Diariamente',
+        'several-week': 'Varias veces por semana',
+        'weekly': 'Semanalmente',
+        'monthly': 'Mensualmente',
+        'rarely': 'Raramente'
+      };
+
+      const gameTypeMap = {
+        'slots': 'Slots/Tragaperras',
+        'sports': 'Apuestas deportivas',
+        'casino': 'Casino (ruleta, blackjack)',
+        'lottery': 'Lotería/Primitiva',
+        'poker': 'Poker',
+        'other': 'Otros'
+      };
+
+      const goalMap = {
+        'reduce-frequency': 'Reducir frecuencia de juego',
+        'reduce-amount': 'Reducir gasto en juego',
+        'quit': 'Dejar de jugar completamente'
+      };
+
+      const strategyMap = {
+        'daily-limit': 'Establecer límite diario',
+        'monthly-limit': 'Establecer límite mensual',
+        'bank-block': 'Bloqueo bancario',
+        'time-limits': 'Límites de tiempo',
+        'specific-days': 'Jugar solo días específicos',
+        'cooling-period': 'Periodos de reflexión',
+        'official-registry': 'Registro oficial DGOJ',
+        'app-exclusion': 'Autoexclusión en aplicaciones',
+        'website-blocking': 'Bloqueo de sitios web',
+        'stop-technique': 'Usar técnica STOP',
+        '10-minute-rule': 'Aplicar regla de 10 minutos',
+        'meditation': 'Meditación diaria',
+        'tell-family': 'Contarle a la familia',
+        'therapy': 'Buscar terapia profesional',
+        'support-group': 'Unirse a grupo de apoyo',
+        'exercise': 'Realizar ejercicio físico',
+        'hobbies': 'Desarrollar hobbies creativos',
+        'social-activities': 'Participar en actividades sociales'
+      };
+
+      const triggerMap = {
+        'stress': 'Estrés o ansiedad',
+        'boredom': 'Aburrimiento',
+        'alcohol': 'Después de beber alcohol',
+        'social': 'Presión social',
+        'financial': 'Problemas económicos',
+        'emotional': 'Bajón emocional'
+      };
+
+      const emergencyMap = {
+        'call-support': 'Llamar a mi persona de confianza',
+        'physical-activity': 'Hacer ejercicio físico inmediato',
+        'leave-environment': 'Salir del lugar donde estoy',
+        'breathing': 'Hacer ejercicios de respiración',
+        'call-hotline': 'Llamar línea de ayuda 900 200 225',
+        'go-to-person': 'Ir físicamente donde mi persona de confianza',
+        'remove-access': 'Eliminar acceso inmediato (dar dinero/tarjetas)',
+        'distraction-activity': 'Actividad de distracción intensa'
+      };
+
+      const reviewMap = {
+        'weekly': 'Cada semana',
+        'biweekly': 'Cada 2 semanas',
+        'monthly': 'Cada mes'
+      };
+
+      // Rellenar información personal
+      document.getElementById('display-name').textContent = data.userName || 'No especificado';
+      document.getElementById('display-age').textContent = data.userAge ? `${data.userAge} años` : 'No especificado';
+      document.getElementById('display-plan-date').textContent = data.planDate || 'No especificado';
+
+      // Rellenar situación actual
+      document.getElementById('display-frequency').textContent = frequencyMap[data.frequency] || 'No especificado';
+      document.getElementById('display-monthly').textContent = data.monthlySpend ? `${data.monthlySpend}€` : 'No especificado';
+      document.getElementById('display-total').textContent = data.totalLost ? `${data.totalLost}€` : 'No especificado';
+      document.getElementById('display-game-type').textContent = gameTypeMap[data.gameType] || 'No especificado';
+
+      // Rellenar triggers
+      if (data.triggers && data.triggers.length > 0) {
+        const triggersContainer = document.getElementById('display-triggers');
+        triggersContainer.innerHTML = '';
+        const triggerList = Array.isArray(data.triggers) ? data.triggers : [data.triggers];
+        triggerList.forEach(trigger => {
+          const li = document.createElement('li');
+          li.textContent = triggerMap[trigger] || trigger;
+          triggersContainer.appendChild(li);
+        });
+      }
+
+      // Rellenar objetivo principal
+      document.getElementById('display-main-goal').textContent = goalMap[data.mainGoal] || 'No especificado';
+      document.getElementById('display-specific-goal').textContent = data.specificGoal || 'No especificado';
+      document.getElementById('display-goal-date').textContent = data.goalDate || 'No especificado';
+      document.getElementById('display-goal-why').textContent = data.goalWhy || 'No especificado';
+
+      // Rellenar estrategias
+      if (data.strategies && data.strategies.length > 0) {
+        const strategiesContainer = document.getElementById('display-strategies');
+        strategiesContainer.innerHTML = '';
+        const strategyList = Array.isArray(data.strategies) ? data.strategies : [data.strategies];
+        strategyList.forEach(strategy => {
+          const li = document.createElement('li');
+          li.textContent = strategyMap[strategy] || strategy;
+          strategiesContainer.appendChild(li);
+        });
+      }
+
+      // Mostrar límites si existen
+      if (data.dailyLimit || data.monthlyLimit) {
+        document.getElementById('limits-card').style.display = 'block';
+        document.getElementById('display-daily-limit').textContent = data.dailyLimit ? `${data.dailyLimit}€` : 'No establecido';
+        document.getElementById('display-monthly-limit').textContent = data.monthlyLimit ? `${data.monthlyLimit}€` : 'No establecido';
+      }
+
+      // Rellenar red de apoyo
+      document.getElementById('display-support-person').textContent = data.supportPerson || 'No especificado';
+      document.getElementById('display-emergency-contact').textContent = data.emergencyContact || 'No especificado';
+      document.getElementById('display-support-network').textContent = data.supportNetwork || 'No especificado';
+
+      // Rellenar protocolo de emergencia
+      document.getElementById('display-emergency-1').textContent = emergencyMap[data.emergencyStep1] || 'No especificado';
+      document.getElementById('display-emergency-2').textContent = emergencyMap[data.emergencyStep2] || 'No especificado';
+      document.getElementById('display-reminder').textContent = data.personalReminder || 'No especificado';
+
+      // Rellenar compromiso
+      document.getElementById('display-review-frequency').textContent = reviewMap[data.reviewFrequency] || 'No especificado';
+      document.getElementById('display-next-review').textContent = data.nextReview || 'No especificado';
+      document.getElementById('display-motivation').textContent = data.mainMotivation || 'No especificado';
+    }
+
+    // Función para imprimir con configuraciones específicas
+    function printPlan() {
+      window.print();
+    }
+
+    // Añadir evento de teclado para imprimir con Ctrl+P
+    document.addEventListener('keydown', function(e) {
+      if (e.ctrlKey && e.key === 'p') {
+        e.preventDefault();
+        printPlan();
+      }
+    });
+  </script>
+</body>
+</html>

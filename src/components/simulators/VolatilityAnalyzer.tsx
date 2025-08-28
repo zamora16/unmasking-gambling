@@ -1,5 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { createChart, ColorType, type IChartApi, type ISeriesApi } from 'lightweight-charts';
+
+// Declaración global para Chart.js
+declare global {
+  interface Window {
+    Chart: any;
+  }
+}
 
 interface VolatilityResults {
   lowVolatility: {
@@ -39,68 +45,116 @@ const VolatilityAnalyzer: React.FC = () => {
   const [results, setResults] = useState<VolatilityResults | null>(null);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   
-  const lowVolChartRef = useRef<HTMLDivElement>(null);
-  const highVolChartRef = useRef<HTMLDivElement>(null);
-  const lowVolChart = useRef<IChartApi | null>(null);
-  const highVolChart = useRef<IChartApi | null>(null);
+  const lowVolChartRef = useRef<HTMLCanvasElement>(null);
+  const highVolChartRef = useRef<HTMLCanvasElement>(null);
+  const lowVolChart = useRef<any>(null);
+  const highVolChart = useRef<any>(null);
 
-  // Inicializar gráficos
+  // Inicializar gráficos con Chart.js
   useEffect(() => {
-    const initChart = (container: HTMLDivElement, title: string) => {
-      return createChart(container, {
-        layout: {
-          background: { type: ColorType.Solid, color: '#ffffff' },
-          textColor: '#374151',
+    const initChart = (canvas: HTMLCanvasElement, color: string, label: string) => {
+      const ctx = canvas.getContext('2d');
+      if (!ctx || !window.Chart) return null;
+      
+      return new window.Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: ['Inicio'],
+          datasets: [{
+            label: label,
+            data: [initialBalance],
+            borderColor: color,
+            backgroundColor: color.replace('rgb', 'rgba').replace(')', ', 0.1)'),
+            tension: 0.1,
+            fill: true,
+            pointRadius: 2,
+            pointHoverRadius: 4,
+            borderWidth: 2
+          }]
         },
-        width: container.clientWidth,
-        height: window.innerWidth < 768 ? 200 : 300,
-        rightPriceScale: {
-          borderColor: '#e5e7eb',
-          textColor: '#6b7280',
-        },
-        timeScale: {
-          borderColor: '#e5e7eb',
-          timeVisible: false,
-          secondsVisible: false,
-        },
-        grid: {
-          vertLines: { color: '#f3f4f6' },
-          horzLines: { color: '#f3f4f6' },
-        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            y: {
+              beginAtZero: false,
+              title: {
+                display: true,
+                text: 'Saldo (€)'
+              },
+              grid: {
+                color: 'rgba(0,0,0,0.1)'
+              },
+              ticks: {
+                callback: function(value) {
+                  return '€' + value;
+                }
+              }
+            },
+            x: {
+              title: {
+                display: true,
+                text: 'Tiradas'
+              },
+              grid: {
+                color: 'rgba(0,0,0,0.05)'
+              }
+            }
+          },
+          plugins: {
+            legend: {
+              display: false
+            },
+            tooltip: {
+              mode: 'index',
+              intersect: false,
+              callbacks: {
+                label: function(context) {
+                  return label + ': €' + context.parsed.y.toFixed(0);
+                }
+              }
+            }
+          },
+          interaction: {
+            mode: 'nearest',
+            axis: 'x',
+            intersect: false
+          }
+        }
       });
     };
 
-    if (lowVolChartRef.current && !lowVolChart.current) {
-      lowVolChart.current = initChart(lowVolChartRef.current, 'Baja Volatilidad');
-    }
-    
-    if (highVolChartRef.current && !highVolChart.current) {
-      highVolChart.current = initChart(highVolChartRef.current, 'Alta Volatilidad');
-    }
-
-    const handleResize = () => {
-      if (lowVolChartRef.current && lowVolChart.current) {
-        const isMobile = window.innerWidth < 768;
-        lowVolChart.current.applyOptions({ 
-          width: lowVolChartRef.current.clientWidth,
-          height: isMobile ? 200 : 300
-        });
-      }
-      if (highVolChartRef.current && highVolChart.current) {
-        const isMobile = window.innerWidth < 768;
-        highVolChart.current.applyOptions({ 
-          width: highVolChartRef.current.clientWidth,
-          height: isMobile ? 200 : 300
-        });
-      }
+    const initCharts = () => {
+      // Pequeño delay para asegurar que los canvas estén disponibles en el DOM
+      setTimeout(() => {
+        if (window.Chart && lowVolChartRef.current && !lowVolChart.current) {
+          lowVolChart.current = initChart(lowVolChartRef.current, 'rgb(34, 197, 94)', 'Baja Volatilidad');
+        }
+        
+        if (window.Chart && highVolChartRef.current && !highVolChart.current) {
+          highVolChart.current = initChart(highVolChartRef.current, 'rgb(239, 68, 68)', 'Alta Volatilidad');
+        }
+      }, 100);
     };
 
-    window.addEventListener('resize', handleResize);
+    if (window.Chart) {
+      initCharts();
+    } else {
+      const script = document.createElement('script');
+      script.src = 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js';
+      script.onload = initCharts;
+      document.head.appendChild(script);
+    }
 
     return () => {
-      window.removeEventListener('resize', handleResize);
-      if (lowVolChart.current) lowVolChart.current.remove();
-      if (highVolChart.current) highVolChart.current.remove();
+      if (lowVolChart.current) {
+        lowVolChart.current.destroy();
+        lowVolChart.current = null;
+      }
+      if (highVolChart.current) {
+        highVolChart.current.destroy();
+        highVolChart.current = null;
+      }
     };
   }, []);
 
@@ -351,46 +405,23 @@ const VolatilityAnalyzer: React.FC = () => {
 
     setResults({ lowVolatility: lowVolResults, highVolatility: highVolResults });
 
-    // Actualizar gráficos
-    if (lowVolChart.current && highVolChart.current) {
-      // Limpiar gráficos existentes
-      lowVolChart.current.remove();
-      highVolChart.current.remove();
+    // Actualizar gráficos con Chart.js
+    if (lowVolChart.current && highVolChart.current && lowVolHistory.length > 0 && highVolHistory.length > 0) {
+      // Convertir datos para Chart.js
+      const lowLabels = lowVolHistory.map((point, index) => index === 0 ? 'Inicio' : `${point.time}`);
+      const lowData = lowVolHistory.map(point => point.value);
+      const highLabels = highVolHistory.map((point, index) => index === 0 ? 'Inicio' : `${point.time}`);
+      const highData = highVolHistory.map(point => point.value);
       
-      // Recrear gráficos
-      if (lowVolChartRef.current && highVolChartRef.current) {
-        lowVolChart.current = createChart(lowVolChartRef.current, {
-          layout: { background: { type: ColorType.Solid, color: '#ffffff' }, textColor: '#374151' },
-          width: lowVolChartRef.current.clientWidth,
-          height: window.innerWidth < 768 ? 200 : 300,
-          rightPriceScale: { borderColor: '#e5e7eb', textColor: '#6b7280' },
-          timeScale: { borderColor: '#e5e7eb', timeVisible: false, secondsVisible: false },
-          grid: { vertLines: { color: '#f3f4f6' }, horzLines: { color: '#f3f4f6' } },
-        });
-
-        highVolChart.current = createChart(highVolChartRef.current, {
-          layout: { background: { type: ColorType.Solid, color: '#ffffff' }, textColor: '#374151' },
-          width: highVolChartRef.current.clientWidth,
-          height: window.innerWidth < 768 ? 200 : 300,
-          rightPriceScale: { borderColor: '#e5e7eb', textColor: '#6b7280' },
-          timeScale: { borderColor: '#e5e7eb', timeVisible: false, secondsVisible: false },
-          grid: { vertLines: { color: '#f3f4f6' }, horzLines: { color: '#f3f4f6' } },
-        });
-
-        const lowSeries = lowVolChart.current.addLineSeries({
-          color: '#10b981',
-          lineWidth: 3,
-          priceFormat: { type: 'custom', formatter: (price: number) => `€${price.toFixed(0)}` },
-        });
-        lowSeries.setData(lowVolHistory);
-
-        const highSeries = highVolChart.current.addLineSeries({
-          color: '#ef4444',
-          lineWidth: 3,
-          priceFormat: { type: 'custom', formatter: (price: number) => `€${price.toFixed(0)}` },
-        });
-        highSeries.setData(highVolHistory);
-      }
+      // Actualizar gráfico de baja volatilidad
+      lowVolChart.current.data.labels = lowLabels;
+      lowVolChart.current.data.datasets[0].data = lowData;
+      lowVolChart.current.update();
+      
+      // Actualizar gráfico de alta volatilidad
+      highVolChart.current.data.labels = highLabels;
+      highVolChart.current.data.datasets[0].data = highData;
+      highVolChart.current.update();
     }
 
     setIsAnalyzing(false);
@@ -398,39 +429,19 @@ const VolatilityAnalyzer: React.FC = () => {
 
   const resetAnalysis = () => {
     setResults(null);
+    
+    // Reinicializar gráficos con datos iniciales
     if (lowVolChart.current) {
-      lowVolChart.current.remove();
-      lowVolChart.current = null;
-    }
-    if (highVolChart.current) {
-      highVolChart.current.remove();
-      highVolChart.current = null;
+      lowVolChart.current.data.labels = ['Inicio'];
+      lowVolChart.current.data.datasets[0].data = [initialBalance];
+      lowVolChart.current.update();
     }
     
-    // Reinicializar gráficos
-    setTimeout(() => {
-      if (lowVolChartRef.current) {
-        lowVolChart.current = createChart(lowVolChartRef.current, {
-          layout: { background: { type: ColorType.Solid, color: '#ffffff' }, textColor: '#374151' },
-          width: lowVolChartRef.current.clientWidth,
-          height: window.innerWidth < 768 ? 200 : 300,
-          rightPriceScale: { borderColor: '#e5e7eb', textColor: '#6b7280' },
-          timeScale: { borderColor: '#e5e7eb', timeVisible: false, secondsVisible: false },
-          grid: { vertLines: { color: '#f3f4f6' }, horzLines: { color: '#f3f4f6' } },
-        });
-      }
-      
-      if (highVolChartRef.current) {
-        highVolChart.current = createChart(highVolChartRef.current, {
-          layout: { background: { type: ColorType.Solid, color: '#ffffff' }, textColor: '#374151' },
-          width: highVolChartRef.current.clientWidth,
-          height: window.innerWidth < 768 ? 200 : 300,
-          rightPriceScale: { borderColor: '#e5e7eb', textColor: '#6b7280' },
-          timeScale: { borderColor: '#e5e7eb', timeVisible: false, secondsVisible: false },
-          grid: { vertLines: { color: '#f3f4f6' }, horzLines: { color: '#f3f4f6' } },
-        });
-      }
-    }, 100);
+    if (highVolChart.current) {
+      highVolChart.current.data.labels = ['Inicio'];
+      highVolChart.current.data.datasets[0].data = [initialBalance];
+      highVolChart.current.update();
+    }
   };
 
   return (
@@ -523,6 +534,36 @@ const VolatilityAnalyzer: React.FC = () => {
         </div>
       </div>
 
+      {/* Botones de acción - Justo después de los controles */}
+      <div className="flex flex-col sm:flex-row gap-4 mb-8">
+        <button
+          onClick={runAnalysis}
+          disabled={isAnalyzing}
+          className="flex items-center justify-center px-6 py-4 md:px-8 md:py-4 min-h-[48px] bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 disabled:from-gray-400 disabled:to-gray-500 text-white font-semibold rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl"
+        >
+          {isAnalyzing ? (
+            <>
+              <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
+              Analizando...
+            </>
+          ) : (
+            <>⚡ Analizar Volatilidad</>
+          )}
+        </button>
+
+        {results && (
+          <button
+            onClick={resetAnalysis}
+            className="px-6 py-4 min-h-[48px] bg-gray-500 hover:bg-gray-600 text-white font-semibold rounded-lg transition-colors duration-200"
+          >
+            🔄 Reiniciar
+          </button>
+        )}
+      </div>
+
       {/* Información clave sobre RTP */}
       <div className="mb-8 p-4 bg-blue-50 rounded-lg border-l-4 border-blue-400">
         <h4 className="text-lg font-semibold text-blue-800 mb-2">🎯 Concepto Clave</h4>
@@ -556,36 +597,6 @@ const VolatilityAnalyzer: React.FC = () => {
             <li>• <strong>Mismo RTP final</strong> que baja volatilidad</li>
           </ul>
         </div>
-      </div>
-
-      {/* Botones */}
-      <div className="flex gap-4 mb-8">
-        <button
-          onClick={runAnalysis}
-          disabled={isAnalyzing}
-          className="flex items-center px-6 py-4 md:px-8 md:py-4 min-h-[48px] bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 disabled:from-gray-400 disabled:to-gray-500 text-white font-semibold rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl"
-        >
-          {isAnalyzing ? (
-            <>
-              <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-              </svg>
-              Analizando...
-            </>
-          ) : (
-            <>⚡ Analizar Volatilidad</>
-          )}
-        </button>
-
-        {results && (
-          <button
-            onClick={resetAnalysis}
-            className="px-6 py-4 min-h-[48px] bg-gray-500 hover:bg-gray-600 text-white font-semibold rounded-lg transition-colors duration-200"
-          >
-            🔄 Reiniciar
-          </button>
-        )}
       </div>
 
       {/* Resultados */}
@@ -687,11 +698,23 @@ const VolatilityAnalyzer: React.FC = () => {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
               <div className="bg-green-50 p-4 rounded-lg">
                 <h4 className="text-lg font-bold text-green-800 mb-3 text-center">Baja Volatilidad - Más Predecible</h4>
-                <div ref={lowVolChartRef} className="w-full" />
+                <div className="h-64 relative">
+                  <canvas 
+                    ref={lowVolChartRef} 
+                    id="lowVolatilityChart"
+                    className="w-full h-full" 
+                  />
+                </div>
               </div>
               <div className="bg-red-50 p-4 rounded-lg">
                 <h4 className="text-lg font-bold text-red-800 mb-3 text-center">Alta Volatilidad - Más Salvaje</h4>
-                <div ref={highVolChartRef} className="w-full" />
+                <div className="h-64 relative">
+                  <canvas 
+                    ref={highVolChartRef} 
+                    id="highVolatilityChart"
+                    className="w-full h-full" 
+                  />
+                </div>
               </div>
             </div>
           </div>

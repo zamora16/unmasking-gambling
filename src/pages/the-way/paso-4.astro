@@ -1,6 +1,6 @@
 ---
 import MainLayout from '../../layouts/MainLayout.astro';
-import { getUrl } from '../../utils/links';
+import { getUrl, getExternalLink } from '../../utils/links';
 ---
 
 <MainLayout 
@@ -158,7 +158,7 @@ import { getUrl } from '../../utils/links';
                       <li>• No puedes cancelarlo hasta que expire el período</li>
                     </ul>
                   </div>
-                  <a href="https://www.autoexclusion.es" target="_blank" class="inline-flex items-center mt-4 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700">
+                  <a href={getExternalLink('spain', 'rgea')} target="_blank" class="inline-flex items-center mt-4 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700">
                     Acceder al RGEA
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
