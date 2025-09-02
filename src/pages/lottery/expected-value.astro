@@ -226,45 +226,145 @@ import MainLayout from '../../layouts/MainLayout.astro';
 
         <!-- Opportunity Cost Calculator -->
         <div class="bg-white rounded-xl shadow-lg p-8">
-          <h3 class="text-2xl font-bold text-gray-900 mb-6 text-center">🛍️ ¿Qué Podrías Comprar Instead?</h3>
+          <h3 class="text-2xl font-bold text-gray-900 mb-6 text-center">🛍️ ¿Qué Podrías Comprar En Su Lugar?</h3>
           
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div class="text-center p-4 bg-blue-50 rounded-lg">
-              <div class="text-4xl mb-2">🎮</div>
-              <div class="font-bold text-blue-800">PlayStation 5</div>
-              <div id="playstations" class="text-2xl font-bold text-blue-600">9.5</div>
-              <div class="text-sm text-gray-600">consolas</div>
-            </div>
-            
-            <div class="text-center p-4 bg-green-50 rounded-lg">
+          <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6 mb-8">
+            <div class="text-center p-4 bg-green-50 rounded-lg hover:bg-green-100 transition-colors">
               <div class="text-4xl mb-2">✈️</div>
               <div class="font-bold text-green-800">Viajes Europa</div>
-              <div id="trips" class="text-2xl font-bold text-green-600">6.4</div>
-              <div class="text-sm text-gray-600">viajes de una semana</div>
+              <div id="trips" class="text-2xl font-bold text-green-600">4.0</div>
+              <div class="text-sm text-gray-600">vacaciones completas</div>
             </div>
             
-            <div class="text-center p-4 bg-purple-50 rounded-lg">
-              <div class="text-4xl mb-2">🎓</div>
-              <div class="font-bold text-purple-800">Cursos Online</div>
-              <div id="courses" class="text-2xl font-bold text-purple-600">47.9</div>
-              <div class="text-sm text-gray-600">cursos profesionales</div>
+            <div class="text-center p-4 bg-indigo-50 rounded-lg hover:bg-indigo-100 transition-colors">
+              <div class="text-4xl mb-2">🍽️</div>
+              <div class="font-bold text-indigo-800">Cenas Fuera</div>
+              <div id="dinners" class="text-2xl font-bold text-indigo-600">100</div>
+              <div class="text-sm text-gray-600">restaurantes</div>
             </div>
             
-            <div class="text-center p-4 bg-orange-50 rounded-lg">
-              <div class="text-4xl mb-2">🍕</div>
-              <div class="font-bold text-orange-800">Pizzas</div>
-              <div id="pizzas" class="text-2xl font-bold text-orange-600">319</div>
-              <div class="text-sm text-gray-600">pizzas familiares</div>
+            <div class="text-center p-4 bg-teal-50 rounded-lg hover:bg-teal-100 transition-colors">
+              <div class="text-4xl mb-2">🏋️</div>
+              <div class="font-bold text-teal-800">Gimnasio</div>
+              <div id="gym" class="text-2xl font-bold text-teal-600">7.5</div>
+              <div class="text-sm text-gray-600">años completos</div>
+            </div>
+            
+            <div class="text-center p-4 bg-orange-50 rounded-lg hover:bg-orange-100 transition-colors">
+              <div class="text-4xl mb-2">☕</div>
+              <div class="font-bold text-orange-800">Cafés</div>
+              <div id="coffees" class="text-2xl font-bold text-orange-600">1200</div>
+              <div class="text-sm text-gray-600">cafeterías</div>
+            </div>
+            
+            <div class="text-center p-4 bg-cyan-50 rounded-lg hover:bg-cyan-100 transition-colors">
+              <div class="text-4xl mb-2">🎬</div>
+              <div class="font-bold text-cyan-800">Netflix</div>
+              <div id="netflix" class="text-2xl font-bold text-cyan-600">19</div>
+              <div class="text-sm text-gray-600">años completos</div>
             </div>
           </div>
           
-          <div class="mt-8 p-6 bg-yellow-100 rounded-lg text-center">
-            <h4 class="text-xl font-bold text-yellow-800 mb-2">💡 Reflexión</h4>
-            <p class="text-yellow-700">
-            En lugar de perder dinero en lotería, podrías haber disfrutado de todas estas cosas 
-            <strong>Y ADEMÁS</strong> seguir teniendo tu dinero ahorrado.
+          <!-- House down payment -->
+          <div class="bg-gradient-to-r from-amber-50 to-yellow-50 p-6 rounded-lg mb-6">
+            <div class="text-center">
+              <div class="text-4xl mb-2">🏡</div>
+              <div class="font-bold text-amber-800 text-lg">Entrada para Vivienda</div>
+              <div id="houseDown" class="text-2xl font-bold text-amber-600 mb-2">20%</div>
+              <div class="text-sm text-gray-600">de una entrada típica (€15,000)</div>
+            </div>
+          </div>
+          
+          <div class="p-6 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg text-center">
+            <h4 class="text-xl font-bold text-blue-800 mb-3">💡 La Realidad de los Números</h4>
+            <p class="text-blue-700 mb-3">
+            Con el dinero que <strong>pierdes estadísticamente</strong> en lotería, podrías disfrutar 
+            de experiencias reales y <strong>conservar tu dinero original</strong>.
+            </p>
+            <p class="text-blue-600 text-sm">
+            La diferencia fundamental: estos gastos te aportan valor tangible, 
+            mientras que la lotería te deja sistemáticamente con menos dinero.
             </p>
           </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How Calculations Work -->
+  <section class="py-20 bg-gray-50">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6">🧐 ¿Cómo Se Calculan Estas Diferencias?</h2>
+          <p class="text-xl text-gray-600">Entiende exactamente de dónde salen estos números</p>
+        </div>
+        
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+          <!-- Lottery Math -->
+          <div class="bg-white p-8 rounded-xl shadow-lg">
+            <h3 class="text-xl font-bold text-red-800 mb-4">🎲 Matemáticas de la Lotería</h3>
+            <div class="space-y-4">
+              <div class="flex justify-between items-center p-3 bg-red-50 rounded">
+                <span class="text-gray-700">Gastas por semana:</span>
+                <span class="font-bold text-red-800">€10</span>
+              </div>
+              <div class="flex justify-between items-center p-3 bg-red-50 rounded">
+                <span class="text-gray-700">En 10 años:</span>
+                <span class="font-bold text-red-800">€5,200</span>
+              </div>
+              <div class="flex justify-between items-center p-3 bg-red-100 rounded">
+                <span class="text-gray-700">RTP Lotería (50%):</span>
+                <span class="font-bold text-red-600">€2,600</span>
+              </div>
+              <div class="flex justify-between items-center p-3 bg-red-200 rounded border-2 border-red-300">
+                <span class="text-gray-700 font-bold">Pérdida garantizada:</span>
+                <span class="font-bold text-red-800 text-lg">-€2,600</span>
+              </div>
+            </div>
+            <p class="text-sm text-red-600 mt-4 italic">
+              * RTP = Return To Player. La lotería devuelve solo el 50% de lo recaudado en premios.
+            </p>
+          </div>
+
+          <!-- Saving Math -->
+          <div class="bg-white p-8 rounded-xl shadow-lg">
+            <h3 class="text-xl font-bold text-green-800 mb-4">💰 Matemáticas del Ahorro</h3>
+            <div class="space-y-4">
+              <div class="flex justify-between items-center p-3 bg-green-50 rounded">
+                <span class="text-gray-700">Ahorras por semana:</span>
+                <span class="font-bold text-green-800">€10</span>
+              </div>
+              <div class="flex justify-between items-center p-3 bg-green-50 rounded">
+                <span class="text-gray-700">En 10 años:</span>
+                <span class="font-bold text-green-800">€5,200</span>
+              </div>
+              <div class="flex justify-between items-center p-3 bg-green-100 rounded">
+                <span class="text-gray-700">Con interés (1.5%):</span>
+                <span class="font-bold text-green-600">€5,606</span>
+              </div>
+              <div class="flex justify-between items-center p-3 bg-green-200 rounded border-2 border-green-300">
+                <span class="text-gray-700 font-bold">Tienes al final:</span>
+                <span class="font-bold text-green-800 text-lg">€5,606</span>
+              </div>
+            </div>
+            <p class="text-sm text-green-600 mt-4 italic">
+              * Incluso sin interés (0%), tendrías €5,200 vs. €2,600 de la lotería.
+            </p>
+          </div>
+        </div>
+
+        <!-- The Key Difference -->
+        <div class="bg-gradient-to-r from-blue-100 to-purple-100 p-8 rounded-xl text-center mb-8">
+          <h3 class="text-2xl font-bold text-purple-800 mb-4">🔥 La Diferencia Clave</h3>
+          <div class="text-4xl font-bold text-purple-900 mb-2">€5,606 - €2,600 = €3,006</div>
+          <p class="text-lg text-purple-700 mb-4">
+            <strong>Esta diferencia de €3,006 es lo que "podrías comprar en su lugar"</strong>
+          </p>
+          <p class="text-purple-600">
+            No es dinero mágico - es simplemente el dinero que <strong>conservas</strong> 
+            al no jugar lotería más los pequeños intereses ganados ahorrando.
+          </p>
         </div>
       </div>
     </div>
@@ -468,32 +568,37 @@ import MainLayout from '../../layouts/MainLayout.astro';
 
   // Update opportunity cost calculations
   function updateOpportunityCost(difference) {
-    // Prices in euros (approximate)
+    // Updated prices in euros for 2025
     const prices = {
-      playstation: 500,
       trip: 750,
-      course: 100,
-      pizza: 15
+      dinner: 30,
+      gym: 400, // annual
+      coffee: 2.50,
+      netflix: 156, // annual (13€/month)
+      houseDown: 15000 // typical down payment
     };
     
-    document.getElementById('playstations').textContent = (difference / prices.playstation).toFixed(1);
+    // Calculate products
     document.getElementById('trips').textContent = (difference / prices.trip).toFixed(1);
-    document.getElementById('courses').textContent = (difference / prices.course).toFixed(1);
-    document.getElementById('pizzas').textContent = Math.round(difference / prices.pizza);
+    document.getElementById('dinners').textContent = Math.round(difference / prices.dinner);
+    document.getElementById('gym').textContent = (difference / prices.gym).toFixed(1);
+    document.getElementById('coffees').textContent = Math.round(difference / prices.coffee);
+    document.getElementById('netflix').textContent = (difference / prices.netflix).toFixed(0);
+    document.getElementById('houseDown').textContent = Math.round((difference / prices.houseDown) * 100) + '%';
     
-    // House down payment equivalent
-    if (difference >= 20000) {
+    // House down payment equivalent (for the main comparison section)
+    if (difference >= 15000) {
       document.getElementById('houseEquivalent').textContent = 'Entrada para casa';
-    } else if (difference >= 10000) {
-      document.getElementById('houseEquivalent').textContent = 'Coche usado';
-    } else if (difference >= 2000) {
-      document.getElementById('houseEquivalent').textContent = 'Curso universitario';
+    } else if (difference >= 3000) {
+      document.getElementById('houseEquivalent').textContent = 'Vacaciones múltiples';
+    } else if (difference >= 1500) {
+      document.getElementById('houseEquivalent').textContent = 'Viajes por Europa';
     } else {
-      document.getElementById('houseEquivalent').textContent = 'Ordenador nuevo';
+      document.getElementById('houseEquivalent').textContent = 'Experiencias únicas';
     }
     
     // Time equivalent
-    const salaryPerWeek = 400; // Average weekly salary
+    const salaryPerWeek = 450; // Updated average weekly salary for 2025
     const weeksWorking = Math.round(difference / salaryPerWeek);
     document.getElementById('timeLost').textContent = `${weeksWorking} semanas trabajando`;
   }

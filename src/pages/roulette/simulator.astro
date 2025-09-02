@@ -3,29 +3,88 @@ import MainLayout from '../../layouts/MainLayout.astro';
 ---
 
 <MainLayout 
-  title="Simulador de Ruleta" 
-  description="Simula apuestas en ruleta europea y americana. Descubre por qué la ventaja de la casa es matemáticamente inevitable."
+  title="¿Tiene Memoria la Ruleta?" 
+  description="Experimenta con patrones y rachas en la ruleta. Descubre por qué los resultados pasados no pueden predecir los futuros."
 >
   
   <!-- Hero Section -->
-  <section class="bg-gradient-to-br from-red-600 via-black to-red-800 text-white py-12">
+  <section class="bg-gradient-to-br from-purple-600 via-indigo-700 to-purple-800 text-white py-12">
     <div class="container mx-auto px-4 text-center">
       <div class="max-w-4xl mx-auto">
         <h1 class="text-3xl md:text-5xl font-bold mb-4">
-          🎲 Simulador de Ruleta
+          🧠 ¿Tiene Memoria la Ruleta?
         </h1>
-        <p class="text-lg md:text-xl mb-6 text-red-100">
-          Experimenta con diferentes estrategias y descubre 
-          <span class="text-yellow-300 font-semibold">por qué las matemáticas siempre ganan</span>
+        <p class="text-lg md:text-xl mb-6 text-purple-100">
+          Investiga patrones y rachas para descubrir 
+          <span class="text-yellow-300 font-semibold">por qué cada giro es completamente independiente</span>
         </p>
+        <div class="bg-white/10 backdrop-blur-sm rounded-lg p-4 max-w-2xl mx-auto">
+          <p class="text-purple-100">
+            🔬 <strong>Experimento científico:</strong> La falacia del jugador al descubierto
+          </p>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Main Simulator -->
+  <!-- Main Experiment -->
   <section class="py-12 bg-gray-50">
     <div class="container mx-auto px-4">
       
+      <!-- Explanation of What the Simulator Does -->
+      <div class="max-w-4xl mx-auto mb-12">
+        <div class="bg-white rounded-lg shadow-lg p-8">
+          <h2 class="text-2xl font-bold text-center text-gray-900 mb-6">🤖 ¿Qué hace este simulador?</h2>
+          
+          <div class="bg-yellow-50 border-l-4 border-yellow-400 p-6 mb-6">
+            <h3 class="text-lg font-bold text-yellow-800 mb-3">⚠️ Atención: Este simulador IMITA el pensamiento erróneo</h3>
+            <p class="text-yellow-700 mb-3">
+              Nuestro simulador actuará como un jugador que cree en patrones y tratará de predecir 
+              el próximo resultado basándose en los anteriores. <strong>Esto es exactamente lo que NO debes hacer.</strong>
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="bg-red-50 border border-red-200 rounded-lg p-6">
+              <h4 class="font-bold text-red-800 mb-3">❌ Predicciones que verás (ERRÓNEAS)</h4>
+              <ul class="text-red-700 space-y-2 text-sm">
+                <li><strong>"Después de 3 rojos, es más probable negro"</strong><br>
+                <span class="text-xs text-red-600">Pensamiento: Las rachas deben romperse</span></li>
+                <li><strong>"Hay más rojos recientemente, debe equilibrarse"</strong><br>
+                <span class="text-xs text-red-600">Pensamiento: Los colores se "compensan"</span></li>
+                <li><strong>"Después de 5 negros seguidos, es más probable rojo"</strong><br>
+                <span class="text-xs text-red-600">Pensamiento: La ruleta "debe" alternar</span></li>
+                <li><strong>"El patrón sugiere que viene negro"</strong><br>
+                <span class="text-xs text-red-600">Pensamiento: Los resultados siguen patrones</span></li>
+              </ul>
+            </div>
+            
+            <div class="bg-green-50 border border-green-200 rounded-lg p-6">
+              <h4 class="font-bold text-green-800 mb-3">✅ La realidad matemática</h4>
+              <ul class="text-green-700 space-y-2 text-sm">
+                <li><strong>Cada giro es independiente</strong><br>
+                <span class="text-xs text-green-600">Probabilidad fija: 48.65% rojo, 48.65% negro</span></li>
+                <li><strong>No hay "equilibrio cósmico"</strong><br>
+                <span class="text-xs text-green-600">Los resultados pasados no afectan los futuros</span></li>
+                <li><strong>Las rachas son completamente normales</strong><br>
+                <span class="text-xs text-green-600">En secuencias aleatorias aparecen rachas largas</span></li>
+                <li><strong>No existen patrones predecibles</strong><br>
+                <span class="text-xs text-green-600">Solo existe aleatoriedad pura</span></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="mt-6 bg-blue-50 border border-blue-200 rounded-lg p-6 text-center">
+            <h4 class="font-bold text-blue-800 mb-2">🎯 Objetivo del Experimento</h4>
+            <p class="text-blue-700 text-sm">
+              Verás cómo el simulador falla constantemente en sus predicciones "lógicas". 
+              Esto demuestra que <strong>la falacia del jugador arruina a millones de personas</strong> 
+              que creen poder predecir lo impredecible.
+            </p>
+          </div>
+        </div>
+      </div>
+
       <!-- Roulette Type Selector -->
       <div class="max-w-6xl mx-auto mb-8">
         <div class="bg-white rounded-lg shadow-lg p-6">
@@ -33,11 +92,11 @@ import MainLayout from '../../layouts/MainLayout.astro';
           <div class="flex flex-col sm:flex-row justify-center gap-4">
             <button id="europeanBtn" class="flex-1 max-w-xs mx-auto bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-200 active-roulette">
               🇪🇺 Europea (37 números)
-              <div class="text-sm opacity-90">Ventaja casa: 2.7%</div>
+              <div class="text-sm opacity-90">Cero: 0</div>
             </button>
             <button id="americanBtn" class="flex-1 max-w-xs mx-auto bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-200">
               🇺🇸 Americana (38 números)
-              <div class="text-sm opacity-90">Ventaja casa: 5.26%</div>
+              <div class="text-sm opacity-90">Ceros: 0, 00</div>
             </button>
           </div>
         </div>
@@ -52,7 +111,7 @@ import MainLayout from '../../layouts/MainLayout.astro';
             <!-- Roulette Wheel -->
             <div class="text-center mb-8">
               <div class="bg-white rounded-lg p-6 border-4 border-gray-800">
-                <h4 class="text-lg font-bold text-gray-900 mb-4">🎲 Ruleta en Movimiento</h4>
+                <h4 class="text-lg font-bold text-gray-900 mb-4">🎲 Laboratorio de Independencia</h4>
                 
                 <!-- Roulette Strip Container -->
                 <div class="relative h-20 bg-gradient-to-r from-gray-700 via-gray-800 to-gray-700 rounded-lg overflow-hidden border-4 border-gray-800 mx-auto">
@@ -73,196 +132,161 @@ import MainLayout from '../../layouts/MainLayout.astro';
                 <!-- Result Display -->
                 <div class="mt-6">
                   <div id="lastResult" class="text-3xl font-bold text-gray-800 mb-2">-</div>
-                  <div id="lastResultColor" class="text-lg text-gray-600">Gira la ruleta</div>
+                  <div id="lastResultColor" class="text-lg text-gray-600">Gira para comenzar el experimento</div>
+                </div>
+
+                <!-- Pattern Prediction -->
+                <div id="predictionBox" class="mt-4 p-4 bg-yellow-50 border-2 border-yellow-200 rounded-lg hidden">
+                  <h5 class="font-bold text-yellow-800 mb-2">🔮 Predicción Basada en Patrones</h5>
+                  <p id="predictionText" class="text-yellow-700 text-sm mb-2">
+                    Después de 4 rojos seguidos, el próximo DEBE ser negro...
+                  </p>
+                  <div id="predictionResult" class="font-bold text-lg">
+                    <!-- Prediction result will appear here -->
+                  </div>
                 </div>
               </div>
             </div>
 
-            <!-- Betting Options -->
-            <div class="mb-6">
-              <h3 class="text-xl font-bold text-gray-900 mb-4">Opciones de Apuesta</h3>
-              <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
-                <button class="bet-option bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-4 rounded-lg transition-all duration-200" data-bet="red" data-payout="1">
-                  🔴 Rojo
-                  <div class="text-sm opacity-90">Paga 1:1</div>
-                </button>
-                <button class="bet-option bg-gray-800 hover:bg-gray-900 text-white font-bold py-3 px-4 rounded-lg transition-all duration-200" data-bet="black" data-payout="1">
-                  ⚫ Negro
-                  <div class="text-sm opacity-90">Paga 1:1</div>
-                </button>
-                <button class="bet-option bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-4 rounded-lg transition-all duration-200" data-bet="even" data-payout="1">
-                  🔢 Par
-                  <div class="text-sm opacity-90">Paga 1:1</div>
-                </button>
-                <button class="bet-option bg-purple-500 hover:bg-purple-600 text-white font-bold py-3 px-4 rounded-lg transition-all duration-200" data-bet="odd" data-payout="1">
-                  🎯 Impar
-                  <div class="text-sm opacity-90">Paga 1:1</div>
-                </button>
-                <button class="bet-option bg-yellow-600 hover:bg-yellow-700 text-white font-bold py-3 px-4 rounded-lg transition-all duration-200" data-bet="1-18" data-payout="1">
-                  📉 1-18
-                  <div class="text-sm opacity-90">Paga 1:1</div>
-                </button>
-                <button class="bet-option bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 px-4 rounded-lg transition-all duration-200" data-bet="19-36" data-payout="1">
-                  📈 19-36
-                  <div class="text-sm opacity-90">Paga 1:1</div>
-                </button>
-                <button class="bet-option bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-3 px-4 rounded-lg transition-all duration-200" data-bet="dozen1" data-payout="2">
-                  1️⃣ 1ra Docena
-                  <div class="text-sm opacity-90">Paga 2:1</div>
-                </button>
-                <button class="bet-option bg-teal-500 hover:bg-teal-600 text-white font-bold py-3 px-4 rounded-lg transition-all duration-200" data-bet="dozen2" data-payout="2">
-                  2️⃣ 2da Docena
-                  <div class="text-sm opacity-90">Paga 2:1</div>
-                </button>
-              </div>
-            </div>
-
-            <!-- Bet Amount and Controls -->
+            <!-- Controls -->
             <div class="flex flex-col sm:flex-row items-center gap-4 mb-6">
-              <div class="flex items-center gap-2">
-                <label class="text-gray-700 font-medium">Apuesta:</label>
-                <input id="betAmount" type="number" value="10" min="1" max="1000" class="w-20 px-3 py-2 border border-gray-300 rounded-lg">
-                <span class="text-gray-600">€</span>
-              </div>
-              <button id="spinBtn" class="bg-gradient-to-r from-red-600 to-red-800 hover:from-red-700 hover:to-red-900 text-white font-bold py-3 px-8 rounded-lg transition-all duration-200 transform hover:scale-105">
+              <button id="spinBtn" class="bg-gradient-to-r from-purple-600 to-indigo-700 hover:from-purple-700 hover:to-indigo-800 text-white font-bold py-3 px-8 rounded-lg transition-all duration-200 transform hover:scale-105">
                 🎰 GIRAR
               </button>
-              <button id="resetBtn" class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-lg transition-all duration-200">
+              <button id="spin50Btn" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-200">
+                ⚡ 50 Giros Rápidos
+              </button>
+              <button id="analyzeBtn" class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-200">
+                🔍 Analizar Patrones
+              </button>
+              <button id="resetBtn" class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-4 rounded-lg transition-all duration-200">
                 🔄 Reset
               </button>
             </div>
 
-            <!-- Auto Play -->
-            <div class="border-t pt-6">
-              <h3 class="text-lg font-bold text-gray-900 mb-3">Simulación Automática</h3>
-              <div class="flex flex-col sm:flex-row items-center gap-4">
-                <div class="flex items-center gap-2">
-                  <label class="text-gray-700">Giros:</label>
-                  <select id="autoSpins" class="px-3 py-2 border border-gray-300 rounded-lg">
-                    <option value="10">10</option>
-                    <option value="50">50</option>
-                    <option value="100">100</option>
-                    <option value="500">500</option>
-                    <option value="1000">1000</option>
-                  </select>
-                </div>
-                <button id="autoPlayBtn" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-lg transition-all duration-200">
-                  ⚡ Auto Play
-                </button>
-                <button id="stopAutoBtn" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-6 rounded-lg transition-all duration-200 hidden">
-                  ⏹️ Parar
-                </button>
+            <!-- Pattern Analysis Results -->
+            <div id="analysisResults" class="border-t pt-6 hidden">
+              <h3 class="text-lg font-bold text-gray-900 mb-3">🔬 Resultados del Análisis</h3>
+              <div id="analysisContent" class="bg-gray-50 rounded-lg p-4">
+                <!-- Analysis results will appear here -->
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Stats and Results -->
+        <!-- Pattern Tracking -->
         <div class="space-y-6">
           
-          <!-- Current Balance -->
+          <!-- Recent Results History -->
           <div class="bg-white rounded-lg shadow-lg p-6">
-            <h3 class="text-xl font-bold text-gray-900 mb-4">💰 Balance</h3>
+            <h3 class="text-xl font-bold text-gray-900 mb-4">📜 Historial Reciente</h3>
+            <div class="mb-4">
+              <h4 class="font-medium text-gray-700 mb-2">Últimos 20 resultados:</h4>
+              <div id="recentHistory" class="flex flex-wrap gap-2">
+                <span class="text-gray-400">Esperando resultados...</span>
+              </div>
+            </div>
+            <div class="text-sm text-gray-600">
+              <p><span class="text-red-600">●</span> Rojo • <span class="text-gray-800">●</span> Negro • <span class="text-green-600">●</span> Verde</p>
+            </div>
+          </div>
+
+          <!-- Streak Counter -->
+          <div class="bg-white rounded-lg shadow-lg p-6">
+            <h3 class="text-xl font-bold text-gray-900 mb-4">🔥 Contador de Rachas</h3>
             <div class="space-y-3">
-              <div class="flex justify-between">
-                <span class="text-gray-600">Balance inicial:</span>
-                <span class="font-bold">€<span id="initialBalance">1000</span></span>
+              <div class="flex justify-between items-center">
+                <span class="text-gray-600">Racha actual:</span>
+                <span id="currentStreak" class="font-bold text-lg">-</span>
               </div>
-              <div class="flex justify-between">
-                <span class="text-gray-600">Balance actual:</span>
-                <span id="currentBalance" class="font-bold text-lg">€1000</span>
+              <div class="flex justify-between items-center">
+                <span class="text-gray-600">Racha más larga (rojo):</span>
+                <span id="longestRedStreak" class="font-bold text-red-600">0</span>
               </div>
-              <div class="flex justify-between">
-                <span class="text-gray-600">Ganancia/Pérdida:</span>
-                <span id="totalPnL" class="font-bold text-lg">€0</span>
+              <div class="flex justify-between items-center">
+                <span class="text-gray-600">Racha más larga (negro):</span>
+                <span id="longestBlackStreak" class="font-bold text-gray-800">0</span>
               </div>
               <div class="border-t pt-2">
-                <div class="flex justify-between">
-                  <span class="text-gray-600">% Change:</span>
-                  <span id="percentChange" class="font-bold">0%</span>
+                <div class="flex justify-between items-center">
+                  <span class="text-gray-600">Total giros:</span>
+                  <span id="totalSpins" class="font-bold">0</span>
                 </div>
               </div>
             </div>
           </div>
 
-          <!-- Statistics -->
+          <!-- Independence Test -->
           <div class="bg-white rounded-lg shadow-lg p-6">
-            <h3 class="text-xl font-bold text-gray-900 mb-4">📊 Estadísticas</h3>
-            <div class="space-y-2 text-sm">
-              <div class="flex justify-between">
-                <span class="text-gray-600">Giros totales:</span>
-                <span id="totalSpins" class="font-medium">0</span>
-              </div>
-              <div class="flex justify-between">
-                <span class="text-gray-600">Giros ganados:</span>
-                <span id="winsCount" class="font-medium text-green-600">0</span>
-              </div>
-              <div class="flex justify-between">
-                <span class="text-gray-600">Giros perdidos:</span>
-                <span id="lossesCount" class="font-medium text-red-600">0</span>
-              </div>
-              <div class="flex justify-between">
-                <span class="text-gray-600">% Aciertos:</span>
-                <span id="winRate" class="font-medium">0%</span>
-              </div>
-              <div class="flex justify-between">
-                <span class="text-gray-600">Apuesta total:</span>
-                <span id="totalBet" class="font-medium">€0</span>
-              </div>
-              <div class="flex justify-between">
-                <span class="text-gray-600">Retorno total:</span>
-                <span id="totalReturn" class="font-medium">€0</span>
-              </div>
-              <div class="flex justify-between border-t pt-2">
-                <span class="text-gray-600">RTP Real:</span>
-                <span id="actualRTP" class="font-medium">0%</span>
-              </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-4">🧪 Test de Independencia</h3>
+            <div id="independenceTest" class="space-y-2 text-sm">
+              <p class="text-gray-500">Gira al menos 50 veces para ver el análisis</p>
             </div>
           </div>
 
-          <!-- Recent Results -->
-          <div class="bg-white rounded-lg shadow-lg p-6">
-            <h3 class="text-xl font-bold text-gray-900 mb-4">🎯 Últimos Resultados</h3>
-            <div id="recentResults" class="space-y-2 max-h-40 overflow-y-auto">
-              <p class="text-gray-500 text-center">No hay resultados aún</p>
-            </div>
-          </div>
-
-          <!-- House Edge Reminder -->
+          <!-- Gambler's Fallacy Counter -->
           <div class="bg-red-50 border border-red-200 rounded-lg p-4">
-            <h4 class="font-bold text-red-800 mb-2">⚠️ Ventaja de la Casa</h4>
-            <p class="text-red-700 text-sm" id="houseEdgeInfo">
-              Ruleta Europea: 2.7% - El casino gana €2.7 por cada €100 apostados a largo plazo.
-            </p>
+            <h4 class="font-bold text-red-800 mb-2">🚨 Detector de Falacia</h4>
+            <div id="fallacyDetector" class="space-y-2 text-sm">
+              <div class="flex justify-between">
+                <span class="text-red-700">Predicciones fallidas:</span>
+                <span id="wrongPredictions" class="font-bold text-red-600">0</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-red-700">% Error en predicciones:</span>
+                <span id="predictionErrorRate" class="font-bold text-red-600">-%</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Educational Info -->
+  <!-- Educational Content -->
   <section class="py-12 bg-white">
     <div class="container mx-auto px-4">
-      <div class="max-w-4xl mx-auto">
-        <h2 class="text-3xl font-bold text-center text-gray-900 mb-8">🧠 Lo Que Debes Entender</h2>
+      <div class="max-w-6xl mx-auto">
+        <h2 class="text-3xl font-bold text-center text-gray-900 mb-8">📚 Ejemplos Reales de la Falacia</h2>
+        
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div class="bg-blue-50 border-l-4 border-blue-400 p-6 rounded">
-            <h3 class="text-xl font-bold text-blue-800 mb-3">🎯 Probabilidades Reales</h3>
-            <ul class="text-blue-700 space-y-2 text-sm">
-              <li><strong>Rojo/Negro:</strong> 48.6% (europea) / 47.4% (americana)</li>
-              <li><strong>Número específico:</strong> 2.7% (europea) / 2.6% (americana)</li>
-              <li><strong>Docena:</strong> 32.4% (europea) / 31.6% (americana)</li>
-              <li><strong>Par/Impar:</strong> 48.6% (europea) / 47.4% (americana)</li>
-            </ul>
+          <div class="bg-white rounded-lg shadow p-6">
+            <h4 class="font-bold text-gray-900 mb-3">🎰 Casino de Monte Carlo (1913)</h4>
+            <p class="text-gray-700 text-sm mb-3">
+              El negro salió 26 veces seguidas. Los jugadores perdieron millones apostando al rojo, 
+              convencidos de que "debía salir". Al final de la noche, seguía siendo 48.65% para ambos.
+            </p>
+            <div class="bg-red-100 border border-red-200 rounded p-2">
+              <p class="text-red-600 text-xs font-bold">
+                Resultado: Millones perdidos por no entender la independencia estadística
+              </p>
+            </div>
           </div>
-          <div class="bg-red-50 border-l-4 border-red-400 p-6 rounded">
-            <h3 class="text-xl font-bold text-red-800 mb-3">⚠️ Mitos Peligrosos</h3>
-            <ul class="text-red-700 space-y-2 text-sm">
-              <li><strong>❌ "Los números tienen memoria"</strong> - Cada giro es independiente</li>
-              <li><strong>❌ "Sistemas como Martingala funcionan"</strong> - Llevan a la ruina</li>
-              <li><strong>❌ "Puedo predecir patrones"</strong> - Es matemáticamente imposible</li>
-              <li><strong>❌ "El casino trucó mi mesa"</strong> - Las matemáticas ya los favorecen</li>
-            </ul>
+
+          <div class="bg-white rounded-lg shadow p-6">
+            <h4 class="font-bold text-gray-900 mb-3">📊 Experimento con Monedas</h4>
+            <p class="text-gray-700 text-sm mb-3">
+              Si lanzas una moneda justa 1000 veces y salen 60% caras, el siguiente lanzamiento 
+              sigue siendo exactamente 50% probabilidad para cada lado. La moneda no "debe" compensar.
+            </p>
+            <div class="bg-blue-100 border border-blue-200 rounded p-2">
+              <p class="text-blue-600 text-xs font-bold">
+                Lección: Los eventos pasados no alteran probabilidades futuras
+              </p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="mt-8 bg-red-50 border border-red-200 rounded-lg p-6 text-center">
+          <h3 class="text-xl font-bold text-red-800 mb-3">🚨 Conclusión Final</h3>
+          <p class="text-red-700 mb-3">
+            La falacia del jugador ha arruinado más fortunas que cualquier sistema de apuestas. 
+            <strong>Cada giro es independiente, sin memoria del pasado.</strong>
+          </p>
+          <div class="bg-white rounded p-3 inline-block">
+            <p id="finalProbabilities" class="text-red-800 font-bold text-lg">
+              Probabilidad fija siempre: 48.65% rojo • 48.65% negro • 2.7% verde
+            </p>
           </div>
         </div>
       </div>
@@ -272,21 +296,15 @@ import MainLayout from '../../layouts/MainLayout.astro';
 </MainLayout>
 
 <script>
-class RouletteSimulator {
+class RouletteMemoryExperiment {
   constructor() {
     this.isEuropean = true;
-    this.currentBet = null;
-    this.betAmount = 10;
-    this.balance = 1000;
-    this.initialBalance = 1000;
+    this.results = [];
+    this.predictions = [];
+    this.wrongPredictions = 0;
+    this.currentStreak = { type: null, count: 0 };
+    this.longestStreaks = { red: 0, black: 0 };
     this.totalSpins = 0;
-    this.wins = 0;
-    this.losses = 0;
-    this.totalBet = 0;
-    this.totalReturn = 0;
-    this.recentResults = [];
-    this.isAutoPlaying = false;
-    this.autoPlayInterval = null;
     
     this.initializeElements();
     this.createWheel();
@@ -301,25 +319,23 @@ class RouletteSimulator {
       rouletteWheel: document.getElementById('rouletteStrip'),
       lastResult: document.getElementById('lastResult'),
       lastResultColor: document.getElementById('lastResultColor'),
-      betAmount: document.getElementById('betAmount'),
       spinBtn: document.getElementById('spinBtn'),
+      spin50Btn: document.getElementById('spin50Btn'),
+      analyzeBtn: document.getElementById('analyzeBtn'),
       resetBtn: document.getElementById('resetBtn'),
-      autoSpins: document.getElementById('autoSpins'),
-      autoPlayBtn: document.getElementById('autoPlayBtn'),
-      stopAutoBtn: document.getElementById('stopAutoBtn'),
-      betOptions: document.querySelectorAll('.bet-option'),
-      currentBalance: document.getElementById('currentBalance'),
-      totalPnL: document.getElementById('totalPnL'),
-      percentChange: document.getElementById('percentChange'),
+      predictionBox: document.getElementById('predictionBox'),
+      predictionText: document.getElementById('predictionText'),
+      predictionResult: document.getElementById('predictionResult'),
+      recentHistory: document.getElementById('recentHistory'),
+      currentStreak: document.getElementById('currentStreak'),
+      longestRedStreak: document.getElementById('longestRedStreak'),
+      longestBlackStreak: document.getElementById('longestBlackStreak'),
       totalSpins: document.getElementById('totalSpins'),
-      winsCount: document.getElementById('winsCount'),
-      lossesCount: document.getElementById('lossesCount'),
-      winRate: document.getElementById('winRate'),
-      totalBet: document.getElementById('totalBet'),
-      totalReturn: document.getElementById('totalReturn'),
-      actualRTP: document.getElementById('actualRTP'),
-      recentResults: document.getElementById('recentResults'),
-      houseEdgeInfo: document.getElementById('houseEdgeInfo')
+      independenceTest: document.getElementById('independenceTest'),
+      wrongPredictions: document.getElementById('wrongPredictions'),
+      predictionErrorRate: document.getElementById('predictionErrorRate'),
+      analysisResults: document.getElementById('analysisResults'),
+      analysisContent: document.getElementById('analysisContent')
     };
   }
 
@@ -327,20 +343,14 @@ class RouletteSimulator {
     this.elements.europeanBtn.addEventListener('click', () => this.setRouletteType(true));
     this.elements.americanBtn.addEventListener('click', () => this.setRouletteType(false));
     this.elements.spinBtn.addEventListener('click', () => this.spin());
+    this.elements.spin50Btn.addEventListener('click', () => this.spin50());
+    this.elements.analyzeBtn.addEventListener('click', () => this.analyzePatterns());
     this.elements.resetBtn.addEventListener('click', () => this.reset());
-    this.elements.autoPlayBtn.addEventListener('click', () => this.startAutoPlay());
-    this.elements.stopAutoBtn.addEventListener('click', () => this.stopAutoPlay());
-    this.elements.betAmount.addEventListener('input', (e) => this.betAmount = parseInt(e.target.value) || 10);
-    
-    this.elements.betOptions.forEach(btn => {
-      btn.addEventListener('click', () => this.selectBet(btn));
-    });
   }
 
   setRouletteType(isEuropean) {
     this.isEuropean = isEuropean;
     
-    // Update button styles
     if (isEuropean) {
       this.elements.europeanBtn.classList.add('active-roulette');
       this.elements.americanBtn.classList.remove('active-roulette');
@@ -349,58 +359,48 @@ class RouletteSimulator {
       this.elements.europeanBtn.classList.remove('active-roulette');
     }
     
-    // Update house edge info
-    const houseEdge = isEuropean ? '2.7%' : '5.26%';
-    const type = isEuropean ? 'Europea' : 'Americana';
-    this.elements.houseEdgeInfo.textContent = `Ruleta ${type}: ${houseEdge} - El casino gana €${isEuropean ? '2.7' : '5.26'} por cada €100 apostados a largo plazo.`;
+    // Update final probabilities text
+    const finalProbText = document.getElementById('finalProbabilities');
+    if (finalProbText) {
+      if (isEuropean) {
+        finalProbText.textContent = 'Probabilidad fija siempre: 48.65% rojo • 48.65% negro • 2.7% verde';
+      } else {
+        finalProbText.textContent = 'Probabilidad fija siempre: 47.37% rojo • 47.37% negro • 5.26% verde';
+      }
+    }
     
     this.createWheel();
-  }
-
-  selectBet(button) {
-    // Remove active class from all buttons
-    this.elements.betOptions.forEach(btn => btn.classList.remove('active-bet'));
-    
-    // Add active class to selected button
-    button.classList.add('active-bet');
-    
-    this.currentBet = {
-      type: button.dataset.bet,
-      payout: parseInt(button.dataset.payout)
-    };
+    this.reset();
   }
 
   createWheel() {
     const strip = document.getElementById('rouletteStrip');
     strip.innerHTML = '';
     
-    // European roulette wheel order (standard)
     this.numbers = this.isEuropean ? 
       [0, 32, 15, 19, 4, 21, 2, 25, 17, 34, 6, 27, 13, 36, 11, 30, 8, 23, 10, 5, 24, 16, 33, 1, 20, 14, 31, 9, 22, 18, 29, 7, 28, 12, 35, 3, 26] :
       [0, 28, 9, 26, 30, 11, 7, 20, 32, 17, 5, 22, 34, 15, 3, 24, 36, 13, 1, 37, 27, 10, 25, 29, 12, 8, 19, 31, 18, 6, 21, 33, 16, 4, 23, 35, 14, 2];
     
-    // Create enough repetitions for smooth scrolling
-    const repetitions = 8; // More repetitions for better scrolling
+    const repetitions = 8;
     const allNumbers = [];
     for (let i = 0; i < repetitions; i++) {
       allNumbers.push(...this.numbers);
     }
     
-    this.segmentWidth = 80; // Width of each number segment
+    this.segmentWidth = 80;
     
-    allNumbers.forEach((number, index) => {
+    allNumbers.forEach((number) => {
       const segment = document.createElement('div');
       segment.className = 'flex-shrink-0 flex items-center justify-center border-r border-white font-bold text-white text-xl';
       segment.style.width = this.segmentWidth + 'px';
       segment.style.height = '64px';
       
-      // Set background color
       let bgColor;
       if (number === 0 || number === 37) {
-        bgColor = '#059669'; // green
+        bgColor = '#059669';
       } else {
         const redNumbers = [1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36];
-        bgColor = redNumbers.includes(number) ? '#dc2626' : '#1f2937'; // red or black
+        bgColor = redNumbers.includes(number) ? '#dc2626' : '#1f2937';
       }
       
       segment.style.backgroundColor = bgColor;
@@ -409,276 +409,426 @@ class RouletteSimulator {
       strip.appendChild(segment);
     });
     
-    // Store calculation variables
     this.totalSegments = allNumbers.length;
     this.originalNumbersLength = this.numbers.length;
     
-    // Reset position to start
     strip.style.transform = 'translateX(0px)';
   }
 
   spin() {
-    if (!this.currentBet) {
-      alert('Por favor, selecciona una apuesta primero');
-      return;
-    }
-    
-    if (this.betAmount > this.balance) {
-      alert('No tienes suficiente balance para esta apuesta');
-      return;
-    }
-    
-    // Disable spin button during animation
     this.elements.spinBtn.disabled = true;
     
-    // Generate random result
     const maxNumber = this.isEuropean ? 36 : 37;
     const result = Math.floor(Math.random() * (maxNumber + 1));
     const displayResult = result === 37 ? '00' : result;
     
-    // Find the index of the result in our numbers array
-    const resultIndex = this.numbers.indexOf(result);
+    // Make prediction before spin result
+    const prediction = this.makePrediction();
     
-    // Use a repetition in the middle of our strip (repetition 4 out of 8)
+    // Animate wheel
+    const resultIndex = this.numbers.indexOf(result);
     const targetRepetition = 4;
     const targetSegmentIndex = targetRepetition * this.originalNumbersLength + resultIndex;
-    
-    // Calculate the position to center this segment
     const container = document.getElementById('rouletteStrip').parentElement;
     const containerWidth = container.clientWidth;
     const targetPosition = targetSegmentIndex * this.segmentWidth;
     const centerOffset = containerWidth / 2 - this.segmentWidth / 2;
-    
-    // Add extra scrolling distance for the animation effect
-    const extraDistance = this.originalNumbersLength * this.segmentWidth * 3; // 3 extra full cycles
-    
-    // Calculate final position (negative because we're moving left)
+    const extraDistance = this.originalNumbersLength * this.segmentWidth * 3;
     const finalPosition = -(targetPosition - centerOffset + extraDistance);
     
-    // Apply the animation
     const strip = document.getElementById('rouletteStrip');
     strip.style.transform = `translateX(${finalPosition}px)`;
     
-    // Process result after animation
     setTimeout(() => {
-      this.processResult(result, displayResult);
+      this.processResult(result, displayResult, prediction);
       this.elements.spinBtn.disabled = false;
     }, 3000);
   }
 
-  processResult(result, displayResult) {
-    // Update result display
-    this.elements.lastResult.textContent = displayResult;
+  async spin50() {
+    this.elements.spin50Btn.disabled = true;
+    this.elements.spin50Btn.textContent = 'Girando...';
     
-    // Determine result color
-    let resultColor, colorText;
-    if (result === 0 || result === 37) {
-      resultColor = 'text-green-600';
-      colorText = result === 37 ? 'Doble Cero' : 'Cero';
-    } else {
-      const redNumbers = [1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36];
-      const isRed = redNumbers.includes(result);
-      resultColor = isRed ? 'text-red-600' : 'text-gray-800';
-      colorText = isRed ? 'Rojo' : 'Negro';
+    for (let i = 0; i < 50; i++) {
+      const maxNumber = this.isEuropean ? 36 : 37;
+      const result = Math.floor(Math.random() * (maxNumber + 1));
+      const displayResult = result === 37 ? '00' : result;
+      const prediction = this.makePrediction();
+      
+      this.processResult(result, displayResult, prediction);
+      
+      // Update display every 5 spins
+      if (i % 5 === 0) {
+        this.updateDisplay();
+        await new Promise(resolve => setTimeout(resolve, 50));
+      }
     }
     
-    this.elements.lastResult.className = `text-3xl font-bold ${resultColor} mb-2`;
-    this.elements.lastResultColor.textContent = colorText;
+    this.updateDisplay();
+    this.elements.spin50Btn.disabled = false;
+    this.elements.spin50Btn.textContent = '⚡ 50 Giros Rápidos';
+  }
+
+  makePrediction() {
+    if (this.results.length < 3) return null;
     
-    // Check if bet wins
-    const won = this.checkWin(result);
+    const lastResults = this.results.slice(-5);
+    const redNumbers = [1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36];
     
-    // ✅ CORRECCIÓN: Lógica de ganancias/pérdidas corregida
-    // Primero, siempre se descuenta la apuesta del balance
-    this.balance -= this.betAmount;
-    this.totalBet += this.betAmount;
-    
-    if (won) {
-      // Si gana: recibe el pago completo (apuesta original + ganancia)
-      const totalPayout = this.betAmount * (this.currentBet.payout + 1);
-      this.balance += totalPayout;
-      this.totalReturn += totalPayout;
-      this.wins++;
-    } else {
-      // Si pierde: ya se descontó la apuesta, no se devuelve nada
-      this.totalReturn += 0;
-      this.losses++;
-    }
-    
-    this.totalSpins++;
-    
-    // Add to recent results  
-    const netResult = won ? this.betAmount * this.currentBet.payout : -this.betAmount;
-    this.recentResults.unshift({
-      result: displayResult,
-      color: colorText,
-      bet: this.currentBet.type,
-      amount: this.betAmount,
-      won: won,
-      winAmount: netResult
+    // Count recent colors
+    let recentColors = lastResults.map(r => {
+      if (r === 0 || r === 37) return 'green';
+      return redNumbers.includes(r) ? 'red' : 'black';
     });
     
-    if (this.recentResults.length > 10) {
-      this.recentResults.pop();
+    // Simple pattern-based prediction logic
+    let prediction = null;
+    let reason = '';
+    
+    if (recentColors.length >= 3) {
+      const lastThree = recentColors.slice(-3);
+      if (lastThree.every(c => c === 'red')) {
+        prediction = 'black';
+        reason = `Después de ${lastThree.length} rojos seguidos, es más probable negro`;
+      } else if (lastThree.every(c => c === 'black')) {
+        prediction = 'red';
+        reason = `Después de ${lastThree.length} negros seguidos, es más probable rojo`;
+      } else if (recentColors.filter(c => c === 'red').length > recentColors.filter(c => c === 'black').length) {
+        prediction = 'black';
+        reason = 'Hay más rojos que negros recientemente, debe equilibrarse';
+      } else if (recentColors.filter(c => c === 'black').length > recentColors.filter(c => c === 'red').length) {
+        prediction = 'red';
+        reason = 'Hay más negros que rojos recientemente, debe equilibrarse';
+      }
+    }
+    
+    return prediction ? { color: prediction, reason: reason } : null;
+  }
+
+  processResult(result, displayResult, prediction) {
+    const redNumbers = [1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36];
+    
+    // Determine result color
+    let resultColor, colorText, colorClass;
+    if (result === 0 || result === 37) {
+      resultColor = 'green';
+      colorText = result === 37 ? 'Doble Cero' : 'Cero';
+      colorClass = 'text-green-600';
+    } else {
+      const isRed = redNumbers.includes(result);
+      resultColor = isRed ? 'red' : 'black';
+      colorText = isRed ? 'Rojo' : 'Negro';
+      colorClass = isRed ? 'text-red-600' : 'text-gray-800';
+    }
+    
+    // Update result display
+    this.elements.lastResult.textContent = displayResult;
+    this.elements.lastResult.className = `text-3xl font-bold ${colorClass} mb-2`;
+    this.elements.lastResultColor.textContent = colorText;
+    
+    // Process prediction
+    if (prediction && (resultColor === 'red' || resultColor === 'black')) {
+      const correct = prediction.color === resultColor;
+      if (!correct) this.wrongPredictions++;
+      
+      this.elements.predictionBox.classList.remove('hidden');
+      this.elements.predictionText.textContent = prediction.reason;
+      this.elements.predictionResult.innerHTML = correct ? 
+        `<span class="text-green-600">✅ ¡Predicción correcta!</span>` :
+        `<span class="text-red-600">❌ Predicción fallida - Salió ${colorText}</span>`;
+      
+      this.predictions.push({ predicted: prediction.color, actual: resultColor, correct });
+    }
+    
+    // Add to results
+    this.results.push(result);
+    this.totalSpins++;
+    
+    // Update streaks
+    this.updateStreaks(resultColor);
+    
+    // Keep only last 1000 results for performance
+    if (this.results.length > 1000) {
+      this.results = this.results.slice(-1000);
     }
     
     this.updateDisplay();
   }
 
-  checkWin(result) {
-    const bet = this.currentBet.type;
+  updateStreaks(resultColor) {
+    if (resultColor === 'green') {
+      this.currentStreak = { type: 'green', count: 1 };
+      return;
+    }
     
-    switch(bet) {
-      case 'red':
-        const redNumbers = [1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36];
-        return redNumbers.includes(result);
-      case 'black':
-        const blackNumbers = [2, 4, 6, 8, 10, 11, 13, 15, 17, 20, 22, 24, 26, 28, 29, 31, 33, 35];
-        return blackNumbers.includes(result);
-      case 'even':
-        return result > 0 && result !== 37 && result % 2 === 0;
-      case 'odd':
-        return result > 0 && result !== 37 && result % 2 === 1;
-      case '1-18':
-        return result >= 1 && result <= 18;
-      case '19-36':
-        return result >= 19 && result <= 36;
-      case 'dozen1':
-        return result >= 1 && result <= 12;
-      case 'dozen2':
-        return result >= 13 && result <= 24;
-      default:
-        return false;
+    if (this.currentStreak.type === resultColor) {
+      this.currentStreak.count++;
+    } else {
+      this.currentStreak = { type: resultColor, count: 1 };
+    }
+    
+    if (resultColor === 'red' && this.currentStreak.count > this.longestStreaks.red) {
+      this.longestStreaks.red = this.currentStreak.count;
+    } else if (resultColor === 'black' && this.currentStreak.count > this.longestStreaks.black) {
+      this.longestStreaks.black = this.currentStreak.count;
     }
   }
 
   updateDisplay() {
-    // Update balance info
-    this.elements.currentBalance.textContent = `€${this.balance}`;
-    const pnl = this.balance - this.initialBalance;
-    this.elements.totalPnL.textContent = `€${pnl}`;
-    this.elements.totalPnL.className = `font-bold text-lg ${pnl >= 0 ? 'text-green-600' : 'text-red-600'}`;
+    // Update history
+    const last20 = this.results.slice(-20);
+    const redNumbers = [1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36];
     
-    const percentChange = ((pnl / this.initialBalance) * 100).toFixed(1);
-    this.elements.percentChange.textContent = `${percentChange}%`;
-    this.elements.percentChange.className = `font-bold ${pnl >= 0 ? 'text-green-600' : 'text-red-600'}`;
+    this.elements.recentHistory.innerHTML = last20.length === 0 ? 
+      '<span class="text-gray-400">Esperando resultados...</span>' :
+      last20.map(result => {
+        let color, symbol;
+        if (result === 0 || result === 37) {
+          color = 'text-green-600';
+          symbol = '●';
+        } else if (redNumbers.includes(result)) {
+          color = 'text-red-600';
+          symbol = '●';
+        } else {
+          color = 'text-gray-800';
+          symbol = '●';
+        }
+        
+        return `<span class="${color} text-lg" title="${result === 37 ? '00' : result}">${symbol}</span>`;
+      }).join('');
     
-    // Update statistics
+    // Update streak info
+    this.elements.currentStreak.textContent = this.currentStreak.type ? 
+      `${this.currentStreak.count} ${this.currentStreak.type === 'red' ? 'Rojos' : this.currentStreak.type === 'black' ? 'Negros' : 'Verde'}` : 
+      '-';
+    this.elements.longestRedStreak.textContent = this.longestStreaks.red;
+    this.elements.longestBlackStreak.textContent = this.longestStreaks.black;
     this.elements.totalSpins.textContent = this.totalSpins;
-    this.elements.winsCount.textContent = this.wins;
-    this.elements.lossesCount.textContent = this.losses;
     
-    const winRate = this.totalSpins > 0 ? ((this.wins / this.totalSpins) * 100).toFixed(1) : 0;
-    this.elements.winRate.textContent = `${winRate}%`;
-    
-    this.elements.totalBet.textContent = `€${this.totalBet}`;
-    this.elements.totalReturn.textContent = `€${this.totalReturn}`;
-    
-    // ✅ CORRECCIÓN: Cálculo de RTP corregido
-    const actualRTP = this.totalBet > 0 ? ((this.totalReturn / this.totalBet) * 100).toFixed(1) : 0;
-    this.elements.actualRTP.textContent = `${actualRTP}%`;
-    
-    // Update recent results
-    this.updateRecentResults();
-  }
-
-  updateRecentResults() {
-    if (this.recentResults.length === 0) {
-      this.elements.recentResults.innerHTML = '<p class="text-gray-500 text-center">No hay resultados aún</p>';
-      return;
+    // Update independence test
+    if (this.totalSpins >= 50) {
+      this.updateIndependenceTest();
     }
     
-    this.elements.recentResults.innerHTML = this.recentResults.map(result => `
-      <div class="flex justify-between items-center text-sm border-b pb-2">
-        <div class="flex items-center gap-2">
-          <span class="font-bold ${result.color === 'Rojo' ? 'text-red-600' : result.color === 'Negro' ? 'text-gray-800' : 'text-green-600'}">
-            ${result.result}
-          </span>
-          <span class="text-gray-600">${result.color}</span>
-        </div>
-        <div class="text-right">
-          <div class="${result.won ? 'text-green-600' : 'text-red-600'} font-medium">
-            ${result.won ? '+' : ''}€${result.winAmount}
+    // Update fallacy detector
+    this.elements.wrongPredictions.textContent = this.wrongPredictions;
+    const errorRate = this.predictions.length > 0 ? 
+      ((this.wrongPredictions / this.predictions.length) * 100).toFixed(1) : 
+      0;
+    this.elements.predictionErrorRate.textContent = `${errorRate}%`;
+  }
+
+  updateIndependenceTest() {
+    const redNumbers = [1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36];
+    
+    // Calculate expected percentages based on roulette type
+    const expectedRed = this.isEuropean ? 48.65 : 47.37;
+    const expectedBlack = this.isEuropean ? 48.65 : 47.37;
+    const expectedGreen = this.isEuropean ? 2.70 : 5.26;
+    
+    // Analyze patterns after streaks
+    let afterRed = { red: 0, black: 0, green: 0 };
+    let afterBlack = { red: 0, black: 0, green: 0 };
+    
+    for (let i = 1; i < this.results.length; i++) {
+      const prev = this.results[i-1];
+      const curr = this.results[i];
+      
+      const prevColor = (prev === 0 || prev === 37) ? 'green' : 
+                       redNumbers.includes(prev) ? 'red' : 'black';
+      const currColor = (curr === 0 || curr === 37) ? 'green' : 
+                       redNumbers.includes(curr) ? 'red' : 'black';
+      
+      if (prevColor === 'red') {
+        afterRed[currColor]++;
+      } else if (prevColor === 'black') {
+        afterBlack[currColor]++;
+      }
+    }
+    
+    const totalAfterRed = afterRed.red + afterRed.black + afterRed.green;
+    const totalAfterBlack = afterBlack.red + afterBlack.black + afterBlack.green;
+    
+    this.elements.independenceTest.innerHTML = `
+      <div class="space-y-3">
+        <div>
+          <h5 class="font-bold text-gray-900 mb-2">Después de ROJO salió:</h5>
+          <div class="text-xs space-y-1">
+            <div>• Rojo: ${totalAfterRed > 0 ? ((afterRed.red / totalAfterRed) * 100).toFixed(1) : 0}% (esperado: ${expectedRed}%)</div>
+            <div>• Negro: ${totalAfterRed > 0 ? ((afterRed.black / totalAfterRed) * 100).toFixed(1) : 0}% (esperado: ${expectedBlack}%)</div>
+            <div>• Verde: ${totalAfterRed > 0 ? ((afterRed.green / totalAfterRed) * 100).toFixed(1) : 0}% (esperado: ${expectedGreen}%)</div>
           </div>
-          <div class="text-xs text-gray-500">${result.bet}</div>
+        </div>
+        <div>
+          <h5 class="font-bold text-gray-900 mb-2">Después de NEGRO salió:</h5>
+          <div class="text-xs space-y-1">
+            <div>• Rojo: ${totalAfterBlack > 0 ? ((afterBlack.red / totalAfterBlack) * 100).toFixed(1) : 0}% (esperado: ${expectedRed}%)</div>
+            <div>• Negro: ${totalAfterBlack > 0 ? ((afterBlack.black / totalAfterBlack) * 100).toFixed(1) : 0}% (esperado: ${expectedBlack}%)</div>
+            <div>• Verde: ${totalAfterBlack > 0 ? ((afterBlack.green / totalAfterBlack) * 100).toFixed(1) : 0}% (esperado: ${expectedGreen}%)</div>
+          </div>
+        </div>
+        <div class="border-t pt-2 text-xs text-gray-600">
+          <strong>Conclusión:</strong> Los valores se acercan a lo esperado, demostrando independencia.
         </div>
       </div>
-    `).join('');
+    `;
   }
 
-  startAutoPlay() {
-    if (!this.currentBet) {
-      alert('Por favor, selecciona una apuesta primero');
+  analyzePatterns() {
+    if (this.totalSpins < 20) {
+      alert('Necesitas al menos 20 giros para analizar patrones');
       return;
     }
     
-    const spins = parseInt(this.elements.autoSpins.value);
-    let spinsRemaining = spins;
+    const redNumbers = [1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36];
     
-    this.isAutoPlaying = true;
-    this.elements.autoPlayBtn.classList.add('hidden');
-    this.elements.stopAutoBtn.classList.remove('hidden');
-    this.elements.spinBtn.disabled = true;
+    // Calculate expected percentages based on roulette type
+    const expectedRed = this.isEuropean ? 48.65 : 47.37;
+    const expectedBlack = this.isEuropean ? 48.65 : 47.37;
+    const expectedGreen = this.isEuropean ? 2.70 : 5.26;
     
-    this.autoPlayInterval = setInterval(() => {
-      if (spinsRemaining <= 0 || this.betAmount > this.balance) {
-        this.stopAutoPlay();
-        return;
-      }
+    // Count colors
+    let reds = 0, blacks = 0, greens = 0;
+    this.results.forEach(result => {
+      if (result === 0 || result === 37) greens++;
+      else if (redNumbers.includes(result)) reds++;
+      else blacks++;
+    });
+    
+    // Look for "patterns"
+    let patterns = [];
+    
+    // Alternating pattern
+    let alternations = 0;
+    for (let i = 1; i < this.results.length; i++) {
+      const prev = this.results[i-1];
+      const curr = this.results[i];
+      if ((prev === 0 || prev === 37) || (curr === 0 || curr === 37)) continue;
       
-      // Simulate faster spins for auto play
-      const maxNumber = this.isEuropean ? 36 : 37;
-      const result = Math.floor(Math.random() * (maxNumber + 1));
-      const displayResult = result === 37 ? '00' : result;
-      
-      this.processResult(result, displayResult);
-      spinsRemaining--;
-      
-      // Update last result display without animation
-      this.elements.lastResult.textContent = displayResult;
-      let resultColor, colorText;
-      if (result === 0 || result === 37) {
-        resultColor = 'text-green-600';
-        colorText = result === 37 ? 'Doble Cero' : 'Cero';
-      } else {
-        const redNumbers = [1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36];
-        const isRed = redNumbers.includes(result);
-        resultColor = isRed ? 'text-red-600' : 'text-gray-800';
-        colorText = isRed ? 'Rojo' : 'Negro';
-      }
-      this.elements.lastResult.className = `text-3xl font-bold ${resultColor} mb-2`;
-      this.elements.lastResultColor.textContent = colorText;
-      
-    }, 100); // Fast auto play
-  }
-
-  stopAutoPlay() {
-    this.isAutoPlaying = false;
-    if (this.autoPlayInterval) {
-      clearInterval(this.autoPlayInterval);
+      const prevRed = redNumbers.includes(prev);
+      const currRed = redNumbers.includes(curr);
+      if (prevRed !== currRed) alternations++;
     }
-    this.elements.autoPlayBtn.classList.remove('hidden');
-    this.elements.stopAutoBtn.classList.add('hidden');
-    this.elements.spinBtn.disabled = false;
+    
+    // Streaks analysis
+    let streaks = { red: [], black: [] };
+    let currentColor = null;
+    let currentCount = 0;
+    
+    this.results.forEach((result, index) => {
+      const color = (result === 0 || result === 37) ? 'green' : 
+                   redNumbers.includes(result) ? 'red' : 'black';
+      
+      if (color === currentColor && color !== 'green') {
+        currentCount++;
+      } else {
+        // Save previous streak if it exists and is not green
+        if (currentColor && currentColor !== 'green' && currentCount > 0) {
+          streaks[currentColor].push(currentCount);
+        }
+        // Start new streak
+        if (color !== 'green') {
+          currentColor = color;
+          currentCount = 1;
+        } else {
+          currentColor = null;
+          currentCount = 0;
+        }
+      }
+      
+      // Handle last streak
+      if (index === this.results.length - 1 && currentColor && currentColor !== 'green' && currentCount > 0) {
+        streaks[currentColor].push(currentCount);
+      }
+    });
+    
+    this.elements.analysisResults.classList.remove('hidden');
+    this.elements.analysisContent.innerHTML = `
+      <div class="space-y-4">
+        <div>
+          <h4 class="font-bold text-gray-900 mb-2">📊 Distribución de Colores</h4>
+          <div class="grid grid-cols-3 gap-4 text-sm">
+            <div class="text-center">
+              <div class="text-red-600 font-bold">${((reds / this.totalSpins) * 100).toFixed(1)}%</div>
+              <div>Rojo (esperado: ${expectedRed}%)</div>
+            </div>
+            <div class="text-center">
+              <div class="text-gray-800 font-bold">${((blacks / this.totalSpins) * 100).toFixed(1)}%</div>
+              <div>Negro (esperado: ${expectedBlack}%)</div>
+            </div>
+            <div class="text-center">
+              <div class="text-green-600 font-bold">${((greens / this.totalSpins) * 100).toFixed(1)}%</div>
+              <div>Verde (esperado: ${expectedGreen}%)</div>
+            </div>
+          </div>
+        </div>
+        
+        <div>
+          <h4 class="font-bold text-gray-900 mb-2">🔍 Análisis de Rachas y Patrones</h4>
+          <div class="text-sm space-y-3">
+            <div>• Alternaciones R-N-R-N: ${alternations} de ${this.totalSpins - 1} posibles (${alternations > 0 ? ((alternations / (this.totalSpins - 1)) * 100).toFixed(1) : 0}%)</div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div class="bg-red-50 p-3 rounded">
+                <strong class="text-red-800">Rachas Rojas (${streaks.red.length} total):</strong>
+                <div class="text-xs mt-1 space-y-1">
+                  <div>• Promedio: ${streaks.red.length > 0 ? (streaks.red.reduce((a, b) => a + b, 0) / streaks.red.length).toFixed(1) : 0} giros</div>
+                  <div>• Más larga: ${streaks.red.length > 0 ? Math.max(...streaks.red) : 0} giros</div>
+                  <div>• Rachas de 1: ${streaks.red.filter(s => s === 1).length}</div>
+                  <div>• Rachas de 2-4: ${streaks.red.filter(s => s >= 2 && s <= 4).length}</div>
+                  <div>• Rachas de 5+: ${streaks.red.filter(s => s >= 5).length}</div>
+                </div>
+              </div>
+              
+              <div class="bg-gray-100 p-3 rounded">
+                <strong class="text-gray-800">Rachas Negras (${streaks.black.length} total):</strong>
+                <div class="text-xs mt-1 space-y-1">
+                  <div>• Promedio: ${streaks.black.length > 0 ? (streaks.black.reduce((a, b) => a + b, 0) / streaks.black.length).toFixed(1) : 0} giros</div>
+                  <div>• Más larga: ${streaks.black.length > 0 ? Math.max(...streaks.black) : 0} giros</div>
+                  <div>• Rachas de 1: ${streaks.black.filter(s => s === 1).length}</div>
+                  <div>• Rachas de 2-4: ${streaks.black.filter(s => s >= 2 && s <= 4).length}</div>
+                  <div>• Rachas de 5+: ${streaks.black.filter(s => s >= 5).length}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="bg-blue-50 border border-blue-200 rounded p-3 mb-3">
+          <h5 class="font-bold text-blue-800 mb-2">📊 Contexto Estadístico:</h5>
+          <div class="text-blue-700 text-sm space-y-1">
+            <div>• <strong>Rachas esperadas:</strong> En ${this.totalSpins} giros, es normal ver rachas de 4-6 consecutivos</div>
+            <div>• <strong>Racha de 8:</strong> Probabilidad ≈ 0.4% (1 en 256) - Rara pero normal</div>
+            <div>• <strong>Racha de 10:</strong> Probabilidad ≈ 0.1% (1 en 1024) - Muy rara pero posible</div>
+            <div>• <strong>Record histórico:</strong> 32 del mismo color (Monte Carlo, 1913)</div>
+          </div>
+        </div>
+        
+        <div class="bg-red-50 border border-red-200 rounded p-3">
+          <h5 class="font-bold text-red-800 mb-1">🚨 Conclusión del Análisis:</h5>
+          <p class="text-red-700 text-sm">
+            No se encontraron patrones predecibles. Todas las variaciones observadas están 
+            dentro del rango normal de aleatoriedad. <strong>La ruleta no tiene memoria.</strong>
+            Las rachas largas son eventos raros pero completamente normales en secuencias aleatorias.
+          </p>
+        </div>
+      </div>
+    `;
   }
 
   reset() {
-    this.stopAutoPlay();
-    this.balance = this.initialBalance;
+    this.results = [];
+    this.predictions = [];
+    this.wrongPredictions = 0;
+    this.currentStreak = { type: null, count: 0 };
+    this.longestStreaks = { red: 0, black: 0 };
     this.totalSpins = 0;
-    this.wins = 0;
-    this.losses = 0;
-    this.totalBet = 0;
-    this.totalReturn = 0;
-    this.recentResults = [];
-    this.currentBet = null;
     
-    // Reset UI
-    this.elements.betOptions.forEach(btn => btn.classList.remove('active-bet'));
     this.elements.lastResult.textContent = '-';
-    this.elements.lastResultColor.textContent = 'Gira la ruleta';
+    this.elements.lastResultColor.textContent = 'Gira para comenzar el experimento';
+    this.elements.predictionBox.classList.add('hidden');
+    this.elements.analysisResults.classList.add('hidden');
     
-    // Reset strip position
     const strip = document.getElementById('rouletteStrip');
     if (strip) {
       strip.style.transform = 'translateX(0px)';
@@ -688,18 +838,12 @@ class RouletteSimulator {
   }
 }
 
-// Add CSS for active states
+// Add CSS for active states and animations
 const style = document.createElement('style');
 style.textContent = `
   .active-roulette {
     transform: scale(1.05);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-  }
-  
-  .active-bet {
-    transform: scale(1.05);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-    border: 2px solid #fbbf24;
   }
   
   #rouletteStrip {
@@ -708,8 +852,8 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
-// Initialize simulator when page loads
+// Initialize experiment when page loads
 document.addEventListener('DOMContentLoaded', () => {
-  new RouletteSimulator();
+  new RouletteMemoryExperiment();
 });
 </script>

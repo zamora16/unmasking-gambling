@@ -204,59 +204,191 @@ import MainLayout from '../../layouts/MainLayout.astro';
             </div>
           </div>
 
-          <!-- Visual Probability - NUEVA VERSIÓN MÁS REPRESENTATIVA -->
+          <!-- Visual Probability - SIMULADOR DE COMPRA EN TIEMPO REAL -->
           <div class="bg-white rounded-xl shadow-lg p-8">
-            <h3 class="text-2xl font-bold text-gray-900 mb-6 text-center">Visualización Real de la Probabilidad</h3>
+            <h3 class="text-2xl font-bold text-gray-900 mb-6 text-center">🎰 Simulador de Compra en Tiempo Real</h3>
             
-            <!-- Escala más realista -->
-            <div class="mb-8">
-              <div class="bg-red-50 p-6 rounded-lg mb-6">
-                <h4 class="text-xl font-bold text-red-800 mb-3 text-center">🏟️ Imagina el Camp Nou (99,354 asientos)</h4>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-center">
-                  <div class="bg-white p-4 rounded-lg">
-                    <div class="text-3xl font-bold text-red-600" id="stadiumsNeeded">141</div>
-                    <div class="text-sm text-gray-600">Camp Nous llenos necesarios</div>
-                  </div>
-                  <div class="bg-white p-4 rounded-lg">
-                    <div class="text-3xl font-bold text-red-600" id="totalPeople">14 millones</div>
-                    <div class="text-sm text-gray-600">de personas para 1 ganador</div>
+            <!-- Controles principales -->
+            <div class="mb-6">
+              <div class="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-6">
+                <button id="startBuyingBtn" class="bg-purple-600 hover:bg-purple-700 text-white px-8 py-3 rounded-lg font-bold text-lg transition-colors">
+                  🎫 Empezar a "Comprar" Billetes
+                </button>
+                <button id="turboModeBtn" class="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-lg transition-colors disabled:opacity-50" disabled>
+                  🚀 Modo Turbo (1000x velocidad)
+                </button>
+                <button id="resetBuyingBtn" class="bg-gray-600 hover:bg-gray-700 text-white px-6 py-2 rounded-lg transition-colors">
+                  🔄 Reiniciar
+                </button>
+              </div>
+            </div>
+
+            <!-- Estadísticas del desafío -->
+            <div class="bg-red-50 p-6 rounded-lg mb-6">
+              <h4 class="text-xl font-bold text-red-800 mb-3 text-center">📊 El Desafío</h4>
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
+                <div class="bg-white p-4 rounded-lg">
+                  <div class="text-3xl font-bold text-red-600" id="totalTicketsTarget">14,000,000</div>
+                  <div class="text-sm text-gray-600">billetes que debes "comprar"</div>
+                </div>
+                <div class="bg-white p-4 rounded-lg">
+                  <div class="text-3xl font-bold text-green-600">1</div>
+                  <div class="text-sm text-gray-600">billete será el ganador</div>
+                </div>
+                <div class="bg-white p-4 rounded-lg">
+                  <div class="text-3xl font-bold text-orange-600" id="estimatedRealTime">269,230</div>
+                  <div class="text-sm text-gray-600">años a ritmo real (1/semana)</div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Panel de compra en tiempo real -->
+            <div id="buyingSimulatorSection" class="hidden">
+              <div class="bg-gray-100 rounded-lg p-6 mb-6">
+                <!-- Display principal de compra -->
+                <div class="text-center mb-6">
+                  <div class="bg-white p-8 rounded-xl shadow-inner">
+                    <div class="text-6xl mb-4" id="buyingEmoji">🎫</div>
+                    <div class="text-4xl font-bold text-purple-600 mb-2" id="ticketsBought">0</div>
+                    <div class="text-lg text-gray-600">billetes "comprados"</div>
+                    <div class="mt-4 text-sm text-gray-500">
+                      <span id="buyingRate">0</span> billetes/segundo
+                    </div>
                   </div>
                 </div>
-                <p class="text-center text-red-700 mt-4">
-                  Solo <strong>1 persona</strong> de todas esas ganaría el premio mayor.
-                </p>
+                
+                <!-- Barra de progreso épica -->
+                <div class="mb-6">
+                  <div class="flex justify-between items-center mb-2">
+                    <span class="text-sm font-medium text-gray-700">Progreso hacia 14 millones</span>
+                    <span id="buyingProgressPercentage" class="text-sm font-medium text-purple-600">0.0000%</span>
+                  </div>
+                  <div class="w-full bg-gray-200 rounded-full h-4 relative overflow-hidden">
+                    <div id="buyingProgressBar" class="bg-gradient-to-r from-purple-600 via-pink-500 to-red-500 h-4 rounded-full transition-all duration-300" style="width: 0%"></div>
+                    <!-- Marcador del 1% -->
+                    <div class="absolute top-0 left-[1%] w-0.5 h-full bg-yellow-500 opacity-50"></div>
+                    <div class="absolute top-0 left-[1%] -mt-6 text-xs text-yellow-600 font-bold whitespace-nowrap">1% (140,000)</div>
+                  </div>
+                </div>
+                
+                <!-- Estadísticas en tiempo real -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                  <div class="bg-white p-4 rounded-lg text-center">
+                    <div class="text-2xl font-bold text-blue-600" id="buyingTime">0:00</div>
+                    <div class="text-sm text-gray-600">Tiempo comprando</div>
+                  </div>
+                  <div class="bg-white p-4 rounded-lg text-center">
+                    <div class="text-2xl font-bold text-green-600" id="moneySpent">€0</div>
+                    <div class="text-sm text-gray-600">Dinero "gastado"</div>
+                  </div>
+                  <div class="bg-white p-4 rounded-lg text-center">
+                    <div class="text-2xl font-bold text-red-600" id="remainingTickets">14,000,000</div>
+                    <div class="text-sm text-gray-600">Billetes restantes</div>
+                  </div>
+                  <div class="bg-white p-4 rounded-lg text-center">
+                    <div class="text-2xl font-bold text-orange-600" id="timeToFinish">∞</div>
+                    <div class="text-sm text-gray-600">Tiempo restante</div>
+                  </div>
+                </div>
+                
+                <!-- Botón de compra manual -->
+                <div class="text-center mb-6">
+                  <button id="manualBuyBtn" class="bg-green-600 hover:bg-green-700 active:scale-95 text-white px-8 py-4 rounded-lg font-bold text-xl transition-all duration-100" disabled>
+                    💸 ¡COMPRAR BILLETE! (+1)
+                  </button>
+                  <div class="mt-2 text-sm text-gray-600">Mantén presionado para compra rápida</div>
+                </div>
+                
+                <!-- Controles de velocidad -->
+                <div class="bg-white p-4 rounded-lg">
+                  <h5 class="font-bold text-gray-800 mb-3 text-center">🎛️ Velocidad de Compra</h5>
+                  <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
+                    <button class="speed-btn bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded text-sm" data-speed="1">
+                      😴 1/seg (Realista)
+                    </button>
+                    <button class="speed-btn bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded text-sm" data-speed="10">
+                      🚶 10/seg (Rápido)
+                    </button>
+                    <button class="speed-btn bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded text-sm" data-speed="100">
+                      🏃 100/seg (Super)
+                    </button>
+                    <button class="speed-btn bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded text-sm" data-speed="1000">
+                      🚀 1000/seg (Loco)
+                    </button>
+                  </div>
+                  <div class="mt-3 text-center text-sm text-gray-600">
+                    Velocidad actual: <span id="currentSpeed" class="font-bold text-purple-600">Parado</span>
+                  </div>
+                </div>
               </div>
               
-              <!-- Visualización con píxeles -->
-              <div class="mb-6">
-                <h4 class="text-lg font-bold text-gray-800 mb-3 text-center">Representación Visual (cada píxel = 10,000 billetes)</h4>
-                <div class="bg-gray-100 p-4 rounded-lg">
-                  <div class="grid gap-1" id="pixelGrid" style="grid-template-columns: repeat(50, 1fr);">
-                    <!-- Píxeles generados por JavaScript -->
-                  </div>
-                  <div class="mt-4 text-center text-sm text-gray-600">
-                    <div class="flex justify-center items-center space-x-4">
-                      <div class="flex items-center">
-                        <div class="w-3 h-3 bg-red-500 mr-2"></div>
-                        <span>Billetes perdedores</span>
-                      </div>
-                      <div class="flex items-center">
-                        <div class="w-3 h-3 bg-green-500 mr-2"></div>
-                        <span>Billete ganador (1 entre todos)</span>
-                      </div>
+              <!-- Mensajes dinámicos -->
+              <div id="buyingMessage" class="mb-6 p-4 rounded-lg text-center hidden">
+                <div class="text-2xl mb-2" id="buyingMessageEmoji">💭</div>
+                <div class="text-lg font-bold" id="buyingMessageTitle">Mensaje</div>
+                <div class="text-sm" id="buyingMessageText">Texto del mensaje</div>
+              </div>
+              
+              <!-- Simulación de encuentro del ganador -->
+              <div id="winnerFoundSection" class="hidden">
+                <div class="bg-green-50 border-2 border-green-200 rounded-lg p-6 text-center">
+                  <div class="text-6xl mb-4">🎉</div>
+                  <h4 class="text-3xl font-bold text-green-800 mb-4">¡GANADOR ENCONTRADO!</h4>
+                  <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                    <div>
+                      <div class="text-2xl font-bold text-green-600" id="finalTicketsBought">0</div>
+                      <div class="text-sm">Billetes "comprados"</div>
                     </div>
-                    <p class="mt-2 text-xs">
-                      En esta cuadrícula de 70x20 = 1,400 píxeles, cada píxel representa 10,000 billetes.<br>
-                      Solo 1 píxel verde representa al ganador entre 14 millones de billetes.
+                    <div>
+                      <div class="text-2xl font-bold text-green-600" id="finalTimeTaken">0:00</div>
+                      <div class="text-sm">Tiempo total</div>
+                    </div>
+                    <div>
+                      <div class="text-2xl font-bold text-green-600" id="finalMoneySpent">€0</div>
+                      <div class="text-sm">Dinero "gastado"</div>
+                    </div>
+                  </div>
+                  <div class="bg-white p-4 rounded-lg">
+                    <p class="text-green-700 mb-2">
+                      <strong>En esta simulación:</strong> Encontraste el ganador relativamente rápido.
+                    </p>
+                    <p class="text-green-600 text-sm">
+                      <strong>En la realidad:</strong> Cada billete es a ciegas, sin saber si estás cerca o lejos del ganador.
+                      La estadística dice que necesitarías <strong>269,230 años</strong> comprando 1 billete por semana.
                     </p>
                   </div>
                 </div>
               </div>
-
-
             </div>
             
-
+            <!-- Explicación educativa inicial -->
+            <div id="buyingExplanation" class="bg-yellow-50 p-6 rounded-lg">
+              <h4 class="text-lg font-bold text-yellow-800 mb-3 text-center">💡 ¿Cómo Funciona Este Simulador?</h4>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                <div>
+                  <p class="text-yellow-700 mb-2">
+                    <strong>Tu misión:</strong> "Comprar" billetes hasta encontrar el ganador entre 14 millones.
+                  </p>
+                  <p class="text-yellow-700">
+                    <strong>La simulación:</strong> Cada "compra" es instantánea, pero verás cuánto tiempo llevas.
+                  </p>
+                </div>
+                <div>
+                  <p class="text-yellow-700 mb-2">
+                    <strong>Modo Turbo:</strong> Incluso comprando 1,000 billetes por segundo, tardarás horas.
+                  </p>
+                  <p class="text-yellow-700">
+                    <strong>La lección:</strong> Incluso "con trampa" (súper velocidad), la lotería es inmensa.
+                  </p>
+                </div>
+              </div>
+              <div class="mt-4 p-3 bg-yellow-100 rounded-lg text-center">
+                <p class="text-yellow-800 text-sm">
+                  <strong>Dato impactante:</strong> A velocidad "realista" (1 billete/segundo), 
+                  necesitarías <strong>162 días continuos</strong> sin parar para revisar los 14 millones.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -386,37 +518,375 @@ document.addEventListener('DOMContentLoaded', function() {
     if (lightningElement) lightningElement.textContent = `${Math.round(lotteryOdds / lightning)} veces más probable`;
   }
 
-  // Generate realistic probability visualization - COMPLETAMENTE NUEVA
-  function generateRealisticVisualization(odds) {
-    // Actualizar estadísticas del estadio
-    const campNouCapacity = 99354;
-    const stadiumsNeeded = Math.ceil(odds / campNouCapacity);
-    
-    const stadiumsElement = document.getElementById('stadiumsNeeded');
-    const totalPeopleElement = document.getElementById('totalPeople');
-    
-    if (stadiumsElement) stadiumsElement.textContent = formatNumber(stadiumsNeeded);
-    if (totalPeopleElement) totalPeopleElement.textContent = `${formatNumber(Math.round(odds / 1000000))} millones`;
+  // Variables para el simulador de compra en tiempo real
+  let buyingActive = false;
+  let buyingStartTime = null;
+  let buyingInterval = null;
+  let ticketsBoughtCount = 0;
+  let winnerTicketNumber = 0;
+  let currentBuyingSpeed = 0;
+  let turboMode = false;
+  const TICKET_PRICE = 2; // €2 por billete
 
-    // Generar cuadrícula de píxeles más representativa
-    const pixelGrid = document.getElementById('pixelGrid');
-    if (!pixelGrid) return;
+  // Generate buying simulator - NUEVA IMPLEMENTACIÓN
+  function generateBuyingSimulator(odds) {
+    // Actualizar estadísticas básicas
+    const totalTicketsTarget = document.getElementById('totalTicketsTarget');
+    const estimatedRealTime = document.getElementById('estimatedRealTime');
     
-    pixelGrid.innerHTML = '';
+    if (totalTicketsTarget) totalTicketsTarget.textContent = formatNumber(odds);
+    if (estimatedRealTime) estimatedRealTime.textContent = formatNumber(Math.round(odds / 52));
+
+    // Generar número del billete ganador (posición aleatoria)
+    winnerTicketNumber = Math.floor(Math.random() * odds) + 1;
+  }
+
+  // Iniciar simulador de compra
+  function startBuyingSimulator() {
+    const buyingSimulatorSection = document.getElementById('buyingSimulatorSection');
+    const buyingExplanation = document.getElementById('buyingExplanation');
+    const turboModeBtn = document.getElementById('turboModeBtn');
+    const manualBuyBtn = document.getElementById('manualBuyBtn');
     
-    // 70x20 = 1,400 píxeles, cada uno representa 10,000 billetes
-    const totalPixels = 1400; // 70x20
-    const ticketsPerPixel = 10000;
-    const totalTicketsRepresented = totalPixels * ticketsPerPixel; // 14,000,000
+    if (buyingSimulatorSection && buyingExplanation) {
+      buyingSimulatorSection.classList.remove('hidden');
+      buyingExplanation.classList.add('hidden');
+    }
     
-    // Determinar si hay un ganador en esta representación
-    const hasWinner = odds <= totalTicketsRepresented;
-    const winnerPosition = hasWinner ? Math.floor(Math.random() * totalPixels) : -1;
+    if (turboModeBtn) turboModeBtn.disabled = false;
+    if (manualBuyBtn) manualBuyBtn.disabled = false;
     
-    for (let i = 0; i < totalPixels; i++) {
-      const pixel = document.createElement('div');
-      pixel.className = `w-1 h-1 ${i === winnerPosition ? 'bg-green-500' : 'bg-red-500'}`;
-      pixelGrid.appendChild(pixel);
+    buyingActive = true;
+    buyingStartTime = Date.now();
+    buyingInterval = setInterval(updateBuyingTimer, 1000);
+    
+    // Reset contadores
+    ticketsBoughtCount = 0;
+    currentBuyingSpeed = 0;
+    updateBuyingStats();
+  }
+
+  // Actualizar estadísticas del simulador
+  function updateBuyingStats() {
+    const progress = (ticketsBoughtCount / currentOdds) * 100;
+    const moneySpentTotal = ticketsBoughtCount * TICKET_PRICE;
+    const remainingTickets = currentOdds - ticketsBoughtCount;
+    
+    // Actualizar elementos UI
+    const ticketsBought = document.getElementById('ticketsBought');
+    const buyingProgressBar = document.getElementById('buyingProgressBar');
+    const buyingProgressPercentage = document.getElementById('buyingProgressPercentage');
+    const moneySpent = document.getElementById('moneySpent');
+    const remainingTicketsElement = document.getElementById('remainingTickets');
+    const buyingRate = document.getElementById('buyingRate');
+    
+    if (ticketsBought) ticketsBought.textContent = formatNumber(ticketsBoughtCount);
+    if (buyingProgressBar) buyingProgressBar.style.width = `${Math.min(progress, 100)}%`;
+    if (buyingProgressPercentage) buyingProgressPercentage.textContent = `${progress.toFixed(4)}%`;
+    if (moneySpent) moneySpent.textContent = `€${formatNumber(moneySpentTotal)}`;
+    if (remainingTicketsElement) remainingTicketsElement.textContent = formatNumber(remainingTickets);
+    if (buyingRate) buyingRate.textContent = formatNumber(currentBuyingSpeed);
+    
+    // Actualizar tiempo restante estimado
+    updateTimeToFinish();
+    
+    // Actualizar mensajes motivacionales
+    updateBuyingMessage(progress, ticketsBoughtCount);
+    
+    // Verificar si encontró el ganador
+    checkForBuyingWinner();
+  }
+
+  // Actualizar tiempo estimado para terminar
+  function updateTimeToFinish() {
+    const timeToFinishElement = document.getElementById('timeToFinish');
+    
+    if (!timeToFinishElement || currentBuyingSpeed === 0) {
+      if (timeToFinishElement) timeToFinishElement.textContent = '∞';
+      return;
+    }
+    
+    const remainingTickets = currentOdds - ticketsBoughtCount;
+    const secondsRemaining = remainingTickets / currentBuyingSpeed;
+    
+    if (secondsRemaining < 60) {
+      timeToFinishElement.textContent = `${Math.round(secondsRemaining)}s`;
+    } else if (secondsRemaining < 3600) {
+      const minutes = Math.round(secondsRemaining / 60);
+      timeToFinishElement.textContent = `${minutes}m`;
+    } else if (secondsRemaining < 86400) {
+      const hours = Math.round(secondsRemaining / 3600);
+      timeToFinishElement.textContent = `${hours}h`;
+    } else {
+      const days = Math.round(secondsRemaining / 86400);
+      timeToFinishElement.textContent = `${days} días`;
+    }
+  }
+
+  // Verificar si se encontró el ganador
+  function checkForBuyingWinner() {
+    if (ticketsBoughtCount >= winnerTicketNumber) {
+      // ¡Ganador encontrado!
+      stopBuying();
+      showWinnerFound();
+    }
+  }
+
+  // Mostrar que se encontró el ganador
+  function showWinnerFound() {
+    const winnerFoundSection = document.getElementById('winnerFoundSection');
+    const finalTicketsBought = document.getElementById('finalTicketsBought');
+    const finalTimeTaken = document.getElementById('finalTimeTaken');
+    const finalMoneySpent = document.getElementById('finalMoneySpent');
+    
+    if (winnerFoundSection) winnerFoundSection.classList.remove('hidden');
+    
+    if (finalTicketsBought) finalTicketsBought.textContent = formatNumber(ticketsBoughtCount);
+    if (finalMoneySpent) finalMoneySpent.textContent = `€${formatNumber(ticketsBoughtCount * TICKET_PRICE)}`;
+    
+    if (finalTimeTaken && buyingStartTime) {
+      const totalTime = Date.now() - buyingStartTime;
+      const minutes = Math.floor(totalTime / 60000);
+      const seconds = Math.floor((totalTime % 60000) / 1000);
+      const timeString = minutes > 0 ? `${minutes}:${seconds.toString().padStart(2, '0')}` : `${seconds}s`;
+      finalTimeTaken.textContent = timeString;
+    }
+    
+    // Detener timer
+    if (buyingInterval) {
+      clearInterval(buyingInterval);
+      buyingInterval = null;
+    }
+  }
+
+  // Actualizar mensajes motivacionales
+  function updateBuyingMessage(progress, ticketsBought) {
+    const buyingMessage = document.getElementById('buyingMessage');
+    const buyingMessageEmoji = document.getElementById('buyingMessageEmoji');
+    const buyingMessageTitle = document.getElementById('buyingMessageTitle');
+    const buyingMessageText = document.getElementById('buyingMessageText');
+    
+    if (!buyingMessage || !buyingMessageEmoji || !buyingMessageTitle || !buyingMessageText) return;
+    
+    let emoji = '';
+    let title = '';
+    let text = '';
+    let showMessage = false;
+    
+    const timeElapsed = buyingStartTime ? (Date.now() - buyingStartTime) / 1000 : 0;
+    
+    if (ticketsBought === 1000) {
+      emoji = '🎉';
+      title = '¡Primer hito!';
+      text = 'Has "comprado" 1,000 billetes. Solo te faltan 13,999,000...';
+      showMessage = true;
+    } else if (ticketsBought === 10000) {
+      emoji = '🚅';
+      title = '¡Vas por buen camino!';
+      text = `10,000 billetes en ${Math.round(timeElapsed)}s. ¡Solo el ${(progress).toFixed(3)}% completado!`;
+      showMessage = true;
+    } else if (ticketsBought === 100000) {
+      emoji = '🚀';
+      title = '¡100K billetes!';
+      text = `Llevas ${Math.round(timeElapsed / 60)} minutos. Has gastado €${formatNumber(ticketsBought * 2)}.`;
+      showMessage = true;
+    } else if (progress >= 1 && ticketsBought % 50000 === 0) {
+      emoji = '💪';
+      title = `¡${progress.toFixed(1)}% completado!`;
+      text = `Has "comprado" ${formatNumber(ticketsBought)} billetes. En la vida real, esto serían años de loteria.`;
+      showMessage = true;
+    } else if (progress >= 10 && ticketsBought % 200000 === 0) {
+      emoji = '🤯';
+      title = `¡${progress.toFixed(1)}% - increíble persistencia!`;
+      text = `${Math.round(timeElapsed / 60)} minutos comprando y aún te falta el ${(100 - progress).toFixed(1)}%.`;
+      showMessage = true;
+    } else if (progress >= 50 && ticketsBought % 500000 === 0) {
+      emoji = '🤯';
+      title = `¡Más de la mitad!`;
+      text = `${progress.toFixed(1)}% completado. ¿Ya te diste cuenta de lo masivo que es esto?`;
+      showMessage = true;
+    }
+    
+    if (showMessage) {
+      buyingMessageEmoji.textContent = emoji;
+      buyingMessageTitle.textContent = title;
+      buyingMessageText.textContent = text;
+      buyingMessage.classList.remove('hidden');
+      
+      // Cambiar color según el progreso
+      buyingMessage.className = `mb-6 p-4 rounded-lg text-center ${
+        progress < 1 ? 'bg-blue-50 border border-blue-200' :
+        progress < 10 ? 'bg-yellow-50 border border-yellow-200' :
+        progress < 50 ? 'bg-orange-50 border border-orange-200' :
+        'bg-red-50 border border-red-200'
+      }`;
+      
+      // Ocultar después de 4 segundos
+      setTimeout(() => {
+        if (buyingMessage) buyingMessage.classList.add('hidden');
+      }, 4000);
+    }
+  }
+
+  // Actualizar timer del simulador
+  function updateBuyingTimer() {
+    if (!buyingStartTime) return;
+    
+    const elapsed = Date.now() - buyingStartTime;
+    const minutes = Math.floor(elapsed / 60000);
+    const seconds = Math.floor((elapsed % 60000) / 1000);
+    
+    const buyingTimeElement = document.getElementById('buyingTime');
+    if (buyingTimeElement) {
+      buyingTimeElement.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+    }
+  }
+
+  // Comprar billetes a velocidad específica
+  function startBuyingAtSpeed(speed) {
+    stopBuying(); // Parar cualquier compra anterior
+    
+    currentBuyingSpeed = speed;
+    updateSpeedDisplay(speed);
+    
+    if (speed === 0) return;
+    
+    buyingInterval = setInterval(() => {
+      if (!buyingActive) return;
+      
+      const ticketsToAdd = Math.min(speed, currentOdds - ticketsBoughtCount);
+      ticketsBoughtCount += ticketsToAdd;
+      
+      updateBuyingStats();
+      
+      if (ticketsBoughtCount >= currentOdds) {
+        stopBuying();
+      }
+    }, 1000);
+  }
+
+  // Actualizar display de velocidad
+  function updateSpeedDisplay(speed) {
+    const currentSpeedElement = document.getElementById('currentSpeed');
+    const speedButtons = document.querySelectorAll('.speed-btn');
+    
+    // Actualizar texto de velocidad
+    if (currentSpeedElement) {
+      if (speed === 0) {
+        currentSpeedElement.textContent = 'Parado';
+      } else {
+        currentSpeedElement.textContent = `${formatNumber(speed)} billetes/segundo`;
+      }
+    }
+    
+    // Actualizar botones activos
+    speedButtons.forEach(btn => {
+      const btnSpeed = parseInt(btn.dataset.speed);
+      if (btnSpeed === speed) {
+        btn.classList.add('ring-2', 'ring-white', 'ring-opacity-60');
+      } else {
+        btn.classList.remove('ring-2', 'ring-white', 'ring-opacity-60');
+      }
+    });
+  }
+
+  // Parar compra
+  function stopBuying() {
+    if (buyingInterval) {
+      clearInterval(buyingInterval);
+      buyingInterval = null;
+    }
+    currentBuyingSpeed = 0;
+    updateSpeedDisplay(0);
+  }
+
+  // Compra manual (un billete)
+  function buyManualTicket() {
+    if (!buyingActive || ticketsBoughtCount >= currentOdds) return;
+    
+    ticketsBoughtCount++;
+    updateBuyingStats();
+    
+    // Efecto visual en el botón
+    const manualBuyBtn = document.getElementById('manualBuyBtn');
+    if (manualBuyBtn) {
+      manualBuyBtn.style.transform = 'scale(0.95)';
+      setTimeout(() => {
+        manualBuyBtn.style.transform = 'scale(1)';
+      }, 100);
+    }
+  }
+
+  // Modo turbo (velocidad máxima)
+  function toggleTurboMode() {
+    const turboModeBtn = document.getElementById('turboModeBtn');
+    
+    if (!turboMode) {
+      turboMode = true;
+      startBuyingAtSpeed(1000);
+      
+      if (turboModeBtn) {
+        turboModeBtn.textContent = '⏸️ Pausar Turbo';
+        turboModeBtn.classList.remove('bg-red-600', 'hover:bg-red-700');
+        turboModeBtn.classList.add('bg-orange-600', 'hover:bg-orange-700');
+      }
+    } else {
+      turboMode = false;
+      stopBuying();
+      
+      if (turboModeBtn) {
+        turboModeBtn.textContent = '🚀 Modo Turbo (1000x velocidad)';
+        turboModeBtn.classList.remove('bg-orange-600', 'hover:bg-orange-700');
+        turboModeBtn.classList.add('bg-red-600', 'hover:bg-red-700');
+      }
+    }
+  }
+
+  // Reset simulador de compra
+  function resetBuyingSimulator() {
+    // Limpiar intervals
+    if (buyingInterval) {
+      clearInterval(buyingInterval);
+      buyingInterval = null;
+    }
+    
+    // Reset estado
+    buyingActive = false;
+    buyingStartTime = null;
+    ticketsBoughtCount = 0;
+    currentBuyingSpeed = 0;
+    turboMode = false;
+    
+    // Ocultar sección y mostrar explicación
+    const buyingSimulatorSection = document.getElementById('buyingSimulatorSection');
+    const buyingExplanation = document.getElementById('buyingExplanation');
+    const winnerFoundSection = document.getElementById('winnerFoundSection');
+    const buyingMessage = document.getElementById('buyingMessage');
+    const turboModeBtn = document.getElementById('turboModeBtn');
+    const manualBuyBtn = document.getElementById('manualBuyBtn');
+    
+    if (buyingSimulatorSection) buyingSimulatorSection.classList.add('hidden');
+    if (buyingExplanation) buyingExplanation.classList.remove('hidden');
+    if (winnerFoundSection) winnerFoundSection.classList.add('hidden');
+    if (buyingMessage) buyingMessage.classList.add('hidden');
+    
+    if (turboModeBtn) {
+      turboModeBtn.disabled = true;
+      turboModeBtn.textContent = '🚀 Modo Turbo (1000x velocidad)';
+      turboModeBtn.classList.remove('bg-orange-600', 'hover:bg-orange-700');
+      turboModeBtn.classList.add('bg-red-600', 'hover:bg-red-700');
+    }
+    
+    if (manualBuyBtn) {
+      manualBuyBtn.disabled = true;
+    }
+    
+    // Reset displays
+    updateSpeedDisplay(0);
+    
+    // Regenerar número ganador
+    if (currentOdds) {
+      generateBuyingSimulator(currentOdds);
     }
   }
 
@@ -445,7 +915,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (lotteryOddsElement) lotteryOddsElement.textContent = `1 en ${formatNumber(odds)}`;
     
     updateComparisons(odds);
-    generateRealisticVisualization(odds);
+    generateBuyingSimulator(odds);
     updateTicketsCalculation();
     
     const resultsSection = document.getElementById('resultsSection');
@@ -520,6 +990,13 @@ document.addEventListener('DOMContentLoaded', function() {
   const btnCustom = document.getElementById('btn-custom');
   const btnCalculateCustom = document.getElementById('btn-calculate-custom');
   const ticketsSlider = document.getElementById('ticketsSlider');
+  
+  // Nuevos controles del simulador de compra
+  const startBuyingBtn = document.getElementById('startBuyingBtn');
+  const turboModeBtn = document.getElementById('turboModeBtn');
+  const resetBuyingBtn = document.getElementById('resetBuyingBtn');
+  const manualBuyBtn = document.getElementById('manualBuyBtn');
+  const speedButtons = document.querySelectorAll('.speed-btn');
 
   if (btn649) btn649.addEventListener('click', () => calculateLottery('6-49'));
   if (btnEuromillions) btnEuromillions.addEventListener('click', () => calculateLottery('euromillions'));
@@ -527,9 +1004,61 @@ document.addEventListener('DOMContentLoaded', function() {
   if (btnCustom) btnCustom.addEventListener('click', () => calculateLottery('custom'));
   if (btnCalculateCustom) btnCalculateCustom.addEventListener('click', calculateCustom);
   if (ticketsSlider) ticketsSlider.addEventListener('input', updateTicketsCalculation);
+  
+  // Event listeners para simulador de compra
+  if (startBuyingBtn) {
+    startBuyingBtn.addEventListener('click', startBuyingSimulator);
+  }
+  
+  if (turboModeBtn) {
+    turboModeBtn.addEventListener('click', toggleTurboMode);
+  }
+  
+  if (resetBuyingBtn) {
+    resetBuyingBtn.addEventListener('click', resetBuyingSimulator);
+  }
+  
+  if (manualBuyBtn) {
+    manualBuyBtn.addEventListener('click', buyManualTicket);
+    
+    // Compra rápida manteniendo presionado
+    let manualBuyInterval;
+    manualBuyBtn.addEventListener('mousedown', () => {
+      manualBuyInterval = setInterval(buyManualTicket, 100);
+    });
+    
+    manualBuyBtn.addEventListener('mouseup', () => {
+      if (manualBuyInterval) {
+        clearInterval(manualBuyInterval);
+        manualBuyInterval = null;
+      }
+    });
+    
+    manualBuyBtn.addEventListener('mouseleave', () => {
+      if (manualBuyInterval) {
+        clearInterval(manualBuyInterval);
+        manualBuyInterval = null;
+      }
+    });
+  }
+  
+  // Event listeners para botones de velocidad
+  speedButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const speed = parseInt(btn.dataset.speed);
+      startBuyingAtSpeed(speed);
+    });
+  });
 
   // Initialize with default lottery
   calculateLottery('6-49');
+  
+  // Prevent scroll to top when clicking on dots
+  document.addEventListener('click', (e) => {
+    if (e.target.dataset.index !== undefined) {
+      e.preventDefault();
+    }
+  });
 });
 </script>
 
@@ -571,10 +1100,156 @@ document.addEventListener('DOMContentLoaded', function() {
     border: none;
   }
 
-  #pixelGrid {
-    min-height: 80px;
-    display: grid;
-    grid-template-columns: repeat(70, 1fr);
-    gap: 1px;
+  /* Estilos para el simulador de compra */
+  .speed-btn {
+    transition: all 0.2s ease;
+  }
+  
+  .speed-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .speed-btn:active {
+    transform: translateY(0);
+  }
+  
+  #manualBuyBtn {
+    transition: transform 0.1s ease;
+    user-select: none;
+  }
+  
+  #manualBuyBtn:active {
+    transform: scale(0.95);
+  }
+  
+  #buyingProgressBar {
+    transition: width 0.3s ease;
+  }
+  
+  /* Animaciones para el emoji principal */
+  #buyingEmoji {
+    animation: gentle-bounce 2s ease-in-out infinite;
+  }
+  
+  @keyframes gentle-bounce {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-5px);
+    }
+  }
+  
+  /* Efectos para mensajes dinámicos */
+  #buyingMessage {
+    animation: slideInUp 0.4s ease-out;
+  }
+  
+  @keyframes slideInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Ring effect for active speed buttons */
+  .speed-btn.ring-2 {
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.6);
+  }
+  
+  /* Progress bar with animation */
+  @keyframes progress-glow {
+    0% {
+      box-shadow: 0 0 5px rgba(139, 92, 246, 0.3);
+    }
+    50% {
+      box-shadow: 0 0 20px rgba(139, 92, 246, 0.6);
+    }
+    100% {
+      box-shadow: 0 0 5px rgba(139, 92, 246, 0.3);
+    }
+  }
+  
+  #buyingProgressBar {
+    animation: progress-glow 2s ease-in-out infinite;
+  }
+  
+  /* Winner section animation */
+  #winnerFoundSection {
+    animation: celebrateWin 0.6s ease-out;
+  }
+  
+  @keyframes celebrateWin {
+    0% {
+      opacity: 0;
+      transform: scale(0.8);
+    }
+    50% {
+      transform: scale(1.05);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  /* Hover effects para stats */
+  .bg-white.p-4.rounded-lg {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  .bg-white.p-4.rounded-lg:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Smooth transitions para botones principales */
+  .transition-colors {
+    transition: all 0.2s ease;
+  }
+  
+  /* Disabled state para botones */
+  button:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+  
+  button:disabled:hover {
+    transform: none;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .grid.grid-cols-2.md\:grid-cols-4 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .speed-btn {
+      padding: 0.5rem 0.25rem;
+      font-size: 0.75rem;
+    }
+    
+    #buyingEmoji {
+      font-size: 3rem;
+    }
+    
+    #ticketsBought {
+      font-size: 2rem;
+    }
+  }
+  
+  /* Shadow effects para containers principales */
+  .bg-white.rounded-xl.shadow-lg {
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Subtle animation para números que cambian */
+  #ticketsBought, #moneySpent, #remainingTickets {
+    transition: color 0.3s ease;
   }
 </style>

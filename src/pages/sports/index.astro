@@ -21,7 +21,7 @@ import { getUrl } from '../../utils/links';
         </p>
         <div class="bg-white/10 backdrop-blur-sm rounded-lg p-4 sm:p-6 max-w-2xl mx-auto">
           <p class="text-green-100 text-base sm:text-lg">
-            📊 <strong>Simuladores reales:</strong> Matemáticas brutales del betting deportivo
+            📊 <strong>Simuladores reales:</strong> Las matemáticas del betting deportivo
           </p>
         </div>
       </div>
@@ -31,65 +31,33 @@ import { getUrl } from '../../utils/links';
   <!-- Navigation Cards -->
   <section class="py-12 sm:py-16 md:py-20 lg:py-24 bg-gray-50">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
         
-        <!-- Season Simulator - Main Feature -->
-        <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden transform hover:scale-105">
-          <div class="h-48 bg-gradient-to-br from-red-600 to-red-800 flex items-center justify-center relative">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-16 h-16 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-            </svg>
-            <div class="absolute top-4 right-4 bg-yellow-400 text-yellow-900 px-3 py-1 rounded-full text-sm font-bold">
-              DEVASTADOR
-            </div>
-          </div>
-          <div class="p-6">
-            <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-3">🏈 Simulador de Temporada</h3>
-            <p class="text-gray-600 mb-4">
-              Simula una temporada completa de fútbol. Elige tu % de aciertos (50%-80%) y descubre por qué incluso siendo muy bueno, pierdes dinero.
-            </p>
-            <div class="mb-4">
-              <span class="inline-block bg-red-100 text-red-800 text-xs px-2 py-1 rounded mr-2">38 Jornadas</span>
-              <span class="inline-block bg-orange-100 text-orange-800 text-xs px-2 py-1 rounded mr-2">Gráficos Real</span>
-              <span class="inline-block bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded">Múltiples Estrategias</span>
-            </div>
-            <a 
-              href={getUrl('/sports/season-simulator')} 
-              class="inline-flex items-center w-full justify-center px-6 py-4 md:px-8 md:py-4 min-h-[48px] bg-gradient-to-r from-red-600 to-red-800 hover:from-red-700 hover:to-red-900 text-white font-semibold rounded-lg transition-all duration-200"
-            >
-              Simular Temporada
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M12 5l7 7-7 7" />
-              </svg>
-            </a>
-          </div>
-        </div>
-
-        <!-- Juice Calculator -->
+        <!-- Profit Illusion Simulator - Main Feature -->
         <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden transform hover:scale-105">
           <div class="h-48 bg-gradient-to-br from-blue-600 to-indigo-700 flex items-center justify-center relative">
             <svg xmlns="http://www.w3.org/2000/svg" class="w-16 h-16 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01m3 0h.01m0-3h.01m-3 0h.01m3-3h.01m-3 0h.01M5 8a2 2 0 012-2h10a2 2 0 012 2v8a2 2 0 01-2 2H7a2 2 0 01-2-2V8z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
             </svg>
             <div class="absolute top-4 right-4 bg-blue-400 text-blue-900 px-3 py-1 rounded-full text-sm font-bold">
-              NUEVO
+              REVELADOR
             </div>
           </div>
           <div class="p-6">
-            <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-3">🧮 Calculadora de Juice</h3>
+            <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-3">📊 Ilusión de Ganancias</h3>
             <p class="text-gray-600 mb-4">
-              Descubre el "impuesto invisible" en cada apuesta. Calcula el margen oculto de las casas de apuestas y compara cuál te roba menos.
+              Dos apostadores idénticos, misma habilidad, mismos aciertos. Solo cambian las cuotas. Descubre cómo el margen transforma ganancias en pérdidas.
             </p>
             <div class="mb-4">
-              <span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded mr-2">Margen Real</span>
-              <span class="inline-block bg-indigo-100 text-indigo-800 text-xs px-2 py-1 rounded mr-2">Comparador</span>
-              <span class="inline-block bg-cyan-100 text-cyan-800 text-xs px-2 py-1 rounded">Probabilidades</span>
+              <span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded mr-2">Experimento Controlado</span>
+              <span class="inline-block bg-indigo-100 text-indigo-800 text-xs px-2 py-1 rounded mr-2">Comparación Visual</span>
+              <span class="inline-block bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded">Impacto del Margen</span>
             </div>
             <a 
-              href={getUrl('/sports/juice-calculator')} 
+              href={getUrl('/sports/season-simulator')} 
               class="inline-flex items-center w-full justify-center px-6 py-4 md:px-8 md:py-4 min-h-[48px] bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-semibold rounded-lg transition-all duration-200"
             >
-              Calcular Juice
+              Ver Experimento
               <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M12 5l7 7-7 7" />
               </svg>
@@ -104,7 +72,7 @@ import { getUrl } from '../../utils/links';
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
             </svg>
             <div class="absolute top-4 right-4 bg-green-400 text-green-900 px-3 py-1 rounded-full text-sm font-bold">
-              NUEVO
+              ESENCIAL
             </div>
           </div>
           <div class="p-6">
@@ -129,25 +97,25 @@ import { getUrl } from '../../utils/links';
           </div>
         </div>
 
-        <!-- Tipster Simulator -->
+        <!-- Bankroll Manager -->
         <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden transform hover:scale-105">
           <div class="h-48 bg-gradient-to-br from-purple-600 to-purple-800 flex items-center justify-center relative">
             <svg xmlns="http://www.w3.org/2000/svg" class="w-16 h-16 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01m3 0h.01m0-3h.01m-3 0h.01m3-3h.01m-3 0h.01M5 8a2 2 0 012-2h10a2 2 0 012 2v8a2 2 0 01-2 2H7a2 2 0 01-2-2V8z" />
             </svg>
             <div class="absolute top-4 right-4 bg-purple-400 text-purple-900 px-3 py-1 rounded-full text-sm font-bold">
-              NUEVO
+              AVANZADO
             </div>
           </div>
           <div class="p-6">
             <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-3">💰 Bankroll Manager</h3>
             <p class="text-gray-600 mb-4">
-              "Yo gestiono bien el dinero". Descubre por qué Kelly Criterion, gestión de riesgo y estrategias no te salvarán de las matemáticas brutales.
+              "Yo gestiono bien el dinero". Descubre por qué Kelly Criterion, gestión de riesgo y estrategias no pueden vencer las desventajas matemáticas.
             </p>
             <div class="mb-4">
               <span class="inline-block bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded mr-2">Kelly Criterion</span>
               <span class="inline-block bg-pink-100 text-pink-800 text-xs px-2 py-1 rounded mr-2">Risk of Ruin</span>
-              <span class="inline-block bg-violet-100 text-violet-800 text-xs px-2 py-1 rounded">Gestión Falsa</span>
+              <span class="inline-block bg-violet-100 text-violet-800 text-xs px-2 py-1 rounded">Limitaciones</span>
             </div>
             <a 
               href={getUrl('/sports/bankroll-manager')} 
@@ -255,33 +223,27 @@ import { getUrl } from '../../utils/links';
   <section class="py-12 sm:py-16 bg-green-600">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
       <div class="max-w-3xl mx-auto">
-        <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-6">🎯 Usa Los 4 Simuladores</h2>
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-6">🎯 Usa Los 3 Simuladores</h2>
         <p class="text-base sm:text-lg md:text-xl text-green-100 mb-8">
-          No arriesgues dinero real. Usa nuestros simuladores para entender las matemáticas brutales 
+          No arriesgues dinero real. Usa nuestros simuladores para entender las matemáticas 
           y los sesgos psicológicos antes de apostar tu dinero real.
         </p>
-        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 max-w-4xl mx-auto">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3 max-w-3xl mx-auto">
           <a 
             href={getUrl('/sports/season-simulator')} 
-            class="bg-white hover:bg-gray-100 text-green-600 font-bold py-3 px-2 sm:px-4 min-h-[48px] rounded-lg transition-all duration-200 text-center text-xs sm:text-sm"
+            class="bg-white hover:bg-gray-100 text-green-600 font-bold py-3 px-4 min-h-[48px] rounded-lg transition-all duration-200 text-center text-sm"
           >
-            🏈 Temporada
-          </a>
-          <a 
-            href={getUrl('/sports/juice-calculator')} 
-            class="bg-green-800 hover:bg-green-900 text-white font-bold py-3 px-2 sm:px-4 min-h-[48px] rounded-lg transition-all duration-200 text-center text-xs sm:text-sm"
-          >
-            🧮 Juice
+            📊 Ilusión
           </a>
           <a 
             href={getUrl('/sports/streak-simulator')} 
-            class="bg-green-700 hover:bg-green-800 text-white font-bold py-3 px-2 sm:px-4 min-h-[48px] rounded-lg transition-all duration-200 text-center text-xs sm:text-sm"
+            class="bg-green-700 hover:bg-green-800 text-white font-bold py-3 px-4 min-h-[48px] rounded-lg transition-all duration-200 text-center text-sm"
           >
             📈 Rachas
           </a>
           <a 
             href={getUrl('/sports/bankroll-manager')} 
-            class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-2 sm:px-4 min-h-[48px] rounded-lg transition-all duration-200 text-center text-xs sm:text-sm"
+            class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-4 min-h-[48px] rounded-lg transition-all duration-200 text-center text-sm"
           >
             💰 Bankroll
           </a>

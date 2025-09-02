@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from 'react';
+import PaylineReality from './PaylineReality';
 
 interface PaylineData {
   lines: number;
@@ -251,38 +252,7 @@ const PaylineCalculator: React.FC = () => {
       {/* Visualización de líneas */}
       <div className="mb-8">
         <h3 className="text-2xl font-bold text-gray-800 mb-6">👀 Visualización de Líneas de Pago</h3>
-        <div className="bg-gray-50 p-6 rounded-lg">
-          <div className="grid grid-cols-5 gap-2 max-w-md mx-auto mb-4">
-            {Array.from({ length: 15 }, (_, i) => (
-              <div
-                key={i}
-                className={`w-12 h-12 rounded-lg flex items-center justify-center text-sm font-bold ${
-                  Math.random() > 0.7 ? 'bg-yellow-400 text-yellow-900' : 'bg-gray-300 text-gray-600'
-                }`}
-              >
-                {['🍒', '🍋', '⭐', '💎', '7️⃣'][Math.floor(Math.random() * 5)]}
-              </div>
-            ))}
-          </div>
-          <div className="text-center">
-            <p className="text-sm text-gray-600 mb-2">Ejemplo de slot 5x3 con múltiples líneas</p>
-            <div className="flex justify-center space-x-4 text-xs">
-              <span className="flex items-center">
-                <div className="w-3 h-3 bg-red-400 rounded mr-1"></div>
-                Línea 1
-              </span>
-              <span className="flex items-center">
-                <div className="w-3 h-3 bg-blue-400 rounded mr-1"></div>
-                Línea 2
-              </span>
-              <span className="flex items-center">
-                <div className="w-3 h-3 bg-green-400 rounded mr-1"></div>
-                Línea 3
-              </span>
-              <span className="text-gray-500">+ {Math.max(0, selectedLines - 3)} más...</span>
-            </div>
-          </div>
-        </div>
+        <PaylineReality />
       </div>
 
       {/* Comparación matemática precisa */}

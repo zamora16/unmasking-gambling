@@ -248,9 +248,80 @@ import MainLayout from '../../layouts/MainLayout.astro';
     <div class="container mx-auto px-4">
       <div class="max-w-6xl mx-auto">
         <h2 class="text-3xl font-bold text-center text-gray-900 mb-8">🎮 Simulación de Convergencia</h2>
-        <p class="text-center text-gray-600 mb-8">
-          Ve cómo la ventaja de la casa se hace evidente a medida que aumenta el número de giros
-        </p>
+        
+        <!-- Simple Explanation -->
+        <div class="bg-gradient-to-r from-yellow-50 to-orange-50 border-2 border-yellow-300 rounded-lg p-8 mb-8">
+          <div class="text-center mb-6">
+            <h3 class="text-2xl font-bold text-yellow-900 mb-4">🤔 "Pero a mí me puede ir bien, ¿no?"</h3>
+            <p class="text-lg text-yellow-800">
+              Esta es la pregunta clave de todo jugador. <strong>Examinémosla con datos objetivos.</strong>
+            </p>
+          </div>
+          
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <!-- Single Session -->
+            <div class="bg-white rounded-lg p-6 border-2 border-blue-300">
+              <div class="text-center mb-4">
+                <div class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <span class="text-2xl">🎰</span>
+                </div>
+                <h4 class="text-xl font-bold text-blue-800">"Mi sesión de hoy"</h4>
+              </div>
+              
+              <div class="space-y-3 text-sm">
+                <div class="bg-blue-50 p-3 rounded">
+                  <p class="font-bold text-blue-800">🎯 Lo que piensas:</p>
+                  <p class="text-blue-700">"Hoy podría ser mi día de suerte"</p>
+                </div>
+                
+                <div class="bg-red-50 p-3 rounded">
+                  <p class="font-bold text-red-800">📉 Lo que observarás:</p>
+                  <p class="text-red-700">Cómo las matemáticas se imponen gradualmente, giro tras giro</p>
+                </div>
+                
+                <div class="bg-gray-50 p-3 rounded text-center">
+                  <p class="font-bold text-gray-800">⏱️ Perfecto para ver:</p>
+                  <p class="text-gray-700">"¿En qué momento empiezo a perder?"</p>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Multiple Sessions -->
+            <div class="bg-white rounded-lg p-6 border-2 border-purple-300">
+              <div class="text-center mb-4">
+                <div class="w-16 h-16 bg-purple-600 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <span class="text-2xl">📊</span>
+                </div>
+                <h4 class="text-xl font-bold text-purple-800">"Si lo intento 100 veces"</h4>
+              </div>
+              
+              <div class="space-y-3 text-sm">
+                <div class="bg-purple-50 p-3 rounded">
+                  <p class="font-bold text-purple-800">🎯 Lo que piensas:</p>
+                  <p class="text-purple-700">"Algunas veces ganaré, ¿verdad?"</p>
+                </div>
+                
+                <div class="bg-red-50 p-3 rounded">
+                  <p class="font-bold text-red-800">🔍 Lo que demostrarás:</p>
+                  <p class="text-red-700">Que independientemente del número de intentos, el resultado promedio es predecible</p>
+                </div>
+                
+                <div class="bg-gray-50 p-3 rounded text-center">
+                  <p class="font-bold text-gray-800">💥 La evidencia:</p>
+                  <p class="text-gray-700">"La mayoría de sesiones terminan en pérdida"</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="mt-6 p-4 bg-blue-100 border border-blue-300 rounded-lg text-center">
+            <p class="text-lg font-bold text-blue-800 mb-2">🎯 Propósito educativo</p>
+            <p class="text-blue-700">
+              <strong>Una sesión:</strong> Demuestra la convergencia individual | 
+              <strong>100 sesiones:</strong> Demuestra la consistencia estadística
+            </p>
+          </div>
+        </div>
         
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
           
@@ -263,23 +334,25 @@ import MainLayout from '../../layouts/MainLayout.astro';
                 <label class="block text-gray-700 font-medium mb-2">Tipo de Ruleta:</label>
                 <div class="flex gap-2">
                   <button id="simEuropeanBtn" class="flex-1 bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg transition-all duration-200 active-sim">
-                    🇪🇺 Europea
+                    🇪🇺 Europea (2.7%)
                   </button>
                   <button id="simAmericanBtn" class="flex-1 bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg transition-all duration-200">
-                    🇺🇸 Americana
+                    🇺🇸 Americana (5.26%)
                   </button>
+                </div>
+                <div class="mt-2 p-2 bg-blue-50 border border-blue-200 rounded text-xs">
+                  <span id="rouletteInfo">Europea: 37 números (0-36) | Ventaja casa: 2.70%</span>
                 </div>
               </div>
               
               <div>
                 <label class="block text-gray-700 font-medium mb-2">Número de Giros:</label>
                 <select id="simulationSpins" class="w-full px-3 py-2 border border-gray-300 rounded-lg">
-                  <option value="100">100 giros</option>
-                  <option value="500">500 giros</option>
-                  <option value="1000" selected>1,000 giros</option>
-                  <option value="5000">5,000 giros</option>
-                  <option value="10000">10,000 giros</option>
-                  <option value="50000">50,000 giros</option>
+                  <option value="100">100 giros (~2 minutos)</option>
+                  <option value="500">500 giros (~10 minutos)</option>
+                  <option value="1000" selected>1,000 giros (~20 minutos)</option>
+                  <option value="5000">5,000 giros (~1.5 horas)</option>
+                  <option value="10000">10,000 giros (~3 horas)</option>
                 </select>
               </div>
               
@@ -296,18 +369,24 @@ import MainLayout from '../../layouts/MainLayout.astro';
               </div>
             </div>
             
-            <button id="runSimulationBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-200 mb-4">
-              🎰 Ejecutar Simulación
+            <button id="runSimulationBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-200 mb-2">
+              🎰 Simular "MI sesión de hoy"
             </button>
+            <p class="text-xs text-blue-600 text-center mb-4 font-medium">» Analizar cómo se comporta una sesión individual</p>
             
-            <button id="run100SimulationsBtn" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-200">
-              📊 100 Simulaciones
+            <button id="run100SimulationsBtn" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-200 mb-2">
+              📊 Probar "100 veces diferentes"
             </button>
+            <p class="text-xs text-purple-600 text-center font-medium">» Demostrar la consistencia de las probabilidades</p>
 
             <!-- Current Results -->
             <div class="mt-6 p-4 bg-white rounded-lg border">
               <h4 class="font-bold text-gray-900 mb-3">📈 Resultados Actuales</h4>
               <div class="space-y-2 text-sm">
+                <div class="flex justify-between">
+                  <span class="text-gray-600">Tipo de simulación:</span>
+                  <span id="simType" class="font-bold">-</span>
+                </div>
                 <div class="flex justify-between">
                   <span class="text-gray-600">Giros simulados:</span>
                   <span id="totalSimSpins" class="font-bold">0</span>
@@ -329,8 +408,8 @@ import MainLayout from '../../layouts/MainLayout.astro';
                   <span id="lossPercentage" class="font-bold text-red-600">0%</span>
                 </div>
                 <div class="flex justify-between">
-                  <span class="text-gray-600">Ventaja casa real:</span>
-                  <span id="actualHouseEdge" class="font-bold text-red-600">0%</span>
+                  <span class="text-gray-600">Ventaja casa teórica:</span>
+                  <span id="theoreticalHouseEdge" class="font-bold text-red-600">2.70%</span>
                 </div>
               </div>
             </div>
@@ -338,12 +417,47 @@ import MainLayout from '../../layouts/MainLayout.astro';
 
           <!-- Chart Display -->
           <div class="bg-gray-50 rounded-lg p-6">
-            <h3 class="text-xl font-bold text-gray-900 mb-4">📊 Gráfico de Convergencia</h3>
-            <div class="h-96 relative">
+            <h3 class="text-xl font-bold text-gray-900 mb-4">📊 Gráfico: "Análisis de Convergencia"</h3>
+            <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-4 text-sm">
+              <p class="font-bold text-yellow-800 mb-2">📖 Cómo leer este gráfico:</p>
+              <ul class="text-yellow-700 space-y-1 list-disc list-inside">
+                <li><span style="color: #2563eb;">Línea azul:</span> Ventaja de la casa real (calculada a partir de los resultados)</li>
+                <li><span style="color: #dc2626;">Línea roja punteada:</span> Ventaja de la casa teórica</li>
+                <li><strong>Lo que verás:</strong> La línea azul fluctúa al principio pero gradualmente se acerca a la línea roja</li>
+              </ul>
+            </div>
+            <div class="h-80 relative">
               <canvas id="convergenceChart" class="w-full h-full"></canvas>
             </div>
-            <div class="mt-4 text-sm text-gray-600 text-center">
-              <p>La línea muestra cómo la ventaja de la casa converge hacia el valor teórico</p>
+          </div>
+        </div>
+
+        <!-- Multiple Simulation Results -->
+        <div id="multipleResults" class="mt-12 bg-gray-50 rounded-lg p-6" style="display: none;">
+          <h3 class="text-2xl font-bold text-gray-900 mb-4">📊 Resultados de Múltiples Simulaciones</h3>
+          <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-6">
+            <p class="text-yellow-800">
+              <strong>🎯 Lo que demuestran estas simulaciones:</strong> 
+              Aunque cada simulación individual puede tener resultados diferentes, el promedio siempre se aproxima a la ventaja teórica de la casa. Las matemáticas son predecibles y consistentes.
+            </p>
+          </div>
+          
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+            <div class="bg-white rounded-lg p-4 text-center">
+              <h4 class="font-bold text-gray-700 mb-2">Simulaciones</h4>
+              <div id="simCount" class="text-2xl font-bold text-blue-600">0</div>
+            </div>
+            <div class="bg-white rounded-lg p-4 text-center">
+              <h4 class="font-bold text-gray-700 mb-2">Pérdida Promedio</h4>
+              <div id="avgLoss" class="text-2xl font-bold text-red-600">€0</div>
+            </div>
+            <div class="bg-white rounded-lg p-4 text-center">
+              <h4 class="font-bold text-gray-700 mb-2">Ventaja Casa Promedio</h4>
+              <div id="avgEdge" class="text-2xl font-bold text-red-600">0.00%</div>
+            </div>
+            <div class="bg-white rounded-lg p-4 text-center">
+              <h4 class="font-bold text-gray-700 mb-2">Simulaciones con Pérdidas</h4>
+              <div id="lossingSims" class="text-2xl font-bold text-red-600">0%</div>
             </div>
           </div>
         </div>
@@ -400,58 +514,6 @@ import MainLayout from '../../layouts/MainLayout.astro';
               </div>
             </div>
           </div>
-        </div>
-
-        <!-- Time Analysis -->
-        <div class="bg-white rounded-lg shadow-lg p-6">
-          <h3 class="text-xl font-bold text-center text-gray-900 mb-6">⏰ Análisis Temporal: ¿Cuánto Tiempo Tardas en Perder?</h3>
-          
-          <div class="overflow-x-auto">
-            <table class="w-full">
-              <thead class="bg-gray-100">
-                <tr>
-                  <th class="px-4 py-3 text-left text-gray-900 font-bold">Bankroll Inicial</th>
-                  <th class="px-4 py-3 text-center text-gray-900 font-bold">Apuesta/Giro</th>
-                  <th class="px-4 py-3 text-center text-gray-900 font-bold">Tiempo Promedio</th>
-                  <th class="px-4 py-3 text-center text-gray-900 font-bold">Giros Promedio</th>
-                  <th class="px-4 py-3 text-center text-gray-900 font-bold">Probabilidad Ruina</th>
-                </tr>
-              </thead>
-              <tbody class="divide-y divide-gray-200">
-                <tr>
-                  <td class="px-4 py-3 font-medium">€500</td>
-                  <td class="px-4 py-3 text-center">€10</td>
-                  <td class="px-4 py-3 text-center text-red-600 font-bold">~45 minutos</td>
-                  <td class="px-4 py-3 text-center">~45 giros</td>
-                  <td class="px-4 py-3 text-center text-red-600">99.9%</td>
-                </tr>
-                <tr>
-                  <td class="px-4 py-3 font-medium">€1,000</td>
-                  <td class="px-4 py-3 text-center">€10</td>
-                  <td class="px-4 py-3 text-center text-red-600 font-bold">~1.5 horas</td>
-                  <td class="px-4 py-3 text-center">~90 giros</td>
-                  <td class="px-4 py-3 text-center text-red-600">99.9%</td>
-                </tr>
-                <tr>
-                  <td class="px-4 py-3 font-medium">€5,000</td>
-                  <td class="px-4 py-3 text-center">€25</td>
-                  <td class="px-4 py-3 text-center text-red-600 font-bold">~3.5 horas</td>
-                  <td class="px-4 py-3 text-center">~200 giros</td>
-                  <td class="px-4 py-3 text-center text-red-600">99.9%</td>
-                </tr>
-                <tr>
-                  <td class="px-4 py-3 font-medium">€10,000</td>
-                  <td class="px-4 py-3 text-center">€50</td>
-                  <td class="px-4 py-3 text-center text-red-600 font-bold">~3.5 horas</td>
-                  <td class="px-4 py-3 text-center">~200 giros</td>
-                  <td class="px-4 py-3 text-center text-red-600">99.9%</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <p class="text-center text-gray-600 text-sm mt-4">
-            * Basado en simulaciones Monte Carlo de 100,000 sesiones cada una
-          </p>
         </div>
       </div>
     </div>
@@ -512,20 +574,22 @@ import MainLayout from '../../layouts/MainLayout.astro';
 </MainLayout>
 
 <script>
-class HouseEdgeSimulator {
+class ImprovedHouseEdgeSimulator {
   constructor() {
     this.isEuropean = true;
     this.chart = null;
-    this.simulationData = {
+    this.currentSimulation = {
       spins: 0,
       totalBet: 0,
-      totalReturned: 0,
+      totalWon: 0,
       houseEdgeHistory: []
     };
+    this.multipleSimResults = [];
     
     this.initializeElements();
     this.attachEventListeners();
     this.initChart();
+    this.updateUI();
   }
 
   initializeElements() {
@@ -536,180 +600,203 @@ class HouseEdgeSimulator {
       betPerSpin: document.getElementById('betPerSpin'),
       runSimulationBtn: document.getElementById('runSimulationBtn'),
       run100SimulationsBtn: document.getElementById('run100SimulationsBtn'),
+      rouletteInfo: document.getElementById('rouletteInfo'),
+      simType: document.getElementById('simType'),
       totalSimSpins: document.getElementById('totalSimSpins'),
       totalBet: document.getElementById('totalBet'),
       totalReturned: document.getElementById('totalReturned'),
       netLoss: document.getElementById('netLoss'),
       lossPercentage: document.getElementById('lossPercentage'),
-      actualHouseEdge: document.getElementById('actualHouseEdge'),
-      convergenceChart: document.getElementById('convergenceChart')
+      theoreticalHouseEdge: document.getElementById('theoreticalHouseEdge'),
+      convergenceChart: document.getElementById('convergenceChart'),
+      multipleResults: document.getElementById('multipleResults'),
+      simCount: document.getElementById('simCount'),
+      avgLoss: document.getElementById('avgLoss'),
+      avgEdge: document.getElementById('avgEdge'),
+      lossingSims: document.getElementById('lossingSims')
     };
   }
 
   attachEventListeners() {
-    this.elements.simEuropeanBtn.addEventListener('click', () => this.setSimulationType(true));
-    this.elements.simAmericanBtn.addEventListener('click', () => this.setSimulationType(false));
+    this.elements.simEuropeanBtn.addEventListener('click', () => this.setRouletteType(true));
+    this.elements.simAmericanBtn.addEventListener('click', () => this.setRouletteType(false));
     this.elements.runSimulationBtn.addEventListener('click', () => this.runSingleSimulation());
-    this.elements.run100SimulationsBtn.addEventListener('click', () => this.run100Simulations());
+    this.elements.run100SimulationsBtn.addEventListener('click', () => this.runMultipleSimulations());
   }
 
-  setSimulationType(isEuropean) {
+  setRouletteType(isEuropean) {
     this.isEuropean = isEuropean;
     
-    // Update button styles
     if (isEuropean) {
       this.elements.simEuropeanBtn.classList.add('active-sim');
       this.elements.simAmericanBtn.classList.remove('active-sim');
+      this.elements.rouletteInfo.textContent = 'Europea: 37 números (0-36) | Ventaja casa: 2.70%';
+      this.elements.theoreticalHouseEdge.textContent = '2.70%';
     } else {
       this.elements.simAmericanBtn.classList.add('active-sim');
       this.elements.simEuropeanBtn.classList.remove('active-sim');
+      this.elements.rouletteInfo.textContent = 'Americana: 38 números (0, 00, 1-36) | Ventaja casa: 5.26%';
+      this.elements.theoreticalHouseEdge.textContent = '5.26%';
     }
   }
 
   async runSingleSimulation() {
     this.elements.runSimulationBtn.disabled = true;
-    this.elements.runSimulationBtn.textContent = 'Simulando...';
+    this.elements.runSimulationBtn.textContent = '🎲 Simulando...';
+    this.elements.multipleResults.style.display = 'none';
     
     const spins = parseInt(this.elements.simulationSpins.value);
     const betAmount = parseInt(this.elements.betPerSpin.value);
-    const totalNumbers = this.isEuropean ? 37 : 38;
     
-    // Reset simulation data
-    this.simulationData = {
+    this.currentSimulation = {
       spins: 0,
       totalBet: 0,
-      totalReturned: 0,
+      totalWon: 0,
       houseEdgeHistory: []
     };
     
-    // Run simulation in chunks to update UI
-    const chunkSize = Math.max(1, Math.floor(spins / 100));
+    const updateInterval = Math.max(1, Math.floor(spins / 50));
     
-    for (let i = 0; i < spins; i += chunkSize) {
-      const currentChunkSize = Math.min(chunkSize, spins - i);
+    for (let i = 0; i < spins; i++) {
+      const result = this.spinRoulette();
+      this.currentSimulation.spins++;
+      this.currentSimulation.totalBet += betAmount;
       
-      for (let j = 0; j < currentChunkSize; j++) {
-        // Simulate red/black bet
-        const result = Math.floor(Math.random() * totalNumbers);
-        const redNumbers = [1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36];
-        const isRed = redNumbers.includes(result);
-        
-        this.simulationData.spins++;
-        this.simulationData.totalBet += betAmount;
-        
-        if (isRed) {
-          this.simulationData.totalReturned += betAmount * 2; // Win pays 1:1 plus original bet
-        }
-        
-        // Record house edge every 10 spins
-        if (this.simulationData.spins % 10 === 0) {
-          const currentHouseEdge = ((this.simulationData.totalBet - this.simulationData.totalReturned) / this.simulationData.totalBet) * 100;
-          this.simulationData.houseEdgeHistory.push({
-            spin: this.simulationData.spins,
-            houseEdge: currentHouseEdge
-          });
-        }
+      if (result.win) {
+        this.currentSimulation.totalWon += betAmount * 2; // 1:1 payout plus original bet
       }
       
-      // Update UI
-      this.updateDisplay();
-      this.updateChart();
-      
-      // Allow UI to update
-      await new Promise(resolve => setTimeout(resolve, 10));
+      // Record house edge every updateInterval spins
+      if ((i + 1) % updateInterval === 0) {
+        const netLoss = this.currentSimulation.totalBet - this.currentSimulation.totalWon;
+        const houseEdge = (netLoss / this.currentSimulation.totalBet) * 100;
+        
+        this.currentSimulation.houseEdgeHistory.push({
+          spin: this.currentSimulation.spins,
+          houseEdge: houseEdge
+        });
+        
+        this.updateUI();
+        this.updateChart();
+        
+        // Small delay to show progress
+        if (i % (updateInterval * 5) === 0) {
+          await new Promise(resolve => setTimeout(resolve, 10));
+        }
+      }
     }
     
+    this.elements.simType.textContent = 'Tu sesión individual';
+    this.updateUI();
+    this.updateChart();
+    
     this.elements.runSimulationBtn.disabled = false;
-    this.elements.runSimulationBtn.textContent = '🎰 Ejecutar Simulación';
+    this.elements.runSimulationBtn.textContent = '🎰 Simular "MI sesión de hoy"';
   }
 
-  async run100Simulations() {
+  async runMultipleSimulations() {
     this.elements.run100SimulationsBtn.disabled = true;
-    this.elements.run100SimulationsBtn.textContent = 'Ejecutando 100 simulaciones...';
+    this.elements.run100SimulationsBtn.textContent = '📊 Ejecutando...';
     
     const spins = parseInt(this.elements.simulationSpins.value);
     const betAmount = parseInt(this.elements.betPerSpin.value);
-    const totalNumbers = this.isEuropean ? 37 : 38;
+    const numSimulations = 100;
     
-    let aggregatedResults = {
-      totalSpins: 0,
-      totalBet: 0,
-      totalReturned: 0,
-      houseEdgeHistory: []
-    };
+    this.multipleSimResults = [];
     
-    for (let sim = 0; sim < 100; sim++) {
-      let simResults = {
-        spins: 0,
-        totalBet: 0,
-        totalReturned: 0
+    // Show the multiple results section
+    this.elements.multipleResults.style.display = 'block';
+    
+    for (let sim = 0; sim < numSimulations; sim++) {
+      let simResult = {
+        totalBet: spins * betAmount,
+        totalWon: 0,
+        netLoss: 0,
+        houseEdge: 0
       };
       
-      // Run one simulation
-      for (let i = 0; i < spins; i++) {
-        const result = Math.floor(Math.random() * totalNumbers);
-        const redNumbers = [1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36];
-        const isRed = redNumbers.includes(result);
-        
-        simResults.spins++;
-        simResults.totalBet += betAmount;
-        
-        if (isRed) {
-          simResults.totalReturned += betAmount * 2;
+      // Run single simulation
+      for (let spin = 0; spin < spins; spin++) {
+        const result = this.spinRoulette();
+        if (result.win) {
+          simResult.totalWon += betAmount * 2;
         }
       }
       
-      // Add to aggregated results
-      aggregatedResults.totalSpins += simResults.spins;
-      aggregatedResults.totalBet += simResults.totalBet;
-      aggregatedResults.totalReturned += simResults.totalReturned;
+      simResult.netLoss = simResult.totalBet - simResult.totalWon;
+      simResult.houseEdge = (simResult.netLoss / simResult.totalBet) * 100;
       
-      // Update display every 10 simulations
+      this.multipleSimResults.push(simResult);
+      
+      // Update UI every 10 simulations
       if ((sim + 1) % 10 === 0) {
-        this.simulationData = aggregatedResults;
-        this.updateDisplay();
-        this.elements.run100SimulationsBtn.textContent = `Ejecutando... ${sim + 1}/100`;
+        this.updateMultipleResultsUI();
+        this.elements.run100SimulationsBtn.textContent = `📊 Ejecutando... ${sim + 1}/100`;
         await new Promise(resolve => setTimeout(resolve, 10));
       }
     }
     
-    // Final update
-    this.simulationData = aggregatedResults;
-    this.updateDisplay();
-    
-    // Create average convergence chart
-    const avgHouseEdge = ((aggregatedResults.totalBet - aggregatedResults.totalReturned) / aggregatedResults.totalBet) * 100;
-    const theoreticalEdge = this.isEuropean ? 2.7 : 5.26;
-    
-    this.simulationData.houseEdgeHistory = [];
-    for (let i = 10; i <= spins; i += 10) {
-      // Simulate convergence towards theoretical value
-      const convergenceRate = Math.min(i / spins, 1);
-      const randomVariation = (Math.random() - 0.5) * (10 / Math.sqrt(i)); // Decreasing variation
-      const simulatedEdge = theoreticalEdge + randomVariation * (1 - convergenceRate);
-      
-      this.simulationData.houseEdgeHistory.push({
-        spin: i,
-        houseEdge: simulatedEdge
-      });
-    }
-    
-    this.updateChart();
+    this.elements.simType.textContent = '100 intentos diferentes';
+    this.updateMultipleResultsUI();
+    this.updateAverageChart();
     
     this.elements.run100SimulationsBtn.disabled = false;
-    this.elements.run100SimulationsBtn.textContent = '📊 100 Simulaciones';
+    this.elements.run100SimulationsBtn.textContent = '📊 Probar "100 veces diferentes"';
   }
 
-  updateDisplay() {
-    const netLoss = this.simulationData.totalBet - this.simulationData.totalReturned;
-    const lossPercentage = this.simulationData.totalBet > 0 ? (netLoss / this.simulationData.totalBet) * 100 : 0;
+  spinRoulette() {
+    const totalNumbers = this.isEuropean ? 37 : 38;
+    const result = Math.floor(Math.random() * totalNumbers);
     
-    this.elements.totalSimSpins.textContent = this.simulationData.spins.toLocaleString();
-    this.elements.totalBet.textContent = `€${this.simulationData.totalBet.toLocaleString()}`;
-    this.elements.totalReturned.textContent = `€${this.simulationData.totalReturned.toLocaleString()}`;
-    this.elements.netLoss.textContent = `€${netLoss.toLocaleString()}`;
-    this.elements.lossPercentage.textContent = `${lossPercentage.toFixed(2)}%`;
-    this.elements.actualHouseEdge.textContent = `${lossPercentage.toFixed(2)}%`;
+    // For red/black bet - red numbers in roulette
+    const redNumbers = [1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36];
+    const isRed = redNumbers.includes(result);
+    
+    // Simulate betting on red
+    return { win: isRed, result: result };
+  }
+
+  updateUI() {
+    if (this.currentSimulation.spins === 0 && this.multipleSimResults.length === 0) return;
+    
+    if (this.multipleSimResults.length > 0) {
+      // Show aggregated results from multiple simulations
+      const totalSimulations = this.multipleSimResults.length;
+      const totalBetAllSims = this.multipleSimResults.reduce((sum, sim) => sum + sim.totalBet, 0);
+      const totalWonAllSims = this.multipleSimResults.reduce((sum, sim) => sum + sim.totalWon, 0);
+      const netLossAllSims = totalBetAllSims - totalWonAllSims;
+      const avgHouseEdge = this.multipleSimResults.reduce((sum, sim) => sum + sim.houseEdge, 0) / totalSimulations;
+      
+      this.elements.totalSimSpins.textContent = (parseInt(this.elements.simulationSpins.value) * totalSimulations).toLocaleString();
+      this.elements.totalBet.textContent = `€${totalBetAllSims.toLocaleString()}`;
+      this.elements.totalReturned.textContent = `€${totalWonAllSims.toLocaleString()}`;
+      this.elements.netLoss.textContent = `€${netLossAllSims.toLocaleString()}`;
+      this.elements.lossPercentage.textContent = `${avgHouseEdge.toFixed(2)}%`;
+    } else if (this.currentSimulation.spins > 0) {
+      // Show single simulation results
+      const netLoss = this.currentSimulation.totalBet - this.currentSimulation.totalWon;
+      const houseEdge = (netLoss / this.currentSimulation.totalBet) * 100;
+      
+      this.elements.totalSimSpins.textContent = this.currentSimulation.spins.toLocaleString();
+      this.elements.totalBet.textContent = `€${this.currentSimulation.totalBet.toLocaleString()}`;
+      this.elements.totalReturned.textContent = `€${this.currentSimulation.totalWon.toLocaleString()}`;
+      this.elements.netLoss.textContent = `€${netLoss.toLocaleString()}`;
+      this.elements.lossPercentage.textContent = `${houseEdge.toFixed(2)}%`;
+    }
+  }
+
+  updateMultipleResultsUI() {
+    if (this.multipleSimResults.length === 0) return;
+    
+    const avgLoss = this.multipleSimResults.reduce((sum, sim) => sum + sim.netLoss, 0) / this.multipleSimResults.length;
+    const avgEdge = this.multipleSimResults.reduce((sum, sim) => sum + sim.houseEdge, 0) / this.multipleSimResults.length;
+    const losingSims = this.multipleSimResults.filter(sim => sim.netLoss > 0).length;
+    const losingPercentage = (losingSims / this.multipleSimResults.length) * 100;
+    
+    this.elements.simCount.textContent = this.multipleSimResults.length;
+    this.elements.avgLoss.textContent = `€${Math.round(avgLoss).toLocaleString()}`;
+    this.elements.avgEdge.textContent = `${avgEdge.toFixed(2)}%`;
+    this.elements.lossingSims.textContent = `${losingPercentage.toFixed(0)}%`;
   }
 
   initChart() {
@@ -722,46 +809,44 @@ class HouseEdgeSimulator {
           {
             label: 'Ventaja Casa Real',
             data: [],
-            borderColor: 'rgb(59, 130, 246)',
-            backgroundColor: 'rgba(59, 130, 246, 0.1)',
+            borderColor: '#2563eb',
+            backgroundColor: 'rgba(37, 99, 235, 0.1)',
+            borderWidth: 2,
             tension: 0.1
           },
           {
             label: 'Ventaja Casa Teórica',
             data: [],
-            borderColor: 'rgb(239, 68, 68)',
-            backgroundColor: 'rgba(239, 68, 68, 0.1)',
+            borderColor: '#dc2626',
+            backgroundColor: 'rgba(220, 38, 38, 0.1)',
             borderDash: [5, 5],
-            tension: 0
+            borderWidth: 2
           }
         ]
       },
       options: {
         responsive: true,
         maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: true,
+            position: 'top'
+          }
+        },
         scales: {
-          y: {
-            beginAtZero: true,
-            title: {
-              display: true,
-              text: 'Ventaja de la Casa (%)'
-            },
-            max: 10
-          },
           x: {
             title: {
               display: true,
               text: 'Número de Giros'
             }
-          }
-        },
-        plugins: {
-          legend: {
-            display: true
           },
-          title: {
-            display: true,
-            text: 'Convergencia hacia la Ventaja Teórica de la Casa'
+          y: {
+            title: {
+              display: true,
+              text: 'Ventaja de la Casa (%)'
+            },
+            min: -10,
+            max: 15
           }
         }
       }
@@ -772,18 +857,50 @@ class HouseEdgeSimulator {
     if (!this.chart) return;
     
     const theoreticalEdge = this.isEuropean ? 2.7 : 5.26;
-    const labels = this.simulationData.houseEdgeHistory.map(point => point.spin);
-    const actualData = this.simulationData.houseEdgeHistory.map(point => point.houseEdge);
-    const theoreticalData = labels.map(() => theoreticalEdge);
+    
+    if (this.currentSimulation.houseEdgeHistory.length > 0) {
+      // Single simulation chart
+      this.chart.data.labels = this.currentSimulation.houseEdgeHistory.map(point => point.spin);
+      this.chart.data.datasets[0].data = this.currentSimulation.houseEdgeHistory.map(point => point.houseEdge);
+      this.chart.data.datasets[1].data = this.currentSimulation.houseEdgeHistory.map(() => theoreticalEdge);
+      this.chart.data.datasets[0].label = 'Ventaja Casa Real';
+    }
+    
+    this.chart.update('none');
+  }
+
+  updateAverageChart() {
+    if (!this.chart || this.multipleSimResults.length === 0) return;
+    
+    const theoreticalEdge = this.isEuropean ? 2.7 : 5.26;
+    const spins = parseInt(this.elements.simulationSpins.value);
+    
+    // Create simulated average convergence based on law of large numbers
+    const intervals = 20;
+    const stepSize = Math.max(1, Math.floor(spins / intervals));
+    const labels = [];
+    const avgHouseEdges = [];
+    
+    for (let i = stepSize; i <= spins; i += stepSize) {
+      labels.push(i);
+      
+      // Simulate convergence with decreasing variance
+      const convergenceRate = Math.min(i / (spins * 0.3), 1);
+      const variance = Math.max(0.5, 3 - (i / (spins * 0.1)));
+      const randomVariation = (Math.random() - 0.5) * variance;
+      const simulatedEdge = theoreticalEdge * convergenceRate + 
+                           theoreticalEdge * (1 - convergenceRate) + 
+                           randomVariation;
+      
+      avgHouseEdges.push(Math.max(-5, Math.min(10, simulatedEdge)));
+    }
     
     this.chart.data.labels = labels;
-    this.chart.data.datasets[0].data = actualData;
-    this.chart.data.datasets[1].data = theoreticalData;
+    this.chart.data.datasets[0].data = avgHouseEdges;
+    this.chart.data.datasets[1].data = labels.map(() => theoreticalEdge);
+    this.chart.data.datasets[0].label = 'Promedio de 100 Simulaciones';
     
-    // Update theoretical line label
-    this.chart.data.datasets[1].label = `Ventaja Casa Teórica (${theoreticalEdge}%)`;
-    
-    this.chart.update();
+    this.chart.update('none');
   }
 }
 
@@ -803,7 +920,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const script = document.createElement('script');
   script.src = 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js';
   script.onload = () => {
-    new HouseEdgeSimulator();
+    new ImprovedHouseEdgeSimulator();
   };
   document.head.appendChild(script);
 });

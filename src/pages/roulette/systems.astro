@@ -61,6 +61,40 @@ import MainLayout from '../../layouts/MainLayout.astro';
               <!-- Will be populated by JavaScript -->
             </div>
 
+            <!-- Strategy Preview -->
+            <div class="mb-6">
+              <h3 class="text-xl font-bold text-gray-900 mb-4">🎯 Previsualización de la Estrategia</h3>
+              <div class="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-lg p-4">
+                <div class="flex items-center justify-between mb-3">
+                  <span class="text-blue-800 font-semibold">Secuencia de apuestas:</span>
+                  <span id="previewInfo" class="text-xs text-blue-600">Actualiza los valores para ver la secuencia</span>
+                </div>
+                <div id="bettingSequence" class="bg-white rounded-lg p-3 min-h-[60px] flex items-center">
+                  <div class="text-gray-500 italic">Configura los valores para ver la secuencia de apuestas...</div>
+                </div>
+                <div class="mt-3 grid grid-cols-2 gap-4 text-xs">
+                  <div class="bg-yellow-50 border border-yellow-200 rounded p-2">
+                    <div class="text-yellow-800 font-semibold mb-1">⚠️ Alcance del límite:</div>
+                    <div id="tableLimitWarning" class="text-yellow-700">-</div>
+                  </div>
+                  <div class="bg-red-50 border border-red-200 rounded p-2">
+                    <div class="text-red-800 font-semibold mb-1">💰 Pérdida acumulada:</div>
+                    <div id="cumulativeLoss" class="text-red-700">-</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Validation Errors -->
+            <div id="validationErrors" class="mb-6 hidden">
+              <div class="bg-red-50 border border-red-200 rounded-lg p-4">
+                <h4 class="text-red-800 font-semibold mb-2">🚫 Errores de Configuración</h4>
+                <ul id="errorList" class="text-red-700 text-sm space-y-1">
+                  <!-- Errores se mostrarán aquí -->
+                </ul>
+              </div>
+            </div>
+
             <!-- Configuration -->
             <div class="mb-6">
               <h3 class="text-xl font-bold text-gray-900 mb-4">⚙️ Configuración</h3>
@@ -84,21 +118,25 @@ import MainLayout from '../../layouts/MainLayout.astro';
               </div>
             </div>
 
-            <!-- Controls -->
+            <!-- Controls SIMPLIFICADOS -->
             <div class="mb-6">
               <div class="flex flex-wrap gap-3">
-                <button id="singleSpinBtn" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition-all duration-200">
-                  🎲 1 Giro
+                <button id="simulateSessionBtn" class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-200">
+                  🎯 Simular 1 Sesión
+                  <div class="text-sm opacity-90 mt-1">Hasta ganar objetivo o arruinarse</div>
                 </button>
-                <button id="runSessionBtn" class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-6 rounded-lg transition-all duration-200">
-                  🏃 Sesión Completa
-                </button>
-                <button id="simulate1000Btn" class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-6 rounded-lg transition-all duration-200">
-                  ⚡ 1000 Sesiones
+                <button id="simulate1000Btn" class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-200">
+                  ⚡ Simular 1000 Sesiones
+                  <div class="text-sm opacity-90 mt-1">Para ver estadísticas reales</div>
                 </button>
                 <button id="resetBtn" class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-lg transition-all duration-200">
                   🔄 Reset
                 </button>
+              </div>
+              <div class="mt-4 bg-blue-50 border border-blue-200 rounded-lg p-3">
+                <p class="text-blue-800 text-sm">
+                  💡 <strong>Cómo usar:</strong> "1 Sesión" te muestra una simulación completa. "1000 Sesiones" revela la realidad estadística.
+                </p>
               </div>
             </div>
 
@@ -174,7 +212,7 @@ import MainLayout from '../../layouts/MainLayout.astro';
 
             <!-- Warning -->
             <div class="bg-red-50 border border-red-200 rounded-lg p-4">
-              <h4 class="font-bold text-red-800 mb-2">⚠️ Realidad Matemática</h4>
+              <h4 class="font-bold text-red-800 mb-2">⚠️ Consideración Importante</h4>
               <p id="systemWarning" class="text-red-700 text-sm">
                 Ningún sistema puede vencer la ventaja de la casa a largo plazo.
               </p>
@@ -189,7 +227,7 @@ import MainLayout from '../../layouts/MainLayout.astro';
   <section class="py-12 bg-white">
     <div class="container mx-auto px-4">
       <div class="max-w-6xl mx-auto">
-        <h2 class="text-3xl font-bold text-center text-gray-900 mb-12">🧠 Por Qué Fallan Todos los Sistemas</h2>
+        <h2 class="text-3xl font-bold text-center text-gray-900 mb-12">🧠 Limitaciones Matemáticas de los Sistemas</h2>
         
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
           <div class="bg-red-50 border-l-4 border-red-400 p-6 rounded">
@@ -244,7 +282,7 @@ import MainLayout from '../../layouts/MainLayout.astro';
                   <th class="px-6 py-3 text-left text-gray-900 font-bold">Sistema</th>
                   <th class="px-6 py-3 text-left text-gray-900 font-bold">Progresión</th>
                   <th class="px-6 py-3 text-left text-gray-900 font-bold">Ventaja Aparente</th>
-                  <th class="px-6 py-3 text-left text-gray-900 font-bold">Fallo Fatal</th>
+                  <th class="px-6 py-3 text-left text-gray-900 font-bold">Limitación Principal</th>
                 </tr>
               </thead>
               <tbody class="divide-y divide-gray-200">
@@ -266,12 +304,6 @@ import MainLayout from '../../layouts/MainLayout.astro';
                   <td class="px-6 py-4 text-sm">"Equilibrio natural"</td>
                   <td class="px-6 py-4 text-sm text-red-600">No compensa la ventaja casa</td>
                 </tr>
-                <tr>
-                  <td class="px-6 py-4 font-bold text-purple-600">Labouchère</td>
-                  <td class="px-6 py-4 text-sm">Sistema de cancelación</td>
-                  <td class="px-6 py-4 text-sm">"Garantiza ganancia objetivo"</td>
-                  <td class="px-6 py-4 text-sm text-red-600">Rachas largas = apuestas enormes</td>
-                </tr>
               </tbody>
             </table>
           </div>
@@ -288,7 +320,7 @@ import MainLayout from '../../layouts/MainLayout.astro';
         
         <div class="space-y-8">
           <div class="bg-white rounded-lg shadow-lg p-6">
-            <h3 class="text-xl font-bold text-red-800 mb-4">🔥 Martingala: El Ejemplo de los €10</h3>
+            <h3 class="text-xl font-bold text-red-800 mb-4">📈 Martingala: Progresión Exponencial</h3>
             <p class="text-gray-700 mb-4">
               Empiezas con €10. Después de solo 8 pérdidas consecutivas (probabilidad ~0.4%), necesitarías apostar €2,560.
             </p>
@@ -301,7 +333,7 @@ import MainLayout from '../../layouts/MainLayout.astro';
                 <div>Giro 5: Apuesta €160 → Pierdes → Total perdido: €310</div>
                 <div>Giro 6: Apuesta €320 → Pierdes → Total perdido: €630</div>
                 <div>Giro 7: Apuesta €640 → Pierdes → Total perdido: €1,270</div>
-                <div class="text-red-600 font-bold">Giro 8: Necesitas apostar €1,280 → ¡Límite de mesa alcanzado!</div>
+                <div class="text-red-600 font-bold">Giro 8: Necesitas apostar €1,280 → Limite de mesa alcanzado</div>
               </div>
             </div>
             <p class="text-red-600 font-bold mt-4">
@@ -343,30 +375,52 @@ import MainLayout from '../../layouts/MainLayout.astro';
 class BettingSystemAnalyzer {
   constructor() {
     this.currentSystem = 'martingale';
-    this.basebet = 10;
-    this.bankroll = 1000;
-    this.initialBankroll = 1000;
-    this.tableLimit = 500;
-    this.targetProfit = 100;
-    this.nextBet = 10;
-    this.spinsCount = 0;
-    this.sessionStatus = 'waiting';
-    this.bankrollHistory = [];
-    this.totalSessions = 0;
-    this.winningSessions = 0;
-    this.bankruptSessions = 0;
-    this.profits = [];
-    this.losses = [];
-    this.fibonacciSequence = [1, 1];
-    this.currentFibIndex = 0;
-    this.dalembertBase = 1;
-    this.chart = null;
+    this.config = {
+      basebet: 10,
+      bankroll: 1000,
+      tableLimit: 500,
+      targetProfit: 100
+    };
     
+    // Session state
+    this.session = this.createNewSession();
+    
+    // Statistics
+    this.stats = {
+      totalSessions: 0,
+      winningSessions: 0,
+      bankruptSessions: 0,
+      profits: [],
+      losses: []
+    };
+    
+    this.chart = null;
     this.initializeElements();
     this.attachEventListeners();
     this.updateSystemDescription();
+    
+    // Validación inicial
+    const errors = this.validateConfig();
+    this.showValidationErrors(errors);
+    this.updateSimulationButtons();
+    
+    this.updateStrategyPreview();
     this.updateDisplay();
     this.initChart();
+  }
+
+  createNewSession() {
+    return {
+      bankroll: this.config.bankroll,
+      currentBet: this.config.basebet,
+      spinsCount: 0,
+      status: 'ready', // 'ready', 'running', 'won', 'bust'
+      bankrollHistory: [this.config.bankroll],
+      // System-specific state
+      fibonacciIndex: 0,
+      dalembertLevel: 1,
+      fibonacciSequence: [1, 1]
+    };
   }
 
   initializeElements() {
@@ -375,18 +429,25 @@ class BettingSystemAnalyzer {
       fibonacciBtn: document.getElementById('fibonacciBtn'),
       dalembertBtn: document.getElementById('dalembertBtn'),
       systemDescription: document.getElementById('systemDescription'),
+      
+      // Config inputs
       basebet: document.getElementById('basebet'),
       bankroll: document.getElementById('bankroll'),
       tableLimit: document.getElementById('tableLimit'),
       targetProfit: document.getElementById('targetProfit'),
-      singleSpinBtn: document.getElementById('singleSpinBtn'),
-      runSessionBtn: document.getElementById('runSessionBtn'),
+      
+      // Controls - SIMPLIFICADOS
+      simulateSessionBtn: document.getElementById('simulateSessionBtn'),
       simulate1000Btn: document.getElementById('simulate1000Btn'),
       resetBtn: document.getElementById('resetBtn'),
+      
+      // Current status
       currentBankroll: document.getElementById('currentBankroll'),
       nextBet: document.getElementById('nextBet'),
       spinsCount: document.getElementById('spinsCount'),
       sessionStatus: document.getElementById('sessionStatus'),
+      
+      // Statistics
       totalSessions: document.getElementById('totalSessions'),
       winningSessions: document.getElementById('winningSessions'),
       bankruptSessions: document.getElementById('bankruptSessions'),
@@ -394,119 +455,535 @@ class BettingSystemAnalyzer {
       avgProfit: document.getElementById('avgProfit'),
       avgLoss: document.getElementById('avgLoss'),
       expectedROI: document.getElementById('expectedROI'),
+      
+      // Strategy Preview
+      bettingSequence: document.getElementById('bettingSequence'),
+      previewInfo: document.getElementById('previewInfo'),
+      tableLimitWarning: document.getElementById('tableLimitWarning'),
+      cumulativeLoss: document.getElementById('cumulativeLoss'),
+      
+      // Validation
+      validationErrors: document.getElementById('validationErrors'),
+      errorList: document.getElementById('errorList'),
+      
       systemWarning: document.getElementById('systemWarning'),
       bankrollChart: document.getElementById('bankrollChart')
     };
   }
 
   attachEventListeners() {
-    this.elements.martingaleBtn.addEventListener('click', () => this.setSystem('martingale'));
-    this.elements.fibonacciBtn.addEventListener('click', () => this.setSystem('fibonacci'));
-    this.elements.dalembertBtn.addEventListener('click', () => this.setSystem('dalembert'));
+    this.elements.martingaleBtn?.addEventListener('click', () => this.setSystem('martingale'));
+    this.elements.fibonacciBtn?.addEventListener('click', () => this.setSystem('fibonacci'));
+    this.elements.dalembertBtn?.addEventListener('click', () => this.setSystem('dalembert'));
     
-    this.elements.basebet.addEventListener('input', (e) => this.updateConfig());
-    this.elements.bankroll.addEventListener('input', (e) => this.updateConfig());
-    this.elements.tableLimit.addEventListener('input', (e) => this.updateConfig());
-    this.elements.targetProfit.addEventListener('input', (e) => this.updateConfig());
+    this.elements.basebet?.addEventListener('input', () => this.updateConfig());
+    this.elements.bankroll?.addEventListener('input', () => this.updateConfig());
+    this.elements.tableLimit?.addEventListener('input', () => this.updateConfig());
+    this.elements.targetProfit?.addEventListener('input', () => this.updateConfig());
     
-    this.elements.singleSpinBtn.addEventListener('click', () => this.singleSpin());
-    this.elements.runSessionBtn.addEventListener('click', () => this.runSession());
-    this.elements.simulate1000Btn.addEventListener('click', () => this.simulate1000());
-    this.elements.resetBtn.addEventListener('click', () => this.reset());
+    // CONTROLES SIMPLIFICADOS
+    this.elements.simulateSessionBtn?.addEventListener('click', () => this.simulateSession());
+    this.elements.simulate1000Btn?.addEventListener('click', () => this.simulate1000Sessions());
+    this.elements.resetBtn?.addEventListener('click', () => this.resetAll());
   }
 
   setSystem(system) {
     this.currentSystem = system;
     
     // Update button styles
-    document.querySelectorAll('.system-btn').forEach(btn => btn.classList.remove('active-system'));
-    this.elements[system + 'Btn'].classList.add('active-system');
+    document.querySelectorAll('.system-btn')?.forEach(btn => btn.classList.remove('active-system'));
+    this.elements[system + 'Btn']?.classList.add('active-system');
     
     this.updateSystemDescription();
-    this.reset();
+    
+    // Re-validar al cambiar sistema
+    const errors = this.validateConfig();
+    this.showValidationErrors(errors);
+    this.updateSimulationButtons();
+    
+    this.updateStrategyPreview();
+    this.resetAll();
   }
 
   updateSystemDescription() {
     const descriptions = {
       martingale: {
         title: '🎯 Sistema Martingala',
-        description: 'Dobla tu apuesta después de cada pérdida. Cuando ganes, recuperarás todas las pérdidas más una ganancia igual a tu apuesta base.',
-        warning: 'Peligro: El crecimiento exponencial puede agotar tu bankroll rápidamente. Solo 8 pérdidas consecutivas convertirían €10 en €2,560.',
-        howItWorks: 'Apuesta base → Si pierdes: x2 → Si ganas: vuelve a base'
+        description: 'Dobla tu apuesta después de cada pérdida hasta ganar. Cuando ganes, vuelve a la apuesta base.',
+        example: 'Ejemplo: €10 → €20 → €40 → €80 → GANA → vuelve a €10',
+        warning: 'Solo 8 pérdidas consecutivas convierten €10 en €2,560. Probabilidad: ~0.4%',
+        howItWorks: 'Si pierdes: apuesta × 2 | Si ganas: vuelve a apuesta base'
       },
       fibonacci: {
         title: '🔢 Sistema Fibonacci',
-        description: 'Sigues la secuencia de Fibonacci (1,1,2,3,5,8,13...). Después de perder, avanzas en la secuencia. Después de ganar, retrocedes dos posiciones.',
-        warning: 'Aunque crece más lento que Martingala, sigue siendo exponencial y puede llevar a apuestas enormes.',
-        howItWorks: '1,1,2,3,5,8,13,21,34,55... → +1 si pierdes, -2 si ganas'
+        description: 'Sigues la secuencia de Fibonacci. Avanzas si pierdes, retrocedes 2 posiciones si ganas.',
+        example: 'Secuencia: 1,1,2,3,5,8,13,21... | Pierdes: +1 posición | Ganas: -2 posiciones',
+        warning: 'Crece más lento que Martingala, pero sigue siendo exponencial.',
+        howItWorks: 'Fibonacci: 1,1,2,3,5,8,13,21,34,55,89...'
       },
       dalembert: {
         title: '⚖️ Sistema D\'Alembert',
-        description: 'Aumenta tu apuesta en 1 unidad después de perder, disminuye en 1 unidad después de ganar. Basado en la "ley del equilibrio".',
-        warning: 'Más conservador, pero aún no puede superar la ventaja de la casa. Las rachas perdedoras siguen siendo peligrosas.',
-        howItWorks: 'Base +1 si pierdes, -1 si ganas (mínimo = base)'
+        description: 'Aumenta la apuesta en 1 unidad si pierdes, disminuye 1 unidad si ganas.',
+        example: '€10 → pierde → €20 → pierde → €30 → gana → €20 → gana → €10',
+        warning: 'Más conservador, pero las rachas largas siguen representando un riesgo elevado.',
+        howItWorks: 'Pierde: +1 unidad | Gana: -1 unidad (mínimo = apuesta base)'
       }
     };
 
     const desc = descriptions[this.currentSystem];
-    this.elements.systemDescription.innerHTML = `
-      <h3 class="text-xl font-bold text-gray-900 mb-3">${desc.title}</h3>
-      <p class="text-gray-700 mb-3">${desc.description}</p>
-      <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-3 mb-3">
-        <p class="text-yellow-800 text-sm"><strong>Cómo funciona:</strong> ${desc.howItWorks}</p>
-      </div>
-      <div class="bg-red-50 border border-red-200 rounded-lg p-3">
-        <p class="text-red-700 text-sm"><strong>⚠️ Realidad:</strong> ${desc.warning}</p>
-      </div>
-    `;
+    if (this.elements.systemDescription) {
+      this.elements.systemDescription.innerHTML = `
+        <h3 class="text-xl font-bold text-gray-900 mb-3">${desc.title}</h3>
+        <p class="text-gray-700 mb-3">${desc.description}</p>
+        <div class="bg-blue-50 border border-blue-200 rounded-lg p-3 mb-3">
+          <p class="text-blue-800 text-sm"><strong>📚 Cómo funciona:</strong> ${desc.howItWorks}</p>
+          <p class="text-blue-700 text-sm mt-1"><strong>📝 Ejemplo:</strong> ${desc.example}</p>
+        </div>
+        <div class="bg-red-50 border border-red-200 rounded-lg p-3">
+          <p class="text-red-700 text-sm"><strong>⚠️ Limitación principal:</strong> ${desc.warning}</p>
+        </div>
+      `;
+    }
 
-    // Update warning text
-    this.elements.systemWarning.textContent = desc.warning;
+    if (this.elements.systemWarning) {
+      this.elements.systemWarning.textContent = desc.warning;
+    }
+  }
+
+  updateStrategyPreview() {
+    const sequence = this.generateBettingSequence();
+    const stats = this.calculateSequenceStats(sequence);
+    
+    if (this.elements.bettingSequence) {
+      this.elements.bettingSequence.innerHTML = this.renderBettingSequence(sequence, stats);
+    }
+    
+    if (this.elements.previewInfo) {
+      this.elements.previewInfo.textContent = `${this.currentSystem.charAt(0).toUpperCase() + this.currentSystem.slice(1)} con apuesta base €${this.config.basebet}`;
+    }
+    
+    if (this.elements.tableLimitWarning && stats.limitReached) {
+      this.elements.tableLimitWarning.textContent = `Límite alcanzado en el paso ${stats.limitReached} (€${sequence[stats.limitReached - 1]})`;
+    } else if (this.elements.tableLimitWarning) {
+      this.elements.tableLimitWarning.textContent = 'No se alcanza el límite en los primeros 10 pasos';
+    }
+    
+    if (this.elements.cumulativeLoss) {
+      this.elements.cumulativeLoss.textContent = `€${stats.maxCumulativeLoss} tras ${stats.maxLossStep} pérdidas`;
+    }
+  }
+
+  generateBettingSequence() {
+    const sequence = [];
+    const maxSteps = 15; // Mostrar hasta 15 pasos
+    
+    let currentBet = this.config.basebet;
+    let fibIndex = 0;
+    let dalembertLevel = 1;
+    const fibSequence = [1, 1];
+    
+    for (let i = 0; i < maxSteps; i++) {
+      sequence.push(currentBet);
+      
+      // Si la próxima apuesta excede el límite de mesa, parar
+      if (currentBet > this.config.tableLimit) break;
+      
+      // Calcular próxima apuesta según el sistema
+      switch (this.currentSystem) {
+        case 'martingale':
+          currentBet *= 2;
+          break;
+          
+        case 'fibonacci':
+          fibIndex++;
+          // Extender secuencia si es necesario
+          while (fibSequence.length <= fibIndex) {
+            const len = fibSequence.length;
+            fibSequence.push(fibSequence[len - 1] + fibSequence[len - 2]);
+          }
+          currentBet = this.config.basebet * fibSequence[fibIndex];
+          break;
+          
+        case 'dalembert':
+          dalembertLevel++;
+          currentBet = this.config.basebet * dalembertLevel;
+          break;
+      }
+    }
+    
+    return sequence;
+  }
+
+  calculateSequenceStats(sequence) {
+    let cumulativeLoss = 0;
+    let maxCumulativeLoss = 0;
+    let maxLossStep = 0;
+    let limitReached = null;
+    
+    for (let i = 0; i < sequence.length; i++) {
+      cumulativeLoss += sequence[i];
+      
+      if (cumulativeLoss > maxCumulativeLoss) {
+        maxCumulativeLoss = cumulativeLoss;
+        maxLossStep = i + 1;
+      }
+      
+      if (sequence[i] > this.config.tableLimit && !limitReached) {
+        limitReached = i + 1;
+      }
+    }
+    
+    return {
+      maxCumulativeLoss,
+      maxLossStep,
+      limitReached
+    };
+  }
+
+  renderBettingSequence(sequence, stats) {
+    if (sequence.length === 0) {
+      return '<div class="text-gray-500 italic">No se puede generar secuencia</div>';
+    }
+    
+    const maxDisplay = 10; // Mostrar máximo 10 elementos iniciales
+    const displaySequence = sequence.slice(0, maxDisplay);
+    
+    let html = '<div class="flex flex-wrap items-center gap-2">';
+    
+    displaySequence.forEach((bet, index) => {
+      const isOverLimit = bet > this.config.tableLimit;
+      const colorClass = isOverLimit ? 'bg-red-100 text-red-800 border-red-300' : 
+                        index === 0 ? 'bg-green-100 text-green-800 border-green-300' : 
+                        'bg-blue-100 text-blue-800 border-blue-300';
+      
+      html += `<span class="${colorClass} border px-2 py-1 rounded font-mono text-sm font-semibold">€${bet}</span>`;
+      
+      if (index < displaySequence.length - 1) {
+        html += '<span class="text-gray-400">→</span>';
+      }
+    });
+    
+    if (sequence.length > maxDisplay) {
+      html += '<span class="text-gray-500 text-sm ml-2">... (+' + (sequence.length - maxDisplay) + ' más)</span>';
+    }
+    
+    html += '</div>';
+    
+    // Agregar explicación del sistema
+    html += '<div class="mt-2 text-xs text-gray-600">';
+    
+    switch (this.currentSystem) {
+      case 'martingale':
+        html += '📈 Cada pérdida duplica la apuesta anterior';
+        break;
+      case 'fibonacci':
+        html += '🔢 Cada pérdida avanza 1 posición en la secuencia de Fibonacci';
+        break;
+      case 'dalembert':
+        html += '⚖️ Cada pérdida aumenta la apuesta en 1 unidad base';
+        break;
+    }
+    
+    html += '</div>';
+    
+    return html;
+  }
+
+  validateConfig() {
+    const errors = [];
+    
+    // Validar que todos los valores sean números positivos
+    if (!this.config.basebet || this.config.basebet <= 0) {
+      errors.push('La apuesta base debe ser mayor a 0');
+    }
+    
+    if (!this.config.bankroll || this.config.bankroll <= 0) {
+      errors.push('El bankroll inicial debe ser mayor a 0');
+    }
+    
+    if (!this.config.tableLimit || this.config.tableLimit <= 0) {
+      errors.push('El límite de mesa debe ser mayor a 0');
+    }
+    
+    if (!this.config.targetProfit || this.config.targetProfit <= 0) {
+      errors.push('El objetivo de ganancia debe ser mayor a 0');
+    }
+    
+    // Validaciones lógicas entre valores
+    if (this.config.basebet && this.config.bankroll) {
+      if (this.config.basebet > this.config.bankroll) {
+        errors.push('La apuesta base no puede ser mayor al bankroll inicial');
+      }
+      
+      if (this.config.basebet > this.config.bankroll * 0.5) {
+        errors.push('⚠️ Advertencia: La apuesta base es muy alta (>50% del bankroll)');
+      }
+    }
+    
+    if (this.config.basebet && this.config.tableLimit) {
+      if (this.config.basebet > this.config.tableLimit) {
+        errors.push('La apuesta base no puede ser mayor al límite de mesa');
+      }
+    }
+    
+    if (this.config.targetProfit && this.config.bankroll) {
+      if (this.config.targetProfit > this.config.bankroll * 5) {
+        errors.push('⚠️ Advertencia: Objetivo muy alto (>500% del bankroll) - casi imposible de alcanzar');
+      }
+    }
+    
+    // Validaciones específicas por sistema
+    if (this.currentSystem === 'martingale' && this.config.basebet && this.config.tableLimit) {
+      // Calcular cuántas pérdidas consecutivas puede soportar con Martingala
+      let bet = this.config.basebet;
+      let steps = 0;
+      while (bet <= this.config.tableLimit && steps < 20) {
+        bet *= 2;
+        steps++;
+      }
+      
+      if (steps < 5) {
+        errors.push(`🎯 Martingala: Solo soporta ${steps} pérdidas consecutivas antes de alcanzar el límite`);
+      }
+    }
+    
+    // Verificar que el bankroll pueda soportar al menos algunas apuestas
+    if (this.config.bankroll && this.config.basebet) {
+      const maxBets = Math.floor(this.config.bankroll / this.config.basebet);
+      if (maxBets < 3) {
+        errors.push('El bankroll es demasiado pequeño - permite menos de 3 apuestas base');
+      }
+    }
+    
+    return errors;
+  }
+  
+  showValidationErrors(errors) {
+    if (!this.elements.validationErrors || !this.elements.errorList) return;
+    
+    if (errors.length === 0) {
+      this.elements.validationErrors.classList.add('hidden');
+      return;
+    }
+    
+    this.elements.errorList.innerHTML = '';
+    errors.forEach(error => {
+      const li = document.createElement('li');
+      li.textContent = `• ${error}`;
+      this.elements.errorList.appendChild(li);
+    });
+    
+    this.elements.validationErrors.classList.remove('hidden');
+  }
+  
+  hideValidationErrors() {
+    if (this.elements.validationErrors) {
+      this.elements.validationErrors.classList.add('hidden');
+    }
+  }
+  
+  isConfigValid() {
+    const errors = this.validateConfig();
+    const criticalErrors = errors.filter(error => !error.startsWith('⚠️'));
+    return criticalErrors.length === 0;
   }
 
   updateConfig() {
-    this.basebet = parseInt(this.elements.basebet.value) || 10;
-    this.initialBankroll = parseInt(this.elements.bankroll.value) || 1000;
-    this.tableLimit = parseInt(this.elements.tableLimit.value) || 500;
-    this.targetProfit = parseInt(this.elements.targetProfit.value) || 100;
+    this.config.basebet = parseInt(this.elements.basebet?.value) || 10;
+    this.config.bankroll = parseInt(this.elements.bankroll?.value) || 1000;
+    this.config.tableLimit = parseInt(this.elements.tableLimit?.value) || 500;
+    this.config.targetProfit = parseInt(this.elements.targetProfit?.value) || 100;
     
-    this.reset();
+    // Validar configuración
+    const errors = this.validateConfig();
+    this.showValidationErrors(errors);
+    
+    // Habilitar/deshabilitar botones de simulación
+    this.updateSimulationButtons();
+    
+    this.updateStrategyPreview();
+    this.resetAll();
   }
-
-  singleSpin() {
-    if (this.sessionStatus === 'finished') return;
+  
+  updateSimulationButtons() {
+    const isValid = this.isConfigValid();
     
-    const result = this.simulateSpin();
-    this.processSpin(result);
-    this.updateDisplay();
-    this.updateChart();
-  }
-
-  runSession() {
-    this.resetSession();
-    
-    while (this.sessionStatus === 'active') {
-      const result = this.simulateSpin();
-      this.processSpin(result);
+    // Habilitar/deshabilitar botones
+    if (this.elements.simulateSessionBtn) {
+      this.elements.simulateSessionBtn.disabled = !isValid;
+      this.elements.simulateSessionBtn.style.opacity = isValid ? '1' : '0.5';
+      this.elements.simulateSessionBtn.style.cursor = isValid ? 'pointer' : 'not-allowed';
     }
     
+    if (this.elements.simulate1000Btn) {
+      this.elements.simulate1000Btn.disabled = !isValid;
+      this.elements.simulate1000Btn.style.opacity = isValid ? '1' : '0.5';
+      this.elements.simulate1000Btn.style.cursor = isValid ? 'pointer' : 'not-allowed';
+    }
+  }
+
+  // MÉTODO PRINCIPAL: Simular una sesión completa
+  async simulateSession() {
+    // Verificar que la configuración sea válida
+    if (!this.isConfigValid()) {
+      alert('🚫 Por favor, corrige los errores de configuración antes de simular.');
+      return;
+    }
+    
+    this.session = this.createNewSession();
+    this.session.status = 'running';
+    
+    // Simular hasta que termine (gane objetivo o se arruine)
+    let step = 0;
+    while (this.session.status === 'running' && step < 10000) { // Safety limit
+      this.simulateSingleSpin();
+      step++;
+      
+      // Update display periodically for visual feedback
+      if (step % 10 === 0) {
+        this.updateDisplay();
+        this.updateChart();
+        await new Promise(resolve => setTimeout(resolve, 1)); // Yield to UI
+      }
+    }
+    
+    // Record session result
+    this.recordSessionResult();
     this.updateDisplay();
     this.updateChart();
   }
 
-  async simulate1000() {
-    this.elements.simulate1000Btn.disabled = true;
-    this.elements.simulate1000Btn.textContent = 'Simulando...';
+  // Simular un solo giro
+  simulateSingleSpin() {
+    if (this.session.status !== 'running') return;
+
+    // Check if we can make the bet
+    if (this.session.bankroll < this.session.currentBet || this.session.currentBet > this.config.tableLimit) {
+      this.session.status = 'bust';
+      return;
+    }
+
+    // Make the bet
+    this.session.spinsCount++;
+    const won = this.spinRoulette();
+    
+    if (won) {
+      // WIN: Get back bet + profit (1:1 payout for red/black)
+      this.session.bankroll += this.session.currentBet; // Net profit (already lost the bet)
+      this.adjustBetAfterWin();
+      
+      // Check if target reached
+      if (this.session.bankroll >= this.config.bankroll + this.config.targetProfit) {
+        this.session.status = 'won';
+      }
+    } else {
+      // LOSE: Lose the bet
+      this.session.bankroll -= this.session.currentBet;
+      this.adjustBetAfterLoss();
+    }
+    
+    // Record bankroll history
+    this.session.bankrollHistory.push(this.session.bankroll);
+  }
+
+  spinRoulette() {
+    // European roulette: 18 red, 18 black, 1 green (0)
+    // Probability of winning red/black: 18/37 ≈ 48.65%
+    return Math.random() < (18/37);
+  }
+
+  adjustBetAfterWin() {
+    switch (this.currentSystem) {
+      case 'martingale':
+        this.session.currentBet = this.config.basebet;
+        break;
+        
+      case 'fibonacci':
+        // Move back 2 positions in sequence
+        this.session.fibonacciIndex = Math.max(0, this.session.fibonacciIndex - 2);
+        this.session.currentBet = this.config.basebet * this.getFibonacci(this.session.fibonacciIndex);
+        break;
+        
+      case 'dalembert':
+        // Decrease by 1 unit
+        this.session.dalembertLevel = Math.max(1, this.session.dalembertLevel - 1);
+        this.session.currentBet = this.config.basebet * this.session.dalembertLevel;
+        break;
+    }
+  }
+
+  adjustBetAfterLoss() {
+    switch (this.currentSystem) {
+      case 'martingale':
+        this.session.currentBet *= 2;
+        break;
+        
+      case 'fibonacci':
+        // Move forward 1 position in sequence
+        this.session.fibonacciIndex++;
+        this.session.currentBet = this.config.basebet * this.getFibonacci(this.session.fibonacciIndex);
+        break;
+        
+      case 'dalembert':
+        // Increase by 1 unit
+        this.session.dalembertLevel++;
+        this.session.currentBet = this.config.basebet * this.session.dalembertLevel;
+        break;
+    }
+  }
+
+  getFibonacci(index) {
+    // Extend sequence if needed
+    while (this.session.fibonacciSequence.length <= index) {
+      const len = this.session.fibonacciSequence.length;
+      this.session.fibonacciSequence.push(
+        this.session.fibonacciSequence[len - 1] + this.session.fibonacciSequence[len - 2]
+      );
+    }
+    return this.session.fibonacciSequence[index];
+  }
+
+  recordSessionResult() {
+    this.stats.totalSessions++;
+    const profit = this.session.bankroll - this.config.bankroll;
+    
+    if (this.session.status === 'won') {
+      this.stats.winningSessions++;
+      this.stats.profits.push(profit);
+    } else {
+      this.stats.bankruptSessions++;
+      this.stats.losses.push(-profit); // Store as positive loss
+    }
+  }
+
+  // Simular 1000 sesiones
+  async simulate1000Sessions() {
+    // Verificar que la configuración sea válida
+    if (!this.isConfigValid()) {
+      alert('🚫 Por favor, corrige los errores de configuración antes de simular.');
+      return;
+    }
+    
+    const button = this.elements.simulate1000Btn;
+    if (!button) return;
+    
+    button.disabled = true;
+    button.textContent = 'Simulando...';
     
     for (let i = 0; i < 1000; i++) {
-      this.resetSession();
+      this.session = this.createNewSession();
+      this.session.status = 'running';
       
-      while (this.sessionStatus === 'active') {
-        const result = this.simulateSpin();
-        this.processSpin(result);
+      // Run session without UI updates for speed
+      let step = 0;
+      while (this.session.status === 'running' && step < 10000) {
+        this.simulateSingleSpin();
+        step++;
       }
       
-      // Update display every 100 sessions
+      this.recordSessionResult();
+      
+      // Update UI every 100 sessions
       if (i % 100 === 0) {
         this.updateDisplay();
         await new Promise(resolve => setTimeout(resolve, 10));
@@ -514,178 +991,114 @@ class BettingSystemAnalyzer {
     }
     
     this.updateDisplay();
-    this.elements.simulate1000Btn.disabled = false;
-    this.elements.simulate1000Btn.textContent = '⚡ 1000 Sesiones';
-  }
-
-  simulateSpin() {
-    // Simulate European roulette (2.7% house edge)
-    const random = Math.random();
-    return random < 18/37; // Win on red/black bet
-  }
-
-  processSpin(won) {
-    this.spinsCount++;
+    this.updateChart();
     
-    // Primero, siempre se descuenta la apuesta del bankroll
-    this.bankroll -= this.nextBet;
-    
-    if (won) {
-      // Si gana: recibe el pago completo (apuesta original + ganancia para 1:1)
-      const totalPayout = this.nextBet * 2; // 1:1 payout means 2x return
-      this.bankroll += totalPayout;
-      
-      // Reset bet according to system
-      this.resetBetAfterWin();
-      
-      // Check if target reached
-      if (this.bankroll >= this.initialBankroll + this.targetProfit) {
-        this.sessionStatus = 'won';
-        this.winningSessions++;
-        this.totalSessions++;
-        this.profits.push(this.bankroll - this.initialBankroll);
-      }
-    } else {
-      // Si pierde: ya se descontó la apuesta, no se devuelve nada
-      
-      // Increase bet according to system
-      this.increaseBetAfterLoss();
-      
-      // Check bankruptcy or table limit
-      if (this.bankroll < this.nextBet || this.nextBet > this.tableLimit) {
-        this.sessionStatus = 'bust';
-        this.bankruptSessions++;
-        this.totalSessions++;
-        this.losses.push(this.initialBankroll - this.bankroll);
-      }
-    }
-    
-    this.bankrollHistory.push(this.bankroll);
+    button.disabled = false;
+    button.textContent = '⚡ Simular 1000 Sesiones';
   }
 
-  resetBetAfterWin() {
-    switch (this.currentSystem) {
-      case 'martingale':
-        this.nextBet = this.basebet;
-        break;
-      case 'fibonacci':
-        this.currentFibIndex = Math.max(0, this.currentFibIndex - 2);
-        this.nextBet = this.basebet * this.getFibonacci(this.currentFibIndex);
-        break;
-      case 'dalembert':
-        this.dalembertBase = Math.max(1, this.dalembertBase - 1);
-        this.nextBet = this.basebet * this.dalembertBase;
-        break;
-    }
-  }
-
-  increaseBetAfterLoss() {
-    switch (this.currentSystem) {
-      case 'martingale':
-        this.nextBet *= 2;
-        break;
-      case 'fibonacci':
-        this.currentFibIndex++;
-        this.nextBet = this.basebet * this.getFibonacci(this.currentFibIndex);
-        break;
-      case 'dalembert':
-        this.dalembertBase++;
-        this.nextBet = this.basebet * this.dalembertBase;
-        break;
-    }
-  }
-
-  getFibonacci(index) {
-    while (this.fibonacciSequence.length <= index) {
-      const len = this.fibonacciSequence.length;
-      this.fibonacciSequence.push(this.fibonacciSequence[len - 1] + this.fibonacciSequence[len - 2]);
-    }
-    return this.fibonacciSequence[index];
-  }
-
-  resetSession() {
-    this.bankroll = this.initialBankroll;
-    this.nextBet = this.basebet;
-    this.spinsCount = 0;
-    this.sessionStatus = 'active';
-    this.bankrollHistory = [this.bankroll];
-    this.currentFibIndex = 0;
-    this.dalembertBase = 1;
-  }
-
-  reset() {
-    this.resetSession();
-    this.sessionStatus = 'waiting';
-    this.totalSessions = 0;
-    this.winningSessions = 0;
-    this.bankruptSessions = 0;
-    this.profits = [];
-    this.losses = [];
+  resetAll() {
+    this.session = this.createNewSession();
+    this.stats = {
+      totalSessions: 0,
+      winningSessions: 0,
+      bankruptSessions: 0,
+      profits: [],
+      losses: []
+    };
     this.updateDisplay();
     this.updateChart();
   }
 
   updateDisplay() {
-    this.elements.currentBankroll.textContent = `€${this.bankroll}`;
-    this.elements.nextBet.textContent = `€${this.nextBet}`;
-    this.elements.spinsCount.textContent = this.spinsCount;
-    
-    let statusText = 'Esperando';
-    let statusClass = 'text-blue-600';
-    
-    switch (this.sessionStatus) {
-      case 'active':
-        statusText = 'Jugando';
-        statusClass = 'text-green-600';
-        break;
-      case 'won':
-        statusText = 'Ganó';
-        statusClass = 'text-green-600';
-        break;
-      case 'bust':
-        statusText = 'Arruinado';
-        statusClass = 'text-red-600';
-        break;
+    // Current session status
+    if (this.elements.currentBankroll) {
+      const profit = this.session.bankroll - this.config.bankroll;
+      const color = profit >= 0 ? 'text-green-600' : 'text-red-600';
+      this.elements.currentBankroll.innerHTML = `€${this.session.bankroll} <span class="${color}">(${profit >= 0 ? '+' : ''}€${profit})</span>`;
     }
     
-    this.elements.sessionStatus.textContent = statusText;
-    this.elements.sessionStatus.className = `font-bold ${statusClass}`;
+    if (this.elements.nextBet) {
+      this.elements.nextBet.textContent = `€${this.session.currentBet}`;
+    }
+    
+    if (this.elements.spinsCount) {
+      this.elements.spinsCount.textContent = this.session.spinsCount;
+    }
+    
+    if (this.elements.sessionStatus) {
+      const statusConfig = {
+        'ready': { text: 'Listo para empezar', class: 'text-blue-600' },
+        'running': { text: 'Simulando...', class: 'text-yellow-600' },
+        'won': { text: '🎉 Ganó el objetivo', class: 'text-green-600' },
+        'bust': { text: '💥 Arruinado', class: 'text-red-600' }
+      };
+      
+      const config = statusConfig[this.session.status] || statusConfig['ready'];
+      this.elements.sessionStatus.textContent = config.text;
+      this.elements.sessionStatus.className = `font-bold ${config.class}`;
+    }
     
     // Statistics
-    this.elements.totalSessions.textContent = this.totalSessions;
-    this.elements.winningSessions.textContent = this.winningSessions;
-    this.elements.bankruptSessions.textContent = this.bankruptSessions;
+    if (this.elements.totalSessions) this.elements.totalSessions.textContent = this.stats.totalSessions;
+    if (this.elements.winningSessions) this.elements.winningSessions.textContent = this.stats.winningSessions;
+    if (this.elements.bankruptSessions) this.elements.bankruptSessions.textContent = this.stats.bankruptSessions;
     
-    const successRate = this.totalSessions > 0 ? ((this.winningSessions / this.totalSessions) * 100).toFixed(1) : 0;
-    this.elements.successRate.textContent = `${successRate}%`;
+    const successRate = this.stats.totalSessions > 0 ? 
+      ((this.stats.winningSessions / this.stats.totalSessions) * 100).toFixed(1) : 0;
+    if (this.elements.successRate) this.elements.successRate.textContent = `${successRate}%`;
     
-    const avgProfit = this.profits.length > 0 ? (this.profits.reduce((a, b) => a + b, 0) / this.profits.length).toFixed(0) : 0;
-    this.elements.avgProfit.textContent = `€${avgProfit}`;
+    const avgProfit = this.stats.profits.length > 0 ? 
+      (this.stats.profits.reduce((a, b) => a + b, 0) / this.stats.profits.length).toFixed(0) : 0;
+    if (this.elements.avgProfit) this.elements.avgProfit.textContent = `€${avgProfit}`;
     
-    const avgLoss = this.losses.length > 0 ? (this.losses.reduce((a, b) => a + b, 0) / this.losses.length).toFixed(0) : 0;
-    this.elements.avgLoss.textContent = `€${avgLoss}`;
+    const avgLoss = this.stats.losses.length > 0 ? 
+      (this.stats.losses.reduce((a, b) => a + b, 0) / this.stats.losses.length).toFixed(0) : 0;
+    if (this.elements.avgLoss) this.elements.avgLoss.textContent = `€${avgLoss}`;
     
-    // Expected ROI (always negative due to house edge)
-    this.elements.expectedROI.textContent = '-2.7%';
+    if (this.elements.expectedROI) this.elements.expectedROI.textContent = '-2.7%';
   }
 
   initChart() {
-    const ctx = this.elements.bankrollChart.getContext('2d');
+    const canvas = this.elements.bankrollChart;
+    if (!canvas) return;
+    
+    const ctx = canvas.getContext('2d');
+    
+    // Check if Chart is available
+    if (typeof Chart === 'undefined') {
+      console.warn('Chart.js not loaded');
+      return;
+    }
+    
     this.chart = new Chart(ctx, {
       type: 'line',
       data: {
         labels: [0],
         datasets: [{
           label: 'Bankroll',
-          data: [this.initialBankroll],
+          data: [this.config.bankroll],
           borderColor: 'rgb(59, 130, 246)',
           backgroundColor: 'rgba(59, 130, 246, 0.1)',
-          tension: 0.1
+          tension: 0.1,
+          pointRadius: 1
+        }, {
+          label: 'Objetivo',
+          data: [this.config.bankroll + this.config.targetProfit],
+          borderColor: 'rgb(34, 197, 94)',
+          backgroundColor: 'transparent',
+          borderDash: [5, 5],
+          pointRadius: 0,
+          tension: 0
         }]
       },
       options: {
         responsive: true,
         maintainAspectRatio: false,
+        interaction: {
+          intersect: false,
+          mode: 'index'
+        },
         scales: {
           y: {
             beginAtZero: true,
@@ -703,7 +1116,15 @@ class BettingSystemAnalyzer {
         },
         plugins: {
           legend: {
-            display: false
+            display: true,
+            position: 'top'
+          },
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                return `${context.dataset.label}: €${context.parsed.y}`;
+              }
+            }
           }
         }
       }
@@ -713,15 +1134,18 @@ class BettingSystemAnalyzer {
   updateChart() {
     if (!this.chart) return;
     
-    const labels = this.bankrollHistory.map((_, index) => index);
+    const labels = this.session.bankrollHistory.map((_, index) => index);
+    const targetData = new Array(this.session.bankrollHistory.length).fill(this.config.bankroll + this.config.targetProfit);
     
     this.chart.data.labels = labels;
-    this.chart.data.datasets[0].data = this.bankrollHistory;
-    this.chart.update();
+    this.chart.data.datasets[0].data = this.session.bankrollHistory;
+    this.chart.data.datasets[1].data = targetData;
+    
+    this.chart.update('none'); // No animation for performance
   }
 }
 
-// Add CSS for active states
+// Add CSS for active states and disabled buttons
 const style = document.createElement('style');
 style.textContent = `
   .active-system {
@@ -729,17 +1153,36 @@ style.textContent = `
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     border: 2px solid #fbbf24;
   }
+  
+  button:disabled {
+    pointer-events: none;
+    filter: grayscale(50%);
+  }
+  
+  button:disabled:hover {
+    transform: none !important;
+    box-shadow: none !important;
+  }
 `;
 document.head.appendChild(style);
 
-// Load Chart.js and initialize analyzer
+// Initialize when page loads
 document.addEventListener('DOMContentLoaded', () => {
-  // Load Chart.js
-  const script = document.createElement('script');
-  script.src = 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js';
-  script.onload = () => {
+  // Check if Chart.js is loaded
+  if (typeof Chart === 'undefined') {
+    console.log('Loading Chart.js...');
+    const script = document.createElement('script');
+    script.src = 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js';
+    script.onload = () => {
+      console.log('Chart.js loaded, initializing analyzer...');
+      new BettingSystemAnalyzer();
+    };
+    script.onerror = () => {
+      console.error('Failed to load Chart.js');
+    };
+    document.head.appendChild(script);
+  } else {
     new BettingSystemAnalyzer();
-  };
-  document.head.appendChild(script);
+  }
 });
 </script>

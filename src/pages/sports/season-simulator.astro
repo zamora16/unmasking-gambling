@@ -3,219 +3,289 @@ import MainLayout from '../../layouts/MainLayout.astro';
 ---
 
 <MainLayout 
-  title="Simulador de Temporada de Fútbol" 
-  description="Simula una temporada completa apostando. Descubre por qué incluso acertando el 70% de las apuestas puedes perder dinero."
+  title="Simulador de Ilusión de Ganancias" 
+  description="Compara dos apostadores idénticos: uno con cuotas justas y otro con cuotas reales. Descubre cómo el margen de la casa transforma ganancias en pérdidas."
 >
   
   <!-- Hero Section -->
-  <section class="bg-gradient-to-br from-red-600 via-orange-600 to-red-800 text-white py-12">
+  <section class="bg-gradient-to-br from-blue-600 via-indigo-600 to-blue-800 text-white py-16">
     <div class="container mx-auto px-4 text-center">
       <div class="max-w-4xl mx-auto">
-        <h1 class="text-3xl md:text-5xl font-bold mb-4">
-          🏈 Simulador de Temporada
+        <h1 class="text-3xl md:text-5xl font-bold mb-6">
+          📊 Simulador de Ilusión de Ganancias
         </h1>
-        <p class="text-lg md:text-xl mb-6 text-red-100">
-          Simula una temporada completa de fútbol y descubre 
-          <span class="text-yellow-300 font-semibold">por qué incluso acertando mucho, pierdes dinero</span>
+        <p class="text-lg md:text-xl mb-8 text-blue-100">
+          Dos apostadores idénticos, misma habilidad, mismos aciertos.
+          <span class="text-yellow-300 font-semibold">Solo cambian las cuotas que reciben.</span>
         </p>
-        <div class="bg-white/10 backdrop-blur-sm rounded-lg p-4 max-w-2xl mx-auto">
-          <p class="text-red-100">
-            📊 <strong>38 jornadas:</strong> Matemáticas reales vs ilusiones de ganancia
+        <div class="bg-white/10 backdrop-blur-sm rounded-lg p-6 max-w-2xl mx-auto">
+          <p class="text-blue-100">
+            🎯 <strong>Objetivo:</strong> Comprender cómo el margen de las casas afecta los resultados financieros
           </p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Main Simulator -->
+  <!-- Concept Explanation -->
   <section class="py-12 bg-gray-50">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto">
+        <div class="bg-blue-50 border-l-4 border-blue-400 p-6 rounded-lg mb-8">
+          <h2 class="text-2xl font-bold text-blue-800 mb-4">⚽ El Experimento: Más/Menos 2.5 Goles</h2>
+          <p class="text-blue-700 mb-4">
+            Vamos a simular dos apostadores que apuestan a <strong>"Más de 2.5 goles"</strong> en partidos de fútbol. 
+            Ambos tienen la misma habilidad de predicción, pero reciben cuotas diferentes de las casas de apuestas:
+          </p>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
+            <div class="bg-white border border-green-200 rounded p-4">
+              <h3 class="font-semibold text-green-800 mb-2">📈 Apostador A - "Mercado Justo"</h3>
+              <p class="text-green-700 text-sm mb-3">
+                Recibe cuotas teóricamente justas de <strong>2.00</strong> por "Más de 2.5 goles". 
+                Representa un escenario sin comisión de la casa.
+              </p>
+              <div class="bg-green-100 p-2 rounded text-xs">
+                <strong>Cuota:</strong> 2.00<br>
+                <strong>Probabilidad implícita:</strong> 50%<br>
+                <strong>Margen de casa:</strong> 0%
+              </div>
+            </div>
+            <div class="bg-white border border-red-200 rounded p-4">
+              <h3 class="font-semibold text-red-800 mb-2">📉 Apostador B - "Mercado Real"</h3>
+              <p class="text-red-700 text-sm mb-3">
+                Recibe cuotas típicas del mercado real que incluyen 
+                el margen de beneficio de las casas de apuestas.
+              </p>
+              <div class="bg-red-100 p-2 rounded text-xs" id="realMarketInfo">
+                <strong>Cuota:</strong> 1.85<br>
+                <strong>Probabilidad implícita:</strong> 54.1%<br>
+                <strong>Margen de casa:</strong> 8.1%
+              </div>
+            </div>
+          </div>
+          <div class="mt-4 bg-yellow-100 border border-yellow-300 rounded p-3">
+            <p class="text-yellow-800 text-sm">
+              <strong>🎯 Objetivo:</strong> Ambos apostadores predicen exactamente los mismos partidos 
+              (misma secuencia de aciertos y fallos), pero las cuotas diferentes producen resultados financieros distintos.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Simulator Interface -->
+  <section class="py-16 bg-white">
     <div class="container mx-auto px-4">
       <div class="max-w-6xl mx-auto">
         
         <!-- Configuration Panel -->
-        <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
-          <h2 class="text-2xl font-bold text-gray-900 mb-6 text-center">⚙️ Configuración del Apostador</h2>
+        <div class="bg-gray-50 rounded-lg shadow-lg p-6 mb-8">
+          <h3 class="text-2xl font-bold text-gray-900 mb-6 text-center">⚙️ Configuración del Experimento</h3>
           
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <!-- Win Rate -->
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
             <div>
-              <label class="block text-gray-700 font-medium mb-2">% de Aciertos:</label>
+              <label class="block text-gray-700 font-medium mb-2">Habilidad de Predicción:</label>
               <select id="winRate" class="w-full px-3 py-2 border border-gray-300 rounded-lg">
                 <option value="50">50% - Aleatorio</option>
-                <option value="55">55% - Principiante</option>
-                <option value="60">60% - Intermedio</option>
-                <option value="65" selected>65% - Avanzado</option>
+                <option value="55">55% - Principiante Hábil</option>
+                <option value="60" selected>60% - Intermedio</option>
+                <option value="65">65% - Avanzado</option>
                 <option value="70">70% - Experto</option>
-                <option value="75">75% - Profesional</option>
-                <option value="80">80% - Imposible</option>
-              </select>\n              <p class="text-xs text-gray-500 mt-1">Incluso 65% es muy difícil de mantener</p>
-            </div>
-
-            <!-- Betting Strategy -->
-            <div>
-              <label class="block text-gray-700 font-medium mb-2">Estrategia:</label>
-              <select id="strategy" class="w-full px-3 py-2 border border-gray-300 rounded-lg">
-                <option value="fixed">Apuesta Fija</option>
-                <option value="percentage" selected>% del Bankroll</option>
-                <option value="kelly">Kelly Criterion</option>
               </select>
-              <p class="text-xs text-gray-500 mt-1">Diferentes formas de gestionar el dinero</p>
             </div>
 
-            <!-- Bet Amount -->
             <div>
-              <label class="block text-gray-700 font-medium mb-2">Cantidad/Porcentaje:</label>
-              <input id="betAmount" type="number" value="5" min="1" max="20" class="w-full px-3 py-2 border border-gray-300 rounded-lg">
-              <p class="text-xs text-gray-500 mt-1" id="betAmountHelp">5% del bankroll por apuesta</p>
+              <label class="block text-gray-700 font-medium mb-2">Cuotas del Apostador B:</label>
+              <select id="realOdds" class="w-full px-3 py-2 border border-gray-300 rounded-lg">
+                <option value="1.75">1.75 (Margen 14.3%)</option>
+                <option value="1.80">1.80 (Margen 11.1%)</option>
+                <option value="1.85" selected>1.85 (Margen 8.1%)</option>
+                <option value="1.90">1.90 (Margen 5.3%)</option>
+                <option value="1.95">1.95 (Margen 2.6%)</option>
+              </select>
             </div>
 
-            <!-- Initial Bankroll -->
             <div>
-              <label class="block text-gray-700 font-medium mb-2">Bankroll Inicial:</label>
-              <select id="bankroll" class="w-full px-3 py-2 border border-gray-300 rounded-lg">
+              <label class="block text-gray-700 font-medium mb-2">Número de Apuestas:</label>
+              <select id="numBets" class="w-full px-3 py-2 border border-gray-300 rounded-lg">
+                <option value="50">50 apuestas</option>
+                <option value="100" selected>100 apuestas</option>
+                <option value="200">200 apuestas</option>
+                <option value="500">500 apuestas</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-gray-700 font-medium mb-2">Capital Inicial:</label>
+              <select id="initialCapital" class="w-full px-3 py-2 border border-gray-300 rounded-lg">
                 <option value="1000" selected>€1,000</option>
                 <option value="2000">€2,000</option>
                 <option value="5000">€5,000</option>
                 <option value="10000">€10,000</option>
               </select>
-              <p class="text-xs text-gray-500 mt-1">Tu dinero inicial para apostar</p>
             </div>
           </div>
 
-          <!-- Control Buttons -->
-          <div class="flex flex-col sm:flex-row gap-4 mt-6 justify-center">
-            <button id="startSeasonBtn" class="bg-gradient-to-r from-green-600 to-green-800 hover:from-green-700 hover:to-green-900 text-white font-bold py-3 px-8 rounded-lg transition-all duration-200">
-              🚀 Empezar Temporada
-            </button>
-            <button id="fastSimulateBtn" class="bg-gradient-to-r from-blue-600 to-blue-800 hover:from-blue-700 hover:to-blue-900 text-white font-bold py-3 px-8 rounded-lg transition-all duration-200">
-              ⚡ Simulación Rápida
-            </button>
-            <button id="resetBtn" class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-lg transition-all duration-200">
-              🔄 Reset
+          <div class="flex justify-center mt-6">
+            <button 
+              id="startExperiment" 
+              onclick="runExperiment()"
+              class="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold py-3 px-8 rounded-lg transition-all duration-200"
+            >
+              🔬 Ejecutar Experimento
             </button>
           </div>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <!-- Results Comparison -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
           
-          <!-- Season Progress -->
-          <div class="lg:col-span-2">
-            <!-- Current Match -->
-            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
-              <h3 class="text-xl font-bold text-gray-900 mb-4">🏟️ Jornada en Curso</h3>
-              
-              <div class="mb-4">
-                <div class="flex justify-between text-sm mb-2">
-                  <span>Progreso de Temporada:</span>
-                  <span id="seasonProgress">Jornada 0 de 38</span>
-                </div>
-                <div class="w-full bg-gray-200 rounded-full h-3">
-                  <div id="progressBar" class="bg-green-600 h-3 rounded-full transition-all duration-300" style="width: 0%"></div>
-                </div>
-              </div>
-
-              <!-- Current Matchday -->
-              <div id="currentMatchday" class="space-y-3">
-                <p class="text-center text-gray-500">Haz clic en \"Empezar Temporada\" para comenzar</p>
-              </div>
-
-              <!-- Season Controls -->
-              <div class="mt-6 flex gap-3 justify-center">
-                <button id="playMatchdayBtn" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-lg transition-all duration-200 hidden">
-                  ▶️ Jugar Jornada
-                </button>
-                <button id="autoPlayBtn" class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-6 rounded-lg transition-all duration-200 hidden">
-                  ⏩ Auto Play
-                </button>
+          <!-- Apostador A - Fair Odds -->
+          <div class="bg-white border-2 border-green-200 rounded-xl shadow-lg p-6">
+            <div class="text-center mb-6">
+              <h3 class="text-2xl font-bold text-green-800 mb-2">📈 Apostador A</h3>
+              <div class="bg-green-50 border border-green-200 rounded-lg p-3">
+                <p class="text-green-700 font-medium">Cuotas Justas: 2.00</p>
+                <p class="text-green-600 text-sm">Sin margen de casa</p>
               </div>
             </div>
+            
+            <div class="space-y-4" id="fairResults">
+              <div class="text-center text-gray-500 py-8">
+                🔬 Ejecuta el experimento para ver los resultados
+              </div>
+            </div>
+            
+            <div class="h-48 mt-4" id="fairChart">
+              <!-- Chart will be inserted here -->
+            </div>
+          </div>
 
-            <!-- Bankroll Chart -->
-            <div class="bg-white rounded-lg shadow-lg p-6">
-              <h3 class="text-xl font-bold text-gray-900 mb-4">📈 Evolución del Bankroll</h3>
-              <div class="h-64 relative">
-                <canvas id="bankrollChart" class="w-full h-full"></canvas>
+          <!-- Apostador B - Real Odds -->
+          <div class="bg-white border-2 border-red-200 rounded-xl shadow-lg p-6">
+            <div class="text-center mb-6">
+              <h3 class="text-2xl font-bold text-red-800 mb-2">📉 Apostador B</h3>
+              <div class="bg-red-50 border border-red-200 rounded-lg p-3">
+                <p class="text-red-700 font-medium" id="realOddsDisplay">Cuotas Reales: 1.85</p>
+                <p class="text-red-600 text-sm" id="marginDisplay">Margen de casa: 8.1%</p>
+              </div>
+            </div>
+            
+            <div class="space-y-4" id="realResults">
+              <div class="text-center text-gray-500 py-8">
+                🔬 Ejecuta el experimento para ver los resultados
+              </div>
+            </div>
+            
+            <div class="h-48 mt-4" id="realChart">
+              <!-- Chart will be inserted here -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Analysis Section -->
+        <div class="bg-white rounded-xl shadow-lg p-6 mb-8" id="analysisSection" style="display: none;">
+          <h3 class="text-2xl font-bold text-gray-900 mb-6 text-center">📊 Análisis Comparativo</h3>
+          <div id="comparisonAnalysis"></div>
+        </div>
+
+        <!-- Expected Value Explanation -->
+        <div class="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-8">
+          <h3 class="text-xl font-bold text-blue-800 mb-4">⚽ Ejemplo Práctico: "Más de 2.5 Goles"</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <h4 class="font-semibold text-green-700 mb-2">Apostador A - Mercado Justo (2.00):</h4>
+              <div class="bg-white border border-green-200 rounded p-3 text-sm">
+                <p><strong>Con 60% de aciertos en 100 apuestas de €50:</strong></p>
+                <p class="text-green-600">• 60 partidos acertados: 60 × €50 × 1.00 = <strong>€3,000 ganados</strong></p>
+                <p class="text-red-600">• 40 partidos fallados: 40 × €50 = <strong>€2,000 perdidos</strong></p>
+                <p class="font-bold text-green-600 border-t pt-2 mt-2">• Beneficio neto: <strong>+€1,000</strong></p>
+                <p class="text-green-600 text-xs">ROI: +20%</p>
+              </div>
+            </div>
+            <div>
+              <h4 class="font-semibold text-red-700 mb-2">Apostador B - Mercado Real (1.85):</h4>
+              <div class="bg-white border border-red-200 rounded p-3 text-sm">
+                <p><strong>Con 60% de aciertos en 100 apuestas de €50:</strong></p>
+                <p class="text-green-600">• 60 partidos acertados: 60 × €50 × 0.85 = <strong>€2,550 ganados</strong></p>
+                <p class="text-red-600">• 40 partidos fallados: 40 × €50 = <strong>€2,000 perdidos</strong></p>
+                <p class="font-bold text-green-600 border-t pt-2 mt-2">• Beneficio neto: <strong>+€550</strong></p>
+                <p class="text-orange-600 text-xs">ROI: +11%</p>
+              </div>
+            </div>
+          </div>
+          <div class="mt-4 bg-yellow-100 border border-yellow-300 rounded p-3">
+            <p class="text-yellow-800 text-sm">
+              <strong>📝 Observación:</strong> Con la misma habilidad (60% aciertos), el margen de casa reduce 
+              las ganancias potenciales en un 45% (de €20 a €11 por cada €100).
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mathematical Reality -->
+  <section class="py-16 bg-gray-50">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold text-center text-gray-900 mb-12">📐 La Realidad Matemática</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          
+          <!-- Breakeven Points -->
+          <div class="bg-white border border-gray-200 rounded-lg p-6">
+            <h3 class="text-lg font-bold text-gray-800 mb-4">⚖️ Punto de Equilibrio</h3>
+            <div class="space-y-3 text-sm">
+              <div class="bg-green-50 border border-green-200 rounded p-3">
+                <div class="font-semibold text-green-800">Cuotas 2.00 (justas)</div>
+                <div class="text-green-700">Necesitas: 50% aciertos</div>
+              </div>
+              <div class="bg-yellow-50 border border-yellow-200 rounded p-3">
+                <div class="font-semibold text-yellow-800">Cuotas 1.90</div>
+                <div class="text-yellow-700">Necesitas: 52.6% aciertos</div>
+              </div>
+              <div class="bg-red-50 border border-red-200 rounded p-3">
+                <div class="font-semibold text-red-800">Cuotas 1.85</div>
+                <div class="text-red-700">Necesitas: 54.1% aciertos</div>
               </div>
             </div>
           </div>
 
-          <!-- Statistics Panel -->
-          <div class="space-y-6">
-            
-            <!-- Current Status -->
-            <div class="bg-white rounded-lg shadow-lg p-6">
-              <h3 class="text-xl font-bold text-gray-900 mb-4">💰 Estado Actual</h3>
-              <div class="space-y-3 text-sm">
-                <div class="flex justify-between">
-                  <span class="text-gray-600">Bankroll actual:</span>
-                  <span id="currentBankroll" class="font-bold text-lg">€1,000</span>
-                </div>
-                <div class="flex justify-between">
-                  <span class="text-gray-600">Ganancia/Pérdida:</span>
-                  <span id="totalPnL" class="font-bold text-lg">€0</span>
-                </div>
-                <div class="flex justify-between">
-                  <span class="text-gray-600">ROI:</span>
-                  <span id="roi" class="font-bold">0%</span>
-                </div>
-                <div class="flex justify-between border-t pt-2">
-                  <span class="text-gray-600">Próxima apuesta:</span>
-                  <span id="nextBet" class="font-bold">€50</span>
-                </div>
+          <!-- House Edge Impact -->
+          <div class="bg-white border border-gray-200 rounded-lg p-6">
+            <h3 class="text-lg font-bold text-gray-800 mb-4">🏠 Impacto del Margen</h3>
+            <div class="space-y-3 text-sm text-gray-700">
+              <div>
+                <strong>• Margen 2.6% (cuotas 1.95):</strong><br>
+                Reduce ganancias ~13%
+              </div>
+              <div>
+                <strong>• Margen 5.3% (cuotas 1.90):</strong><br>
+                Reduce ganancias ~27%
+              </div>
+              <div>
+                <strong>• Margen 8.1% (cuotas 1.85):</strong><br>
+                Reduce ganancias ~40%
+              </div>
+              <div>
+                <strong>• Margen 11.1% (cuotas 1.80):</strong><br>
+                Reduce ganancias ~55%
               </div>
             </div>
+          </div>
 
-            <!-- Season Stats -->
-            <div class="bg-white rounded-lg shadow-lg p-6">
-              <h3 class="text-xl font-bold text-gray-900 mb-4">📊 Estadísticas</h3>
-              <div class="space-y-2 text-sm">
-                <div class="flex justify-between">
-                  <span class="text-gray-600">Apuestas totales:</span>
-                  <span id="totalBets" class="font-medium">0</span>
-                </div>
-                <div class="flex justify-between">
-                  <span class="text-gray-600">Aciertos:</span>
-                  <span id="wins" class="font-medium text-green-600">0</span>
-                </div>
-                <div class="flex justify-between">
-                  <span class="text-gray-600">Fallos:</span>
-                  <span id="losses" class="font-medium text-red-600">0</span>
-                </div>
-                <div class="flex justify-between">
-                  <span class="text-gray-600">% Aciertos real:</span>
-                  <span id="actualWinRate" class="font-medium">0%</span>
-                </div>
-                <div class="flex justify-between border-t pt-2">
-                  <span class="text-gray-600">Total apostado:</span>
-                  <span id="totalWagered" class="font-medium">€0</span>
-                </div>
-                <div class="flex justify-between">
-                  <span class="text-gray-600">Total devuelto:</span>
-                  <span id="totalReturned" class="font-medium">€0</span>
-                </div>
-                <div class="flex justify-between">
-                  <span class="text-gray-600">RTP real:</span>
-                  <span id="actualRTP" class="font-medium">0%</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- Performance Analysis -->
-            <div class="bg-white rounded-lg shadow-lg p-6">
-              <h3 class="text-xl font-bold text-gray-900 mb-4">🎯 Análisis</h3>
-              <div id="performanceAnalysis" class="space-y-3 text-sm">
-                <p class="text-gray-500 text-center">Estadísticas aparecerán aquí durante la simulación</p>
-              </div>
-            </div>
-
-            <!-- Reality Check -->
-            <div class="bg-red-50 border border-red-200 rounded-lg p-4">
-              <h4 class="font-bold text-red-800 mb-2">⚠️ Reality Check</h4>
-              <div class="text-red-700 text-xs space-y-1" id="realityCheck">
-                <p>• Cuotas reales: 1.70-2.50 (parecen justas)</p>
-                <p>• Margen oculto: 5-8% en cada apuesta</p>
-                <p>• 60% aciertos + margen 6% = Pérdidas lentas</p>
-                <p>• Como jugar ruleta: el 0 siempre gana</p>
+          <!-- Long-term Impact -->
+          <div class="bg-white border border-gray-200 rounded-lg p-6">
+            <h3 class="text-lg font-bold text-gray-800 mb-4">⏰ Impacto a Largo Plazo</h3>
+            <div class="space-y-2 text-sm text-gray-700">
+              <p>El margen de casa opera como un "impuesto" constante en cada apuesta.</p>
+              <div class="bg-blue-50 border border-blue-200 rounded p-3 mt-3">
+                <p class="text-blue-800 font-medium">
+                  Con 1000 apuestas de €50, un margen del 8% puede representar 
+                  una diferencia de €4,000 en ganancias potenciales.
+                </p>
               </div>
             </div>
           </div>
@@ -224,45 +294,28 @@ import MainLayout from '../../layouts/MainLayout.astro';
     </div>
   </section>
 
-  <!-- Educational Content -->
-  <section class="py-12 bg-white">
-    <div class="container mx-auto px-4">
-      <div class="max-w-4xl mx-auto">
-        <h2 class="text-3xl font-bold text-center text-gray-900 mb-8">🧠 Lo Que Este Simulador Te Enseña</h2>
-        
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div class="bg-blue-50 border-l-4 border-blue-400 p-6 rounded">
-            <h3 class="text-xl font-bold text-blue-800 mb-3">📊 Matemáticas Brutales</h3>
-            <ul class="text-blue-700 space-y-2 text-sm">
-              <li><strong>• Cuotas realistas:</strong> Como los ejemplos reales (1.70, 2.50, etc.)</li>
-              <li><strong>• Margen oculto:</strong> 5-8% en cada apuesta (como el 0 de la ruleta)</li>
-              <li><strong>• Breakeven real:</strong> Necesitas 57-60% aciertos para compensar margen</li>
-              <li><strong>• ROI profesional:</strong> 2-5% anual con 65%+ aciertos consistentes</li>
-              <li><strong>• La trampa:</strong> El margen es invisible pero siempre está ahí</li>
-            </ul>
-          </div>
-          
-          <div class="bg-red-50 border-l-4 border-red-400 p-6 rounded">
-            <h3 class="text-xl font-bold text-red-800 mb-3">🚨 Trampas Comunes</h3>
-            <ul class="text-red-700 space-y-2 text-sm">
-              <li><strong>• Overconfidence:</strong> \"Soy bueno prediciendo resultados\"</li>
-              <li><strong>• Cherry picking:</strong> Solo recuerdas tus aciertos</li>
-              <li><strong>• Gestión emocional:</strong> Subir apuestas tras pérdidas</li>
-              <li><strong>• Survival bias:</strong> Solo oyes historias de ganadores</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="mt-8 bg-yellow-50 border border-yellow-200 rounded-lg p-6">
-          <h3 class="text-xl font-bold text-yellow-800 mb-4 text-center">🎓 Lección Principal</h3>
-          <p class="text-yellow-700 text-center text-lg">
-            \"Incluso si fueras capaz de acertar el 65% de tus apuestas (algo extremadamente difícil), 
-            el margen de la casa y la varianza harían que tu ROI fuera mínimo y el riesgo de ruina alto.\"
-          </p>
-          <p class="text-yellow-600 text-center text-sm mt-4">
-            Los apostadores profesionales que ganan dinero son menos del 4% y requieren bankrolls enormes, 
-            disciplina férrea y dedicación a tiempo completo.
-          </p>
+  <!-- Final CTA -->
+  <section class="py-16 bg-blue-600">
+    <div class="container mx-auto px-4 text-center">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-bold text-white mb-6">🎯 Comprende el Sistema</h2>
+        <p class="text-xl text-blue-100 mb-8">
+          El margen de las casas de apuestas no es aleatorio: es una ventaja matemática sistemática 
+          que opera en cada apuesta, transformando estrategias ganadoras en pérdidas graduales.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a 
+            href="/sports" 
+            class="bg-white hover:bg-gray-100 text-blue-600 font-bold py-3 px-6 rounded-lg transition-all duration-200"
+          >
+            🏈 Explorar Más Simuladores
+          </a>
+          <a 
+            href="/the-way" 
+            class="bg-blue-800 hover:bg-blue-900 text-white font-bold py-3 px-6 rounded-lg transition-all duration-200"
+          >
+            🛤️ El Camino
+          </a>
         </div>
       </div>
     </div>
@@ -271,580 +324,292 @@ import MainLayout from '../../layouts/MainLayout.astro';
 </MainLayout>
 
 <script>
-class SeasonSimulator {
-  constructor() {
-    this.config = {
-      winRate: 65,
-      strategy: 'percentage',
-      betAmount: 5,
-      initialBankroll: 1000
+  let experimentData = {
+    fair: [],
+    real: []
+  };
+  
+  function runExperiment() {
+    const winRate = parseFloat(document.getElementById('winRate').value) / 100;
+    const realOdds = parseFloat(document.getElementById('realOdds').value);
+    const numBets = parseInt(document.getElementById('numBets').value);
+    const initialCapital = parseFloat(document.getElementById('initialCapital').value);
+    
+    console.log('Starting experiment with:', { winRate, realOdds, numBets, initialCapital });
+    
+    // Update display
+    updateOddsDisplay(realOdds);
+    
+    const btn = document.getElementById('startExperiment');
+    btn.textContent = '⏳ Ejecutando...';
+    btn.disabled = true;
+    
+    setTimeout(() => {
+      // Run both simulations with same win/loss sequence
+      const fairResults = simulateApostas(initialCapital, winRate, 2.00, numBets, false);
+      const realResults = simulateApostas(initialCapital, winRate, realOdds, numBets, true);
+      
+      experimentData.fair = fairResults;
+      experimentData.real = realResults;
+      
+      // Update displays
+      updateResults(fairResults, 'fair');
+      updateResults(realResults, 'real');
+      updateCharts();
+      updateAnalysis();
+      
+      // Show analysis section
+      document.getElementById('analysisSection').style.display = 'block';
+      
+      btn.textContent = '🔄 Ejecutar Nuevo Experimento';
+      btn.disabled = false;
+    }, 500);
+  }
+  
+  let sharedResults = []; // Store shared win/loss sequence
+  
+  function simulateApostas(initialCapital, winRate, odds, numBets, useSharedResults = false) {
+    let capital = initialCapital;
+    const betSize = 50; // Fixed bet size for simplicity
+    const history = [{ bet: 0, capital: capital, result: null }];
+    
+    let wins = 0;
+    let losses = 0;
+    let totalStaked = 0;
+    let totalReturns = 0;
+    
+    // Generate shared results only once (for the first apostador)
+    if (!useSharedResults) {
+      sharedResults = [];
+      for (let i = 1; i <= numBets; i++) {
+        sharedResults.push(Math.random() < winRate);
+      }
+    }
+    
+    for (let i = 1; i <= numBets; i++) {
+      if (capital < betSize) {
+        // Not enough capital for next bet
+        history.push({ bet: i, capital: capital, result: 'insufficient' });
+        continue;
+      }
+      
+      const won = sharedResults[i - 1]; // Use shared result
+      totalStaked += betSize;
+      capital -= betSize;
+      
+      if (won) {
+        const winAmount = betSize * odds;
+        capital += winAmount;
+        totalReturns += winAmount;
+        wins++;
+        history.push({ bet: i, capital: capital, result: 'win', amount: winAmount });
+      } else {
+        losses++;
+        history.push({ bet: i, capital: capital, result: 'loss', amount: betSize });
+      }
+    }
+    
+    return {
+      history,
+      finalCapital: capital,
+      initialCapital,
+      wins,
+      losses,
+      actualWinRate: wins / (wins + losses),
+      totalStaked,
+      totalReturns,
+      netResult: capital - initialCapital,
+      roi: ((capital - initialCapital) / initialCapital) * 100
     };
-    
-    this.state = {
-      currentBankroll: 1000,
-      currentMatchday: 0,
-      totalBets: 0,
-      wins: 0,
-      losses: 0,
-      totalWagered: 0,
-      totalReturned: 0,
-      bankrollHistory: [1000],
-      isPlaying: false,
-      autoPlay: false
-    };
-    
-    this.chart = null;
-    this.teams = [
-      'Real Madrid', 'Barcelona', 'Atlético', 'Sevilla', 'Valencia', 'Betis',
-      'Real Sociedad', 'Villarreal', 'Athletic', 'Getafe', 'Osasuna', 'Celta',
-      'Mallorca', 'Girona', 'Las Palmas', 'Alavés', 'Rayo', 'Cádiz', 'Granada', 'Almería'
-    ];
-    
-    this.initializeElements();
-    this.attachEventListeners();
-    this.updateConfigHelp();
-    this.initChart();
   }
-
-  initializeElements() {
-    this.elements = {
-      winRate: document.getElementById('winRate'),
-      strategy: document.getElementById('strategy'),
-      betAmount: document.getElementById('betAmount'),
-      bankroll: document.getElementById('bankroll'),
-      betAmountHelp: document.getElementById('betAmountHelp'),
-      startSeasonBtn: document.getElementById('startSeasonBtn'),
-      fastSimulateBtn: document.getElementById('fastSimulateBtn'),
-      resetBtn: document.getElementById('resetBtn'),
-      playMatchdayBtn: document.getElementById('playMatchdayBtn'),
-      autoPlayBtn: document.getElementById('autoPlayBtn'),
-      seasonProgress: document.getElementById('seasonProgress'),
-      progressBar: document.getElementById('progressBar'),
-      currentMatchday: document.getElementById('currentMatchday'),
-      currentBankroll: document.getElementById('currentBankroll'),
-      totalPnL: document.getElementById('totalPnL'),
-      roi: document.getElementById('roi'),
-      nextBet: document.getElementById('nextBet'),
-      totalBets: document.getElementById('totalBets'),
-      wins: document.getElementById('wins'),
-      losses: document.getElementById('losses'),
-      actualWinRate: document.getElementById('actualWinRate'),
-      totalWagered: document.getElementById('totalWagered'),
-      totalReturned: document.getElementById('totalReturned'),
-      actualRTP: document.getElementById('actualRTP'),
-      performanceAnalysis: document.getElementById('performanceAnalysis'),
-      bankrollChart: document.getElementById('bankrollChart')
-    };
-  }
-
-  attachEventListeners() {
-    this.elements.winRate.addEventListener('change', (e) => {
-      this.config.winRate = parseInt(e.target.value);
-      this.updateConfigHelp();
-    });
+  
+  function updateOddsDisplay(realOdds) {
+    // Calculate margin for equal probability bets (like over/under 2.5 goals)
+    const impliedProb = (1 / realOdds) * 100;
+    const margin = (impliedProb * 2) - 100; // For two equal outcomes
     
-    this.elements.strategy.addEventListener('change', (e) => {
-      this.config.strategy = e.target.value;
-      this.updateConfigHelp();
-    });
+    document.getElementById('realOddsDisplay').textContent = `Cuotas Reales: ${realOdds}`;
+    document.getElementById('marginDisplay').textContent = `Margen de casa: ${margin.toFixed(1)}%`;
     
-    this.elements.betAmount.addEventListener('input', (e) => {
-      this.config.betAmount = parseFloat(e.target.value);
-      this.updateConfigHelp();
-    });
-    
-    this.elements.bankroll.addEventListener('change', (e) => {
-      this.config.initialBankroll = parseInt(e.target.value);
-      this.updateConfigHelp();
-    });
-    
-    this.elements.startSeasonBtn.addEventListener('click', () => this.startSeason());
-    this.elements.fastSimulateBtn.addEventListener('click', () => this.fastSimulate());
-    this.elements.resetBtn.addEventListener('click', () => this.reset());
-    this.elements.playMatchdayBtn.addEventListener('click', () => this.playMatchday());
-    this.elements.autoPlayBtn.addEventListener('click', () => this.toggleAutoPlay());
-  }
-
-  updateConfigHelp() {
-    const strategy = this.config.strategy;
-    const amount = this.config.betAmount;
-    
-    let helpText = '';
-    switch(strategy) {
-      case 'fixed':
-        helpText = `€${amount} por apuesta`;
-        break;
-      case 'percentage':
-        helpText = `${amount}% del bankroll por apuesta`;
-        break;
-      case 'kelly':
-        helpText = `Kelly Criterion (${amount}% max)`;
-        break;
+    // Update the real market info box
+    const realMarketInfo = document.getElementById('realMarketInfo');
+    if (realMarketInfo) {
+      realMarketInfo.innerHTML = `
+        <strong>Cuota:</strong> ${realOdds}<br>
+        <strong>Probabilidad implícita:</strong> ${impliedProb.toFixed(1)}%<br>
+        <strong>Margen de casa:</strong> ${margin.toFixed(1)}%
+      `;
     }
-    
-    this.elements.betAmountHelp.textContent = helpText;
-    this.updateNextBet();
   }
-
-  updateNextBet() {
-    const nextBet = this.calculateBetSize();
-    this.elements.nextBet.textContent = `€${nextBet.toFixed(0)}`;
-  }
-
-  calculateBetSize() {
-    const currentBankroll = this.state.currentBankroll;
+  
+  function updateResults(results, type) {
+    const container = document.getElementById(type === 'fair' ? 'fairResults' : 'realResults');
     
-    // Prevent exponential growth while allowing realistic betting
-    let betSize;
-    
-    switch(this.config.strategy) {
-      case 'fixed':
-        betSize = Math.min(this.config.betAmount, currentBankroll);
-        break;
-      case 'percentage':
-        // Standard percentage betting with reasonable cap
-        const percentageBet = currentBankroll * (this.config.betAmount / 100);
-        const maxBet = this.config.initialBankroll * 0.15; // Max 15% of initial bankroll
-        betSize = Math.min(percentageBet, maxBet, currentBankroll);
-        break;
-      case 'kelly':
-        // Kelly for sports betting with 5-8% house edge
-        const averageHouseEdge = 0.065; // 6.5% average house edge
-        const edge = (this.config.winRate / 100) - (0.5 + averageHouseEdge); // Break-even at ~57% with house edge
-        const kellyFraction = Math.max(0, Math.min(edge * 1.5, this.config.betAmount / 100));
-        const kellyBet = currentBankroll * kellyFraction;
-        const maxKellyBet = this.config.initialBankroll * 0.08; // Conservative Kelly
-        betSize = Math.min(kellyBet, maxKellyBet, currentBankroll);
-        break;
-      default:
-        betSize = 10;
-    }
-    
-    return Math.max(1, Math.min(betSize, currentBankroll));
-  }
-
-  generateMatchday() {
-    // Generate 10 matches with 100% REALISTIC odds (like real betting sites)
-    const matches = [];
-    const usedTeams = new Set();
-    
-    for (let i = 0; i < 10; i++) {
-      // REAL betting scenarios with REAL house edge (like casino's 0)
-      const scenarios = [
-        // Balanced match - REAL odds
-        { homeOdds: 2.50, drawOdds: 3.20, awayOdds: 2.80, desc: "Partido equilibrado" },
-        // Home favorite moderate - REAL odds
-        { homeOdds: 1.70, drawOdds: 3.60, awayOdds: 5.00, desc: "Favorito moderado casa" },
-        // Strong home favorite - REAL odds
-        { homeOdds: 1.15, drawOdds: 7.50, awayOdds: 15.00, desc: "Favorito claro casa" },
-        // Away favorite - REAL odds
-        { homeOdds: 7.00, drawOdds: 4.50, awayOdds: 1.40, desc: "Favorito visitante" },
-        // Balanced lower league - REAL odds
-        { homeOdds: 2.20, drawOdds: 3.00, awayOdds: 3.10, desc: "Equipos parejos" },
-        // Slight home favorite - REAL odds
-        { homeOdds: 1.90, drawOdds: 3.40, awayOdds: 4.20, desc: "Ligero favorito casa" },
-        // Strong away favorite - REAL odds
-        { homeOdds: 6.50, drawOdds: 4.00, awayOdds: 1.50, desc: "Grande jugando fuera" },
-        // Very balanced - REAL odds
-        { homeOdds: 2.40, drawOdds: 3.10, awayOdds: 2.90, desc: "Muy equilibrado" },
-        // Moderate away favorite - REAL odds
-        { homeOdds: 3.80, drawOdds: 3.30, awayOdds: 2.00, desc: "Favorito moderado fuera" }
-      ];
-      
-      const scenario = scenarios[Math.floor(Math.random() * scenarios.length)];
-      
-      // Ensure NO duplicate teams
-      let homeTeam, awayTeam;
-      let attempts = 0;
-      do {
-        homeTeam = this.teams[Math.floor(Math.random() * this.teams.length)];
-        awayTeam = this.teams[Math.floor(Math.random() * this.teams.length)];
-        attempts++;
-        if (attempts > 50) break;
-      } while (homeTeam === awayTeam && attempts <= 50);
-      
-      // Calculate TRUE probabilities from odds (removing house edge)
-      const impliedHome = 1 / scenario.homeOdds;
-      const impliedDraw = 1 / scenario.drawOdds;
-      const impliedAway = 1 / scenario.awayOdds;
-      const totalImplied = impliedHome + impliedDraw + impliedAway;
-      
-      // TRUE probabilities (fair odds without house edge)
-      const trueHome = impliedHome / totalImplied;
-      const trueDraw = impliedDraw / totalImplied;
-      const trueAway = impliedAway / totalImplied;
-      
-      matches.push({
-        id: i + 1,
-        homeTeam: homeTeam,
-        awayTeam: awayTeam,
-        homeOdds: scenario.homeOdds,
-        drawOdds: scenario.drawOdds, 
-        awayOdds: scenario.awayOdds,
-        description: scenario.desc,
-        // House edge (like casino's 0)
-        houseEdge: (totalImplied - 1) * 100,
-        // True probabilities (fair odds)
-        trueHomeWin: trueHome,
-        trueDraw: trueDraw,
-        trueAwayWin: trueAway
-      });
-    }
-    
-    return matches;
-  }
-
-  startSeason() {
-    this.state.isPlaying = true;
-    this.state.currentBankroll = this.config.initialBankroll;
-    this.state.bankrollHistory = [this.config.initialBankroll];
-    
-    this.elements.startSeasonBtn.classList.add('hidden');
-    this.elements.playMatchdayBtn.classList.remove('hidden');
-    this.elements.autoPlayBtn.classList.remove('hidden');
-    
-    this.updateDisplay();
-    this.generateAndDisplayMatchday();
-  }
-
-  generateAndDisplayMatchday() {
-    if (this.state.currentMatchday >= 38) {
-      this.endSeason();
-      return;
-    }
-    
-    this.state.currentMatchday++;
-    const matches = this.generateMatchday();
-    
-    this.elements.seasonProgress.textContent = `Jornada ${this.state.currentMatchday} de 38`;
-    this.elements.progressBar.style.width = `${(this.state.currentMatchday / 38) * 100}%`;
-    
-    // Display matches with HOUSE EDGE prominently shown (like casino's 0)
-    this.elements.currentMatchday.innerHTML = `
-      <div class="mb-4 text-center">
-        <div class="bg-orange-50 border border-orange-200 rounded-lg p-3">
-          <p class="text-orange-800 text-sm font-medium">🎰 <strong>El "0 verde" de las apuestas deportivas</strong></p>
-          <p class="text-orange-700 text-xs">Cada partido tiene margen oculto 5-8% que garantiza pérdidas a largo plazo</p>
-        </div>
-      </div>
-      ${matches.map((match, index) => `
-        <div class="bg-gray-50 rounded-lg p-4 border mb-2">
-          <div class="flex justify-between items-center">
-            <div class="text-sm">
-              <span class="font-medium">${match.homeTeam}</span> vs <span class="font-medium">${match.awayTeam}</span>
-              <div class="text-xs text-gray-500">${match.description}</div>
-            </div>
-            <div class="text-sm space-x-2">
-              <span class="bg-blue-100 px-2 py-1 rounded text-blue-800">${match.homeOdds.toFixed(2)}</span>
-              <span class="bg-gray-100 px-2 py-1 rounded text-gray-800">${match.drawOdds.toFixed(2)}</span>
-              <span class="bg-red-100 px-2 py-1 rounded text-red-800">${match.awayOdds.toFixed(2)}</span>
-            </div>
+    const html = `
+      <div class="space-y-3">
+        <div class="text-center">
+          <div class="text-3xl font-bold ${results.roi >= 0 ? 'text-green-600' : 'text-red-600'}">
+            ${results.roi >= 0 ? '+' : ''}${results.roi.toFixed(1)}%
           </div>
-          <div class="text-xs mt-2 text-center">
-            <span class="bg-red-100 text-red-800 px-2 py-1 rounded font-medium">
-              🎯 Margen Casa: ${this.calculateHouseEdge(match).toFixed(1)}% (como el 0 de la ruleta)
+          <div class="text-gray-600 font-medium">Rendimiento Total</div>
+        </div>
+        
+        <div class="bg-gray-50 rounded-lg p-3 space-y-2 text-sm">
+          <div class="flex justify-between">
+            <span>Capital final:</span>
+            <span class="font-bold ${results.netResult >= 0 ? 'text-green-600' : 'text-red-600'}">
+              €${results.finalCapital.toFixed(0)}
             </span>
           </div>
-        </div>
-      `).join('')}
-    `;
-    
-    this.currentMatches = matches;
-  }
-
-  playMatchday() {
-    if (!this.currentMatches || this.state.currentBankroll <= 0) return;
-    
-    // Select random matches to bet on (3-6 matches per matchday)
-    const numBets = 3 + Math.floor(Math.random() * 4);
-    const selectedMatches = this.currentMatches
-      .sort(() => Math.random() - 0.5)
-      .slice(0, numBets);
-    
-    selectedMatches.forEach(match => {
-      this.placeBet(match);
-    });
-    
-    this.updateDisplay();
-    this.updateChart();
-    
-    // Auto-generate next matchday after a delay
-    setTimeout(() => {
-      if (this.state.isPlaying && this.state.currentMatchday < 38) {
-        this.generateAndDisplayMatchday();
-        
-        if (this.state.autoPlay) {
-          setTimeout(() => this.playMatchday(), 1000);
-        }
-      }
-    }, this.state.autoPlay ? 500 : 2000);
-  }
-
-  calculateHouseEdge(match) {
-    // Calculate house edge from odds
-    const impliedHome = 1 / match.homeOdds;
-    const impliedDraw = 1 / match.drawOdds;
-    const impliedAway = 1 / match.awayOdds;
-    const totalImplied = impliedHome + impliedDraw + impliedAway;
-    
-    return (totalImplied - 1) * 100; // House edge percentage
-  }
-
-  placeBet(match) {
-    if (this.state.currentBankroll <= 0) return;
-    
-    const betSize = this.calculateBetSize();
-    if (betSize <= 0) return;
-    
-    // Randomly choose what to bet on (home, draw, away)
-    const betChoice = Math.random();
-    let odds, trueProbability, betType;
-    
-    if (betChoice < 0.5) {
-      // Bet on home win
-      odds = match.homeOdds;
-      trueProbability = match.trueHomeWin;
-      betType = 'home';
-    } else if (betChoice < 0.8) {
-      // Bet on away win  
-      odds = match.awayOdds;
-      trueProbability = match.trueAwayWin;
-      betType = 'away';
-    } else {
-      // Bet on draw
-      odds = match.drawOdds;
-      trueProbability = match.trueDraw;
-      betType = 'draw';
-    }
-    
-    // CRITICAL: Apply user skill to TRUE probabilities (not biased odds)
-    const baseSkill = this.config.winRate / 100;
-    
-    // Add realistic variance: ±10% swing based on "luck" and psychological factors
-    const variance = (Math.random() - 0.5) * 0.2; // ±10% variance
-    const psychologicalFactor = this.state.currentBankroll < this.config.initialBankroll ? -0.05 : 0; // Worse when losing
-    const actualSkill = Math.max(0.2, Math.min(0.9, baseSkill + variance + psychologicalFactor));
-    
-    // The HOUSE EDGE KILLER: Even with skill, you bet at unfair odds
-    // Skill affects your prediction accuracy, but payouts are still rigged
-    const skillAdjustedProbability = trueProbability + (actualSkill - 0.5) * 0.3;
-    const finalProbability = Math.max(0.05, Math.min(0.95, skillAdjustedProbability));
-    
-    const wins = Math.random() < finalProbability;
-    
-    // Update stats
-    this.state.currentBankroll -= betSize;
-    this.state.totalBets++;
-    this.state.totalWagered += betSize;
-    
-    if (wins) {
-      const winnings = betSize * odds; // Payout at HOUSE EDGE ODDS
-      this.state.currentBankroll += winnings;
-      this.state.totalReturned += winnings;
-      this.state.wins++;
-    } else {
-      this.state.losses++;
-    }
-    
-    this.state.bankrollHistory.push(this.state.currentBankroll);
-  }
-
-  async fastSimulate() {
-    this.startSeason();
-    this.state.autoPlay = true;
-    
-    this.elements.fastSimulateBtn.disabled = true;
-    this.elements.fastSimulateBtn.textContent = 'Simulando...';
-    
-    while (this.state.currentMatchday < 38 && this.state.currentBankroll > 0) {
-      this.generateAndDisplayMatchday();
-      this.playMatchday();
-      await new Promise(resolve => setTimeout(resolve, 50));
-    }
-    
-    this.endSeason();
-    this.elements.fastSimulateBtn.disabled = false;
-    this.elements.fastSimulateBtn.textContent = '⚡ Simulación Rápida';
-  }
-
-  toggleAutoPlay() {
-    this.state.autoPlay = !this.state.autoPlay;
-    
-    if (this.state.autoPlay) {
-      this.elements.autoPlayBtn.textContent = '⏸️ Pausar';
-      this.elements.autoPlayBtn.classList.remove('bg-purple-600', 'hover:bg-purple-700');
-      this.elements.autoPlayBtn.classList.add('bg-red-600', 'hover:bg-red-700');
-      this.playMatchday();
-    } else {
-      this.elements.autoPlayBtn.textContent = '⏩ Auto Play';
-      this.elements.autoPlayBtn.classList.remove('bg-red-600', 'hover:bg-red-700');
-      this.elements.autoPlayBtn.classList.add('bg-purple-600', 'hover:bg-purple-700');
-    }
-  }
-
-  endSeason() {
-    this.state.isPlaying = false;
-    this.state.autoPlay = false;
-    
-    this.elements.playMatchdayBtn.classList.add('hidden');
-    this.elements.autoPlayBtn.classList.add('hidden');
-    
-    // Show final analysis
-    this.showFinalAnalysis();
-  }
-
-  showFinalAnalysis() {
-    const roi = ((this.state.currentBankroll - this.config.initialBankroll) / this.config.initialBankroll) * 100;
-    const actualWinRate = this.state.totalBets > 0 ? (this.state.wins / this.state.totalBets) * 100 : 0;
-    
-    let analysis = '';
-    if (roi > 5) {
-      analysis = '🎉 Resultado excepcional. Pero recuerda: mantener esto es casi imposible.';
-    } else if (roi > 0) {
-      analysis = '😐 Pequeña ganancia. El margen de casa está erosionando tus beneficios.';
-    } else if (roi > -10) {
-      analysis = '😑 Pérdidas menores. El margen 6% funciona lentamente pero seguro.';
-    } else if (roi > -30) {
-      analysis = '😟 Pérdidas típicas. El "0 verde" de las apuestas te está matando.';
-    } else {
-      analysis = '💸 El margen de casa ha ganado. Como siempre.';
-    }
-    
-    this.elements.performanceAnalysis.innerHTML = `
-      <div class="space-y-2">
-        <p class="font-bold text-center">${analysis}</p>
-        <div class="text-xs space-y-1">
-          <p>• Target aciertos: ${this.config.winRate}% | Real: ${actualWinRate.toFixed(1)}%</p>
-          <p>• ROI profesional real: 2-5% anual | Tu ROI: ${roi.toFixed(1)}%</p>
-          <p>• Breakeven necesario: ~57% aciertos (con margen casa 6%)</p>
-          <p>• Margen casa promedio: 5-8% en cada apuesta</p>
-          <p>• RTP real: ${(this.state.totalReturned / this.state.totalWagered * 100).toFixed(1)}% (el margen te come)</p>
+          <div class="flex justify-between">
+            <span>Ganancia/Pérdida:</span>
+            <span class="font-bold ${results.netResult >= 0 ? 'text-green-600' : 'text-red-600'}">
+              ${results.netResult >= 0 ? '+' : ''}€${results.netResult.toFixed(0)}
+            </span>
+          </div>
+          <div class="flex justify-between border-t pt-2">
+            <span>Aciertos:</span>
+            <span class="font-bold text-green-600">${results.wins}</span>
+          </div>
+          <div class="flex justify-between">
+            <span>Fallos:</span>
+            <span class="font-bold text-red-600">${results.losses}</span>
+          </div>
+          <div class="flex justify-between">
+            <span>Win rate real:</span>
+            <span class="font-bold text-blue-600">${(results.actualWinRate * 100).toFixed(1)}%</span>
+          </div>
+          <div class="flex justify-between">
+            <span>Total apostado:</span>
+            <span class="text-gray-700">€${results.totalStaked.toFixed(0)}</span>
+          </div>
         </div>
       </div>
     `;
+    
+    container.innerHTML = html;
   }
-
-  updateDisplay() {
-    const pnl = this.state.currentBankroll - this.config.initialBankroll;
-    const roi = (pnl / this.config.initialBankroll) * 100;
-    const actualWinRate = this.state.totalBets > 0 ? (this.state.wins / this.state.totalBets) * 100 : 0;
-    const actualRTP = this.state.totalWagered > 0 ? (this.state.totalReturned / this.state.totalWagered) * 100 : 0;
-    
-    this.elements.currentBankroll.textContent = `€${this.state.currentBankroll.toFixed(0)}`;
-    this.elements.totalPnL.textContent = `€${pnl.toFixed(0)}`;
-    this.elements.totalPnL.className = `font-bold text-lg ${pnl >= 0 ? 'text-green-600' : 'text-red-600'}`;
-    
-    this.elements.roi.textContent = `${roi.toFixed(1)}%`;
-    this.elements.roi.className = `font-bold ${roi >= 0 ? 'text-green-600' : 'text-red-600'}`;
-    
-    this.elements.totalBets.textContent = this.state.totalBets;
-    this.elements.wins.textContent = this.state.wins;
-    this.elements.losses.textContent = this.state.losses;
-    this.elements.actualWinRate.textContent = `${actualWinRate.toFixed(1)}%`;
-    this.elements.totalWagered.textContent = `€${this.state.totalWagered.toFixed(0)}`;
-    this.elements.totalReturned.textContent = `€${this.state.totalReturned.toFixed(0)}`;
-    this.elements.actualRTP.textContent = `${actualRTP.toFixed(1)}%`;
-    
-    this.updateNextBet();
+  
+  function updateCharts() {
+    createMiniChart(experimentData.fair.history, 'fairChart', '#22c55e');
+    createMiniChart(experimentData.real.history, 'realChart', '#ef4444');
   }
-
-  initChart() {
-    const ctx = this.elements.bankrollChart.getContext('2d');
-    this.chart = new Chart(ctx, {
-      type: 'line',
-      data: {
-        labels: [0],
-        datasets: [{
-          label: 'Bankroll',
-          data: [this.config.initialBankroll],
-          borderColor: 'rgb(59, 130, 246)',
-          backgroundColor: 'rgba(59, 130, 246, 0.1)',
-          tension: 0.1,
-          fill: true
-        }]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        scales: {
-          y: {
-            beginAtZero: true,
-            title: {
-              display: true,
-              text: 'Bankroll (€)'
-            }
-          },
-          x: {
-            title: {
-              display: true,
-              text: 'Apuestas'
-            }
-          }
-        },
-        plugins: {
-          legend: {
-            display: false
-          }
-        }
+  
+  function createMiniChart(history, containerId, color) {
+    const container = document.getElementById(containerId);
+    if (!history || history.length === 0) return;
+    
+    const maxCapital = Math.max(...history.map(h => h.capital));
+    const minCapital = Math.min(...history.map(h => h.capital));
+    const range = maxCapital - minCapital || 100;
+    
+    let svg = `<svg class="w-full h-full" viewBox="0 0 300 120">`;
+    
+    // Grid lines
+    for (let i = 0; i <= 4; i++) {
+      const y = 20 + (i * 20);
+      svg += `<line x1="30" y1="${y}" x2="280" y2="${y}" stroke="#e5e7eb" stroke-width="0.5"/>`;
+    }
+    
+    // Chart line
+    let path = '';
+    history.forEach((point, index) => {
+      const x = 30 + ((index / (history.length - 1)) * 250);
+      const y = 100 - ((point.capital - minCapital) / range * 60);
+      
+      if (index === 0) {
+        path += `M ${x} ${y}`;
+      } else {
+        path += ` L ${x} ${y}`;
       }
     });
+    
+    svg += `<path d="${path}" fill="none" stroke="${color}" stroke-width="2"/>`;
+    
+    // Y-axis labels
+    const initialCapital = history[0].capital;
+    svg += `<line x1="30" y1="70" x2="280" y2="70" stroke="#6b7280" stroke-width="1" stroke-dasharray="2,2"/>`;
+    svg += `<text x="25" y="74" text-anchor="end" class="text-xs fill-gray-600">€${Math.round(initialCapital)}</text>`;
+    
+    svg += '</svg>';
+    
+    container.innerHTML = svg;
   }
-
-  updateChart() {
-    if (!this.chart) return;
+  
+  function updateAnalysis() {
+    const fairData = experimentData.fair;
+    const realData = experimentData.real;
     
-    const labels = this.state.bankrollHistory.map((_, index) => index);
+    const difference = fairData.netResult - realData.netResult;
+    const percentDifference = fairData.netResult !== 0 ? 
+      Math.abs(difference / fairData.netResult) * 100 : 0;
     
-    this.chart.data.labels = labels;
-    this.chart.data.datasets[0].data = this.state.bankrollHistory;
+    const html = `
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="space-y-4">
+          <h4 class="text-lg font-bold text-gray-800">📊 Comparación de Resultados</h4>
+          <div class="bg-gray-50 rounded-lg p-4 space-y-3">
+            <div class="flex justify-between items-center">
+              <span class="text-gray-700">Apostador A (cuotas 2.00):</span>
+              <span class="font-bold ${fairData.netResult >= 0 ? 'text-green-600' : 'text-red-600'}">
+                ${fairData.netResult >= 0 ? '+' : ''}€${fairData.netResult.toFixed(0)}
+              </span>
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="text-gray-700">Apostador B (cuotas reales):</span>
+              <span class="font-bold ${realData.netResult >= 0 ? 'text-green-600' : 'text-red-600'}">
+                ${realData.netResult >= 0 ? '+' : ''}€${realData.netResult.toFixed(0)}
+              </span>
+            </div>
+            <div class="border-t pt-3">
+              <div class="flex justify-between items-center">
+                <span class="text-gray-700 font-medium">Diferencia:</span>
+                <span class="font-bold text-blue-600">€${Math.abs(difference).toFixed(0)}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="space-y-4">
+          <h4 class="text-lg font-bold text-gray-800">🔍 Análisis</h4>
+          <div class="text-sm text-gray-700 space-y-2">
+            ${difference > 0 ? 
+              `<p><strong>El margen de casa ha reducido las ganancias en €${difference.toFixed(0)}</strong>, 
+               representando una disminución del ${percentDifference.toFixed(1)}% en el resultado.</p>` :
+              difference < 0 ?
+              `<p><strong>El margen de casa ha convertido ganancias potenciales en pérdidas adicionales</strong> 
+               por valor de €${Math.abs(difference).toFixed(0)}.</p>` :
+              `<p><strong>Ambos apostadores obtuvieron resultados similares</strong>, lo que puede ocurrir 
+               en muestras pequeñas debido a la varianza.</p>`
+            }
+            
+            <p>Ambos apostadores tuvieron exactamente el mismo win rate: 
+               <strong>${(fairData.actualWinRate * 100).toFixed(1)}%</strong> (idéntica secuencia de resultados).</p>
+            
+            <div class="bg-blue-50 border border-blue-200 rounded p-3 mt-3">
+              <p class="text-blue-800 font-medium">
+                💡 La diferencia se debe exclusivamente al margen incorporado en las cuotas, 
+                no a diferencias en la habilidad predictiva.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="mt-8 bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+        <h4 class="text-lg font-bold text-yellow-800 mb-3">📝 Conclusiones del Experimento</h4>
+        <div class="text-yellow-800 text-sm space-y-2">
+          <p>• <strong>La habilidad predictiva fue idéntica</strong> - Ambos apostadores acertaron aproximadamente el mismo porcentaje.</p>
+          <p>• <strong>El margen de casa actuó como un "impuesto"</strong> - Redujo sistemáticamente los retornos del Apostador B.</p>
+          <p>• <strong>La diferencia se amplifica con el tiempo</strong> - Más apuestas = mayor impacto acumulativo del margen.</p>
+          <p>• <strong>No hay estrategia que elimine este efecto</strong> - Es una desventaja matemática estructural.</p>
+        </div>
+      </div>
+    `;
     
-    // Color the line based on performance
-    const currentValue = this.state.bankrollHistory[this.state.bankrollHistory.length - 1];
-    const isProfit = currentValue >= this.config.initialBankroll;
-    
-    this.chart.data.datasets[0].borderColor = isProfit ? 'rgb(34, 197, 94)' : 'rgb(239, 68, 68)';
-    this.chart.data.datasets[0].backgroundColor = isProfit ? 'rgba(34, 197, 94, 0.1)' : 'rgba(239, 68, 68, 0.1)';
-    
-    this.chart.update();
+    document.getElementById('comparisonAnalysis').innerHTML = html;
   }
-
-  reset() {
-    this.state = {
-      currentBankroll: this.config.initialBankroll,
-      currentMatchday: 0,
-      totalBets: 0,
-      wins: 0,
-      losses: 0,
-      totalWagered: 0,
-      totalReturned: 0,
-      bankrollHistory: [this.config.initialBankroll],
-      isPlaying: false,
-      autoPlay: false
-    };
-    
-    this.elements.startSeasonBtn.classList.remove('hidden');
-    this.elements.playMatchdayBtn.classList.add('hidden');
-    this.elements.autoPlayBtn.classList.add('hidden');
-    
-    this.elements.seasonProgress.textContent = 'Jornada 0 de 38';
-    this.elements.progressBar.style.width = '0%';
-    this.elements.currentMatchday.innerHTML = '<p class="text-center text-gray-500">Haz clic en "Empezar Temporada" para comenzar</p>';
-    
-    this.elements.performanceAnalysis.innerHTML = '<p class="text-gray-500 text-center">Estadísticas aparecerán aquí durante la simulación</p>';
-    
-    this.updateDisplay();
-    this.initChart();
-  }
-}
-
-// Load Chart.js and initialize simulator
-document.addEventListener('DOMContentLoaded', () => {
-  // Load Chart.js
-  const script = document.createElement('script');
-  script.src = 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js';
-  script.onload = () => {
-    new SeasonSimulator();
-  };
-  document.head.appendChild(script);
-});
+  
+  // Make functions global so they can be called from HTML
+  window.runExperiment = runExperiment;
 </script>
