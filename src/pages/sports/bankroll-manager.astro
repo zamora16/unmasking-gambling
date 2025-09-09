@@ -3,8 +3,8 @@ import MainLayout from '../../layouts/MainLayout.astro';
 ---
 
 <MainLayout 
-  title="Bankroll Manager Realista - Gestión Inteligente de Capital" 
-  description="Simulador Kelly Criterion, calculadora de riesgo y estrategias de gestión. Comprende las matemáticas reales detrás de la gestión de capital."
+  title="Gestor Inteligente de Dinero - ¿Funciona Controlar Cuánto Apuesto?" 
+  description="¿Crees que controlando cuánto apuestas puedes ganar dinero? Prueba diferentes estrategias de gestión y descubre por qué el 95% sigue perdiendo."
 >
   
   <!-- Hero Section -->
@@ -12,14 +12,14 @@ import MainLayout from '../../layouts/MainLayout.astro';
     <div class="container mx-auto px-4 text-center">
       <div class="max-w-4xl mx-auto">
         <h1 class="text-4xl md:text-6xl font-bold mb-6">
-          💰 Bankroll Manager Realista
+          🧠 Gestor Inteligente de Dinero
         </h1>
         <p class="text-xl md:text-2xl mb-8 text-purple-100">
-          Comprende las matemáticas reales de la gestión de capital
+          "Si controlo bien cuánto apuesto en cada partido, podré ganar dinero"
         </p>
         <div class="bg-white/10 backdrop-blur-sm rounded-lg p-6 max-w-2xl mx-auto">
           <p class="text-purple-100 text-lg">
-            🎯 <strong>Objetivo:</strong> Entender por qué incluso la mejor gestión no puede vencer las matemáticas adversas
+            🤔 <strong>¿Te suena familiar?</strong> Vamos a poner esta creencia a prueba...
           </p>
         </div>
       </div>
@@ -31,35 +31,46 @@ import MainLayout from '../../layouts/MainLayout.astro';
     <div class="container mx-auto px-4">
       <div class="max-w-4xl mx-auto">
         <div class="text-center mb-8">
-          <h2 class="text-2xl font-bold text-blue-800 mb-4">🧮 La Gestión de Capital</h2>
+          <h2 class="text-2xl font-bold text-blue-800 mb-4">💡 ¿Qué significa "gestionar bien el dinero"?</h2>
           <p class="text-blue-700 text-lg">
-            La gestión de capital puede <strong>reducir el riesgo</strong>, pero no puede eliminar la desventaja matemática inherente. 
-            El Kelly Criterion funciona solo cuando tienes una ventaja real y conoces las probabilidades exactas.
+            Muchas personas creen que el secreto está en controlar cuánto apuestan. 
+            <strong>"Si nunca apuesto más del 5% de mi dinero, podré ganar"</strong> es una frase muy común.
           </p>
         </div>
         
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
           <div class="bg-white rounded-lg p-4 border border-blue-200">
-            <div class="text-2xl font-bold text-blue-600">📚</div>
+            <div class="text-2xl font-bold text-green-600">💶</div>
             <div class="text-sm text-gray-700 mt-2">
-              <strong>En teoría:</strong><br>
-              "Kelly Criterion optimiza el crecimiento"
+              <strong>Método 1:</strong><br>
+              "Siempre apuesto la misma cantidad"<br>
+              <span class="text-xs text-gray-500">Ej: Siempre 50€</span>
             </div>
           </div>
           <div class="bg-white rounded-lg p-4 border border-blue-200">
-            <div class="text-2xl font-bold text-orange-600">⚠️</div>
+            <div class="text-2xl font-bold text-blue-600">📊</div>
             <div class="text-sm text-gray-700 mt-2">
-              <strong>En práctica:</strong><br>
-              Requiere ventaja real + probabilidades exactas
+              <strong>Método 2:</strong><br>
+              "Siempre el mismo porcentaje"<br>
+              <span class="text-xs text-gray-500">Ej: Siempre el 3%</span>
             </div>
           </div>
           <div class="bg-white rounded-lg p-4 border border-blue-200">
-            <div class="text-2xl font-bold text-red-600">📊</div>
+            <div class="text-2xl font-bold text-purple-600">🤓</div>
             <div class="text-sm text-gray-700 mt-2">
-              <strong>Con desventaja:</strong><br>
-              Gestión solo ralentiza las pérdidas
+              <strong>Método 3:</strong><br>
+              "Hay una fórmula matemática"<br>
+              <span class="text-xs text-gray-500">Que calcula por mí</span>
             </div>
           </div>
+        </div>
+        
+        <div class="bg-yellow-100 border border-yellow-300 rounded-lg p-4 mt-6 max-w-2xl mx-auto">
+          <p class="text-yellow-800 text-center">
+            <strong>🤔 La pregunta de 1000€:</strong><br>
+            Si alguno de estos métodos realmente funcionara...<br>
+            ¿Por qué siguen perdiendo dinero el 95% de los apostadores?
+          </p>
         </div>
       </div>
     </div>
@@ -72,11 +83,11 @@ import MainLayout from '../../layouts/MainLayout.astro';
         
         <!-- Configuration Panel -->
         <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
-          <h3 class="text-2xl font-bold text-gray-900 mb-6">⚙️ Configuración del Simulador</h3>
+          <h3 class="text-2xl font-bold text-gray-900 mb-6">⚙️ Vamos a Probarlo Tú Mismo</h3>
           
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
             <div>
-              <label class="block text-sm font-medium text-gray-700 mb-2">Bankroll Inicial (€)</label>
+              <label class="block text-sm font-medium text-gray-700 mb-2">¿Cuánto dinero tienes para apostar?</label>
               <input 
                 type="number" 
                 id="initialBankroll"
@@ -85,36 +96,37 @@ import MainLayout from '../../layouts/MainLayout.astro';
                 step="100"
                 class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
               >
+              <small class="text-gray-500">No te preocupes, es solo una simulación</small>
             </div>
             
             <div>
-              <label class="block text-sm font-medium text-gray-700 mb-2">Win Rate Estimado</label>
+              <label class="block text-sm font-medium text-gray-700 mb-2">¿Qué tal crees que se te da predecir?</label>
               <select id="winRate" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500">
-                <option value="0.48">48% (Realista)</option>
-                <option value="0.50">50% (Equilibrio)</option>
-                <option value="0.52" selected>52% (Optimista)</option>
-                <option value="0.55">55% (Muy Optimista)</option>
+                <option value="0.48">Malo - Peor que la suerte (48%)</option>
+                <option value="0.50">Regular - Como tirar una moneda (50%)</option>
+                <option value="0.52" selected>Bueno - Un poco mejor que la suerte (52%)</option>
+                <option value="0.55">Muy bueno - Bastante hábil (55%)</option>
               </select>
             </div>
             
             <div>
-              <label class="block text-sm font-medium text-gray-700 mb-2">Cuota Promedio</label>
+              <label class="block text-sm font-medium text-gray-700 mb-2">¿Cuánto te suelen pagar las casas?</label>
               <select id="avgOdds" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500">
-                <option value="1.80">1.80 (Juice alto -11%)</option>
-                <option value="1.85">1.85 (Juice alto -8%)</option>
-                <option value="1.90" selected>1.90 (Juice medio -5%)</option>
-                <option value="1.95">1.95 (Juice bajo -3%)</option>
-                <option value="2.00">2.00 (Sin juice - teórico)</option>
+                <option value="1.80">€1.80 por cada euro (casas codiciosas)</option>
+                <option value="1.85">€1.85 por cada euro (casas normales)</option>
+                <option value="1.90" selected>€1.90 por cada euro (casas buenas)</option>
+                <option value="1.95">€1.95 por cada euro (casas generosas)</option>
+                <option value="2.00">€2.00 por cada euro (ideal teórico)</option>
               </select>
             </div>
             
             <div>
-              <label class="block text-sm font-medium text-gray-700 mb-2">Número de Apuestas</label>
+              <label class="block text-sm font-medium text-gray-700 mb-2">¿Cuántas apuestas quieres simular?</label>
               <select id="numBets" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500">
-                <option value="100">100 apuestas</option>
-                <option value="250" selected>250 apuestas</option>
-                <option value="500">500 apuestas</option>
-                <option value="1000">1000 apuestas</option>
+                <option value="100">100 apuestas (3 meses)</option>
+                <option value="250" selected>250 apuestas (8 meses)</option>
+                <option value="500">500 apuestas (1 año y medio)</option>
+                <option value="1000">1000 apuestas (3 años)</option>
               </select>
             </div>
           </div>
@@ -123,54 +135,39 @@ import MainLayout from '../../layouts/MainLayout.astro';
           <div class="border-t border-gray-200 pt-6">
             <h4 class="text-lg font-semibold text-gray-800 mb-4">📊 Estrategia de Gestión</h4>
             
-            <!-- Kelly Explanation Box -->
             <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
-              <h5 class="font-bold text-blue-800 mb-2">🔍 ¿Qué es Kelly Criterion?</h5>
+              <h5 class="font-bold text-blue-800 mb-2">💡 ¿Cómo quieres gestionar tu dinero?</h5>
               <p class="text-blue-700 text-sm mb-3">
-                Es una fórmula matemática que calcula el porcentaje óptimo del capital a apostar 
-                cuando tienes una <strong>ventaja estadística confirmada</strong>.
+                Elige una estrategia y veamos qué tal funciona en la práctica.
+                Cada método tiene sus defensores que juran que "es la clave del éxito".
               </p>
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
-                <div class="bg-green-100 p-2 rounded">
-                  <strong class="text-green-800">✅ Funciona cuando:</strong>
-                  <br>• Tienes ventaja real y medible
-                  <br>• Conoces probabilidades exactas
-                  <br>• Puedes mantener disciplina perfecta
-                </div>
-                <div class="bg-red-100 p-2 rounded">
-                  <strong class="text-red-800">❌ Problemas comunes:</strong>
-                  <br>• Sobreestimar win rate propio
-                  <br>• No considerar el juice/margen
-                  <br>• Varianza emocional
-                </div>
-              </div>
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
               <label class="strategy-option cursor-pointer">
-                <input type="radio" name="strategy" value="kelly" class="sr-only" checked>
-                <div class="strategy-card border-2 border-purple-200 rounded-lg p-4 hover:border-purple-400 transition-all">
-                  <h5 class="font-bold text-purple-800">Kelly Criterion</h5>
-                  <p class="text-purple-600 text-sm">Fórmula matemática óptima</p>
-                  <p class="text-purple-500 text-xs mt-1">Calcula % automáticamente</p>
-                </div>
-              </label>
-              
-              <label class="strategy-option cursor-pointer">
-                <input type="radio" name="strategy" value="fixed" class="sr-only">
-                <div class="strategy-card border-2 border-gray-200 rounded-lg p-4 hover:border-gray-400 transition-all">
-                  <h5 class="font-bold text-gray-800">Cantidad Fija</h5>
-                  <p class="text-gray-600 text-sm">Siempre la misma cantidad (€)</p>
-                  <p class="text-gray-500 text-xs mt-1">Ej: Siempre apostar €50</p>
+                <input type="radio" name="strategy" value="fixed" class="sr-only" checked>
+                <div class="strategy-card border-2 border-blue-200 rounded-lg p-4 hover:border-blue-400 transition-all">
+                  <h5 class="font-bold text-blue-800">💶 Cantidad Fija</h5>
+                  <p class="text-blue-600 text-sm">"Siempre apuesto la misma cantidad"</p>
+                  <p class="text-blue-500 text-xs mt-1">La estrategia más simple</p>
                 </div>
               </label>
               
               <label class="strategy-option cursor-pointer">
                 <input type="radio" name="strategy" value="percentage" class="sr-only">
                 <div class="strategy-card border-2 border-gray-200 rounded-lg p-4 hover:border-gray-400 transition-all">
-                  <h5 class="font-bold text-gray-800">% Fijo del Bankroll</h5>
-                  <p class="text-gray-600 text-sm">Siempre el mismo % del total</p>
-                  <p class="text-gray-500 text-xs mt-1">Ej: Siempre apostar 3%</p>
+                  <h5 class="font-bold text-gray-800">📊 Porcentaje Fijo</h5>
+                  <p class="text-gray-600 text-sm">"Siempre apuesto el mismo % de mi dinero"</p>
+                  <p class="text-gray-500 text-xs mt-1">Se adapta al dinero disponible</p>
+                </div>
+              </label>
+              
+              <label class="strategy-option cursor-pointer">
+                <input type="radio" name="strategy" value="kelly" class="sr-only">
+                <div class="strategy-card border-2 border-gray-200 rounded-lg p-4 hover:border-gray-400 transition-all">
+                  <h5 class="font-bold text-gray-800">🤓 Fórmula Inteligente</h5>
+                  <p class="text-gray-600 text-sm">"Que las matemáticas decidan por mí"</p>
+                  <p class="text-gray-500 text-xs mt-1">Los profesionales la usan</p>
                 </div>
               </label>
             </div>
@@ -185,7 +182,7 @@ import MainLayout from '../../layouts/MainLayout.astro';
             id="simulateBtn"
             class="w-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-200"
           >
-            📊 Ejecutar Simulación
+            🎯 Probar Mi Estrategia
           </button>
         </div>
 
@@ -194,20 +191,20 @@ import MainLayout from '../../layouts/MainLayout.astro';
           
           <!-- Chart -->
           <div class="bg-white rounded-xl shadow-lg p-6">
-            <h3 class="text-xl font-bold text-gray-900 mb-4">📈 Evolución del Bankroll</h3>
+            <h3 class="text-xl font-bold text-gray-900 mb-4">📈 ¿Cómo Evolucionó Tu Dinero?</h3>
             <div id="chartContainer" class="h-80">
               <div class="flex items-center justify-center h-full text-gray-500">
-                💰 Ejecuta la simulación para ver la evolución del capital
+                💰 Prueba tu estrategia para ver cómo evoluciona tu dinero
               </div>
             </div>
           </div>
           
           <!-- Risk Metrics -->
           <div class="bg-white rounded-xl shadow-lg p-6">
-            <h3 class="text-xl font-bold text-gray-900 mb-4">📊 Métricas de Riesgo</h3>
+            <h3 class="text-xl font-bold text-gray-900 mb-4">📊 ¿Cómo te Fue?</h3>
             <div id="riskMetrics" class="space-y-4">
               <div class="text-center text-gray-500 py-8">
-                🎯 Las métricas de riesgo aparecerán aquí
+                🎯 Tus resultados aparecerán aquí
               </div>
             </div>
           </div>
@@ -215,17 +212,36 @@ import MainLayout from '../../layouts/MainLayout.astro';
 
         <!-- Kelly Reality Check -->
         <div class="bg-white rounded-xl shadow-lg p-6 mb-8" id="kellyReality" style="display: none;">
-          <h3 class="text-xl font-bold text-gray-900 mb-4">🔍 Análisis Kelly Criterion</h3>
+          <h3 class="text-xl font-bold text-gray-900 mb-4">🤓 ¿Qué es esa "Fórmula Inteligente"?</h3>
           <div id="kellyAnalysis"></div>
         </div>
 
         <!-- Comparison Results -->
-        <div class="bg-white rounded-xl shadow-lg p-6">
-          <h3 class="text-xl font-bold text-gray-900 mb-4">📊 Comparación de Estrategias</h3>
-          <p class="text-gray-600 mb-6">
-            Simulamos 1000 apostadores con diferentes estrategias para comparar resultados.
-          </p>
-          <div id="strategyComparison">
+        <div class="bg-white rounded-xl shadow-lg p-6" id="comparisonSection">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-xl font-bold text-gray-900">⚖️ Comparación Educativa</h3>
+            <button 
+              id="toggleComparison" 
+              onclick="toggleComparisonVisibility()" 
+              class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg text-sm transition-all"
+              style="display: none;"
+            >
+              📊 Mostrar Comparación
+            </button>
+          </div>
+          
+          <div id="comparisonIntro" class="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6" style="display: none;">
+            <div class="text-blue-800 text-sm">
+              <strong>🤔 ¿Te preguntas cómo se compara tu estrategia con las otras?</strong><br>
+              Aunque elegiste <strong id="selectedStrategyName"></strong>, aquí puedes ver cómo se comportarían 
+              las 3 estrategias usando exactamente los mismos parámetros que configuraste.
+              <br><br>
+              <em>Nota: Esto es solo para comparación educativa. Los parámetros de las otras estrategias 
+              son valores estándar típicos.</em>
+            </div>
+          </div>
+          
+          <div id="strategyComparison" style="display: none;">
             <div class="text-center text-gray-500 py-8">
               📈 La comparación aparecerá después de la simulación
             </div>
@@ -239,67 +255,58 @@ import MainLayout from '../../layouts/MainLayout.astro';
   <section class="py-16 bg-white">
     <div class="container mx-auto px-4">
       <div class="max-w-4xl mx-auto">
-        <h2 class="text-3xl font-bold text-center text-gray-900 mb-12">🧠 Conceptos Clave de Gestión</h2>
+        <h2 class="text-3xl font-bold text-center text-gray-900 mb-12">💡 La Realidad de la Gestión de Dinero</h2>
         
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
           
-          <!-- Kelly Problems -->
-          <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-6">
-            <h3 class="text-xl font-bold text-yellow-800 mb-4">⚠️ Kelly Criterion: Limitaciones</h3>
-            <div class="bg-white border border-yellow-300 rounded p-3 mb-4">
-              <div class="text-yellow-900 text-sm font-medium mb-2">
-                🔍 <strong>¿Qué hace exactamente Kelly?</strong>
-              </div>
-              <div class="text-yellow-800 text-xs">
-                Calcula el % óptimo del capital a apostar cuando tienes ventaja confirmada. 
-                <strong>No crea ventaja donde no existe.</strong>
-              </div>
-            </div>
-            <div class="text-yellow-700 space-y-3 text-sm">
+          <!-- What Management CAN Do -->
+          <div class="bg-green-50 border border-green-200 rounded-lg p-6">
+            <h3 class="text-xl font-bold text-green-800 mb-4">✅ Lo que SÍ Puede Hacer la Gestión</h3>
+            <div class="text-green-700 space-y-3 text-sm">
               <div>
-                <strong>• Requiere datos exactos:</strong><br>
-                Necesitas conocer tu win rate real, no estimado. Difícil de determinar con precisión.
+                <strong>• Durar más tiempo:</strong><br>
+                Con buena gestión no te quedas sin dinero tan rápido
               </div>
               <div>
-                <strong>• Sensible a errores:</strong><br>
-                Pequeños errores en las estimaciones pueden llevar a apostar más de lo óptimo.
+                <strong>• Reducir el estrés:</strong><br>
+                Apostando cantidades razonables duermes mejor
               </div>
               <div>
-                <strong>• No considera psicología:</strong><br>
-                Asume disciplina perfecta durante rachas adversas prolongadas.
+                <strong>• Evitar la ruina total:</strong><br>
+                Nunca apostar "todo a una carta"
               </div>
               <div>
-                <strong>• Varianza alta:</strong><br>
-                Puede sugerir porcentajes que resulten en alta volatilidad emocional.
+                <strong>• Mantener el control:</strong><br>
+                Tener un plan te ayuda a no volverte loco
               </div>
-              <div class="bg-yellow-100 p-3 rounded border-l-4 border-yellow-400">
-                <strong>💡 Clave:</strong> Kelly optimiza matemáticamente, pero la implementación práctica es compleja.
+              <div class="bg-green-100 p-3 rounded border-l-4 border-green-400">
+                <strong>💪 Beneficio real:</strong> La gestión te ayuda a apostar de forma más inteligente y disciplinada.
               </div>
             </div>
           </div>
 
-          <!-- Risk Management -->
-          <div class="bg-blue-50 border border-blue-200 rounded-lg p-6">
-            <h3 class="text-xl font-bold text-blue-800 mb-4">🛡️ Gestión de Riesgo</h3>
-            <div class="text-blue-700 space-y-3 text-sm">
+          <!-- What Management CANNOT Do -->
+          <div class="bg-red-50 border border-red-200 rounded-lg p-6">
+            <h3 class="text-xl font-bold text-red-800 mb-4">❌ Lo que NO Puede Hacer la Gestión</h3>
+            <div class="text-red-700 space-y-3 text-sm">
               <div>
-                <strong>• Risk of Ruin:</strong><br>
-                Probabilidad de perder todo el capital
+                <strong>• Crear ganancias mágicas:</strong><br>
+                Si no sabes predecir, ningún método te hará ganar
               </div>
               <div>
-                <strong>• Drawdown máximo:</strong><br>
-                Mayor pérdida desde un pico anterior
+                <strong>• Vencer las matemáticas:</strong><br>
+                El margen de las casas sigue ahí, hagas lo que hagas
               </div>
               <div>
-                <strong>• Rachas adversas:</strong><br>
-                Secuencias de pérdidas consecutivas
+                <strong>• Eliminar las rachas malas:</strong><br>
+                Puedes perder 10 seguidas aunque gestiones perfectamente
               </div>
               <div>
-                <strong>• Gestión emocional:</strong><br>
-                Mantener disciplina durante períodos difíciles
+                <strong>• Convertirte en profesional:</strong><br>
+                La gestión es una herramienta, no una solución mágica
               </div>
-              <div class="bg-blue-100 p-3 rounded border-l-4 border-blue-400">
-                <strong>⚡ Importante:</strong> La gestión puede controlar el riesgo, pero no puede crear ventaja.
+              <div class="bg-red-100 p-3 rounded border-l-4 border-red-400">
+                <strong>⚠️ Realidad:</strong> Sin ventaja real, todas las estrategias llevan al mismo destino: pérdidas graduales.
               </div>
             </div>
           </div>
@@ -307,47 +314,64 @@ import MainLayout from '../../layouts/MainLayout.astro';
 
         <!-- Examples -->
         <div class="mt-12">
-          <h3 class="text-2xl font-bold text-center text-gray-900 mb-8">📊 Escenarios Realistas</h3>
+          <h3 class="text-2xl font-bold text-center text-gray-900 mb-8">📊 ¿Qué Puedes Esperar Realmente?</h3>
           
           <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div class="bg-green-50 border border-green-200 rounded-lg p-4">
-              <h4 class="font-bold text-green-800 mb-2">👍 Escenario Favorable</h4>
+              <h4 class="font-bold text-green-800 mb-2">🎆 Escenario Ideal</h4>
               <div class="text-green-700 text-sm space-y-1">
-                <div>• Bankroll: €10,000</div>
-                <div>• Win rate real: 53%</div>
-                <div>• Cuotas: 1.95 promedio</div>
-                <div>• Kelly: 2.3% por apuesta</div>
+                <div>• Tienes €10,000 para apostar</div>
+                <div>• Eres realmente bueno (53% aciertos)</div>
+                <div>• Encuentras casas generosas</div>
+                <div>• Mantienes disciplina perfecta</div>
                 <div class="border-t border-green-300 pt-2 mt-2 font-bold">
-                  ✅ Crecimiento lento pero sostenible
+                  ✅ Podrías ganar dinero lentamente
                 </div>
               </div>
+              <p class="text-green-600 text-xs mt-2 font-semibold">
+                Solo el 2-3% de apostadores llega aquí
+              </p>
             </div>
             
             <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
-              <h4 class="font-bold text-yellow-800 mb-2">⚖️ Escenario Equilibrado</h4>
+              <h4 class="font-bold text-yellow-800 mb-2">🤷 Escenario Realista</h4>
               <div class="text-yellow-700 text-sm space-y-1">
-                <div>• Bankroll: €5,000</div>
-                <div>• Win rate real: 50%</div>
-                <div>• Cuotas: 1.90 promedio</div>
-                <div>• Kelly: 0% (sin ventaja)</div>
+                <div>• Tienes €2,000 ahorrados</div>
+                <div>• Aciertas como tirar una moneda (50%)</div>
+                <div>• Las casas se quedan su parte</div>
+                <div>• A veces te emocionas y apuestas más</div>
                 <div class="border-t border-yellow-300 pt-2 mt-2 font-bold">
-                  ⚠️ Pérdida lenta por el juice
+                  ⚠️ Perderás dinero gradualmente
                 </div>
               </div>
+              <p class="text-yellow-600 text-xs mt-2 font-semibold">
+                La situación del 90% de la gente
+              </p>
             </div>
             
             <div class="bg-red-50 border border-red-200 rounded-lg p-4">
-              <h4 class="font-bold text-red-800 mb-2">👎 Escenario Adverso</h4>
+              <h4 class="font-bold text-red-800 mb-2">😨 Escenario Peligroso</h4>
               <div class="text-red-700 text-sm space-y-1">
-                <div>• Bankroll: €2,000</div>
-                <div>• Win rate real: 47%</div>
-                <div>• Cuotas: 1.85 promedio</div>
-                <div>• Kelly: -5.4% (ventaja negativa)</div>
+                <div>• Apuestas dinero que necesitas</div>
+                <div>• Persigues las pérdidas</div>
+                <div>• "Esta vez seguro que gano"</div>
+                <div>• La gestión se va por la ventana</div>
                 <div class="border-t border-red-300 pt-2 mt-2 font-bold">
-                  ❌ La gestión solo ralentiza pérdidas
+                  ❌ Problemas serios garantizados
                 </div>
               </div>
+              <p class="text-red-600 text-xs mt-2 font-semibold">
+                El 5-8% acaba aquí
+              </p>
             </div>
+          </div>
+          
+          <div class="bg-blue-100 border border-blue-300 rounded-lg p-6 mt-8 max-w-2xl mx-auto">
+            <h4 class="text-blue-800 font-bold mb-3">🎯 La Conclusión Más Importante</h4>
+            <p class="text-blue-700">
+              La gestión de dinero es como un cinturón de seguridad en un coche:
+              <strong>Te protege en caso de accidente, pero no puede llevarte a donde no existe carretera.</strong>
+            </p>
           </div>
         </div>
       </div>
@@ -360,8 +384,8 @@ import MainLayout from '../../layouts/MainLayout.astro';
       <div class="max-w-3xl mx-auto">
         <h2 class="text-3xl font-bold text-white mb-6">💡 La Gestión es Solo una Herramienta</h2>
         <p class="text-xl text-purple-100 mb-8">
-          Kelly Criterion y otras técnicas de gestión son útiles cuando tienes ventaja real. 
-          Sin ventaja, solo ralentizan las pérdidas inevitables.
+          Gestionar bien el dinero te ayuda a apostar de forma más inteligente y durar más tiempo. 
+          Pero <strong>no puede crear ganancias donde no las hay</strong>.
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
           <a 
@@ -385,7 +409,7 @@ import MainLayout from '../../layouts/MainLayout.astro';
 
 <script client:load>
   let simulationData = [];
-  let currentStrategy = 'kelly';
+  let currentStrategy = 'fixed';
   
   document.addEventListener('DOMContentLoaded', function() {
     console.log('Bankroll manager loaded');
@@ -420,13 +444,13 @@ import MainLayout from '../../layouts/MainLayout.astro';
     switch(currentStrategy) {
       case 'kelly':
         paramsHTML = `
-          <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
-            <div class="text-blue-800 text-sm">
-              <strong>ℹ️ Kelly Criterion:</strong> 
-              <br>• <strong>Función:</strong> Calcula automáticamente el % óptimo del bankroll para cada apuesta
-              <br>• <strong>Fórmula:</strong> (Win Rate × Cuotas - 1) ÷ (Cuotas - 1)
-              <br>• <strong>Requisito:</strong> Solo funciona con ventaja estadística real
-              <br>• <strong>Limitación:</strong> Muy sensible a errores en las estimaciones
+          <div class="bg-purple-50 border border-purple-200 rounded-lg p-4">
+            <div class="text-purple-800 text-sm">
+              <strong>🤓 Sobre la "Fórmula Inteligente":</strong> 
+              <br>• <strong>¿Qué hace?</strong> Calcula automáticamente cuánto apostar según tus posibilidades de ganar
+              <br>• <strong>¿Cómo funciona?</strong> Mira tus aciertos, las ganancias, y decide el porcentaje "óptimo"
+              <br>• <strong>El problema:</strong> Solo funciona si realmente tienes ventaja (muy raro)
+              <br>• <strong>En la práctica:</strong> La mayoría sobreestima sus habilidades
             </div>
           </div>
         `;
@@ -496,7 +520,13 @@ import MainLayout from '../../layouts/MainLayout.astro';
         
         updateRiskMetrics(result);
         updateKellyReality(result, trueEdge);
+        
+        // Show comparison button after simulation
+        showComparisonOption();
         runStrategyComparison();
+        
+        // Update selected strategy name in comparison intro
+        updateSelectedStrategyName();
         
         btn.textContent = '🔄 Ejecutar Nueva Simulación';
         btn.disabled = false;
@@ -531,9 +561,15 @@ import MainLayout from '../../layouts/MainLayout.astro';
       
       switch(strategy) {
         case 'kelly':
-          // Kelly with a maximum cap of 10% to prevent disaster
+          // Kelly with educational minimum - even if Kelly says "don't bet", bet small amount for demonstration
           const kellySuggestion = Math.max(0, kellyFraction * bankroll);
-          betAmount = Math.min(kellySuggestion, bankroll * 0.1);
+          if (kellySuggestion <= 0) {
+            // If Kelly says don't bet, use 1% for educational purposes
+            betAmount = bankroll * 0.01;
+          } else {
+            // Cap Kelly at 10% to prevent disaster
+            betAmount = Math.min(kellySuggestion, bankroll * 0.1);
+          }
           break;
         case 'fixed':
           const fixedAmount = document.getElementById('fixedAmount') ? 
@@ -712,49 +748,69 @@ import MainLayout from '../../layouts/MainLayout.astro';
     const riskContainer = document.getElementById('riskMetrics');
     if (!riskContainer) return;
     
+    const initialBankroll = parseFloat(document.getElementById('initialBankroll').value);
+    const finalAmount = Math.max(0, result.finalBankroll);
+    const gainLoss = finalAmount - initialBankroll;
+    
     const html = `
       <div class="space-y-4">
-        <div class="bg-blue-50 rounded-lg p-4 text-center">
-          <div class="text-3xl font-bold text-blue-600">${result.riskOfRuin.toFixed(0)}%</div>
-          <div class="text-blue-700 font-medium">Risk of Ruin</div>
-          <div class="text-blue-600 text-sm">Probabilidad de pérdida total</div>
-          <div class="text-blue-500 text-xs mt-1">*Calculado por simulación</div>
+        <div class="text-center mb-4">
+          <div class="text-4xl font-bold ${gainLoss >= 0 ? 'text-green-600' : 'text-red-600'} mb-2">
+            €${finalAmount.toFixed(0)}
+          </div>
+          <div class="text-gray-600">Tu dinero al final</div>
+          <div class="text-sm ${gainLoss >= 0 ? 'text-green-700' : 'text-red-700'}">
+            ${gainLoss >= 0 ? 'Ganaste' : 'Perdiste'} €${Math.abs(gainLoss).toFixed(0)}
+          </div>
         </div>
         
-        <div class="space-y-3">
+        <div class="bg-gray-50 rounded-lg p-4 space-y-3 text-sm">
           <div class="flex justify-between items-center">
-            <span class="text-gray-700">Resultado final:</span>
-            <span class="font-bold ${result.totalReturn >= 0 ? 'text-green-600' : 'text-red-600'}">
-              ${result.totalReturn >= 0 ? '+' : ''}${result.totalReturn.toFixed(1)}%
-            </span>
+            <span class="text-gray-700">Empezaste con:</span>
+            <span class="font-medium text-gray-900">€${initialBankroll.toFixed(0)}</span>
           </div>
           <div class="flex justify-between items-center">
-            <span class="text-gray-700">Win rate real:</span>
+            <span class="text-gray-700">Terminaste con:</span>
+            <span class="font-bold ${gainLoss >= 0 ? 'text-green-600' : 'text-red-600'}">
+              €${finalAmount.toFixed(0)}
+            </span>
+          </div>
+          <div class="flex justify-between items-center border-t pt-2">
+            <span class="text-gray-700">Aciertos reales:</span>
             <span class="font-bold text-blue-600">${(result.actualWinRate * 100).toFixed(1)}%</span>
           </div>
           <div class="flex justify-between items-center">
-            <span class="text-gray-700">Edge estimado:</span>
-            <span class="font-bold ${result.edge >= 0 ? 'text-green-600' : 'text-red-600'}">
-              ${result.edge >= 0 ? '+' : ''}${(result.edge * 100).toFixed(2)}%
-            </span>
-          </div>
-          <div class="flex justify-between items-center">
-            <span class="text-gray-700">Máximo drawdown:</span>
-            <span class="font-bold text-red-600">${(result.maxDrawdown * 100).toFixed(1)}%</span>
-          </div>
-          <div class="flex justify-between items-center">
-            <span class="text-gray-700">Racha de pérdidas:</span>
+            <span class="text-gray-700">Peor racha de fallos:</span>
             <span class="font-bold text-orange-600">${result.maxConsecutiveLosses} seguidas</span>
+          </div>
+          <div class="flex justify-between items-center">
+            <span class="text-gray-700">Mayor pérdida temporal:</span>
+            <span class="font-bold text-red-600">€${(result.maxDrawdown * initialBankroll).toFixed(0)}</span>
+          </div>
+        </div>
+        
+        <div class="bg-blue-50 border border-blue-200 rounded-lg p-3">
+          <div class="text-blue-800 text-sm">
+            <strong>🎲 Probabilidad de que te arruines:</strong><br>
+            Si 100 personas usaran tu estrategia, aproximadamente <strong>${result.riskOfRuin.toFixed(0)} perderían todo su dinero</strong>.
           </div>
         </div>
         
         ${result.busted ? 
-          '<div class="bg-red-100 border border-red-200 rounded-lg p-3"><div class="text-red-800 text-sm font-bold">❌ BANKROLL AGOTADO</div></div>' :
-          result.totalReturn < -50 ?
-          '<div class="bg-orange-100 border border-orange-200 rounded-lg p-3"><div class="text-orange-800 text-sm font-bold">⚠️ PÉRDIDAS SIGNIFICATIVAS</div></div>' :
-          result.totalReturn > 20 ?
-          '<div class="bg-green-100 border border-green-200 rounded-lg p-3"><div class="text-green-800 text-sm font-bold">✅ RESULTADO POSITIVO</div></div>' :
-          '<div class="bg-yellow-100 border border-yellow-200 rounded-lg p-3"><div class="text-yellow-800 text-sm font-bold">🔄 RESULTADO NEUTRO</div></div>'
+          '<div class="bg-red-100 border border-red-200 rounded-lg p-3"><div class="text-red-800 text-sm font-bold">💸 TE QUEDASTE SIN DINERO</div><div class="text-red-700 text-xs mt-1">Tu estrategia no pudo evitar la bancarrota</div></div>' :
+          gainLoss < -initialBankroll * 0.5 ?
+          '<div class="bg-red-100 border border-red-200 rounded-lg p-3"><div class="text-red-800 text-sm font-bold">📉 PERDISTE MÁS DE LA MITAD</div><div class="text-red-700 text-xs mt-1">Perdiste más del 50% de tu capital inicial</div></div>' :
+          gainLoss < -initialBankroll * 0.2 ?
+          '<div class="bg-orange-100 border border-orange-200 rounded-lg p-3"><div class="text-orange-800 text-sm font-bold">📉 PERDISTE BASTANTE DINERO</div><div class="text-orange-700 text-xs mt-1">Perdiste €${Math.abs(gainLoss).toFixed(0)} (${((gainLoss/initialBankroll)*100).toFixed(1)}%)</div></div>' :
+          gainLoss < -10 ?
+          '<div class="bg-yellow-100 border border-yellow-200 rounded-lg p-3"><div class="text-yellow-800 text-sm font-bold">📉 PERDISTE DINERO</div><div class="text-yellow-700 text-xs mt-1">Perdiste €${Math.abs(gainLoss).toFixed(0)} - Resultado negativo</div></div>' :
+          gainLoss > initialBankroll * 0.3 ?
+          '<div class="bg-green-100 border border-green-200 rounded-lg p-3"><div class="text-green-800 text-sm font-bold">🎉 ¡GANASTE MUCHO DINERO!</div><div class="text-green-700 text-xs mt-1">Más del 30% de beneficio - ¡Increíble!</div></div>' :
+          gainLoss > 10 ?
+          '<div class="bg-green-100 border border-green-200 rounded-lg p-3"><div class="text-green-800 text-sm font-bold">💰 ¡GANASTE DINERO!</div><div class="text-green-700 text-xs mt-1">Ganaste €${gainLoss.toFixed(0)} - Uno de los pocos afortunados</div></div>' :
+          gainLoss >= 0 ?
+          '<div class="bg-blue-100 border border-blue-200 rounded-lg p-3"><div class="text-blue-800 text-sm font-bold">😐 RESULTADO CASI NEUTRO</div><div class="text-blue-700 text-xs mt-1">Ganaste €${gainLoss.toFixed(0)} - Variación mínima</div></div>' :
+          '<div class="bg-blue-100 border border-blue-200 rounded-lg p-3"><div class="text-blue-800 text-sm font-bold">😐 RESULTADO CASI NEUTRO</div><div class="text-blue-700 text-xs mt-1">Perdiste €${Math.abs(gainLoss).toFixed(0)} - Variación mínima</div></div>'
         }
       </div>
     `;
@@ -774,41 +830,64 @@ import MainLayout from '../../layouts/MainLayout.astro';
     kellyContainer.style.display = 'block';
     
     const kellyPercent = (result.kellyFraction * 100).toFixed(1);
-    const edgePercent = (trueEdge * 100).toFixed(2);
+    const winRate = parseFloat(document.getElementById('winRate').value);
+    const avgOdds = parseFloat(document.getElementById('avgOdds').value);
     
     const html = `
       <div class="space-y-6">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div class="space-y-4">
-            <h4 class="text-lg font-bold text-gray-800 mb-3">📊 Recomendación Kelly</h4>
-            <div class="bg-purple-50 border border-purple-200 rounded-lg p-4">
-              <div class="text-lg font-bold text-purple-800 mb-2">
-                ${result.kellyFraction > 0 ? `Apostar ${kellyPercent}%` : 'No apostar (sin ventaja)'}
-              </div>
-              <div class="text-purple-600 text-sm">
-                ${result.kellyFraction > 0 ? 'del bankroll en cada apuesta' : 'Kelly recomienda no apostar'}
-              </div>
-            </div>
-            <div class="text-sm text-gray-700">
-              Con un edge estimado del ${edgePercent}% y cuotas promedio de ${document.getElementById('avgOdds').value}, 
-              ${result.kellyFraction > 0 ? 
-                `Kelly sugiere apostar el ${kellyPercent}% del bankroll.` : 
-                'Kelly no recomienda apostar debido a la falta de ventaja.'}
+        <div class="bg-purple-50 border border-purple-200 rounded-lg p-6">
+          <h4 class="text-lg font-bold text-purple-800 mb-4">🤓 ¿Qué hizo la "Fórmula Inteligente"?</h4>
+          
+          <div class="bg-blue-100 border border-blue-300 rounded-lg p-4 mb-4">
+            <div class="text-blue-800 text-sm">
+              <strong>📊 Cálculos de la fórmula:</strong><br>
+              • Tu habilidad: <strong>${(winRate*100).toFixed(0)}% de aciertos</strong><br>
+              • Cuotas promedio: <strong>${avgOdds}</strong> (€${avgOdds} por cada €1)<br>
+              • Tu ventaja real: <strong>${trueEdge >= 0 ? '+' : ''}${(trueEdge*100).toFixed(2)}%</strong>
             </div>
           </div>
           
-          <div class="space-y-4">
-            <h4 class="text-lg font-bold text-gray-800 mb-3">🔍 Análisis de Precisión</h4>
-            <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
-              <div class="text-blue-700 space-y-2 text-sm">
-                <div><strong>• Edge real vs estimado:</strong> ${trueEdge >= 0 ? 'Favorable' : 'Desfavorable'}</div>
-                <div><strong>• Sensibilidad:</strong> ${result.kellyFraction > 0.05 ? 'Alta varianza' : 'Varianza moderada'}</div>
-                <div><strong>• Riesgo psicológico:</strong> ${result.maxDrawdown > 0.3 ? 'Alto estrés' : 'Manejable'}</div>
-                <div><strong>• Sostenibilidad:</strong> ${result.riskOfRuin < 30 ? 'Viable' : 'Cuestionable'}</div>
+          ${result.kellyFraction <= 0 ? 
+            `<div class="bg-orange-100 border border-orange-300 rounded-lg p-4 mb-4">
+              <div class="text-orange-800 text-sm">
+                <strong>⚠️ Resultado del análisis:</strong> La fórmula detectó que <strong>no tienes ventaja suficiente</strong> 
+                para apostar de forma rentable. Teóricamente recomendaría apostar 0€.<br><br>
+                <strong>Sin embargo,</strong> para que puedas ver el efecto práctico, simulamos apostando 
+                pequeñas cantidades (1% del bankroll).
+              </div>
+            </div>` :
+            `<div class="bg-green-100 border border-green-300 rounded-lg p-4 mb-4">
+              <div class="text-green-800 text-sm">
+                <strong>✅ Resultado del análisis:</strong> La fórmula detectó que <strong>tienes una ventaja teórica</strong> 
+                del ${(trueEdge*100).toFixed(2)}%. Recomienda apostar el <strong>${kellyPercent}%</strong> de tu dinero en cada apuesta.
+              </div>
+            </div>`}
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="bg-white rounded p-3 border border-purple-200">
+              <h5 class="text-purple-800 font-semibold mb-2">📊 ¿Por qué ${result.kellyFraction <= 0 ? 'no' : 'sí'} tienes ventaja?</h5>
+              <div class="text-sm text-purple-700">
+                ${result.kellyFraction <= 0 ? 
+                  'Las casas de apuestas incluyen un margen (juice) en sus cuotas. Incluso acertando el ' + (winRate*100).toFixed(0) + '%, el margen hace que pierdas dinero gradualmente.' :
+                  'Según tus datos, tu habilidad supera el margen de las casas. Pero ¿es tu habilidad real o solo una estimación optimista?'}
               </div>
             </div>
-            <div class="text-xs text-gray-600">
-              Kelly funciona mejor con ventaja confirmada y estimaciones precisas.
+            
+            <div class="bg-white rounded p-3 border border-purple-200">
+              <h5 class="text-purple-800 font-semibold mb-2">⚙️ ¿Cómo funciona?</h5>
+              <div class="text-sm text-purple-700">
+                La fórmula analiza tu win rate, las cuotas, y calcula si tienes ventaja matemática real. 
+                Es muy precisa... <strong>pero solo si tus estimaciones son correctas.</strong>
+              </div>
+            </div>
+          </div>
+          
+          <div class="bg-yellow-100 border border-yellow-300 rounded p-3 mt-4">
+            <div class="text-yellow-800 text-sm">
+              <strong>💡 La lección principal:</strong> Incluso la fórmula matemática más sofisticada del mundo 
+              ${result.kellyFraction <= 0 ? 
+                'no puede crear ventaja donde no existe. Si las matemáticas básicas no te favorecen, ninguna estrategia funcionará.' :
+                'depende de que tengas ventaja REAL. ¿Realmente aciertas más de lo que crees?'}
             </div>
           </div>
         </div>
@@ -832,34 +911,70 @@ import MainLayout from '../../layouts/MainLayout.astro';
     strategies.forEach(strategy => {
       const simResults = [];
       
-      // Set proper parameters for each strategy before simulation
-      if (strategy === 'fixed') {
-        // Ensure fixed amount input exists for comparison
-        if (!document.getElementById('fixedAmount')) {
-          const tempInput = document.createElement('input');
-          tempInput.id = 'fixedAmount';
-          tempInput.value = '50';
-          tempInput.style.display = 'none';
-          document.body.appendChild(tempInput);
-        }
-      }
-      if (strategy === 'percentage') {
-        // Ensure percentage input exists for comparison
-        if (!document.getElementById('fixedPercentage')) {
-          const tempInput = document.createElement('input');
-          tempInput.id = 'fixedPercentage';
-          tempInput.value = '3';
-          tempInput.style.display = 'none';
-          document.body.appendChild(tempInput);
-        }
-      }
-      
       for (let i = 0; i < numSims; i++) {
-        const result = simulateBankroll(initialBankroll, winRate, avgOdds, numBets, strategy);
+        // Use the actual current values for each simulation
+        let currentBankroll = initialBankroll;
+        let bankroll = currentBankroll;
+        const history = [];
+        
+        // Calculate edge and kelly fraction using current parameters
+        const edge = (winRate * (avgOdds - 1)) - (1 - winRate);
+        const kellyFraction = edge > 0 ? (winRate * avgOdds - 1) / (avgOdds - 1) : 0;
+        
+        let maxBankroll = bankroll;
+        let maxDrawdown = 0;
+        let winsCount = 0;
+        
+        for (let bet = 0; bet < numBets; bet++) {
+          if (bankroll <= 0.01) break;
+          
+          // Calculate bet amount using current strategy
+          let betAmount = 0;
+          switch(strategy) {
+            case 'kelly':
+              const kellySuggestion = Math.max(0, kellyFraction * bankroll);
+              if (kellySuggestion <= 0) {
+                // If Kelly says don't bet, use 1% for educational purposes
+                betAmount = bankroll * 0.01;
+              } else {
+                // Cap Kelly at 10% to prevent disaster
+                betAmount = Math.min(kellySuggestion, bankroll * 0.1);
+              }
+              break;
+            case 'fixed':
+              const fixedAmt = document.getElementById('fixedAmount') ? 
+                parseFloat(document.getElementById('fixedAmount').value) : 50;
+              betAmount = Math.min(fixedAmt, bankroll);
+              break;
+            case 'percentage':
+              const percentage = document.getElementById('fixedPercentage') ? 
+                parseFloat(document.getElementById('fixedPercentage').value) : 3;
+              betAmount = (percentage / 100) * bankroll;
+              break;
+          }
+          
+          betAmount = Math.max(0.01, Math.min(betAmount, bankroll * 0.99));
+          
+          // Simulate bet outcome
+          const won = Math.random() < winRate;
+          
+          if (won) {
+            bankroll += betAmount * (avgOdds - 1);
+            winsCount++;
+          } else {
+            bankroll -= betAmount;
+          }
+          
+          // Track max bankroll and drawdown
+          maxBankroll = Math.max(maxBankroll, bankroll);
+          const currentDrawdown = maxBankroll > 0 ? (maxBankroll - bankroll) / maxBankroll : 0;
+          maxDrawdown = Math.max(maxDrawdown, currentDrawdown);
+        }
+        
         simResults.push({
-          finalReturn: result.totalReturn,
-          busted: result.busted,
-          maxDrawdown: result.maxDrawdown
+          finalReturn: ((bankroll - initialBankroll) / initialBankroll) * 100,
+          busted: bankroll <= 0.01,
+          maxDrawdown: maxDrawdown
         });
       }
       
@@ -883,9 +998,9 @@ import MainLayout from '../../layouts/MainLayout.astro';
     if (!container) return;
     
     const strategyNames = {
-      kelly: 'Kelly Criterion',
+      kelly: 'Fórmula Inteligente',
       fixed: 'Cantidad Fija',
-      percentage: '% Fijo'
+      percentage: 'Porcentaje Fijo'
     };
     
     let html = '<div class="grid grid-cols-1 md:grid-cols-3 gap-6">';
@@ -912,22 +1027,22 @@ import MainLayout from '../../layouts/MainLayout.astro';
           <h4 class="font-bold ${textClass} mb-3">${strategyNames[strategy]}</h4>
           <div class="space-y-2 text-sm">
             <div class="flex justify-between">
-              <span>Retorno promedio:</span>
+              <span>Ganaron dinero:</span>
+              <span class="font-bold text-blue-600">${result.winRate} de 100 personas</span>
+            </div>
+            <div class="flex justify-between">
+              <span>Se arruinaron:</span>
+              <span class="font-bold ${textClass.replace('800', '700')}">${result.bustedPercentage.toFixed(0)} de 100</span>
+            </div>
+            <div class="flex justify-between">
+              <span>Resultado típico:</span>
               <span class="font-bold ${result.avgReturn >= 0 ? 'text-green-600' : 'text-red-600'}">
-                ${result.avgReturn >= 0 ? '+' : ''}${result.avgReturn.toFixed(1)}%
+                ${result.avgReturn >= 0 ? 'Ganar' : 'Perder'} ${Math.abs(result.avgReturn).toFixed(1)}%
               </span>
             </div>
             <div class="flex justify-between">
-              <span>Casos positivos:</span>
-              <span class="font-bold text-blue-600">${result.winRate}%</span>
-            </div>
-            <div class="flex justify-between">
-              <span>Bankrolls agotados:</span>
-              <span class="font-bold ${textClass.replace('800', '700')}">${result.bustedPercentage.toFixed(0)}%</span>
-            </div>
-            <div class="flex justify-between">
-              <span>Drawdown promedio:</span>
-              <span class="font-bold text-red-600">${result.avgDrawdown.toFixed(1)}%</span>
+              <span>Pérdida temporal típica:</span>
+              <span class="font-bold text-red-600">${result.avgDrawdown.toFixed(1)}% del dinero</span>
             </div>
           </div>
         </div>
@@ -955,8 +1070,53 @@ import MainLayout from '../../layouts/MainLayout.astro';
     container.innerHTML = html;
   }
   
+  function showComparisonOption() {
+    const toggleBtn = document.getElementById('toggleComparison');
+    if (toggleBtn) {
+      toggleBtn.style.display = 'block';
+    }
+  }
+  
+  function updateSelectedStrategyName() {
+    const strategyNames = {
+      kelly: 'Fórmula Inteligente',
+      fixed: 'Cantidad Fija', 
+      percentage: 'Porcentaje Fijo'
+    };
+    
+    const nameElement = document.getElementById('selectedStrategyName');
+    if (nameElement) {
+      nameElement.textContent = strategyNames[currentStrategy];
+    }
+  }
+  
+  function toggleComparisonVisibility() {
+    const intro = document.getElementById('comparisonIntro');
+    const comparison = document.getElementById('strategyComparison');
+    const toggleBtn = document.getElementById('toggleComparison');
+    
+    if (intro && comparison && toggleBtn) {
+      const isHidden = intro.style.display === 'none';
+      
+      if (isHidden) {
+        intro.style.display = 'block';
+        comparison.style.display = 'block';
+        toggleBtn.textContent = '🙈 Ocultar Comparación';
+        toggleBtn.classList.remove('bg-blue-500', 'hover:bg-blue-600');
+        toggleBtn.classList.add('bg-gray-500', 'hover:bg-gray-600');
+      } else {
+        intro.style.display = 'none';
+        comparison.style.display = 'none';
+        toggleBtn.textContent = '📊 Mostrar Comparación';
+        toggleBtn.classList.remove('bg-gray-500', 'hover:bg-gray-600');
+        toggleBtn.classList.add('bg-blue-500', 'hover:bg-blue-600');
+      }
+    }
+  }
+  
   // Make functions global
   window.runBankrollSimulation = runBankrollSimulation;
+  window.toggleComparisonVisibility = toggleComparisonVisibility;
 </script>
 
 <style>
