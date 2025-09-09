@@ -1,0 +1,259 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+---
+
+<MainLayout 
+  title="Convertidor de Cuotas - Formatos de Apuestas" 
+  description="Convierte entre formatos decimal, fraccionario y americano de cuotas. Entiende las probabilidades implícitas de cada formato."
+>
+  
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-br from-purple-600 via-indigo-600 to-purple-800 text-white py-20">
+    <div class="container mx-auto px-4 text-center">
+      <div class="max-w-4xl mx-auto">
+        <h1 class="text-4xl md:text-6xl font-bold mb-6">
+          🔄 Convertidor de Cuotas
+        </h1>
+        <p class="text-xl md:text-2xl mb-8 text-purple-100">
+          Convierte entre formatos de cuotas y descubre las 
+          <span class="text-yellow-300 font-semibold">probabilidades reales detrás de cada número</span>
+        </p>
+        <div class="bg-white/10 backdrop-blur-sm rounded-lg p-6 max-w-2xl mx-auto">
+          <p class="text-purple-100 text-lg">
+            📊 <strong>Todos los formatos:</strong> Decimal, Fraccionario y Americano
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Converter -->
+  <section class="py-16 bg-gray-50">
+    <div class="container mx-auto px-4">
+      <div class="max-w-6xl mx-auto">
+        
+        <!-- Format Explanation -->
+        <div class="bg-gradient-to-r from-blue-50 to-indigo-50 border-l-4 border-blue-400 p-6 rounded-lg mb-8">
+          <h2 class="text-2xl font-bold text-blue-800 mb-4">🌍 Formatos de Cuotas por Región</h2>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="text-center">
+              <div class="text-3xl mb-2">🇪🇺</div>
+              <h3 class="font-bold text-blue-800">Decimal (Europa)</h3>
+              <p class="text-blue-700 text-sm">2.50 = €2.50 por cada €1</p>
+              <p class="text-blue-600 text-xs">Incluye apuesta original</p>
+            </div>
+            <div class="text-center">
+              <div class="text-3xl mb-2">🇬🇧</div>
+              <h3 class="font-bold text-blue-800">Fraccionario (Reino Unido)</h3>
+              <p class="text-blue-700 text-sm">3/2 = €3 ganancia por €2 apostados</p>
+              <p class="text-blue-600 text-xs">Solo ganancia neta</p>
+            </div>
+            <div class="text-center">
+              <div class="text-3xl mb-2">🇺🇸</div>
+              <h3 class="font-bold text-blue-800">Americano (EE.UU.)</h3>
+              <p class="text-blue-700 text-sm">+150 o -200</p>
+              <p class="text-blue-600 text-xs">Base de $100</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Converter Interface -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+          
+          <!-- Input Section -->
+          <div class="bg-white rounded-xl shadow-lg p-6">
+            <h3 class="text-2xl font-bold text-gray-900 mb-6">🔢 Introduce una Cuota</h3>
+            
+            <!-- Decimal Input -->
+            <div class="mb-6">
+              <label class="block text-sm font-medium text-gray-700 mb-2">
+                🇪🇺 Formato Decimal
+                <span class="text-gray-500">(Ej: 2.50, 1.85, 3.40)</span>
+              </label>
+              <input 
+                type="number" 
+                id="decimalInput"
+                step="0.01" 
+                min="1.01"
+                placeholder="2.50"
+                class="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-lg font-mono"
+              >
+              <p class="text-xs text-gray-500 mt-1">Mínimo: 1.01 (probabilidad 99%)</p>
+            </div>
+
+            <!-- Fractional Input -->
+            <div class="mb-6">
+              <label class="block text-sm font-medium text-gray-700 mb-2">
+                🇬🇧 Formato Fraccionario
+                <span class="text-gray-500">(Ej: 3/2, 1/1, 5/4)</span>
+              </label>
+              <div class="flex items-center gap-2">
+                <input 
+                  type="number" 
+                  id="fracNumerator"
+                  min="1"
+                  placeholder="3"
+                  class="flex-1 p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-lg font-mono text-center"
+                >
+                <span class="text-2xl font-bold text-gray-600">/</span>
+                <input 
+                  type="number" 
+                  id="fracDenominator"
+                  min="1"
+                  placeholder="2"
+                  class="flex-1 p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-lg font-mono text-center"
+                >
+              </div>
+              <p class="text-xs text-gray-500 mt-1">Ganancia / Apuesta (solo números enteros)</p>
+            </div>
+
+            <!-- American Input -->
+            <div class="mb-6">
+              <label class="block text-sm font-medium text-gray-700 mb-2">
+                🇺🇸 Formato Americano
+                <span class="text-gray-500">(Ej: +150, -200, +300)</span>
+              </label>
+              <input 
+                type="number" 
+                id="americanInput"
+                placeholder="+150"
+                class="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-lg font-mono"
+              >
+              <p class="text-xs text-gray-500 mt-1">Positivo: underdog, Negativo: favorito</p>
+            </div>
+
+            <!-- Quick Examples -->
+            <div class="bg-purple-50 border border-purple-200 rounded-lg p-4">
+              <h4 class="font-bold text-purple-800 mb-3">⚡ Prueba Estos Ejemplos</h4>
+              <div class="grid grid-cols-2 gap-2">
+                <button onclick="setExample(2.00, '1/1', '+100')" class="example-btn">
+                  50% - Moneda al aire
+                </button>
+                <button onclick="setExample(1.50, '1/2', '-200')" class="example-btn">
+                  Gran favorito
+                </button>
+                <button onclick="setExample(3.00, '2/1', '+200')" class="example-btn">
+                  Underdog medio
+                </button>
+                <button onclick="setExample(10.00, '9/1', '+900')" class="example-btn">
+                  Longshot extremo
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Results Section -->
+          <div class="bg-white rounded-xl shadow-lg p-6">
+            <h3 class="text-2xl font-bold text-gray-900 mb-6">📊 Conversiones y Análisis</h3>
+            
+            <div id="results" class="space-y-6">
+              <div class="text-center text-gray-500 py-8">
+                👈 Introduce una cuota para ver las conversiones
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Betting Scenarios -->
+        <div class="bg-white rounded-xl shadow-lg p-6 mb-12">
+          <h3 class="text-2xl font-bold text-gray-900 mb-6">💰 Simulador de Apuestas</h3>
+          <p class="text-gray-600 mb-6">
+            Simula una apuesta con la cuota actual para entender mejor los payouts en cada formato.
+          </p>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Bet Amount Input -->
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-2">Cantidad a Apostar</label>
+              <div class="flex gap-4 mb-4">
+                <input 
+                  type="number" 
+                  id="betAmount"
+                  value="100"
+                  min="1"
+                  step="1"
+                  class="flex-1 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                >
+                <select id="currency" class="p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                  <option value="€">€ (Euro)</option>
+                  <option value="$">$ (Dólar)</option>
+                  <option value="£">£ (Libra)</option>
+                </select>
+              </div>
+              
+              <!-- Quick bet amounts -->
+              <div class="flex flex-wrap gap-2">
+                <button onclick="setBetAmount(10)" class="bet-amount-btn">10</button>
+                <button onclick="setBetAmount(25)" class="bet-amount-btn">25</button>
+                <button onclick="setBetAmount(50)" class="bet-amount-btn">50</button>
+                <button onclick="setBetAmount(100)" class="bet-amount-btn">100</button>
+                <button onclick="setBetAmount(500)" class="bet-amount-btn">500</button>
+              </div>
+            </div>
+            
+            <!-- Payout Calculation -->
+            <div id="payoutCalculation" class="bg-gray-50 rounded-lg p-4">
+              <h4 class="font-bold text-gray-800 mb-3">🎯 Si Ganas Esta Apuesta:</h4>
+              <div class="text-center text-gray-500">
+                Introduce una cuota válida para calcular
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Comparison Table -->
+        <div class="bg-white rounded-xl shadow-lg overflow-hidden mb-12">
+          <div class="bg-gradient-to-r from-purple-600 to-indigo-600 text-white p-6">
+            <h3 class="text-2xl font-bold">📋 Tabla de Comparación Rápida</h3>
+            <p class="text-purple-100 mt-2">Cuotas comunes en todos los formatos</p>
+          </div>
+          
+          <div class="overflow-x-auto">
+            <table class="w-full">
+              <thead class="bg-gray-50">
+                <tr>
+                  <th class="px-6 py-3 text-left text-gray-900 font-bold">Probabilidad</th>
+                  <th class="px-6 py-3 text-center text-gray-900 font-bold">🇪🇺 Decimal</th>
+                  <th class="px-6 py-3 text-center text-gray-900 font-bold">🇬🇧 Fraccionario</th>
+                  <th class="px-6 py-3 text-center text-gray-900 font-bold">🇺🇸 Americano</th>
+                  <th class="px-6 py-3 text-center text-gray-900 font-bold">Descripción</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-gray-200">
+                <tr class="hover:bg-gray-50 cursor-pointer" onclick="setExample(1.10, '1/10', '-1000')">
+                  <td class="px-6 py-4 font-medium">90.91%</td>
+                  <td class="px-6 py-4 text-center font-mono">1.10</td>
+                  <td class="px-6 py-4 text-center font-mono">1/10</td>
+                  <td class="px-6 py-4 text-center font-mono">-1000</td>
+                  <td class="px-6 py-4 text-gray-600">Mega favorito</td>
+                </tr>
+                <tr class="hover:bg-gray-50 cursor-pointer" onclick="setExample(1.25, '1/4', '-400')">
+                  <td class="px-6 py-4 font-medium">80.00%</td>
+                  <td class="px-6 py-4 text-center font-mono">1.25</td>
+                  <td class="px-6 py-4 text-center font-mono">1/4</td>
+                  <td class="px-6 py-4 text-center font-mono">-400</td>
+                  <td class="px-6 py-4 text-gray-600">Gran favorito</td>
+                </tr>
+                <tr class="hover:bg-gray-50 cursor-pointer" onclick="setExample(1.50, '1/2', '-200')">
+                  <td class="px-6 py-4 font-medium">66.67%</td>
+                  <td class="px-6 py-4 text-center font-mono">1.50</td>
+                  <td class="px-6 py-4 text-center font-mono">1/2</td>
+                  <td class="px-6 py-4 text-center font-mono">-200</td>
+                  <td class="px-6 py-4 text-gray-600">Favorito claro</td>
+                </tr>
+                <tr class="hover:bg-gray-50 cursor-pointer" onclick="setExample(2.00, '1/1', '+100')" class="bg-blue-50">
+                  <td class="px-6 py-4 font-medium">50.00%</td>
+                  <td class="px-6 py-4 text-center font-mono font-bold">2.00</td>
+                  <td class="px-6 py-4 text-center font-mono font-bold">1/1</td>
+                  <td class="px-6 py-4 text-center font-mono font-bold">+100</td>
+                  <td class="px-6 py-4 text-blue-600 font-bold">Probabilidades iguales</td>
+                </tr>
+                <tr class="hover:bg-gray-50 cursor-pointer" onclick="setExample(2.50, '3/2', '+150')">
+                  <td class="px-6 py-4 font-medium">40.00%</td>
+                  <td class="px-6 py-4 text-center font-mono">2.50</td>
+                  <td class="px-6 py-4 text-center font-mono">3/2</td>
+                  <td class="px-6 py-4 text-center font-mono">+150</td>
+                  <td class="px-6 py-4 text-gray-600">Underdog ligero</td>
+                </tr>
+                <tr class="hover:bg-gray-50 cursor-pointer" onclick="setExample(3.00, '2/1', '+200')">
+                  

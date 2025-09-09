@@ -9,51 +9,114 @@ import { getUrl } from '../../utils/links';
 >
   
   <!-- Hero Section -->
-  <section class="bg-gradient-to-br from-purple-600 via-pink-600 to-purple-800 text-white py-16 sm:py-20">
-    <div class="container mx-auto px-4 text-center">
+  <section class="relative bg-gradient-to-br from-purple-600 via-pink-700 to-purple-800 text-white overflow-hidden">
+    <!-- Animated Background Elements -->
+    <div class="absolute inset-0 overflow-hidden">
+      <!-- Gradient overlay -->
+      <div class="absolute inset-0 bg-gradient-to-br from-purple-900/30 via-pink-900/50 to-purple-900/30"></div>
+      
+      <!-- Floating lottery elements -->
+      <div class="floating-lottery-shapes">
+        <div class="lottery-shape lottery-shape-1">🎟️</div>
+        <div class="lottery-shape lottery-shape-2">🎫</div>
+        <div class="lottery-shape lottery-shape-3">💰</div>
+        <div class="lottery-shape lottery-shape-4">🎯</div>
+        <div class="lottery-shape lottery-shape-5">🍀</div>
+        <div class="lottery-shape lottery-shape-6">⭐</div>
+        <div class="lottery-shape lottery-shape-7">🔢</div>
+        <div class="lottery-shape lottery-shape-8">💎</div>
+      </div>
+      
+      <!-- Animated numbers pattern -->
+      <div class="absolute inset-0 opacity-5">
+        <div class="lottery-numbers-pattern"></div>
+      </div>
+    </div>
+
+    <div class="relative container mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 md:py-24 lg:py-32 text-center z-10">
       <div class="max-w-4xl mx-auto">
-        <h1 class="text-3xl sm:text-4xl md:text-6xl font-bold mb-6 leading-tight">
-          🎟️ Loterías y Rascas
+        <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-8 lottery-title-animation">
+          <span class="inline-block">🎟️</span>
+          <span class="typing-lottery ml-4">Loterías y Rascas</span>
         </h1>
-        <p class="text-lg sm:text-xl md:text-2xl mb-8 text-purple-100 leading-relaxed">
-          Descubre las probabilidades reales y por qué 
-          <span class="text-yellow-300 font-semibold">las matemáticas no mienten</span>
-        </p>
+        <div class="staggered-fade-in">
+          <p class="text-lg sm:text-xl md:text-2xl lg:text-3xl mb-8 text-purple-100 leading-relaxed">
+            Descubre las probabilidades reales y por qué 
+            <span class="text-yellow-300 font-semibold glow-text">las matemáticas no mienten</span>
+          </p>
+        </div>
+        
+        <!-- Quick stats -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-12 staggered-fade-in-delayed">
+          <div class="bg-white/10 backdrop-blur-sm rounded-lg p-4 hover:bg-white/20 transition-all duration-300">
+            <div class="text-2xl font-bold">1:<span class="counter" data-target="14">0</span>M</div>
+            <div class="text-sm text-purple-200">Probabilidad</div>
+          </div>
+          <div class="bg-white/10 backdrop-blur-sm rounded-lg p-4 hover:bg-white/20 transition-all duration-300">
+            <div class="text-2xl font-bold counter" data-target="50">0</div>
+            <div class="text-sm text-purple-200">% RTP</div>
+          </div>
+          <div class="bg-white/10 backdrop-blur-sm rounded-lg p-4 hover:bg-white/20 transition-all duration-300">
+            <div class="text-2xl font-bold counter" data-target="250">0</div>
+            <div class="text-sm text-purple-200">K años espera</div>
+          </div>
+          <div class="bg-white/10 backdrop-blur-sm rounded-lg p-4 hover:bg-white/20 transition-all duration-300">
+            <div class="text-2xl font-bold counter" data-target="0">0</div>
+            <div class="text-sm text-purple-200">% Predicible</div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- Navigation Cards -->
-  <section class="py-16 sm:py-20 bg-gray-50">
-    <div class="container mx-auto px-4">
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+  <section class="py-16 sm:py-20 md:py-24 lg:py-32 bg-gradient-to-b from-gray-50 to-white relative overflow-hidden">
+    <!-- Background decoration -->
+    <div class="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-purple-600/5 to-transparent"></div>
+    
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="text-center mb-16 lg:mb-24">
+        <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 fade-in-up">
+          Calculadoras 
+          <span class="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+            Reveladoras
+          </span>
+        </h2>
+        <p class="text-xl md:text-2xl text-gray-600 max-w-4xl mx-auto leading-relaxed fade-in-up-delayed">
+          Herramientas que te muestran la verdad matemática detrás de loterías y rascas
+        </p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
         
         <!-- Probability Calculator - Main Feature -->
-        <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden transform hover:scale-105">
-          <div class="h-48 bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center relative">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-16 h-16 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01m3 0h.01m0-3h.01m-3 0h.01m3-3h.01m-3 0h.01M5 8a2 2 0 012-2h10a2 2 0 012 2v8a2 2 0 01-2 2H7a2 2 0 01-2-2V8z" />
-            </svg>
-            <div class="absolute top-4 right-4 bg-yellow-400 text-yellow-900 px-3 py-1 rounded-full text-sm font-bold">
+        <div class="lottery-card group">
+          <div class="lottery-card-header bg-gradient-to-br from-purple-500 to-pink-600">
+            <div class="lottery-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01m3 0h.01m0-3h.01m-3 0h.01m3-3h.01m-3 0h.01M5 8a2 2 0 012-2h10a2 2 0 012 2v8a2 2 0 01-2 2H7a2 2 0 01-2-2V8z" />
+              </svg>
+            </div>
+            <div class="absolute top-4 right-4 bg-yellow-400 text-yellow-900 px-3 py-1 rounded-full text-sm font-bold new-badge">
               NUEVO
             </div>
           </div>
-          <div class="p-4 sm:p-6">
-            <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-3 leading-tight">Calculadora de Probabilidades</h3>
-            <p class="text-gray-600 mb-4 text-sm sm:text-base leading-relaxed">
+          <div class="lottery-card-content">
+            <h3 class="text-2xl font-bold text-gray-900 mb-4">Calculadora de Probabilidades</h3>
+            <p class="text-gray-600 mb-6 leading-relaxed">
               Calcula las probabilidades reales de ganar en diferentes tipos de lotería y compáralas con eventos cotidianos.
             </p>
-            <div class="mb-4 flex flex-wrap gap-2">
-              <span class="inline-block bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded">Calculadora</span>
-              <span class="inline-block bg-pink-100 text-pink-800 text-xs px-2 py-1 rounded">Comparativo</span>
-              <span class="inline-block bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded">Educativo</span>
+            <div class="mb-6 flex flex-wrap gap-2">
+              <span class="tag tag-purple">Calculadora</span>
+              <span class="tag tag-pink">Comparativo</span>
+              <span class="tag tag-yellow">Educativo</span>
             </div>
             <a 
               href={getUrl('/lottery/probability-calculator')} 
-              class="inline-flex items-center w-full justify-center px-4 sm:px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-semibold rounded-lg transition-all duration-200 text-sm sm:text-base"
+              class="lottery-link bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700"
             >
               Calcular Probabilidades
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 ml-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M12 5l7 7-7 7" />
               </svg>
             </a>
@@ -61,31 +124,33 @@ import { getUrl } from '../../utils/links';
         </div>
 
         <!-- Scratch Cards Simulator -->
-        <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden transform hover:scale-105">
-          <div class="h-48 bg-gradient-to-br from-green-400 to-blue-500 flex items-center justify-center relative">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-16 h-16 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
-            </svg>
-            <div class="absolute top-4 right-4 bg-green-400 text-green-900 px-3 py-1 rounded-full text-sm font-bold">
-              NUEVO
+        <div class="lottery-card group">
+          <div class="lottery-card-header bg-gradient-to-br from-green-400 to-blue-500">
+            <div class="lottery-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
+              </svg>
+            </div>
+            <div class="absolute top-4 right-4 bg-green-400 text-green-900 px-3 py-1 rounded-full text-sm font-bold popular-badge">
+              POPULAR
             </div>
           </div>
-          <div class="p-4 sm:p-6">
-            <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-3 leading-tight">Simulador de Rascas</h3>
-            <p class="text-gray-600 mb-4 text-sm sm:text-base leading-relaxed">
+          <div class="lottery-card-content">
+            <h3 class="text-2xl font-bold text-gray-900 mb-4">Simulador de Rascas</h3>
+            <p class="text-gray-600 mb-6 leading-relaxed">
               Simula la compra de múltiples rascas del mismo lote y descubre cómo están distribuidos los premios.
             </p>
-            <div class="mb-4 flex flex-wrap gap-2">
-              <span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded">Simulador</span>
-              <span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">Interactivo</span>
-              <span class="inline-block bg-orange-100 text-orange-800 text-xs px-2 py-1 rounded">Visual</span>
+            <div class="mb-6 flex flex-wrap gap-2">
+              <span class="tag tag-green">Simulador</span>
+              <span class="tag tag-blue">Interactivo</span>
+              <span class="tag tag-orange">Visual</span>
             </div>
             <a 
               href={getUrl('/lottery/scratch-cards')} 
-              class="inline-flex items-center w-full justify-center px-4 sm:px-6 py-3 bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600 text-white font-semibold rounded-lg transition-all duration-200 text-sm sm:text-base"
+              class="lottery-link bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600"
             >
               Simular Rascas
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 ml-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M12 5l7 7-7 7" />
               </svg>
             </a>
@@ -93,31 +158,33 @@ import { getUrl } from '../../utils/links';
         </div>
 
         <!-- Expected Value Calculator -->
-        <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden transform hover:scale-105">
-          <div class="h-48 bg-gradient-to-br from-orange-400 to-red-500 flex items-center justify-center relative">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-16 h-16 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-            <div class="absolute top-4 right-4 bg-orange-400 text-orange-900 px-3 py-1 rounded-full text-sm font-bold">
+        <div class="lottery-card group">
+          <div class="lottery-card-header bg-gradient-to-br from-orange-400 to-red-500">
+            <div class="lottery-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <div class="absolute top-4 right-4 bg-orange-400 text-orange-900 px-3 py-1 rounded-full text-sm font-bold new-badge">
               NUEVO
             </div>
           </div>
-          <div class="p-4 sm:p-6">
-            <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-3 leading-tight">Calculadora de Valor Esperado</h3>
-            <p class="text-gray-600 mb-4 text-sm sm:text-base leading-relaxed">
+          <div class="lottery-card-content">
+            <h3 class="text-2xl font-bold text-gray-900 mb-4">Calculadora de Valor Esperado</h3>
+            <p class="text-gray-600 mb-6 leading-relaxed">
               Calcula cuánto dinero pierdes realmente por cada euro que gastas en lotería y compáralo con alternativas.
             </p>
-            <div class="mb-4 flex flex-wrap gap-2">
-              <span class="inline-block bg-orange-100 text-orange-800 text-xs px-2 py-1 rounded">Matemático</span>
-              <span class="inline-block bg-red-100 text-red-800 text-xs px-2 py-1 rounded">Revelador</span>
-              <span class="inline-block bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded">Educativo</span>
+            <div class="mb-6 flex flex-wrap gap-2">
+              <span class="tag tag-orange">Matemático</span>
+              <span class="tag tag-red">Revelador</span>
+              <span class="tag tag-purple">Educativo</span>
             </div>
             <a 
               href={getUrl('/lottery/expected-value')} 
-              class="inline-flex items-center w-full justify-center px-4 sm:px-6 py-3 bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white font-semibold rounded-lg transition-all duration-200 text-sm sm:text-base"
+              class="lottery-link bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600"
             >
               Calcular Valor Esperado
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 ml-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M12 5l7 7-7 7" />
               </svg>
             </a>
@@ -128,107 +195,131 @@ import { getUrl } from '../../utils/links';
   </section>
 
   <!-- Educational Content -->
-  <section class="py-16 sm:py-20 bg-white">
-    <div class="container mx-auto px-4">
+  <section class="py-16 sm:py-20 md:py-24 lg:py-32 bg-white">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
       <div class="max-w-4xl mx-auto">
-        <div class="text-center mb-12 sm:mb-16">
-          <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-6 leading-tight">¿Cómo Funcionan Realmente las Loterías?</h2>
-          <p class="text-lg sm:text-xl text-gray-600 leading-relaxed">
+        <div class="text-center mb-16 lg:mb-24">
+          <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 fade-in-up">
+            ¿Cómo Funcionan las 
+            <span class="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+              Loterías?
+            </span>
+          </h2>
+          <p class="text-xl md:text-2xl text-gray-600 fade-in-up-delayed">
             La verdad matemática detrás de los billetes y los sueños
           </p>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-center mb-12 sm:mb-16">
-          <div class="order-2 lg:order-1">
-            <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-4 leading-tight">🎯 Probabilidades Extremas</h3>
-            <p class="text-gray-600 mb-4 text-sm sm:text-base leading-relaxed">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-16 sm:mb-24">
+          <div class="fade-in-up">
+            <h3 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-6">🎯 Probabilidades Extremas</h3>
+            <p class="text-gray-600 mb-6 text-lg leading-relaxed">
               La probabilidad de ganar una lotería típica (como 6/49) es de aproximadamente 1 entre 14 millones. 
               Esto significa que tienes más probabilidades de ser alcanzado por un rayo múltiples veces.
             </p>
-            <p class="text-gray-600 text-sm sm:text-base leading-relaxed">
-              <strong>Perspectiva:</strong> Si compraras un billete cada semana, estadísticamente tardarías 
-              más de 250,000 años en ganar el premio mayor.
-            </p>
+            <div class="bg-blue-50 border-l-4 border-blue-400 p-4 rounded">
+              <p class="text-gray-700 font-semibold">
+                <strong>Perspectiva:</strong> Si compraras un billete cada semana, estadísticamente tardarías 
+                más de 250,000 años en ganar el premio mayor.
+              </p>
+            </div>
           </div>
-          <div class="bg-gray-100 p-6 sm:p-8 rounded-lg order-1 lg:order-2">
+          <div class="educational-card fade-in-up-delayed">
             <div class="text-center">
-              <div class="text-4xl sm:text-6xl mb-4">⚡</div>
-              <div class="text-xs sm:text-sm text-gray-600 mb-2">Probabilidad de ser alcanzado por un rayo</div>
-              <div class="text-base sm:text-lg font-bold text-blue-600">1 en 1,000,000</div>
-              <div class="text-xs sm:text-sm text-gray-600 mt-4 mb-2">Probabilidad de ganar la lotería</div>
-              <div class="text-base sm:text-lg font-bold text-red-600">1 en 14,000,000</div>
+              <div class="text-6xl mb-6 animate-pulse-slow">⚡</div>
+              <div class="comparison-container">
+                <div class="comparison-item">
+                  <div class="text-sm text-gray-600 mb-2">Probabilidad de ser alcanzado por un rayo</div>
+                  <div class="text-xl font-bold text-blue-600">1 en 1,000,000</div>
+                </div>
+                <div class="comparison-vs">VS</div>
+                <div class="comparison-item">
+                  <div class="text-sm text-gray-600 mb-2">Probabilidad de ganar la lotería</div>
+                  <div class="text-xl font-bold text-red-600">1 en <span class="counter" data-target="14">0</span>,000,000</div>
+                </div>
+              </div>
+              <div class="mt-6 text-sm text-gray-500">
+                <span class="inline-block bg-red-100 text-red-700 px-3 py-1 rounded-full">
+                  14 veces menos probable que un rayo
+                </span>
+              </div>
             </div>
           </div>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-center mb-12 sm:mb-16">
-          <div class="bg-gray-100 p-6 sm:p-8 rounded-lg order-2 lg:order-1">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-16 sm:mb-24">
+          <div class="educational-card fade-in-up order-2 md:order-1">
             <div class="text-center">
-              <div class="text-4xl sm:text-6xl mb-4">💸</div>
-              <div class="text-base sm:text-lg font-bold text-red-600 mb-2">RTP: 50%</div>
-              <div class="text-xs sm:text-sm text-gray-600 mb-4">Return to Player</div>
-              <div class="bg-red-500 h-3 sm:h-4 rounded-full">
-                <div class="bg-green-500 h-3 sm:h-4 rounded-full w-[50%]"></div>
+              <div class="text-6xl mb-6">💸</div>
+              <div class="text-2xl font-bold text-red-600 mb-4">RTP: <span class="counter" data-target="50">0</span>%</div>
+              <div class="text-lg text-gray-600 mb-6">Return to Player</div>
+              <div class="rtp-bar-lottery">
+                <div class="rtp-fill-lottery"></div>
               </div>
-              <div class="text-xs text-gray-500 mt-2">El peor RTP de todos los juegos</div>
+              <div class="text-sm text-gray-500 mt-4">El peor RTP de todos los juegos</div>
+              <div class="mt-4 text-xs text-gray-400">
+                Por cada €2 que gastas, pierdes €1 automáticamente
+              </div>
             </div>
           </div>
-          <div class="order-1 lg:order-2">
-            <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-4 leading-tight">📉 Valor Esperado Negativo</h3>
-            <p class="text-gray-600 mb-4 text-sm sm:text-base leading-relaxed">
+          <div class="order-1 md:order-2 fade-in-up-delayed">
+            <h3 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-6">📉 Valor Esperado Negativo</h3>
+            <p class="text-gray-600 mb-6 text-lg leading-relaxed">
               Las loterías tienen el peor RTP (Return to Player) de todos los juegos de azar, típicamente entre 40-50%. 
               Esto significa que por cada €1 que gastas, solo recuperas €0.50 en premios.
             </p>
-            <p class="text-gray-600 text-sm sm:text-base leading-relaxed">
-              <strong>En otras palabras:</strong> Cada billete que compras pierde automáticamente la mitad de su valor.
-            </p>
+            <div class="bg-orange-50 border-l-4 border-orange-400 p-4 rounded">
+              <p class="text-gray-700 font-semibold">
+                <strong>En otras palabras:</strong> Cada billete que compras pierde automáticamente la mitad de su valor.
+              </p>
+            </div>
           </div>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-center">
-          <div class="order-2 lg:order-1">
-            <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-4 leading-tight">🎫 Rascas y Ganas</h3>
-            <p class="text-gray-600 mb-4 text-sm sm:text-base leading-relaxed">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+          <div class="fade-in-up">
+            <h3 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-6">🎫 Rascas y Ganas</h3>
+            <p class="text-gray-600 mb-6 text-lg leading-relaxed">
               Los rascas son especialmente engañosos porque dan la sensación de control e inmediatez. 
               Cada "lote" tiene un número fijo de premios distribuidos aleatoriamente.
             </p>
-            <ul class="text-gray-600 space-y-2 text-sm sm:text-base">
-              <li><strong>Premio mayor:</strong> Solo 1 o 2 por lote completo</li>
-              <li><strong>Premios menores:</strong> Distribuidos para crear "falsas esperanzas"</li>
-              <li><strong>Pérdidas garantizadas:</strong> 70-80% de los billetes no tienen premio</li>
+            <ul class="text-gray-600 space-y-3 text-lg">
+              <li class="flex items-center"><span class="text-red-500 mr-2">⚠</span><strong>Premio mayor:</strong> Solo 1 o 2 por lote completo</li>
+              <li class="flex items-center"><span class="text-yellow-500 mr-2">⚠</span><strong>Premios menores:</strong> Distribuidos para crear "falsas esperanzas"</li>
+              <li class="flex items-center"><span class="text-red-500 mr-2">❌</span><strong>Pérdidas garantizadas:</strong> 70-80% de los billetes no tienen premio</li>
             </ul>
           </div>
-          <div class="bg-gray-100 p-6 sm:p-8 rounded-lg order-1 lg:order-2">
-            <div class="space-y-4">
-              <div class="text-center">
-                <div class="text-2xl sm:text-3xl mb-2">🎫</div>
-                <div class="text-xs sm:text-sm text-gray-600">Lote de 1000 rascas</div>
-              </div>
-              <div>
-                <div class="flex justify-between text-xs sm:text-sm mb-1">
-                  <span>Premios mayores</span>
-                  <span>2 billetes</span>
+          <div class="educational-card fade-in-up-delayed">
+            <div class="text-center">
+              <div class="text-4xl mb-4">🎫</div>
+              <div class="text-lg font-semibold mb-6">Lote de 1000 rascas</div>
+              <div class="space-y-4">
+                <div class="scratch-distribution">
+                  <div class="flex justify-between text-sm mb-2">
+                    <span>Premios mayores</span>
+                    <span class="font-bold">2 billetes</span>
+                  </div>
+                  <div class="scratch-bar bg-green-200">
+                    <div class="scratch-fill bg-green-500 w-[0.2%]"></div>
+                  </div>
                 </div>
-                <div class="bg-green-200 h-2 rounded-full">
-                  <div class="bg-green-500 h-2 rounded-full w-[0.2%]"></div>
+                <div class="scratch-distribution">
+                  <div class="flex justify-between text-sm mb-2">
+                    <span>Premios menores</span>
+                    <span class="font-bold">150 billetes</span>
+                  </div>
+                  <div class="scratch-bar bg-yellow-200">
+                    <div class="scratch-fill bg-yellow-500 w-[15%]"></div>
+                  </div>
                 </div>
-              </div>
-              <div>
-                <div class="flex justify-between text-xs sm:text-sm mb-1">
-                  <span>Premios menores</span>
-                  <span>150 billetes</span>
-                </div>
-                <div class="bg-yellow-200 h-2 rounded-full">
-                  <div class="bg-yellow-500 h-2 rounded-full w-[15%]"></div>
-                </div>
-              </div>
-              <div>
-                <div class="flex justify-between text-xs sm:text-sm mb-1">
-                  <span>Sin premio</span>
-                  <span>848 billetes</span>
-                </div>
-                <div class="bg-red-200 h-2 rounded-full">
-                  <div class="bg-red-500 h-2 rounded-full w-[85%]"></div>
+                <div class="scratch-distribution">
+                  <div class="flex justify-between text-sm mb-2">
+                    <span>Sin premio</span>
+                    <span class="font-bold">848 billetes</span>
+                  </div>
+                  <div class="scratch-bar bg-red-200">
+                    <div class="scratch-fill bg-red-500 w-[85%]"></div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -239,44 +330,58 @@ import { getUrl } from '../../utils/links';
   </section>
 
   <!-- Psychological Tricks Section -->
-  <section class="py-20 bg-gray-50">
-    <div class="container mx-auto px-4">
-      <div class="max-w-4xl mx-auto">
-        <div class="text-center mb-16">
-          <h2 class="text-4xl font-bold text-gray-900 mb-6">🧠 Trucos Psicológicos</h2>
-          <p class="text-xl text-gray-600">
+  <section class="py-16 sm:py-20 md:py-24 bg-gradient-to-br from-gray-50 to-gray-100 relative overflow-hidden">
+    <!-- Background decoration -->
+    <div class="absolute inset-0 opacity-5">
+      <div class="psychology-pattern"></div>
+    </div>
+    
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-16 lg:mb-24">
+          <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-6 fade-in-up">
+            🧠 Trucos 
+            <span class="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+              Psicológicos
+            </span>
+          </h2>
+          <p class="text-xl md:text-2xl text-gray-600 fade-in-up-delayed">
             Cómo las loterías manipulan tu mente para seguir jugando
           </p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div class="bg-white p-6 rounded-lg shadow-lg">
-            <h3 class="text-xl font-bold text-gray-900 mb-3">🔢 "Números de la Suerte"</h3>
-            <p class="text-gray-600">
+          <div class="psychology-card group">
+            <div class="text-5xl mb-6 psychology-icon">🔢</div>
+            <h3 class="text-xl font-bold text-gray-900 mb-4">"Números de la Suerte"</h3>
+            <p class="text-gray-600 leading-relaxed">
               No existen números con más probabilidad de salir. Cada combinación tiene exactamente 
               las mismas probabilidades, pero nuestro cerebro busca patrones donde no los hay.
             </p>
           </div>
 
-          <div class="bg-white p-6 rounded-lg shadow-lg">
-            <h3 class="text-xl font-bold text-gray-900 mb-3">📺 Sesgo del Superviviente</h3>
-            <p class="text-gray-600">
+          <div class="psychology-card group">
+            <div class="text-5xl mb-6 psychology-icon">📺</div>
+            <h3 class="text-xl font-bold text-gray-900 mb-4">Sesgo del Superviviente</h3>
+            <p class="text-gray-600 leading-relaxed">
               Solo vemos a los ganadores en los medios, no a los millones que perdieron. 
               Esto crea una falsa sensación de que ganar es más común de lo que realmente es.
             </p>
           </div>
 
-          <div class="bg-white p-6 rounded-lg shadow-lg">
-            <h3 class="text-xl font-bold text-gray-900 mb-3">🎯 "Casi Gané"</h3>
-            <p class="text-gray-600">
+          <div class="psychology-card group">
+            <div class="text-5xl mb-6 psychology-icon">🎯</div>
+            <h3 class="text-xl font-bold text-gray-900 mb-4">"Casi Gané"</h3>
+            <p class="text-gray-600 leading-relaxed">
               Tener números cercanos a los ganadores no significa nada, pero activa las mismas 
               áreas del cerebro que una victoria real, manteniéndote enganchado.
             </p>
           </div>
 
-          <div class="bg-white p-6 rounded-lg shadow-lg">
-            <h3 class="text-xl font-bold text-gray-900 mb-3">🔄 Falacia del Jugador</h3>
-            <p class="text-gray-600">
+          <div class="psychology-card group">
+            <div class="text-5xl mb-6 psychology-icon">🔄</div>
+            <h3 class="text-xl font-bold text-gray-900 mb-4">Falacia del Jugador</h3>
+            <p class="text-gray-600 leading-relaxed">
               Creer que los números que no han salido tienen más probabilidad de salir. 
               Cada sorteo es independiente, no hay "números que deben salir".
             </p>
@@ -287,37 +392,44 @@ import { getUrl } from '../../utils/links';
   </section>
 
   <!-- Warning Section -->
-  <section class="py-16 bg-red-50">
-    <div class="container mx-auto px-4">
-      <div class="max-w-4xl mx-auto text-center">
-        <h2 class="text-3xl font-bold text-red-800 mb-6">⚠️ La Realidad Matemática</h2>
+  <section class="py-16 sm:py-20 bg-gradient-to-br from-red-50 to-pink-50 relative overflow-hidden">
+    <!-- Background decoration -->
+    <div class="absolute inset-0 opacity-5">
+      <div class="warning-pattern"></div>
+    </div>
+    
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="max-w-6xl mx-auto text-center">
+        <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-red-800 mb-8 fade-in-up">
+          ⚠️ La Realidad Matemática
+        </h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div class="bg-white p-6 rounded-lg shadow-lg">
-            <div class="text-4xl mb-4">📚</div>
-            <h3 class="text-lg font-bold text-gray-900 mb-2">Impuesto a la Ignorancia</h3>
-            <p class="text-gray-600 text-sm">
+          <div class="warning-card group">
+            <div class="text-5xl mb-6 warning-icon">📚</div>
+            <h3 class="text-xl font-bold text-gray-900 mb-4">Impuesto a la Ignorancia</h3>
+            <p class="text-gray-600 leading-relaxed">
               Las loterías son llamadas "impuesto a los que no saben matemáticas" por una razón: 
               las probabilidades están completamente en tu contra.
             </p>
           </div>
-          <div class="bg-white p-6 rounded-lg shadow-lg">
-            <div class="text-4xl mb-4">💰</div>
-            <h3 class="text-lg font-bold text-gray-900 mb-2">Peor "Inversión" Posible</h3>
-            <p class="text-gray-600 text-sm">
+          <div class="warning-card group">
+            <div class="text-5xl mb-6 warning-icon">💰</div>
+            <h3 class="text-xl font-bold text-gray-900 mb-4">Peor "Inversión" Posible</h3>
+            <p class="text-gray-600 leading-relaxed">
               Con un RTP del 50%, las loterías son la peor forma posible de "invertir" tu dinero. 
               Incluso los casinos ofrecen mejores probabilidades.
             </p>
           </div>
-          <div class="bg-white p-6 rounded-lg shadow-lg">
-            <div class="text-4xl mb-4">🎯</div>
-            <h3 class="text-lg font-bold text-gray-900 mb-2">Matemáticas Inmutables</h3>
-            <p class="text-gray-600 text-sm">
+          <div class="warning-card group">
+            <div class="text-5xl mb-6 warning-icon">🎯</div>
+            <h3 class="text-xl font-bold text-gray-900 mb-4">Matemáticas Inmutables</h3>
+            <p class="text-gray-600 leading-relaxed">
               No hay sistema, estrategia o "método" que pueda cambiar las probabilidades. 
               Las matemáticas no mienten, no negocian y no hacen excepciones.
             </p>
           </div>
         </div>
-        <div class="mt-8 p-6 bg-yellow-100 rounded-lg">
+        <div class="mt-12 p-6 bg-yellow-100 rounded-xl lottery-alternative">
           <p class="text-lg text-yellow-800">
             <strong>💡 Alternativa inteligente:</strong> Ese dinero que gastas en lotería cada semana, 
             inviértelo en un fondo de inversión. En 20 años tendrás un "premio" garantizado.
@@ -328,3 +440,545 @@ import { getUrl } from '../../utils/links';
   </section>
 
 </MainLayout>
+
+<style>
+  /* Typing Animation for Lottery */
+  .typing-lottery {
+    animation: typing-lottery 2.5s ease-in-out;
+  }
+  
+  .lottery-title-animation {
+    animation: fadeInUp 1s ease-out;
+  }
+  
+  @keyframes typing-lottery {
+    0% { 
+      opacity: 0;
+      transform: translateX(-20px);
+    }
+    100% { 
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  /* Glow text effect */
+  .glow-text {
+    text-shadow: 0 0 20px rgba(253, 224, 71, 0.6);
+  }
+
+  /* Staggered Animations */
+  .staggered-fade-in {
+    animation: fadeInUp 1s ease-out 0.5s both;
+  }
+  
+  .staggered-fade-in-delayed {
+    animation: fadeInUp 1s ease-out 1s both;
+  }
+  
+  .fade-in-up {
+    animation: fadeInUp 1s ease-out;
+  }
+  
+  .fade-in-up-delayed {
+    animation: fadeInUp 1s ease-out 0.3s both;
+  }
+  
+  @keyframes fadeInUp {
+    0% {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Floating Lottery Shapes */
+  .floating-lottery-shapes {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+  
+  .lottery-shape {
+    position: absolute;
+    font-size: 2rem;
+    opacity: 0.12;
+    animation: float-lottery 10s ease-in-out infinite;
+  }
+  
+  .lottery-shape-1 {
+    top: 10%;
+    left: 8%;
+    animation-delay: 0s;
+  }
+  
+  .lottery-shape-2 {
+    top: 25%;
+    right: 12%;
+    animation-delay: 1.5s;
+  }
+  
+  .lottery-shape-3 {
+    bottom: 35%;
+    left: 15%;
+    animation-delay: 3s;
+  }
+  
+  .lottery-shape-4 {
+    top: 55%;
+    right: 20%;
+    animation-delay: 4.5s;
+  }
+  
+  .lottery-shape-5 {
+    bottom: 15%;
+    right: 8%;
+    animation-delay: 6s;
+  }
+  
+  .lottery-shape-6 {
+    top: 35%;
+    left: 65%;
+    animation-delay: 7.5s;
+  }
+  
+  .lottery-shape-7 {
+    bottom: 45%;
+    left: 75%;
+    animation-delay: 2s;
+  }
+  
+  .lottery-shape-8 {
+    top: 70%;
+    left: 40%;
+    animation-delay: 5s;
+  }
+  
+  @keyframes float-lottery {
+    0%, 100% { 
+      transform: translateY(0) rotate(0deg) scale(1); 
+      opacity: 0.12;
+    }
+    33% { 
+      transform: translateY(-25px) rotate(120deg) scale(1.1); 
+      opacity: 0.18;
+    }
+    66% { 
+      transform: translateY(15px) rotate(240deg) scale(0.9); 
+      opacity: 0.15;
+    }
+  }
+
+  /* Numbers Pattern */
+  .lottery-numbers-pattern {
+    background-image: 
+      radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.1) 2px, transparent 2px),
+      radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.1) 2px, transparent 2px);
+    background-size: 40px 40px;
+    width: 100%;
+    height: 100%;
+    animation: numbers-drift 25s linear infinite;
+  }
+  
+  @keyframes numbers-drift {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(40px, 40px); }
+  }
+
+  /* Counter Animation */
+  .counter {
+    transition: all 0.5s ease;
+  }
+
+  /* Lottery Cards */
+  .lottery-card {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    transition: all 0.5s ease;
+    animation: fadeInUp 0.8s ease-out;
+  }
+  
+  .lottery-card:nth-child(1) { animation-delay: 0.1s; }
+  .lottery-card:nth-child(2) { animation-delay: 0.2s; }
+  .lottery-card:nth-child(3) { animation-delay: 0.3s; }
+  
+  .lottery-card:hover {
+    transform: translateY(-15px) scale(1.02);
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
+  }
+  
+  .lottery-card-header {
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .lottery-card-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, rgba(255, 255, 255, 0.15), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+  }
+  
+  .lottery-card:hover .lottery-card-header::before {
+    transform: translateX(100%);
+  }
+  
+  .lottery-icon {
+    transform: scale(1);
+    transition: transform 0.4s ease;
+    z-index: 2;
+  }
+  
+  .lottery-card:hover .lottery-icon {
+    transform: scale(1.15) rotate(10deg);
+  }
+  
+  .lottery-card-content {
+    padding: 2rem;
+  }
+  
+  .lottery-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 1rem 2rem;
+    color: white;
+    font-weight: 600;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+  }
+
+  /* Tags */
+  .tag {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+  
+  .tag-purple { background: #f3e8ff; color: #581c87; }
+  .tag-pink { background: #fce7f3; color: #be185d; }
+  .tag-yellow { background: #fef3c7; color: #92400e; }
+  .tag-green { background: #dcfce7; color: #166534; }
+  .tag-blue { background: #dbeafe; color: #1e40af; }
+  .tag-orange { background: #fed7aa; color: #9a3412; }
+  .tag-red { background: #fecaca; color: #991b1b; }
+
+  /* Badges */
+  .popular-badge, .new-badge {
+    animation: pulse-badge 2s infinite;
+  }
+  
+  @keyframes pulse-badge {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+  }
+
+  /* Educational Cards */
+  .educational-card {
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+  }
+  
+  .educational-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Comparison Container */
+  .comparison-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+  }
+  
+  .comparison-item {
+    padding: 1rem;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.5);
+  }
+  
+  .comparison-vs {
+    font-weight: bold;
+    color: #6b7280;
+    font-size: 1.2rem;
+  }
+
+  /* RTP Bar for Lottery */
+  .rtp-bar-lottery {
+    background: #fecaca;
+    height: 1rem;
+    border-radius: 9999px;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .rtp-fill-lottery {
+    background: linear-gradient(90deg, #ef4444, #dc2626);
+    height: 100%;
+    width: 50%;
+    border-radius: 9999px;
+    animation: fill-rtp-lottery 3s ease-out;
+  }
+  
+  @keyframes fill-rtp-lottery {
+    0% { width: 0%; }
+    100% { width: 50%; }
+  }
+
+  /* Scratch Distribution */
+  .scratch-distribution {
+    margin-bottom: 1rem;
+  }
+  
+  .scratch-bar {
+    height: 0.75rem;
+    border-radius: 9999px;
+    overflow: hidden;
+  }
+  
+  .scratch-fill {
+    height: 100%;
+    border-radius: 9999px;
+    animation: fill-scratch 2s ease-out;
+  }
+  
+  @keyframes fill-scratch {
+    0% { width: 0%; }
+  }
+
+  /* Psychology Cards */
+  .psychology-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    transition: all 0.5s ease;
+    animation: fadeInUp 0.8s ease-out;
+  }
+  
+  .psychology-card:nth-child(1) { animation-delay: 0.1s; }
+  .psychology-card:nth-child(2) { animation-delay: 0.2s; }
+  .psychology-card:nth-child(3) { animation-delay: 0.3s; }
+  .psychology-card:nth-child(4) { animation-delay: 0.4s; }
+  
+  .psychology-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+  }
+  
+  .psychology-icon {
+    transition: transform 0.3s ease;
+  }
+  
+  .psychology-card:hover .psychology-icon {
+    transform: scale(1.1) rotate(5deg);
+  }
+
+  /* Psychology Pattern */
+  .psychology-pattern {
+    background-image: 
+      radial-gradient(circle at 30% 40%, rgba(147, 51, 234, 0.1) 25%, transparent 25%),
+      radial-gradient(circle at 70% 80%, rgba(236, 72, 153, 0.1) 25%, transparent 25%);
+    background-size: 60px 60px;
+    width: 100%;
+    height: 100%;
+    animation: psychology-move 30s linear infinite;
+  }
+  
+  @keyframes psychology-move {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(60px, 60px); }
+  }
+
+  /* Warning Cards */
+  .warning-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    transition: all 0.5s ease;
+    animation: fadeInUp 0.8s ease-out;
+  }
+  
+  .warning-card:nth-child(1) { animation-delay: 0.1s; }
+  .warning-card:nth-child(2) { animation-delay: 0.2s; }
+  .warning-card:nth-child(3) { animation-delay: 0.3s; }
+  
+  .warning-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+  }
+  
+  .warning-icon {
+    transition: transform 0.3s ease;
+  }
+  
+  .warning-card:hover .warning-icon {
+    transform: scale(1.1) rotate(5deg);
+  }
+
+  /* Warning Pattern */
+  .warning-pattern {
+    background-image: 
+      linear-gradient(45deg, rgba(239, 68, 68, 0.1) 25%, transparent 25%),
+      linear-gradient(-45deg, rgba(239, 68, 68, 0.1) 25%, transparent 25%),
+      linear-gradient(45deg, transparent 75%, rgba(239, 68, 68, 0.1) 75%),
+      linear-gradient(-45deg, transparent 75%, rgba(239, 68, 68, 0.1) 75%);
+    background-size: 40px 40px;
+    background-position: 0 0, 0 20px, 20px -20px, -20px 0px;
+    width: 100%;
+    height: 100%;
+    animation: warning-move 20s linear infinite;
+  }
+  
+  @keyframes warning-move {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(40px, 40px); }
+  }
+
+  /* Lottery Alternative */
+  .lottery-alternative {
+    animation: fadeInUp 1s ease-out 0.5s both;
+    border: 2px solid #fbbf24;
+  }
+
+  /* Pulse animation */
+  .animate-pulse-slow {
+    animation: pulse-slow 4s infinite;
+  }
+  
+  @keyframes pulse-slow {
+    0%, 100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.8;
+      transform: scale(1.05);
+    }
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .lottery-card-content {
+      padding: 1.5rem;
+    }
+    
+    .educational-card {
+      padding: 1.5rem;
+    }
+    
+    .psychology-card, .warning-card {
+      padding: 1.5rem;
+    }
+    
+    .comparison-container {
+      gap: 0.5rem;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Counter animation for stats
+    const counters = document.querySelectorAll('.counter');
+    const observerOptions = {
+      threshold: 0.5,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const counterObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const counter = entry.target;
+          const target = parseFloat(counter.getAttribute('data-target'));
+          const duration = 2000;
+          const start = performance.now();
+          
+          const animate = (currentTime) => {
+            const elapsed = currentTime - start;
+            const progress = Math.min(elapsed / duration, 1);
+            
+            const easeOutCubic = 1 - Math.pow(1 - progress, 3);
+            const current = target * easeOutCubic;
+            
+            if (target % 1 === 0) {
+              counter.textContent = Math.floor(current);
+            } else {
+              counter.textContent = current.toFixed(1);
+            }
+            
+            if (progress < 1) {
+              requestAnimationFrame(animate);
+            }
+          };
+          
+          requestAnimationFrame(animate);
+          counterObserver.unobserve(counter);
+        }
+      });
+    }, observerOptions);
+
+    counters.forEach(counter => {
+      counterObserver.observe(counter);
+    });
+
+    // Enhanced fade-in animations
+    const fadeElements = document.querySelectorAll('.fade-in-up, .fade-in-up-delayed');
+    const fadeObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.1 });
+
+    fadeElements.forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(40px)';
+      el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+      fadeObserver.observe(el);
+    });
+
+    // Scratch bar animation trigger
+    const scratchBars = document.querySelectorAll('.scratch-fill');
+    const scratchObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.animationPlayState = 'running';
+        }
+      });
+    }, { threshold: 0.5 });
+
+    scratchBars.forEach(bar => {
+      bar.style.animationPlayState = 'paused';
+      scratchObserver.observe(bar);
+    });
+  });
+</script>

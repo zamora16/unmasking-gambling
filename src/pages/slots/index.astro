@@ -9,115 +9,180 @@ import { getUrl } from '../../utils/links';
 >
   
   <!-- Hero Section -->
-  <section class="bg-gradient-to-br from-indigo-600 via-purple-600 to-indigo-800 text-white py-12 sm:py-16 md:py-20 lg:py-24">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+  <section class="relative bg-gradient-to-br from-indigo-600 via-purple-700 to-indigo-800 text-white overflow-hidden">
+    <!-- Animated Background Elements -->
+    <div class="absolute inset-0 overflow-hidden">
+      <!-- Gradient overlay -->
+      <div class="absolute inset-0 bg-gradient-to-br from-indigo-900/30 via-purple-900/50 to-indigo-900/30"></div>
+      
+      <!-- Floating casino elements -->
+      <div class="floating-casino-shapes">
+        <div class="casino-shape casino-shape-1">🎰</div>
+        <div class="casino-shape casino-shape-2">🎲</div>
+        <div class="casino-shape casino-shape-3">💰</div>
+        <div class="casino-shape casino-shape-4">🍒</div>
+        <div class="casino-shape casino-shape-5">🔔</div>
+        <div class="casino-shape casino-shape-6">⭐</div>
+      </div>
+      
+      <!-- Animated grid pattern -->
+      <div class="absolute inset-0 opacity-5">
+        <div class="slots-grid-pattern"></div>
+      </div>
+    </div>
+
+    <div class="relative container mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 md:py-24 lg:py-32 text-center z-10">
       <div class="max-w-4xl mx-auto">
-        <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-          🎰 Máquinas Tragaperras
+        <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-8 slots-title-animation">
+          <span class="inline-block">🎰</span>
+          <span class="typing-slots ml-4">Máquinas Tragaperras</span>
         </h1>
-        <p class="text-lg sm:text-xl md:text-2xl lg:text-3xl mb-8 text-indigo-100 leading-relaxed">
-          Descubre cómo funcionan realmente las slots y por qué 
-          <span class="text-yellow-300 font-semibold">la casa siempre gana</span>
-        </p>
+        <div class="staggered-fade-in">
+          <p class="text-lg sm:text-xl md:text-2xl lg:text-3xl mb-8 text-indigo-100 leading-relaxed">
+            Descubre cómo funcionan realmente las slots y por qué 
+            <span class="text-yellow-300 font-semibold glow-text">la casa siempre gana</span>
+          </p>
+        </div>
+        
+        <!-- Quick stats -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-12 staggered-fade-in-delayed">
+          <div class="bg-white/10 backdrop-blur-sm rounded-lg p-4 hover:bg-white/20 transition-all duration-300">
+            <div class="text-2xl font-bold counter" data-target="95">0</div>
+            <div class="text-sm text-indigo-200">% RTP Típico</div>
+          </div>
+          <div class="bg-white/10 backdrop-blur-sm rounded-lg p-4 hover:bg-white/20 transition-all duration-300">
+            <div class="text-2xl font-bold counter" data-target="5">0</div>
+            <div class="text-sm text-indigo-200">% Ventaja Casa</div>
+          </div>
+          <div class="bg-white/10 backdrop-blur-sm rounded-lg p-4 hover:bg-white/20 transition-all duration-300">
+            <div class="text-2xl font-bold">∞</div>
+            <div class="text-sm text-indigo-200">Combinaciones</div>
+          </div>
+          <div class="bg-white/10 backdrop-blur-sm rounded-lg p-4 hover:bg-white/20 transition-all duration-300">
+            <div class="text-2xl font-bold counter" data-target="0">0</div>
+            <div class="text-sm text-indigo-200">% Predicible</div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- Navigation Cards -->
-  <section class="py-12 sm:py-16 md:py-20 lg:py-24 bg-gray-50">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+  <section class="py-16 sm:py-20 md:py-24 lg:py-32 bg-gradient-to-b from-gray-50 to-white relative overflow-hidden">
+    <!-- Background decoration -->
+    <div class="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-indigo-600/5 to-transparent"></div>
+    
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="text-center mb-16 lg:mb-24">
+        <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 fade-in-up">
+          Simuladores 
+          <span class="bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+            Interactivos
+          </span>
+        </h2>
+        <p class="text-xl md:text-2xl text-gray-600 max-w-4xl mx-auto leading-relaxed fade-in-up-delayed">
+          Herramientas prácticas para entender la mecánica de las tragaperras
+        </p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
         
         <!-- RTP Simulator - Main Feature -->
-        <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden transform hover:scale-105">
-          <div class="h-48 bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center relative">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-16 h-16 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-            </svg>
-            <div class="absolute top-4 right-4 bg-green-400 text-green-900 px-3 py-1 rounded-full text-sm font-bold">
+        <div class="simulator-card group">
+          <div class="simulator-card-header bg-gradient-to-br from-indigo-500 to-purple-600">
+            <div class="simulator-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+              </svg>
+            </div>
+            <div class="absolute top-4 right-4 bg-green-400 text-green-900 px-3 py-1 rounded-full text-sm font-bold popular-badge">
               POPULAR
             </div>
           </div>
-          <div class="p-6">
-            <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-3">Simulador RTP</h3>
-            <p class="text-gray-600 mb-4">
+          <div class="simulator-card-content">
+            <h3 class="text-2xl font-bold text-gray-900 mb-4">Simulador RTP</h3>
+            <p class="text-gray-600 mb-6 leading-relaxed">
               Experimenta con diferentes configuraciones de RTP y entiende por qué las matemáticas favorecen al casino.
             </p>
-            <div class="mb-4">
-              <span class="inline-block bg-indigo-100 text-indigo-800 text-xs px-2 py-1 rounded mr-2">Interactivo</span>
-              <span class="inline-block bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded mr-2">Gráficos</span>
-              <span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded">Educativo</span>
+            <div class="mb-6 flex flex-wrap gap-2">
+              <span class="tag tag-indigo">Interactivo</span>
+              <span class="tag tag-purple">Gráficos</span>
+              <span class="tag tag-green">Educativo</span>
             </div>
             <a 
               href={getUrl('/slots/rtp')} 
-              class="inline-flex items-center w-full justify-center px-6 py-4 md:px-8 md:py-4 min-h-[48px] bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-semibold rounded-lg transition-all duration-200"
+              class="simulator-link bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700"
             >
               Probar Simulador
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M12 5l7 7-7 7" />
               </svg>
             </a>
           </div>
         </div>
 
-        <!-- Volatility Analyzer - Now Available -->
-        <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden transform hover:scale-105">
-          <div class="h-48 bg-gradient-to-br from-orange-400 to-red-500 flex items-center justify-center relative">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-16 h-16 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-            </svg>
-            <div class="absolute top-4 right-4 bg-yellow-400 text-yellow-900 px-3 py-1 rounded-full text-sm font-bold">
+        <!-- Volatility Analyzer -->
+        <div class="simulator-card group">
+          <div class="simulator-card-header bg-gradient-to-br from-orange-400 to-red-500">
+            <div class="simulator-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+              </svg>
+            </div>
+            <div class="absolute top-4 right-4 bg-yellow-400 text-yellow-900 px-3 py-1 rounded-full text-sm font-bold new-badge">
               NUEVO
             </div>
           </div>
-          <div class="p-6">
-            <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-3">Analizador de Volatilidad</h3>
-            <p class="text-gray-600 mb-4">
+          <div class="simulator-card-content">
+            <h3 class="text-2xl font-bold text-gray-900 mb-4">Analizador de Volatilidad</h3>
+            <p class="text-gray-600 mb-6 leading-relaxed">
               Comprende la diferencia entre alta y baja volatilidad en las tragaperras y cómo afecta tu experiencia.
             </p>
-            <div class="mb-4">
-              <span class="inline-block bg-orange-100 text-orange-800 text-xs px-2 py-1 rounded mr-2">Comparativo</span>
-              <span class="inline-block bg-red-100 text-red-800 text-xs px-2 py-1 rounded mr-2">Gráficos</span>
-              <span class="inline-block bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded">Interactivo</span>
+            <div class="mb-6 flex flex-wrap gap-2">
+              <span class="tag tag-orange">Comparativo</span>
+              <span class="tag tag-red">Gráficos</span>
+              <span class="tag tag-yellow">Interactivo</span>
             </div>
             <a 
               href={getUrl('/slots/volatilidad')} 
-              class="inline-flex items-center w-full justify-center px-6 py-4 md:px-8 md:py-4 min-h-[48px] bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white font-semibold rounded-lg transition-all duration-200"
+              class="simulator-link bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600"
             >
               Analizar Volatilidad
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M12 5l7 7-7 7" />
               </svg>
             </a>
           </div>
         </div>
 
-        <!-- Payline Calculator - Now Available -->
-        <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden transform hover:scale-105">
-          <div class="h-48 bg-gradient-to-br from-green-400 to-blue-500 flex items-center justify-center relative">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-16 h-16 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01m3 0h.01m0-3h.01m-3 0h.01m3-3h.01m-3 0h.01M5 8a2 2 0 012-2h10a2 2 0 012 2v8a2 2 0 01-2 2H7a2 2 0 01-2-2V8z" />
-            </svg>
-            <div class="absolute top-4 right-4 bg-green-400 text-green-900 px-3 py-1 rounded-full text-sm font-bold">
+        <!-- Payline Calculator -->
+        <div class="simulator-card group">
+          <div class="simulator-card-header bg-gradient-to-br from-green-400 to-blue-500">
+            <div class="simulator-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01m3 0h.01m0-3h.01m-3 0h.01m3-3h.01m-3 0h.01M5 8a2 2 0 012-2h10a2 2 0 012 2v8a2 2 0 01-2 2H7a2 2 0 01-2-2V8z" />
+              </svg>
+            </div>
+            <div class="absolute top-4 right-4 bg-green-400 text-green-900 px-3 py-1 rounded-full text-sm font-bold new-badge">
               NUEVO
             </div>
           </div>
-          <div class="p-6">
-            <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-3">Calculadora de Líneas</h3>
-            <p class="text-gray-600 mb-4">
+          <div class="simulator-card-content">
+            <h3 class="text-2xl font-bold text-gray-900 mb-4">Calculadora de Líneas</h3>
+            <p class="text-gray-600 mb-6 leading-relaxed">
               Analiza cómo las líneas de pago afectan tus probabilidades y coste total por tirada.
             </p>
-            <div class="mb-4">
-              <span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded mr-2">Calculadora</span>
-              <span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded mr-2">Comparativo</span>
-              <span class="inline-block bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded">Educativo</span>
+            <div class="mb-6 flex flex-wrap gap-2">
+              <span class="tag tag-green">Calculadora</span>
+              <span class="tag tag-blue">Comparativo</span>
+              <span class="tag tag-purple">Educativo</span>
             </div>
             <a 
               href={getUrl('/slots/lineas-pago')} 
-              class="inline-flex items-center w-full justify-center px-6 py-4 md:px-8 md:py-4 min-h-[48px] bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600 text-white font-semibold rounded-lg transition-all duration-200"
+              class="simulator-link bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600"
             >
               Calcular Líneas
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M12 5l7 7-7 7" />
               </svg>
             </a>
@@ -128,53 +193,60 @@ import { getUrl } from '../../utils/links';
   </section>
 
   <!-- Educational Content -->
-  <section class="py-12 sm:py-16 md:py-20 lg:py-24 bg-white">
+  <section class="py-16 sm:py-20 md:py-24 lg:py-32 bg-white">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
       <div class="max-w-4xl mx-auto">
-        <div class="text-center mb-12 sm:mb-16">
-          <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">¿Cómo Funcionan las Tragaperras?</h2>
-          <p class="text-base sm:text-lg md:text-xl text-gray-600">
+        <div class="text-center mb-16 lg:mb-24">
+          <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 fade-in-up">
+            ¿Cómo Funcionan las 
+            <span class="bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+              Tragaperras?
+            </span>
+          </h2>
+          <p class="text-xl md:text-2xl text-gray-600 fade-in-up-delayed">
             Conoce la ciencia y las matemáticas detrás de las máquinas de casino
           </p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12 items-center mb-12 sm:mb-16">
-          <div>
-            <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-4">🎲 Generador de Números Aleatorios (RNG)</h3>
-            <p class="text-gray-600 mb-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-16 sm:mb-24">
+          <div class="fade-in-up">
+            <h3 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-6">🎲 Generador de Números Aleatorios (RNG)</h3>
+            <p class="text-gray-600 mb-6 text-lg leading-relaxed">
               Cada milisegundo, el RNG genera números completamente aleatorios que determinan el resultado de cada tirada. 
               Esto significa que no hay patrones, no hay "máquinas calientes" y no hay forma de predecir el resultado.
             </p>
-            <p class="text-gray-600">
-              <strong>Realidad:</strong> Tu resultado se decide en el momento exacto en que presionas el botón, 
-              no cuando los rodillos se detienen.
-            </p>
+            <div class="bg-blue-50 border-l-4 border-blue-400 p-4 rounded">
+              <p class="text-gray-700 font-semibold">
+                <strong>Realidad:</strong> Tu resultado se decide en el momento exacto en que presionas el botón, 
+                no cuando los rodillos se detienen.
+              </p>
+            </div>
           </div>
-          <div class="bg-gray-100 p-8 rounded-lg">
+          <div class="educational-card fade-in-up-delayed">
             <div class="text-center">
-              <div class="text-6xl mb-4">🎰</div>
-              <div class="text-sm text-gray-600 mb-2">Cada giro es independiente</div>
-              <div class="text-xs text-gray-500 mb-4">Los resultados anteriores NO afectan los siguientes</div>
-              <div class="mt-4 space-y-3">
-                <div class="grid grid-cols-3 gap-2">
-                  <div class="bg-gray-50 border-2 border-gray-300 h-14 rounded flex flex-col items-center justify-center relative overflow-hidden">
-                    <div class="text-2xl animate-pulse">🍒</div>
-                    <div class="text-xs text-gray-600">Perdió</div>
+              <div class="text-6xl mb-6 animate-bounce-slow">🎰</div>
+              <div class="text-lg text-gray-700 mb-4 font-semibold">Cada giro es independiente</div>
+              <div class="text-sm text-gray-500 mb-6">Los resultados anteriores NO afectan los siguientes</div>
+              <div class="mt-6 space-y-4">
+                <div class="grid grid-cols-3 gap-3">
+                  <div class="reel-demo reel-lose">
+                    <div class="text-3xl reel-symbol">🍒</div>
+                    <div class="text-xs text-gray-600 mt-1">Perdió</div>
                   </div>
-                  <div class="bg-gray-50 border-2 border-gray-300 h-14 rounded flex flex-col items-center justify-center relative overflow-hidden">
-                    <div class="text-2xl animate-pulse delay-150">🍋</div>
-                    <div class="text-xs text-gray-600">Perdió</div>
+                  <div class="reel-demo reel-lose">
+                    <div class="text-3xl reel-symbol">🍋</div>
+                    <div class="text-xs text-gray-600 mt-1">Perdió</div>
                   </div>
-                  <div class="bg-yellow-50 border-2 border-yellow-400 h-14 rounded flex flex-col items-center justify-center relative overflow-hidden">
-                    <div class="text-2xl animate-pulse delay-300">💰</div>
-                    <div class="text-xs text-yellow-700 font-bold">¡Ganó!</div>
+                  <div class="reel-demo reel-win">
+                    <div class="text-3xl reel-symbol">💰</div>
+                    <div class="text-xs text-yellow-700 font-bold mt-1">¡Ganó!</div>
                   </div>
                 </div>
-                <div class="text-xs text-gray-500 text-center">
+                <div class="text-sm text-gray-500 text-center">
                   Cada resultado es aleatorio - los anteriores NO predicen los siguientes
                 </div>
               </div>
-              <div class="mt-3 text-xs text-gray-500">
+              <div class="mt-4 text-sm text-gray-500">
                 <div class="flex justify-center items-center gap-2">
                   <span>🎲</span>
                   <span>Cada resultado es 100% aleatorio</span>
@@ -185,64 +257,68 @@ import { getUrl } from '../../utils/links';
           </div>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12 items-center mb-12 sm:mb-16">
-          <div class="bg-gray-100 p-8 rounded-lg order-2 md:order-1">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-16 sm:mb-24">
+          <div class="educational-card fade-in-up order-2 md:order-1">
             <div class="text-center">
-              <div class="text-6xl mb-4">📊</div>
-              <div class="text-lg font-bold text-red-600 mb-2">RTP: 95%</div>
-              <div class="text-sm text-gray-600 mb-4">Return to Player</div>
-              <div class="bg-red-500 h-4 rounded-full">
-                <div class="bg-green-500 h-4 rounded-full w-[95%]"></div>
+              <div class="text-6xl mb-6">📊</div>
+              <div class="text-2xl font-bold text-red-600 mb-4">RTP: <span class="counter" data-target="95">0</span>%</div>
+              <div class="text-lg text-gray-600 mb-6">Return to Player</div>
+              <div class="rtp-bar">
+                <div class="rtp-fill"></div>
               </div>
-              <div class="text-xs text-gray-500 mt-2">El casino se queda con 5% garantizado</div>
+              <div class="text-sm text-gray-500 mt-4">El casino se queda con 5% garantizado</div>
             </div>
           </div>
-          <div class="order-1 md:order-2">
-            <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-4">📈 Return to Player (RTP)</h3>
-            <p class="text-gray-600 mb-4">
+          <div class="order-1 md:order-2 fade-in-up-delayed">
+            <h3 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-6">📈 Return to Player (RTP)</h3>
+            <p class="text-gray-600 mb-6 text-lg leading-relaxed">
               El RTP es el porcentaje del dinero apostado que la máquina devuelve a los jugadores <strong>a muy largo plazo</strong>. 
               Un RTP del 95% significa que por cada €100 apostados, la máquina devuelve €95 en premios.
             </p>
-            <p class="text-gray-600">
-              <strong>Importante:</strong> Esto es una media estadística de millones de tiradas. 
-              En el corto plazo, puedes ganar mucho o perder todo.
-            </p>
+            <div class="bg-orange-50 border-l-4 border-orange-400 p-4 rounded">
+              <p class="text-gray-700 font-semibold">
+                <strong>Importante:</strong> Esto es una media estadística de millones de tiradas. 
+                En el corto plazo, puedes ganar mucho o perder todo.
+              </p>
+            </div>
           </div>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12 items-center">
-          <div>
-            <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-4">⚡ Volatilidad</h3>
-            <p class="text-gray-600 mb-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+          <div class="fade-in-up">
+            <h3 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-6">⚡ Volatilidad</h3>
+            <p class="text-gray-600 mb-6 text-lg leading-relaxed">
               La volatilidad determina la frecuencia y el tamaño de los premios:
             </p>
-            <ul class="text-gray-600 space-y-2">
-              <li><strong>Baja volatilidad:</strong> Premios pequeños y frecuentes</li>
-              <li><strong>Alta volatilidad:</strong> Premios grandes pero muy raros</li>
+            <ul class="text-gray-600 space-y-3 text-lg">
+              <li class="flex items-center"><span class="text-green-500 mr-2">✓</span><strong>Baja volatilidad:</strong> Premios pequeños y frecuentes</li>
+              <li class="flex items-center"><span class="text-red-500 mr-2">⚠</span><strong>Alta volatilidad:</strong> Premios grandes pero muy raros</li>
             </ul>
-            <p class="text-gray-600 mt-4">
-              <strong>Truco psicológico:</strong> Las máquinas de alta volatilidad crean más emoción 
-              y pueden generar más adicción debido a los "casi premios".
-            </p>
+            <div class="bg-red-50 border-l-4 border-red-400 p-4 rounded mt-6">
+              <p class="text-gray-700 font-semibold">
+                <strong>Truco psicológico:</strong> Las máquinas de alta volatilidad crean más emoción 
+                y pueden generar más adicción debido a los "casi premios".
+              </p>
+            </div>
           </div>
-          <div class="bg-gray-100 p-8 rounded-lg">
-            <div class="space-y-4">
+          <div class="educational-card fade-in-up-delayed">
+            <div class="space-y-6">
               <div>
-                <div class="flex justify-between text-sm mb-1">
+                <div class="flex justify-between text-sm mb-2 font-semibold">
                   <span>Baja Volatilidad</span>
-                  <span>Frecuente</span>
+                  <span class="text-green-600">Frecuente</span>
                 </div>
-                <div class="bg-green-200 h-3 rounded-full">
-                  <div class="bg-green-500 h-3 rounded-full w-[80%]"></div>
+                <div class="volatility-bar bg-green-200">
+                  <div class="volatility-fill bg-green-500 w-[80%]"></div>
                 </div>
               </div>
               <div>
-                <div class="flex justify-between text-sm mb-1">
+                <div class="flex justify-between text-sm mb-2 font-semibold">
                   <span>Alta Volatilidad</span>
-                  <span>Raro</span>
+                  <span class="text-red-600">Raro</span>
                 </div>
-                <div class="bg-red-200 h-3 rounded-full">
-                  <div class="bg-red-500 h-3 rounded-full w-[20%]"></div>
+                <div class="volatility-bar bg-red-200">
+                  <div class="volatility-fill bg-red-500 w-[20%]"></div>
                 </div>
               </div>
             </div>
@@ -253,29 +329,36 @@ import { getUrl } from '../../utils/links';
   </section>
 
   <!-- Warning Section -->
-  <section class="py-12 sm:py-16 bg-red-50">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="max-w-4xl mx-auto text-center">
-        <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-red-800 mb-6">⚠️ La Realidad que Debes Conocer</h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
-          <div class="bg-white p-4 sm:p-6 rounded-lg shadow-lg">
-            <div class="text-4xl mb-4">🏠</div>
-            <h3 class="text-base sm:text-lg font-bold text-gray-900 mb-2">La Casa Siempre Gana</h3>
-            <p class="text-gray-600 text-sm">
+  <section class="py-16 sm:py-20 bg-gradient-to-br from-red-50 to-pink-50 relative overflow-hidden">
+    <!-- Background decoration -->
+    <div class="absolute inset-0 opacity-5">
+      <div class="warning-pattern"></div>
+    </div>
+    
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="max-w-6xl mx-auto text-center">
+        <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-red-800 mb-8 fade-in-up">
+          ⚠️ La Realidad que Debes Conocer
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div class="warning-card group">
+            <div class="text-5xl mb-6 warning-icon">🏠</div>
+            <h3 class="text-xl font-bold text-gray-900 mb-4">La Casa Siempre Gana</h3>
+            <p class="text-gray-600 leading-relaxed">
               Las matemáticas garantizan que el casino obtenga beneficios. No hay sistema ni estrategia que pueda vencer esto.
             </p>
           </div>
-          <div class="bg-white p-4 sm:p-6 rounded-lg shadow-lg">
-            <div class="text-4xl mb-4">🧠</div>
-            <h3 class="text-base sm:text-lg font-bold text-gray-900 mb-2">Diseñadas para Adicción</h3>
-            <p class="text-gray-600 text-sm">
+          <div class="warning-card group">
+            <div class="text-5xl mb-6 warning-icon">🧠</div>
+            <h3 class="text-xl font-bold text-gray-900 mb-4">Diseñadas para Adicción</h3>
+            <p class="text-gray-600 leading-relaxed">
               Sonidos, luces y "casi premios" están diseñados para liberar dopamina y mantenerte jugando.
             </p>
           </div>
-          <div class="bg-white p-4 sm:p-6 rounded-lg shadow-lg">
-            <div class="text-4xl mb-4">💸</div>
-            <h3 class="text-base sm:text-lg font-bold text-gray-900 mb-2">Nunca una Inversión</h3>
-            <p class="text-gray-600 text-sm">
+          <div class="warning-card group">
+            <div class="text-5xl mb-6 warning-icon">💸</div>
+            <h3 class="text-xl font-bold text-gray-900 mb-4">Nunca una Inversión</h3>
+            <p class="text-gray-600 leading-relaxed">
               El juego debe ser entretenimiento, nunca una forma de ganar dinero o solucionar problemas financieros.
             </p>
           </div>
@@ -285,3 +368,488 @@ import { getUrl } from '../../utils/links';
   </section>
 
 </MainLayout>
+
+<style>
+  /* Typing Animation for Slots */
+  .typing-slots {
+    animation: typing-slots 2s ease-in-out;
+  }
+  
+  .slots-title-animation {
+    animation: fadeInUp 1s ease-out;
+  }
+  
+  @keyframes typing-slots {
+    0% { 
+      opacity: 0;
+      transform: translateX(-20px);
+    }
+    100% { 
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  /* Glow text effect */
+  .glow-text {
+    text-shadow: 0 0 20px rgba(253, 224, 71, 0.5);
+  }
+
+  /* Staggered Animations */
+  .staggered-fade-in {
+    animation: fadeInUp 1s ease-out 0.5s both;
+  }
+  
+  .staggered-fade-in-delayed {
+    animation: fadeInUp 1s ease-out 1s both;
+  }
+  
+  .fade-in-up {
+    animation: fadeInUp 1s ease-out;
+  }
+  
+  .fade-in-up-delayed {
+    animation: fadeInUp 1s ease-out 0.3s both;
+  }
+  
+  @keyframes fadeInUp {
+    0% {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Floating Casino Shapes */
+  .floating-casino-shapes {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+  
+  .casino-shape {
+    position: absolute;
+    font-size: 2rem;
+    opacity: 0.1;
+    animation: float-casino 8s ease-in-out infinite;
+  }
+  
+  .casino-shape-1 {
+    top: 10%;
+    left: 10%;
+    animation-delay: 0s;
+  }
+  
+  .casino-shape-2 {
+    top: 20%;
+    right: 15%;
+    animation-delay: 1s;
+  }
+  
+  .casino-shape-3 {
+    bottom: 30%;
+    left: 20%;
+    animation-delay: 2s;
+  }
+  
+  .casino-shape-4 {
+    top: 60%;
+    right: 25%;
+    animation-delay: 3s;
+  }
+  
+  .casino-shape-5 {
+    bottom: 20%;
+    right: 10%;
+    animation-delay: 4s;
+  }
+  
+  .casino-shape-6 {
+    top: 30%;
+    left: 70%;
+    animation-delay: 5s;
+  }
+  
+  @keyframes float-casino {
+    0%, 100% { 
+      transform: translateY(0) rotate(0deg); 
+      opacity: 0.1;
+    }
+    50% { 
+      transform: translateY(-30px) rotate(180deg); 
+      opacity: 0.2;
+    }
+  }
+
+  /* Grid Pattern */
+  .slots-grid-pattern {
+    background-image: 
+      linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+    background-size: 30px 30px;
+    width: 100%;
+    height: 100%;
+    animation: grid-move-slots 15s linear infinite;
+  }
+  
+  @keyframes grid-move-slots {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(30px, 30px); }
+  }
+
+  /* Counter Animation */
+  .counter {
+    transition: all 0.5s ease;
+  }
+
+  /* Simulator Cards */
+  .simulator-card {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    transition: all 0.5s ease;
+    animation: fadeInUp 0.8s ease-out;
+  }
+  
+  .simulator-card:nth-child(1) { animation-delay: 0.1s; }
+  .simulator-card:nth-child(2) { animation-delay: 0.2s; }
+  .simulator-card:nth-child(3) { animation-delay: 0.3s; }
+  
+  .simulator-card:hover {
+    transform: translateY(-15px) scale(1.02);
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
+  }
+  
+  .simulator-card-header {
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .simulator-card-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, rgba(255, 255, 255, 0.15), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+  }
+  
+  .simulator-card:hover .simulator-card-header::before {
+    transform: translateX(100%);
+  }
+  
+  .simulator-icon {
+    transform: scale(1);
+    transition: transform 0.4s ease;
+    z-index: 2;
+  }
+  
+  .simulator-card:hover .simulator-icon {
+    transform: scale(1.15) rotate(10deg);
+  }
+  
+  .simulator-card-content {
+    padding: 2rem;
+  }
+  
+  .simulator-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 1rem 2rem;
+    color: white;
+    font-weight: 600;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+  }
+
+  /* Tags */
+  .tag {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+  
+  .tag-indigo { background: #e0e7ff; color: #3730a3; }
+  .tag-purple { background: #f3e8ff; color: #581c87; }
+  .tag-green { background: #dcfce7; color: #166534; }
+  .tag-orange { background: #fed7aa; color: #9a3412; }
+  .tag-red { background: #fecaca; color: #991b1b; }
+  .tag-yellow { background: #fef3c7; color: #92400e; }
+  .tag-blue { background: #dbeafe; color: #1e40af; }
+
+  /* Badges */
+  .popular-badge, .new-badge {
+    animation: pulse-badge 2s infinite;
+  }
+  
+  @keyframes pulse-badge {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+  }
+
+  /* Educational Cards */
+  .educational-card {
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+  }
+  
+  .educational-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Reel Demo */
+  .reel-demo {
+    border-radius: 8px;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 80px;
+    transition: all 0.3s ease;
+  }
+  
+  .reel-lose {
+    background: #f3f4f6;
+    border: 2px solid #d1d5db;
+  }
+  
+  .reel-win {
+    background: #fef3c7;
+    border: 2px solid #f59e0b;
+    animation: glow-win 2s infinite;
+  }
+  
+  .reel-symbol {
+    animation: spin-symbol 3s ease-in-out infinite;
+  }
+  
+  @keyframes spin-symbol {
+    0%, 100% { transform: rotateY(0deg); }
+    50% { transform: rotateY(180deg); }
+  }
+  
+  @keyframes glow-win {
+    0%, 100% { box-shadow: 0 0 5px rgba(245, 158, 11, 0.5); }
+    50% { box-shadow: 0 0 20px rgba(245, 158, 11, 0.8); }
+  }
+
+  /* RTP Bar */
+  .rtp-bar {
+    background: #fecaca;
+    height: 1rem;
+    border-radius: 9999px;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .rtp-fill {
+    background: linear-gradient(90deg, #10b981, #3b82f6);
+    height: 100%;
+    width: 95%;
+    border-radius: 9999px;
+    animation: fill-rtp 3s ease-out;
+  }
+  
+  @keyframes fill-rtp {
+    0% { width: 0%; }
+    100% { width: 95%; }
+  }
+
+  /* Volatility Bar */
+  .volatility-bar {
+    height: 0.75rem;
+    border-radius: 9999px;
+    overflow: hidden;
+  }
+  
+  .volatility-fill {
+    height: 100%;
+    border-radius: 9999px;
+    animation: fill-volatility 2s ease-out;
+  }
+  
+  @keyframes fill-volatility {
+    0% { width: 0%; }
+  }
+
+  /* Warning Cards */
+  .warning-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    transition: all 0.5s ease;
+    animation: fadeInUp 0.8s ease-out;
+  }
+  
+  .warning-card:nth-child(1) { animation-delay: 0.1s; }
+  .warning-card:nth-child(2) { animation-delay: 0.2s; }
+  .warning-card:nth-child(3) { animation-delay: 0.3s; }
+  
+  .warning-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+  }
+  
+  .warning-icon {
+    transition: transform 0.3s ease;
+  }
+  
+  .warning-card:hover .warning-icon {
+    transform: scale(1.1) rotate(5deg);
+  }
+
+  /* Warning Pattern */
+  .warning-pattern {
+    background-image: 
+      linear-gradient(45deg, rgba(239, 68, 68, 0.1) 25%, transparent 25%),
+      linear-gradient(-45deg, rgba(239, 68, 68, 0.1) 25%, transparent 25%),
+      linear-gradient(45deg, transparent 75%, rgba(239, 68, 68, 0.1) 75%),
+      linear-gradient(-45deg, transparent 75%, rgba(239, 68, 68, 0.1) 75%);
+    background-size: 40px 40px;
+    background-position: 0 0, 0 20px, 20px -20px, -20px 0px;
+    width: 100%;
+    height: 100%;
+    animation: warning-move 20s linear infinite;
+  }
+  
+  @keyframes warning-move {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(40px, 40px); }
+  }
+
+  /* Bounce animation */
+  .animate-bounce-slow {
+    animation: bounce-slow 3s infinite;
+  }
+  
+  @keyframes bounce-slow {
+    0%, 100% {
+      transform: translateY(0);
+      animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+    }
+    50% {
+      transform: translateY(-10px);
+      animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+    }
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .simulator-card-content {
+      padding: 1.5rem;
+    }
+    
+    .educational-card {
+      padding: 1.5rem;
+    }
+    
+    .warning-card {
+      padding: 1.5rem;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Counter animation for stats
+    const counters = document.querySelectorAll('.counter');
+    const observerOptions = {
+      threshold: 0.5,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const counterObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const counter = entry.target;
+          const target = parseFloat(counter.getAttribute('data-target'));
+          const duration = 2000;
+          const start = performance.now();
+          
+          const animate = (currentTime) => {
+            const elapsed = currentTime - start;
+            const progress = Math.min(elapsed / duration, 1);
+            
+            const easeOutCubic = 1 - Math.pow(1 - progress, 3);
+            const current = target * easeOutCubic;
+            
+            if (target % 1 === 0) {
+              counter.textContent = Math.floor(current);
+            } else {
+              counter.textContent = current.toFixed(1);
+            }
+            
+            if (progress < 1) {
+              requestAnimationFrame(animate);
+            }
+          };
+          
+          requestAnimationFrame(animate);
+          counterObserver.unobserve(counter);
+        }
+      });
+    }, observerOptions);
+
+    counters.forEach(counter => {
+      counterObserver.observe(counter);
+    });
+
+    // Enhanced fade-in animations
+    const fadeElements = document.querySelectorAll('.fade-in-up, .fade-in-up-delayed');
+    const fadeObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.1 });
+
+    fadeElements.forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(40px)';
+      el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+      fadeObserver.observe(el);
+    });
+
+    // Reel symbol animation trigger
+    const reelSymbols = document.querySelectorAll('.reel-symbol');
+    const reelObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.animationPlayState = 'running';
+        }
+      });
+    }, { threshold: 0.5 });
+
+    reelSymbols.forEach(symbol => {
+      symbol.style.animationPlayState = 'paused';
+      reelObserver.observe(symbol);
+    });
+  });
+</script>

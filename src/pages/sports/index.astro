@@ -9,18 +9,66 @@ import { getUrl } from '../../utils/links';
 >
   
   <!-- Hero Section -->
-  <section class="bg-gradient-to-br from-green-600 via-blue-600 to-green-800 text-white py-12 sm:py-16 md:py-20 lg:py-24">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+  <section class="relative bg-gradient-to-br from-green-600 via-blue-700 to-green-800 text-white overflow-hidden">
+    <!-- Animated Background Elements -->
+    <div class="absolute inset-0 overflow-hidden">
+      <!-- Gradient overlay -->
+      <div class="absolute inset-0 bg-gradient-to-br from-green-900/30 via-blue-900/50 to-green-900/30"></div>
+      
+      <!-- Floating sports elements -->
+      <div class="floating-sports-shapes">
+        <div class="sports-shape sports-shape-1">🏆</div>
+        <div class="sports-shape sports-shape-2">⚽</div>
+        <div class="sports-shape sports-shape-3">🏀</div>
+        <div class="sports-shape sports-shape-4">🎾</div>
+        <div class="sports-shape sports-shape-5">🏈</div>
+        <div class="sports-shape sports-shape-6">📊</div>
+        <div class="sports-shape sports-shape-7">💰</div>
+        <div class="sports-shape sports-shape-8">📈</div>
+      </div>
+      
+      <!-- Animated sports pattern -->
+      <div class="absolute inset-0 opacity-5">
+        <div class="sports-grid-pattern"></div>
+      </div>
+    </div>
+
+    <div class="relative container mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 md:py-24 lg:py-32 text-center z-10">
       <div class="max-w-4xl mx-auto">
-        <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-          🏆 Apuestas Deportivas
+        <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-8 sports-title-animation">
+          <span class="inline-block">🏆</span>
+          <span class="typing-sports ml-4">Apuestas Deportivas</span>
         </h1>
-        <p class="text-lg sm:text-xl md:text-2xl lg:text-3xl mb-8 text-green-100 leading-relaxed">
-          Descubre por qué incluso acertando el 70% de tus apuestas 
-          <span class="text-yellow-300 font-semibold">puedes seguir perdiendo dinero</span>
-        </p>
-        <div class="bg-white/10 backdrop-blur-sm rounded-lg p-4 sm:p-6 max-w-2xl mx-auto">
-          <p class="text-green-100 text-base sm:text-lg">
+        <div class="staggered-fade-in">
+          <p class="text-lg sm:text-xl md:text-2xl lg:text-3xl mb-8 text-green-100 leading-relaxed">
+            Descubre por qué incluso acertando el 70% de tus apuestas 
+            <span class="text-yellow-300 font-semibold glow-text">puedes seguir perdiendo dinero</span>
+          </p>
+        </div>
+        
+        <!-- Quick stats -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-12 staggered-fade-in-delayed">
+          <div class="bg-white/10 backdrop-blur-sm rounded-lg p-4 hover:bg-white/20 transition-all duration-300">
+            <div class="text-2xl font-bold counter" data-target="96">0</div>
+            <div class="text-sm text-green-200">% Apostadores pierden</div>
+          </div>
+          <div class="bg-white/10 backdrop-blur-sm rounded-lg p-4 hover:bg-white/20 transition-all duration-300">
+            <div class="text-2xl font-bold counter" data-target="5">0</div>
+            <div class="text-sm text-green-200">% Margen Casa</div>
+          </div>
+          <div class="bg-white/10 backdrop-blur-sm rounded-lg p-4 hover:bg-white/20 transition-all duration-300">
+            <div class="text-2xl font-bold counter" data-target="65">0</div>
+            <div class="text-sm text-green-200">% Aciertos mínimo</div>
+          </div>
+          <div class="bg-white/10 backdrop-blur-sm rounded-lg p-4 hover:bg-white/20 transition-all duration-300">
+            <div class="text-2xl font-bold counter" data-target="2">0</div>
+            <div class="text-sm text-green-200">% ROI profesional</div>
+          </div>
+        </div>
+        
+        <!-- Hero info box -->
+        <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6 max-w-2xl mx-auto mt-8 hero-info-box">
+          <p class="text-green-100 text-lg font-medium">
             📊 <strong>Simuladores reales:</strong> Las matemáticas del betting deportivo
           </p>
         </div>
@@ -29,36 +77,53 @@ import { getUrl } from '../../utils/links';
   </section>
 
   <!-- Navigation Cards -->
-  <section class="py-12 sm:py-16 md:py-20 lg:py-24 bg-gray-50">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+  <section class="py-16 sm:py-20 md:py-24 lg:py-32 bg-gradient-to-b from-gray-50 to-white relative overflow-hidden">
+    <!-- Background decoration -->
+    <div class="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-green-600/5 to-transparent"></div>
+    
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="text-center mb-16 lg:mb-24">
+        <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 fade-in-up">
+          Simuladores 
+          <span class="bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent">
+            Reveladores
+          </span>
+        </h2>
+        <p class="text-xl md:text-2xl text-gray-600 max-w-4xl mx-auto leading-relaxed fade-in-up-delayed">
+          Herramientas interactivas que muestran la realidad matemática de las apuestas deportivas
+        </p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
         
         <!-- Profit Illusion Simulator - Main Feature -->
-        <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden transform hover:scale-105">
-          <div class="h-48 bg-gradient-to-br from-blue-600 to-indigo-700 flex items-center justify-center relative">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-16 h-16 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-            </svg>
-            <div class="absolute top-4 right-4 bg-blue-400 text-blue-900 px-3 py-1 rounded-full text-sm font-bold">
+        <div class="sports-card group">
+          <div class="sports-card-header bg-gradient-to-br from-blue-600 to-indigo-700">
+            <div class="sports-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+              </svg>
+            </div>
+            <div class="absolute top-4 right-4 bg-blue-400 text-blue-900 px-3 py-1 rounded-full text-sm font-bold revelador-badge">
               REVELADOR
             </div>
           </div>
-          <div class="p-6">
-            <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-3">📊 Ilusión de Ganancias</h3>
-            <p class="text-gray-600 mb-4">
+          <div class="sports-card-content">
+            <h3 class="text-2xl font-bold text-gray-900 mb-4">📊 Ilusión de Ganancias</h3>
+            <p class="text-gray-600 mb-6 leading-relaxed">
               Dos apostadores idénticos, misma habilidad, mismos aciertos. Solo cambian las cuotas. Descubre cómo el margen transforma ganancias en pérdidas.
             </p>
-            <div class="mb-4">
-              <span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded mr-2">Experimento Controlado</span>
-              <span class="inline-block bg-indigo-100 text-indigo-800 text-xs px-2 py-1 rounded mr-2">Comparación Visual</span>
-              <span class="inline-block bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded">Impacto del Margen</span>
+            <div class="mb-6 flex flex-wrap gap-2">
+              <span class="tag tag-blue">Experimento Controlado</span>
+              <span class="tag tag-indigo">Comparación Visual</span>
+              <span class="tag tag-purple">Impacto del Margen</span>
             </div>
             <a 
               href={getUrl('/sports/season-simulator')} 
-              class="inline-flex items-center w-full justify-center px-6 py-4 md:px-8 md:py-4 min-h-[48px] bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-semibold rounded-lg transition-all duration-200"
+              class="sports-link bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700"
             >
               Ver Experimento
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M12 5l7 7-7 7" />
               </svg>
             </a>
@@ -66,31 +131,33 @@ import { getUrl } from '../../utils/links';
         </div>
 
         <!-- Streak Simulator -->
-        <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden transform hover:scale-105">
-          <div class="h-48 bg-gradient-to-br from-green-600 to-emerald-700 flex items-center justify-center relative">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-16 h-16 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-            </svg>
-            <div class="absolute top-4 right-4 bg-green-400 text-green-900 px-3 py-1 rounded-full text-sm font-bold">
+        <div class="sports-card group">
+          <div class="sports-card-header bg-gradient-to-br from-green-600 to-emerald-700">
+            <div class="sports-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+              </svg>
+            </div>
+            <div class="absolute top-4 right-4 bg-green-400 text-green-900 px-3 py-1 rounded-full text-sm font-bold esencial-badge">
               ESENCIAL
             </div>
           </div>
-          <div class="p-6">
-            <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-3">📈 Simulador de Rachas</h3>
-            <p class="text-gray-600 mb-4">
+          <div class="sports-card-content">
+            <h3 class="text-2xl font-bold text-gray-900 mb-4">📈 Simulador de Rachas</h3>
+            <p class="text-gray-600 mb-6 leading-relaxed">
               ¿Tu racha de 10 aciertos demuestra habilidad? Simula 1000 apostadores aleatorios y descubre que las rachas son normales estadísticamente.
             </p>
-            <div class="mb-4">
-              <span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded mr-2">1000 Apostadores</span>
-              <span class="inline-block bg-emerald-100 text-emerald-800 text-xs px-2 py-1 rounded mr-2">Rachas Reales</span>
-              <span class="inline-block bg-teal-100 text-teal-800 text-xs px-2 py-1 rounded">Survival Bias</span>
+            <div class="mb-6 flex flex-wrap gap-2">
+              <span class="tag tag-green">1000 Apostadores</span>
+              <span class="tag tag-emerald">Rachas Reales</span>
+              <span class="tag tag-teal">Survival Bias</span>
             </div>
             <a 
               href={getUrl('/sports/streak-simulator')} 
-              class="inline-flex items-center w-full justify-center px-6 py-4 md:px-8 md:py-4 min-h-[48px] bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-semibold rounded-lg transition-all duration-200"
+              class="sports-link bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700"
             >
               Simular Rachas
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M12 5l7 7-7 7" />
               </svg>
             </a>
@@ -98,31 +165,33 @@ import { getUrl } from '../../utils/links';
         </div>
 
         <!-- Bankroll Manager -->
-        <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden transform hover:scale-105">
-          <div class="h-48 bg-gradient-to-br from-purple-600 to-purple-800 flex items-center justify-center relative">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-16 h-16 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01m3 0h.01m0-3h.01m-3 0h.01m3-3h.01m-3 0h.01M5 8a2 2 0 012-2h10a2 2 0 012 2v8a2 2 0 01-2 2H7a2 2 0 01-2-2V8z" />
-            </svg>
-            <div class="absolute top-4 right-4 bg-purple-400 text-purple-900 px-3 py-1 rounded-full text-sm font-bold">
+        <div class="sports-card group">
+          <div class="sports-card-header bg-gradient-to-br from-purple-600 to-purple-800">
+            <div class="sports-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01m3 0h.01m0-3h.01m-3 0h.01m3-3h.01m-3 0h.01M5 8a2 2 0 012-2h10a2 2 0 012 2v8a2 2 0 01-2 2H7a2 2 0 01-2-2V8z" />
+              </svg>
+            </div>
+            <div class="absolute top-4 right-4 bg-purple-400 text-purple-900 px-3 py-1 rounded-full text-sm font-bold avanzado-badge">
               AVANZADO
             </div>
           </div>
-          <div class="p-6">
-            <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-3">💰 Bankroll Manager</h3>
-            <p class="text-gray-600 mb-4">
+          <div class="sports-card-content">
+            <h3 class="text-2xl font-bold text-gray-900 mb-4">💰 Bankroll Manager</h3>
+            <p class="text-gray-600 mb-6 leading-relaxed">
               "Yo gestiono bien el dinero". Descubre por qué Kelly Criterion, gestión de riesgo y estrategias no pueden vencer las desventajas matemáticas.
             </p>
-            <div class="mb-4">
-              <span class="inline-block bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded mr-2">Kelly Criterion</span>
-              <span class="inline-block bg-pink-100 text-pink-800 text-xs px-2 py-1 rounded mr-2">Risk of Ruin</span>
-              <span class="inline-block bg-violet-100 text-violet-800 text-xs px-2 py-1 rounded">Limitaciones</span>
+            <div class="mb-6 flex flex-wrap gap-2">
+              <span class="tag tag-purple">Kelly Criterion</span>
+              <span class="tag tag-pink">Risk of Ruin</span>
+              <span class="tag tag-violet">Limitaciones</span>
             </div>
             <a 
               href={getUrl('/sports/bankroll-manager')} 
-              class="inline-flex items-center w-full justify-center px-6 py-4 md:px-8 md:py-4 min-h-[48px] bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-semibold rounded-lg transition-all duration-200"
+              class="sports-link bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700"
             >
               Gestionar Bankroll
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M12 5l7 7-7 7" />
               </svg>
             </a>
@@ -133,53 +202,105 @@ import { getUrl } from '../../utils/links';
   </section>
 
   <!-- Eye-Opening Stats -->
-  <section class="py-12 sm:py-16 bg-white">
+  <section class="py-16 sm:py-20 md:py-24 lg:py-32 bg-white">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
       <div class="max-w-4xl mx-auto">
-        <div class="text-center mb-8 sm:mb-12">
-          <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">🚨 Estadísticas Que Debes Conocer</h2>
-          <p class="text-base sm:text-lg md:text-xl text-gray-600">
+        <div class="text-center mb-16 lg:mb-24">
+          <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 fade-in-up">
+            🚨 Estadísticas Que 
+            <span class="bg-gradient-to-r from-red-600 to-orange-600 bg-clip-text text-transparent">
+              Debes Conocer
+            </span>
+          </h2>
+          <p class="text-xl md:text-2xl text-gray-600 fade-in-up-delayed">
             La realidad de las apuestas deportivas
           </p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 mb-8 sm:mb-12">
-          <div class="text-center">
-            <div class="text-3xl sm:text-4xl font-bold text-red-600 mb-2">96%</div>
-            <p class="text-gray-700 font-medium mb-2">De apostadores pierde dinero</p>
-            <p class="text-gray-500 text-sm">Solo 4% tiene beneficios a largo plazo</p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12 sm:mb-16">
+          <div class="stats-card group">
+            <div class="text-5xl font-bold text-red-600 mb-4 counter" data-target="96">0</div>
+            <div class="stats-symbol">%</div>
+            <p class="text-xl font-bold text-gray-900 mb-2">De apostadores pierde dinero</p>
+            <p class="text-gray-500">Solo 4% tiene beneficios a largo plazo</p>
           </div>
-          <div class="text-center">
-            <div class="text-3xl sm:text-4xl font-bold text-red-600 mb-2">5-10%</div>
-            <p class="text-gray-700 font-medium mb-2">Margen típico de la casa</p>
-            <p class="text-gray-500 text-sm">Ventaja matemática en cada apuesta</p>
+          <div class="stats-card group">
+            <div class="text-5xl font-bold text-red-600 mb-4"><span class="counter" data-target="5">0</span>-<span class="counter" data-target="10">0</span></div>
+            <div class="stats-symbol">%</div>
+            <p class="text-xl font-bold text-gray-900 mb-2">Margen típico de la casa</p>
+            <p class="text-gray-500">Ventaja matemática en cada apuesta</p>
           </div>
-          <div class="text-center">
-            <div class="text-3xl sm:text-4xl font-bold text-red-600 mb-2">2-5%</div>
-            <p class="text-gray-700 font-medium mb-2">ROI de profesionales</p>
-            <p class="text-gray-500 text-sm">Incluso los mejores ganan poco</p>
+          <div class="stats-card group">
+            <div class="text-5xl font-bold text-red-600 mb-4"><span class="counter" data-target="2">0</span>-<span class="counter" data-target="5">0</span></div>
+            <div class="stats-symbol">%</div>
+            <p class="text-xl font-bold text-gray-900 mb-2">ROI de profesionales</p>
+            <p class="text-gray-500">Incluso los mejores ganan poco</p>
           </div>
         </div>
 
-        <div class="bg-red-50 border border-red-200 rounded-lg p-4 sm:p-6">
-          <h3 class="text-lg sm:text-xl font-bold text-red-800 mb-4 text-center">⚠️ La Verdad Incómoda</h3>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 text-sm">
-            <div>
-              <h4 class="font-bold text-red-800 mb-2">Incluso Acertando Mucho...</h4>
-              <ul class="text-red-700 space-y-1">
-                <li>• 55% aciertos = Pierdes dinero</li>
-                <li>• 60% aciertos = Rompes tablas</li>
-                <li>• 65% aciertos = Ganancia mínima</li>
-                <li>• 70% aciertos = Muy difícil de mantener</li>
-              </ul>
+        <div class="reality-alert">
+          <h3 class="text-2xl font-bold text-red-800 mb-6 text-center">⚠️ La Verdad Incómoda</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="reality-section">
+              <h4 class="text-xl font-bold text-red-800 mb-4">Incluso Acertando Mucho...</h4>
+              <div class="accuracy-bars">
+                <div class="accuracy-item">
+                  <div class="flex justify-between mb-2">
+                    <span class="font-semibold">55% aciertos</span>
+                    <span class="text-red-600 font-bold">Pierdes dinero</span>
+                  </div>
+                  <div class="accuracy-bar bg-red-200">
+                    <div class="accuracy-fill bg-red-500 w-[55%]"></div>
+                  </div>
+                </div>
+                <div class="accuracy-item">
+                  <div class="flex justify-between mb-2">
+                    <span class="font-semibold">60% aciertos</span>
+                    <span class="text-orange-600 font-bold">Rompes tablas</span>
+                  </div>
+                  <div class="accuracy-bar bg-orange-200">
+                    <div class="accuracy-fill bg-orange-500 w-[60%]"></div>
+                  </div>
+                </div>
+                <div class="accuracy-item">
+                  <div class="flex justify-between mb-2">
+                    <span class="font-semibold">65% aciertos</span>
+                    <span class="text-yellow-600 font-bold">Ganancia mínima</span>
+                  </div>
+                  <div class="accuracy-bar bg-yellow-200">
+                    <div class="accuracy-fill bg-yellow-500 w-[65%]"></div>
+                  </div>
+                </div>
+                <div class="accuracy-item">
+                  <div class="flex justify-between mb-2">
+                    <span class="font-semibold">70% aciertos</span>
+                    <span class="text-green-600 font-bold">Muy difícil mantener</span>
+                  </div>
+                  <div class="accuracy-bar bg-green-200">
+                    <div class="accuracy-fill bg-green-500 w-[70%]"></div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div>
-              <h4 class="font-bold text-red-800 mb-2">¿Por Qué Es Tan Difícil?</h4>
-              <ul class="text-red-700 space-y-1">
-                <li>• Margen de la casa (5-10%)</li>
-                <li>• Varianza y rachas malas</li>
-                <li>• Sesgo de confirmación</li>
-                <li>• Gestión emocional</li>
+            <div class="reality-section">
+              <h4 class="text-xl font-bold text-red-800 mb-4">¿Por Qué Es Tan Difícil?</h4>
+              <ul class="text-red-700 space-y-3">
+                <li class="flex items-center">
+                  <span class="text-red-500 mr-3 text-xl">⚠</span>
+                  <span><strong>Margen de la casa</strong> (5-10%)</span>
+                </li>
+                <li class="flex items-center">
+                  <span class="text-red-500 mr-3 text-xl">📉</span>
+                  <span><strong>Varianza</strong> y rachas malas</span>
+                </li>
+                <li class="flex items-center">
+                  <span class="text-red-500 mr-3 text-xl">🧠</span>
+                  <span><strong>Sesgo de confirmación</strong></span>
+                </li>
+                <li class="flex items-center">
+                  <span class="text-red-500 mr-3 text-xl">😰</span>
+                  <span><strong>Gestión emocional</strong></span>
+                </li>
               </ul>
             </div>
           </div>
@@ -189,29 +310,67 @@ import { getUrl } from '../../utils/links';
   </section>
 
   <!-- Educational Content -->
-  <section class="py-12 sm:py-16 bg-gray-50">
-    <div class="container mx-auto px-4">
-      <div class="max-w-4xl mx-auto">
-        <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center text-gray-900 mb-8 sm:mb-12">🎓 Lo Que Aprenderás</h2>
+  <section class="py-16 sm:py-20 md:py-24 bg-gradient-to-br from-gray-50 to-gray-100 relative overflow-hidden">
+    <!-- Background decoration -->
+    <div class="absolute inset-0 opacity-5">
+      <div class="education-pattern"></div>
+    </div>
+    
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-16 lg:mb-24">
+          <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-6 fade-in-up">
+            🎓 Lo Que 
+            <span class="bg-gradient-to-r from-blue-600 to-green-600 bg-clip-text text-transparent">
+              Aprenderás
+            </span>
+          </h2>
+        </div>
         
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
-          <div class="bg-blue-50 border-l-4 border-blue-400 p-4 sm:p-6 rounded">
-            <h3 class="text-xl font-bold text-blue-800 mb-3">📊 Matemáticas Reales</h3>
-            <ul class="text-blue-700 space-y-2 text-sm">
-              <li><strong>• Margen de la casa</strong> - Cómo se calcula el "juice"</li>
-              <li><strong>• Probabilidades implícitas</strong> - Qué significan las cuotas realmente</li>
-              <li><strong>• Valor esperado</strong> - Por qué pierdes incluso acertando</li>
-              <li><strong>• Varianza</strong> - Por qué las rachas no significan habilidad</li>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div class="education-card group">
+            <div class="text-5xl mb-6 education-icon">📊</div>
+            <h3 class="text-2xl font-bold text-blue-800 mb-4">Matemáticas Reales</h3>
+            <ul class="text-blue-700 space-y-3">
+              <li class="flex items-start">
+                <span class="text-blue-500 mr-2 mt-1">•</span>
+                <span><strong>Margen de la casa</strong> - Cómo se calcula el "juice"</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-blue-500 mr-2 mt-1">•</span>
+                <span><strong>Probabilidades implícitas</strong> - Qué significan las cuotas realmente</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-blue-500 mr-2 mt-1">•</span>
+                <span><strong>Valor esperado</strong> - Por qué pierdes incluso acertando</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-blue-500 mr-2 mt-1">•</span>
+                <span><strong>Varianza</strong> - Por qué las rachas no significan habilidad</span>
+              </li>
             </ul>
           </div>
           
-          <div class="bg-red-50 border-l-4 border-red-400 p-4 sm:p-6 rounded">
-            <h3 class="text-xl font-bold text-red-800 mb-3">🧠 Sesgos Mentales</h3>
-            <ul class="text-red-700 space-y-2 text-sm">
-              <li><strong>• Sesgo de confirmación</strong> - Solo recuerdas los aciertos</li>
-              <li><strong>• Survival bias</strong> - Solo oyes de los ganadores</li>
-              <li><strong>• Gamblers fallacy</strong> - "Esta vez será diferente"</li>
-              <li><strong>• Overconfidence</strong> - Sobreestimar tu habilidad</li>
+          <div class="education-card group">
+            <div class="text-5xl mb-6 education-icon">🧠</div>
+            <h3 class="text-2xl font-bold text-red-800 mb-4">Sesgos Mentales</h3>
+            <ul class="text-red-700 space-y-3">
+              <li class="flex items-start">
+                <span class="text-red-500 mr-2 mt-1">•</span>
+                <span><strong>Sesgo de confirmación</strong> - Solo recuerdas los aciertos</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-red-500 mr-2 mt-1">•</span>
+                <span><strong>Survival bias</strong> - Solo oyes de los ganadores</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-red-500 mr-2 mt-1">•</span>
+                <span><strong>Gamblers fallacy</strong> - "Esta vez será diferente"</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-red-500 mr-2 mt-1">•</span>
+                <span><strong>Overconfidence</strong> - Sobreestimar tu habilidad</span>
+              </li>
             </ul>
           </div>
         </div>
@@ -220,30 +379,42 @@ import { getUrl } from '../../utils/links';
   </section>
 
   <!-- Final CTA -->
-  <section class="py-12 sm:py-16 bg-green-600">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+  <section class="py-16 sm:py-20 bg-gradient-to-r from-green-600 via-blue-600 to-green-700 relative overflow-hidden">
+    <!-- Background effects -->
+    <div class="absolute inset-0 bg-black/10"></div>
+    <div class="absolute inset-0 opacity-20">
+      <div class="floating-cta-shapes">
+        <div class="cta-shape cta-shape-1"></div>
+        <div class="cta-shape cta-shape-2"></div>
+        <div class="cta-shape cta-shape-3"></div>
+      </div>
+    </div>
+    
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
       <div class="max-w-3xl mx-auto">
-        <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-6">🎯 Usa Los 3 Simuladores</h2>
-        <p class="text-base sm:text-lg md:text-xl text-green-100 mb-8">
+        <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-8 fade-in-up">
+          🎯 Usa Los 3 Simuladores
+        </h2>
+        <p class="text-xl md:text-2xl text-green-100 mb-12 leading-relaxed fade-in-up-delayed">
           No arriesgues dinero real. Usa nuestros simuladores para entender las matemáticas 
           y los sesgos psicológicos antes de apostar tu dinero real.
         </p>
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3 max-w-3xl mx-auto">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-3xl mx-auto staggered-fade-in">
           <a 
             href={getUrl('/sports/season-simulator')} 
-            class="bg-white hover:bg-gray-100 text-green-600 font-bold py-3 px-4 min-h-[48px] rounded-lg transition-all duration-200 text-center text-sm"
+            class="cta-button bg-white hover:bg-gray-100 text-green-600"
           >
             📊 Ilusión
           </a>
           <a 
             href={getUrl('/sports/streak-simulator')} 
-            class="bg-green-700 hover:bg-green-800 text-white font-bold py-3 px-4 min-h-[48px] rounded-lg transition-all duration-200 text-center text-sm"
+            class="cta-button bg-green-700 hover:bg-green-800 text-white"
           >
             📈 Rachas
           </a>
           <a 
             href={getUrl('/sports/bankroll-manager')} 
-            class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-4 min-h-[48px] rounded-lg transition-all duration-200 text-center text-sm"
+            class="cta-button bg-green-600 hover:bg-green-700 text-white"
           >
             💰 Bankroll
           </a>
@@ -253,3 +424,538 @@ import { getUrl } from '../../utils/links';
   </section>
 
 </MainLayout>
+
+<style>
+  /* Typing Animation for Sports */
+  .typing-sports {
+    animation: typing-sports 2.5s ease-in-out;
+  }
+  
+  .sports-title-animation {
+    animation: fadeInUp 1s ease-out;
+  }
+  
+  @keyframes typing-sports {
+    0% { 
+      opacity: 0;
+      transform: translateX(-20px);
+    }
+    100% { 
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  /* Glow text effect */
+  .glow-text {
+    text-shadow: 0 0 20px rgba(253, 224, 71, 0.6);
+  }
+
+  /* Staggered Animations */
+  .staggered-fade-in {
+    animation: fadeInUp 1s ease-out 0.5s both;
+  }
+  
+  .staggered-fade-in-delayed {
+    animation: fadeInUp 1s ease-out 1s both;
+  }
+  
+  .fade-in-up {
+    animation: fadeInUp 1s ease-out;
+  }
+  
+  .fade-in-up-delayed {
+    animation: fadeInUp 1s ease-out 0.3s both;
+  }
+  
+  @keyframes fadeInUp {
+    0% {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Hero Info Box */
+  .hero-info-box {
+    animation: fadeInUp 1s ease-out 1.5s both;
+  }
+
+  /* Floating Sports Shapes */
+  .floating-sports-shapes {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+  
+  .sports-shape {
+    position: absolute;
+    font-size: 2rem;
+    opacity: 0.12;
+    animation: float-sports 12s ease-in-out infinite;
+  }
+  
+  .sports-shape-1 {
+    top: 10%;
+    left: 8%;
+    animation-delay: 0s;
+  }
+  
+  .sports-shape-2 {
+    top: 25%;
+    right: 12%;
+    animation-delay: 1.5s;
+  }
+  
+  .sports-shape-3 {
+    bottom: 35%;
+    left: 15%;
+    animation-delay: 3s;
+  }
+  
+  .sports-shape-4 {
+    top: 55%;
+    right: 20%;
+    animation-delay: 4.5s;
+  }
+  
+  .sports-shape-5 {
+    bottom: 15%;
+    right: 8%;
+    animation-delay: 6s;
+  }
+  
+  .sports-shape-6 {
+    top: 35%;
+    left: 65%;
+    animation-delay: 7.5s;
+  }
+  
+  .sports-shape-7 {
+    bottom: 45%;
+    left: 75%;
+    animation-delay: 2s;
+  }
+  
+  .sports-shape-8 {
+    top: 70%;
+    left: 40%;
+    animation-delay: 5s;
+  }
+  
+  @keyframes float-sports {
+    0%, 100% { 
+      transform: translateY(0) rotate(0deg) scale(1); 
+      opacity: 0.12;
+    }
+    25% { 
+      transform: translateY(-20px) rotate(90deg) scale(1.1); 
+      opacity: 0.18;
+    }
+    50% { 
+      transform: translateY(10px) rotate(180deg) scale(0.9); 
+      opacity: 0.15;
+    }
+    75% { 
+      transform: translateY(-15px) rotate(270deg) scale(1.05); 
+      opacity: 0.20;
+    }
+  }
+
+  /* Sports Grid Pattern */
+  .sports-grid-pattern {
+    background-image: 
+      linear-gradient(45deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+      linear-gradient(-45deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+    background-size: 25px 25px;
+    width: 100%;
+    height: 100%;
+    animation: sports-grid-move 20s linear infinite;
+  }
+  
+  @keyframes sports-grid-move {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(25px, 25px); }
+  }
+
+  /* Counter Animation */
+  .counter {
+    transition: all 0.5s ease;
+  }
+
+  /* Sports Cards */
+  .sports-card {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    transition: all 0.5s ease;
+    animation: fadeInUp 0.8s ease-out;
+  }
+  
+  .sports-card:nth-child(1) { animation-delay: 0.1s; }
+  .sports-card:nth-child(2) { animation-delay: 0.2s; }
+  .sports-card:nth-child(3) { animation-delay: 0.3s; }
+  
+  .sports-card:hover {
+    transform: translateY(-15px) scale(1.02);
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
+  }
+  
+  .sports-card-header {
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .sports-card-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, rgba(255, 255, 255, 0.15), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+  }
+  
+  .sports-card:hover .sports-card-header::before {
+    transform: translateX(100%);
+  }
+  
+  .sports-icon {
+    transform: scale(1);
+    transition: transform 0.4s ease;
+    z-index: 2;
+  }
+  
+  .sports-card:hover .sports-icon {
+    transform: scale(1.15) rotate(10deg);
+  }
+  
+  .sports-card-content {
+    padding: 2rem;
+  }
+  
+  .sports-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 1rem 2rem;
+    color: white;
+    font-weight: 600;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+  }
+
+  /* Tags */
+  .tag {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+  
+  .tag-blue { background: #dbeafe; color: #1e40af; }
+  .tag-indigo { background: #e0e7ff; color: #3730a3; }
+  .tag-purple { background: #f3e8ff; color: #581c87; }
+  .tag-green { background: #dcfce7; color: #166534; }
+  .tag-emerald { background: #d1fae5; color: #065f46; }
+  .tag-teal { background: #ccfbf1; color: #134e4a; }
+  .tag-pink { background: #fce7f3; color: #be185d; }
+  .tag-violet { background: #ede9fe; color: #5b21b6; }
+
+  /* Badges */
+  .revelador-badge, .esencial-badge, .avanzado-badge {
+    animation: pulse-badge 2s infinite;
+  }
+  
+  @keyframes pulse-badge {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+  }
+
+  /* Stats Cards */
+  .stats-card {
+    text-align: center;
+    padding: 2rem;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    transition: all 0.5s ease;
+    animation: fadeInUp 0.8s ease-out;
+  }
+  
+  .stats-card:nth-child(1) { animation-delay: 0.1s; }
+  .stats-card:nth-child(2) { animation-delay: 0.2s; }
+  .stats-card:nth-child(3) { animation-delay: 0.3s; }
+  
+  .stats-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+  }
+  
+  .stats-symbol {
+    font-size: 2rem;
+    font-weight: 900;
+    opacity: 0.7;
+    display: inline;
+    margin-left: 0.2rem;
+  }
+
+  /* Reality Alert */
+  .reality-alert {
+    background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+    border: 2px solid #fca5a5;
+    border-radius: 16px;
+    padding: 2rem;
+    animation: fadeInUp 0.8s ease-out 0.5s both;
+  }
+  
+  .reality-section {
+    background: rgba(255, 255, 255, 0.7);
+    padding: 1.5rem;
+    border-radius: 12px;
+  }
+
+  /* Accuracy Bars */
+  .accuracy-item {
+    margin-bottom: 1rem;
+  }
+  
+  .accuracy-bar {
+    height: 0.75rem;
+    border-radius: 9999px;
+    overflow: hidden;
+  }
+  
+  .accuracy-fill {
+    height: 100%;
+    border-radius: 9999px;
+    animation: fill-accuracy 2s ease-out;
+  }
+  
+  @keyframes fill-accuracy {
+    0% { width: 0%; }
+  }
+
+  /* Education Cards */
+  .education-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    transition: all 0.5s ease;
+    animation: fadeInUp 0.8s ease-out;
+  }
+  
+  .education-card:nth-child(1) { animation-delay: 0.1s; }
+  .education-card:nth-child(2) { animation-delay: 0.2s; }
+  
+  .education-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+  }
+  
+  .education-icon {
+    transition: transform 0.3s ease;
+  }
+  
+  .education-card:hover .education-icon {
+    transform: scale(1.1) rotate(5deg);
+  }
+
+  /* Education Pattern */
+  .education-pattern {
+    background-image: 
+      radial-gradient(circle at 25% 25%, rgba(34, 197, 94, 0.1) 25%, transparent 25%),
+      radial-gradient(circle at 75% 75%, rgba(59, 130, 246, 0.1) 25%, transparent 25%);
+    background-size: 50px 50px;
+    width: 100%;
+    height: 100%;
+    animation: education-move 25s linear infinite;
+  }
+  
+  @keyframes education-move {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(50px, 50px); }
+  }
+
+  /* CTA Floating Shapes */
+  .floating-cta-shapes {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .cta-shape {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    animation: float-cta 8s ease-in-out infinite;
+  }
+  
+  .cta-shape-1 {
+    width: 80px;
+    height: 80px;
+    top: 20%;
+    left: 10%;
+    animation-delay: 0s;
+  }
+  
+  .cta-shape-2 {
+    width: 60px;
+    height: 60px;
+    top: 70%;
+    right: 15%;
+    animation-delay: 2s;
+  }
+  
+  .cta-shape-3 {
+    width: 100px;
+    height: 100px;
+    bottom: 20%;
+    left: 70%;
+    animation-delay: 4s;
+  }
+  
+  @keyframes float-cta {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-20px) scale(1.1); }
+  }
+
+  /* CTA Buttons */
+  .cta-button {
+    font-weight: bold;
+    padding: 1rem 1.5rem;
+    min-height: 64px;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translateY(0);
+  }
+  
+  .cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .sports-card-content {
+      padding: 1.5rem;
+    }
+    
+    .stats-card {
+      padding: 1.5rem;
+    }
+    
+    .education-card {
+      padding: 1.5rem;
+    }
+    
+    .reality-alert {
+      padding: 1.5rem;
+    }
+    
+    .reality-section {
+      padding: 1rem;
+      margin-bottom: 1rem;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Counter animation for stats
+    const counters = document.querySelectorAll('.counter');
+    const observerOptions = {
+      threshold: 0.5,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const counterObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const counter = entry.target;
+          const target = parseFloat(counter.getAttribute('data-target'));
+          const duration = 2000;
+          const start = performance.now();
+          
+          const animate = (currentTime) => {
+            const elapsed = currentTime - start;
+            const progress = Math.min(elapsed / duration, 1);
+            
+            const easeOutCubic = 1 - Math.pow(1 - progress, 3);
+            const current = target * easeOutCubic;
+            
+            if (target % 1 === 0) {
+              counter.textContent = Math.floor(current);
+            } else {
+              counter.textContent = current.toFixed(1);
+            }
+            
+            if (progress < 1) {
+              requestAnimationFrame(animate);
+            }
+          };
+          
+          requestAnimationFrame(animate);
+          counterObserver.unobserve(counter);
+        }
+      });
+    }, observerOptions);
+
+    counters.forEach(counter => {
+      counterObserver.observe(counter);
+    });
+
+    // Enhanced fade-in animations
+    const fadeElements = document.querySelectorAll('.fade-in-up, .fade-in-up-delayed');
+    const fadeObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.1 });
+
+    fadeElements.forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(40px)';
+      el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+      fadeObserver.observe(el);
+    });
+
+    // Accuracy bar animation trigger
+    const accuracyBars = document.querySelectorAll('.accuracy-fill');
+    const accuracyObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.animationPlayState = 'running';
+        }
+      });
+    }, { threshold: 0.5 });
+
+    accuracyBars.forEach(bar => {
+      bar.style.animationPlayState = 'paused';
+      accuracyObserver.observe(bar);
+    });
+  });
+</script>
