@@ -1,0 +1,20 @@
+---
+import type { Lang } from '../i18n';
+/** Collapsible technical detail. Closed in plain mode, open in technical mode. */
+interface Props {
+  lang: Lang;
+  title?: string;
+}
+const { lang, title } = Astro.props;
+const label = title ?? (lang === 'es' ? 'La parte técnica' : 'The technical part');
+---
+
+<details class="techbox" data-techbox>
+  <summary>
+    <span class="tb-tag">{lang === 'es' ? 'Técnico' : 'Technical'}</span>
+    <span class="tb-title">{label}</span>
+  </summary>
+  <div class="tb-body">
+    <slot />
+  </div>
+</details>

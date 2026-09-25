@@ -2,17 +2,21 @@
 interface Props {
   title: string;
   sub?: string;
+  /** subtitle for technical mode (falls back to `sub`) */
+  subTech?: string;
   foot?: string;
   wide?: boolean;
   id?: string;
 }
-const { title, sub, foot, wide = true, id } = Astro.props;
+const { title, sub, subTech, foot, wide = true, id } = Astro.props;
 ---
 
 <figure class:list={['figure', wide ? 'wide' : 'measure']} id={id}>
   <figcaption class="figure-head">
     <p class="figure-title">{title}</p>
-    {sub && <p class="figure-sub">{sub}</p>}
+    {sub && !subTech && <p class="figure-sub">{sub}</p>}
+    {sub && subTech && <p class="figure-sub only-simple">{sub}</p>}
+    {subTech && <p class="figure-sub only-tech">{subTech}</p>}
   </figcaption>
   <slot />
   {foot && <p class="figure-foot" set:html={foot} />}

@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import PageHead from '../components/PageHead.astro';
+import TechBox from '../components/TechBox.astro';
 import GamesCost, { GAME_ROWS } from '../islands/GamesCost';
 import { type Lang, fmt, href } from '../i18n';
 import summary from '../data/odds/summary.json';
@@ -50,6 +51,7 @@ const maxEdge = Math.max(...GAME_ROWS.map((g) => g.edge));
     : 'The house edge of every game, from lotteries to blackjack, and what it costs to play at your pace.'}
 >
   <PageHead
+    lang={lang}
     kicker={es ? 'Guía de juegos' : 'Game guide'}
     title={es ? 'Cada juego tiene un precio' : 'Every game has a price'}
     lede={es
@@ -103,6 +105,29 @@ const maxEdge = Math.max(...GAME_ROWS.map((g) => g.edge));
         {es ? ' y ' : ' and '}<a href="https://www.labrujadeoro.es/loteria-nacional-premios.htm">Lotería Nacional</a>.
         {es ? ' Blackjack y baccarat: valores habituales, que dependen de las reglas de la mesa.' : ' Blackjack and baccarat: typical values that depend on table rules.'}
       </p>
+      <TechBox lang={lang} title={es ? 'Cómo se calcula cada ventaja' : 'How each edge is calculated'}>
+        {
+          es ? (
+            <ul>
+              <li><strong>Ruleta europea:</strong> una apuesta a un número paga 35 a 1 con probabilidad 1/37: E = 35·(1/37) − 36/37 = −1/37 ≈ −2,70 %. Todas las apuestas de la mesa tienen la misma esperanza. Americana: −2/38 ≈ −5,26 %.</li>
+              <li><strong>Dados, línea de pase:</strong> P(ganar) = 244/495, así que E = 244/495 − 251/495 = −7/495 ≈ −1,41 %.</li>
+              <li><strong>Apuesta deportiva:</strong> con margen m, lo que devuelve cada euro es 1/(1+m); la ventaja es m/(1+m). Con el margen mediano de nuestros datos, {f.pct(summary.medianMargin / (1 + summary.medianMargin), 2)}.</li>
+              <li><strong>Combinadas de k partidos:</strong> las cuotas se multiplican y el retorno también: 1 − (1/(1+m))<sup>k</sup>.</li>
+              <li><strong>Loterías:</strong> ventaja = 1 − fracción de la recaudación destinada a premios.</li>
+              <li><strong>Calculadora:</strong> pérdida esperada = ventaja × apuesta × apuestas por hora × horas. Es una media: el resultado real de una persona varía mucho alrededor de ella, como se ve en el <a href={href(lang, 'lab')}>Laboratorio</a>.</li>
+            </ul>
+          ) : (
+            <ul>
+              <li><strong>European roulette:</strong> a straight-up bet pays 35 to 1 with probability 1/37: E = 35·(1/37) − 36/37 = −1/37 ≈ −2.70%. Every bet on the table has the same expectation. American: −2/38 ≈ −5.26%.</li>
+              <li><strong>Craps, pass line:</strong> P(win) = 244/495, so E = 244/495 − 251/495 = −7/495 ≈ −1.41%.</li>
+              <li><strong>Sports bet:</strong> with overround m, each euro pays back 1/(1+m); the edge is m/(1+m). With the median margin in our data, {f.pct(summary.medianMargin / (1 + summary.medianMargin), 2)}.</li>
+              <li><strong>k-leg accumulators:</strong> odds multiply and so do returns: 1 − (1/(1+m))<sup>k</sup>.</li>
+              <li><strong>Lotteries:</strong> edge = 1 − share of sales paid out as prizes.</li>
+              <li><strong>Calculator:</strong> expected loss = edge × stake × bets per hour × hours. It is an average: one person’s actual result varies widely around it, as the <a href={href(lang, 'lab')}>Lab</a> shows.</li>
+            </ul>
+          )
+        }
+      </TechBox>
     </section>
 
     <article class="measure prose">

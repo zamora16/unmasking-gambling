@@ -12,6 +12,8 @@
 
 Most prevention messages say that gambling is risky. This site shows *why*, with simulations you can run and real data you can check.
 
+It is written for everyone. Every page has a **plain mode** (the default: ideas explained without jargon) and a **technical mode** that reveals the formulas, statistical methods and code behind each chart.
+
 ## What's inside
 
 | Section | What it does | Techniques |

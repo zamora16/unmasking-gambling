@@ -1,0 +1,5 @@
+---
+/** Text shown only in technical mode. */
+const { block = false } = Astro.props as { block?: boolean };
+---
+{block ? <div class="only-tech"><slot /></div> : <span class="only-tech"><slot /></span>}

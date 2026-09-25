@@ -543,3 +543,89 @@ p {
   color: var(--accent-ink);
   font-size: 0.9rem;
 }
+
+/* ---- reading modes: plain (default) and technical ---- */
+:root:not([data-mode='tech']) .only-tech,
+:root[data-mode='tech'] .only-simple {
+  display: none !important;
+}
+.techbox {
+  font-family: var(--sans);
+  font-size: 0.93rem;
+  line-height: 1.6;
+  color: var(--ink-2);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  background: var(--paper-2);
+  margin: 1.6rem 0;
+}
+.techbox summary {
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.75rem 1rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+.techbox summary::-webkit-details-marker {
+  display: none;
+}
+.techbox summary::after {
+  content: '+';
+  margin-left: auto;
+  font-family: var(--mono);
+  color: var(--ink-3);
+}
+.techbox[open] summary::after {
+  content: '–';
+}
+.tb-tag {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--series-1);
+  border: 1px solid currentColor;
+  border-radius: 4px;
+  padding: 0.05rem 0.35rem;
+}
+.tb-body {
+  padding: 0 1rem 0.9rem;
+}
+.tb-body p:last-child,
+.tb-body ul:last-child {
+  margin-bottom: 0;
+}
+.tb-body ul {
+  padding-left: 1.1rem;
+}
+.tb-body code,
+.tb-body .formula {
+  font-family: var(--mono);
+  font-size: 0.85em;
+}
+.tb-body .formula {
+  display: block;
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  padding: 0.6rem 0.8rem;
+  margin: 0.6rem 0;
+  overflow-x: auto;
+}
+.plain-box {
+  font-family: var(--sans);
+  font-size: 1rem;
+  line-height: 1.55;
+  background: color-mix(in srgb, var(--series-3) 9%, var(--paper));
+  border-left: 3px solid var(--series-3);
+  border-radius: 0 8px 8px 0;
+  padding: 0.9rem 1.1rem;
+  margin: 1.5rem 0;
+}
+.plain-box strong {
+  font-weight: 700;
+}

@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import LineChart from '../charts/LineChart';
 import Columns from '../charts/Columns';
-import { DataTable } from '../charts/core';
+import { DataTable, Dual } from '../charts/core';
 import type { RuinResult, Strategy } from '../lib/montecarlo';
 import { GAMES, houseEdge, type GameId } from '../lib/games';
 import { fmt, type Lang } from '../i18n';
@@ -35,13 +35,15 @@ const T = {
       { key: 'fair', label: 'Sin ventaja de la casa' },
     ],
     edge: 'Ventaja de la casa',
+    edgePlain: (x: string) => `De cada 100 € apostados, la casa se queda ${x} de media.`,
     ruined: 'Se arruinaron',
     ahead: 'Terminaron ganando',
     median: 'Resultado mediano',
     avgLoss: 'Pérdida media',
     expected: 'predicha por la ventaja',
     fanTitle: 'Cómo evoluciona el dinero de todos los jugadores',
-    fanSub: (n: string) => `Cada línea fina es un jugador. Las bandas contienen al 50 % y al 90 % de los ${n} jugadores en cada momento.`,
+    fanSub: (n: string) => `Cada línea fina es una persona. La zona azul oscura es donde está la mitad de los ${n} jugadores; la clara, casi todos. Si la zona baja, la gente está perdiendo dinero.`,
+    fanSubTech: (n: string) => `Bandas de percentiles P25–P75 y P5–P95 de ${n} trayectorias, con la mediana y la media. Las líneas finas son trayectorias individuales.`,
     median50: 'Jugador mediano',
     meanLine: 'Media de todos',
     band50: '50 % central',
@@ -49,11 +51,13 @@ const T = {
     start: 'Dinero inicial',
     after: 'tras',
     bets: 'apuestas',
-    survTitle: 'Cuántos siguen jugando sin arruinarse',
-    survSub: 'Curva de supervivencia de Kaplan–Meier. Quien se retira al doblar su dinero sale del grupo sin contar como arruinado (dato censurado).',
+    survTitle: 'Cuántos siguen teniendo dinero',
+    survSub: 'Qué parte de los jugadores sigue teniendo dinero para apostar a medida que pasan las apuestas.',
+    survSubTech: 'Curva de supervivencia de Kaplan–Meier. Quien se retira al doblar su dinero sale del grupo sin contar como arruinado (dato censurado).',
     stillIn: 'Sin arruinarse',
     histTitle: 'Con cuánto dinero acaba cada jugador',
-    histSub: 'Distribución del dinero final. La barra de la izquierda son los arruinados; en oscuro, quienes acabaron por encima del dinero inicial.',
+    histSub: 'Cuántas personas acaban con cada cantidad. La barra de la izquierda son quienes se quedaron sin nada; en oscuro, quienes acabaron ganando.',
+    histSubTech: 'Histograma del bankroll final (40 intervalos). La primera barra acumula la ruina; en oscuro, los intervalos por encima del bankroll inicial.',
     players2: 'jugadores',
     headline: (r: RuinResult, f: ReturnType<typeof fmt>, n: number) =>
       `De ${f.int(n)} jugadores, ${f.pct(r.ruinedShare, 0)} se quedó sin dinero y solo ${f.pct(r.aheadShare, 0)} terminó por encima de lo que tenía. En conjunto apostaron ${f.eur(r.totalWagered)} y perdieron de media ${f.eur(r.expectedLossFromEdge, 2)} por cabeza: casi exactamente lo que dice la ventaja de la casa.`,
@@ -91,13 +95,15 @@ const T = {
       { key: 'fair', label: 'No house edge' },
     ],
     edge: 'House edge',
+    edgePlain: (x: string) => `Of every €100 wagered, the house keeps ${x} on average.`,
     ruined: 'Went broke',
     ahead: 'Finished ahead',
     median: 'Median outcome',
     avgLoss: 'Average loss',
     expected: 'predicted by the edge',
     fanTitle: 'How everyone’s money evolves',
-    fanSub: (n: string) => `Each thin line is one player. The bands hold the middle 50% and 90% of the ${n} players at each moment.`,
+    fanSub: (n: string) => `Each thin line is one person. The dark blue area is where half of the ${n} players are; the light one, almost all of them. If the area goes down, people are losing money.`,
+    fanSubTech: (n: string) => `P25–P75 and P5–P95 percentile bands over ${n} trajectories, with median and mean. Thin lines are individual trajectories.`,
     median50: 'Median player',
     meanLine: 'Average of all',
     band50: 'Middle 50%',
@@ -105,11 +111,13 @@ const T = {
     start: 'Starting money',
     after: 'after',
     bets: 'bets',
-    survTitle: 'How many are still playing without going broke',
-    survSub: 'Kaplan–Meier survival curve. Players who walk away after doubling their money leave the group without counting as broke (censored).',
+    survTitle: 'How many still have money left',
+    survSub: 'The share of players who still have money to bet as the bets go by.',
+    survSubTech: 'Kaplan–Meier survival curve. Players who walk away after doubling their money leave the group without counting as broke (censored).',
     stillIn: 'Not broke',
     histTitle: 'How much money each player ends with',
-    histSub: 'Distribution of final bankrolls. The leftmost bar is the players who went broke; darker bars finished above their starting money.',
+    histSub: 'How many people end with each amount. The leftmost bar is those left with nothing; darker bars are those who ended up winning.',
+    histSubTech: 'Histogram of final bankrolls (40 bins). The first bin holds the ruined players; darker bins are above the starting bankroll.',
     players2: 'players',
     headline: (r: RuinResult, f: ReturnType<typeof fmt>, n: number) =>
       `Out of ${f.int(n)} players, ${f.pct(r.ruinedShare, 0)} ran out of money and only ${f.pct(r.aheadShare, 0)} finished above where they started. Together they wagered ${f.eur(r.totalWagered)} and lost ${f.eur(r.expectedLossFromEdge, 2)} each on average: almost exactly what the house edge predicts.`,
@@ -281,6 +289,8 @@ export default function RuinLab({ lang }: { lang: Lang }) {
         </button>
         <p className="edge">
           {t.edge}: <strong className="num">{f.pct(edge, 2)}</strong>
+          <br />
+          <span>{t.edgePlain(f.eur(edge * 100, 2))}</span>
         </p>
       </aside>
 
@@ -300,7 +310,7 @@ export default function RuinLab({ lang }: { lang: Lang }) {
             <figure className="figure">
               <figcaption className="figure-head">
                 <p className="figure-title">{t.fanTitle}</p>
-                <p className="figure-sub">{t.fanSub(f.int(p.players))}</p>
+                <p className="figure-sub"><Dual simple={t.fanSub(f.int(p.players))} tech={t.fanSubTech(f.int(p.players))} /></p>
               </figcaption>
               {charts && (
                 <LineChart
@@ -334,7 +344,7 @@ export default function RuinLab({ lang }: { lang: Lang }) {
               <figure className="figure">
                 <figcaption className="figure-head">
                   <p className="figure-title">{t.survTitle}</p>
-                  <p className="figure-sub">{t.survSub}</p>
+                  <p className="figure-sub"><Dual simple={t.survSub} tech={t.survSubTech} /></p>
                 </figcaption>
                 {charts && (
                   <LineChart
@@ -352,7 +362,7 @@ export default function RuinLab({ lang }: { lang: Lang }) {
               <figure className="figure">
                 <figcaption className="figure-head">
                   <p className="figure-title">{t.histTitle}</p>
-                  <p className="figure-sub">{t.histSub}</p>
+                  <p className="figure-sub"><Dual simple={t.histSub} tech={t.histSubTech} /></p>
                 </figcaption>
                 {charts && (
                   <Columns

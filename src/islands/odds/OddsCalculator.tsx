@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { overround, implied, proportional, power, shin } from '../../lib/odds';
 import { fmt, type Lang } from '../../i18n';
+import { Dual } from '../../charts/core';
 
 const T = {
   es: {
-    title: 'Calculadora de margen',
+    title: 'Calculadora de la comisión',
     sub: 'Escribe las cuotas decimales de un partido (local, empate, visitante) y mira cuánto se queda la casa.',
     outcomes: ['Local', 'Empate', 'Visitante'],
     odds: 'Cuota',
@@ -12,20 +13,21 @@ const T = {
     prop: 'Proporcional',
     pow: 'Potencia',
     shin: 'Shin',
-    ret: 'Retorno por 1 €',
-    margin: 'Margen de la casa',
+    fair: 'Probabilidad sin comisión',
+    ret: 'Te devuelve por cada 1 €',
+    margin: 'Comisión de la casa',
     marginNote: (m: string, r: string) => `Por cada 100 € repartidos «en justo» entre los tres resultados, la casa se queda ${m}. Una apuesta devuelve de media ${r} por euro.`,
     invalid: 'Las cuotas decimales tienen que ser mayores que 1.',
-    retNote: 'Retorno esperado con las probabilidades de Shin.',
+    retNote: 'La probabilidad sin comisión se estima con el método de Shin. La última columna es lo que te devuelve de media cada euro apostado a ese resultado.',
     presets: 'Probar con',
     presetList: [
       { label: 'Partido igualado', o: [2.6, 3.2, 2.8] },
       { label: 'Gran favorito', o: [1.25, 6.5, 11] },
-      { label: 'Casa con margen alto', o: [1.8, 3.2, 3.9] },
+      { label: 'Casa con comisión alta', o: [1.8, 3.2, 3.9] },
     ],
   },
   en: {
-    title: 'Margin calculator',
+    title: 'Fee calculator',
     sub: 'Type a match’s decimal odds (home, draw, away) and see how much the bookmaker keeps.',
     outcomes: ['Home', 'Draw', 'Away'],
     odds: 'Odds',
@@ -33,16 +35,17 @@ const T = {
     prop: 'Proportional',
     pow: 'Power',
     shin: 'Shin',
-    ret: 'Return per €1',
-    margin: 'Bookmaker margin',
+    fair: 'Chance without the fee',
+    ret: 'Pays back per €1',
+    margin: 'Bookmaker’s fee',
     marginNote: (m: string, r: string) => `For every €100 spread “fairly” across the three outcomes, the bookmaker keeps ${m}. A bet pays back ${r} per euro on average.`,
     invalid: 'Decimal odds must be greater than 1.',
-    retNote: 'Expected return using Shin probabilities.',
+    retNote: 'The chance without the fee is estimated with Shin’s method. The last column is what each euro bet on that result pays back on average.',
     presets: 'Try',
     presetList: [
       { label: 'Close match', o: [2.6, 3.2, 2.8] },
       { label: 'Heavy favourite', o: [1.25, 6.5, 11] },
-      { label: 'High-margin book', o: [1.8, 3.2, 3.9] },
+      { label: 'High-fee bookmaker', o: [1.8, 3.2, 3.9] },
     ],
   },
 };
@@ -102,10 +105,10 @@ export default function OddsCalculator({ lang }: { lang: Lang }) {
                 <tr>
                   <th scope="col"></th>
                   <th scope="col">{t.odds}</th>
-                  <th scope="col">{t.implied}</th>
-                  <th scope="col">{t.prop}</th>
-                  <th scope="col">{t.pow}</th>
-                  <th scope="col">{t.shin}</th>
+                  <th scope="col" className="only-tech">{t.implied}</th>
+                  <th scope="col" className="only-tech">{t.prop}</th>
+                  <th scope="col" className="only-tech">{t.pow}</th>
+                  <th scope="col"><Dual simple={t.fair} tech={t.shin} /></th>
                   <th scope="col">{t.ret}</th>
                 </tr>
               </thead>
@@ -114,9 +117,9 @@ export default function OddsCalculator({ lang }: { lang: Lang }) {
                   <tr key={o}>
                     <th scope="row">{o}</th>
                     <td>{f.num(odds[i], 2)}</td>
-                    <td>{f.pct(imp[i])}</td>
-                    <td>{f.pct(pr[i])}</td>
-                    <td>{f.pct(pw[i])}</td>
+                    <td className="only-tech">{f.pct(imp[i])}</td>
+                    <td className="only-tech">{f.pct(pr[i])}</td>
+                    <td className="only-tech">{f.pct(pw[i])}</td>
                     <td>{f.pct(sh[i])}</td>
                     <td>{f.eur(sh[i] * odds[i], 3)}</td>
                   </tr>
@@ -124,9 +127,9 @@ export default function OddsCalculator({ lang }: { lang: Lang }) {
                 <tr>
                   <th scope="row">Σ</th>
                   <td></td>
-                  <td>{f.pct(imp.reduce((a, b) => a + b, 0))}</td>
-                  <td>{f.pct(1)}</td>
-                  <td>{f.pct(1)}</td>
+                  <td className="only-tech">{f.pct(imp.reduce((a, b) => a + b, 0))}</td>
+                  <td className="only-tech">{f.pct(1)}</td>
+                  <td className="only-tech">{f.pct(1)}</td>
                   <td>{f.pct(1)}</td>
                   <td></td>
                 </tr>

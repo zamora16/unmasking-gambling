@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro';
 import PageHead from '../components/PageHead.astro';
 import Figure from '../components/Figure.astro';
 import Stat from '../components/Stat.astro';
+import TechBox from '../components/TechBox.astro';
 import { GgrColumns, HoldLine, BonusLine, Segments, Marketing, Prevalence, AdultsOnline } from '../islands/market/MarketCharts';
 import { type Lang, fmt, href } from '../i18n';
 import d from '../data/market/spain.json';
@@ -40,6 +41,7 @@ const link = (k: keyof typeof src) => `<a href="${src[k].url}">${src[k].label}</
     : 'Revenue, players, marketing and prevalence of online gambling in Spain, from official DGOJ and Ministry of Health data.'}
 >
   <PageHead
+    lang={lang}
     kicker={es ? 'Panel de datos · España' : 'Data dashboard · Spain'}
     title={es ? 'Lo que pierden los jugadores, año a año' : 'What players lose, year by year'}
     lede={es
@@ -60,20 +62,30 @@ const link = (k: keyof typeof src) => `<a href="${src[k].url}">${src[k].label}</
       {
         es ? (
           <p>
-            El <strong>GGR</strong> (<em>gross gaming revenue</em>) es lo que las casas ingresan después de pagar los premios: lo apostado menos lo devuelto. Es, por tanto, la pérdida neta de sus clientes. En el juego online de ámbito estatal ha pasado de {f.int(S.ggr[0])} millones de euros en {S.years[0]} a {f.int(S.ggr[last])} millones en {S.years[last]}.
+            Lo que ganan las casas de apuestas online es, literalmente, lo que pierden sus clientes: todo lo que se apuesta menos todo lo que se devuelve en premios. En España, esa cifra ha pasado de {f.int(S.ggr[0])} millones de euros en {S.years[0]} a {f.int(S.ggr[last])} millones en {S.years[last]}.
           </p>
         ) : (
           <p>
-            <strong>GGR</strong> (gross gaming revenue) is what operators take in after paying out prizes: stakes minus winnings. In other words, it is their customers’ net loss. In Spain’s nationally licensed online market it went from €{f.int(S.ggr[0])}m in {S.years[0]} to €{f.int(S.ggr[last])}m in {S.years[last]}.
+            What online gambling operators earn is, literally, what their customers lose: everything that is bet minus everything paid back as prizes. In Spain that figure went from €{f.int(S.ggr[0])}m in {S.years[0]} to €{f.int(S.ggr[last])}m in {S.years[last]}.
           </p>
         )
       }
+      <TechBox lang={lang} title={es ? 'Qué es el GGR' : 'What GGR is'}>
+        {
+          es ? (
+            <p>El <strong>GGR</strong> (<em>gross gaming revenue</em>, «rendimiento neto» en los informes de la DGOJ) es la suma de las cantidades jugadas menos los premios pagados. Es el ingreso bruto de los operadores antes de impuestos, marketing y costes, y equivale a la pérdida neta agregada de los jugadores. Las cifras cubren solo el juego online de ámbito estatal con licencia de la DGOJ.</p>
+          ) : (
+            <p><strong>GGR</strong> (gross gaming revenue, «rendimiento neto» in DGOJ reports) is total stakes minus prizes paid. It is operators’ gross income before tax, marketing and costs, and equals the aggregate net loss of players. Figures cover only nationally licensed online gambling regulated by the DGOJ.</p>
+          )
+        }
+      </TechBox>
     </article>
 
     <Figure
       wide={false}
       title={es ? 'Ingresos netos del juego online en España' : 'Net revenue of online gambling in Spain'}
-      sub={es ? 'GGR anual, en millones de euros.' : 'Annual GGR, in millions of euros.'}
+      sub={es ? 'Lo que perdieron los jugadores cada año, en millones de euros.' : 'What players lost each year, in millions of euros.'}
+      subTech={es ? 'GGR anual del juego online estatal, millones de euros.' : 'Annual GGR of nationally licensed online gambling, € millions.'}
       foot={`${es ? 'Fuente' : 'Source'}: ${link('red2026')}, ${es ? 'a partir de datos de la DGOJ' : 'from DGOJ data'}.`}
     >
       <GgrColumns client:idle lang={lang} />
@@ -96,7 +108,8 @@ const link = (k: keyof typeof src) => `<a href="${src[k].url}">${src[k].label}</
     <Figure
       wide={false}
       title={es ? 'La casa se queda con unos 4 céntimos de cada euro apostado' : 'The house keeps about 4 cents of every euro wagered'}
-      sub={es ? 'GGR dividido entre las cantidades jugadas.' : 'GGR divided by amounts wagered.'}
+      sub={es ? 'De cada euro que se apuesta, la parte que acaba en manos de la casa.' : 'Of every euro bet, the share that ends up with the house.'}
+      subTech={es ? 'Tasa de retención (hold): GGR / cantidades jugadas.' : 'Hold rate: GGR / amounts wagered.'}
       foot={`${es ? 'Fuente' : 'Source'}: ${link('red2026')}. ${es ? 'Cálculo propio.' : 'Our calculation.'}`}
     >
       <HoldLine client:idle lang={lang} />
@@ -120,7 +133,8 @@ const link = (k: keyof typeof src) => `<a href="${src[k].url}">${src[k].label}</
     <Figure
       wide={false}
       title={es ? 'Ingresos por tipo de juego, 2024 y 2025' : 'Revenue by type of game, 2024 and 2025'}
-      sub={es ? 'GGR en millones de euros.' : 'GGR in millions of euros.'}
+      sub={es ? 'Lo que perdieron los jugadores en cada tipo de juego, en millones de euros.' : 'What players lost on each type of game, in millions of euros.'}
+      subTech={es ? 'GGR por segmento, millones de euros.' : 'GGR by segment, € millions.'}
       foot={`${es ? 'Fuentes' : 'Sources'}: ${link('dgoj2024')}; ${link('dgoj2025')}.`}
     >
       <Segments client:idle lang={lang} />
@@ -207,21 +221,21 @@ const link = (k: keyof typeof src) => `<a href="${src[k].url}">${src[k].label}</
     </div>
 
     <article class="measure prose">
-      <div class="note">
+      <TechBox lang={lang} title={es ? 'Sobre los datos' : 'About the data'}>
         {
           es ? (
             <>
-              <strong>Sobre los datos.</strong> Las cifras son del mercado de juego online de ámbito estatal regulado por la DGOJ; no incluyen el juego presencial ni las loterías del Estado. La serie 2017–2025 procede de una recopilación publicada en la <em>Revista Española de Drogodependencias</em> a partir de datos de la DGOJ; el detalle de 2024 y 2025, de los informes anuales de la DGOJ. Todas las cifras están en un único archivo con su fuente:{' '}
+              Las cifras son del mercado de juego online de ámbito estatal regulado por la DGOJ; no incluyen el juego presencial ni las loterías del Estado. La serie 2017–2025 procede de una recopilación publicada en la <em>Revista Española de Drogodependencias</em> a partir de datos de la DGOJ; el detalle de 2024 y 2025, de los informes anuales de la DGOJ. Todas las cifras están en un único archivo con su fuente:{' '}
               <a href="https://github.com/zamora16/unmasking-gambling/blob/main/src/data/market/spain.json">spain.json</a>.
             </>
           ) : (
             <>
-              <strong>About the data.</strong> Figures cover Spain’s nationally licensed online gambling market regulated by the DGOJ; they exclude land-based gambling and state lotteries. The 2017–2025 series comes from a compilation published in the <em>Revista Española de Drogodependencias</em> based on DGOJ data; the 2024 and 2025 detail comes from the DGOJ annual reports. Every figure lives in a single file with its source:{' '}
+              Figures cover Spain’s nationally licensed online gambling market regulated by the DGOJ; they exclude land-based gambling and state lotteries. The 2017–2025 series comes from a compilation published in the <em>Revista Española de Drogodependencias</em> based on DGOJ data; the 2024 and 2025 detail comes from the DGOJ annual reports. Every figure lives in a single file with its source:{' '}
               <a href="https://github.com/zamora16/unmasking-gambling/blob/main/src/data/market/spain.json">spain.json</a>.
             </>
           )
         }
-      </div>
+      </TechBox>
     </article>
   </div>
 </Base>

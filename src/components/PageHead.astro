@@ -1,10 +1,15 @@
 ---
+import ModeSwitch from './ModeSwitch.astro';
+import type { Lang } from '../i18n';
 interface Props {
   kicker: string;
   title: string;
   lede: string;
+  lang?: Lang;
+  modes?: boolean;
 }
-const { kicker, title, lede } = Astro.props;
+const { kicker, title, lede, lang = 'es', modes = true } = Astro.props;
+const es = lang === 'es';
 ---
 
 <header class="page-head page">
@@ -13,6 +18,18 @@ const { kicker, title, lede } = Astro.props;
     <h1>{title}</h1>
     <p class="lede">{lede}</p>
     <slot />
+    {
+      modes && (
+        <div class="modes">
+          <ModeSwitch lang={lang} />
+          <p class="modes-hint">
+            {es
+              ? 'El modo sencillo explica las ideas sin jerga. El técnico añade fórmulas, métodos y código.'
+              : 'Plain mode explains the ideas without jargon. Technical mode adds formulas, methods and code.'}
+          </p>
+        </div>
+      )
+    }
   </div>
 </header>
 
@@ -32,5 +49,19 @@ const { kicker, title, lede } = Astro.props;
   }
   .lede {
     max-width: 42rem;
+  }
+  .modes {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.6rem 1rem;
+    margin-top: 1.8rem;
+  }
+  .modes-hint {
+    font-family: var(--sans);
+    font-size: 0.8rem;
+    color: var(--ink-3);
+    margin: 0;
+    max-width: 26rem;
   }
 </style>

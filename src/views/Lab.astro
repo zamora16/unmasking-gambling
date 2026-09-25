@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import RuinLab from '../islands/RuinLab';
 import PageHead from '../components/PageHead.astro';
+import TechBox from '../components/TechBox.astro';
 import { type Lang, href } from '../i18n';
 interface Props {
   lang: Lang;
@@ -19,12 +20,29 @@ const es = lang === 'es';
     : 'Simulate thousands of players at once and watch the house edge win: percentile bands, survival curves and risk of ruin.'}
 >
   <PageHead
-    kicker={es ? 'Simulación Monte Carlo' : 'Monte Carlo simulation'}
+    lang={lang}
+    kicker={es ? 'Simulación' : 'Simulation'}
     title={es ? 'Laboratorio de ruina' : 'The Ruin Lab'}
     lede={es
-      ? 'Una persona que juega una tarde puede ganar. Miles de personas jugando las mismas reglas, no. Aquí simulamos a miles a la vez, en tu navegador, para ver qué hace la ventaja de la casa cuando se le da tiempo.'
-      : 'One person playing for an evening can win. Thousands of people playing by the same rules cannot. Here we simulate thousands at once, in your browser, to see what the house edge does when it is given time.'}
+      ? 'Si una persona juega una tarde, puede ganar. Pero si miles de personas juegan con las mismas reglas, el resultado deja de ser cuestión de suerte. Aquí puedes poner a jugar a miles a la vez y ver qué pasa con su dinero.'
+      : 'One person playing for an evening can win. But when thousands of people play by the same rules, the result stops being a matter of luck. Here you can set thousands playing at once and watch what happens to their money.'}
   />
+
+  <section class="page">
+    <div class="measure plain-box only-simple">
+      {
+        es ? (
+          <>
+            <strong>Cómo usarlo.</strong> Elige un escenario o cambia las reglas a la izquierda: el juego, el dinero con el que empieza cada persona y cuántas veces apuesta. El resultado aparece al momento. En el primer gráfico, cada línea fina es una persona y la zona azul es donde está la mayoría. Si esa zona baja, la gente está perdiendo.
+          </>
+        ) : (
+          <>
+            <strong>How to use it.</strong> Pick a scenario or change the rules on the left: the game, how much money each person starts with and how many times they bet. The result appears instantly. In the first chart each thin line is a person and the blue area is where most of them are. If that area goes down, people are losing.
+          </>
+        )
+      }
+    </div>
+  </section>
 
   <section class="page lab-wrap">
     <RuinLab client:load lang={lang} />
@@ -36,51 +54,97 @@ const es = lang === 'es';
         es ? (
           <>
             <h2>Tres cosas que enseña el laboratorio</h2>
-            <h3>1. La media es el destino</h3>
+            <h3>1. La casa cobra un poco en cada apuesta</h3>
             <p>
-              En cada apuesta la casa se queda, de media, con una fracción fija de lo apostado: su <strong>ventaja</strong>. En la ruleta europea es 1/37, un 2,7 %. Eso significa que la pérdida esperada no depende de la suerte sino de <strong>cuánto dinero pasa por la mesa</strong>: pérdida media ≈ ventaja × total apostado. Fíjate en la línea discontinua del primer gráfico: baja en línea recta, y la simulación la reproduce casi al céntimo.
+              La ruleta paga como si tuviera 36 casillas, pero tiene 37: el cero. Esa diferencia hace que, de media, la casa se quede con <strong>unos 3 céntimos de cada euro</strong> que se apuesta. Parece poco, pero se cobra en cada tirada, ganes o pierdas. Por eso lo que pierdes a la larga no depende de la suerte, sino de <strong>cuánto dinero pasa por la mesa</strong>. Cuanto más juegas, más pagas. En el primer gráfico lo ves en la línea discontinua, que baja sin parar.
             </p>
-            <h3>2. La varianza lo esconde</h3>
+            <TechBox lang={lang} title="Pérdida esperada = ventaja × total apostado">
+              <p>
+                Cada apuesta es una variable aleatoria X con esperanza E[X] = −h·s, donde s es lo apostado y h la ventaja de la casa. En la ruleta europea, apostando al rojo: E = (18/37)·s − (19/37)·s = −s/37, así que h = 1/37 ≈ 2,70 %. Por linealidad de la esperanza, tras n apuestas la pérdida esperada es h·Σs<sub>i</sub>, sea cual sea el orden o el tamaño de las apuestas.
+              </p>
+              <p>El recuadro «Pérdida media» compara la media simulada con ese valor teórico: coinciden salvo por el error de muestreo, que decrece como 1/√N con el número de jugadores N.</p>
+            </TechBox>
+
+            <h3>2. Ganar un día no es ir ganando</h3>
             <p>
-              A corto plazo el azar pesa mucho más que la ventaja, y por eso siempre hay ganadores. Son los que se cuentan, los que salen en las capturas de pantalla. Pero la banda de colores se desplaza hacia abajo con cada apuesta: cuantas más partidas, más seguro es el resultado. Con la tragaperras de volatilidad alta pasa algo más: la mayoría pierde deprisa mientras unos pocos premios enormes mantienen la media. La mediana, lo que le pasa al jugador típico, queda muy por debajo.
+              A corto plazo la suerte pesa mucho más que la ventaja de la casa, y por eso siempre hay gente que gana. Son a los que oímos, los que enseñan la captura de pantalla. Pero si miras a todos a la vez, la mayoría va perdiendo, y cuanto más dura la partida, menos gente queda por encima. En las tragaperras de «volatilidad alta» es aún más claro: casi todos pierden deprisa mientras unos pocos se llevan premios enormes. Esos pocos premios hacen que la media parezca menos mala de lo que es para la persona típica.
             </p>
-            <h3>3. Los sistemas cambian la forma, no la media</h3>
+            <TechBox lang={lang} title="Varianza, mediana y media">
+              <p>
+                La desviación típica del resultado crece como √n mientras que la pérdida esperada crece como n, así que la probabilidad de ir por delante tiende a cero. Con distribuciones de premios muy asimétricas (volatilidad alta), la media queda muy por encima de la mediana: los percentiles del gráfico lo muestran mejor que la media, que es sensible a unos pocos valores extremos.
+              </p>
+              <p>Las tragaperras se modelan con una tabla de premios discreta que se escala para dar un RTP exacto del 96 %; la versión de volatilidad alta pone parte del retorno en premios de 500× y 5.000× con probabilidades muy bajas.</p>
+            </TechBox>
+
+            <h3>3. Ningún sistema vence a la casa</h3>
             <p>
-              La Martingala, doblar la apuesta tras cada pérdida, gana poco muchas veces y pierde mucho de vez en cuando. En el gráfico verás muchas líneas subiendo despacio y otras que se desploman de golpe. Ningún sistema de apuestas puede cambiar la ventaja, porque cada tirada es independiente de la anterior: solo decide <em>cuándo</em> y <em>de qué forma</em> pierdes.
+              La <strong>Martingala</strong> consiste en doblar la apuesta cada vez que pierdes, para recuperarlo todo con el siguiente acierto. Funciona muchas veces seguidas, y por eso engancha, hasta que llega una mala racha y la apuesta necesaria es más de lo que tienes o de lo que permite la mesa. Entonces lo pierdes todo de golpe. En el gráfico se ve: muchas líneas suben despacio y algunas se desploman. Ningún sistema cambia el hecho de fondo: cada tirada es independiente de la anterior y la casa cobra en todas.
             </p>
-            <div class="note">
-              <strong>La ruina del jugador, en una fórmula.</strong> Si empiezas con <em>a</em> unidades, apuestas una unidad cada vez con probabilidad <em>p</em> de ganar (q = 1 − p) y te retiras al llegar a <em>b</em>, la probabilidad de arruinarte antes es ((q/p)<sup>a</sup> − (q/p)<sup>b</sup>) / (1 − (q/p)<sup>b</sup>). Con 20 € en la ruleta europea y el objetivo de llegar a 40 €, es casi un 75 %. Los tests del proyecto comprueban que la simulación reproduce este resultado exacto.
-            </div>
-            <h2>Cómo funciona</h2>
-            <p>
-              Cada juego se modela como una distribución de premios: lo que devuelve cada euro apostado y con qué probabilidad. Las tragaperras usan una tabla de premios que se escala para dar un RTP exacto del 96 %; la versión de volatilidad alta concentra el retorno en premios muy raros. La simulación usa un generador pseudoaleatorio con semilla (mulberry32), así que cada resultado es reproducible. Corre en un <em>Web Worker</em> para no bloquear la página. La curva de supervivencia se estima con Kaplan–Meier. Todo el código está en <a href="https://github.com/zamora16/unmasking-gambling/tree/main/src/lib">src/lib</a>, con tests, y lo explicamos en <a href={href(lang, 'methods')}>Método</a>.
-            </p>
+            <TechBox lang={lang} title="La ruina del jugador y por qué los sistemas no funcionan">
+              <p>
+                Si empiezas con <em>a</em> unidades, apuestas una unidad con probabilidad <em>p</em> de ganar (q = 1 − p) y paras al llegar a <em>b</em>, la probabilidad de arruinarte antes es:
+              </p>
+              <span class="formula">P(ruina) = ((q/p)^a − (q/p)^b) / (1 − (q/p)^b)</span>
+              <p>
+                Con 20 € en la ruleta europea y el objetivo de llegar a 40 €, sale casi un 75 %. Los tests del proyecto comprueban que la simulación reproduce este valor exacto. Los sistemas de progresión (Martingala, D’Alembert) no pueden cambiar la esperanza por el teorema de parada opcional: con apuestas de esperanza negativa y límites finitos (bankroll y máximo de mesa), cualquier regla de apuesta sigue siendo una supermartingala. Solo redistribuyen el resultado: muchas ganancias pequeñas a cambio de pérdidas raras y grandes.
+              </p>
+            </TechBox>
           </>
         ) : (
           <>
             <h2>Three things the lab teaches</h2>
-            <h3>1. The average is destiny</h3>
+            <h3>1. The house charges a little on every bet</h3>
             <p>
-              On every bet the house keeps, on average, a fixed fraction of the stake: its <strong>edge</strong>. In European roulette it is 1/37, or 2.7%. So the expected loss does not depend on luck but on <strong>how much money goes across the table</strong>: average loss ≈ edge × total wagered. Look at the dashed line in the first chart: it falls in a straight line, and the simulation matches it almost to the cent.
+              Roulette pays as if it had 36 pockets, but it has 37: the zero. That difference means that, on average, the house keeps <strong>about 3 cents of every euro</strong> that is bet. It sounds small, but it is charged on every spin, win or lose. So what you lose in the long run does not depend on luck but on <strong>how much money goes across the table</strong>. The more you play, the more you pay. In the first chart you can see it in the dashed line that keeps going down.
             </p>
-            <h3>2. Variance hides it</h3>
+            <TechBox lang={lang} title="Expected loss = edge × total wagered">
+              <p>
+                Each bet is a random variable X with expectation E[X] = −h·s, where s is the stake and h the house edge. In European roulette, betting on red: E = (18/37)·s − (19/37)·s = −s/37, so h = 1/37 ≈ 2.70%. By linearity of expectation, after n bets the expected loss is h·Σs<sub>i</sub>, whatever the order or size of the bets.
+              </p>
+              <p>The “Average loss” tile compares the simulated mean with that theoretical value: they match up to sampling error, which shrinks as 1/√N with the number of players N.</p>
+            </TechBox>
+
+            <h3>2. Winning one day is not being ahead</h3>
             <p>
-              In the short run chance matters far more than the edge, which is why there are always winners. They are the ones we hear about, the ones in the screenshots. But the coloured band drifts down with every bet: the more you play, the more certain the outcome. High-volatility slots add a twist: most players lose quickly while a few huge prizes hold up the average. The median, what happens to the typical player, sits far below it.
+              In the short run luck matters far more than the house edge, which is why there are always people who win. They are the ones we hear about, the ones posting screenshots. But look at everyone at once and most are losing, and the longer the session, the fewer remain ahead. With “high-volatility” slots it is even clearer: almost everyone loses quickly while a few take huge prizes. Those few prizes make the average look less bad than it is for the typical person.
             </p>
-            <h3>3. Systems change the shape, not the mean</h3>
+            <TechBox lang={lang} title="Variance, median and mean">
+              <p>
+                The standard deviation of the outcome grows like √n while the expected loss grows like n, so the probability of being ahead tends to zero. With highly skewed prize distributions (high volatility) the mean sits far above the median: the percentile bands tell the story better than the mean, which is sensitive to a few extreme values.
+              </p>
+              <p>Slots are modelled as a discrete paytable scaled to an exact 96% RTP; the high-volatility version puts part of the return into 500× and 5,000× prizes with very low probabilities.</p>
+            </TechBox>
+
+            <h3>3. No system beats the house</h3>
             <p>
-              The Martingale, doubling the stake after every loss, wins small amounts often and loses big occasionally. In the chart you will see many lines creeping up and a few collapsing at once. No betting system can change the edge, because each spin is independent of the last: it only decides <em>when</em> and <em>how</em> you lose.
+              The <strong>Martingale</strong> means doubling your bet every time you lose, so the next win recovers everything. It works many times in a row, which is why it is so tempting, until a bad streak comes along and the bet you need is more than you have or than the table allows. Then you lose everything at once. You can see it in the chart: many lines creep up and a few collapse. No system changes the underlying fact: every spin is independent of the last and the house charges on all of them.
             </p>
-            <div class="note">
-              <strong>Gambler’s ruin, in one formula.</strong> If you start with <em>a</em> units, bet one unit at a time with win probability <em>p</em> (q = 1 − p) and stop when you reach <em>b</em>, the probability of going broke first is ((q/p)<sup>a</sup> − (q/p)<sup>b</sup>) / (1 − (q/p)<sup>b</sup>). With €20 at European roulette and a target of €40, that is almost 75%. The project’s tests check that the simulation reproduces this exact result.
-            </div>
-            <h2>How it works</h2>
-            <p>
-              Each game is modelled as a prize distribution: what each unit staked pays back, and with what probability. The slots use a paytable scaled to an exact 96% RTP; the high-volatility version concentrates the return in very rare prizes. The simulation uses a seeded pseudo-random generator (mulberry32), so every result is reproducible. It runs in a <em>Web Worker</em> so the page stays responsive. The survival curve is a Kaplan–Meier estimate. All the code is in <a href="https://github.com/zamora16/unmasking-gambling/tree/main/src/lib">src/lib</a>, with tests, and explained in <a href={href(lang, 'methods')}>Methods</a>.
-            </p>
+            <TechBox lang={lang} title="Gambler’s ruin and why systems fail">
+              <p>
+                If you start with <em>a</em> units, bet one unit with win probability <em>p</em> (q = 1 − p) and stop when you reach <em>b</em>, the probability of going broke first is:
+              </p>
+              <span class="formula">P(ruin) = ((q/p)^a − (q/p)^b) / (1 − (q/p)^b)</span>
+              <p>
+                With €20 at European roulette and a target of €40, that is almost 75%. The project’s tests check that the simulation reproduces this exact value. Progression systems (Martingale, D’Alembert) cannot change the expectation, by the optional stopping theorem: with negative-expectation bets and finite limits (bankroll and table maximum), any betting rule is still a supermartingale. They only reshape the outcome: many small wins in exchange for rare, large losses.
+              </p>
+            </TechBox>
           </>
         )
       }
+
+      <TechBox lang={lang} title={es ? 'Cómo está programado' : 'How it is built'}>
+        {
+          es ? (
+            <p>
+              Cada juego es una distribución discreta de premios (cuánto devuelve cada euro y con qué probabilidad). La simulación usa un generador pseudoaleatorio con semilla (mulberry32), así que cada resultado es reproducible, y corre en un <em>Web Worker</em> para no bloquear la página. Para cada jugador se registra cuándo se arruina o se retira; con eso se estima la curva de supervivencia de Kaplan–Meier, tratando como censurados a quienes se retiran por alcanzar su objetivo. El código está en <a href="https://github.com/zamora16/unmasking-gambling/tree/main/src/lib">src/lib</a>, con tests en Vitest. Más detalles en <a href={href(lang, 'methods')}>Método</a>.
+            </p>
+          ) : (
+            <p>
+              Each game is a discrete prize distribution (what each euro pays back and with what probability). The simulation uses a seeded pseudo-random generator (mulberry32), so every result is reproducible, and runs in a <em>Web Worker</em> so the page stays responsive. For each player we record when they go broke or walk away; from that we estimate the Kaplan–Meier survival curve, treating players who stop after reaching their target as censored. The code is in <a href="https://github.com/zamora16/unmasking-gambling/tree/main/src/lib">src/lib</a>, with Vitest tests. More in <a href={href(lang, 'methods')}>Methods</a>.
+            </p>
+          )
+        }
+      </TechBox>
     </div>
   </article>
 </Base>

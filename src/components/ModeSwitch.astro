@@ -1,0 +1,64 @@
+---
+import type { Lang } from '../i18n';
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const es = lang === 'es';
+---
+
+<div class="mode-switch" role="group" aria-label={es ? 'Nivel de lectura' : 'Reading level'}>
+  <span class="ms-label">{es ? 'Leer en modo' : 'Read in'}</span>
+  <button type="button" data-set-mode="simple">{es ? 'Sencillo' : 'Plain'}</button>
+  <button type="button" data-set-mode="tech">{es ? 'Técnico' : 'Technical'}</button>
+</div>
+
+<script>
+  function apply(mode: string) {
+    document.documentElement.dataset.mode = mode;
+    document.querySelectorAll<HTMLButtonElement>('[data-set-mode]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.setMode === mode)));
+    document.querySelectorAll<HTMLDetailsElement>('details[data-techbox]').forEach((d) => (d.open = mode === 'tech'));
+  }
+  apply(document.documentElement.dataset.mode || 'simple');
+  document.querySelectorAll<HTMLButtonElement>('[data-set-mode]').forEach((b) =>
+    b.addEventListener('click', () => {
+      const m = b.dataset.setMode!;
+      try {
+        localStorage.setItem('ug-mode', m);
+      } catch (e) {}
+      apply(m);
+    }),
+  );
+</script>
+
+<style>
+  .mode-switch {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-family: var(--sans);
+    font-size: 0.82rem;
+    background: var(--paper-2);
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    padding: 0.2rem;
+  }
+  .ms-label {
+    color: var(--ink-3);
+    padding: 0 0.5rem 0 0.6rem;
+  }
+  button {
+    font: inherit;
+    font-weight: 600;
+    border: 0;
+    border-radius: 999px;
+    padding: 0.35rem 0.8rem;
+    background: transparent;
+    color: var(--ink-2);
+    cursor: pointer;
+  }
+  button[aria-pressed='true'] {
+    background: var(--ink);
+    color: var(--paper);
+  }
+</style>

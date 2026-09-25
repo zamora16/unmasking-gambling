@@ -36,7 +36,11 @@ const canonical = new URL(href(lang, page), Astro.site).toString();
       try {
         const t = localStorage.getItem('ug-theme');
         if (t === 'dark' || t === 'light') document.documentElement.dataset.theme = t;
-      } catch (e) {}
+        const m = localStorage.getItem('ug-mode');
+        document.documentElement.dataset.mode = m === 'tech' ? 'tech' : 'simple';
+      } catch (e) {
+        document.documentElement.dataset.mode = 'simple';
+      }
     </script>
   </head>
   <body>

@@ -1,0 +1,5 @@
+---
+/** Text shown only in plain-language mode. */
+const { block = false } = Astro.props as { block?: boolean };
+---
+{block ? <div class="only-simple"><slot /></div> : <span class="only-simple"><slot /></span>}

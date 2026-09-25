@@ -8,9 +8,9 @@ import d from '../../data/market/spain.json';
 const L = {
   es: {
     year: 'Año',
-    ggr: 'Ingresos netos (GGR)',
+    ggr: 'Pérdida de los jugadores (GGR)',
     wagered: 'Cantidades jugadas',
-    hold: 'Retención (GGR / jugado)',
+    hold: 'Parte que se queda la casa (GGR / jugado)',
     bonuses: 'Bonos liberados',
     casino: 'Casino',
     betting: 'Apuestas',
@@ -32,9 +32,9 @@ const L = {
   },
   en: {
     year: 'Year',
-    ggr: 'Gross gaming revenue (GGR)',
+    ggr: 'Players’ losses (GGR)',
     wagered: 'Amounts wagered',
-    hold: 'Hold (GGR / wagered)',
+    hold: 'Share kept by the house (GGR / wagered)',
     bonuses: 'Bonuses released',
     casino: 'Casino',
     betting: 'Betting',

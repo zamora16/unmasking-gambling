@@ -143,3 +143,13 @@ export function niceTicks(lo: number, hi: number, count = 5): number[] {
   for (let v = start; v <= hi + step * 1e-9; v += step) out.push(Math.round(v / step) * step);
   return out;
 }
+
+/** Two versions of a text: plain (default) and technical (shown in technical mode). */
+export function Dual({ simple, tech }: { simple: ReactNode; tech: ReactNode }) {
+  return (
+    <>
+      <span className="only-simple">{simple}</span>
+      <span className="only-tech">{tech}</span>
+    </>
+  );
+}

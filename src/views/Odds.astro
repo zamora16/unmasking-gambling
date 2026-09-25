@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro';
 import PageHead from '../components/PageHead.astro';
 import Figure from '../components/Figure.astro';
 import Stat from '../components/Stat.astro';
+import TechBox from '../components/TechBox.astro';
 import OddsCalculator from '../islands/odds/OddsCalculator';
 import { MarginTrend, LeagueMargins, CalibrationFig, FavouriteLongshot, Strategies } from '../islands/odds/OddsCharts';
 import { type Lang, fmt, href } from '../i18n';
@@ -38,47 +39,58 @@ const years = `${summary.firstDate.slice(0, 4)}–${summary.lastDate.slice(0, 4)
   page="odds"
   title={es ? '¿Dicen la verdad las cuotas?' : 'Do the odds tell the truth?'}
   description={es
-    ? `Analizamos ${f.int(summary.matches)} partidos de fútbol con cuotas reales: el margen de la casa, el sesgo favorito–sorpresa y por qué ninguna estrategia simple gana.`
-    : `We analysed ${f.int(summary.matches)} football matches with real odds: the bookmaker margin, the favourite–longshot bias and why no simple strategy wins.`}
+    ? `Analizamos ${f.int(summary.matches)} partidos de fútbol con cuotas reales: cuánto cobra la casa, dónde se equivoca y por qué ninguna estrategia sencilla gana.`
+    : `We analysed ${f.int(summary.matches)} football matches with real odds: how much the bookmaker charges, where it is wrong and why no simple strategy wins.`}
 >
   <PageHead
+    lang={lang}
     kicker={es ? 'Análisis con datos reales' : 'Real-data analysis'}
     title={es ? '¿Dicen la verdad las cuotas?' : 'Do the odds tell the truth?'}
     lede={es
-      ? `Una cuota es a la vez una probabilidad y un precio. Con ${f.int(summary.matches)} partidos de ${summary.leagues} ligas entre ${years} medimos cuánto cobra la casa, dónde se equivoca y qué le pasa a quien apuesta con reglas sencillas.`
-      : `Odds are a probability and a price at the same time. Using ${f.int(summary.matches)} matches from ${summary.leagues} leagues between ${years}, we measure how much the bookmaker charges, where it is wrong and what happens to anyone betting by simple rules.`}
+      ? `Una cuota te dice cuánto te pagan si aciertas. Pero esconde también cuánto se queda la casa. Hemos revisado ${f.int(summary.matches)} partidos de fútbol reales, de ${years}, para ver si las cuotas son justas y si alguna forma de apostar sale a cuenta.`
+      : `Odds tell you how much you get paid if you win. But they also hide how much the bookmaker keeps. We went through ${f.int(summary.matches)} real football matches, from ${years}, to see whether odds are fair and whether any way of betting pays off.`}
   />
 
   <div class="page">
     <div class="wide stats">
-      <Stat value={f.int(summary.matches)} label={es ? 'partidos con cuotas y resultado' : 'matches with odds and result'} />
-      <Stat value={f.pct(summary.medianMargin, 1)} label={es ? 'margen mediano de la casa de referencia' : 'median margin of the reference bookmaker'} />
-      <Stat value={f.signedPct(longest.roi, 0)} label={es ? `retorno medio apostando a cuotas de ${f.num(longest.from, 0)} a ${f.num(longest.to!, 0)}` : `average return betting at odds of ${f.num(longest.from, 0)} to ${f.num(longest.to!, 0)}`} />
-      <Stat value={`0 / ${strategies.length}`} label={es ? 'estrategias simples con beneficio' : 'simple strategies that made a profit'} />
+      <Stat value={f.int(summary.matches)} label={es ? 'partidos reales analizados, con sus cuotas y su resultado' : 'real matches analysed, with their odds and result'} />
+      <Stat value={f.eur(summary.medianMargin * 100 / (1 + summary.medianMargin), 2)} label={es ? 'se queda la casa de cada 100 € apostados en un partido típico' : 'kept by the bookmaker from every €100 bet on a typical match'} />
+      <Stat value={f.signedPct(longest.roi, 0)} label={es ? `pierde de media quien apuesta a las grandes sorpresas (cuotas de ${f.num(longest.from, 0)} a ${f.num(longest.to!, 0)})` : `average loss backing big upsets (odds of ${f.num(longest.from, 0)} to ${f.num(longest.to!, 0)})`} />
+      <Stat value={`0 / ${strategies.length}`} label={es ? 'formas sencillas de apostar que ganaron dinero en diez años' : 'simple ways of betting that made money over ten years'} />
     </div>
 
     <nav class="measure toc" aria-label={es ? 'En esta página' : 'On this page'}>
       <ol>
-        <li><a href="#price">{es ? 'El precio' : 'The price'}</a></li>
-        <li><a href="#calibration">{es ? 'La precisión' : 'The accuracy'}</a></li>
-        <li><a href="#longshots">{es ? 'Las sorpresas' : 'The long shots'}</a></li>
-        <li><a href="#strategies">{es ? 'Las estrategias' : 'The strategies'}</a></li>
-        <li><a href="#model">{es ? 'El modelo' : 'The model'}</a></li>
+        <li><a href="#price">{es ? 'La comisión' : 'The fee'}</a></li>
+        <li><a href="#calibration">{es ? '¿Aciertan?' : 'Are they right?'}</a></li>
+        <li><a href="#longshots">{es ? 'Las sorpresas' : 'Long shots'}</a></li>
+        <li><a href="#strategies">{es ? 'Ocho estrategias' : 'Eight strategies'}</a></li>
+        <li><a href="#model">{es ? 'Un modelo' : 'A model'}</a></li>
         <li><a href="#caveats">{es ? 'Límites' : 'Caveats'}</a></li>
       </ol>
     </nav>
 
     <article class="measure prose">
-      <h2 id="price">{es ? 'El precio está escondido en la cuota' : 'The price is hidden in the odds'}</h2>
+      <h2 id="price">{es ? 'La comisión escondida en la cuota' : 'The fee hidden in the odds'}</h2>
       {
         es ? (
-          <p>
-            Una cuota decimal de 2,00 promete devolver 2 € por cada euro. Si el precio fuera justo, correspondería a una probabilidad de 1/2. Pero si sumas las probabilidades implícitas de los tres resultados de un partido (local, empate y visitante) no da 100 %, sino algo más. Ese exceso es el <strong>margen</strong> (u <em>overround</em>): la parte de cada apuesta que la casa se queda pase lo que pase. Pruébalo:
-          </p>
+          <>
+            <p>
+              Imagina que apuestas a cara o cruz con una moneda normal. Lo justo sería que, si aciertas, te devolvieran el doble: una cuota de 2,00. Una casa de apuestas no te daría 2,00, te daría algo como 1,90, tanto a cara como a cruz. Esa pequeña diferencia es su <strong>comisión</strong>: pase lo que pase, a la larga se queda con una parte de todo lo que se apuesta.
+            </p>
+            <p>
+              En el fútbol pasa lo mismo con los tres resultados posibles (gana el local, empate o gana el visitante). La comisión no aparece por ningún lado, pero se puede calcular a partir de las cuotas. Escribe las de cualquier partido:
+            </p>
+          </>
         ) : (
-          <p>
-            Decimal odds of 2.00 promise €2 back for every euro. If the price were fair, that would mean a probability of 1/2. But add up the implied probabilities of a match’s three outcomes (home, draw, away) and you do not get 100%, you get a bit more. That excess is the <strong>margin</strong> (or <em>overround</em>): the share of every bet the bookmaker keeps whatever happens. Try it:
-          </p>
+          <>
+            <p>
+              Imagine betting on heads or tails with a normal coin. The fair deal would be to double your money if you win: odds of 2.00. A bookmaker would not offer 2.00, it would offer something like 1.90 on both heads and tails. That small difference is its <strong>fee</strong>: whatever happens, in the long run it keeps part of everything that is bet.
+            </p>
+            <p>
+              Football works the same way with its three possible results (home win, draw, away win). The fee is not shown anywhere, but it can be worked out from the odds. Type in any match:
+            </p>
+          </>
         )
       }
     </article>
@@ -88,27 +100,42 @@ const years = `${summary.firstDate.slice(0, 4)}–${summary.lastDate.slice(0, 4)
     </div>
 
     <article class="measure prose">
-      {
-        es ? (
-          <p>
-            Quitar el margen para recuperar la probabilidad «real» no es trivial. El método <strong>proporcional</strong> reparte el exceso por igual. El de <strong>potencia</strong> y el de <strong>Shin</strong> recortan más las sorpresas, porque ahí es donde las casas cargan más margen (enseguida veremos que los datos les dan la razón). El modelo de Shin, además, lo justifica: supone que una parte del dinero viene de apostadores con información privilegiada y que la casa se protege acortando las cuotas altas. En nuestros datos, esa fracción estimada es de un {f.pct(summary.shinZMedian, 1)}.
-          </p>
-        ) : (
-          <p>
-            Removing the margin to recover the “real” probability is not trivial. The <strong>proportional</strong> method spreads the excess evenly. The <strong>power</strong> and <strong>Shin</strong> methods trim long shots more, because that is where bookmakers load the most margin (as we will see, the data backs them up). Shin’s model even has a reason for it: it assumes part of the money comes from insiders, and that the bookmaker protects itself by shortening high odds. In our data that estimated share is {f.pct(summary.shinZMedian, 1)}.
-          </p>
-        )
-      }
+      <TechBox lang={lang} title={es ? 'Probabilidad implícita, margen y cómo quitarlo' : 'Implied probability, overround and how to remove it'}>
+        {
+          es ? (
+            <>
+              <p>Una cuota decimal <em>o</em> implica una probabilidad π = 1/o. En un mercado 1X2 las tres suman más de uno; el exceso es el <strong>margen</strong> u <em>overround</em>:</p>
+              <span class="formula">margen = 1/o₁ + 1/oₓ + 1/o₂ − 1</span>
+              <p>
+                Para recuperar probabilidades que sumen uno hay varios métodos. El <strong>proporcional</strong> normaliza π<sub>i</sub>/Σπ. El de <strong>potencia</strong> busca k tal que Σπ<sub>i</sub><sup>k</sup> = 1. El de <strong>Shin (1993)</strong> supone que una fracción z del dinero viene de apostadores con información privilegiada y que la casa se protege acortando las cuotas altas; se resuelve numéricamente para z. Potencia y Shin recortan más las probabilidades pequeñas. En nuestros datos, la z mediana de Shin es {f.pct(summary.shinZMedian, 1)}.
+              </p>
+              <p>Lo que pierde de media quien apuesta es margen / (1 + margen) de lo apostado.</p>
+            </>
+          ) : (
+            <>
+              <p>Decimal odds <em>o</em> imply a probability π = 1/o. In a 1X2 market the three add up to more than one; the excess is the <strong>overround</strong> or margin:</p>
+              <span class="formula">overround = 1/o₁ + 1/oₓ + 1/o₂ − 1</span>
+              <p>
+                There are several ways to recover probabilities that sum to one. <strong>Proportional</strong> normalises π<sub>i</sub>/Σπ. <strong>Power</strong> finds k such that Σπ<sub>i</sub><sup>k</sup> = 1. <strong>Shin (1993)</strong> assumes a fraction z of the money comes from insiders and that the bookmaker protects itself by shortening high odds; it is solved numerically for z. Power and Shin shrink small probabilities more. In our data the median Shin z is {f.pct(summary.shinZMedian, 1)}.
+              </p>
+              <p>The average loss for a bettor is overround / (1 + overround) of the stake.</p>
+            </>
+          )
+        }
+      </TechBox>
     </article>
 
     <Figure
-      title={es ? 'El margen de la casa se ha reducido a la mitad desde 2000… pero sigue ahí' : 'The bookmaker margin has halved since 2000… but it is still there'}
+      title={es ? 'La comisión de la casa se ha reducido a la mitad desde 2000… pero sigue ahí' : 'The bookmaker’s fee has halved since 2000… but it is still there'}
       sub={es
-        ? 'Margen mediano por temporada en el mercado 1X2 de todas las ligas del conjunto de datos. La línea azul es la mejor cuota disponible entre unas 17 casas.'
-        : 'Median margin per season on the 1X2 market across every league in the dataset. The blue line is the best price available across about 17 bookmakers.'}
+        ? 'Comisión típica en cada temporada, en porcentaje. Naranja: una casa grande. Azul: si pudieras elegir siempre la mejor cuota entre unas 17 casas.'
+        : 'Typical fee each season, as a percentage. Orange: one big bookmaker. Blue: if you could always pick the best odds among about 17 bookmakers.'}
+      subTech={es
+        ? 'Overround mediano por temporada, mercado 1X2, todas las ligas. Casa de referencia (Bet365) frente a la cuota máxima publicada entre ~17 casas.'
+        : 'Median overround per season, 1X2 market, all leagues. Reference bookmaker (Bet365) against the maximum published price across ~17 books.'}
       foot={es
-        ? `Fuente: Football-Data.co.uk vía <a href="https://github.com/xgabora/Club-Football-Match-Data-2000-2025">xgabora/Club-Football-Match-Data</a>. Cálculo propio. La «mejor cuota» es el máximo publicado por cualquiera de las casas: un límite optimista, porque no siempre se puede apostar a ese precio.`
-        : `Source: Football-Data.co.uk via <a href="https://github.com/xgabora/Club-Football-Match-Data-2000-2025">xgabora/Club-Football-Match-Data</a>. Our calculation. The “best price” is the highest quote published by any bookmaker: an optimistic bound, since you cannot always bet at that price.`}
+        ? `Fuente: Football-Data.co.uk vía <a href="https://github.com/xgabora/Club-Football-Match-Data-2000-2025">xgabora/Club-Football-Match-Data</a>. Cálculo propio. La «mejor cuota» es el máximo publicado por cualquier casa: en la práctica no siempre se puede apostar a ese precio.`
+        : `Source: Football-Data.co.uk via <a href="https://github.com/xgabora/Club-Football-Match-Data-2000-2025">xgabora/Club-Football-Match-Data</a>. Our calculation. The “best price” is the highest quote published by any bookmaker: in practice you cannot always bet at that price.`}
     >
       <MarginTrend client:idle lang={lang} />
     </Figure>
@@ -117,11 +144,11 @@ const years = `${summary.firstDate.slice(0, 4)}–${summary.lastDate.slice(0, 4)
       {
         es ? (
           <p>
-            En la temporada {seasonLabel(first.season)} la casa de referencia se quedaba con un {f.pct(first.margin, 1)}. Desde 2008 ronda el {f.pct(mid.margin, 1)}. La competencia online bajó los precios, pero de forma desigual: en las grandes ligas, donde el mercado es enorme y cualquier error se castiga, el margen es menor. En segunda división, en ligas pequeñas o en competiciones exóticas, la casa cobra casi el doble.
+            En el año 2000 la casa se quedaba con cerca del {f.pct(first.margin, 0)}. Con la llegada de las apuestas online y la competencia bajó hasta alrededor del {f.pct(mid.margin, 0)}, y ahí se ha quedado. Pero no cobra igual en todas partes: en las ligas más seguidas, como la Premier League o LaLiga, la comisión es más baja. En las divisiones inferiores y las ligas pequeñas, donde menos gente mira, cobra casi el doble.
           </p>
         ) : (
           <p>
-            In the {seasonLabel(first.season)} season the reference bookmaker kept {f.pct(first.margin, 1)}. Since 2008 it has hovered around {f.pct(mid.margin, 1)}. Online competition pushed prices down, but unevenly: in the big leagues, where the market is huge and any mistake gets punished, margins are lower. In second divisions, small leagues and exotic competitions, the bookmaker charges almost twice as much.
+            In 2000 the bookmaker kept about {f.pct(first.margin, 0)}. With online betting and competition it fell to around {f.pct(mid.margin, 0)}, and it has stayed there. But it does not charge the same everywhere: in the most-watched leagues, like the Premier League or LaLiga, the fee is lower. In lower divisions and small leagues, where fewer people are watching, it charges almost twice as much.
           </p>
         )
       }
@@ -129,25 +156,24 @@ const years = `${summary.firstDate.slice(0, 4)}–${summary.lastDate.slice(0, 4)
 
     <Figure
       wide={false}
-      title={es ? 'Cuanto menos mirada está una liga, más cobra la casa' : 'The less a league is watched, the more the bookmaker charges'}
-      sub={es ? 'Margen mediano de la casa de referencia por liga, temporadas 2019/20 a 2026/27.' : 'Median margin of the reference bookmaker by league, seasons 2019/20 to 2026/27.'}
+      title={es ? 'Cuanto menos seguida es una liga, más cobra la casa' : 'The less followed a league is, the more the bookmaker charges'}
+      sub={es ? 'Comisión típica por liga desde la temporada 2019/20.' : 'Typical fee by league since the 2019/20 season.'}
+      subTech={es ? 'Overround mediano de la casa de referencia por liga, temporadas 2019/20 a 2026/27.' : 'Median overround of the reference bookmaker by league, seasons 2019/20 to 2026/27.'}
       foot={es ? 'Selección de 16 ligas. La tabla incluye todas.' : 'A selection of 16 leagues. The table includes all of them.'}
     >
       <LeagueMargins client:idle lang={lang} />
     </Figure>
 
     <article class="measure prose">
-      <h2 id="calibration">{es ? '¿Aciertan las probabilidades?' : 'Are the probabilities right?'}</h2>
+      <h2 id="calibration">{es ? '¿Aciertan las casas?' : 'Do bookmakers get it right?'}</h2>
       {
         es ? (
-          <>
-            <p>
-              Que la casa cobre no significa que se equivoque. Para saber si las cuotas son buenas predicciones agrupamos todos los resultados posibles según su probabilidad implícita (ya sin margen) y miramos con qué frecuencia ocurrieron de verdad. Si las cuotas fueran perfectas, los puntos caerían sobre la diagonal.
-            </p>
-          </>
+          <p>
+            Que la casa cobre no quiere decir que se equivoque. Para comprobarlo tomamos todos los resultados a los que las cuotas daban, por ejemplo, un 30 % de posibilidades, y contamos cuántas veces ocurrieron de verdad. Si las cuotas fueran perfectas, habrían ocurrido justo un 30 % de las veces. En el gráfico, eso sería que los puntos caen sobre la línea diagonal.
+          </p>
         ) : (
           <p>
-            Charging a fee does not mean being wrong. To check whether odds are good predictions we group every possible outcome by its implied probability (with the margin removed) and look at how often it actually happened. If the odds were perfect, the points would sit on the diagonal.
+            Charging a fee does not mean being wrong. To check, we took every result the odds gave, say, a 30% chance, and counted how often it actually happened. If the odds were perfect, it would have happened exactly 30% of the time. In the chart, that means the points fall on the diagonal line.
           </p>
         )
       }
@@ -155,10 +181,13 @@ const years = `${summary.firstDate.slice(0, 4)}–${summary.lastDate.slice(0, 4)
 
     <Figure
       wide={false}
-      title={es ? 'Las cuotas son muy precisas… salvo en los extremos' : 'The odds are very accurate… except at the extremes'}
+      title={es ? 'Las cuotas aciertan mucho… salvo con las sorpresas y los grandes favoritos' : 'The odds are very accurate… except for upsets and heavy favourites'}
       sub={es
-        ? 'Probabilidad implícita (método proporcional) frente a la frecuencia observada, temporadas 2012/13 a 2026/27. Las barras verticales son intervalos de confianza del 95 % (Wilson).'
-        : 'Implied probability (proportional method) against observed frequency, seasons 2012/13 to 2026/27. Vertical bars are 95% Wilson confidence intervals.'}
+        ? 'Horizontal: lo que decían las cuotas. Vertical: lo que pasó de verdad. Cada punto agrupa miles de resultados.'
+        : 'Horizontal: what the odds said. Vertical: what actually happened. Each point groups thousands of outcomes.'}
+      subTech={es
+        ? 'Diagrama de fiabilidad: probabilidad implícita (método proporcional) frente a frecuencia observada, 20 intervalos, temporadas 2012/13 a 2026/27. Barras: IC del 95 % de Wilson.'
+        : 'Reliability diagram: implied probability (proportional method) against observed frequency, 20 bins, seasons 2012/13 to 2026/27. Bars: 95% Wilson CIs.'}
     >
       <CalibrationFig client:idle lang={lang} />
     </Figure>
@@ -167,24 +196,37 @@ const years = `${summary.firstDate.slice(0, 4)}–${summary.lastDate.slice(0, 4)
       {
         es ? (
           <p>
-            En el centro, el mercado acierta de forma asombrosa: lo que las cuotas dan como un 30 % ocurre un 30 % de las veces. Pero a la izquierda los puntos quedan por debajo de la diagonal: las sorpresas pasan <strong>menos</strong> de lo que dicen sus cuotas. A la derecha quedan por encima: los grandes favoritos ganan <strong>más</strong> de lo que se paga por ellos. Es el <strong>sesgo favorito–sorpresa</strong>, uno de los hallazgos más replicados de la economía de las apuestas, y aquí aparece con claridad.
+            En la zona central las cuotas aciertan de forma asombrosa. Pero fíjate en los extremos. A la izquierda, los puntos quedan por debajo de la línea: <strong>las sorpresas pasan menos de lo que dicen sus cuotas</strong>. A la derecha, por encima: <strong>los grandes favoritos ganan más de lo que se paga por ellos</strong>. Dicho de otra forma, la casa paga peor precisamente las apuestas más tentadoras, las que prometen mucho dinero por poco. Los economistas lo llaman <em>sesgo favorito–sorpresa</em>, y es de los resultados más repetidos en el estudio de las apuestas.
           </p>
         ) : (
           <p>
-            In the middle the market is remarkably accurate: what the odds call 30% happens 30% of the time. But on the left the points fall below the diagonal: long shots win <strong>less</strong> often than their odds suggest. On the right they sit above it: heavy favourites win <strong>more</strong> often than they are priced. This is the <strong>favourite–longshot bias</strong>, one of the most replicated findings in the economics of betting, and it shows up clearly here.
+            In the middle, the odds are remarkably accurate. But look at the ends. On the left, the points sit below the line: <strong>upsets happen less often than their odds suggest</strong>. On the right, above it: <strong>heavy favourites win more often than they are priced</strong>. In other words, the bookmaker pays worst on exactly the most tempting bets, the ones that promise a lot of money for a little. Economists call it the <em>favourite–longshot bias</em>, and it is one of the most replicated findings in the study of betting.
           </p>
         )
       }
+      <TechBox lang={lang} title={es ? 'Calibración e intervalos de confianza' : 'Calibration and confidence intervals'}>
+        {
+          es ? (
+            <p>
+              Se agrupan las probabilidades implícitas (sin margen, método proporcional) de los tres resultados de cada partido en 20 intervalos de ancho 5 %, y en cada uno se compara la probabilidad media predicha con la frecuencia observada. Los intervalos de confianza del 95 % usan el método de Wilson, más estable que la aproximación normal con proporciones extremas. Se descartan los intervalos con menos de 200 observaciones.
+            </p>
+          ) : (
+            <p>
+              The implied probabilities (margin removed, proportional method) of each match’s three outcomes are grouped into 20 bins 5% wide, and in each bin the mean predicted probability is compared with the observed frequency. The 95% confidence intervals use the Wilson method, which is more stable than the normal approximation for extreme proportions. Bins with fewer than 200 observations are dropped.
+            </p>
+          )
+        }
+      </TechBox>
 
       <h2 id="longshots">{es ? 'Soñar con la sorpresa sale caro' : 'Dreaming of the upset is expensive'}</h2>
       {
         es ? (
           <p>
-            Traducido a dinero: si apuestas 1 € a cada resultado con cuotas entre {f.num(shortest.from, 2)} y {f.num(shortest.to!, 2)}, pierdes de media un {f.pct(-shortest.roi, 1)}. Con cuotas entre {f.num(long10.from, 0)} y {f.num(long10.to!, 0)}, un {f.pct(-long10.roi, 0)}. Las cuotas altas son justo las que más atraen, porque prometen mucho por poco, y son las que peor pagan.
+            Llevado a dinero: si apostaras 1 € a todos los resultados muy probables (cuotas entre {f.num(shortest.from, 2)} y {f.num(shortest.to!, 2)}), perderías de media {f.eur(-shortest.roi, 2)} por euro. Si apostaras a todas las grandes sorpresas (cuotas entre {f.num(long10.from, 0)} y {f.num(long10.to!, 0)}), perderías {f.eur(-long10.roi, 2)} por euro: más de diez veces más.
           </p>
         ) : (
           <p>
-            In money terms: bet €1 on every outcome priced between {f.num(shortest.from, 2)} and {f.num(shortest.to!, 2)} and you lose {f.pct(-shortest.roi, 1)} on average. Between {f.num(long10.from, 0)} and {f.num(long10.to!, 0)}, you lose {f.pct(-long10.roi, 0)}. High odds are exactly the ones that tempt people most, because they promise a lot for a little, and they are the ones that pay worst.
+            In money terms: bet €1 on every very likely result (odds between {f.num(shortest.from, 2)} and {f.num(shortest.to!, 2)}) and you would lose {f.eur(-shortest.roi, 2)} per euro on average. Bet on every big upset (odds between {f.num(long10.from, 0)} and {f.num(long10.to!, 0)}) and you would lose {f.eur(-long10.roi, 2)} per euro: more than ten times as much.
           </p>
         )
       }
@@ -194,37 +236,43 @@ const years = `${summary.firstDate.slice(0, 4)}–${summary.lastDate.slice(0, 4)
       wide={false}
       title={es ? 'Cuanto más alta la cuota, peor el trato' : 'The higher the odds, the worse the deal'}
       sub={es
-        ? 'Retorno medio de apostar 1 unidad a todos los resultados de cada tramo de cuotas, temporadas 2012/13 a 2026/27. Las líneas negras son intervalos del 95 % (bootstrap).'
-        : 'Average return from betting 1 unit on every outcome in each odds range, seasons 2012/13 to 2026/27. Black lines are 95% bootstrap intervals.'}
+        ? 'Lo que se gana o se pierde de media por cada euro apostado, según la cuota. Las rayitas negras marcan el margen de error.'
+        : 'What you win or lose on average for every euro bet, by odds range. The small black lines show the margin of error.'}
+      subTech={es
+        ? 'ROI medio de apostar 1 unidad a cada resultado del tramo, temporadas 2012/13 a 2026/27. Intervalos del 95 % por bootstrap (1.000 réplicas).'
+        : 'Mean ROI of a 1-unit bet on every outcome in the range, seasons 2012/13 to 2026/27. 95% bootstrap intervals (1,000 resamples).'}
       foot={es
-        ? 'Incluso a la mejor cuota del mercado, las sorpresas pierden dinero. Los pequeños retornos positivos en favoritos a la mejor cuota desaparecen en la práctica: esas cuotas máximas duran poco y las casas limitan a quien gana.'
-        : 'Even at the best price in the market, long shots lose money. The small positive returns on favourites at the best price vanish in practice: those top quotes are short-lived and bookmakers limit winning customers.'}
+        ? 'Incluso a la mejor cuota del mercado, las sorpresas pierden dinero. Las pequeñas ganancias con favoritos a la mejor cuota desaparecen en la práctica: esas cuotas duran poco y las casas limitan a quien gana.'
+        : 'Even at the best price in the market, long shots lose money. The small gains on favourites at the best price vanish in practice: those prices do not last and bookmakers limit winning customers.'}
     >
       <FavouriteLongshot client:idle lang={lang} />
     </Figure>
 
     <article class="measure prose">
-      <h2 id="strategies">{es ? 'Ocho maneras de apostar, diez años de partidos' : 'Eight ways to bet, ten years of matches'}</h2>
+      <h2 id="strategies">{es ? 'Ocho formas de apostar, diez años de partidos' : 'Eight ways to bet, ten years of matches'}</h2>
       {
         es ? (
           <p>
-            ¿Y si en vez de elegir con el corazón se aplica una regla fija? Probamos ocho estrategias sobre los {f.int(S.home.bets)} partidos de las temporadas 2016/17 a 2026/27, con 1 unidad por apuesta: siempre al local, al empate, al visitante, al favorito, a la sorpresa, al azar, al favorito con la mejor cuota del mercado y un modelo estadístico que busca «apuestas de valor».
+            ¿Y si en vez de apostar con el corazón se sigue una regla fija? Probamos ocho con los {f.int(S.home.bets)} partidos de las últimas diez temporadas, 1 € por partido: apostar siempre al equipo local, al empate, al visitante, al favorito, a la sorpresa, al azar, al favorito buscando la mejor cuota del mercado y lo que recomendaría un modelo estadístico.
           </p>
         ) : (
           <p>
-            What if instead of picking with your heart you follow a fixed rule? We tested eight strategies on the {f.int(S.home.bets)} matches from the 2016/17 to 2026/27 seasons, 1 unit per bet: always home, always draw, always away, always the favourite, always the underdog, at random, the favourite at the best market price, and a statistical model that hunts for “value bets”.
+            What if instead of betting with your heart you follow a fixed rule? We tested eight on the {f.int(S.home.bets)} matches of the last ten seasons, €1 per match: always backing the home team, the draw, the away team, the favourite, the underdog, at random, the favourite at the best price in the market, and what a statistical model would recommend.
           </p>
         )
       }
     </article>
 
     <Figure
-      title={es ? 'Ninguna regla sencilla gana: todas acaban pagando el margen' : 'No simple rule wins: they all end up paying the margin'}
+      title={es ? 'Ninguna regla sencilla gana: todas acaban pagando la comisión' : 'No simple rule wins: they all end up paying the fee'}
       sub={es
-        ? 'Beneficio acumulado a medida que se hacen las apuestas, en porcentaje sobre el total apostado. En gris: siempre local, siempre empate, siempre visitante y al azar.'
-        : 'Cumulative profit as the bets are placed, as a share of the total staked. In grey: always home, always draw, always away and at random.'}
+        ? 'Dinero ganado o perdido a medida que se apuesta, en porcentaje de todo lo apostado. En gris, las otras cuatro estrategias (local, empate, visitante y al azar).'
+        : 'Money won or lost as the bets go by, as a share of everything staked. In grey, the other four strategies (home, draw, away and random).'}
+      subTech={es
+        ? 'P&L acumulado normalizado por el número total de apuestas de cada estrategia; el valor final es el ROI. Temporadas 2016/17 a 2026/27, stake unitario.'
+        : 'Cumulative P&L normalised by each strategy’s total number of bets; the final value is the ROI. Seasons 2016/17 to 2026/27, unit stakes.'}
       foot={es
-        ? `Resultados finales: favorito ${f.signedPct(S.favourite.roi, 1)}, sorpresa ${f.signedPct(S.underdog.roi, 1)}, azar ${f.signedPct(S.random.roi, 1)}, favorito a la mejor cuota ${f.signedPct(S.favouriteBest.roi, 1)} (intervalo del 95 %: ${f.signedPct(S.favouriteBest.roiLo, 1)} a ${f.signedPct(S.favouriteBest.roiHi, 1)}).`
+        ? `Resultados finales: favorito ${f.signedPct(S.favourite.roi, 1)}, sorpresa ${f.signedPct(S.underdog.roi, 1)}, al azar ${f.signedPct(S.random.roi, 1)}, favorito a la mejor cuota ${f.signedPct(S.favouriteBest.roi, 1)} (intervalo del 95 %: ${f.signedPct(S.favouriteBest.roiLo, 1)} a ${f.signedPct(S.favouriteBest.roiHi, 1)}).`
         : `Final results: favourite ${f.signedPct(S.favourite.roi, 1)}, underdog ${f.signedPct(S.underdog.roi, 1)}, random ${f.signedPct(S.random.roi, 1)}, favourite at the best price ${f.signedPct(S.favouriteBest.roi, 1)} (95% interval: ${f.signedPct(S.favouriteBest.roiLo, 1)} to ${f.signedPct(S.favouriteBest.roiHi, 1)}).`}
     >
       <Strategies client:idle lang={lang} />
@@ -234,74 +282,89 @@ const years = `${summary.firstDate.slice(0, 4)}–${summary.lastDate.slice(0, 4)
       {
         es ? (
           <p>
-            Cada estrategia pierde más o menos lo que cobra la casa en el tipo de apuesta que elige. Apostar siempre a la sorpresa es la peor ({f.signedPct(S.underdog.roi, 1)}) por el sesgo que acabamos de ver. Apostar al azar pierde un {f.pct(-S.random.roi, 1)}, casi exactamente el margen. Lo único que acerca a cero es comprar siempre la mejor cuota de 17 casas a la vez, y ni siquiera así hay beneficio.
+            Todas pierden, y más o menos lo que cobra la casa en el tipo de apuesta que eligen. Apostar siempre a la sorpresa es lo peor ({f.signedPct(S.underdog.roi, 1)}), justo por lo que acabamos de ver. Apostar al azar pierde un {f.pct(-S.random.roi, 1)}, casi exactamente la comisión. Lo único que se acerca a cero es buscar siempre la mejor cuota entre 17 casas a la vez, algo que casi nadie hace, y ni siquiera así se gana.
           </p>
         ) : (
           <p>
-            Every strategy loses roughly what the bookmaker charges on the kind of bet it picks. Always backing the underdog is the worst ({f.signedPct(S.underdog.roi, 1)}) because of the bias we just saw. Betting at random loses {f.pct(-S.random.roi, 1)}, almost exactly the margin. The only thing that gets close to zero is always buying the best price from 17 bookmakers at once, and even then there is no profit.
+            They all lose, roughly what the bookmaker charges on the kind of bet they pick. Always backing the underdog is the worst ({f.signedPct(S.underdog.roi, 1)}), for the reason we just saw. Betting at random loses {f.pct(-S.random.roi, 1)}, almost exactly the fee. The only thing that gets close to zero is always finding the best odds among 17 bookmakers at once, something almost nobody does, and even then you do not win.
           </p>
         )
       }
 
-      <h2 id="model">{es ? '¿Y si tengo un modelo mejor?' : 'What if I have a better model?'}</h2>
+      <h2 id="model">{es ? '¿Y si elige un ordenador?' : 'What if a computer picks?'}</h2>
       {
         es ? (
-          <>
-            <p>
-              Es la promesa de los «tipsters» y de los cursos de apuestas: encontrar partidos donde la casa se equivoca. Lo probamos de forma honesta. Ajustamos un modelo logístico ordinal con la diferencia de rating Elo entre los equipos, usando solo las temporadas {model.trainSeasons[0]}–{model.trainSeasons[1]}, y lo evaluamos en {f.int(model.nTest)} partidos posteriores que el modelo no había visto. Apostábamos solo cuando el modelo veía un valor esperado superior al 5 %.
-            </p>
-            <p>
-              Resultado: el mercado predice mejor que el modelo (<em>log-loss</em> de {f.num(model.logLossMarket, 4)} frente a {f.num(model.logLossElo, 4)}; cuanto menor, mejor), y las «apuestas de valor» del modelo perdieron un {f.pct(-S.eloValue.roi, 1)} en {f.int(S.eloValue.bets)} apuestas. Cuando un modelo sencillo «ve valor», casi siempre es porque le falta información que las cuotas ya tienen: lesiones, alineaciones, dinero informado. Batir al mercado de forma sostenida exige más información que él, y quien lo consigue acaba con la cuenta limitada.
-            </p>
-          </>
+          <p>
+            Es la promesa de los «pronosticadores» y de los cursos de apuestas: encontrar los partidos en los que la casa se equivoca. Lo probamos. Creamos un modelo estadístico que estima quién va a ganar según la fuerza de cada equipo, lo entrenamos con partidos antiguos y lo pusimos a apostar en {f.int(model.nTest)} partidos posteriores que no había visto. Solo apostaba cuando creía haber encontrado una buena oportunidad. Resultado: acertó menos que las propias cuotas y perdió un {f.pct(-S.eloValue.roi, 1)} de lo apostado en {f.int(S.eloValue.bets)} apuestas. Cuando un modelo sencillo «ve una oportunidad», casi siempre es porque no sabe algo que la casa sí sabe: una lesión, una alineación, dinero de gente bien informada.
+          </p>
         ) : (
-          <>
-            <p>
-              It is the promise of tipsters and betting courses: find the matches where the bookmaker is wrong. We tested it honestly. We fitted an ordinal logistic model on the Elo rating difference between the teams, using only the {model.trainSeasons[0]}–{model.trainSeasons[1]} seasons, and evaluated it on {f.int(model.nTest)} later matches the model had never seen. We bet only when the model saw an expected value above 5%.
-            </p>
-            <p>
-              Result: the market predicts better than the model (log-loss of {f.num(model.logLossMarket, 4)} versus {f.num(model.logLossElo, 4)}; lower is better), and the model’s “value bets” lost {f.pct(-S.eloValue.roi, 1)} over {f.int(S.eloValue.bets)} bets. When a simple model “sees value”, it is almost always because it lacks information the odds already have: injuries, line-ups, informed money. Beating the market consistently takes more information than the market has, and whoever manages it ends up with a limited account.
-            </p>
-          </>
+          <p>
+            It is the promise of tipsters and betting courses: find the matches where the bookmaker is wrong. We tried it. We built a statistical model that estimates who will win from each team’s strength, trained it on old matches and set it betting on {f.int(model.nTest)} later matches it had never seen. It only bet when it thought it had found a good opportunity. Result: it predicted worse than the odds themselves and lost {f.pct(-S.eloValue.roi, 1)} of its stakes over {f.int(S.eloValue.bets)} bets. When a simple model “sees an opportunity”, it is almost always because it does not know something the bookmaker does: an injury, a line-up, money from well-informed bettors.
+          </p>
         )
       }
-
-      <div class="note">
+      <TechBox lang={lang} title={es ? 'El modelo: regresión logística ordinal sobre el Elo' : 'The model: ordinal logistic regression on Elo'}>
         {
           es ? (
             <>
-              <strong>¿Qué método de quitar el margen funciona mejor?</strong> Con los tres se predice mucho mejor que con las frecuencias de base (log-loss {f.num(base.logLoss, 4)}), y entre ellos las diferencias son pequeñas: proporcional {f.num(prop.logLoss, 4)}, Shin {f.num(shin.logLoss, 4)}. Shin y potencia ganan por poco porque corrigen el sesgo favorito–sorpresa.
+              <p>
+                Modelo logístico ordinal con la diferencia de rating Elo (local − visitante, en cientos de puntos) como única variable: P(y ≤ j) = σ(c<sub>j</sub> − β·ΔElo), con y ∈ {'{'}local, empate, visitante{'}'}. La ventaja de campo queda recogida en los puntos de corte. Se ajusta por máxima verosimilitud (Nelder–Mead) con las temporadas {model.trainSeasons[0]}–{model.trainSeasons[1]} y se evalúa fuera de muestra desde {model.testSeasons[0]}/{String(model.testSeasons[0] + 1).slice(2)}. Se apuesta cuando el valor esperado estimado, p̂·o − 1, supera el 5 %.
+              </p>
+              <ul>
+                <li><em>Log-loss</em> fuera de muestra: mercado (Shin) {f.num(model.logLossMarket, 4)} frente a Elo {f.num(model.logLossElo, 4)}. Brier: {f.num(model.brierMarket, 4)} frente a {f.num(model.brierElo, 4)}.</li>
+                <li>Métodos de quitar el margen, 2012–2026: frecuencias de base {f.num(base.logLoss, 4)}, proporcional {f.num(prop.logLoss, 4)}, Shin {f.num(shin.logLoss, 4)}. Shin y potencia ganan por poco porque corrigen el sesgo favorito–sorpresa.</li>
+                <li>ROI de las «apuestas de valor»: {f.signedPct(S.eloValue.roi, 1)} (IC 95 % bootstrap: {f.signedPct(S.eloValue.roiLo, 1)} a {f.signedPct(S.eloValue.roiHi, 1)}).</li>
+              </ul>
             </>
           ) : (
             <>
-              <strong>Which margin-removal method works best?</strong> All three predict far better than base rates (log-loss {f.num(base.logLoss, 4)}), and the differences between them are small: proportional {f.num(prop.logLoss, 4)}, Shin {f.num(shin.logLoss, 4)}. Shin and power win narrowly because they correct for the favourite–longshot bias.
+              <p>
+                Ordinal logistic model with the Elo rating difference (home − away, in hundreds of points) as the only feature: P(y ≤ j) = σ(c<sub>j</sub> − β·ΔElo), with y ∈ {'{'}home, draw, away{'}'}. Home advantage is absorbed by the cut points. Fitted by maximum likelihood (Nelder–Mead) on the {model.trainSeasons[0]}–{model.trainSeasons[1]} seasons and evaluated out of sample from {model.testSeasons[0]}/{String(model.testSeasons[0] + 1).slice(2)}. It bets when the estimated expected value, p̂·o − 1, exceeds 5%.
+              </p>
+              <ul>
+                <li>Out-of-sample log-loss: market (Shin) {f.num(model.logLossMarket, 4)} vs Elo {f.num(model.logLossElo, 4)}. Brier: {f.num(model.brierMarket, 4)} vs {f.num(model.brierElo, 4)}.</li>
+                <li>Margin-removal methods, 2012–2026: base rates {f.num(base.logLoss, 4)}, proportional {f.num(prop.logLoss, 4)}, Shin {f.num(shin.logLoss, 4)}. Shin and power win narrowly because they correct for the favourite–longshot bias.</li>
+                <li>ROI of the “value bets”: {f.signedPct(S.eloValue.roi, 1)} (95% bootstrap CI: {f.signedPct(S.eloValue.roiLo, 1)} to {f.signedPct(S.eloValue.roiHi, 1)}).</li>
+              </ul>
             </>
           )
         }
-      </div>
+      </TechBox>
 
-      <h2 id="caveats">{es ? 'Límites de este análisis' : 'Caveats'}</h2>
+      <h2 id="caveats">{es ? 'Lo que este análisis no cubre' : 'What this analysis does not cover'}</h2>
       {
         es ? (
-          <ul>
-            <li>Solo analizamos el mercado 1X2 antes del partido. Las apuestas combinadas, en directo o a jugadores suelen tener márgenes mucho mayores, así que estas cifras son una estimación <em>favorable</em> al apostador.</li>
-            <li>La casa de referencia es la que recoge Football-Data.co.uk. En las primeras temporadas puede proceder de otras casas.</li>
-            <li>Las cuotas máximas son el mejor precio publicado por cualquier casa, no un precio al que siempre se pueda apostar.</li>
-            <li>El modelo Elo es deliberadamente sencillo. Un modelo más rico se acercaría más al mercado, pero para ganar dinero tendría que superarlo, además de pagar el margen.</li>
-          </ul>
+          <>
+            <p>
+              Solo miramos la apuesta más básica: quién gana un partido, antes de que empiece. Las combinadas, las apuestas en directo o a goleadores suelen tener comisiones mucho más altas, así que estas cifras son la versión <em>más favorable</em> para quien apuesta.
+            </p>
+            <TechBox lang={lang} title={es ? 'Límites técnicos' : 'Technical caveats'}>
+              <ul>
+                <li>La casa de referencia es la que recoge Football-Data.co.uk; en las primeras temporadas puede proceder de otras casas.</li>
+                <li>Las cuotas máximas son el mejor precio publicado, no un precio al que siempre se pueda apostar, y no consideran la limitación de cuentas ganadoras.</li>
+                <li>El modelo Elo es deliberadamente sencillo. Uno más rico se acercaría al mercado, pero para ganar dinero tendría que superarlo y además pagar el margen.</li>
+                <li>El análisis es reproducible con <a href="https://github.com/zamora16/unmasking-gambling/tree/main/analysis/odds">analysis/odds/pipeline.py</a>.</li>
+              </ul>
+            </TechBox>
+          </>
         ) : (
-          <ul>
-            <li>We only analyse the pre-match 1X2 market. Accumulators, in-play and player markets usually carry much larger margins, so these figures are a <em>generous</em> estimate for the bettor.</li>
-            <li>The reference bookmaker is the one recorded by Football-Data.co.uk; in the earliest seasons it may come from other bookmakers.</li>
-            <li>Maximum odds are the best price published by any bookmaker, not a price you can always get.</li>
-            <li>The Elo model is deliberately simple. A richer model would get closer to the market, but to make money it would have to beat it, and pay the margin on top.</li>
-          </ul>
+          <>
+            <p>
+              We only look at the most basic bet: who wins a match, before kick-off. Accumulators, in-play bets or goalscorer markets usually carry much higher fees, so these figures are the <em>most favourable</em> version for the bettor.
+            </p>
+            <TechBox lang={lang} title="Technical caveats">
+              <ul>
+                <li>The reference bookmaker is the one recorded by Football-Data.co.uk; in the earliest seasons it may come from other bookmakers.</li>
+                <li>Maximum odds are the best published price, not a price you can always get, and they ignore the limiting of winning accounts.</li>
+                <li>The Elo model is deliberately simple. A richer one would get closer to the market, but to make money it would have to beat it and pay the margin on top.</li>
+                <li>The analysis is reproducible with <a href="https://github.com/zamora16/unmasking-gambling/tree/main/analysis/odds">analysis/odds/pipeline.py</a>.</li>
+              </ul>
+            </TechBox>
+          </>
         )
       }
       <p>
-        {es ? 'El análisis completo es reproducible con un script de Python: ' : 'The full analysis is reproducible with a Python script: '}
-        <a href="https://github.com/zamora16/unmasking-gambling/tree/main/analysis/odds">analysis/odds</a>.
-        {es ? ' Más detalles en ' : ' More details in '}<a href={href(lang, 'methods')}>{es ? 'Método' : 'Methods'}</a>.
+        {es ? 'Más detalles en ' : 'More details in '}<a href={href(lang, 'methods')}>{es ? 'Método' : 'Methods'}</a>.
       </p>
     </article>
   </div>

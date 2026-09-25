@@ -59,6 +59,11 @@ const rnd = strategies.find((s) => s.key === 'random')!;
         <a class="btn" href={href(lang, 'lab')}>{es ? 'Abrir el laboratorio' : 'Open the lab'} →</a>
         <a class="btn ghost" href={href(lang, 'odds')}>{es ? 'Leer el análisis de cuotas' : 'Read the odds analysis'}</a>
       </div>
+      <p class="modes-note">
+        {es
+          ? 'Cada sección se puede leer de dos formas: en modo sencillo, sin jerga, o en modo técnico, con las fórmulas, los métodos y el código.'
+          : 'Every section can be read two ways: in plain mode, without jargon, or in technical mode, with the formulas, methods and code.'}
+      </p>
     </div>
     <figure class="hero-fig">
       <HeroChart client:idle lang={lang} data={hero} bankroll={100} />
@@ -179,6 +184,13 @@ const rnd = strategies.find((s) => s.key === 'random')!;
   }
   .hero-fig {
     margin: 0;
+  }
+  .modes-note {
+    font-family: var(--sans);
+    font-size: 0.85rem;
+    color: var(--ink-3);
+    margin-top: 1.2rem;
+    max-width: 30rem;
   }
   .hero-fig figcaption {
     font-family: var(--sans);
