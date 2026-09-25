@@ -1,7 +1,7 @@
 export type Lang = 'es' | 'en';
 export const LANGS: Lang[] = ['es', 'en'];
 
-export type PageKey = 'home' | 'lab' | 'odds' | 'market' | 'games' | 'help' | 'methods';
+export type PageKey = 'home' | 'lab' | 'odds' | 'market' | 'games' | 'roulette' | 'slots' | 'lottery' | 'sports' | 'help' | 'methods';
 
 const SLUGS: Record<PageKey, string> = {
   home: '',
@@ -9,6 +9,10 @@ const SLUGS: Record<PageKey, string> = {
   odds: 'odds/',
   market: 'market/',
   games: 'games/',
+  roulette: 'games/roulette/',
+  slots: 'games/slots/',
+  lottery: 'games/lottery/',
+  sports: 'games/sports/',
   help: 'help/',
   methods: 'methods/',
 };

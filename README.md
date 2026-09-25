@@ -21,6 +21,10 @@ It is written for everyone. Every page has a **plain mode** (the default: ideas 
 | **Ruin Lab** | Simulates thousands of players at once in the browser and shows how the house edge wins over time. | Monte Carlo in a Web Worker, percentile bands, Kaplan–Meier survival, gambler's ruin |
 | **Do the odds tell the truth?** | Analysis of 235,796 football matches (2000–2026) with real bookmaker odds. | Overround removal (proportional, power, Shin), calibration with Wilson intervals, favourite–longshot bias with bootstrap CIs, strategy backtests, out-of-sample ordinal logit on Elo vs the market |
 | **The market** | Dashboard of Spain's online gambling market: revenue, hold, marketing, bonuses and prevalence among teenagers and adults. | Curated official data (DGOJ, Ministry of Health), every figure linked to its source |
+| **Roulette** | A spinning European wheel with every bet type, a 100-spin mode and gambler's-fallacy prompts. | Exact expectation of every bet (−1/37) |
+| **Slots** | A three-reel machine built like real ones, with a live bankroll chart. | Exact RTP by enumeration, virtual-reel mapping and designed near-misses |
+| **Lotteries** | Exact odds for La Primitiva, Bonoloto, EuroMillions and the National Lottery, plus a lifetime simulation. | Hypergeometric probabilities, simulated draws |
+| **Sports betting** | Odds converter, accumulator calculator and losing-streak simulator. | Compounding margins, Monte Carlo of longest losing runs |
 | **The games** | House edge of every common game and a calculator of what it costs to play at your own pace. | Exact probability calculations |
 | **Help** | Helplines, self-exclusion and practical steps. | |
 
@@ -40,7 +44,7 @@ src/islands/      interactive React components
 src/views/        page content, in Spanish and English
 src/data/         JSON produced by the analysis and the curated market dataset
 analysis/odds/    reproducible Python pipeline for the odds analysis
-tests/            Vitest tests (exact edges, gambler's ruin formula, Kaplan–Meier, margin methods)
+tests/            Vitest tests (exact edges, gambler's ruin, Kaplan–Meier, margin methods, slot RTP, lottery odds)
 ```
 
 ## Run it

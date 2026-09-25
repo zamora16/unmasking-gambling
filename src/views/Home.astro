@@ -123,8 +123,8 @@ const rnd = strategies.find((s) => s.key === 'random')!;
 
   <section class="page more">
     <a href={href(lang, 'games')} class="more-item">
-      <span class="m-title">{es ? 'Los juegos y su precio' : 'The games and their price'}</span>
-      <span class="m-desc">{es ? 'La ventaja de la casa de cada juego y cuánto cuesta jugar a tu ritmo.' : 'The house edge of every game and what it costs at your pace.'}</span>
+      <span class="m-title">{es ? 'Ruleta, tragaperras, loterías y apuestas' : 'Roulette, slots, lotteries and sports betting'}</span>
+      <span class="m-desc">{es ? 'Un simulador para cada juego: gira la ruleta, tira de la máquina y calcula tus probabilidades.' : 'A simulator for each game: spin the wheel, pull the lever and work out your odds.'}</span>
     </a>
     <a href={href(lang, 'methods')} class="more-item">
       <span class="m-title">{es ? 'Método' : 'Methods'}</span>
@@ -166,15 +166,15 @@ const rnd = strategies.find((s) => s.key === 'random')!;
     padding-bottom: clamp(2.5rem, 6vw, 4.5rem);
   }
   h1 {
-    font-size: clamp(2.8rem, 6.4vw, 5.2rem);
-    font-weight: 400;
-    letter-spacing: -0.035em;
-    line-height: 1;
+    font-size: clamp(3rem, 7vw, 5.8rem);
+    font-weight: 600;
+    line-height: 0.92;
     margin: 0.8rem 0 1.4rem;
   }
   h1 em {
-    font-style: italic;
-    color: var(--accent);
+    font-style: normal;
+    color: var(--gold);
+    display: block;
   }
   .cta {
     display: flex;
@@ -209,7 +209,7 @@ const rnd = strategies.find((s) => s.key === 'random')!;
     border-left: 1px solid var(--rule);
   }
   .feature {
-    background: var(--paper);
+    background: transparent;
     padding: 2rem 1.8rem 2rem 0;
     text-decoration: none;
     display: flex;
@@ -234,14 +234,13 @@ const rnd = strategies.find((s) => s.key === 'random')!;
     margin: 0;
   }
   .feature h2 {
-    font-size: 1.7rem;
+    font-size: 1.9rem;
   }
   .f-num {
-    font-family: var(--sans);
-    font-size: 2.6rem;
+    font-family: var(--display);
+    font-size: 3.2rem;
     font-weight: 600;
-    letter-spacing: -0.03em;
-    color: var(--accent-ink);
+    color: var(--gold);
     margin: 0.6rem 0 0;
     font-variant-numeric: tabular-nums;
   }
@@ -292,11 +291,11 @@ const rnd = strategies.find((s) => s.key === 'random')!;
   }
   .about-inner {
     max-width: 44rem;
-    border-top: 2px solid var(--ink);
+    border-top: 2px solid var(--gold);
     padding-top: 1.2rem;
   }
   .about-text {
-    font-size: 1.25rem;
+    font-size: 1.15rem;
     line-height: 1.5;
     margin-top: 0.8rem;
   }

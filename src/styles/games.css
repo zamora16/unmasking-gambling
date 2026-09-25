@@ -1,0 +1,445 @@
+/* Interactive game simulators */
+.game {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 2rem;
+  align-items: start;
+  font-family: var(--sans);
+}
+.game .panel {
+  background: var(--paper-2);
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  padding: 1.3rem;
+  display: grid;
+  gap: 0.8rem;
+  min-width: 0;
+}
+.game .panel > * {
+  margin: 0;
+  min-width: 0;
+}
+.game .wide-panel {
+  grid-column: 1 / -1;
+}
+.panel-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin: 0.4rem 0 0 !important;
+}
+.game .actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  align-items: center;
+}
+.game .btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+.game .btn.small {
+  padding: 0.4rem 0.8rem;
+  font-size: 0.82rem;
+  justify-self: start;
+}
+.game .link {
+  font: inherit;
+  font-size: 0.85rem;
+  color: var(--ink-3);
+  background: none;
+  border: 0;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+.game .scores {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 0;
+}
+.game .scores > div {
+  background: var(--paper);
+  padding: 0.7rem 0.85rem;
+}
+.game .scores dt {
+  font-size: 0.75rem;
+  color: var(--ink-3);
+}
+.game .scores dd {
+  margin: 0.15rem 0 0;
+  font-family: var(--display);
+  font-size: 1.7rem;
+  font-weight: 600;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+.game .win {
+  color: var(--series-2);
+}
+.game .loss {
+  color: var(--accent-ink);
+}
+.game .muted {
+  color: var(--ink-3);
+}
+.game select,
+.game input[type='number'] {
+  font: inherit;
+  font-size: 0.95rem;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid var(--rule-strong);
+  border-radius: 6px;
+  padding: 0.45rem 0.6rem;
+  min-width: 0;
+}
+.game input[type='range'] {
+  width: 100%;
+  accent-color: var(--gold);
+  margin: 0;
+}
+.field-inline {
+  display: grid;
+  gap: 0.35rem;
+  font-size: 0.85rem;
+  color: var(--ink-2);
+}
+.sim-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: end;
+}
+.sim-controls .grow {
+  flex: 1 1 200px;
+}
+.paytable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+.paytable th,
+.paytable td {
+  text-align: left;
+  padding: 0.35rem 0;
+  border-bottom: 1px solid var(--rule);
+  font-weight: 500;
+}
+.paytable td {
+  text-align: right;
+}
+
+/* roulette */
+.wheel-col {
+  display: grid;
+  gap: 1rem;
+  justify-items: center;
+}
+.wheel-wrap {
+  width: min(100%, 380px);
+  aspect-ratio: 1;
+  filter: drop-shadow(0 18px 30px rgb(0 0 0 / 0.45));
+}
+.wheel-wrap svg {
+  width: 100%;
+  height: 100%;
+}
+.result {
+  min-height: 2.6rem;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+.chip-num {
+  display: inline-grid;
+  place-items: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 50%;
+  font-family: var(--display);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #f2ecdf;
+  box-shadow: inset 0 0 0 2px rgb(255 255 255 / 0.15);
+}
+.chip-num.small {
+  width: 1.7rem;
+  height: 1.7rem;
+  font-size: 0.9rem;
+}
+.chip-num.red {
+  background: #b3261e;
+}
+.chip-num.black {
+  background: #141414;
+}
+.chip-num.green {
+  background: #0f7a4a;
+}
+.history {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+}
+.bet-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.35rem;
+}
+.bet {
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 0.55rem 0.3rem;
+  border-radius: 6px;
+  border: 1px solid var(--rule-strong);
+  background: var(--paper);
+  color: var(--ink);
+  cursor: pointer;
+}
+.bet.red {
+  background: #7d1b15;
+  border-color: #b3261e;
+}
+.bet.black {
+  background: #121212;
+}
+.bet.on {
+  outline: 2px solid var(--gold);
+  outline-offset: 1px;
+}
+.bet-info {
+  font-size: 0.85rem;
+  color: var(--ink-2);
+}
+.num-pick {
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+  font-size: 0.85rem;
+}
+.chips {
+  display: flex;
+  gap: 0.6rem;
+}
+.chip {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  font-family: var(--display);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #f2ecdf;
+  cursor: pointer;
+  border: 3px dashed rgb(255 255 255 / 0.55);
+  box-shadow: 0 0 0 3px var(--chip), inset 0 0 0 6px var(--chip);
+  background: var(--chip);
+}
+.chip.c1 {
+  --chip: #4a5a8f;
+}
+.chip.c5 {
+  --chip: #9b2c22;
+}
+.chip.c10 {
+  --chip: #1f6e4f;
+}
+.chip.c25 {
+  --chip: #2b2b2b;
+}
+.chip.on {
+  outline: 2px solid var(--gold);
+  outline-offset: 5px;
+}
+.streak {
+  font-size: 0.88rem;
+  color: var(--ink-2);
+  background: var(--gold-soft);
+  border-left: 3px solid var(--gold);
+  padding: 0.6rem 0.8rem;
+  border-radius: 0 6px 6px 0;
+}
+
+/* slot machine */
+.machine-col {
+  display: grid;
+  gap: 1rem;
+}
+.machine {
+  background: linear-gradient(180deg, #3a2a14, #1f170c);
+  border: 2px solid var(--gold);
+  border-radius: 18px;
+  padding: 1.2rem;
+  box-shadow: 0 20px 40px -12px rgb(0 0 0 / 0.6), inset 0 0 0 4px rgb(0 0 0 / 0.3);
+}
+.reels {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+}
+.reel {
+  background: linear-gradient(180deg, #d9d2c0, #f7f2e6 30%, #f7f2e6 70%, #d9d2c0);
+  border-radius: 8px;
+  overflow: hidden;
+  display: grid;
+  grid-template-rows: 0.7fr 1fr 0.7fr;
+}
+.cell {
+  display: grid;
+  place-items: center;
+  min-height: 3.4rem;
+}
+.cell.off {
+  opacity: 0.55;
+  transform: scale(0.8);
+}
+.payline {
+  position: absolute;
+  left: -0.4rem;
+  right: -0.4rem;
+  top: 50%;
+  height: 2px;
+  background: var(--accent);
+  box-shadow: 0 0 8px var(--accent);
+  pointer-events: none;
+}
+.sym {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 2.3rem;
+  line-height: 1;
+}
+.sym.seven {
+  color: #b3261e;
+  font-size: 2.6rem;
+  text-shadow: 0 2px 0 #6e1510;
+}
+.sym.bar {
+  font-size: 1.3rem;
+  color: #f2ecdf;
+  background: #1a1a1a;
+  padding: 0.2rem 0.45rem;
+  border-radius: 4px;
+  letter-spacing: 0.08em;
+}
+.sym.red {
+  color: #b3261e;
+}
+.sym.black {
+  color: #161616;
+}
+.sym.blank {
+  width: 1.4rem;
+  height: 2px;
+  background: #b8b09c;
+}
+.slot-msg {
+  margin-top: 0.9rem;
+  text-align: center;
+  font-family: var(--display);
+  font-size: 1.3rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #d9d2c0;
+  min-height: 1.6rem;
+}
+.slot-msg.win {
+  color: #e2bd6b;
+}
+.slot-msg.near {
+  color: #f0735c;
+}
+
+/* lottery */
+.big-odds {
+  font-family: var(--display);
+  font-size: clamp(2.2rem, 5vw, 3.2rem);
+  font-weight: 600;
+  color: var(--gold);
+  line-height: 1;
+}
+.cats summary {
+  cursor: pointer;
+  font-size: 0.85rem;
+  color: var(--ink-2);
+}
+.hits {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+.hits li {
+  display: inline-flex;
+  gap: 0.4rem;
+  align-items: baseline;
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  padding: 0.25rem 0.7rem;
+  font-size: 0.82rem;
+}
+.hit-key {
+  font-weight: 700;
+  color: var(--gold);
+}
+
+/* sports */
+.conv {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.8rem;
+}
+.conv label {
+  display: grid;
+  gap: 0.3rem;
+  font-size: 0.8rem;
+  color: var(--ink-2);
+}
+.conv output {
+  font-size: 1.2rem;
+  color: var(--ink);
+  padding: 0.35rem 0;
+}
+.legs {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 0.4rem;
+}
+.legs li {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  font-size: 0.88rem;
+}
+.legs li span {
+  width: 5.5rem;
+  color: var(--ink-2);
+}
+.legs input {
+  width: 6rem;
+}
+
+@media (max-width: 900px) {
+  .game {
+    grid-template-columns: 1fr;
+  }
+  .bet-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

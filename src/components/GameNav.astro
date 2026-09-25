@@ -1,0 +1,66 @@
+---
+import { type Lang, type PageKey, href } from '../i18n';
+interface Props {
+  lang: Lang;
+  current?: PageKey;
+}
+const { lang, current } = Astro.props;
+const es = lang === 'es';
+const items: { key: PageKey; icon: string; es: string; en: string }[] = [
+  { key: 'roulette', icon: '◉', es: 'Ruleta', en: 'Roulette' },
+  { key: 'slots', icon: '7', es: 'Tragaperras', en: 'Slots' },
+  { key: 'lottery', icon: '№', es: 'Loterías', en: 'Lotteries' },
+  { key: 'sports', icon: '⚽', es: 'Apuestas deportivas', en: 'Sports betting' },
+];
+---
+
+<nav class="game-nav page" aria-label={es ? 'Juegos' : 'Games'}>
+  <a href={href(lang, 'games')} class:list={['all', { on: current === 'games' }]}>{es ? 'Todos los juegos' : 'All games'}</a>
+  {
+    items.map((it) => (
+      <a href={href(lang, it.key)} class:list={{ on: current === it.key }} aria-current={current === it.key ? 'page' : undefined}>
+        <span class="ic" aria-hidden="true">{it.icon}</span>
+        {es ? it.es : it.en}
+      </a>
+    ))
+  }
+</nav>
+
+<style>
+  .game-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    font-family: var(--sans);
+    margin-top: 1.4rem;
+  }
+  a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 0.45rem 0.9rem;
+    border: 1px solid var(--rule-strong);
+    border-radius: 999px;
+    text-decoration: none;
+    color: var(--ink-2);
+  }
+  a:hover {
+    border-color: var(--gold);
+    color: var(--ink);
+  }
+  a.on {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: #10211a;
+  }
+  .ic {
+    font-family: var(--display);
+    font-weight: 700;
+    color: var(--gold);
+  }
+  a.on .ic {
+    color: #10211a;
+  }
+</style>

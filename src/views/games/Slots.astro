@@ -1,0 +1,139 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHead from '../../components/PageHead.astro';
+import GameNav from '../../components/GameNav.astro';
+import TechBox from '../../components/TechBox.astro';
+import Slot from '../../islands/games/Slot';
+import { type Lang, fmt, href } from '../../i18n';
+import { exactRTP, sevenOdds, PAYTABLE } from '../../lib/slot';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const es = lang === 'es';
+const f = fmt(lang);
+const { rtp, hitRate } = exactRTP();
+const r3 = sevenOdds(2);
+const r1 = sevenOdds(0);
+const perHour = 1200 * (1 - rtp);
+---
+
+<Base
+  lang={lang}
+  page="slots"
+  title={es ? 'Tragaperras' : 'Slot machines'}
+  description={es ? 'Una tragaperras de tres rodillos construida como las reales: RTP, volatilidad y casi-aciertos diseñados.' : 'A three-reel slot machine built like real ones: RTP, volatility and designed near-misses.'}
+>
+  <GameNav lang={lang} current="slots" />
+  <PageHead
+    lang={lang}
+    kicker={es ? 'Simulador' : 'Simulator'}
+    title={es ? 'Tragaperras' : 'Slot machines'}
+    lede={es
+      ? 'Luces, sonidos y premios que siempre parecen a punto de caer. Esta máquina está construida con los mismos trucos que las reales, y te enseñamos cada uno. Empiezas con 100 € y cada tirada cuesta 1 €.'
+      : 'Lights, sounds and prizes that always seem about to drop. This machine is built with the same tricks as real ones, and we show you each of them. You start with €100 and every spin costs €1.'}
+  />
+
+  <section class="page">
+    <div class="wide">
+      <Slot client:load lang={lang} />
+    </div>
+  </section>
+
+  <article class="page">
+    <div class="measure prose">
+      <h2>{es ? 'Qué quiere decir «devuelve el 96 %»' : 'What “pays back 96%” means'}</h2>
+      {
+        es ? (
+          <p>
+            Las tragaperras anuncian su <strong>RTP</strong> (<em>return to player</em>), lo que devuelven de media. Esta devuelve el {f.pct(rtp, 1)}: de cada 100 € que se meten, a la larga salen unos {f.eur(100 * rtp, 0)} en premios. Pero ojo, esa media es la de la máquina a lo largo de millones de tiradas, no la tuya. Lo que le pasa a una persona concreta varía muchísimo. Prueba a darle a «1.000 tiradas» varias veces: casi siempre acabarás perdiendo, y alguna vez ganarás mucho.
+          </p>
+        ) : (
+          <p>
+            Slots advertise their <strong>RTP</strong> (return to player), what they pay back on average. This one pays back {f.pct(rtp, 1)}: of every €100 that goes in, about {f.eur(100 * rtp, 0)} comes out as prizes in the long run. But careful: that average belongs to the machine over millions of spins, not to you. What happens to one person varies enormously. Try “1,000 spins” a few times: you will almost always lose, and once in a while win big.
+          </p>
+        )
+      }
+      <TechBox lang={lang} title={es ? 'Cómo se calcula el RTP exacto' : 'How the exact RTP is computed'}>
+        {
+          es ? (
+            <>
+              <p>Cada rodillo tiene 14 posiciones visibles, pero el resultado se decide en un «rodillo virtual» de 64 paradas con pesos distintos. El RTP se obtiene recorriendo las 14³ = 2.744 combinaciones:</p>
+              <span class="formula">RTP = Σ P(i)·P(j)·P(k) · premio(i, j, k),  P(i) = peso(i)/64</span>
+              <p>Resultado: {f.pct(rtp, 3)}, con premio en el {f.pct(hitRate, 1)} de las tiradas. El premio máximo (7 7 7) paga {f.int(PAYTABLE.three['7'])}× y sale una vez cada {f.int(Math.round(1 / ((2 / 64) * (2 / 64) * (1 / 64))))} tiradas: gran parte del retorno está concentrado en ese premio rarísimo, lo que hace la máquina muy volátil. Los tests comprueban que el muestreo reproduce el RTP exacto.</p>
+            </>
+          ) : (
+            <>
+              <p>Each reel shows 14 positions, but the outcome is decided on a 64-stop “virtual reel” with different weights. The RTP comes from going through all 14³ = 2,744 combinations:</p>
+              <span class="formula">RTP = Σ P(i)·P(j)·P(k) · prize(i, j, k),  P(i) = weight(i)/64</span>
+              <p>Result: {f.pct(rtp, 3)}, with a prize on {f.pct(hitRate, 1)} of spins. The top prize (7 7 7) pays {f.int(PAYTABLE.three['7'])}× and comes up once every {f.int(Math.round(1 / ((2 / 64) * (2 / 64) * (1 / 64))))} spins: much of the return is packed into that very rare prize, which makes the machine highly volatile. The tests check that sampling reproduces the exact RTP.</p>
+            </>
+          )
+        }
+      </TechBox>
+
+      <h2>{es ? 'El «casi» está diseñado' : 'The “so close” is designed'}</h2>
+      {
+        es ? (
+          <>
+            <p>
+              Te habrás fijado en que el 7 aparece mucho justo encima o debajo de la línea, sobre todo en el tercer rodillo. No es casualidad. En esta máquina, como en muchas reales, el tercer rodillo tiene un solo 7 que cae en la línea el {f.pct(r3.on, 1)} de las veces, pero se queda justo al lado el {f.pct(r3.adjacent, 1)}: {f.num(r3.adjacent / r3.on, 0)} veces más. La sensación de «casi lo consigo» no es mala suerte: está fabricada.
+            </p>
+            <p>
+              Importa porque esos casi-aciertos hacen que queramos seguir jugando. Estudios con neuroimagen han visto que activan en el cerebro las mismas zonas que un premio de verdad (<a href="https://pubmed.ncbi.nlm.nih.gov/19217383/">Clark y colaboradores, 2009</a>).
+            </p>
+          </>
+        ) : (
+          <>
+            <p>
+              You may have noticed that the 7 often shows up just above or below the line, especially on the third reel. That is no accident. On this machine, as on many real ones, the third reel has a single 7 that lands on the line {f.pct(r3.on, 1)} of the time but stops right next to it {f.pct(r3.adjacent, 1)} of the time: {f.num(r3.adjacent / r3.on, 0)} times more often. The feeling of “I nearly had it” is not bad luck: it is manufactured.
+            </p>
+            <p>
+              It matters because those near-misses make us want to keep playing. Brain-imaging studies have found they activate the same areas as a real win (<a href="https://pubmed.ncbi.nlm.nih.gov/19217383/">Clark and colleagues, 2009</a>).
+            </p>
+          </>
+        )
+      }
+      <TechBox lang={lang} title={es ? 'Rodillos virtuales' : 'Virtual reels'}>
+        {
+          es ? (
+            <p>
+              El jugador ve un rodillo físico de 14 posiciones; el resultado se elige en un rodillo virtual de 64 paradas. En el tercer rodillo, el 7 ocupa 1 parada virtual y cada hueco vacío a su lado ocupa 8. Como los símbolos de arriba y abajo de la línea se leen del rodillo físico, el 7 aparece junto a la línea con probabilidad {f.num(r3.adjacent, 3)} frente a {f.num(r3.on, 4)} en la línea. En el primer rodillo, en cambio, la relación es {f.num(r1.adjacent / r1.on, 1)}. Es la técnica de <em>virtual reel mapping</em> que usan las máquinas electrónicas.
+            </p>
+          ) : (
+            <p>
+              The player sees a 14-position physical reel; the outcome is picked on a 64-stop virtual reel. On the third reel the 7 takes 1 virtual stop and each blank next to it takes 8. Since the symbols above and below the line are read off the physical reel, the 7 appears next to the line with probability {f.num(r3.adjacent, 3)} versus {f.num(r3.on, 4)} on it. On the first reel the ratio is only {f.num(r1.adjacent / r1.on, 1)}. This is the <em>virtual reel mapping</em> technique used by electronic machines.
+            </p>
+          )
+        }
+      </TechBox>
+
+      <h2>{es ? 'Premios que en realidad son pérdidas' : 'Wins that are really losses'}</h2>
+      {
+        es ? (
+          <p>
+            Cuando sale un ♠ en el primer rodillo, la máquina celebra un premio de 1 €. Pero habías apostado 1 €: no has ganado nada, solo recuperas lo tuyo. En las máquinas modernas de muchas líneas esto va más allá, y celebran «premios» menores que lo apostado. El cerebro los vive como victorias aunque pierdas dinero (<a href="https://doi.org/10.1111/j.1360-0443.2010.03050.x">Dixon y colaboradores, 2010</a>).
+          </p>
+        ) : (
+          <p>
+            When a ♠ lands on the first reel, the machine celebrates a €1 prize. But you staked €1: you have won nothing, you just got your own money back. Modern multi-line machines go further and celebrate “wins” smaller than the stake. The brain experiences them as victories even while you lose money (<a href="https://doi.org/10.1111/j.1360-0443.2010.03050.x">Dixon and colleagues, 2010</a>).
+          </p>
+        )
+      }
+
+      <h2>{es ? 'La velocidad es el verdadero precio' : 'Speed is the real price'}</h2>
+      {
+        es ? (
+          <p>
+            Perder 3,7 céntimos por euro parece poco. Pero una tirada dura unos segundos. A una tirada cada 3 segundos son 1.200 tiradas por hora: con apuestas de 1 €, eso son {f.eur(perHour, 0)} por hora de media. Y la volatilidad hace que muchas veces se pierda mucho más deprisa. Puedes verlo con miles de jugadores en el <a href={href(lang, 'lab')}>Laboratorio de ruina</a>.
+          </p>
+        ) : (
+          <p>
+            Losing 3.7 cents per euro sounds small. But a spin lasts a few seconds. At one spin every 3 seconds that is 1,200 spins an hour: at €1 a spin, {f.eur(perHour, 0)} an hour on average. And volatility means you often lose much faster than that. See it with thousands of players in the <a href={href(lang, 'lab')}>Ruin Lab</a>.
+          </p>
+        )
+      }
+    </div>
+  </article>
+</Base>

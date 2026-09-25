@@ -1,0 +1,179 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHead from '../../components/PageHead.astro';
+import GameNav from '../../components/GameNav.astro';
+import TechBox from '../../components/TechBox.astro';
+import Roulette from '../../islands/games/Roulette';
+import { type Lang, fmt, href } from '../../i18n';
+import { expectation, covers, payoutToOne, type BetKind } from '../../lib/roulette';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const es = lang === 'es';
+const f = fmt(lang);
+const rows: { kind: BetKind; es: string; en: string }[] = [
+  { kind: 'red', es: 'Rojo o negro', en: 'Red or black' },
+  { kind: 'even', es: 'Par o impar', en: 'Even or odd' },
+  { kind: 'low', es: '1–18 o 19–36', en: '1–18 or 19–36' },
+  { kind: 'dozen1', es: 'Una docena', en: 'A dozen' },
+  { kind: 'number', es: 'Un número', en: 'A single number' },
+];
+const five = (18 / 37) ** 5;
+---
+
+<Base
+  lang={lang}
+  page="roulette"
+  title={es ? 'Ruleta' : 'Roulette'}
+  description={es ? 'Gira una ruleta europea, apuesta como quieras y descubre por qué todas las apuestas cuestan lo mismo.' : 'Spin a European roulette wheel, bet however you like and see why every bet costs the same.'}
+>
+  <GameNav lang={lang} current="roulette" />
+  <PageHead
+    lang={lang}
+    kicker={es ? 'Simulador' : 'Simulator'}
+    title={es ? 'Ruleta' : 'Roulette'}
+    lede={es
+      ? 'La ruleta parece un juego de intuición: rojo o negro, par o impar, tu número de la suerte. En realidad es una máquina de cobrar muy precisa. Gira la rueda, apuesta como quieras y mira qué le pasa a tu dinero.'
+      : 'Roulette looks like a game of hunches: red or black, odd or even, your lucky number. In fact it is a very precise machine for collecting money. Spin the wheel, bet however you like and watch what happens to your money.'}
+  />
+
+  <section class="page">
+    <div class="wide">
+      <Roulette client:load lang={lang} />
+    </div>
+  </section>
+
+  <article class="page">
+    <div class="measure prose">
+      <h2>{es ? 'Da igual a qué apuestes' : 'It does not matter what you bet on'}</h2>
+      {
+        es ? (
+          <p>
+            La rueda tiene 37 casillas: del 1 al 36 y el cero verde. Pero los premios se pagan como si solo hubiera 36. Ese cero es el negocio del casino. Y lo curioso es que afecta a todas las apuestas por igual: al rojo, a una docena o a un número suelto. De cada 100 € que apuestes, a la larga recuperas unos 97,30 €, elijas lo que elijas.
+          </p>
+        ) : (
+          <p>
+            The wheel has 37 pockets: 1 to 36 and the green zero. But prizes are paid as if there were only 36. That zero is the casino’s business. And the curious thing is that it hits every bet equally: red, a dozen or a single number. Of every €100 you bet, in the long run you get back about €97.30, whatever you choose.
+          </p>
+        )
+      }
+    </div>
+    <div class="measure">
+      <table class="edge-table">
+        <thead>
+          <tr>
+            <th scope="col">{es ? 'Apuesta' : 'Bet'}</th>
+            <th scope="col">{es ? 'Paga' : 'Pays'}</th>
+            <th scope="col">{es ? 'Probabilidad' : 'Chance'}</th>
+            <th scope="col">{es ? 'Recuperas de cada 100 €' : 'You get back from €100'}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            rows.map((r) => {
+              const b = r.kind === 'number' ? { kind: r.kind, number: 7 } : { kind: r.kind };
+              return (
+                <tr>
+                  <th scope="row">{es ? r.es : r.en}</th>
+                  <td class="num">{payoutToOne(b)} {es ? 'a' : 'to'} 1</td>
+                  <td class="num">{f.pct(covers(b).length / 37, 1)}</td>
+                  <td class="num">{f.eur(100 * (1 + expectation(b)), 2)}</td>
+                </tr>
+              );
+            })
+          }
+        </tbody>
+      </table>
+    </div>
+    <div class="measure prose">
+      <TechBox lang={lang} title={es ? 'La esperanza de cada apuesta' : 'The expectation of every bet'}>
+        {
+          es ? (
+            <>
+              <p>Una apuesta que cubre <em>k</em> números paga (36/k − 1) a 1. Su esperanza por unidad apostada es:</p>
+              <span class="formula">E = (k/37)·(36/k − 1) − (37 − k)/37 = (36 − k − 37 + k)/37 = −1/37</span>
+              <p>La <em>k</em> desaparece: por eso todas las apuestas de la ruleta europea tienen la misma ventaja de la casa, 2,70 %. En la americana, con dos ceros, el denominador es 38 y la ventaja sube a 2/38 = 5,26 %. Los tests del proyecto comprueban este resultado para todas las apuestas del simulador.</p>
+            </>
+          ) : (
+            <>
+              <p>A bet covering <em>k</em> numbers pays (36/k − 1) to 1. Its expectation per unit staked is:</p>
+              <span class="formula">E = (k/37)·(36/k − 1) − (37 − k)/37 = (36 − k − 37 + k)/37 = −1/37</span>
+              <p>The <em>k</em> cancels out, which is why every bet in European roulette carries the same house edge, 2.70%. In American roulette, with two zeros, the denominator is 38 and the edge rises to 2/38 = 5.26%. The project’s tests check this for every bet in the simulator.</p>
+            </>
+          )
+        }
+      </TechBox>
+
+      <h2>{es ? 'La ruleta no tiene memoria' : 'The wheel has no memory'}</h2>
+      {
+        es ? (
+          <>
+            <p>
+              Muchos casinos muestran en una pantalla los últimos números que han salido. Parece información útil, pero no lo es. Si han salido cinco rojos seguidos, es muy tentador pensar que «ya toca» negro. Es la <strong>falacia del jugador</strong>: la bola no sabe lo que ha pasado antes, y la probabilidad de rojo en la siguiente tirada sigue siendo exactamente la misma. Pruébalo en el simulador: cuando salgan tres o más del mismo color, te lo recordaremos.
+            </p>
+            <TechBox lang={lang} title="Independencia">
+              <p>
+                Las tiradas son independientes e idénticamente distribuidas: P(rojo | cinco rojos antes) = P(rojo) = 18/37 ≈ 48,6 %. Lo que sí es poco probable es la secuencia completa vista de antemano: (18/37)⁵ ≈ {f.pct(five, 1)}. En cientos de tiradas, estas rachas aparecen muchas veces por puro azar. La ilusión viene de confundir la probabilidad de una racha con la probabilidad de la siguiente tirada.
+              </p>
+            </TechBox>
+          </>
+        ) : (
+          <>
+            <p>
+              Many casinos display the last numbers on a screen. It looks like useful information, but it is not. After five reds in a row it is very tempting to think black is “due”. That is the <strong>gambler’s fallacy</strong>: the ball does not know what happened before, and the chance of red on the next spin is exactly the same. Try it in the simulator: when three or more of the same colour come up, we will remind you.
+            </p>
+            <TechBox lang={lang} title="Independence">
+              <p>
+                Spins are independent and identically distributed: P(red | five reds before) = P(red) = 18/37 ≈ 48.6%. What is unlikely is the whole sequence seen in advance: (18/37)⁵ ≈ {f.pct(five, 1)}. Over hundreds of spins such streaks appear many times by pure chance. The illusion comes from mixing up the probability of a streak with the probability of the next spin.
+              </p>
+            </TechBox>
+          </>
+        )
+      }
+
+      <h2>{es ? '¿Y los sistemas para ganar?' : 'What about winning systems?'}</h2>
+      {
+        es ? (
+          <p>
+            Doblar tras perder, subir poco a poco, apostar a los números «calientes»… Ningún sistema cambia la cuenta de arriba, porque cada apuesta sigue teniendo la misma desventaja. Lo único que cambian es la forma de perder. Puedes comprobarlo con miles de jugadores a la vez en el <a href={href(lang, 'lab')}>Laboratorio de ruina</a>, eligiendo la estrategia Martingala.
+          </p>
+        ) : (
+          <p>
+            Doubling after a loss, raising the stake little by little, betting on “hot” numbers… No system changes the sum above, because every bet keeps the same disadvantage. All they change is the way you lose. You can check it with thousands of players at once in the <a href={href(lang, 'lab')}>Ruin Lab</a> by choosing the Martingale strategy.
+          </p>
+        )
+      }
+    </div>
+  </article>
+</Base>
+
+<style>
+  .edge-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--sans);
+    font-size: 0.92rem;
+    margin: 0.5rem 0 1rem;
+  }
+  .edge-table th,
+  .edge-table td {
+    padding: 0.6rem 0.5rem;
+    border-bottom: 1px solid var(--rule);
+    text-align: right;
+  }
+  .edge-table th:first-child {
+    text-align: left;
+  }
+  .edge-table thead th {
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+  .edge-table tbody td:last-child {
+    color: var(--gold);
+    font-weight: 600;
+  }
+</style>

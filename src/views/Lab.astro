@@ -33,11 +33,11 @@ const es = lang === 'es';
       {
         es ? (
           <>
-            <strong>Cómo usarlo.</strong> Elige un escenario o cambia las reglas a la izquierda: el juego, el dinero con el que empieza cada persona y cuántas veces apuesta. El resultado aparece al momento. En el primer gráfico, cada línea fina es una persona y la zona azul es donde está la mayoría. Si esa zona baja, la gente está perdiendo.
+            <strong>Cómo usarlo.</strong> Elige un escenario o cambia las reglas a la izquierda: el juego, el dinero con el que empieza cada persona y cuántas veces apuesta. El resultado aparece al momento. En el primer gráfico, cada línea fina es una persona y la zona dorada es donde está la mayoría. Si esa zona baja, la gente está perdiendo.
           </>
         ) : (
           <>
-            <strong>How to use it.</strong> Pick a scenario or change the rules on the left: the game, how much money each person starts with and how many times they bet. The result appears instantly. In the first chart each thin line is a person and the blue area is where most of them are. If that area goes down, people are losing.
+            <strong>How to use it.</strong> Pick a scenario or change the rules on the left: the game, how much money each person starts with and how many times they bet. The result appears instantly. In the first chart each thin line is a person and the gold area is where most of them are. If that area goes down, people are losing.
           </>
         )
       }
@@ -190,12 +190,17 @@ const es = lang === 'es';
     cursor: pointer;
   }
   .lab .presets button.on {
-    background: var(--ink);
-    color: var(--paper);
-    border-color: var(--ink);
+    background: var(--gold);
+    color: #10211a;
+    border-color: var(--gold);
+  }
+  .lab .controls > *,
+  .lab .field > * {
+    min-width: 0;
   }
   .lab .field {
     display: grid;
+    min-width: 0;
     gap: 0.35rem;
     font-size: 0.85rem;
     color: var(--ink-2);
@@ -209,6 +214,7 @@ const es = lang === 'es';
     font-size: 0.82rem;
   }
   .lab select {
+    width: 100%;
     font: inherit;
     font-size: 0.85rem;
     color: var(--ink);
@@ -220,7 +226,7 @@ const es = lang === 'es';
   .lab input[type='range'] {
     width: 100%;
     margin: 0;
-    accent-color: var(--ink);
+    accent-color: var(--gold);
   }
   .lab .check {
     display: flex;
@@ -230,7 +236,7 @@ const es = lang === 'es';
     color: var(--ink-2);
   }
   .lab .check input {
-    accent-color: var(--ink);
+    accent-color: var(--gold);
     width: 16px;
     height: 16px;
   }
@@ -251,8 +257,7 @@ const es = lang === 'es';
     min-width: 0;
   }
   .lab .headline {
-    font-family: var(--serif);
-    font-size: clamp(1.2rem, 2vw, 1.45rem);
+    font-size: clamp(1.1rem, 1.8vw, 1.3rem);
     line-height: 1.45;
     margin: 0 0 1.5rem;
     max-width: 44rem;
@@ -267,7 +272,7 @@ const es = lang === 'es';
     overflow: hidden;
   }
   .lab .tile {
-    background: var(--paper);
+    background: var(--paper-2);
     padding: 1rem 1.1rem;
   }
   .lab .tile p {
@@ -278,9 +283,10 @@ const es = lang === 'es';
     color: var(--ink-2);
   }
   .lab .tile-value {
-    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-family: var(--display);
+    font-size: clamp(1.9rem, 3.4vw, 2.5rem);
     font-weight: 600;
-    letter-spacing: -0.02em;
+    color: var(--gold);
     font-variant-numeric: tabular-nums;
     margin-top: 0.2rem !important;
   }

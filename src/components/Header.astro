@@ -7,21 +7,14 @@ interface Props {
 const { lang, page } = Astro.props;
 const t = ui[lang];
 const other: Lang = lang === 'es' ? 'en' : 'es';
+const section: PageKey = ['roulette', 'slots', 'lottery', 'sports'].includes(page) ? 'games' : page;
 const items = ['lab', 'odds', 'market', 'games'] as const;
 ---
 
 <header class="site-header">
   <div class="bar page">
     <a class="brand" href={href(lang, 'home')} aria-label={t.siteName}>
-      <svg viewBox="0 0 32 32" width="26" height="26" aria-hidden="true"
-        ><rect width="32" height="32" rx="7" fill="currentColor"></rect><path
-          d="M7 22 L13 15 L18 18 L25 9"
-          fill="none"
-          stroke="var(--paper)"
-          stroke-width="2.4"
-          stroke-linecap="round"
-          stroke-linejoin="round"></path><circle cx="25" cy="23" r="2.6" fill="var(--accent)"></circle></svg
-      >
+      <svg viewBox="0 0 32 32" width="28" height="28" aria-hidden="true"><circle cx="16" cy="16" r="15" fill="var(--gold)"></circle><circle cx="16" cy="16" r="12.5" fill="none" stroke="var(--paper)" stroke-width="3" stroke-dasharray="4.9 4.9"></circle><circle cx="16" cy="16" r="8.5" fill="var(--paper)"></circle><path d="M16 10.5 L20.2 16 L16 21.5 L11.8 16 Z" fill="var(--accent)"></path></svg>
       <span class="brand-name">Unmasking <em>Gambling</em></span>
     </a>
 
@@ -30,7 +23,7 @@ const items = ['lab', 'odds', 'market', 'games'] as const;
         {
           items.map((k) => (
             <li>
-              <a href={href(lang, k)} aria-current={page === k ? 'page' : undefined}>
+              <a href={href(lang, k)} aria-current={section === k ? 'page' : undefined}>
                 {t.nav[k]}
               </a>
             </li>
@@ -56,7 +49,7 @@ const items = ['lab', 'odds', 'market', 'games'] as const;
   <nav class="nav-mobile page" aria-label={lang === 'es' ? 'Secciones' : 'Sections'}>
     {
       items.map((k) => (
-        <a href={href(lang, k)} aria-current={page === k ? 'page' : undefined}>
+        <a href={href(lang, k)} aria-current={section === k ? 'page' : undefined}>
           {t.nav[k]}
         </a>
       ))
@@ -68,7 +61,7 @@ const items = ['lab', 'odds', 'market', 'games'] as const;
   const btn = document.querySelector<HTMLButtonElement>('[data-theme-toggle]');
   btn?.addEventListener('click', () => {
     const root = document.documentElement;
-    const current = root.dataset.theme ?? (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    const current = root.dataset.theme === 'light' ? 'light' : 'dark';
     const next = current === 'dark' ? 'light' : 'dark';
     root.dataset.theme = next;
     try {
@@ -103,14 +96,16 @@ const items = ['lab', 'odds', 'market', 'games'] as const;
     flex-shrink: 0;
   }
   .brand-name {
-    font-family: var(--serif);
-    font-size: 1.2rem;
-    font-weight: 600;
-    letter-spacing: -0.01em;
+    font-family: var(--display);
+    font-size: 1.3rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
   }
   .brand-name em {
-    font-style: italic;
+    font-style: normal;
     font-weight: 500;
+    color: var(--gold);
   }
   .nav {
     margin-left: auto;
@@ -139,7 +134,7 @@ const items = ['lab', 'odds', 'market', 'games'] as const;
   .nav a[aria-current='page'],
   .nav-mobile a[aria-current='page'] {
     color: var(--ink);
-    box-shadow: inset 0 -2px 0 var(--accent);
+    box-shadow: inset 0 -2px 0 var(--gold);
     border-radius: 0;
   }
   .tools {

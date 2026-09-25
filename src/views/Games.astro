@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import PageHead from '../components/PageHead.astro';
 import TechBox from '../components/TechBox.astro';
+import GameNav from '../components/GameNav.astro';
 import GamesCost, { GAME_ROWS } from '../islands/GamesCost';
 import { type Lang, fmt, href } from '../i18n';
 import summary from '../data/odds/summary.json';
@@ -50,6 +51,7 @@ const maxEdge = Math.max(...GAME_ROWS.map((g) => g.edge));
     ? 'La ventaja de la casa de cada juego, de la lotería al blackjack, y cuánto cuesta jugar a tu ritmo.'
     : 'The house edge of every game, from lotteries to blackjack, and what it costs to play at your pace.'}
 >
+  <GameNav lang={lang} current="games" />
   <PageHead
     lang={lang}
     kicker={es ? 'Guía de juegos' : 'Game guide'}
@@ -58,6 +60,26 @@ const maxEdge = Math.max(...GAME_ROWS.map((g) => g.edge));
       ? 'No hay juegos buenos y malos: hay juegos más caros y más baratos. El precio es la ventaja de la casa, y se paga con cada apuesta, se gane o se pierda.'
       : 'There are no good and bad games, only more and less expensive ones. The price is the house edge, and it is paid on every bet, win or lose.'}
   />
+
+  <section class="page">
+    <div class="wide game-cards">
+      {
+        [
+          { k: 'roulette', icon: '◉', t: es ? 'Ruleta' : 'Roulette', d: es ? 'Gira la rueda, apuesta a lo que quieras y comprueba que todas las apuestas cuestan lo mismo.' : 'Spin the wheel, bet on anything and see that every bet costs the same.' },
+          { k: 'slots', icon: '7', t: es ? 'Tragaperras' : 'Slots', d: es ? 'Una máquina construida como las reales: RTP, volatilidad y casi-aciertos diseñados.' : 'A machine built like real ones: RTP, volatility and designed near-misses.' },
+          { k: 'lottery', icon: '№', t: es ? 'Loterías' : 'Lotteries', d: es ? 'Probabilidades exactas y una simulación de toda una vida jugando.' : 'Exact odds and a simulation of a lifetime of playing.' },
+          { k: 'sports', icon: '⚽', t: es ? 'Apuestas deportivas' : 'Sports betting', d: es ? 'Conversor de cuotas, combinadas y rachas perdedoras.' : 'Odds converter, accumulators and losing streaks.' },
+        ].map((c) => (
+          <a class="game-card" href={href(lang, c.k as 'roulette')}>
+            <span class="gc-icon" aria-hidden="true">{c.icon}</span>
+            <span class="gc-title">{c.t}</span>
+            <span class="gc-desc">{c.d}</span>
+            <span class="gc-link">{es ? 'Jugar' : 'Play'} →</span>
+          </a>
+        ))
+      }
+    </div>
+  </section>
 
   <div class="page">
     <div class="measure figure">
@@ -130,53 +152,66 @@ const maxEdge = Math.max(...GAME_ROWS.map((g) => g.edge));
       </TechBox>
     </section>
 
-    <article class="measure prose">
-      {
-        es ? (
-          <>
-            <h2>Ruleta: el precio de un cero</h2>
-            <p>
-              La ruleta paga como si solo hubiera 36 números, pero tiene 37. Esa casilla verde es todo el negocio: en cada apuesta, sea al rojo, a una docena o a un número, la casa se queda de media con 1/37 del dinero. Da igual la estrategia: todas las apuestas de la ruleta europea tienen exactamente la misma ventaja. La americana añade un segundo cero y casi la duplica.
-            </p>
-            <h2>Tragaperras: poca ventaja, mucha velocidad</h2>
-            <p>
-              Una tragaperras con un RTP (<em>return to player</em>) del 96 % se queda con 4 céntimos de cada euro. Parece poco, pero una tirada dura unos segundos. A cientos de tiradas por hora, el dinero que pasa por la máquina multiplica varias veces lo que llevabas, y la ventaja se aplica sobre todo lo apostado, no sobre lo que traías. Además, la volatilidad decide la experiencia: las máquinas que concentran el retorno en premios gigantes y raros hacen que la mayoría pierda deprisa, con la promesa del bote de fondo. Lo puedes ver en el <a href={href(lang, 'lab')}>Laboratorio de ruina</a>.
-            </p>
-            <h2>Apuestas deportivas: el margen escondido</h2>
-            <p>
-              En las apuestas deportivas el precio no se ve, está dentro de la cuota. En un partido normal de 1X2 la casa se queda con alrededor del {f.pct(summary.medianMargin / (1 + summary.medianMargin), 1)} de lo apostado, y bastante más en ligas pequeñas o en apuestas a cuotas altas. Las <strong>combinadas</strong> son la trampa más cara: el margen se aplica a cada partido y se acumula. Tres selecciones cuestan un {f.pct(1 - (1 / (1 + summary.medianMargin)) ** 3, 0)} y cinco, un {f.pct(1 - (1 / (1 + summary.medianMargin)) ** 5, 0)}. Lo analizamos con 235.000 partidos en <a href={href(lang, 'odds')}>Las cuotas</a>.
-            </p>
-            <h2>Loterías: el juego más caro, el más aceptado</h2>
-            <p>
-              La lotería no parece juego de azar porque se juega poco y con calma. Pero es, con diferencia, lo más caro: en EuroMillones solo la mitad de lo recaudado vuelve en premios. Su atractivo es el bote enorme y muy improbable. Una apuesta simple de EuroMillones tiene una probabilidad entre 139.838.160 de acertar la máxima categoría.
-            </p>
-          </>
-        ) : (
-          <>
-            <h2>Roulette: the price of a zero</h2>
-            <p>
-              Roulette pays as if there were only 36 numbers, but there are 37. That green pocket is the whole business: on every bet, whether on red, a dozen or a single number, the house keeps 1/37 of the money on average. Strategy makes no difference: every bet in European roulette carries exactly the same edge. American roulette adds a second zero and almost doubles it.
-            </p>
-            <h2>Slots: a small edge, a lot of speed</h2>
-            <p>
-              A slot with a 96% RTP (return to player) keeps 4 cents of every euro. That sounds small, but a spin lasts a few seconds. At hundreds of spins an hour, the money going through the machine is several times what you brought, and the edge applies to everything wagered, not to what you started with. Volatility shapes the experience too: machines that pack the return into rare, giant prizes make most players lose fast, with the jackpot dangled in the background. You can see it in the <a href={href(lang, 'lab')}>Ruin Lab</a>.
-            </p>
-            <h2>Sports betting: the hidden margin</h2>
-            <p>
-              In sports betting the price is invisible, built into the odds. On a normal 1X2 match the bookmaker keeps about {f.pct(summary.medianMargin / (1 + summary.medianMargin), 1)} of the stake, and quite a bit more in small leagues or on high odds. <strong>Accumulators</strong> are the most expensive trap: the margin applies to every leg and compounds. Three selections cost {f.pct(1 - (1 / (1 + summary.medianMargin)) ** 3, 0)}, five cost {f.pct(1 - (1 / (1 + summary.medianMargin)) ** 5, 0)}. We analysed it with 235,000 matches in <a href={href(lang, 'odds')}>The odds</a>.
-            </p>
-            <h2>Lotteries: the most expensive game, the most accepted</h2>
-            <p>
-              The lottery does not feel like gambling because people play rarely and calmly. But it is by far the most expensive: in EuroMillions only half of sales comes back as prizes. Its appeal is the huge and very unlikely jackpot. A single EuroMillions line has a 1 in 139,838,160 chance of hitting the top prize.
-            </p>
-          </>
-        )
-      }
-    </article>
   </div>
 </Base>
 
 <style>
+  .game-cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin: 0.5rem auto 3rem;
+  }
+  .game-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1.4rem 1.3rem;
+    background: var(--paper-2);
+    border: 1px solid var(--rule);
+    border-top: 3px solid var(--gold);
+    border-radius: 10px;
+    text-decoration: none;
+    font-family: var(--sans);
+    transition: transform 0.15s, border-color 0.15s;
+  }
+  .game-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--gold);
+  }
+  .gc-icon {
+    font-family: var(--display);
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1;
+  }
+  .gc-title {
+    font-family: var(--display);
+    font-size: 1.6rem;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+  .gc-desc {
+    font-size: 0.9rem;
+    color: var(--ink-2);
+    flex: 1;
+  }
+  .gc-link {
+    font-weight: 700;
+    font-size: 0.88rem;
+    color: var(--gold);
+  }
+  @media (max-width: 900px) {
+    .game-cards {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  @media (max-width: 520px) {
+    .game-cards {
+      grid-template-columns: 1fr;
+    }
+  }
   .edges {
     margin-top: 4rem;
     font-family: var(--sans);
@@ -223,7 +258,7 @@ const maxEdge = Math.max(...GAME_ROWS.map((g) => g.edge));
     display: inline-block;
     height: 14px;
     width: max(3px, calc(var(--w) * 0.8));
-    background: var(--accent);
+    background: var(--gold);
     border-radius: 0 4px 4px 0;
   }
   .num {

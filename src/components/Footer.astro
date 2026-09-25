@@ -67,7 +67,7 @@ const t = ui[lang];
 <style>
   .site-footer {
     margin-top: 6rem;
-    border-top: 1px solid var(--rule);
+    border-top: 2px solid var(--gold);
     background: var(--paper-2);
     font-family: var(--sans);
     font-size: 0.9rem;
@@ -80,9 +80,11 @@ const t = ui[lang];
     gap: 2.5rem;
   }
   .brand {
-    font-family: var(--serif);
-    font-size: 1.25rem;
-    font-weight: 600;
+    font-family: var(--display);
+    font-size: 1.35rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
     color: var(--ink);
     margin-bottom: 0.6rem;
   }
@@ -107,6 +109,10 @@ const t = ui[lang];
     margin: 0;
     display: grid;
     gap: 0.45rem;
+  }
+  .brand em {
+    font-style: normal;
+    color: var(--gold);
   }
   .muted {
     color: var(--ink-3);

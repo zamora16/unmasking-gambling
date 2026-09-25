@@ -10,10 +10,10 @@ export default defineConfig({
   redirects: {
     '/ayuda': '/unmasking-gambling/help/',
     '/the-way': '/unmasking-gambling/help/',
-    '/slots': '/unmasking-gambling/games/',
-    '/roulette': '/unmasking-gambling/games/',
-    '/lottery': '/unmasking-gambling/games/',
-    '/sports': '/unmasking-gambling/odds/',
+    '/slots': '/unmasking-gambling/games/slots/',
+    '/roulette': '/unmasking-gambling/games/roulette/',
+    '/lottery': '/unmasking-gambling/games/lottery/',
+    '/sports': '/unmasking-gambling/games/sports/',
   },
   i18n: {
     defaultLocale: 'es',

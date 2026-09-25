@@ -1,0 +1,108 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHead from '../../components/PageHead.astro';
+import GameNav from '../../components/GameNav.astro';
+import TechBox from '../../components/TechBox.astro';
+import Lottery from '../../islands/games/Lottery';
+import { type Lang, fmt } from '../../i18n';
+import { choose } from '../../lib/lottery';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const es = lang === 'es';
+const f = fmt(lang);
+const prim = choose(49, 6);
+---
+
+<Base
+  lang={lang}
+  page="lottery"
+  title={es ? 'Loterías' : 'Lotteries'}
+  description={es ? 'Probabilidades exactas de La Primitiva, Bonoloto, EuroMillones y Lotería Nacional, y una simulación de toda una vida jugando.' : 'Exact odds for La Primitiva, Bonoloto, EuroMillions and the Spanish National Lottery, and a simulation of a lifetime of playing.'}
+>
+  <GameNav lang={lang} current="lottery" />
+  <PageHead
+    lang={lang}
+    kicker={es ? 'Simulador' : 'Simulator'}
+    title={es ? 'Loterías' : 'Lotteries'}
+    lede={es
+      ? 'La lotería no parece juego de azar: se juega poco, con calma y muchas veces en familia. Pero es, con diferencia, el juego más caro. Calcula tus probabilidades y simula lo que pasaría si jugaras toda la vida.'
+      : 'The lottery does not feel like gambling: people play rarely, calmly and often as a family tradition. But it is by far the most expensive game. Work out your odds and simulate what would happen if you played for a lifetime.'}
+  />
+
+  <section class="page">
+    <div class="wide">
+      <Lottery client:load lang={lang} />
+    </div>
+  </section>
+
+  <article class="page">
+    <div class="measure prose">
+      <h2>{es ? 'Números que el cerebro no sabe imaginar' : 'Numbers the brain cannot picture'}</h2>
+      {
+        es ? (
+          <p>
+            Acertar los seis números de La Primitiva tiene una probabilidad de 1 entre {f.int(prim)}. Es tan pequeña que no tenemos intuición para ella: nos parece «difícil», igual que nos parecería difícil algo mil veces más probable. Por eso ayuda traducirla a tiempo. Jugando en cada sorteo, harían falta de media decenas de miles de años para ganar una vez.
+          </p>
+        ) : (
+          <p>
+            Matching all six numbers in La Primitiva has a probability of 1 in {f.int(prim)}. It is so small that we have no intuition for it: it just feels “hard”, the same way something a thousand times more likely would. That is why it helps to translate it into time. Playing in every draw, it would take tens of thousands of years on average to win once.
+          </p>
+        )
+      }
+      <TechBox lang={lang} title={es ? 'Probabilidades exactas (distribución hipergeométrica)' : 'Exact probabilities (hypergeometric distribution)'}>
+        {
+          es ? (
+            <>
+              <p>Para un juego 6/49, la probabilidad de acertar <em>k</em> números es:</p>
+              <span class="formula">P(k) = C(6, k) · C(43, 6 − k) / C(49, 6)</span>
+              <p>
+                Con C(49, 6) = {f.int(prim)}. En EuroMillones se multiplican dos sorteos independientes, 5 de 50 números y 2 de 12 estrellas: P(5+2) = 1 / (C(50, 5) · C(12, 2)) = 1 / {f.int(choose(50, 5) * choose(12, 2))}. La categoría 5 + complementario exige que el número que no aciertas coincida con el complementario, que sale de los 43 restantes: P(5) · 1/43. Los tests del proyecto comprueban estas cifras.
+              </p>
+            </>
+          ) : (
+            <>
+              <p>For a 6/49 game, the probability of matching <em>k</em> numbers is:</p>
+              <span class="formula">P(k) = C(6, k) · C(43, 6 − k) / C(49, 6)</span>
+              <p>
+                With C(49, 6) = {f.int(prim)}. EuroMillions multiplies two independent draws, 5 of 50 numbers and 2 of 12 stars: P(5+2) = 1 / (C(50, 5) · C(12, 2)) = 1 / {f.int(choose(50, 5) * choose(12, 2))}. The 5 + bonus tier needs the number you missed to match the bonus ball, drawn from the remaining 43: P(5) · 1/43. The project’s tests check these figures.
+              </p>
+            </>
+          )
+        }
+      </TechBox>
+
+      <h2>{es ? 'La mitad del dinero no vuelve' : 'Half the money never comes back'}</h2>
+      {
+        es ? (
+          <p>
+            En la ruleta la casa se queda con menos de 3 céntimos de cada euro. En la lotería, con muchísimo más: EuroMillones reparte en premios el 50 % de lo que recauda, La Primitiva y Bonoloto el 55 % y la Lotería Nacional el 70 %. Es decir, de cada 10 € en décimos o boletos, entre 3 € y 5 € no vuelven nunca a los jugadores. La simulación de arriba lo refleja: después de toda una vida jugando, lo normal es no haber ganado nunca un premio grande y haber recuperado solo una parte de lo gastado.
+          </p>
+        ) : (
+          <p>
+            At roulette the house keeps less than 3 cents of every euro. With the lottery it keeps far more: EuroMillions pays out 50% of sales in prizes, La Primitiva and Bonoloto 55%, and the National Lottery 70%. In other words, out of every €10 spent on tickets, between €3 and €5 never comes back to players. The simulation above shows it: after a lifetime of playing, the usual outcome is never winning a big prize and getting back only part of what you spent.
+          </p>
+        )
+      }
+      <p class="figure-foot">
+        {es ? 'Fuentes de los porcentajes de premios: ' : 'Sources for prize shares: '}
+        <a href="https://www.labrujadeoro.es/blog/nuevas-normas-de-la-primitiva-distribucion-de-fondos-para-premios.htm">La Primitiva</a>, <a href="https://www.elpollitodeoro.com/blog/tabla-premios-euromillones.htm">EuroMillones</a>, <a href="https://www.labrujadeoro.es/loteria-nacional-premios.htm">Lotería Nacional</a>.
+      </p>
+
+      <h2>{es ? '«Alguien tiene que ganar»' : '“Somebody has to win”'}</h2>
+      {
+        es ? (
+          <p>
+            Es verdad: casi en cada sorteo alguien gana. Pero que alguien gane no dice nada de tus posibilidades. Cuando millones de personas juegan, es casi seguro que a alguna le toque, y esa persona sale en las noticias. Los millones que no ganan no salen nunca. Ver solo a los ganadores hace que el premio parezca mucho más cercano de lo que es.
+          </p>
+        ) : (
+          <p>
+            True: in almost every draw somebody wins. But somebody winning says nothing about your chances. When millions of people play, it is almost certain that one of them hits, and that person is on the news. The millions who do not win never are. Seeing only the winners makes the prize feel far closer than it is.
+          </p>
+        )
+      }
+    </div>
+  </article>
+</Base>

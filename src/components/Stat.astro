@@ -20,10 +20,15 @@ const { value, label } = Astro.props;
   p {
     margin: 0;
   }
+  .stat {
+    background: var(--paper-2);
+  }
   .stat-value {
-    font-size: clamp(1.8rem, 3.6vw, 2.6rem);
+    font-family: var(--display);
+    font-size: clamp(2.2rem, 4vw, 3rem);
     font-weight: 600;
-    letter-spacing: -0.03em;
+    letter-spacing: 0.01em;
+    color: var(--gold);
     line-height: 1.05;
     font-variant-numeric: tabular-nums;
   }

@@ -1,0 +1,93 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHead from '../../components/PageHead.astro';
+import GameNav from '../../components/GameNav.astro';
+import TechBox from '../../components/TechBox.astro';
+import Sports from '../../islands/games/Sports';
+import { type Lang, fmt, href } from '../../i18n';
+import summary from '../../data/odds/summary.json';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const es = lang === 'es';
+const f = fmt(lang);
+const m = summary.medianMargin;
+const acca = (k: number) => 1 - (1 / (1 + m)) ** k;
+---
+
+<Base
+  lang={lang}
+  page="sports"
+  title={es ? 'Apuestas deportivas' : 'Sports betting'}
+  description={es ? 'Conversor de cuotas, calculadora de combinadas y simulador de rachas perdedoras.' : 'Odds converter, accumulator calculator and losing-streak simulator.'}
+>
+  <GameNav lang={lang} current="sports" />
+  <PageHead
+    lang={lang}
+    kicker={es ? 'Herramientas' : 'Tools'}
+    title={es ? 'Apuestas deportivas' : 'Sports betting'}
+    lede={es
+      ? 'Las apuestas deportivas se venden como un juego de conocimiento: si sabes de fútbol, ganas. Estas herramientas enseñan lo que esconden las cuotas, por qué las combinadas son tan caras y por qué una mala racha no significa que «ya toque» ganar.'
+      : 'Sports betting is sold as a game of knowledge: if you know football, you win. These tools show what the odds hide, why accumulators are so expensive and why a bad streak does not mean a win is “due”.'}
+  />
+
+  <section class="page">
+    <div class="wide">
+      <Sports client:load lang={lang} />
+    </div>
+  </section>
+
+  <article class="page">
+    <div class="measure prose">
+      <h2>{es ? 'Las combinadas: el producto estrella de las casas' : 'Accumulators: the bookmakers’ star product'}</h2>
+      {
+        es ? (
+          <p>
+            Las casas de apuestas promocionan mucho las combinadas, y hay un motivo. Cada partido lleva su propia comisión, y al combinarlos las comisiones se acumulan. Con la comisión típica de nuestros datos, una apuesta simple cuesta {f.pct(acca(1), 1)} de lo apostado; una combinada de 3 partidos, {f.pct(acca(3), 0)}; y una de 5, {f.pct(acca(5), 0)}. Además, basta un fallo para perderlo todo.
+          </p>
+        ) : (
+          <p>
+            Bookmakers push accumulators hard, and there is a reason. Every match carries its own fee, and combining them stacks the fees up. With the typical fee in our data, a single bet costs {f.pct(acca(1), 1)} of the stake; a 3-match accumulator, {f.pct(acca(3), 0)}; a 5-match one, {f.pct(acca(5), 0)}. And a single miss loses everything.
+          </p>
+        )
+      }
+      <TechBox lang={lang} title={es ? 'Por qué el margen se multiplica' : 'Why the margin compounds'}>
+        {
+          es ? (
+            <p>
+              Si cada selección <em>i</em> tiene cuota o<sub>i</sub> y margen m, su probabilidad real es aproximadamente p<sub>i</sub> = 1/(o<sub>i</sub>(1+m)). La combinada paga Πo<sub>i</sub> con probabilidad Πp<sub>i</sub> (suponiendo partidos independientes), así que su retorno esperado es Π(o<sub>i</sub>p<sub>i</sub>) = (1+m)<sup>−k</sup>. La ventaja efectiva es 1 − (1+m)<sup>−k</sup>, que crece casi linealmente con <em>k</em>. Con m = {f.pct(m, 1)}, el margen mediano de los {f.int(summary.matches)} partidos analizados en <a href={href(lang, 'odds')}>Las cuotas</a>.
+            </p>
+          ) : (
+            <p>
+              If each leg <em>i</em> has odds o<sub>i</sub> and overround m, its true probability is roughly p<sub>i</sub> = 1/(o<sub>i</sub>(1+m)). The accumulator pays Πo<sub>i</sub> with probability Πp<sub>i</sub> (assuming independent matches), so its expected return is Π(o<sub>i</sub>p<sub>i</sub>) = (1+m)<sup>−k</sup>. The effective edge is 1 − (1+m)<sup>−k</sup>, which grows almost linearly with <em>k</em>. With m = {f.pct(m, 1)}, the median margin of the {f.int(summary.matches)} matches analysed in <a href={href(lang, 'odds')}>The odds</a>.
+            </p>
+          )
+        }
+      </TechBox>
+
+      <h2>{es ? 'Las rachas no significan nada' : 'Streaks mean nothing'}</h2>
+      {
+        es ? (
+          <p>
+            Incluso alguien que acierta la mitad de sus apuestas va a vivir rachas de seis, siete u ocho derrotas seguidas en una temporada. No es que haya perdido el «olfato»: es lo que hace el azar. El peligro está en cómo se reacciona. Quien apuesta más para recuperar lo perdido (lo que se llama «perseguir pérdidas») convierte una mala racha normal en un agujero. Perseguir pérdidas es uno de los signos más claros de que el juego se está volviendo un problema.
+          </p>
+        ) : (
+          <p>
+            Even someone who wins half their bets will go through streaks of six, seven or eight losses in a row in a season. They have not lost their “touch”: that is what chance does. The danger lies in how people react. Betting more to win back losses (“chasing losses”) turns a normal bad streak into a hole. Chasing losses is one of the clearest signs that gambling is becoming a problem.
+          </p>
+        )
+      }
+      <TechBox lang={lang} title={es ? 'Cómo se simulan las rachas' : 'How the streaks are simulated'}>
+        {
+          es ? (
+            <p>Cada temporada es una secuencia de <em>n</em> apuestas de Bernoulli independientes con probabilidad de acierto <em>p</em>. Se simulan 5.000 temporadas y se registra la racha perdedora más larga de cada una. Para n = 100 y p = 0,5, la racha más larga típica ronda log<sub>2</sub>(n) ≈ 6–7, y en casi una de cada tres temporadas llega a 7 o más.</p>
+          ) : (
+            <p>Each season is a sequence of <em>n</em> independent Bernoulli bets with win probability <em>p</em>. We simulate 5,000 seasons and record the longest losing run in each. For n = 100 and p = 0.5 the typical longest run is about log<sub>2</sub>(n) ≈ 6–7, and almost one season in three reaches 7 or more.</p>
+          )
+        }
+      </TechBox>
+    </div>
+  </article>
+</Base>
