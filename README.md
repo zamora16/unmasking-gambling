@@ -66,7 +66,7 @@ python analysis/odds/pipeline.py Matches.csv
 
 ## Data sources
 
-- Match results and odds: [Football-Data.co.uk](https://www.football-data.co.uk/) and [ClubElo](http://clubelo.com/), compiled in [xgabora/Club-Football-Match-Data](https://github.com/xgabora/Club-Football-Match-Data-2000-2025).
+- Match results and odds: [Football-Data.co.uk](https://www.football-data.co.uk/) and [ClubElo](http://clubelo.com/), compiled in Gábor, A. (2026). *Club Football Match Data*. [github.com/xgabora/Club-Football-Match-Data](https://github.com/xgabora/Club-Football-Match-Data-2000-2025) (MIT licence).
 - Spanish market: annual reports of the [Dirección General de Ordenación del Juego](https://www.ordenacionjuego.es/) and the *Revista Española de Drogodependencias*.
 - Prevalence: ESTUDES and EDADES surveys, [Observatorio Español de las Drogas y las Adicciones](https://pnsd.sanidad.gob.es/).
 

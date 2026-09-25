@@ -37,8 +37,7 @@ const repo = 'https://github.com/zamora16/unmasking-gambling';
             <h2>Datos</h2>
             <ul>
               <li>
-                <strong>Partidos y cuotas.</strong> {f.int(summary.matches)} partidos de {summary.leagues} ligas ({summary.firstDate.slice(0, 4)}–{summary.lastDate.slice(0, 4)}) con resultado, cuotas 1X2 de la casa de referencia, cuota máxima entre unas 17 casas y rating Elo previo al partido. Proceden de Football-Data.co.uk y ClubElo, recopilados en{' '}
-                <a href="https://github.com/xgabora/Club-Football-Match-Data-2000-2025">xgabora/Club-Football-Match-Data</a>.
+                <strong>Partidos y cuotas.</strong> {f.int(summary.matches)} partidos de {summary.leagues} ligas ({summary.firstDate.slice(0, 4)}–{summary.lastDate.slice(0, 4)}) con resultado, cuotas 1X2 de la casa de referencia, cuota máxima entre unas 17 casas y rating Elo previo al partido. Proceden de Football-Data.co.uk y ClubElo, recopilados por Adam Gábor (2026), <a href="https://github.com/xgabora/Club-Football-Match-Data-2000-2025"><em>Club Football Match Data</em></a>, con licencia MIT. El archivo original (unos 45 MB) no se guarda en este repositorio: el script lo descarga y solo se publican los resultados agregados.
               </li>
               <li>
                 <strong>Mercado español.</strong> Informes anuales de la Dirección General de Ordenación del Juego (DGOJ) y recopilación de la <em>Revista Española de Drogodependencias</em>. Cada cifra está enlazada a su fuente en <a href={`${repo}/blob/main/src/data/market/spain.json`}>spain.json</a>.
@@ -83,8 +82,7 @@ python analysis/odds/pipeline.py ruta/a/Matches.csv</code></pre>
             <h2>Data</h2>
             <ul>
               <li>
-                <strong>Matches and odds.</strong> {f.int(summary.matches)} matches from {summary.leagues} leagues ({summary.firstDate.slice(0, 4)}–{summary.lastDate.slice(0, 4)}) with result, reference-bookmaker 1X2 odds, the maximum price across about 17 bookmakers and pre-match Elo ratings. They come from Football-Data.co.uk and ClubElo, compiled in{' '}
-                <a href="https://github.com/xgabora/Club-Football-Match-Data-2000-2025">xgabora/Club-Football-Match-Data</a>.
+                <strong>Matches and odds.</strong> {f.int(summary.matches)} matches from {summary.leagues} leagues ({summary.firstDate.slice(0, 4)}–{summary.lastDate.slice(0, 4)}) with result, reference-bookmaker 1X2 odds, the maximum price across about 17 bookmakers and pre-match Elo ratings. They come from Football-Data.co.uk and ClubElo, compiled by Adam Gábor (2026), <a href="https://github.com/xgabora/Club-Football-Match-Data-2000-2025"><em>Club Football Match Data</em></a>, under the MIT licence. The raw file (about 45 MB) is not stored in this repository: the script downloads it and only aggregated results are published.
               </li>
               <li>
                 <strong>Spanish market.</strong> Annual reports from Spain’s gambling regulator (DGOJ) and a compilation in the <em>Revista Española de Drogodependencias</em>. Every figure links to its source in <a href={`${repo}/blob/main/src/data/market/spain.json`}>spain.json</a>.
