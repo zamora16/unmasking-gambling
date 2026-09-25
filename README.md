@@ -1,101 +1,40 @@
-# 🎯 Unmasking Gambling
+# Unmasking Gambling
 
-Una plataforma educativa interactiva diseñada para ayudar a las personas a entender los riesgos del gambling y promover decisiones informadas.
+**An interactive educational site that shows, with simulators and the actual maths, why the house always wins, and guides people towards help.**
 
-## 🌟 Características
+🌐 **Live:** [zamora16.github.io/unmasking-gambling](https://zamora16.github.io/unmasking-gambling/) (Spanish)
 
-- **Simuladores Interactivos**: Demuestra matemáticamente por qué la casa siempre gana
-- **El Camino**: Guía paso a paso para la recuperación y prevención
-- **Recursos Educativos**: Información basada en evidencia sobre gambling responsable
-- **Herramientas de Autoayuda**: Calculadoras y evaluaciones personalizadas
-- **Recursos de Apoyo**: Enlaces a organizaciones profesionales de ayuda
+![Astro](https://img.shields.io/badge/Astro-4-BC52EE?logo=astro&logoColor=white)
+![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=black)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-06B6D4?logo=tailwindcss&logoColor=white)
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 
-## 🚀 Inicio Rápido
+Most prevention messages tell people that gambling is risky. This site lets them *see* it: they can play a slot machine, bet on a roulette system or simulate a betting season and watch the expected value work against them.
 
-### Prerrequisitos
-- Node.js 18+ 
-- npm o yarn
+## What's inside
 
-### Instalación
+- **Slots**: slot simulator, RTP and volatility explained, payline calculator and visualiser.
+- **Roulette**: simulator, house-edge breakdown, calculator and why betting systems (Martingale and others) fail.
+- **Lottery and scratch cards**: expected value and probability calculators.
+- **Sports betting**: odds converter, bookmaker margin ("juice") calculator, bankroll manager, streak and season simulators.
+- **"El Camino"**: a six-step self-help path with a self-assessment, self-control tools and a printable personal plan.
+- **Help**: crisis pop-up and verified support resources for Spain, Latin America, the UK and the US, managed from a single typed file (`src/utils/links.ts`).
+
+## Tech
+
+Astro (static output) with React islands for the interactive simulators, TypeScript and Tailwind CSS. Deployed to GitHub Pages by a GitHub Actions workflow on every push to `main`.
 
 ```bash
-# Clonar el repositorio
-git clone https://github.com/tu-usuario/unmasking-gambling.git
-
-# Entrar al directorio
-cd unmasking-gambling
-
-# Instalar dependencias
 npm install
-
-# Ejecutar en desarrollo
-npm run dev
+npm run dev       # http://localhost:4321
+npm run build     # static site in ./dist
 ```
 
-### Scripts Disponibles
+## Need help?
 
-```bash
-npm run dev          # Servidor de desarrollo
-npm run build        # Build para producción
-npm run preview      # Preview del build
-npm run astro        # CLI de Astro
-```
+This site is educational and does not replace professional help. In Spain you can call **FEJAR, 900 200 225**, or **024** if you are in crisis. UK: [GamCare](https://www.gamcare.org.uk). US: [National Council on Problem Gambling](https://www.ncpgambling.org), 1-800-GAMBLER.
 
-## 🛠️ Tecnologías
+## Author
 
-- **[Astro](https://astro.build/)** - Framework web moderno
-- **[Tailwind CSS](https://tailwindcss.com/)** - Framework de CSS
-- **[TypeScript](https://www.typescriptlang.org/)** - JavaScript tipado
-- **[Chart.js](https://www.chartjs.org/)** - Gráficos interactivos
-
-## 📁 Estructura del Proyecto
-
-```
-src/
-├── components/     # Componentes reutilizables
-├── layouts/        # Layouts de página
-├── pages/          # Páginas del sitio
-├── styles/         # Estilos globales
-└── utils/          # Utilidades y helpers
-
-public/
-├── images/         # Imágenes estáticas
-└── favicon.ico     # Favicon
-```
-
-## 🌍 Despliegue
-
-El sitio se despliega automáticamente en GitHub Pages cuando se hace push a la rama `main`.
-
-**URL del sitio**: [https://tu-usuario.github.io/unmasking-gambling](https://tu-usuario.github.io/unmasking-gambling)
-
-## 🤝 Contribuir
-
-Las contribuciones son bienvenidas. Por favor:
-
-1. Fork el proyecto
-2. Crea una rama para tu feature (`git checkout -b feature/AmazingFeature`)
-3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
-4. Push a la rama (`git push origin feature/AmazingFeature`)
-5. Abre un Pull Request
-
-## 📄 Licencia
-
-Este proyecto está bajo la Licencia MIT - ver el archivo [LICENSE](LICENSE) para detalles.
-
-## 🆘 Recursos de Ayuda
-
-Si tú o alguien que conoces necesita ayuda con problemas de gambling:
-
-### España
-- **Teléfono**: 900 200 225 (Línea de Ayuda)
-- **Web**: [Federación Española de Jugadores de Azar Rehabilitados](https://www.fejar.org/)
-
-### Internacional
-- **Reino Unido**: [GamCare](https://www.gamcare.org.uk/)
-- **Estados Unidos**: [National Council on Problem Gambling](https://www.ncpgambling.org/)
-- **Canadá**: [Responsible Gambling Council](https://www.responsiblegambling.org/)
-
----
-
-**⚠️ Nota**: Esta plataforma tiene fines educativos y no sustituye la ayuda profesional. Si experimentas problemas graves con el gambling, busca ayuda profesional inmediatamente.
+[Ángel Zamora Martínez](https://zamora16.github.io/angel-zamora-portfolio/), PhD in Psychology. Released under the [MIT License](LICENSE).
