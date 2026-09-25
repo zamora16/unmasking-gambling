@@ -1,0 +1,302 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHead from '../components/PageHead.astro';
+import type { Lang } from '../i18n';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const es = lang === 'es';
+
+const spain = [
+  { name: 'FEJAR', desc: es ? 'Federación Española de Jugadores de Azar Rehabilitados. Orientación gratuita y asociaciones en toda España.' : 'Spanish federation of recovering gamblers. Free guidance and local groups across Spain.', phone: '900 200 225', tel: '900200225', url: 'https://www.fejar.org' },
+  { name: es ? 'Línea 024' : '024 line', desc: es ? 'Atención a la conducta suicida. Gratuita, 24 horas.' : 'Suicide-prevention line. Free, 24 hours.', phone: '024', tel: '024' },
+  { name: es ? 'Autoexclusión (RGIAJ)' : 'Self-exclusion (RGIAJ)', desc: es ? 'Registro oficial que te impide jugar en todas las webs de juego con licencia en España.' : 'Official register that blocks you from every licensed gambling website in Spain.', url: 'https://www.ordenacionjuego.es/participantes-juego/juego-seguro/rgiaj' },
+  { name: 'Jugar Bien', desc: es ? 'Web de la Dirección General de Ordenación del Juego sobre juego seguro y ayuda.' : 'The regulator’s website on safer gambling and support.', url: 'https://www.jugarbien.es' },
+];
+const intl = [
+  { country: es ? 'Reino Unido' : 'United Kingdom', name: 'National Gambling Helpline (GamCare)', phone: '0808 8020 133', tel: '08088020133', url: 'https://www.gamcare.org.uk' },
+  { country: es ? 'Reino Unido' : 'United Kingdom', name: 'Samaritans', phone: '116 123', tel: '116123', url: 'https://www.samaritans.org' },
+  { country: es ? 'Estados Unidos' : 'United States', name: 'National Problem Gambling Helpline', phone: '1-800-GAMBLER', tel: '18004262537', url: 'https://www.ncpgambling.org' },
+  { country: es ? 'Estados Unidos' : 'United States', name: '988 Suicide & Crisis Lifeline', phone: '988', tel: '988', url: 'https://988lifeline.org' },
+  { country: 'México', name: 'Línea de la Vida', phone: '800 911 2000', tel: '8009112000', url: 'https://www.gob.mx/conadic' },
+  { country: 'Argentina', name: es ? 'Línea 141 (SEDRONAR)' : '141 line (SEDRONAR)', phone: '141', tel: '141' },
+  { country: 'Chile', name: es ? 'Línea de prevención del suicidio' : 'Suicide-prevention line', phone: '*4141', tel: '*4141' },
+];
+const signs = es
+  ? [
+      'Juegas más tiempo o más dinero del que habías pensado.',
+      'Vuelves a jugar para recuperar lo que has perdido.',
+      'Ocultas o minimizas cuánto juegas o cuánto has perdido.',
+      'Juegas para escapar de problemas o de cómo te sientes.',
+      'Has intentado parar o reducir y no lo has conseguido.',
+      'Has pedido dinero, vendido cosas o dejado de pagar algo para jugar.',
+      'El juego te está costando discusiones, trabajo, estudios o relaciones.',
+      'Te sientes irritable o inquieto cuando no puedes jugar.',
+    ]
+  : [
+      'You play for longer, or with more money, than you intended.',
+      'You go back to win back what you lost.',
+      'You hide or play down how much you gamble or have lost.',
+      'You gamble to escape problems or how you feel.',
+      'You have tried to stop or cut down and could not.',
+      'You have borrowed money, sold things or skipped bills to gamble.',
+      'Gambling is costing you arguments, work, studies or relationships.',
+      'You feel restless or irritable when you cannot gamble.',
+    ];
+const steps = es
+  ? [
+      { h: 'Díselo a alguien', p: 'Hablar con una persona de confianza o llamar a una línea de ayuda es el paso que más cuesta y el que más ayuda. No tienes que tenerlo todo claro para llamar.' },
+      { h: 'Pon una barrera', p: 'Inscríbete en el RGIAJ para bloquear las webs de juego con licencia en España. Instala un bloqueador gratuito como BetBlocker en el móvil y el ordenador.' },
+      { h: 'Aleja el dinero', p: 'Muchos bancos permiten bloquear los pagos a webs de juego desde la app. Baja los límites de la tarjeta y deja de guardar los datos de pago en el navegador.' },
+      { h: 'Anota lo que pasa', p: 'Apunta cuándo te entran ganas de jugar, qué estabas haciendo y cómo te sentías. Reconocer esos momentos permite prepararse para el siguiente.' },
+      { h: 'Busca apoyo profesional', p: 'El trastorno por juego tiene tratamiento, y la terapia cognitivo-conductual tiene buena evidencia. Tu médico de atención primaria puede derivarte, y FEJAR te orienta hacia recursos de tu zona.' },
+    ]
+  : [
+      { h: 'Tell someone', p: 'Talking to someone you trust, or calling a helpline, is the hardest step and the one that helps most. You do not need to have it all figured out before calling.' },
+      { h: 'Put up a barrier', p: 'Use your country’s self-exclusion scheme (RGIAJ in Spain, GAMSTOP in the UK) and install a free blocker such as BetBlocker on your phone and computer.' },
+      { h: 'Put distance between you and the money', p: 'Many banks let you block gambling payments in their app. Lower your card limits and stop saving card details in your browser.' },
+      { h: 'Write down what happens', p: 'Note when the urge to gamble shows up, what you were doing and how you felt. Recognising those moments lets you prepare for the next one.' },
+      { h: 'Get professional support', p: 'Gambling disorder is treatable, and cognitive-behavioural therapy has good evidence behind it. Your GP can refer you, and helplines can point you to local services.' },
+    ];
+---
+
+<Base
+  lang={lang}
+  page="help"
+  title={es ? 'Pedir ayuda' : 'Get help'}
+  description={es ? 'Teléfonos, autoexclusión y pasos concretos si el juego te está haciendo daño a ti o a alguien cercano.' : 'Helplines, self-exclusion and practical steps if gambling is hurting you or someone close to you.'}
+>
+  <PageHead
+    kicker={es ? 'Ayuda' : 'Help'}
+    title={es ? 'Si el juego te está haciendo daño' : 'If gambling is hurting you'}
+    lede={es
+      ? 'No es una cuestión de fuerza de voluntad, y no tienes que resolverlo solo. Aquí tienes a quién llamar y qué puedes hacer hoy.'
+      : 'It is not a matter of willpower, and you do not have to deal with it alone. Here is who to call and what you can do today.'}
+  />
+
+  <div class="page">
+    <aside class="urgent wide" role="note">
+      <p class="u-title">{es ? '¿Estás en crisis o piensas en hacerte daño?' : 'In crisis or thinking about harming yourself?'}</p>
+      {
+        es ? (
+          <p>
+            Llama al <a href="tel:024">024</a> (gratuito, 24 horas) o al <a href="tel:112">112</a> si hay peligro inmediato.
+          </p>
+        ) : (
+          <p>
+            In the US call or text <a href="tel:988">988</a>; in the UK call Samaritans on <a href="tel:116123">116 123</a>; in Spain call <a href="tel:024">024</a>. Call your local emergency number if there is immediate danger.
+          </p>
+        )
+      }
+    </aside>
+
+    <section class="wide block">
+      <h2>{es ? 'En España' : 'In Spain'}</h2>
+      <ul class="cards">
+        {
+          spain.map((r) => (
+            <li class="card">
+              <p class="c-name">{r.name}</p>
+              <p class="c-desc">{r.desc}</p>
+              <p class="c-links">
+                {r.phone && <a class="phone num" href={`tel:${r.tel}`}>{r.phone}</a>}
+                {r.url && <a href={r.url}>{r.url.replace(/^https?:\/\/(www\.)?/, '').split('/')[0]} ↗</a>}
+              </p>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <section class="wide block">
+      <h2>{es ? 'En otros países' : 'Elsewhere'}</h2>
+      <table class="intl">
+        <tbody>
+          {
+            intl.map((r) => (
+              <tr>
+                <th scope="row">{r.country}</th>
+                <td>{r.url ? <a href={r.url}>{r.name}</a> : r.name}</td>
+                <td class="num">
+                  <a href={`tel:${r.tel}`}>{r.phone}</a>
+                </td>
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+    </section>
+
+    <section class="measure prose">
+      <h2>{es ? 'Señales de alarma' : 'Warning signs'}</h2>
+      <p>{es ? 'No es un test ni un diagnóstico. Si te reconoces en varias de estas frases, merece la pena hablarlo con alguien.' : 'This is not a test or a diagnosis. If several of these sound familiar, it is worth talking to someone.'}</p>
+      <ul class="signs">
+        {signs.map((s) => <li>{s}</li>)}
+      </ul>
+
+      <h2>{es ? 'Cinco cosas que puedes hacer hoy' : 'Five things you can do today'}</h2>
+      <ol class="steps">
+        {
+          steps.map((s) => (
+            <li>
+              <p class="s-h">{s.h}</p>
+              <p>{s.p}</p>
+            </li>
+          ))
+        }
+      </ol>
+
+      <h2>{es ? 'Si le pasa a alguien cercano' : 'If it is happening to someone close to you'}</h2>
+      {
+        es ? (
+          <ul>
+            <li>Habla desde la preocupación, no desde el reproche: describe lo que ves, sin etiquetas.</li>
+            <li>No pagues sus deudas ni le prestes dinero; eso suele alargar el problema.</li>
+            <li>Protege la economía familiar: separa cuentas y revisa quién tiene acceso a las tarjetas.</li>
+            <li>Busca apoyo para ti también. Las asociaciones de FEJAR tienen grupos para familias.</li>
+          </ul>
+        ) : (
+          <ul>
+            <li>Speak from concern rather than blame: describe what you see, without labels.</li>
+            <li>Do not pay their debts or lend them money; it usually prolongs the problem.</li>
+            <li>Protect the household finances: separate accounts and check who can use the cards.</li>
+            <li>Get support for yourself too. Many helplines and groups also help families.</li>
+          </ul>
+        )
+      }
+      <p class="note">{es ? 'Esta página es informativa y no sustituye la atención de un profesional sanitario.' : 'This page is for information and does not replace care from a health professional.'}</p>
+    </section>
+  </div>
+</Base>
+
+<style>
+  .urgent {
+    font-family: var(--sans);
+    background: var(--paper-2);
+    border-left: 4px solid var(--accent);
+    border-radius: 6px;
+    padding: 1.1rem 1.4rem;
+    margin-top: 0.5rem;
+  }
+  .urgent p {
+    margin: 0;
+  }
+  .u-title {
+    font-weight: 700;
+    margin-bottom: 0.3rem !important;
+  }
+  .urgent a {
+    font-weight: 700;
+    font-family: var(--mono);
+  }
+  .block {
+    margin-top: 3.5rem;
+    font-family: var(--sans);
+  }
+  .block h2 {
+    font-size: clamp(1.6rem, 3vw, 2rem);
+    margin-bottom: 1.2rem;
+  }
+  .cards {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 1rem;
+  }
+  .card {
+    border: 1px solid var(--rule);
+    border-radius: 10px;
+    padding: 1.1rem 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+  .card p {
+    margin: 0;
+  }
+  .c-name {
+    font-weight: 700;
+    font-size: 1.05rem;
+  }
+  .c-desc {
+    font-size: 0.88rem;
+    color: var(--ink-2);
+    line-height: 1.45;
+    flex: 1;
+  }
+  .c-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    align-items: baseline;
+    font-size: 0.85rem;
+    margin-top: 0.4rem !important;
+  }
+  .phone {
+    font-size: 1.15rem;
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .intl {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.92rem;
+  }
+  .intl th,
+  .intl td {
+    text-align: left;
+    padding: 0.65rem 1rem 0.65rem 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .intl th {
+    font-weight: 600;
+    color: var(--ink-2);
+    width: 12rem;
+  }
+  .intl td.num {
+    text-align: right;
+    font-weight: 600;
+  }
+  .signs li::marker {
+    color: var(--accent);
+  }
+  .steps {
+    list-style: none;
+    padding: 0;
+    counter-reset: s;
+  }
+  .steps li {
+    counter-increment: s;
+    position: relative;
+    padding-left: 3rem;
+    margin-bottom: 1.4rem;
+  }
+  .steps li::before {
+    content: counter(s);
+    position: absolute;
+    left: 0;
+    top: 0.1rem;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    font-family: var(--sans);
+    font-weight: 700;
+    font-size: 0.9rem;
+    background: var(--ink);
+    color: var(--paper);
+  }
+  .steps p {
+    margin: 0;
+  }
+  .s-h {
+    font-family: var(--sans);
+    font-weight: 700;
+    margin-bottom: 0.2rem !important;
+  }
+</style>

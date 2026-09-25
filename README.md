@@ -1,39 +1,72 @@
 # Unmasking Gambling
 
-**An interactive educational site that shows, with simulators and the actual maths, why the house always wins, and guides people towards help.**
+**Data journalism and interactive simulations on the mathematics of gambling, in Spanish and English.**
 
-🌐 **Live:** [zamora16.github.io/unmasking-gambling](https://zamora16.github.io/unmasking-gambling/) (Spanish)
+🌐 **Live:** [zamora16.github.io/unmasking-gambling](https://zamora16.github.io/unmasking-gambling/) · [English](https://zamora16.github.io/unmasking-gambling/en/)
 
-![Astro](https://img.shields.io/badge/Astro-4-BC52EE?logo=astro&logoColor=white)
-![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=black)
+![Astro](https://img.shields.io/badge/Astro-5-BC52EE?logo=astro&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)
-![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-06B6D4?logo=tailwindcss&logoColor=white)
+![Python](https://img.shields.io/badge/Python-pandas%20%C2%B7%20SciPy-3776AB?logo=python&logoColor=white)
+![Tests](https://github.com/zamora16/unmasking-gambling/actions/workflows/deploy.yml/badge.svg)
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 
-Most prevention messages tell people that gambling is risky. This site lets them *see* it: they can play a slot machine, bet on a roulette system or simulate a betting season and watch the expected value work against them.
+Most prevention messages say that gambling is risky. This site shows *why*, with simulations you can run and real data you can check.
 
 ## What's inside
 
-- **Slots**: slot simulator, RTP and volatility explained, payline calculator and visualiser.
-- **Roulette**: simulator, house-edge breakdown, calculator and why betting systems (Martingale and others) fail.
-- **Lottery and scratch cards**: expected value and probability calculators.
-- **Sports betting**: odds converter, bookmaker margin ("juice") calculator, bankroll manager, streak and season simulators.
-- **"El Camino"**: a six-step self-help path with a self-assessment, self-control tools and a printable personal plan.
-- **Help**: crisis pop-up and verified support resources for Spain, Latin America, the UK and the US, managed from a single typed file (`src/utils/links.ts`).
+| Section | What it does | Techniques |
+| --- | --- | --- |
+| **Ruin Lab** | Simulates thousands of players at once in the browser and shows how the house edge wins over time. | Monte Carlo in a Web Worker, percentile bands, Kaplan–Meier survival, gambler's ruin |
+| **Do the odds tell the truth?** | Analysis of 235,796 football matches (2000–2026) with real bookmaker odds. | Overround removal (proportional, power, Shin), calibration with Wilson intervals, favourite–longshot bias with bootstrap CIs, strategy backtests, out-of-sample ordinal logit on Elo vs the market |
+| **The market** | Dashboard of Spain's online gambling market: revenue, hold, marketing, bonuses and prevalence among teenagers and adults. | Curated official data (DGOJ, Ministry of Health), every figure linked to its source |
+| **The games** | House edge of every common game and a calculator of what it costs to play at your own pace. | Exact probability calculations |
+| **Help** | Helplines, self-exclusion and practical steps. | |
 
-## Tech
+A few findings from the odds analysis:
 
-Astro (static output) with React islands for the interactive simulators, TypeScript and Tailwind CSS. Deployed to GitHub Pages by a GitHub Actions workflow on every push to `main`.
+- The reference bookmaker's median margin fell from 12.8% (2000/01) to about 6.5%, and is roughly twice as high in small leagues as in the Premier League.
+- Betting on long shots (odds 10–15) loses 28% on average; short favourites lose about 2%.
+- None of eight simple strategies made money over ten seasons. An Elo model's "value bets", tested out of sample, lost 8.8%.
+
+## Project structure
+
+```
+src/lib/          the maths: games, Monte Carlo, Kaplan–Meier, margin removal (pure TypeScript)
+src/workers/      Web Worker that runs the simulations
+src/charts/       hand-built SVG charts on d3 scales (tooltips, table view, dark mode)
+src/islands/      interactive React components
+src/views/        page content, in Spanish and English
+src/data/         JSON produced by the analysis and the curated market dataset
+analysis/odds/    reproducible Python pipeline for the odds analysis
+tests/            Vitest tests (exact edges, gambler's ruin formula, Kaplan–Meier, margin methods)
+```
+
+## Run it
 
 ```bash
 npm install
-npm run dev       # http://localhost:4321
-npm run build     # static site in ./dist
+npm run dev      # http://localhost:4321/unmasking-gambling/
+npm test
+npm run build
 ```
+
+Reproduce the odds analysis (writes `src/data/odds/*.json`):
+
+```bash
+pip install -r analysis/requirements.txt
+curl -LO https://raw.githubusercontent.com/xgabora/Club-Football-Match-Data-2000-2025/main/data/Matches.csv
+python analysis/odds/pipeline.py Matches.csv
+```
+
+## Data sources
+
+- Match results and odds: [Football-Data.co.uk](https://www.football-data.co.uk/) and [ClubElo](http://clubelo.com/), compiled in [xgabora/Club-Football-Match-Data](https://github.com/xgabora/Club-Football-Match-Data-2000-2025).
+- Spanish market: annual reports of the [Dirección General de Ordenación del Juego](https://www.ordenacionjuego.es/) and the *Revista Española de Drogodependencias*.
+- Prevalence: ESTUDES and EDADES surveys, [Observatorio Español de las Drogas y las Adicciones](https://pnsd.sanidad.gob.es/).
 
 ## Need help?
 
-This site is educational and does not replace professional help. In Spain you can call **FEJAR, 900 200 225**, or **024** if you are in crisis. UK: [GamCare](https://www.gamcare.org.uk). US: [National Council on Problem Gambling](https://www.ncpgambling.org), 1-800-GAMBLER.
+This site is educational and does not replace professional help. Spain: **FEJAR 900 200 225**, crisis line **024**. UK: **GamCare 0808 8020 133**. US: **1-800-GAMBLER**, **988**.
 
 ## Author
 

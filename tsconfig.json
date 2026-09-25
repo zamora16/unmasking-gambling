@@ -1,15 +1,12 @@
-{ 
-  "extends": "astro/tsconfigs/base", 
-  "compilerOptions": { 
-    "allowJs": true, 
-    "checkJs": false, 
-    "strict": false, 
-    "noImplicitAny": false, 
-    "noImplicitReturns": false, 
-    "noImplicitThis": false, 
-    "noImplicitUseStrict": false, 
-    "skipLibCheck": true,
-    "noUnusedLocals": false, 
-    "noUnusedParameters": false 
-  } 
-} 
+{
+  "extends": "astro/tsconfigs/strict",
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "jsxImportSource": "react",
+    "resolveJsonModule": true,
+    "baseUrl": ".",
+    "paths": { "@/*": ["src/*"] }
+  },
+  "include": [".astro/types.d.ts", "**/*"],
+  "exclude": ["dist", "node_modules", "analysis"]
+}

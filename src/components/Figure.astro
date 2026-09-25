@@ -1,0 +1,19 @@
+---
+interface Props {
+  title: string;
+  sub?: string;
+  foot?: string;
+  wide?: boolean;
+  id?: string;
+}
+const { title, sub, foot, wide = true, id } = Astro.props;
+---
+
+<figure class:list={['figure', wide ? 'wide' : 'measure']} id={id}>
+  <figcaption class="figure-head">
+    <p class="figure-title">{title}</p>
+    {sub && <p class="figure-sub">{sub}</p>}
+  </figcaption>
+  <slot />
+  {foot && <p class="figure-foot" set:html={foot} />}
+</figure>

@@ -1,0 +1,122 @@
+---
+import { type Lang, href, ui } from '../i18n';
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const t = ui[lang];
+---
+
+<footer class="site-footer">
+  <div class="page grid">
+    <div class="about">
+      <p class="brand">Unmasking <em>Gambling</em></p>
+      <p>{t.footer.about}</p>
+      <p class="small">{t.footer.disclaimer}</p>
+    </div>
+    <div>
+      <p class="head">{lang === 'es' ? 'Secciones' : 'Sections'}</p>
+      <ul>
+        <li><a href={href(lang, 'lab')}>{t.nav.lab}</a></li>
+        <li><a href={href(lang, 'odds')}>{t.nav.odds}</a></li>
+        <li><a href={href(lang, 'market')}>{t.nav.market}</a></li>
+        <li><a href={href(lang, 'games')}>{t.nav.games}</a></li>
+        <li><a href={href(lang, 'methods')}>{t.nav.methods}</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="head">{t.needHelp}</p>
+      <ul>
+        {
+          lang === 'es' ? (
+            <>
+              <li>
+                FEJAR <a href="tel:900200225">900 200 225</a>
+              </li>
+              <li>
+                {'Crisis '}
+                <a href="tel:024">024</a> · {'Emergencias '}
+                <a href="tel:112">112</a>
+              </li>
+            </>
+          ) : (
+            <>
+              <li>
+                US <a href="tel:18004262537">1-800-GAMBLER</a>
+              </li>
+              <li>
+                UK GamCare <a href="tel:08088020133">0808 8020 133</a>
+              </li>
+            </>
+          )
+        }
+        <li><a href={href(lang, 'help')}>{lang === 'es' ? 'Más recursos' : 'More resources'} →</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="head">{t.footer.author}</p>
+      <ul>
+        <li><a href="https://zamora16.github.io/angel-zamora-portfolio/">Ángel Zamora Martínez</a></li>
+        <li class="muted">{t.footer.authorRole}</li>
+        <li><a href="https://github.com/zamora16/unmasking-gambling">{t.footer.code}</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    margin-top: 6rem;
+    border-top: 1px solid var(--rule);
+    background: var(--paper-2);
+    font-family: var(--sans);
+    font-size: 0.9rem;
+    color: var(--ink-2);
+    padding: 3rem 0 3.5rem;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 2.5rem;
+  }
+  .brand {
+    font-family: var(--serif);
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 0.6rem;
+  }
+  .about p {
+    max-width: 30rem;
+  }
+  .small {
+    font-size: 0.8rem;
+    color: var(--ink-3);
+  }
+  .head {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink);
+    margin-bottom: 0.8rem;
+  }
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 0.45rem;
+  }
+  .muted {
+    color: var(--ink-3);
+  }
+  @media (max-width: 800px) {
+    .grid {
+      grid-template-columns: 1fr 1fr;
+    }
+    .about {
+      grid-column: 1 / -1;
+    }
+  }
+</style>

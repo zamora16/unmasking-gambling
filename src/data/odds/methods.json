@@ -1,0 +1,1 @@
+[{"method":"baseRates","logLoss":1.0732,"brier":0.6491},{"method":"proportional","logLoss":1.0041,"brier":0.6006},{"method":"power","logLoss":1.0036,"brier":0.6003},{"method":"shin","logLoss":1.0036,"brier":0.6004}]

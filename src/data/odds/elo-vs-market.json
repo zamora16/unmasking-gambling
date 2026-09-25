@@ -1,0 +1,1 @@
+{"trainSeasons":[2000,2015],"testSeasons":[2016,2026],"nTest":59906,"coef":{"b":0.5173,"c0":-0.1817,"c1":1.0845},"logLossElo":1.0103,"logLossMarket":0.9908,"brierElo":0.6048,"brierMarket":0.5915}

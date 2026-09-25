@@ -1,0 +1,308 @@
+---
+import Base from '../layouts/Base.astro';
+import HeroChart from '../islands/HeroChart';
+import { type Lang, fmt, href } from '../i18n';
+import { simulateRuin } from '../lib/montecarlo';
+import { GAMES } from '../lib/games';
+import summary from '../data/odds/summary.json';
+import strategies from '../data/odds/strategies.json';
+import market from '../data/market/spain.json';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const es = lang === 'es';
+const f = fmt(lang);
+
+// Computed at build time: 2,000 players, 1,000 one-euro bets on red.
+const sim = simulateRuin({ game: GAMES.rouletteRed, players: 2000, rounds: 1000, bankroll: 100, stake: 1, strategy: 'flat', target: 0, maxStake: 1, seed: 2026 });
+const hero = {
+  x: sim.checkpoints,
+  p05: sim.bands.map((b) => b.p05),
+  p25: sim.bands.map((b) => b.p25),
+  p50: sim.bands.map((b) => b.p50),
+  p75: sim.bands.map((b) => b.p75),
+  p95: sim.bands.map((b) => b.p95),
+  mean: sim.bands.map((b) => b.mean),
+  paths: sim.samplePaths.slice(0, 8),
+};
+const last = sim.bands[sim.bands.length - 1];
+const S = market.series;
+const ggr25 = S.ggr[S.ggr.length - 1];
+const fav = strategies.find((s) => s.key === 'favourite')!;
+const rnd = strategies.find((s) => s.key === 'random')!;
+---
+
+<Base
+  lang={lang}
+  page="home"
+  title={es ? 'Unmasking Gambling · La matemática del juego, con datos' : 'Unmasking Gambling · The mathematics of gambling, with data'}
+  description={es
+    ? 'Simulaciones y análisis con datos reales que muestran por qué la casa siempre gana: ventaja, varianza, cuotas y el mercado del juego en España.'
+    : 'Simulations and real-data analysis showing why the house always wins: edge, variance, odds and the gambling market in Spain.'}
+>
+  <section class="hero page">
+    <div class="hero-text">
+      <p class="kicker">{es ? 'Divulgación con datos' : 'Explained with data'}</p>
+      <h1>
+        {es ? <>La casa no necesita suerte. <em>Tiene aritmética.</em></> : <>The house doesn’t need luck. <em>It has arithmetic.</em></>}
+      </h1>
+      <p class="lede">
+        {
+          es
+            ? 'Simulaciones, 235.000 partidos con cuotas reales y los datos oficiales del juego en España para entender qué ocurre, de verdad, con el dinero que se apuesta.'
+            : 'Simulations, 235,000 matches with real odds and official Spanish gambling data to understand what really happens to the money people bet.'
+        }
+      </p>
+      <div class="cta">
+        <a class="btn" href={href(lang, 'lab')}>{es ? 'Abrir el laboratorio' : 'Open the lab'} →</a>
+        <a class="btn ghost" href={href(lang, 'odds')}>{es ? 'Leer el análisis de cuotas' : 'Read the odds analysis'}</a>
+      </div>
+    </div>
+    <figure class="hero-fig">
+      <HeroChart client:idle lang={lang} data={hero} bankroll={100} />
+      <figcaption>
+        {
+          es
+            ? `${f.int(2000)} jugadores simulados apuestan 1 € al rojo, 1.000 veces, con 100 € cada uno. El jugador mediano acaba con ${f.eur(last.p50)}; solo el ${f.pct(sim.aheadShare, 0)} termina ganando.`
+            : `${f.int(2000)} simulated players bet €1 on red 1,000 times, each starting with €100. The median player ends with ${f.eur(last.p50)}; only ${f.pct(sim.aheadShare, 0)} finish ahead.`
+        }
+      </figcaption>
+    </figure>
+  </section>
+
+  <section class="page" aria-label={es ? 'Secciones' : 'Sections'}>
+    <div class="features">
+    <a class="feature" href={href(lang, 'lab')}>
+      <p class="f-kicker">01 · {es ? 'Simulación' : 'Simulation'}</p>
+      <h2>{es ? 'Laboratorio de ruina' : 'The Ruin Lab'}</h2>
+      <p class="f-num">{f.pct(1 - sim.aheadShare, 0)}</p>
+      <p class="f-desc">
+        {
+          es
+            ? 'de los jugadores de arriba no termina ganando. Cambia el juego, la apuesta o la estrategia y mira a miles de jugadores a la vez: bandas de percentiles, supervivencia y probabilidad de ruina.'
+            : 'of the players above do not finish ahead. Change the game, the stake or the strategy and watch thousands of players at once: percentile bands, survival and risk of ruin.'
+        }
+      </p>
+      <span class="f-link">{es ? 'Simular' : 'Simulate'} →</span>
+    </a>
+    <a class="feature" href={href(lang, 'odds')}>
+      <p class="f-kicker">02 · {es ? 'Datos reales' : 'Real data'}</p>
+      <h2>{es ? '¿Dicen la verdad las cuotas?' : 'Do the odds tell the truth?'}</h2>
+      <p class="f-num">{f.signedPct(fav.roi, 1)}</p>
+      <p class="f-desc">
+        {
+          es
+            ? `es lo que habría perdido quien apostara siempre al favorito durante diez años (al azar, ${f.signedPct(rnd.roi, 1)}). Margen, calibración, sesgo favorito–sorpresa y un modelo que intenta batir al mercado, con ${f.int(summary.matches)} partidos.`
+            : `is what you would have lost always backing the favourite for ten years (at random, ${f.signedPct(rnd.roi, 1)}). Margin, calibration, the favourite–longshot bias and a model that tries to beat the market, across ${f.int(summary.matches)} matches.`
+        }
+      </p>
+      <span class="f-link">{es ? 'Leer' : 'Read'} →</span>
+    </a>
+    <a class="feature" href={href(lang, 'market')}>
+      <p class="f-kicker">03 · {es ? 'España' : 'Spain'}</p>
+      <h2>{es ? 'El mercado' : 'The market'}</h2>
+      <p class="f-num">{es ? `${f.int(ggr25)} M€` : `€${f.int(ggr25)}m`}</p>
+      <p class="f-desc">
+        {
+          es
+            ? `perdieron los jugadores de juego online en España en ${S.years[S.years.length - 1]}, tres veces más que en ${S.years[0]}. Ingresos, marketing, bonos y cuántos adolescentes juegan.`
+            : `lost by online gamblers in Spain in ${S.years[S.years.length - 1]}, three times more than in ${S.years[0]}. Revenue, marketing, bonuses and how many teenagers gamble.`
+        }
+      </p>
+      <span class="f-link">{es ? 'Ver el panel' : 'See the dashboard'} →</span>
+    </a>
+  </div>
+  </section>
+
+  <section class="page more">
+    <a href={href(lang, 'games')} class="more-item">
+      <span class="m-title">{es ? 'Los juegos y su precio' : 'The games and their price'}</span>
+      <span class="m-desc">{es ? 'La ventaja de la casa de cada juego y cuánto cuesta jugar a tu ritmo.' : 'The house edge of every game and what it costs at your pace.'}</span>
+    </a>
+    <a href={href(lang, 'methods')} class="more-item">
+      <span class="m-title">{es ? 'Método' : 'Methods'}</span>
+      <span class="m-desc">{es ? 'Fuentes, técnicas estadísticas, código y límites.' : 'Sources, statistical techniques, code and limitations.'}</span>
+    </a>
+    <a href={href(lang, 'help')} class="more-item help">
+      <span class="m-title">{es ? '¿Te preocupa tu forma de jugar?' : 'Worried about your gambling?'}</span>
+      <span class="m-desc">{es ? 'Teléfonos, autoexclusión y pasos concretos.' : 'Helplines, self-exclusion and practical steps.'}</span>
+    </a>
+  </section>
+
+  <section class="page about">
+    <div class="about-inner">
+      <p class="kicker">{es ? 'Sobre el proyecto' : 'About'}</p>
+      <p class="about-text">
+        {
+          es ? (
+            <>
+              Hecho por <a href="https://zamora16.github.io/angel-zamora-portfolio/">Ángel Zamora Martínez</a>, doctor en Psicología y analista de datos en salud digital. Las simulaciones están escritas en TypeScript y probadas con tests; el análisis de cuotas es un pipeline reproducible en Python. <a href="https://github.com/zamora16/unmasking-gambling">Todo el código es abierto</a>.
+            </>
+          ) : (
+            <>
+              Made by <a href="https://zamora16.github.io/angel-zamora-portfolio/">Ángel Zamora Martínez</a>, PhD in Psychology and digital health data analyst. The simulations are written in TypeScript and covered by tests; the odds analysis is a reproducible Python pipeline. <a href="https://github.com/zamora16/unmasking-gambling">All the code is open</a>.
+            </>
+          )
+        }
+      </p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+    gap: clamp(2rem, 5vw, 4.5rem);
+    align-items: center;
+    padding-top: clamp(2.5rem, 7vw, 5.5rem);
+    padding-bottom: clamp(2.5rem, 6vw, 4.5rem);
+  }
+  h1 {
+    font-size: clamp(2.8rem, 6.4vw, 5.2rem);
+    font-weight: 400;
+    letter-spacing: -0.035em;
+    line-height: 1;
+    margin: 0.8rem 0 1.4rem;
+  }
+  h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+  .cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+    margin-top: 2rem;
+  }
+  .hero-fig {
+    margin: 0;
+  }
+  .hero-fig figcaption {
+    font-family: var(--sans);
+    font-size: 0.85rem;
+    color: var(--ink-2);
+    line-height: 1.5;
+    margin-top: 0.8rem;
+    max-width: 34rem;
+  }
+  .features {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-block: 1px solid var(--rule);
+  }
+  .feature + .feature {
+    border-left: 1px solid var(--rule);
+  }
+  .feature {
+    background: var(--paper);
+    padding: 2rem 1.8rem 2rem 0;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+  .feature + .feature {
+    padding-left: 1.8rem;
+  }
+  .feature:hover h2 {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.15em;
+  }
+  .f-kicker {
+    font-family: var(--sans);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin: 0;
+  }
+  .feature h2 {
+    font-size: 1.7rem;
+  }
+  .f-num {
+    font-family: var(--sans);
+    font-size: 2.6rem;
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    color: var(--accent-ink);
+    margin: 0.6rem 0 0;
+    font-variant-numeric: tabular-nums;
+  }
+  .f-desc {
+    font-size: 1rem;
+    color: var(--ink-2);
+    line-height: 1.5;
+    margin: 0;
+    flex: 1;
+  }
+  .f-link {
+    font-family: var(--sans);
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-top: 0.8rem;
+  }
+  .more {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-top: 3rem;
+  }
+  .more-item {
+    display: grid;
+    gap: 0.3rem;
+    padding: 1.2rem 1.3rem;
+    border: 1px solid var(--rule);
+    border-radius: 10px;
+    text-decoration: none;
+    font-family: var(--sans);
+    transition: border-color 0.15s;
+  }
+  .more-item:hover {
+    border-color: var(--ink);
+  }
+  .m-title {
+    font-weight: 650;
+  }
+  .m-desc {
+    font-size: 0.88rem;
+    color: var(--ink-2);
+  }
+  .more-item.help {
+    background: var(--paper-2);
+  }
+  .about {
+    margin-top: 5rem;
+  }
+  .about-inner {
+    max-width: 44rem;
+    border-top: 2px solid var(--ink);
+    padding-top: 1.2rem;
+  }
+  .about-text {
+    font-size: 1.25rem;
+    line-height: 1.5;
+    margin-top: 0.8rem;
+  }
+  @media (max-width: 960px) {
+    .hero {
+      grid-template-columns: 1fr;
+    }
+    .features,
+    .more {
+      grid-template-columns: 1fr;
+    }
+    .feature,
+    .feature + .feature {
+      padding: 1.8rem 0;
+      border-left: 0;
+    }
+    .feature + .feature {
+      border-top: 1px solid var(--rule);
+    }
+  }
+</style>

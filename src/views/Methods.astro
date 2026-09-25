@@ -1,0 +1,143 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHead from '../components/PageHead.astro';
+import { type Lang, fmt, href } from '../i18n';
+import summary from '../data/odds/summary.json';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const es = lang === 'es';
+const f = fmt(lang);
+const repo = 'https://github.com/zamora16/unmasking-gambling';
+---
+
+<Base
+  lang={lang}
+  page="methods"
+  title={es ? 'Método' : 'Methods'}
+  description={es ? 'Fuentes de datos, técnicas estadísticas, código y límites del proyecto.' : 'Data sources, statistical techniques, code and limitations of the project.'}
+>
+  <PageHead
+    kicker={es ? 'Cómo está hecho' : 'How it is made'}
+    title={es ? 'Método' : 'Methods'}
+    lede={es
+      ? 'Cada número de esta web sale de un archivo público o de un cálculo que se puede repetir. Esto es lo que hay detrás.'
+      : 'Every number on this site comes from a public file or a calculation you can rerun. This is what sits behind it.'}
+  />
+
+  <article class="page">
+    <div class="measure prose">
+      {
+        es ? (
+          <>
+            <h2>Datos</h2>
+            <ul>
+              <li>
+                <strong>Partidos y cuotas.</strong> {f.int(summary.matches)} partidos de {summary.leagues} ligas ({summary.firstDate.slice(0, 4)}–{summary.lastDate.slice(0, 4)}) con resultado, cuotas 1X2 de la casa de referencia, cuota máxima entre unas 17 casas y rating Elo previo al partido. Proceden de Football-Data.co.uk y ClubElo, recopilados en{' '}
+                <a href="https://github.com/xgabora/Club-Football-Match-Data-2000-2025">xgabora/Club-Football-Match-Data</a>.
+              </li>
+              <li>
+                <strong>Mercado español.</strong> Informes anuales de la Dirección General de Ordenación del Juego (DGOJ) y recopilación de la <em>Revista Española de Drogodependencias</em>. Cada cifra está enlazada a su fuente en <a href={`${repo}/blob/main/src/data/market/spain.json`}>spain.json</a>.
+              </li>
+              <li>
+                <strong>Prevalencia.</strong> Encuestas ESTUDES y EDADES del Observatorio Español de las Drogas y las Adicciones (Ministerio de Sanidad).
+              </li>
+            </ul>
+
+            <h2>Técnicas</h2>
+            <ul>
+              <li><strong>Simulación Monte Carlo</strong> con generador pseudoaleatorio con semilla (mulberry32), ejecutada en un Web Worker.</li>
+              <li><strong>Kaplan–Meier</strong> para la curva de supervivencia, tratando como censurados a quienes se retiran por alcanzar su objetivo.</li>
+              <li><strong>Eliminación del margen</strong> por tres métodos: proporcional, potencia y Shin (1993), resueltos numéricamente.</li>
+              <li><strong>Calibración</strong> con intervalos de Wilson del 95 % y comparación por <em>log-loss</em> y <em>Brier score</em>.</li>
+              <li><strong>Intervalos bootstrap</strong> (percentiles) para el retorno medio de cada tramo de cuotas y de cada estrategia.</li>
+              <li><strong>Regresión logística ordinal</strong> sobre la diferencia de Elo, ajustada por máxima verosimilitud con partición temporal: entrenamiento hasta 2015/16, evaluación desde 2016/17.</li>
+            </ul>
+
+            <h2>Código</h2>
+            <p>
+              La web está hecha con Astro, React y TypeScript. Los gráficos son SVG propios construidos con escalas de d3, con tooltip, versión en tabla y modo oscuro. La matemática vive en <a href={`${repo}/tree/main/src/lib`}>src/lib</a>, separada de la interfaz y cubierta por tests (Vitest): ventaja exacta de cada juego, fórmula de la ruina del jugador, Kaplan–Meier y métodos de margen. El análisis de cuotas es un script de Python (pandas, NumPy y SciPy) en <a href={`${repo}/tree/main/analysis`}>analysis/</a> que genera los JSON que lee la web.
+            </p>
+            <pre><code>npm install && npm test && npm run build
+pip install -r analysis/requirements.txt
+python analysis/odds/pipeline.py ruta/a/Matches.csv</code></pre>
+
+            <h2>Límites</h2>
+            <ul>
+              <li>Los modelos de juego del laboratorio son simplificaciones: las tragaperras reales tienen tablas de premios más complejas, aunque la ventaja funciona igual.</li>
+              <li>El análisis de cuotas cubre solo el mercado 1X2 prepartido, que es de los más baratos para el apostador.</li>
+              <li>Los datos del mercado español son agregados anuales. Algunas cifras de años anteriores se revisan en informes posteriores.</li>
+            </ul>
+
+            <h2>Autoría</h2>
+            <p>
+              Proyecto de <a href="https://zamora16.github.io/angel-zamora-portfolio/">Ángel Zamora Martínez</a>, doctor en Psicología e investigador en salud digital. Código publicado con licencia MIT. Si encuentras un error, <a href={`${repo}/issues`}>abre una incidencia</a>.
+            </p>
+          </>
+        ) : (
+          <>
+            <h2>Data</h2>
+            <ul>
+              <li>
+                <strong>Matches and odds.</strong> {f.int(summary.matches)} matches from {summary.leagues} leagues ({summary.firstDate.slice(0, 4)}–{summary.lastDate.slice(0, 4)}) with result, reference-bookmaker 1X2 odds, the maximum price across about 17 bookmakers and pre-match Elo ratings. They come from Football-Data.co.uk and ClubElo, compiled in{' '}
+                <a href="https://github.com/xgabora/Club-Football-Match-Data-2000-2025">xgabora/Club-Football-Match-Data</a>.
+              </li>
+              <li>
+                <strong>Spanish market.</strong> Annual reports from Spain’s gambling regulator (DGOJ) and a compilation in the <em>Revista Española de Drogodependencias</em>. Every figure links to its source in <a href={`${repo}/blob/main/src/data/market/spain.json`}>spain.json</a>.
+              </li>
+              <li>
+                <strong>Prevalence.</strong> The ESTUDES and EDADES surveys from the Spanish Observatory on Drugs and Addictions (Ministry of Health).
+              </li>
+            </ul>
+
+            <h2>Techniques</h2>
+            <ul>
+              <li><strong>Monte Carlo simulation</strong> with a seeded pseudo-random generator (mulberry32), run in a Web Worker.</li>
+              <li><strong>Kaplan–Meier</strong> survival curves, treating players who stop after reaching their target as censored.</li>
+              <li><strong>Margin removal</strong> by three methods: proportional, power and Shin (1993), solved numerically.</li>
+              <li><strong>Calibration</strong> with 95% Wilson intervals, compared by log-loss and Brier score.</li>
+              <li><strong>Bootstrap intervals</strong> (percentile) for the average return of each odds range and each strategy.</li>
+              <li><strong>Ordinal logistic regression</strong> on the Elo difference, fitted by maximum likelihood with a time split: trained up to 2015/16, evaluated from 2016/17.</li>
+            </ul>
+
+            <h2>Code</h2>
+            <p>
+              The site is built with Astro, React and TypeScript. The charts are hand-built SVG on top of d3 scales, with tooltips, a table view and dark mode. The maths lives in <a href={`${repo}/tree/main/src/lib`}>src/lib</a>, separate from the interface and covered by tests (Vitest): the exact edge of each game, the gambler’s ruin formula, Kaplan–Meier and the margin methods. The odds analysis is a Python script (pandas, NumPy and SciPy) in <a href={`${repo}/tree/main/analysis`}>analysis/</a> that writes the JSON the site reads.
+            </p>
+            <pre><code>npm install && npm test && npm run build
+pip install -r analysis/requirements.txt
+python analysis/odds/pipeline.py path/to/Matches.csv</code></pre>
+
+            <h2>Limitations</h2>
+            <ul>
+              <li>The lab’s game models are simplifications: real slots have more complex paytables, though the edge works the same way.</li>
+              <li>The odds analysis only covers the pre-match 1X2 market, one of the cheapest for bettors.</li>
+              <li>Spanish market data are annual aggregates. Some earlier figures are revised in later reports.</li>
+            </ul>
+
+            <h2>Author</h2>
+            <p>
+              A project by <a href="https://zamora16.github.io/angel-zamora-portfolio/">Ángel Zamora Martínez</a>, PhD in Psychology and digital health researcher. Code released under the MIT licence. If you spot a mistake, <a href={`${repo}/issues`}>open an issue</a>.
+            </p>
+          </>
+        )
+      }
+      <p><a href={href(lang, 'home')}>← {es ? 'Volver al inicio' : 'Back to home'}</a></p>
+    </div>
+  </article>
+</Base>
+
+<style>
+  pre {
+    font-family: var(--mono);
+    font-size: 0.82rem;
+    line-height: 1.6;
+    background: var(--paper-2);
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    padding: 1rem 1.2rem;
+    overflow-x: auto;
+  }
+</style>

@@ -1,12 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-  <defs>
-    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#8b5cf6;stop-opacity:1" />
-    </linearGradient>
-  </defs>
-  <circle cx="12" cy="12" r="10" fill="url(#grad1)" stroke="none"/>
-  <path d="M12 2L2 7l10 5 10-5-10-5z" stroke="white" stroke-width="1.5" fill="white"/>
-  <path d="M2 17l10 5 10-5" stroke="white" stroke-width="1.5" fill="none"/>
-  <path d="M2 12l10 5 10-5" stroke="white" stroke-width="1.5" fill="none"/>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" rx="7" fill="#16140f"/><path d="M7 22 L13 15 L18 18 L25 9" fill="none" stroke="#f7f5f0" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="25" cy="23" r="2.6" fill="#e0492f"/></svg>

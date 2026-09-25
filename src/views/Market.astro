@@ -1,0 +1,247 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHead from '../components/PageHead.astro';
+import Figure from '../components/Figure.astro';
+import Stat from '../components/Stat.astro';
+import { GgrColumns, HoldLine, BonusLine, Segments, Marketing, Prevalence, AdultsOnline } from '../islands/market/MarketCharts';
+import { type Lang, fmt, href } from '../i18n';
+import d from '../data/market/spain.json';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const es = lang === 'es';
+const f = fmt(lang);
+const S = d.series;
+const last = S.years.length - 1;
+// headline totals come from the annual series; the segment split from the DGOJ reports
+const ggr25 = d.series.ggr[d.series.ggr.length - 1];
+const ggr24 = d.series.ggr[d.series.ggr.length - 2];
+const seg25 = d.segments.casino[1] + d.segments.betting[1] + d.segments.poker[1] + d.segments.bingo[1];
+const mkt = (i: number) => d.marketing.promotions[i] + d.marketing.advertising[i] + d.marketing.affiliates[i] + d.marketing.sponsorship[i];
+const players25 = d.players.activePlayers[1];
+const perPlayer = (ggr25 * 1e6) / players25;
+const holds = S.years.map((_, i) => S.ggr[i] / S.wagered[i]);
+const st = d.prevalence.students;
+const src = d.sources;
+const bigMoney = es
+  ? `${new Intl.NumberFormat('es-ES', { useGrouping: 'always' } as Intl.NumberFormatOptions).format(Math.round(ggr25))} M€`
+  : `€${f.num(ggr25 / 1000, 2)}bn`;
+const link = (k: keyof typeof src) => `<a href="${src[k].url}">${src[k].label}</a>`;
+---
+
+<Base
+  lang={lang}
+  page="market"
+  title={es ? 'El mercado del juego online en España' : 'Spain’s online gambling market'}
+  description={es
+    ? 'Ingresos, jugadores, publicidad y prevalencia del juego online en España con datos oficiales de la DGOJ y del Ministerio de Sanidad.'
+    : 'Revenue, players, marketing and prevalence of online gambling in Spain, from official DGOJ and Ministry of Health data.'}
+>
+  <PageHead
+    kicker={es ? 'Panel de datos · España' : 'Data dashboard · Spain'}
+    title={es ? 'Lo que pierden los jugadores, año a año' : 'What players lose, year by year'}
+    lede={es
+      ? 'Los ingresos de las casas de juego online son, literalmente, lo que pierden sus clientes. Con datos oficiales, así ha crecido ese negocio en España, cuánto invierte en captar jugadores y a quién llega.'
+      : 'Online gambling operators’ revenue is, quite literally, what their customers lose. Using official data, this is how that business has grown in Spain, how much it spends to recruit players and who it reaches.'}
+  />
+
+  <div class="page">
+    <div class="wide stats">
+      <Stat value={bigMoney} label={es ? `perdieron los jugadores online en 2025 (${f.signedPct(ggr25 / ggr24 - 1, 0)} frente a 2024)` : `lost by online players in 2025 (${f.signedPct(ggr25 / ggr24 - 1, 0)} on 2024)`} />
+      <Stat value={f.compact(players25)} label={es ? 'jugadores activos en 2025' : 'active players in 2025'} />
+      <Stat value={f.eur(perPlayer)} label={es ? 'de pérdida neta por jugador activo y año' : 'net loss per active player per year'} />
+      <Stat value={f.pct(mkt(1) / seg25, 0)} label={es ? `de esos ingresos se reinvierte en marketing (${f.int(mkt(1))} M€)` : `of that revenue goes back into marketing (€${f.int(mkt(1))}m)`} />
+    </div>
+
+    <article class="measure prose">
+      <h2>{es ? 'Un negocio que se ha triplicado' : 'A business that has tripled'}</h2>
+      {
+        es ? (
+          <p>
+            El <strong>GGR</strong> (<em>gross gaming revenue</em>) es lo que las casas ingresan después de pagar los premios: lo apostado menos lo devuelto. Es, por tanto, la pérdida neta de sus clientes. En el juego online de ámbito estatal ha pasado de {f.int(S.ggr[0])} millones de euros en {S.years[0]} a {f.int(S.ggr[last])} millones en {S.years[last]}.
+          </p>
+        ) : (
+          <p>
+            <strong>GGR</strong> (gross gaming revenue) is what operators take in after paying out prizes: stakes minus winnings. In other words, it is their customers’ net loss. In Spain’s nationally licensed online market it went from €{f.int(S.ggr[0])}m in {S.years[0]} to €{f.int(S.ggr[last])}m in {S.years[last]}.
+          </p>
+        )
+      }
+    </article>
+
+    <Figure
+      wide={false}
+      title={es ? 'Ingresos netos del juego online en España' : 'Net revenue of online gambling in Spain'}
+      sub={es ? 'GGR anual, en millones de euros.' : 'Annual GGR, in millions of euros.'}
+      foot={`${es ? 'Fuente' : 'Source'}: ${link('red2026')}, ${es ? 'a partir de datos de la DGOJ' : 'from DGOJ data'}.`}
+    >
+      <GgrColumns client:idle lang={lang} />
+    </Figure>
+
+    <article class="measure prose">
+      {
+        es ? (
+          <p>
+            Hay un dato que conecta este panel con el <a href={href(lang, 'lab')}>Laboratorio de ruina</a>. Si se divide lo que ganan las casas entre todo lo que se apuesta, el resultado apenas se mueve: entre el {f.pct(Math.min(...holds), 1)} y el {f.pct(Math.max(...holds), 1)} cada año. Es la ventaja de la casa vista a escala de un país. Los jugadores apostaron {f.int(S.wagered[last])} millones en {S.years[last]}, y la casa se quedó con unos 4 céntimos de cada euro.
+          </p>
+        ) : (
+          <p>
+            One figure connects this dashboard with the <a href={href(lang, 'lab')}>Ruin Lab</a>. Divide what operators earn by everything that is wagered and the result barely moves: between {f.pct(Math.min(...holds), 1)} and {f.pct(Math.max(...holds), 1)} every year. That is the house edge seen at the scale of a country. Players wagered €{f.int(S.wagered[last])}m in {S.years[last]}, and the house kept about 4 cents of every euro.
+          </p>
+        )
+      }
+    </article>
+
+    <Figure
+      wide={false}
+      title={es ? 'La casa se queda con unos 4 céntimos de cada euro apostado' : 'The house keeps about 4 cents of every euro wagered'}
+      sub={es ? 'GGR dividido entre las cantidades jugadas.' : 'GGR divided by amounts wagered.'}
+      foot={`${es ? 'Fuente' : 'Source'}: ${link('red2026')}. ${es ? 'Cálculo propio.' : 'Our calculation.'}`}
+    >
+      <HoldLine client:idle lang={lang} />
+    </Figure>
+
+    <article class="measure prose">
+      <h2>{es ? 'Casino por encima de las apuestas' : 'Casino overtakes betting'}</h2>
+      {
+        es ? (
+          <p>
+            Las apuestas deportivas son lo más visible, pero ya no son lo que más dinero mueve. En 2025 el casino online (ruleta, tragaperras, blackjack) generó el {f.pct(d.segments.casino[1] / seg25, 0)} de los ingresos, con un crecimiento del {f.pct(d.segments.casino[1] / d.segments.casino[0] - 1, 0)} en un solo año. Son justo los juegos con partidas más rápidas y continuas.
+          </p>
+        ) : (
+          <p>
+            Sports betting is the most visible part, but it is no longer the biggest earner. In 2025 online casino (roulette, slots, blackjack) generated {f.pct(d.segments.casino[1] / seg25, 0)} of revenue, growing {f.pct(d.segments.casino[1] / d.segments.casino[0] - 1, 0)} in a single year. These are precisely the games with the fastest, most continuous play.
+          </p>
+        )
+      }
+    </article>
+
+    <Figure
+      wide={false}
+      title={es ? 'Ingresos por tipo de juego, 2024 y 2025' : 'Revenue by type of game, 2024 and 2025'}
+      sub={es ? 'GGR en millones de euros.' : 'GGR in millions of euros.'}
+      foot={`${es ? 'Fuentes' : 'Sources'}: ${link('dgoj2024')}; ${link('dgoj2025')}.`}
+    >
+      <Segments client:idle lang={lang} />
+    </Figure>
+
+    <article class="measure prose">
+      <h2>{es ? 'El precio de captar jugadores' : 'The price of recruiting players'}</h2>
+      {
+        es ? (
+          <>
+            <p>
+              En 2025 las casas gastaron {f.int(mkt(1))} millones en marketing, un {f.pct(mkt(1) / mkt(0) - 1, 0)} más que el año anterior. La partida más grande no es la publicidad sino las <strong>promociones</strong>, sobre todo los bonos de bienvenida: dinero «gratis» que solo se puede retirar después de apostarlo varias veces.
+            </p>
+            <p>
+              En noviembre de 2020 el Real Decreto 958/2020 restringió la publicidad y los bonos de captación. En abril de 2024 el Tribunal Supremo anuló varios de sus artículos, entre ellos los que limitaban los bonos de bienvenida. Los bonos liberados, que se habían estancado en torno a 200 millones, se dispararon después.
+            </p>
+          </>
+        ) : (
+          <>
+            <p>
+              In 2025 operators spent €{f.int(mkt(1))}m on marketing, {f.pct(mkt(1) / mkt(0) - 1, 0)} more than the year before. The largest item is not advertising but <strong>promotions</strong>, above all welcome bonuses: “free” money that can only be withdrawn after it has been wagered several times over.
+            </p>
+            <p>
+              In November 2020, Royal Decree 958/2020 restricted advertising and sign-up bonuses. In April 2024 the Supreme Court struck down several of its articles, including those limiting welcome bonuses. Bonuses released, which had plateaued at around €200m, shot up afterwards.
+            </p>
+          </>
+        )
+      }
+    </article>
+
+    <div class="wide two-figs">
+      <Figure
+        wide={false}
+        title={es ? 'Gasto en marketing por partida' : 'Marketing spend by item'}
+        sub={es ? 'Millones de euros.' : 'Millions of euros.'}
+        foot={`${es ? 'Fuentes' : 'Sources'}: ${link('dgoj2024')}; ${link('dgoj2025')}.`}
+      >
+        <Marketing client:idle lang={lang} />
+      </Figure>
+      <Figure
+        wide={false}
+        title={es ? 'Bonos liberados a los jugadores' : 'Bonuses released to players'}
+        sub={es ? 'Millones de euros al año, con los dos cambios regulatorios.' : 'Millions of euros per year, with the two regulatory changes.'}
+        foot={`${es ? 'Fuentes' : 'Sources'}: ${link('red2026')}; ${link('rd958')}; ${link('sts2024')}.`}
+      >
+        <BonusLine client:idle lang={lang} />
+      </Figure>
+    </div>
+
+    <article class="measure prose">
+      <h2>{es ? 'A quién llega' : 'Who it reaches'}</h2>
+      {
+        es ? (
+          <>
+            <p>
+              El juego con dinero está prohibido para menores. Aun así, según la encuesta ESTUDES del Ministerio de Sanidad, el {f.num(st.online[st.online.length - 1], 1)} % de los estudiantes de 14 a 18 años jugó dinero online en el último año en 2025, y el {f.num(st.inPerson[st.inPerson.length - 1], 1)} % lo hizo de forma presencial. Entre los chicos el juego online llega al {f.num(st.onlineBoys[st.onlineBoys.length - 1], 1)} %, cuatro veces más que entre las chicas. Los juegos más frecuentes entre ellos son la ruleta y las apuestas deportivas.
+            </p>
+          </>
+        ) : (
+          <p>
+            Gambling for money is illegal for minors. Even so, according to the Ministry of Health’s ESTUDES survey, {f.num(st.online[st.online.length - 1], 1)}% of students aged 14 to 18 gambled online in the past year in 2025, and {f.num(st.inPerson[st.inPerson.length - 1], 1)}% did so in person. Among boys online gambling reaches {f.num(st.onlineBoys[st.onlineBoys.length - 1], 1)}%, four times the rate among girls. Their most common games are roulette and sports betting.
+          </p>
+        )
+      }
+    </article>
+
+    <div class="wide two-figs">
+      <Figure
+        wide={false}
+        title={es ? 'Estudiantes de 14 a 18 años que jugaron dinero online' : 'Students aged 14–18 who gambled online'}
+        sub={es ? 'Porcentaje que jugó en los últimos 12 meses (ESTUDES).' : 'Share who gambled in the last 12 months (ESTUDES).'}
+        foot={`${es ? 'Fuente' : 'Source'}: ${link('oeda2025')}.`}
+      >
+        <Prevalence client:idle lang={lang} />
+      </Figure>
+      <Figure
+        wide={false}
+        title={es ? 'Población de 15 a 64 años que jugó dinero online' : 'Population aged 15–64 who gambled online'}
+        sub={es ? 'Porcentaje que jugó en los últimos 12 meses (EDADES).' : 'Share who gambled in the last 12 months (EDADES).'}
+        foot={`${es ? 'Fuente' : 'Source'}: ${link('oeda2025')}. ${es ? 'Salto durante la pandemia de 2020.' : 'Jump during the 2020 pandemic.'}`}
+      >
+        <AdultsOnline client:idle lang={lang} />
+      </Figure>
+    </div>
+
+    <article class="measure prose">
+      <div class="note">
+        {
+          es ? (
+            <>
+              <strong>Sobre los datos.</strong> Las cifras son del mercado de juego online de ámbito estatal regulado por la DGOJ; no incluyen el juego presencial ni las loterías del Estado. La serie 2017–2025 procede de una recopilación publicada en la <em>Revista Española de Drogodependencias</em> a partir de datos de la DGOJ; el detalle de 2024 y 2025, de los informes anuales de la DGOJ. Todas las cifras están en un único archivo con su fuente:{' '}
+              <a href="https://github.com/zamora16/unmasking-gambling/blob/main/src/data/market/spain.json">spain.json</a>.
+            </>
+          ) : (
+            <>
+              <strong>About the data.</strong> Figures cover Spain’s nationally licensed online gambling market regulated by the DGOJ; they exclude land-based gambling and state lotteries. The 2017–2025 series comes from a compilation published in the <em>Revista Española de Drogodependencias</em> based on DGOJ data; the 2024 and 2025 detail comes from the DGOJ annual reports. Every figure lives in a single file with its source:{' '}
+              <a href="https://github.com/zamora16/unmasking-gambling/blob/main/src/data/market/spain.json">spain.json</a>.
+            </>
+          )
+        }
+      </div>
+    </article>
+  </div>
+</Base>
+
+<style>
+  .two-figs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+  }
+  .two-figs > :global(*) {
+    min-width: 0;
+  }
+  .two-figs :global(.figure) {
+    max-width: none;
+    margin-inline: 0;
+  }
+  @media (max-width: 900px) {
+    .two-figs {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

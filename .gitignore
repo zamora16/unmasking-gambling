@@ -1,87 +1,12 @@
-# Build outputs
 dist/
-.output/
-
-# Dependencies
 node_modules/
-
-# Environment files
+.astro/
 .env
-.env.local
-.env.production
-
-# MacOS
+.env.*
 .DS_Store
-
-# IDEs
-.vscode/
-.idea/
-
-# Logs
 *.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-# Runtime data
-pids
-*.pid
-*.seed
-*.pid.lock
-
-# Coverage directory used by tools like istanbul
 coverage/
-
-# Temporary folders
-tmp/
-temp/
-
-# Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-.idea
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
-
-# Astro
-.astro
-
-# === ARCHIVOS TEMPORALES Y SCRIPTS DE DESARROLLO ===
-# Scripts temporales de desarrollo
-*.bat
-*.sh
-!deploy.sh
-
-# Documentación temporal (mantener solo README.md)
-DEPLOY.md
-INSTALACION.md
-INSTRUCCIONES-*.md
-GITHUB-PAGES-*.md
-NAVIGATION-*.md
-RESUMEN-*.md
-RUTAS-*.md
-LOTTERY-*.md
-*-FIX.md
-*-PROBLEM-*.md
-
-# Archivos de limpieza
-clean-repo.bat
-fix-*.bat
-test-*.bat
-deploy-*.bat
-commit-*.bat
-build-*.bat
-check-*.bat
-diagnose-*.bat
-explain-*.bat
-recreate-*.bat
-verificar-*.bat
-activate-*.bat
-complete-*.bat
-
-# Archivos de shell temporales
-fix-*.sh
-check-*.sh
+# raw data is downloaded by the pipeline, never committed
+analysis/data/
+__pycache__/
+.ipynb_checkpoints/

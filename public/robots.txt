@@ -1,16 +1,2 @@
 User-agent: *
 Allow: /
-
-# Sitemap
-Sitemap: https://unmasking-gambling.com/sitemap-index.xml
-
-# Specific rules
-Disallow: /admin/
-Disallow: /private/
-Disallow: /_astro/
-
-# Allow important pages
-Allow: /
-Allow: /slots/
-Allow: /the-way/
-Allow: /ayuda/
