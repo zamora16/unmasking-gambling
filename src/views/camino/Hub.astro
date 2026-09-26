@@ -1,0 +1,140 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHead from '../../components/PageHead.astro';
+import TechBox from '../../components/TechBox.astro';
+import { type Lang, WAY_STEPS, href } from '../../i18n';
+import { theWayContent } from '../../data/camino/way';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const es = lang === 'es';
+const hub = theWayContent[lang].hub;
+---
+
+<Base lang={lang} page="way" title={hub.title} description={hub.lead}>
+  <PageHead lang={lang} kicker={hub.kicker} title={hub.title} lede={hub.lead}>
+    <p class="hub-cta">
+      <a class="btn" href={href(lang, 'way1')}>{hub.startCta} →</a>
+      <a class="btn ghost" href={href(lang, 'help')}>{es ? 'Necesito ayuda ya' : 'I need help now'}</a>
+    </p>
+  </PageHead>
+
+  <section class="page">
+    <div class="wide">
+      <p class="panel-label">{hub.stepsLabel}</p>
+      <ol class="hub-steps">
+        {
+          hub.steps.map((s, i) => (
+            <li>
+              <a href={href(lang, WAY_STEPS[i])}>
+                <span class="n">{i + 1}</span>
+                <span class="body">
+                  <strong>{s.title}</strong>
+                  <span>{s.summary}</span>
+                </span>
+                <span class="min">{s.minutes} min</span>
+              </a>
+            </li>
+          ))
+        }
+      </ol>
+      <p class="plain-box">{hub.privacyNote}</p>
+    </div>
+  </section>
+
+  <section class="page">
+    <div class="measure prose">
+      <TechBox lang={lang} title={es ? 'Cómo está construido' : 'How it is built'}>
+        {
+          es ? (
+            <>
+              <p>
+                <strong>Cribado.</strong> El paso 2 usa el PGSI (Problem Gambling Severity Index, Ferris y Wynne, 2001): nueve ítems con escala 0–3 y los puntos de corte publicados (0 · 1–2 · 3–7 · 8+). No se reinterpretan: cambiarlos rompería la comparabilidad con la literatura.
+              </p>
+              <p>
+                <strong>Plan.</strong> El paso 5 no es una plantilla. Un motor de reglas puro (<code>src/lib/plan.ts</code>, con tests) combina gravedad, canal de juego y disparadores: la gravedad puede corregir el objetivo declarado, las barreras se eligen por canal y se filtran por proporcionalidad, y el protocolo de impulso se vuelve más concreto cuanto mayor es el riesgo.
+              </p>
+              <p>
+                <strong>Privacidad.</strong> Las respuestas se guardan solo en el <code>localStorage</code> del navegador. No hay servidor, cuenta ni analítica: son datos sobre salud y dinero.
+              </p>
+            </>
+          ) : (
+            <>
+              <p>
+                <strong>Screening.</strong> Step 2 uses the PGSI (Problem Gambling Severity Index, Ferris &amp; Wynne, 2001): nine items on a 0–3 scale with the published cut-offs (0 · 1–2 · 3–7 · 8+). They are not reinterpreted: changing them would break comparability with the literature.
+              </p>
+              <p>
+                <strong>Plan.</strong> Step 5 is not a template. A pure rules engine (<code>src/lib/plan.ts</code>, with tests) combines severity, channel and triggers: severity can override the stated goal, barriers are chosen by channel and filtered for proportionality, and the urge protocol becomes more concrete as risk rises.
+              </p>
+              <p>
+                <strong>Privacy.</strong> Answers are stored only in the browser’s <code>localStorage</code>. There is no server, account or analytics: this is health and money data.
+              </p>
+            </>
+          )
+        }
+      </TechBox>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .hub-cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+    margin-top: 1.6rem;
+  }
+  .hub-steps {
+    list-style: none;
+    padding: 0;
+    margin: 0.8rem 0 1.5rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 20rem), 1fr));
+    gap: 0.9rem;
+    font-family: var(--sans);
+  }
+  .hub-steps a {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 0.9rem;
+    align-items: start;
+    height: 100%;
+    padding: 1.1rem;
+    border: 1px solid var(--rule);
+    border-radius: 12px;
+    background: var(--paper-2);
+    color: var(--ink);
+    text-decoration: none;
+    transition: border-color 0.15s;
+  }
+  .hub-steps a:hover {
+    border-color: var(--gold);
+  }
+  .n {
+    font-family: var(--display);
+    font-size: 2.2rem;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--gold);
+  }
+  .body {
+    display: grid;
+    gap: 0.3rem;
+  }
+  .body strong {
+    font-size: 1.05rem;
+  }
+  .body span {
+    color: var(--ink-2);
+    font-size: 0.9rem;
+    line-height: 1.45;
+  }
+  .min {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--ink-3);
+    white-space: nowrap;
+  }
+</style>

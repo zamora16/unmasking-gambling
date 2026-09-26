@@ -1,0 +1,105 @@
+---
+import { type Lang, WAY_STEPS, href } from '../i18n';
+import { theWayContent } from '../data/camino/way';
+interface Props {
+  lang: Lang;
+  current: number;
+}
+const { lang, current } = Astro.props;
+const steps = theWayContent[lang].hub.steps;
+const es = lang === 'es';
+---
+
+<nav class="stepnav page" aria-label={es ? 'Pasos de El Camino' : 'Steps of The Way'}>
+  <a class="back" href={href(lang, 'way')}>← {es ? 'El Camino' : 'The Way'}</a>
+  <ol>
+    {
+      WAY_STEPS.map((k, i) => (
+        <li>
+          <a
+            href={href(lang, k)}
+            class:list={[{ done: i + 1 < current, now: i + 1 === current }]}
+            aria-current={i + 1 === current ? 'step' : undefined}
+            title={steps[i].title}
+          >
+            <span class="n">{i + 1}</span>
+            <span class="lbl">{steps[i].title}</span>
+          </a>
+        </li>
+      ))
+    }
+  </ol>
+</nav>
+
+<style>
+  .stepnav {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.8rem 1.5rem;
+    padding-top: 1.4rem;
+    font-family: var(--sans);
+  }
+  .back {
+    font-size: 0.85rem;
+    color: var(--ink-3);
+    text-decoration: none;
+  }
+  .back:hover {
+    color: var(--ink);
+  }
+  ol {
+    display: flex;
+    gap: 0.35rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  ol a {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    text-decoration: none;
+    color: var(--ink-3);
+    border: 1px solid var(--rule-strong);
+    border-radius: 999px;
+    padding: 0.2rem;
+    font-size: 0.8rem;
+  }
+  .n {
+    display: grid;
+    place-items: center;
+    width: 1.7rem;
+    height: 1.7rem;
+    border-radius: 50%;
+    font-family: var(--mono);
+    font-weight: 700;
+    font-size: 0.78rem;
+  }
+  .lbl {
+    display: none;
+    padding-right: 0.7rem;
+  }
+  a.done {
+    border-color: var(--gold);
+    color: var(--gold);
+  }
+  .stepnav ol a.now {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: #10211a;
+  }
+  .stepnav ol a.now .lbl {
+    display: inline;
+    font-weight: 700;
+  }
+  a:hover:not(.now) {
+    color: var(--ink);
+  }
+  @media (max-width: 40rem) {
+    .stepnav ol a.now .lbl {
+      display: none;
+    }
+  }
+</style>

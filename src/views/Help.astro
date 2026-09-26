@@ -1,7 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import PageHead from '../components/PageHead.astro';
-import type { Lang } from '../i18n';
+import { type Lang, href } from '../i18n';
 
 interface Props {
   lang: Lang;
@@ -94,6 +94,12 @@ const steps = es
       }
     </aside>
 
+    <a class="way-promo wide" href={href(lang, 'way')}>
+      <span class="wp-kicker">{es ? 'Guía de seis pasos' : 'Six-step guide'}</span>
+      <strong>{es ? 'El Camino: de entender por qué engancha a salir con un plan escrito' : 'The Way: from why it hooks to a written plan'}</strong>
+      <span>{es ? 'Incluye el cribado PGSI y un plan que se adapta a tu situación. Sin registro: todo se queda en tu navegador.' : 'Includes the PGSI screen and a plan that adapts to your situation. No sign-up: everything stays in your browser.'} →</span>
+    </a>
+
     <section class="wide block">
       <h2>{es ? 'En España' : 'In Spain'}</h2>
       <ul class="cards">
@@ -174,6 +180,34 @@ const steps = es
 </Base>
 
 <style>
+  .way-promo {
+    display: grid;
+    gap: 0.35rem;
+    margin: 2rem 0 0;
+    padding: 1.2rem 1.3rem;
+    border: 1px solid var(--gold);
+    border-radius: 12px;
+    background: var(--gold-soft);
+    color: var(--ink);
+    text-decoration: none;
+    font-family: var(--sans);
+  }
+  .way-promo strong {
+    font-family: var(--display);
+    font-size: 1.6rem;
+    font-weight: 600;
+    line-height: 1.1;
+  }
+  .way-promo span {
+    color: var(--ink-2);
+  }
+  .wp-kicker {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold) !important;
+  }
   .urgent {
     font-family: var(--sans);
     background: var(--paper-2);

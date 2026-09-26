@@ -1,0 +1,412 @@
+/* El Camino: screening, plan builder and printable plan */
+.cam {
+  display: grid;
+  gap: 1rem;
+  font-family: var(--sans);
+  margin: 1rem 0 2rem;
+}
+.cam p {
+  margin: 0;
+}
+.cam:focus,
+.cam-card:focus {
+  outline: none;
+}
+.cam-card {
+  background: var(--paper-2);
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  padding: 1.2rem 1.3rem;
+  display: grid;
+  gap: 0.75rem;
+  line-height: 1.55;
+}
+.cam-card.form {
+  gap: 1.5rem;
+}
+.cam-skeleton {
+  height: 8rem;
+  border-radius: 12px;
+  background: var(--paper-2);
+}
+.cam-timeframe {
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  color: var(--gold);
+}
+.cam-note {
+  font-size: 0.92rem;
+  line-height: 1.55;
+  border-left: 3px solid var(--gold);
+  background: var(--gold-soft);
+  border-radius: 0 8px 8px 0;
+  padding: 0.8rem 1rem;
+}
+.cam-note.house {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+}
+.cam-muted {
+  color: var(--ink-3);
+  font-size: 0.88rem;
+}
+.cam-small {
+  color: var(--ink-3);
+  font-size: 0.78rem;
+  line-height: 1.5;
+}
+.cam-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  align-items: center;
+}
+.cam .btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* choices (radio / checkbox pills) */
+.cam fieldset {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  min-width: 0;
+}
+.cam-group legend {
+  font-weight: 700;
+  font-size: 0.95rem;
+  margin-bottom: 0.6rem;
+}
+.cam-choices,
+.pgsi-scale {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+.cam-choice {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.85rem;
+  border: 1px solid var(--rule-strong);
+  border-radius: 8px;
+  font-size: 0.9rem;
+  color: var(--ink-2);
+  cursor: pointer;
+  transition: border-color 0.12s, background 0.12s;
+}
+.cam-choice:hover {
+  border-color: var(--ink-3);
+  color: var(--ink);
+}
+.cam-choice input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+.cam-choice:has(input:focus-visible) {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+.cam-choice.on {
+  border-color: var(--gold);
+  background: var(--gold-soft);
+  color: var(--ink);
+  font-weight: 600;
+}
+.cam-choice .dot {
+  width: 0.85rem;
+  height: 0.85rem;
+  border-radius: 50%;
+  border: 2px solid var(--rule-strong);
+  flex: none;
+}
+.cam-choice.on .dot {
+  border-color: var(--gold);
+  background: var(--gold);
+}
+.cam-field {
+  display: grid;
+  gap: 0.35rem;
+  margin-top: 0.9rem;
+  max-width: 22rem;
+  font-size: 0.88rem;
+  color: var(--ink-2);
+}
+.cam-field input {
+  font: inherit;
+  font-size: 1rem;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid var(--rule-strong);
+  border-radius: 6px;
+  padding: 0.55rem 0.7rem;
+}
+.cam-field input:focus {
+  outline: 2px solid var(--focus);
+  outline-offset: 1px;
+}
+
+/* PGSI */
+.pgsi-items {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 0.7rem;
+}
+.pgsi-items legend {
+  display: flex;
+  gap: 0.8rem;
+  font-weight: 600;
+  line-height: 1.45;
+  margin-bottom: 0.8rem;
+}
+.pgsi-n {
+  font-family: var(--mono);
+  color: var(--ink-3);
+  flex: none;
+}
+.pgsi-scale {
+  padding-left: 2.1rem;
+}
+@media (max-width: 36rem) {
+  .pgsi-scale {
+    padding-left: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+}
+.pgsi-score {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.2rem 0.7rem;
+}
+.pgsi-score strong {
+  font-family: var(--display);
+  font-size: 3.6rem;
+  line-height: 1;
+}
+.pgsi-score > span:first-of-type {
+  font-family: var(--mono);
+  color: var(--ink-3);
+}
+.band-none {
+  --band: var(--series-2);
+}
+.band-low {
+  --band: var(--series-1);
+}
+.band-moderate {
+  --band: #d9822b;
+}
+.band-problem {
+  --band: var(--accent);
+}
+.pgsi-result {
+  border-top: 4px solid var(--band);
+}
+.pgsi-result .pgsi-score strong,
+.pgsi-result .band-name {
+  color: var(--band);
+}
+.band-name {
+  font-family: var(--display);
+  font-size: 1.7rem;
+  font-weight: 600;
+  margin: 0.3rem 0 0;
+  line-height: 1.1;
+}
+.pgsi-result .strong {
+  font-weight: 600;
+}
+.pgsi-meter {
+  position: relative;
+  padding-bottom: 0.3rem;
+}
+.pgsi-meter .track {
+  display: flex;
+  height: 0.55rem;
+  border-radius: 999px;
+  overflow: hidden;
+  gap: 2px;
+}
+.pgsi-meter .seg {
+  background: var(--band);
+  opacity: 0.45;
+}
+.pgsi-meter .mark {
+  position: absolute;
+  top: -0.3rem;
+  width: 4px;
+  height: 1.15rem;
+  margin-left: -2px;
+  border-radius: 2px;
+  background: var(--ink);
+}
+.pgsi-meter .ticks {
+  display: flex;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--ink-3);
+  margin-top: 0.3rem;
+}
+.concerns {
+  margin: 0;
+  padding-left: 1.2rem;
+  display: grid;
+  gap: 0.35rem;
+}
+.concerns li::marker {
+  color: var(--accent);
+}
+.cam-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.cam-tags .tag {
+  font-size: 0.85rem;
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+  border: 1px solid var(--rule-strong);
+}
+.cam-tags .tag[class*='band-'] {
+  border-color: var(--band);
+  color: var(--band);
+  font-weight: 700;
+}
+
+/* generated plan */
+.cam-plan {
+  border: 1px solid var(--gold);
+  border-radius: 12px;
+  background: var(--paper-2);
+  overflow: hidden;
+}
+.plan-title {
+  background: var(--gold);
+  color: #10211a !important;
+  font-family: var(--display);
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 0.6rem 1.3rem;
+}
+.plan-body {
+  display: grid;
+  gap: 1.6rem;
+  padding: 1.3rem;
+  font-family: var(--sans);
+  line-height: 1.55;
+}
+.plan-body p {
+  margin: 0;
+}
+.plan-body h3 {
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin: 0 0 0.7rem;
+}
+.plan-goal {
+  font-family: var(--display);
+  font-size: 1.8rem;
+  font-weight: 600;
+  line-height: 1.1;
+}
+.plan-list {
+  margin: 0;
+  padding-left: 1.6rem;
+  display: grid;
+  gap: 0.8rem;
+}
+.plan-list.plain {
+  list-style: none;
+  padding-left: 0;
+}
+.plan-list li {
+  display: grid;
+  gap: 0.15rem;
+}
+.plan-list li::marker {
+  font-family: var(--mono);
+  color: var(--gold);
+}
+.plan-list.steps li::marker {
+  color: var(--accent);
+}
+.plan-list span {
+  color: var(--ink-2);
+  font-size: 0.93rem;
+}
+.plan-list.steps span {
+  color: var(--ink);
+  font-size: 1rem;
+}
+
+/* printable page */
+.print-page {
+  padding-top: 2.5rem;
+  padding-bottom: 3rem;
+}
+.print-wrap {
+  display: grid;
+  gap: 1.5rem;
+  font-family: var(--sans);
+}
+.print-plan header {
+  border-bottom: 2px solid var(--ink);
+  padding-bottom: 1rem;
+  margin-bottom: 0.5rem;
+  display: grid;
+  gap: 0.3rem;
+}
+.print-plan header p {
+  margin: 0;
+}
+.print-plan h1 {
+  font-size: 2.6rem;
+  margin: 0;
+}
+.print-plan .plan-body {
+  padding: 1rem 0;
+}
+
+@media print {
+  .site-header,
+  .site-footer,
+  footer,
+  .skip,
+  .no-print {
+    display: none !important;
+  }
+  :root,
+  :root[data-theme='light'] {
+    --paper: #fff;
+    --paper-2: #fff;
+    --ink: #111;
+    --ink-2: #333;
+    --ink-3: #666;
+    --gold: #6b5418;
+    --accent: #a8301f;
+    --rule: #ccc;
+  }
+  body {
+    background: #fff !important;
+    color: #111;
+  }
+  .print-plan {
+    font-size: 11pt;
+  }
+  .plan-body section,
+  .plan-list li {
+    break-inside: avoid;
+  }
+}

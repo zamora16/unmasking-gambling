@@ -1,0 +1,191 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHead from '../../components/PageHead.astro';
+import StepNav from '../../components/StepNav.astro';
+import TechBox from '../../components/TechBox.astro';
+import Pgsi from '../../islands/camino/Pgsi';
+import PlanBuilder from '../../islands/camino/PlanBuilder';
+import { type Lang, type PageKey, WAY_STEPS, href } from '../../i18n';
+import { theWayContent } from '../../data/camino/way';
+import { theWayStepBodies } from '../../data/camino/steps';
+
+interface Props {
+  lang: Lang;
+  step: 1 | 2 | 3 | 4 | 5 | 6;
+}
+const { lang, step } = Astro.props;
+const es = lang === 'es';
+const way = theWayContent[lang];
+const meta = way.hub.steps[step - 1];
+const page = WAY_STEPS[step - 1];
+const steps: readonly PageKey[] = WAY_STEPS;
+const prev = step > 1 ? steps[step - 2] : null;
+const next = step < 6 ? steps[step] : null;
+const bodyKey = step === 1 ? 'step1' : step === 3 ? 'step3' : step === 4 ? 'step4' : 'step6';
+const body = step === 2 || step === 5 ? null : theWayStepBodies[lang][bodyKey];
+const lede = body?.lead ?? (step === 2 ? (es ? 'Nueve preguntas validadas para situar tu relación con el juego con criterios reales, no con intuiciones.' : 'Nine validated questions to place your relationship with gambling on real criteria, not hunches.') : es ? 'Un plan escrito que cambia según tu resultado, dónde juegas y qué te empuja a jugar.' : 'A written plan that changes with your result, where you gamble and what pushes you to.');
+const md = (s: string) => s.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+const stepWord = es ? 'Paso' : 'Step';
+---
+
+<Base lang={lang} page={page} title={`${stepWord} ${step}: ${meta.title}`} description={meta.summary}>
+  <StepNav lang={lang} current={step} />
+  <PageHead lang={lang} modes={step === 2 || step === 5} kicker={`${stepWord} ${step} / 6 · ${meta.minutes} min`} title={meta.title} lede={lede} />
+
+  <article class="page">
+    <div class="measure prose">
+      {
+        step === 2 && (
+          <>
+            <Pgsi client:load t={way.pgsi} planHref={href(lang, 'way5')} />
+            <TechBox lang={lang} title={es ? 'El instrumento y sus cortes' : 'The instrument and its cut-offs'}>
+              {es ? (
+                <p>
+                  PGSI: nueve ítems del Canadian Problem Gambling Index (Ferris y Wynne, 2001), escala 0–3 y total 0–27. Bandas publicadas: 0 sin riesgo · 1–2 riesgo bajo · 3–7 riesgo moderado · 8 o más juego problemático. Es un instrumento de cribado poblacional: ordena el riesgo, no diagnostica. La puntuación y los ítems que más pesan se calculan en <code>src/lib/pgsi.ts</code>, cubierto por tests.
+                </p>
+              ) : (
+                <p>
+                  PGSI: nine items from the Canadian Problem Gambling Index (Ferris &amp; Wynne, 2001), 0–3 scale, 0–27 total. Published bands: 0 no risk · 1–2 low risk · 3–7 moderate risk · 8 or more problem gambling. It is a population screening tool: it ranks risk, it does not diagnose. The score and the heaviest items are computed in <code>src/lib/pgsi.ts</code>, covered by tests.
+                </p>
+              )}
+            </TechBox>
+          </>
+        )
+      }
+
+      {
+        step === 5 && (
+          <>
+            <PlanBuilder client:load t={way.plan} pgsiStrings={way.pgsi} lang={lang} screeningHref={href(lang, 'way2')} printHref={href(lang, 'wayPrint')} />
+            <TechBox lang={lang} title={es ? 'Las reglas del motor' : 'The engine’s rules'}>
+              {es ? (
+                <ul>
+                  <li>La gravedad manda: si el cribado da 8 o más y eliges «reducir», el objetivo pasa a «dejarlo» y el plan lo avisa.</li>
+                  <li>Barreras por canal (online, local, administración) ordenadas por eficacia, y filtradas por proporcionalidad: la custodia del dinero solo aparece en la banda problemática.</li>
+                  <li>Cada disparador declarado genera una táctica concreta.</li>
+                  <li>El protocolo de impulso escala con la gravedad y la revisión se acorta: 90, 30, 14 o 7 días.</li>
+                </ul>
+              ) : (
+                <ul>
+                  <li>Severity wins: if the screen gives 8 or more and you choose “cut down”, the goal becomes “stop” and the plan says so.</li>
+                  <li>Barriers per channel (online, venues, lottery shops) ranked by effectiveness and filtered for proportionality: handing over money control only appears in the problem band.</li>
+                  <li>Each trigger you report produces a specific tactic.</li>
+                  <li>The urge protocol escalates with severity and the review interval shortens: 90, 30, 14 or 7 days.</li>
+                </ul>
+              )}
+            </TechBox>
+          </>
+        )
+      }
+
+      {
+        body && (
+          <>
+            {body.blocks.map((b) => (
+              <section class="way-block">
+                <h2>{b.heading}</h2>
+                {b.body.map((p) => (
+                  <p set:html={md(p)} />
+                ))}
+                {b.tool && (
+                  <p>
+                    <a class="btn ghost" href={href(lang, b.tool.routeId)}>
+                      {b.tool.label} →
+                    </a>
+                  </p>
+                )}
+                {b.note && <p class:list={['way-note', b.note.tone]}>{b.note.text}</p>}
+              </section>
+            ))}
+            <p class="plain-box">
+              <strong>{es ? 'Para llevarte: ' : 'The takeaway: '}</strong>
+              {body.takeaway}
+            </p>
+            {step === 6 && (
+              <p>
+                <a class="btn" href={href(lang, 'help')}>
+                  {es ? 'Teléfonos y recursos de ayuda' : 'Helplines and support'} →
+                </a>
+              </p>
+            )}
+          </>
+        )
+      }
+
+      <nav class="way-pager" aria-label={es ? 'Paso anterior y siguiente' : 'Previous and next step'}>
+        {
+          prev ? (
+            <a href={href(lang, prev)}>
+              <span>← {stepWord} {step - 1}</span>
+              <strong>{way.hub.steps[step - 2].title}</strong>
+            </a>
+          ) : (
+            <span />
+          )
+        }
+        {
+          next && (
+            <a class="next" href={href(lang, next)}>
+              <span>
+                {stepWord} {step + 1} →
+              </span>
+              <strong>{way.hub.steps[step].title}</strong>
+            </a>
+          )
+        }
+      </nav>
+    </div>
+  </article>
+</Base>
+
+<style>
+  .way-block {
+    margin-bottom: 2.2rem;
+  }
+  .way-note {
+    font-family: var(--sans);
+    font-size: 0.98rem;
+    line-height: 1.55;
+    border-left: 3px solid var(--gold);
+    background: var(--gold-soft);
+    border-radius: 0 8px 8px 0;
+    padding: 0.85rem 1.05rem;
+  }
+  .way-note.lure {
+    border-color: var(--series-4);
+    background: color-mix(in srgb, var(--series-4) 12%, transparent);
+  }
+  .way-note.house {
+    border-color: var(--accent);
+    background: color-mix(in srgb, var(--accent) 12%, transparent);
+  }
+  .way-pager {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--rule);
+    font-family: var(--sans);
+  }
+  .way-pager a {
+    display: grid;
+    gap: 0.2rem;
+    text-decoration: none;
+    color: var(--ink);
+    padding: 0.8rem 1rem;
+    border: 1px solid var(--rule);
+    border-radius: 10px;
+  }
+  .way-pager a:hover {
+    border-color: var(--gold);
+  }
+  .way-pager span {
+    font-size: 0.78rem;
+    color: var(--ink-3);
+  }
+  .way-pager .next {
+    text-align: right;
+    grid-column: 2;
+  }
+</style>

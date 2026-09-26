@@ -26,6 +26,7 @@ It is written for everyone. Every page has a **plain mode** (the default: ideas 
 | **Lotteries** | Exact odds for La Primitiva, Bonoloto, EuroMillions and the National Lottery, plus a lifetime simulation. | Hypergeometric probabilities, simulated draws |
 | **Sports betting** | Odds converter, accumulator calculator and losing-streak simulator. | Compounding margins, Monte Carlo of longest losing runs |
 | **The games** | House edge of every common game and a calculator of what it costs to play at your own pace. | Exact probability calculations |
+| **The Way** | A six-step guide from why gambling hooks to a written personal plan, with a validated screen and a printable plan. Nothing leaves the browser. | PGSI screening with published cut-offs (Ferris & Wynne, 2001); rules engine that branches on severity, channel and triggers |
 | **Help** | Helplines, self-exclusion and practical steps. | |
 
 A few findings from the odds analysis:
@@ -44,7 +45,7 @@ src/islands/      interactive React components
 src/views/        page content, in Spanish and English
 src/data/         JSON produced by the analysis and the curated market dataset
 analysis/odds/    reproducible Python pipeline for the odds analysis
-tests/            Vitest tests (exact edges, gambler's ruin, Kaplan–Meier, margin methods, slot RTP, lottery odds)
+tests/            Vitest tests (exact edges, gambler's ruin, Kaplan–Meier, margin methods, slot RTP, lottery odds, PGSI and plan engine)
 ```
 
 ## Run it
@@ -55,6 +56,8 @@ npm run dev      # http://localhost:4321/unmasking-gambling/
 npm test
 npm run build
 ```
+
+The build targets GitHub Pages under `/unmasking-gambling`. To host on your own domain, build with `SITE_URL=https://your-domain BASE_PATH=/ npm run build`. Each page gets its own social-share image (`src/pages/og`), plus a sitemap and `robots.txt`.
 
 Reproduce the odds analysis (writes `src/data/odds/*.json`):
 

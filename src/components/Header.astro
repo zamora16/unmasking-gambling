@@ -7,8 +7,8 @@ interface Props {
 const { lang, page } = Astro.props;
 const t = ui[lang];
 const other: Lang = lang === 'es' ? 'en' : 'es';
-const section: PageKey = ['roulette', 'slots', 'lottery', 'sports'].includes(page) ? 'games' : page;
-const items = ['lab', 'odds', 'market', 'games'] as const;
+const section: PageKey = ['roulette', 'slots', 'lottery', 'sports'].includes(page) ? 'games' : page.startsWith('way') ? 'way' : page;
+const items = ['lab', 'odds', 'market', 'games', 'way'] as const;
 ---
 
 <header class="site-header">

@@ -1,0 +1,30 @@
+---
+import Base from '../../layouts/Base.astro';
+import PlanPrint from '../../islands/camino/PlanPrint';
+import { type Lang, href } from '../../i18n';
+import { theWayContent } from '../../data/camino/way';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const es = lang === 'es';
+const way = theWayContent[lang];
+---
+
+<Base lang={lang} page="wayPrint" noindex title={way.plan.resultTitle} description={es ? 'Versión imprimible de tu plan personal.' : 'Printable version of your personal plan.'}>
+  <section class="page print-page">
+    <div class="measure">
+      <PlanPrint
+        client:load
+        t={way.plan}
+        pgsiStrings={way.pgsi}
+        lang={lang}
+        planHref={href(lang, 'way5')}
+        emptyMessage={es ? 'Todavía no has creado ningún plan en este navegador. Vuelve al paso 5 y créalo primero.' : 'You have not created a plan in this browser yet. Go back to step 5 and create one first.'}
+        printLabel={way.plan.printCta}
+        backLabel={es ? 'Volver al plan' : 'Back to the plan'}
+      />
+    </div>
+  </section>
+</Base>
