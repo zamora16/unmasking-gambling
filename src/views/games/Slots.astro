@@ -3,6 +3,7 @@ import Base from '../../layouts/Base.astro';
 import PageHead from '../../components/PageHead.astro';
 import GameNav from '../../components/GameNav.astro';
 import TechBox from '../../components/TechBox.astro';
+import SlotSession from '../../islands/games/SlotSession';
 import Slot from '../../islands/games/Slot';
 import { type Lang, fmt, href } from '../../i18n';
 import { exactRTP, sevenOdds, PAYTABLE } from '../../lib/slot';
@@ -121,6 +122,37 @@ const perHour = 1200 * (1 - rtp);
           </p>
         )
       }
+
+      <h2>{es ? 'Misma máquina, otra experiencia' : 'Same machine, different experience'}</h2>
+      {
+        es ? (
+          <p>
+            Dos tragaperras pueden devolver exactamente lo mismo y sentirse opuestas. La <strong>volatilidad</strong> decide cómo se reparte el dinero devuelto: muchos premios pequeños, o casi nunca nada y de vez en cuando uno enorme. Juega una sesión y compara el pico que alcanzas con lo que te queda al final.
+          </p>
+        ) : (
+          <p>
+            Two slot machines can pay back exactly the same and feel completely different. <strong>Volatility</strong> decides how the money is handed back: lots of small wins, or almost nothing and now and then a huge one. Play a session and compare the peak you reach with what you have left at the end.
+          </p>
+        )
+      }
+    </div>
+    <div class="wide">
+      <SlotSession client:idle lang={lang} />
+    </div>
+    <div class="measure prose">
+      <TechBox lang={lang} title={es ? 'Cómo se modela la volatilidad' : 'How volatility is modelled'}>
+        {
+          es ? (
+            <p>
+              Cada volatilidad es una distribución de multiplicadores con sus probabilidades. La tabla se reescala para que la esperanza sea exactamente el RTP elegido, así que la volatilidad cambia la forma (la varianza) sin tocar la media. Cada sesión usa un generador con semilla (mulberry32): la comparación entre volatilidades es de {500} sesiones reproducibles por tipo.
+            </p>
+          ) : (
+            <p>
+              Each volatility is a distribution of multipliers with their probabilities. The table is rescaled so its expectation is exactly the chosen RTP, so volatility changes the shape (the variance) without touching the mean. Every session uses a seeded generator (mulberry32): the comparison runs {500} reproducible sessions per type.
+            </p>
+          )
+        }
+      </TechBox>
 
       <h2>{es ? 'La velocidad es el verdadero precio' : 'Speed is the real price'}</h2>
       {

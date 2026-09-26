@@ -32,3 +32,23 @@ describe('games', () => {
     expect(wins / n).toBeCloseTo(18 / 37, 2);
   });
 });
+
+import { payoutTable, simulateSession } from '../src/lib/volatility';
+
+describe('slot volatility model', () => {
+  it('gives the exact requested RTP for every volatility', () => {
+    for (const v of ['low', 'medium', 'high'] as const) {
+      const t = payoutTable(v, 0.95);
+      expect(t.reduce((s, o) => s + o.probability, 0)).toBeCloseTo(1, 10);
+      expect(t.reduce((s, o) => s + o.multiplier * o.probability, 0)).toBeCloseTo(0.95, 10);
+    }
+  });
+
+  it('is reproducible with a seed and ruins more players at high volatility', () => {
+    const a = simulateSession({ bankroll: 100, bet: 1, spins: 500, rtp: 0.95, volatility: 'high', seed: 3 });
+    const b = simulateSession({ bankroll: 100, bet: 1, spins: 500, rtp: 0.95, volatility: 'high', seed: 3 });
+    expect(a.finalBalance).toBe(b.finalBalance);
+    const bust = (v: 'low' | 'high') => Array.from({ length: 300 }, (_, i) => simulateSession({ bankroll: 100, bet: 1, spins: 500, rtp: 0.95, volatility: v, seed: i + 1 }).busted).filter(Boolean).length;
+    expect(bust('high')).toBeGreaterThan(bust('low'));
+  });
+});
