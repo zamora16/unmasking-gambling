@@ -1,0 +1,195 @@
+---
+import QuestionPage from '../../components/QuestionPage.astro';
+import Figure from '../../components/Figure.astro';
+import TechBox from '../../components/TechBox.astro';
+import BettingEdge from '../../islands/questions/BettingEdge';
+import { type Lang, href, fmt } from '../../i18n';
+import strategies from '../../data/odds/strategies.json';
+import summary from '../../data/odds/summary.json';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const es = lang === 'es';
+const f = fmt(lang);
+
+const NAMES: Record<string, { es: string; en: string }> = {
+  home: { es: 'Siempre al local', en: 'Always the home team' },
+  draw: { es: 'Siempre al empate', en: 'Always the draw' },
+  away: { es: 'Siempre al visitante', en: 'Always the away team' },
+  favourite: { es: 'Siempre al favorito', en: 'Always the favourite' },
+  underdog: { es: 'Siempre a la sorpresa', en: 'Always the underdog' },
+  random: { es: 'Al azar', en: 'At random' },
+  favouriteBest: { es: 'Al favorito, con la mejor cuota de unas 17 casas', en: 'The favourite, at the best price of ~17 bookmakers' },
+  eloValue: { es: 'Apuestas de «valor» según un modelo Elo', en: '“Value bets” from an Elo model' },
+};
+const rows = [...strategies].sort((a, b) => b.roi - a.roi);
+const best = rows[0];
+const first = strategies[0].series[0].date.slice(0, 4);
+const combo = (legs: number) => 1 - (1 / (1 + summary.medianMargin)) ** legs;
+
+const faq = es
+  ? [
+      { q: '¿Las combinadas pagan más?', a: `Pagan cuotas más altas, pero la comisión se multiplica con cada partido. Con una comisión típica del ${f.pct(summary.medianMargin, 1)}, una combinada de 3 partidos pierde de media un ${f.pct(combo(3), 0)} de lo apostado, y una de 5, un ${f.pct(combo(5), 0)}. Por eso las casas las promocionan tanto.` },
+      { q: '¿Funcionan los tipsters o pronosticadores de pago?', a: 'Para saber si alguien acierta más de lo normal hacen falta miles de apuestas registradas antes de jugarse, no capturas de pantalla de aciertos. Entre miles de pronosticadores, algunos encadenan rachas espectaculares por puro azar, y son esos los que se anuncian.' },
+      { q: '¿Y las apuestas seguras o surebets?', a: 'Existen: a veces las cuotas de varias casas, combinadas, garantizan un beneficio pequeño. Son cada vez más raras, desaparecen en minutos y exigen cuentas en muchas casas. Quien las explota de forma sistemática suele acabar con las cuentas limitadas.' },
+      { q: '¿Por qué las casas limitan a quien gana?', a: 'Porque su negocio es la comisión de cada cuota, no el riesgo. Una cuenta que gana de forma sostenida les cuesta dinero, y las casas pueden reducir la cantidad máxima que aceptan de esa cuenta. Quien pierde, en cambio, no tiene límite.' },
+      { q: '¿Se puede ganar con inteligencia artificial o machine learning?', a: `Lo probamos con ${f.int(summary.matches)} partidos y modelos de machine learning validados temporada a temporada. Los modelos se acercan a la precisión de las cuotas, pero no la superan, y ninguno ganó dinero de forma fiable.` },
+    ]
+  : [
+      { q: 'Do accumulators pay more?', a: `They pay higher odds, but the fee multiplies with every match. With a typical fee of ${f.pct(summary.medianMargin, 1)}, a 3-leg accumulator loses ${f.pct(combo(3), 0)} of the stake on average, and a 5-leg one ${f.pct(combo(5), 0)}. That is why bookmakers push them so hard.` },
+      { q: 'Do tipsters work?', a: 'Telling whether someone beats the odds takes thousands of bets recorded before kick-off, not screenshots of winners. Among thousands of tipsters, some string together spectacular runs by pure chance, and those are the ones you see advertised.' },
+      { q: 'What about sure bets or arbitrage?', a: 'They exist: sometimes the prices of several bookmakers combined guarantee a small profit. They are increasingly rare, vanish within minutes and require accounts with many bookmakers. Anyone who exploits them systematically tends to end up with restricted accounts.' },
+      { q: 'Why do bookmakers restrict winners?', a: 'Because their business is the fee in every price, not risk. An account that wins consistently costs them money, and bookmakers can cut the maximum stake they accept from it. Losing accounts, on the other hand, have no limit.' },
+      { q: 'Can AI or machine learning win?', a: `We tried, with ${f.int(summary.matches)} matches and machine learning models validated season by season. The models get close to the accuracy of the odds but do not beat it, and none made money reliably.` },
+    ];
+---
+
+<QuestionPage lang={lang} id="betting" faq={faq} sources={['src/islands/questions/BettingEdge.tsx', 'src/data/odds']}>
+  <article class="page">
+    <div class="measure prose">
+      {
+        es ? (
+          <>
+            <h2>La comisión que no se ve</h2>
+            <p>
+              Una casa de apuestas no apuesta contra ti: cobra una comisión escondida en cada cuota. Si sumas las probabilidades que implican las cuotas de un partido, salen más del 100 %. Ese exceso, en torno al 6–8 % en el mercado de 1X2, es lo que se queda la casa. Puedes calcularlo con cualquier partido en <a href={href(lang, 'odds', '#price')}>la calculadora de la comisión</a>.
+            </p>
+            <p>
+              Para vivir de apostar no basta con acertar más que la media de la gente. Hay que acertar tanto más que la propia casa como para pagar esa comisión y que sobre. Y la casa pone sus cuotas con mucha información.
+            </p>
+
+            <h2>Lo que dicen diez temporadas de partidos</h2>
+            <p>
+              Probamos ocho formas de apostar sobre {f.int(best.bets)} partidos de {first} a hoy, con las cuotas reales de cierre. Ninguna dio beneficios.
+            </p>
+          </>
+        ) : (
+          <>
+            <h2>The fee you cannot see</h2>
+            <p>
+              A bookmaker does not bet against you: it charges a fee hidden inside every price. Add up the probabilities implied by a match’s odds and you get more than 100%. That excess, around 6–8% on the 1X2 market, is what the bookmaker keeps. You can work it out for any match with <a href={href(lang, 'odds', '#price')}>the fee calculator</a>.
+            </p>
+            <p>
+              To make a living from betting, beating the average punter is not enough. You have to beat the bookmaker by enough to pay that fee and have something left. And bookmakers set their prices with a lot of information.
+            </p>
+
+            <h2>What ten seasons of matches say</h2>
+            <p>
+              We tested eight ways of betting on {f.int(best.bets)} matches from {first} to today, with real closing odds. None made a profit.
+            </p>
+          </>
+        )
+      }
+
+      <div class="ug-table-scroll">
+        <table class="paytable compare strategies">
+          <caption class="visually-hidden">{es ? 'Rentabilidad de ocho estrategias de apuesta' : 'Return of eight betting strategies'}</caption>
+          <thead>
+            <tr>
+              <th scope="col">{es ? 'Estrategia' : 'Strategy'}</th>
+              <th scope="col">{es ? 'Apuestas' : 'Bets'}</th>
+              <th scope="col">{es ? 'Aciertos' : 'Wins'}</th>
+              <th scope="col">{es ? 'Resultado por cada 100 €' : 'Result per €100'}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              rows.map((s) => (
+                <tr>
+                  <th scope="row">{NAMES[s.key]?.[lang] ?? s.name}</th>
+                  <td class="num">{f.int(s.bets)}</td>
+                  <td class="num">{f.pct(s.winRate, 0)}</td>
+                  <td class="num loss">
+                    {f.eur(s.roi * 100, 2)}
+                    <span class="only-tech ci"> [{f.eur(s.roiLo * 100, 2)}, {f.eur(s.roiHi * 100, 2)}]</span>
+                  </td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+      <p class="figure-foot">
+        {
+          es
+            ? 'Una unidad por apuesta, a la cuota de cierre de la casa de referencia salvo donde se indica. En modo técnico, intervalo bootstrap del 95 %. Datos: Football-Data.co.uk y ClubElo, vía A. Gábor (2026).'
+            : 'One unit per bet, at the reference bookmaker’s closing price unless stated. In technical mode, 95% bootstrap interval. Data: Football-Data.co.uk and ClubElo, via A. Gábor (2026).'
+        }
+      </p>
+
+      {
+        es ? (
+          <p>
+            La única que se acerca a cero es apostar al favorito eligiendo siempre la mejor cuota entre unas 17 casas. Y aun así no gana. Además, en la vida real nadie tiene cuenta abierta en 17 casas ni consigue la mejor cuota en cada partido. En <a href={href(lang, 'odds')}>el análisis completo</a> también lo intentamos con machine learning, con el mismo resultado.
+          </p>
+        ) : (
+          <p>
+            The only one close to zero is backing the favourite while always taking the best price among about 17 bookmakers. Even that does not win. And in real life nobody holds accounts with 17 bookmakers and gets the best price on every match. In <a href={href(lang, 'odds')}>the full analysis</a> we also tried machine learning, with the same result.
+          </p>
+        )
+      }
+    </div>
+  </article>
+
+  <Figure
+    wide={false}
+    title={es ? '¿Y si de verdad soy bueno?' : 'What if I really am good?'}
+    sub={es ? 'Cuánto tienes que acertar para no perder, y cuántas apuestas harían falta para distinguir habilidad de suerte.' : 'How often you must win not to lose, and how many bets it would take to tell skill from luck.'}
+  >
+    <BettingEdge client:idle lang={lang} />
+  </Figure>
+
+  <article class="page">
+    <div class="measure prose">
+      {
+        es ? (
+          <>
+            <h2>Por qué tanta gente cree que sí</h2>
+            <p>
+              Porque el azar fabrica ganadores. Si miles de personas apuestan, algunas encadenarán meses buenos sin ninguna habilidad, y son las que cuentan su historia. Las que pierden no publican nada. En el <a href={href(lang, 'sports')}>simulador de apuestas</a> puedes ver cómo aparecen esas rachas entre apostadores que eligen al azar.
+            </p>
+            <p>
+              Ganar alguna vez no demuestra un método. Y si apuestas para recuperar lo que has perdido, conviene pararse a mirarlo con calma.
+            </p>
+          </>
+        ) : (
+          <>
+            <h2>Why so many people think they can</h2>
+            <p>
+              Because chance manufactures winners. When thousands of people bet, some will string together good months with no skill at all, and they are the ones who tell their story. Those who lose post nothing. In the <a href={href(lang, 'sports')}>betting simulator</a> you can watch those runs appear among bettors who pick at random.
+            </p>
+            <p>
+              Winning now and then does not prove a method. And if you are betting to win back what you lost, it is worth stopping to look at it calmly.
+            </p>
+          </>
+        )
+      }
+
+      <TechBox lang={lang} title={es ? 'De dónde salen estas cifras' : 'Where these figures come from'}>
+        {
+          es ? (
+            <p>
+              Margen (overround) = Σ 1/cuota − 1, mediana del {f.pct(summary.medianMargin, 1)} en la casa de referencia y del {f.pct(summary.medianBestMargin, 2)} tomando la mejor cuota del mercado. La rentabilidad de cada estrategia es el beneficio medio por unidad apostada, con intervalo bootstrap por percentiles. El número de apuestas necesario para que el intervalo del 95 % del ROI excluya el cero es n ≈ (1,96 · σ / r)², con σ la desviación típica del retorno de una apuesta. El código está en <a href="https://github.com/zamora16/unmasking-gambling/tree/main/analysis">analysis/</a>.
+            </p>
+          ) : (
+            <p>
+              Margin (overround) = Σ 1/odds − 1, median {f.pct(summary.medianMargin, 1)} at the reference bookmaker and {f.pct(summary.medianBestMargin, 2)} taking the best price in the market. Each strategy’s return is the mean profit per unit staked, with a percentile bootstrap interval. The number of bets needed for the 95% interval of ROI to exclude zero is n ≈ (1.96 · σ / r)², where σ is the standard deviation of one bet’s return. The code is in <a href="https://github.com/zamora16/unmasking-gambling/tree/main/analysis">analysis/</a>.
+            </p>
+          )
+        }
+      </TechBox>
+    </div>
+  </article>
+</QuestionPage>
+
+<style>
+  .strategies {
+    margin-top: 1.5rem;
+  }
+  .ci {
+    color: var(--ink-3);
+    font-weight: 400;
+  }
+</style>

@@ -1,0 +1,12 @@
+---
+import { QUESTIONS } from '../../data/questions';
+
+export function getStaticPaths() {
+  return QUESTIONS.map((q) => ({ params: { slug: q.slug.es }, props: { id: q.id } }));
+}
+
+const views = import.meta.glob<{ default: (props: { lang: 'es' | 'en' }) => unknown }>('../../views/questions/*.astro', { eager: true });
+const View = views[`../../views/questions/${Astro.props.id}.astro`].default;
+---
+
+<View lang="es" />

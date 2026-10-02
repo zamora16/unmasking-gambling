@@ -1,0 +1,93 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHead from '../components/PageHead.astro';
+import { type Lang, questionHref } from '../i18n';
+import { QUESTIONS } from '../data/questions';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const es = lang === 'es';
+---
+
+<Base
+  lang={lang}
+  page="questions"
+  title={es ? 'Preguntas sobre el juego, con respuesta' : 'Questions about gambling, answered'}
+  description={es
+    ? '¿Funciona la martingala? ¿Se puede ganar a la ruleta? ¿Qué es el RTP? Respuestas cortas, con números exactos y una herramienta para comprobarlo.'
+    : 'Does the martingale work? Can you beat roulette? What is RTP? Short answers, with exact numbers and a tool to check them.'}
+>
+  <PageHead
+    lang={lang}
+    modes={false}
+    kicker={es ? 'Preguntas' : 'Questions'}
+    title={es ? 'Lo que la gente pregunta sobre el juego' : 'What people ask about gambling'}
+    lede={es
+      ? 'Respuestas directas a lo que se busca sobre ruleta, tragaperras, apuestas y loterías. Cada una lleva sus números y una herramienta para comprobarlo tú.'
+      : 'Straight answers to what people search for about roulette, slots, betting and lotteries. Each comes with its numbers and a tool to check it yourself.'}
+  />
+
+  <section class="page">
+    <ol class="q-list">
+      {
+        QUESTIONS.map((q) => (
+          <li>
+            <a href={questionHref(lang, q.slug)}>
+              <span class="q-kicker">{q.kicker[lang]}</span>
+              <span class="q-title">{q.question[lang]}</span>
+              <span class="q-answer">{q.answer[lang]}</span>
+            </a>
+          </li>
+        ))
+      }
+    </ol>
+  </section>
+</Base>
+
+<style>
+  .q-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 2rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 22rem), 1fr));
+    gap: 1rem;
+  }
+  .q-list a {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+    height: 100%;
+    padding: 1.3rem 1.4rem;
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    background: var(--paper-2);
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .q-list a:hover,
+  .q-list a:focus-visible {
+    border-color: var(--gold);
+  }
+  .q-kicker {
+    font-family: var(--sans);
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+  .q-title {
+    font-family: var(--display);
+    font-size: 1.7rem;
+    font-weight: 600;
+    line-height: 1.05;
+  }
+  .q-answer {
+    font-family: var(--sans);
+    font-size: 0.92rem;
+    line-height: 1.5;
+    color: var(--ink-2);
+  }
+</style>

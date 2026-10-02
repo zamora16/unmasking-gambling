@@ -1,4 +1,5 @@
 ---
+import RelatedQuestions from '../components/RelatedQuestions.astro';
 import Base from '../layouts/Base.astro';
 import PageHead from '../components/PageHead.astro';
 import TechBox from '../components/TechBox.astro';
@@ -153,6 +154,7 @@ const maxEdge = Math.max(...GAME_ROWS.map((g) => g.edge));
     </section>
 
   </div>
+  <RelatedQuestions lang={lang} />
 </Base>
 
 <style>

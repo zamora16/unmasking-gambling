@@ -1,0 +1,170 @@
+---
+import QuestionPage from '../../components/QuestionPage.astro';
+import Figure from '../../components/Figure.astro';
+import TechBox from '../../components/TechBox.astro';
+import MartingaleCalc from '../../islands/questions/MartingaleCalc';
+import { type Lang, href, questionHref } from '../../i18n';
+import { questionById } from '../../data/questions';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const es = lang === 'es';
+const roulette = questionById('roulette');
+
+const faq = es
+  ? [
+      { q: '¿Por qué los casinos dejan usar la martingala?', a: 'Porque no les cuesta nada. Cada euro apostado deja de media 2,70 céntimos a la casa, se apueste con sistema o sin él. Además, el límite de mesa corta la progresión justo cuando el jugador más lo necesitaría.' },
+      { q: '¿Funciona la martingala en las apuestas deportivas?', a: 'Tampoco. La lógica es la misma, y la comisión de las cuotas (en torno al 6–8 % en el mercado 1X2) es más alta que la ventaja de la ruleta. Doblar tras cada fallo multiplica lo que pagas en comisión.' },
+      { q: '¿Y la martingala inversa, o Paroli?', a: 'Doblar después de ganar en vez de después de perder cambia la forma de los resultados, no su media. Con el Paroli pierdes poco muchas veces y ganas mucho alguna vez. La pérdida media sigue siendo el 2,70 % de lo apostado.' },
+      { q: '¿Cuánto dinero hace falta para que la martingala funcione?', a: 'Infinito, y una mesa sin límite. Aguantar 10 pérdidas seguidas exige 1.023 veces la apuesta inicial, y esa racha llega de media una vez cada 784 series. Con dinero finito siempre hay una racha que lo agota.' },
+      { q: '¿Funcionan otros sistemas como D’Alembert, Fibonacci o Labouchère?', a: 'No. Todos cambian cuánto apuestas según lo que ha pasado antes, pero la ruleta no tiene memoria y cada apuesta pierde lo mismo de media. Ningún orden de apuestas convierte una suma de pérdidas esperadas en una ganancia.' },
+    ]
+  : [
+      { q: 'Why do casinos allow the martingale?', a: 'Because it costs them nothing. Every euro staked leaves the house 2.70 cents on average, with or without a system. And the table limit cuts the progression short exactly when the player would need it most.' },
+      { q: 'Does the martingale work in sports betting?', a: 'No. The logic is the same, and the fee built into the odds (around 6–8% on the 1X2 market) is higher than the roulette edge. Doubling after every miss multiplies what you pay in fees.' },
+      { q: 'What about the reverse martingale, or Paroli?', a: 'Doubling after a win instead of after a loss changes the shape of the results, not their average. With the Paroli you lose a little many times and win a lot now and then. The average loss is still 2.70% of what you stake.' },
+      { q: 'How much money does the martingale need to work?', a: 'An infinite amount, and a table with no limit. Surviving 10 losses in a row takes 1,023 times the starting bet, and that run comes on average once every 784 series. With finite money there is always a run that wipes it out.' },
+      { q: 'Do other systems work, like D’Alembert, Fibonacci or Labouchère?', a: 'No. They all change how much you bet based on what happened before, but the wheel has no memory and every bet loses the same on average. No order of bets turns a sum of expected losses into a gain.' },
+    ];
+---
+
+<QuestionPage lang={lang} id="martingale" faq={faq} sources={['src/islands/questions/MartingaleCalc.tsx', 'src/lib/martingale.ts']}>
+  <article class="page">
+    <div class="measure prose">
+      {
+        es ? (
+          <>
+            <h2>Qué es la martingala</h2>
+            <p>
+              Es el sistema de apuestas más famoso. Apuestas 1 € al rojo. Si ganas, vuelves a empezar con 1 €. Si pierdes, doblas: 2 €, luego 4 €, luego 8 €. Cuando por fin sale rojo, recuperas todo lo perdido y ganas 1 €.
+            </p>
+            <p>
+              Sobre el papel parece imposible perder, porque el rojo tiene que salir alguna vez. Y en la práctica funciona casi siempre. Ese es el problema.
+            </p>
+
+            <h2>Por qué parece que funciona</h2>
+            <p>
+              Con 100 € y apuestas que empiezan en 1 €, puedes doblar seis veces seguidas (1 + 2 + 4 + 8 + 16 + 32 = 63 €). Para perder la serie tienen que salir seis no-rojos seguidos. Eso pasa en 1 de cada 54 series. Las otras 53 terminan con 1 € de ganancia.
+            </p>
+            <p>
+              Así que la experiencia es muy agradable: ganas, ganas, ganas. Muchas noches terminan en positivo. Y quien lo prueba unas cuantas veces se convence de que ha encontrado algo.
+            </p>
+
+            <h2>Dónde falla</h2>
+            <p>
+              Cuando llega la mala racha, y siempre llega, pierdes 63 € de golpe. Es lo que habías ganado en 63 series buenas. Pero de media solo habías ganado 53 antes de que llegara. Las cuentas no salen.
+            </p>
+            <p>
+              La martingala no cambia cuánto pierdes de media. Cambia cómo lo pierdes: en lugar de un goteo, muchas ganancias pequeñas y una pérdida grande y rara. Cada apuesta sigue costando el 2,70 % de lo que pones en la mesa, y el sistema solo hace que pongas más.
+            </p>
+            <p>
+              Pruébalo abajo con tu dinero, tu apuesta y el límite de la mesa. La tabla es exacta, no una simulación.
+            </p>
+          </>
+        ) : (
+          <>
+            <h2>What the martingale is</h2>
+            <p>
+              It is the most famous betting system. You bet €1 on red. If you win, you start again at €1. If you lose, you double: €2, then €4, then €8. When red finally comes up, you win back everything you lost, plus €1.
+            </p>
+            <p>
+              On paper it looks impossible to lose, because red has to come up eventually. And in practice it works almost every time. That is the problem.
+            </p>
+
+            <h2>Why it seems to work</h2>
+            <p>
+              With €100 and bets starting at €1, you can double six times in a row (1 + 2 + 4 + 8 + 16 + 32 = €63). To lose the series, six non-reds have to come up in a row. That happens in 1 in every 54 series. The other 53 end €1 up.
+            </p>
+            <p>
+              So it feels great: you win, win, win. Plenty of nights end in profit. And anyone who tries it a few times becomes convinced they have found something.
+            </p>
+
+            <h2>Where it breaks</h2>
+            <p>
+              When the bad run comes, and it always comes, you lose €63 in one go. That is what you had made in 63 good series. But on average you had only won 53 before it arrived. The sums do not add up.
+            </p>
+            <p>
+              The martingale does not change how much you lose on average. It changes how you lose it: instead of a slow drip, many small wins and one large, rare loss. Every bet still costs 2.70% of what you put on the table, and the system only makes you put more on it.
+            </p>
+            <p>
+              Try it below with your own money, bet and table limit. The table is exact, not a simulation.
+            </p>
+          </>
+        )
+      }
+    </div>
+  </article>
+
+  <Figure
+    wide={false}
+    title={es ? 'La martingala, apuesta a apuesta' : 'The martingale, bet by bet'}
+    sub={es ? 'Cambia el dinero, la apuesta inicial o el límite de la mesa. La última fila es donde el sistema se rompe.' : 'Change the money, the starting bet or the table limit. The last row is where the system breaks.'}
+  >
+    <MartingaleCalc client:idle lang={lang} />
+  </Figure>
+
+  <article class="page">
+    <div class="measure prose">
+      {
+        es ? (
+          <>
+            <h2>¿Y si tengo más dinero?</h2>
+            <p>
+              Ayuda menos de lo que parece. Cada vez que duplicas tu dinero solo ganas una apuesta más antes de romperte, y la serie perdida pasa a costar el doble. Con 1.000 € aguantas nueve pérdidas seguidas; la racha que te rompe llega una vez cada 400 series, pero entonces pierdes 511 €. Y en un casino real, el límite de la mesa suele cortar antes: con apuesta mínima de 5 € y máxima de 500 €, no pasas de siete apuestas seguidas, tengas el dinero que tengas.
+            </p>
+            <p>
+              Si quieres ver qué pasa cuando miles de personas juegan con martingala a la vez, el <a href={href(lang, 'lab')}>laboratorio de ruina</a> lo simula.
+            </p>
+          </>
+        ) : (
+          <>
+            <h2>What if I have more money?</h2>
+            <p>
+              It helps less than it seems. Every time you double your money you only get one more bet before you break, and the lost series costs twice as much. With €1,000 you survive nine losses in a row; the run that breaks you comes once every 400 series, but then you lose €511. And in a real casino the table limit usually cuts in first: with a €5 minimum and a €500 maximum, you cannot go past seven bets in a row, however much money you have.
+            </p>
+            <p>
+              To see what happens when thousands of people play the martingale at once, the <a href={href(lang, 'lab')}>Ruin Lab</a> simulates it.
+            </p>
+          </>
+        )
+      }
+
+      <TechBox lang={lang} title={es ? 'Por qué ningún sistema puede funcionar' : 'Why no system can work'}>
+        {
+          es ? (
+            <>
+              <p>
+                Si cada apuesta de una unidad tiene esperanza −e (con e = 1/37 en la ruleta europea), una estrategia que apuesta s<sub>t</sub> en la tirada t, decidida con la información disponible hasta entonces, tiene una ganancia esperada total de −e · E[Σ s<sub>t</sub>]. La esperanza de la suma es la suma de las esperanzas, y cada término es negativo. El orden y el tamaño de las apuestas solo cambian E[Σ s<sub>t</sub>], el total apostado, que la martingala de hecho aumenta.
+              </p>
+              <p>
+                Formalmente, el saldo es una supermartingala, y el teorema de parada opcional de Doob dice que ninguna regla de parada acotada consigue E[saldo final] &gt; saldo inicial. El nombre del sistema y el del concepto matemático tienen el mismo origen.
+              </p>
+              <p>
+                La tabla de arriba lo comprueba: E[serie] = −(1 − 2p) · E[apostado en la serie], con p = 18/37. El cálculo está en <a href="https://github.com/zamora16/unmasking-gambling/blob/main/src/lib/martingale.ts">src/lib/martingale.ts</a>, con tests.
+              </p>
+            </>
+          ) : (
+            <>
+              <p>
+                If each one-unit bet has expectation −e (e = 1/37 on a European wheel), a strategy that stakes s<sub>t</sub> on spin t, chosen with the information available up to then, has total expected gain −e · E[Σ s<sub>t</sub>]. The expectation of the sum is the sum of the expectations, and every term is negative. The order and size of the bets only change E[Σ s<sub>t</sub>], the total staked, which the martingale actually increases.
+              </p>
+              <p>
+                Formally, the balance is a supermartingale, and Doob’s optional stopping theorem says no bounded stopping rule achieves E[final balance] &gt; starting balance. The betting system and the mathematical concept share their name for a reason.
+              </p>
+              <p>
+                The table above checks it: E[series] = −(1 − 2p) · E[staked in the series], with p = 18/37. The code is in <a href="https://github.com/zamora16/unmasking-gambling/blob/main/src/lib/martingale.ts">src/lib/martingale.ts</a>, with tests.
+              </p>
+            </>
+          )
+        }
+      </TechBox>
+
+      <p>
+        {es ? 'Relacionado: ' : 'Related: '}
+        <a href={questionHref(lang, roulette.slug)}>{roulette.question[lang]}</a>
+      </p>
+    </div>
+  </article>
+</QuestionPage>

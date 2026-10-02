@@ -22,7 +22,7 @@ export const ui = {
   es: {
     siteName: 'Unmasking Gambling',
     tagline: 'La matemática del juego, con datos',
-    nav: { lab: 'Laboratorio de ruina', odds: 'Las cuotas', market: 'El mercado', games: 'Los juegos', way: 'El Camino', help: 'Pedir ayuda', methods: 'Método', about: 'Sobre el proyecto' },
+    nav: { lab: 'Laboratorio de ruina', odds: 'Las cuotas', market: 'El mercado', games: 'Los juegos', way: 'El Camino', help: 'Pedir ayuda', methods: 'Método', about: 'Sobre el proyecto', questions: 'Preguntas' },
     needHelp: '¿Necesitas ayuda?',
     helpLine: 'FEJAR 900 200 225 · Crisis 024',
     langSwitch: 'English',
@@ -43,7 +43,7 @@ export const ui = {
   en: {
     siteName: 'Unmasking Gambling',
     tagline: 'The mathematics of gambling, with data',
-    nav: { lab: 'Ruin Lab', odds: 'The odds', market: 'The market', games: 'The games', way: 'The Way', help: 'Get help', methods: 'Methods', about: 'About' },
+    nav: { lab: 'Ruin Lab', odds: 'The odds', market: 'The market', games: 'The games', way: 'The Way', help: 'Get help', methods: 'Methods', about: 'About', questions: 'Questions' },
     needHelp: 'Need help?',
     helpLine: 'US 1-800-GAMBLER · UK 0808 8020 133',
     langSwitch: 'Español',
@@ -77,4 +77,10 @@ export function fmt(lang: Lang) {
     compact: (n: number) => new Intl.NumberFormat(locale, { notation: 'compact', maximumFractionDigits: 1 }).format(n),
     signedPct: (n: number, d = 1) => new Intl.NumberFormat(locale, { style: 'percent', signDisplay: 'exceptZero', minimumFractionDigits: d, maximumFractionDigits: d }).format(n),
   };
+}
+
+/** Path of a question page (see src/data/questions.ts). */
+export function questionHref(lang: Lang, slug: Record<Lang, string>): string {
+  const prefix = lang === 'es' ? '' : '/en';
+  return `${BASE}${prefix}/${SLUGS[lang].questions}${slug[lang]}/`;
 }

@@ -9,12 +9,14 @@ import { Resvg } from '@resvg/resvg-js';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { LANGS, type Lang, type PageKey } from '../../../i18n';
-import { pageMeta } from '../../../i18n/meta';
+import { pageMeta, questionMeta } from '../../../i18n/meta';
+import { QUESTIONS } from '../../../data/questions';
 
-const PAGES: PageKey[] = ['home', 'lab', 'odds', 'market', 'games', 'roulette', 'slots', 'lottery', 'sports', 'help', 'methods', 'about', 'way', 'way1', 'way2', 'way3', 'way4', 'way5', 'way6'];
+const PAGES: PageKey[] = ['home', 'lab', 'odds', 'market', 'games', 'roulette', 'slots', 'lottery', 'sports', 'help', 'methods', 'about', 'questions', 'way', 'way1', 'way2', 'way3', 'way4', 'way5', 'way6'];
 
 export function getStaticPaths() {
-  return LANGS.flatMap((lang) => PAGES.map((page) => ({ params: { lang, page } })));
+  const pages = [...PAGES, ...QUESTIONS.map((q) => `q-${q.id}`)];
+  return LANGS.flatMap((lang) => pages.map((page) => ({ params: { lang, page } })));
 }
 
 const fonts = resolve(process.cwd(), 'node_modules', '@fontsource');
@@ -25,7 +27,11 @@ const bold = readFileSync(resolve(fonts, 'inter-tight/files/inter-tight-latin-60
 const el = (type: string, style: Record<string, unknown>, children?: unknown) => ({ type, props: { style: { display: 'flex', ...style }, children } });
 
 export const GET: APIRoute = async ({ params }) => {
-  const meta = pageMeta(params.lang as Lang, params.page as PageKey)!;
+  const lang = params.lang as Lang;
+  const qid = params.page!.startsWith('q-') ? params.page!.slice(2) : null;
+  const meta = qid ? questionMeta(lang, qid) : pageMeta(lang, params.page as PageKey)!;
+  // questions are longer than page titles
+  const titleSize = meta.title.length > 34 ? '76px' : '96px';
   const svg = await satori(
     el(
       'div',
@@ -36,7 +42,7 @@ export const GET: APIRoute = async ({ params }) => {
           el('span', { fontFamily: 'Bold', fontSize: '26px', letterSpacing: '0.12em', textTransform: 'uppercase', color: '#c9a45c' }, meta.kicker),
         ]),
         el('div', { flexDirection: 'column', gap: '22px', width: '1000px' }, [
-          el('span', { fontFamily: 'Display', fontSize: '96px', lineHeight: 1, fontWeight: 600 }, meta.title),
+          el('span', { fontFamily: 'Display', fontSize: titleSize, lineHeight: 1, fontWeight: 600 }, meta.title),
           el('span', { fontFamily: 'Body', fontSize: '32px', lineHeight: 1.4, color: '#c7c0ae' }, meta.text),
         ]),
         el('div', { justifyContent: 'space-between', alignItems: 'center', borderTop: '2px solid #36573f', paddingTop: '22px', fontFamily: 'Body', fontSize: '24px', color: '#8f9a8e' }, [

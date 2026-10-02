@@ -1,0 +1,143 @@
+---
+import QuestionPage from '../../components/QuestionPage.astro';
+import Figure from '../../components/Figure.astro';
+import TechBox from '../../components/TechBox.astro';
+import AheadOverTime from '../../islands/questions/AheadOverTime';
+import { type Lang, href, questionHref } from '../../i18n';
+import { questionById } from '../../data/questions';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const es = lang === 'es';
+const martingale = questionById('martingale');
+
+const faq = es
+  ? [
+      { q: '¿Cuál es la mejor apuesta en la ruleta?', a: 'En la ruleta europea todas las apuestas pierden lo mismo de media: el 2,70 % de lo apostado. Al rojo, a una docena o a un número, da igual. Lo único que cambia es la variación: a un número ganas pocas veces pero mucho. En la ruleta francesa con la regla «la partage», las apuestas sencillas pierden la mitad, un 1,35 %.' },
+      { q: '¿Están trucadas las ruletas online?', a: 'No hace falta. El cero ya garantiza a la casa su parte. En España, los juegos de los operadores con licencia pasan una certificación técnica que incluye el generador de números aleatorios. El problema no es que estén trucadas, sino que funcionan exactamente como se anuncia.' },
+      { q: '¿Sirve apuntar los números que salen?', a: 'No. La bola no recuerda lo que ha salido antes. Después de diez rojos seguidos, la probabilidad de rojo en la siguiente tirada sigue siendo 18 de 37. Creer lo contrario se llama falacia del jugador, y es una de las trampas mentales más estudiadas.' },
+      { q: '¿Es mejor la ruleta europea o la americana?', a: 'La europea, con un solo cero, pierde el 2,70 % de cada apuesta. La americana tiene doble cero y pierde el 5,26 %, casi el doble. Su apuesta a cinco números (0, 00, 1, 2 y 3) es todavía peor: un 7,89 %.' },
+      { q: '¿Cuánto se pierde jugando a la ruleta una hora?', a: 'Depende de cuánto apuestes y lo rápido que juegues. En una mesa física se juegan unas 35 tiradas por hora; a 5 € por tirada son 175 € apostados y unos 4,73 € de pérdida media. En la ruleta online o automática el ritmo es mucho mayor, y la pérdida por hora crece en proporción.' },
+    ]
+  : [
+      { q: 'What is the best bet in roulette?', a: 'On a European wheel every bet loses the same on average: 2.70% of the stake. Red, a dozen or a single number, it makes no difference. Only the swings change: on a single number you win rarely but big. In French roulette with the “la partage” rule, even-money bets lose half as much, 1.35%.' },
+      { q: 'Is online roulette rigged?', a: 'It does not need to be. The zero already guarantees the house its share. In Spain, games from licensed operators go through a technical certification that includes the random number generator. The problem is not that it is rigged, but that it works exactly as advertised.' },
+      { q: 'Does it help to track the numbers that come up?', a: 'No. The ball does not remember what came before. After ten reds in a row, the chance of red on the next spin is still 18 in 37. Believing otherwise is called the gambler’s fallacy, and it is one of the most studied mental traps.' },
+      { q: 'Is European or American roulette better?', a: 'European, with a single zero, loses 2.70% of every bet. American has a double zero and loses 5.26%, almost twice as much. Its five-number bet (0, 00, 1, 2 and 3) is worse still: 7.89%.' },
+      { q: 'How much do you lose playing roulette for an hour?', a: 'It depends on how much you bet and how fast you play. A live table runs about 35 spins an hour; at €5 a spin that is €175 staked and about €4.73 lost on average. Online or automated roulette runs much faster, and the loss per hour grows in proportion.' },
+    ];
+---
+
+<QuestionPage lang={lang} id="roulette" faq={faq} sources={['src/islands/questions/AheadOverTime.tsx', 'src/lib/binomial.ts']}>
+  <article class="page">
+    <div class="measure prose">
+      {
+        es ? (
+          <>
+            <h2>El truco está en el cero</h2>
+            <p>
+              Una ruleta europea tiene 37 casillas: del 1 al 36 y el cero. Pero los premios se pagan como si solo hubiera 36. Si apuestas a un número y aciertas, cobras 36 veces lo apostado (35 de premio más tu apuesta). Para que fuera justo, tendrías que cobrar 37.
+            </p>
+            <p>
+              Esa diferencia es la ventaja de la casa: 1 de cada 37 euros apostados, un 2,70 %. Se aplica igual a todas las apuestas de la mesa. No hay una apuesta buena y otra mala. Todas cuestan lo mismo.
+            </p>
+
+            <h2>Una noche sí, una vida no</h2>
+            <p>
+              El 2,70 % es una media. En pocas tiradas el azar pesa mucho más que la ventaja, y por eso mucha gente sale ganando de una noche concreta. Con el tiempo pasa lo contrario: la suerte se compensa y la ventaja se acumula.
+            </p>
+            <p>
+              El gráfico muestra qué parte de los jugadores va ganando después de cada número de tiradas. No es una simulación: es la probabilidad exacta.
+            </p>
+          </>
+        ) : (
+          <>
+            <h2>The trick is the zero</h2>
+            <p>
+              A European wheel has 37 pockets: 1 to 36 and the zero. But prizes are paid as if there were only 36. Bet on a number and hit it, and you get 36 times your stake (35 in winnings plus your bet). For it to be fair, you would need 37.
+            </p>
+            <p>
+              That gap is the house edge: 1 in every 37 euros staked, or 2.70%. It applies equally to every bet on the table. There is no good bet and bad bet. They all cost the same.
+            </p>
+
+            <h2>One night, yes. A lifetime, no</h2>
+            <p>
+              The 2.70% is an average. Over a few spins, luck weighs far more than the edge, which is why plenty of people walk away ahead on a given night. Over time the opposite happens: luck evens out and the edge piles up.
+            </p>
+            <p>
+              The chart shows the share of players who are ahead after each number of spins. It is not a simulation: it is the exact probability.
+            </p>
+          </>
+        )
+      }
+    </div>
+  </article>
+
+  <Figure
+    wide={false}
+    title={es ? 'Cuanto más juegas, menos gente va ganando' : 'The longer you play, the fewer people are ahead'}
+    sub={es ? 'Probabilidad de ir por delante tras cada número de tiradas, según a qué apuestes. El eje horizontal crece de diez en diez veces.' : 'Chance of being ahead after each number of spins, by type of bet. The horizontal axis grows tenfold at each step.'}
+  >
+    <AheadOverTime client:idle lang={lang} />
+  </Figure>
+
+  <article class="page">
+    <div class="measure prose">
+      {
+        es ? (
+          <>
+            <h2>Los «trucos» que circulan</h2>
+            <ul>
+              <li>
+                <strong>Sistemas de apuestas.</strong> Doblar tras perder, subir y bajar la apuesta, seguir secuencias. Ninguno cambia lo que cuesta cada apuesta. Lo explicamos con números en <a href={questionHref(lang, martingale.slug)}>{martingale.question[lang]}</a>
+              </li>
+              <li>
+                <strong>Números calientes y fríos.</strong> La ruleta no tiene memoria. Que el 17 lleve 200 tiradas sin salir no lo hace más probable. Puedes comprobarlo girando una ruleta en el <a href={href(lang, 'roulette')}>simulador</a>.
+              </li>
+              <li>
+                <strong>Ruedas defectuosas.</strong> Hubo casos históricos, como el de Joseph Jagger en Montecarlo en 1873, que aprovechó una rueda desequilibrada. Hoy las ruedas se revisan, y las ruletas online usan generadores aleatorios certificados.
+              </li>
+            </ul>
+            <p>
+              La ruleta se puede disfrutar como un entretenimiento con precio. Pensar que se le puede ganar es la puerta a perder mucho más de lo previsto.
+            </p>
+          </>
+        ) : (
+          <>
+            <h2>The “tricks” going around</h2>
+            <ul>
+              <li>
+                <strong>Betting systems.</strong> Doubling after a loss, raising and lowering stakes, following sequences. None of them changes what each bet costs. We go through the numbers in <a href={questionHref(lang, martingale.slug)}>{martingale.question[lang]}</a>
+              </li>
+              <li>
+                <strong>Hot and cold numbers.</strong> The wheel has no memory. If 17 has not come up in 200 spins, it is no more likely now. You can check it by spinning a wheel in the <a href={href(lang, 'roulette')}>simulator</a>.
+              </li>
+              <li>
+                <strong>Faulty wheels.</strong> There were historical cases, like Joseph Jagger in Monte Carlo in 1873, who exploited an unbalanced wheel. Today wheels are inspected, and online roulette uses certified random number generators.
+              </li>
+            </ul>
+            <p>
+              Roulette can be enjoyed as entertainment with a price tag. Believing you can beat it is the door to losing far more than you planned.
+            </p>
+          </>
+        )
+      }
+
+      <TechBox lang={lang} title={es ? 'Por qué el tiempo juega a favor de la casa' : 'Why time works for the house'}>
+        {
+          es ? (
+            <p>
+              Tras n apuestas de una unidad al rojo, el resultado tiene media −n/37 y desviación típica ≈ √n. La pérdida esperada crece con n y la dispersión con √n, así que a partir de cierto punto la pérdida domina. Con la aproximación normal, ir ganando baja del 2,5 % cuando n/37 &gt; 1,96 · √n, es decir, n &gt; (1,96 · 37)² ≈ 5.260 tiradas. Las curvas del gráfico son exactas: P(W · (k + 1) &gt; n) con W ~ Binomial(n, c/37), calculada en espacio logarítmico en <a href="https://github.com/zamora16/unmasking-gambling/blob/main/src/lib/binomial.ts">src/lib/binomial.ts</a> y contrastada con SciPy en los tests.
+            </p>
+          ) : (
+            <p>
+              After n one-unit bets on red, the result has mean −n/37 and standard deviation ≈ √n. The expected loss grows with n and the spread with √n, so beyond some point the loss dominates. Under the normal approximation, the chance of being ahead drops below 2.5% once n/37 &gt; 1.96 · √n, that is, n &gt; (1.96 · 37)² ≈ 5,260 spins. The chart’s curves are exact: P(W · (k + 1) &gt; n) with W ~ Binomial(n, c/37), computed in log space in <a href="https://github.com/zamora16/unmasking-gambling/blob/main/src/lib/binomial.ts">src/lib/binomial.ts</a> and checked against SciPy in the tests.
+            </p>
+          )
+        }
+      </TechBox>
+    </div>
+  </article>
+</QuestionPage>

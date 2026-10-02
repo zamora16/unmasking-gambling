@@ -1,0 +1,222 @@
+---
+/**
+ * Shell of every question page: the question as H1, the short answer right
+ * under it (what a search engine quotes), then the body, the follow-up
+ * questions (mirrored as FAQPage schema), a quiet way into the screening
+ * test, and links onwards.
+ */
+import Base from '../layouts/Base.astro';
+import ModeSwitch from './ModeSwitch.astro';
+import { type Lang, href, questionHref } from '../i18n';
+import { pageMeta } from '../i18n/meta';
+import { QUESTIONS, questionById } from '../data/questions';
+import { SLUGS } from '../i18n/routes';
+import type { Faq } from '../lib/seo';
+
+interface Props {
+  lang: Lang;
+  id: string;
+  /** Follow-up questions, answered in plain text. */
+  faq?: Faq[];
+  /** Extra source files that date this page (its islands and libs). */
+  sources?: string[];
+}
+const { lang, id, faq = [], sources = [] } = Astro.props;
+const es = lang === 'es';
+const q = questionById(id);
+const others = QUESTIONS.filter((x) => x.id !== id);
+const doc = {
+  slugs: { es: `${SLUGS.es.questions}${q.slug.es}/`, en: `${SLUGS.en.questions}${q.slug.en}/` },
+  sources: [`src/views/questions/${id}.astro`, ...sources],
+  og: `q-${id}`,
+  name: q.question[lang],
+  published: q.published,
+};
+---
+
+<Base lang={lang} page="questions" title={q.question[lang]} description={q.answer[lang]} faq={[{ q: q.question[lang], a: q.answer[lang] }, ...faq]} doc={doc}>
+  <header class="q-head page">
+    <div class="inner">
+      <p class="kicker"><a href={href(lang, 'questions')}>{es ? 'Preguntas' : 'Questions'}</a> · {q.kicker[lang]}</p>
+      <h1>{q.question[lang]}</h1>
+      <div class="answer" role="note" aria-label={es ? 'Respuesta corta' : 'Short answer'}>
+        <p class="answer-label">{es ? 'Respuesta corta' : 'Short answer'}</p>
+        <p class="answer-text">{q.answer[lang]}</p>
+      </div>
+      <div class="modes"><ModeSwitch lang={lang} /></div>
+    </div>
+  </header>
+
+  <slot />
+
+  {
+    faq.length > 0 && (
+      <section class="page faq" aria-labelledby="faq-title">
+        <div class="measure prose">
+          <h2 id="faq-title">{es ? 'Otras preguntas' : 'Related questions'}</h2>
+          {faq.map((f) => (
+            <>
+              <h3>{f.q}</h3>
+              <p>{f.a}</p>
+            </>
+          ))}
+        </div>
+      </section>
+    )
+  }
+
+  <section class="page">
+    <aside class="check measure">
+      <p class="check-title">{es ? '¿Y si la pregunta es por ti?' : 'What if the question is about you?'}</p>
+      <p>
+        {
+          es
+            ? 'Buscar un sistema para recuperar lo perdido es muy común, y también es una de las señales de que el juego empieza a costar más de la cuenta. Hay un cuestionario de nueve preguntas que se usa en investigación para ver dónde estás. Tarda dos minutos y las respuestas no salen de tu navegador.'
+            : 'Looking for a system to win back what you lost is very common, and it is also one of the signs that gambling is starting to cost too much. There is a nine-question questionnaire used in research to see where you stand. It takes two minutes and your answers never leave your browser.'
+        }
+      </p>
+      <a class="btn" href={href(lang, 'way2')}>{es ? 'Hacer el cuestionario' : 'Take the questionnaire'} →</a>
+    </aside>
+  </section>
+
+  <nav class="page more" aria-label={es ? 'Sigue leyendo' : 'Keep reading'}>
+    <p class="panel-label">{es ? 'Compruébalo tú' : 'See for yourself'}</p>
+    <ul class="cards">
+      {
+        q.related.map((p) => {
+          const m = pageMeta(lang, p)!;
+          return (
+            <li>
+              <a href={href(lang, p)}>
+                <span class="card-kicker">{m.kicker}</span>
+                <span class="card-title">{m.title}</span>
+                <span class="card-text">{m.text}</span>
+              </a>
+            </li>
+          );
+        })
+      }
+    </ul>
+    <p class="panel-label">{es ? 'Más preguntas' : 'More questions'}</p>
+    <ul class="cards">
+      {
+        others.map((o) => (
+          <li>
+            <a href={questionHref(lang, o.slug)}>
+              <span class="card-kicker">{o.kicker[lang]}</span>
+              <span class="card-title">{o.question[lang]}</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
+</Base>
+
+<style>
+  .q-head {
+    padding-top: clamp(2.5rem, 6vw, 4.5rem);
+    padding-bottom: 1.5rem;
+  }
+  .inner {
+    max-width: 50rem;
+  }
+  .kicker a {
+    color: inherit;
+    text-decoration: none;
+  }
+  .kicker a:hover {
+    text-decoration: underline;
+  }
+  h1 {
+    font-size: clamp(2.4rem, 6vw, 4.4rem);
+    font-weight: 600;
+    line-height: 0.98;
+    margin: 0.7rem 0 1.5rem;
+  }
+  .answer {
+    border-left: 4px solid var(--gold);
+    background: var(--paper-2);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    padding: 1.1rem 1.4rem 1.2rem;
+  }
+  .answer-label {
+    font-family: var(--sans);
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin: 0 0 0.4rem;
+  }
+  .answer-text {
+    font-size: 1.15rem;
+    line-height: 1.55;
+    margin: 0;
+  }
+  .modes {
+    margin-top: 1.4rem;
+  }
+  .faq {
+    margin-top: 3rem;
+  }
+  .check {
+    margin-top: 3.5rem;
+    padding: 1.4rem 1.5rem;
+    border: 1px solid var(--rule-strong);
+    border-radius: var(--radius);
+  }
+  .check-title {
+    font-family: var(--display);
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin: 0 0 0.5rem;
+  }
+  .check p:not(.check-title) {
+    margin: 0 0 1rem;
+  }
+  .more {
+    margin-top: 3.5rem;
+  }
+  .cards {
+    list-style: none;
+    padding: 0;
+    margin: 0.6rem 0 2rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+    gap: 0.9rem;
+  }
+  .cards a {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    height: 100%;
+    padding: 1rem 1.1rem;
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    background: var(--paper-2);
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .cards a:hover,
+  .cards a:focus-visible {
+    border-color: var(--gold);
+  }
+  .card-kicker {
+    font-family: var(--sans);
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+  .card-title {
+    font-family: var(--display);
+    font-size: 1.35rem;
+    font-weight: 600;
+    line-height: 1.1;
+  }
+  .card-text {
+    font-family: var(--sans);
+    font-size: 0.88rem;
+    color: var(--ink-2);
+  }
+</style>

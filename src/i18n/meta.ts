@@ -1,6 +1,7 @@
 /** Titles and summaries used for the per-page social-share images (src/pages/og). */
 import type { Lang, PageKey } from './index';
 import { theWayContent } from '../data/camino/way';
+import { questionById } from '../data/questions';
 
 type Meta = { kicker: string; title: string; text: string };
 
@@ -17,6 +18,7 @@ const base: Record<Lang, Partial<Record<PageKey, Meta>>> = {
     sports: { kicker: 'Simulador', title: 'Apuestas deportivas', text: 'Combinadas, margen y rachas perdedoras.' },
     help: { kicker: 'Ayuda', title: 'Si el juego te está haciendo daño', text: 'Teléfonos, autoexclusión y pasos concretos. FEJAR 900 200 225 · Crisis 024.' },
     methods: { kicker: 'Método', title: 'Fuentes, técnicas y límites', text: 'Datos, estadística y código reproducible del proyecto.' },
+    questions: { kicker: 'Preguntas', title: 'Lo que la gente pregunta sobre el juego', text: 'Respuestas cortas, con números y una herramienta para comprobarlo tú.' },
     about: { kicker: 'Sobre el proyecto', title: 'Quién hace esto y por qué', text: 'Un recurso independiente: sin publicidad de casas de apuestas, sin afiliados y sin rastreo.' },
   },
   en: {
@@ -31,6 +33,7 @@ const base: Record<Lang, Partial<Record<PageKey, Meta>>> = {
     sports: { kicker: 'Simulator', title: 'Sports betting', text: 'Accumulators, margins and losing streaks.' },
     help: { kicker: 'Help', title: 'If gambling is hurting you', text: 'Helplines, self-exclusion and practical steps.' },
     methods: { kicker: 'Methods', title: 'Sources, techniques and limits', text: 'Data, statistics and reproducible code.' },
+    questions: { kicker: 'Questions', title: 'What people ask about gambling', text: 'Short answers, with numbers and a tool to check them yourself.' },
     about: { kicker: 'About', title: 'Who makes this and why', text: 'An independent resource: no gambling ads, no affiliate links and no tracking.' },
   },
 };
@@ -46,4 +49,11 @@ export function pageMeta(lang: Lang, page: PageKey): Meta | null {
     return { kicker: `${hub.title} · ${lang === 'es' ? 'Paso' : 'Step'} ${m[1]}`, title: s.title, text: s.summary };
   }
   return null;
+}
+
+/** OG card for a question page: the question, and the first sentence of the answer. */
+export function questionMeta(lang: Lang, id: string): Meta {
+  const q = questionById(id);
+  const first = q.answer[lang].split(/(?<=\.)\s/)[0];
+  return { kicker: q.kicker[lang], title: q.question[lang], text: first };
 }

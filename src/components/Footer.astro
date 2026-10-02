@@ -17,6 +17,7 @@ const t = ui[lang];
     <div>
       <p class="head">{lang === 'es' ? 'Secciones' : 'Sections'}</p>
       <ul>
+        <li><a href={href(lang, 'questions')}>{t.nav.questions}</a></li>
         <li><a href={href(lang, 'lab')}>{t.nav.lab}</a></li>
         <li><a href={href(lang, 'odds')}>{t.nav.odds}</a></li>
         <li><a href={href(lang, 'market')}>{t.nav.market}</a></li>

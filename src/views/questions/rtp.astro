@@ -1,0 +1,128 @@
+---
+import QuestionPage from '../../components/QuestionPage.astro';
+import Figure from '../../components/Figure.astro';
+import TechBox from '../../components/TechBox.astro';
+import RtpCost from '../../islands/questions/RtpCost';
+import { type Lang, href, fmt } from '../../i18n';
+import { exactRTP } from '../../lib/slot';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const es = lang === 'es';
+const f = fmt(lang);
+const sim = exactRTP();
+
+const faq = es
+  ? [
+      { q: '¿Es mejor jugar a una tragaperras con RTP alto?', a: 'Pierdes más despacio, pero pierdes. Con un RTP del 97 % la casa se queda 3 céntimos por euro; con uno del 94 %, 6. Es como comparar dos precios: uno es más barato, ninguno es gratis.' },
+      { q: '¿Qué diferencia hay entre RTP y volatilidad?', a: 'El RTP dice cuánto devuelve la máquina de media. La volatilidad dice cómo lo reparte: muchos premios pequeños o pocos muy grandes. Dos máquinas con el mismo RTP pueden dar sesiones muy distintas, pero a la larga cuestan lo mismo.' },
+      { q: '¿Si una máquina lleva tiempo sin pagar, está a punto de dar premio?', a: 'En una tragaperras online, no. Cada tirada la decide un generador de números aleatorios y no depende de las anteriores. El RTP se cumple sobre millones de tiradas de todos los jugadores, no en tu sesión ni en tu máquina.' },
+      { q: '¿Dónde se ve el RTP de una tragaperras?', a: 'En las tragaperras online suele aparecer en el menú de ayuda o de información del juego. Algunos juegos tienen varias versiones con RTP distintos, y el operador elige cuál ofrece.' },
+      { q: '¿Qué significa un RTP del 96 % si meto 100 €?', a: 'No significa que recuperes 96 €. El 96 % se aplica a todo lo que apuestas, incluido lo que vuelves a apostar después de ganar. Si juegas hasta quedarte a cero, esos 100 € se apuestan de media unas 25 veces y la máquina se queda con todo.' },
+    ]
+  : [
+      { q: 'Is it better to play a slot with a high RTP?', a: 'You lose more slowly, but you lose. With 97% RTP the house keeps 3 cents per euro; with 94%, 6. It is like comparing two prices: one is cheaper, neither is free.' },
+      { q: 'What is the difference between RTP and volatility?', a: 'RTP tells you how much the machine pays back on average. Volatility tells you how it spreads it: many small prizes or a few very large ones. Two machines with the same RTP can feel very different, but in the long run they cost the same.' },
+      { q: 'If a machine has not paid out for a while, is it about to?', a: 'Not an online slot. Every spin is decided by a random number generator and does not depend on the ones before. RTP plays out over millions of spins by all players, not in your session or on your machine.' },
+      { q: 'Where can I see a slot’s RTP?', a: 'For online slots it usually appears in the game’s help or information menu. Some games come in several versions with different RTPs, and the operator chooses which one to offer.' },
+      { q: 'What does 96% RTP mean if I put in €100?', a: 'It does not mean you get €96 back. The 96% applies to everything you stake, including what you stake again after winning. If you play until you hit zero, that €100 gets staked about 25 times on average and the machine keeps all of it.' },
+    ];
+---
+
+<QuestionPage lang={lang} id="rtp" faq={faq} sources={['src/islands/questions/RtpCost.tsx']}>
+  <article class="page">
+    <div class="measure prose">
+      {
+        es ? (
+          <>
+            <h2>Lo que significa de verdad</h2>
+            <p>
+              RTP son las siglas de <em>return to player</em>, «retorno al jugador». Es el porcentaje de todo lo que se apuesta en una máquina que vuelve en forma de premios, medido sobre millones de tiradas. Lo que no vuelve se lo queda la casa.
+            </p>
+            <p>
+              Las tragaperras online suelen anunciar un RTP de entre el 94 % y el 97 %. Suena a que casi todo vuelve. Pero ese porcentaje se cobra en cada tirada, no una vez. Y una tragaperras se juega muy deprisa.
+            </p>
+
+            <h2>Por qué «devuelve el 96 %» no significa lo que parece</h2>
+            <p>
+              Si metes 100 € y juegas, ganas algunos premios. Esos premios vuelven a la máquina en las siguientes tiradas, y cada vez la casa se queda su 4 %. El dinero da vueltas hasta que se acaba. Por eso, quien juega hasta quedarse a cero pierde el 100 % de lo que metió, aunque la máquina «devuelva» el 96 %.
+            </p>
+            <p>
+              La calculadora de abajo lo traduce a euros por hora. Cambia el RTP, la apuesta y el ritmo de juego.
+            </p>
+          </>
+        ) : (
+          <>
+            <h2>What it really means</h2>
+            <p>
+              RTP stands for <em>return to player</em>. It is the share of everything staked on a machine that comes back as prizes, measured over millions of spins. What does not come back, the house keeps.
+            </p>
+            <p>
+              Online slots usually advertise an RTP of between 94% and 97%. It sounds as if almost everything comes back. But that percentage is charged on every spin, not once. And slots are played very fast.
+            </p>
+
+            <h2>Why “pays back 96%” does not mean what it seems</h2>
+            <p>
+              Put in €100 and play, and you win some prizes. Those prizes go back into the machine over the next spins, and each time the house takes its 4%. The money goes round and round until it runs out. That is why anyone who plays until they hit zero loses 100% of what they put in, even though the machine “pays back” 96%.
+            </p>
+            <p>
+              The calculator below turns it into euros per hour. Change the RTP, the bet and the pace of play.
+            </p>
+          </>
+        )
+      }
+    </div>
+  </article>
+
+  <Figure
+    wide={false}
+    title={es ? 'Cuánto cuesta jugar, según el RTP' : 'What playing costs, by RTP'}
+    sub={es ? 'Coste medio. En una sesión concreta puedes ganar o perder mucho más; a lo largo de muchas horas, el resultado se acerca a esta cifra.' : 'Average cost. In a given session you may win or lose much more; over many hours, the result gets close to this figure.'}
+  >
+    <RtpCost client:idle lang={lang} />
+  </Figure>
+
+  <article class="page">
+    <div class="measure prose">
+      {
+        es ? (
+          <>
+            <h2>El RTP no es lo único que importa</h2>
+            <p>
+              Dos máquinas con el mismo RTP pueden sentirse muy distintas. Las de volatilidad alta dan pocos premios pero grandes, y dejan picos que se recuerdan durante semanas. Las de volatilidad baja dan premios pequeños a menudo, muchas veces menores que la apuesta: suena la música, pero has perdido dinero. En la <a href={href(lang, 'slots')}>tragaperras simulada</a> puedes ver ambas cosas, además de los casi-aciertos que las máquinas fabrican a propósito.
+            </p>
+            <p>
+              Esa tragaperras tiene un RTP exacto del {f.pct(sim.rtp, 2)}, calculado sobre todas las combinaciones posibles de sus rodillos. Paga algo en el {f.pct(sim.hitRate, 0)} de las tiradas.
+            </p>
+          </>
+        ) : (
+          <>
+            <h2>RTP is not the only thing that matters</h2>
+            <p>
+              Two machines with the same RTP can feel very different. High-volatility ones pay rarely but big, and leave peaks you remember for weeks. Low-volatility ones pay small prizes often, many of them smaller than the bet: the music plays, but you have lost money. In the <a href={href(lang, 'slots')}>simulated slot machine</a> you can see both, along with the near-misses machines create on purpose.
+            </p>
+            <p>
+              That slot has an exact RTP of {f.pct(sim.rtp, 2)}, computed over every possible combination of its reels. It pays something on {f.pct(sim.hitRate, 0)} of spins.
+            </p>
+          </>
+        )
+      }
+
+      <TechBox lang={lang} title={es ? 'RTP, ventaja y total apostado' : 'RTP, edge and total staked'}>
+        {
+          es ? (
+            <p>
+              Ventaja de la casa = 1 − RTP. La pérdida esperada de una sesión es la ventaja por el total apostado, no por el dinero inicial. Si juegas hasta arruinarte con saldo B, la identidad de Wald da E[total apostado] · (1 − RTP) = E[pérdida] ≈ B, así que E[total apostado] ≈ B / (1 − RTP): con RTP del 96 %, 25 veces el saldo inicial. La aproximación ignora el resto que queda por debajo de la apuesta mínima.
+            </p>
+          ) : (
+            <p>
+              House edge = 1 − RTP. A session’s expected loss is the edge times the total staked, not times the starting money. If you play until broke from balance B, Wald’s identity gives E[total staked] · (1 − RTP) = E[loss] ≈ B, so E[total staked] ≈ B / (1 − RTP): at 96% RTP, 25 times the starting balance. The approximation ignores the leftover below the minimum bet.
+            </p>
+          )
+        }
+      </TechBox>
+    </div>
+  </article>
+</QuestionPage>

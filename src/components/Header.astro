@@ -3,12 +3,14 @@ import { type Lang, type PageKey, href, ui } from '../i18n';
 interface Props {
   lang: Lang;
   page: PageKey;
+  /** Link to this page in the other language, when it is not href(other, page). */
+  otherHref?: string;
 }
-const { lang, page } = Astro.props;
+const { lang, page, otherHref } = Astro.props;
 const t = ui[lang];
 const other: Lang = lang === 'es' ? 'en' : 'es';
 const section: PageKey = ['roulette', 'slots', 'lottery', 'sports'].includes(page) ? 'games' : page.startsWith('way') ? 'way' : page;
-const items = ['lab', 'odds', 'market', 'games', 'way'] as const;
+const items = ['questions', 'games', 'lab', 'odds', 'market', 'way'] as const;
 ---
 
 <header class="site-header">
@@ -36,7 +38,7 @@ const items = ['lab', 'odds', 'market', 'games', 'way'] as const;
       <a class="help" href={href(lang, 'help')} aria-current={page === 'help' ? 'page' : undefined}>
         <span class="dot" aria-hidden="true"></span>{t.nav.help}
       </a>
-      <a class="lang" href={href(other, page)} hreflang={other} lang={other}>{other.toUpperCase()}</a>
+      <a class="lang" href={otherHref ?? href(other, page)} hreflang={other} lang={other}>{other.toUpperCase()}</a>
       <button class="theme" type="button" aria-label={t.themeToggle} title={t.themeToggle} data-theme-toggle>
         <svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"
           ><circle cx="10" cy="10" r="7.25" fill="none" stroke="currentColor" stroke-width="1.5"></circle><path

@@ -39,6 +39,7 @@ export const SOURCES: Record<PageKey, string[]> = {
   help: ['src/views/Help.astro'],
   methods: ['src/views/Methods.astro'],
   about: ['src/views/About.astro'],
+  questions: ['src/views/Questions.astro', 'src/data/questions.ts'],
   way: ['src/views/camino/Hub.astro', 'src/data/camino'],
   way1: ['src/views/camino/Step.astro', 'src/data/camino'],
   way2: ['src/views/camino/Step.astro', 'src/data/camino', 'src/islands/camino/Pgsi.tsx'],

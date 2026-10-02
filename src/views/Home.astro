@@ -1,4 +1,5 @@
 ---
+import RelatedQuestions from '../components/RelatedQuestions.astro';
 import Base from '../layouts/Base.astro';
 import HeroChart from '../islands/HeroChart';
 import { type Lang, fmt, href } from '../i18n';
@@ -154,6 +155,7 @@ const rnd = strategies.find((s) => s.key === 'random')!;
       </p>
     </div>
   </section>
+  <RelatedQuestions lang={lang} title={es ? 'Lo que la gente pregunta' : 'What people ask'} />
 </Base>
 
 <style>

@@ -2,7 +2,7 @@
  * URL slugs per language. Kept free of `import.meta.env` so astro.config can
  * import it to build the redirects from the old paths.
  */
-export type PageKey = 'home' | 'lab' | 'odds' | 'market' | 'games' | 'roulette' | 'slots' | 'lottery' | 'sports' | 'help' | 'methods' | 'about'
+export type PageKey = 'home' | 'lab' | 'odds' | 'market' | 'games' | 'roulette' | 'slots' | 'lottery' | 'sports' | 'help' | 'methods' | 'about' | 'questions'
   | 'way' | 'way1' | 'way2' | 'way3' | 'way4' | 'way5' | 'way6' | 'wayPrint';
 
 export const SLUGS: Record<'es' | 'en', Record<PageKey, string>> = {
@@ -19,6 +19,7 @@ export const SLUGS: Record<'es' | 'en', Record<PageKey, string>> = {
     help: 'ayuda/',
     methods: 'metodo/',
     about: 'sobre-el-proyecto/',
+    questions: 'preguntas/',
     way: 'el-camino/',
     way1: 'el-camino/por-que-engancha/',
     way2: 'el-camino/donde-estoy/',
@@ -41,6 +42,7 @@ export const SLUGS: Record<'es' | 'en', Record<PageKey, string>> = {
     help: 'help/',
     methods: 'methods/',
     about: 'about/',
+    questions: 'questions/',
     way: 'the-way/',
     way1: 'the-way/why-it-hooks/',
     way2: 'the-way/where-i-stand/',

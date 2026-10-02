@@ -1,0 +1,86 @@
+---
+/** Links from a tool or section page to the question pages it answers. */
+import { type Lang, href, questionHref } from '../i18n';
+import { QUESTIONS } from '../data/questions';
+
+interface Props {
+  lang: Lang;
+  /** Question ids to show; all of them when omitted. */
+  ids?: string[];
+  title?: string;
+}
+const { lang, ids, title } = Astro.props;
+const es = lang === 'es';
+const list = ids ? QUESTIONS.filter((q) => ids.includes(q.id)) : QUESTIONS;
+---
+
+<section class="page rq" aria-labelledby="rq-title">
+  <p class="rq-head" id="rq-title">{title ?? (es ? 'Preguntas que responde esta página' : 'Questions this page answers')}</p>
+  <ul>
+    {
+      list.map((q) => (
+        <li>
+          <a href={questionHref(lang, q.slug)}>
+            <span class="rq-q">{q.question[lang]}</span>
+            <span class="rq-a">{q.answer[lang].split(/(?<=\.)\s/)[0]}</span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+  <a class="rq-all" href={href(lang, 'questions')}>{es ? 'Todas las preguntas' : 'All questions'} →</a>
+</section>
+
+<style>
+  .rq {
+    margin-top: 3.5rem;
+  }
+  .rq-head {
+    font-family: var(--sans);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin: 0 0 0.7rem;
+  }
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 18rem), 1fr));
+    gap: 0.8rem;
+  }
+  li a {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    height: 100%;
+    padding: 1rem 1.1rem;
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    background: var(--paper-2);
+    color: var(--ink);
+    text-decoration: none;
+  }
+  li a:hover,
+  li a:focus-visible {
+    border-color: var(--gold);
+  }
+  .rq-q {
+    font-family: var(--display);
+    font-size: 1.35rem;
+    font-weight: 600;
+    line-height: 1.1;
+  }
+  .rq-a {
+    font-family: var(--sans);
+    font-size: 0.88rem;
+    color: var(--ink-2);
+  }
+  .rq-all {
+    font-family: var(--sans);
+    font-size: 0.9rem;
+  }
+</style>

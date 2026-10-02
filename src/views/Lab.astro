@@ -1,4 +1,5 @@
 ---
+import RelatedQuestions from '../components/RelatedQuestions.astro';
 import Base from '../layouts/Base.astro';
 import RuinLab from '../islands/RuinLab';
 import PageHead from '../components/PageHead.astro';
@@ -147,6 +148,7 @@ const es = lang === 'es';
       </TechBox>
     </div>
   </article>
+  <RelatedQuestions lang={lang} ids={['martingale', 'roulette', 'rtp']} />
 </Base>
 
 <style is:global>
