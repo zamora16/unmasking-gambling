@@ -55,15 +55,18 @@ const repo = 'https://github.com/zamora16/unmasking-gambling';
               <li><strong>Calibración</strong> con intervalos de Wilson del 95 % y comparación por <em>log-loss</em> y <em>Brier score</em>.</li>
               <li><strong>Intervalos bootstrap</strong> (percentiles) para el retorno medio de cada tramo de cuotas y de cada estrategia.</li>
               <li><strong>Regresión logística ordinal</strong> sobre la diferencia de Elo, ajustada por máxima verosimilitud con partición temporal: entrenamiento hasta 2015/16, evaluación desde 2016/17.</li>
+              <li><strong>Machine learning</strong>: regresión logística multinomial y gradient boosting (scikit-learn) sobre variables de forma calculadas sin fuga de información, con validación walk-forward por temporada, hiperparámetros elegidos en un hold-out temporal, importancia por permutación agrupada y comparación con el mercado por bootstrap pareado.</li>
             </ul>
 
             <h2>Código</h2>
             <p>
-              La web está hecha con Astro, React y TypeScript. Los gráficos son SVG propios construidos con escalas de d3, con tooltip, versión en tabla y modo oscuro. La matemática vive en <a href={`${repo}/tree/main/src/lib`}>src/lib</a>, separada de la interfaz y cubierta por tests (Vitest): ventaja exacta de cada juego, fórmula de la ruina del jugador, Kaplan–Meier y métodos de margen. El análisis de cuotas es un script de Python (pandas, NumPy y SciPy) en <a href={`${repo}/tree/main/analysis`}>analysis/</a> que genera los JSON que lee la web.
+              La web está hecha con Astro, React y TypeScript. Los gráficos son SVG propios construidos con escalas de d3, con tooltip, versión en tabla y modo oscuro. La matemática vive en <a href={`${repo}/tree/main/src/lib`}>src/lib</a>, separada de la interfaz y cubierta por tests (Vitest): ventaja exacta de cada juego, fórmula de la ruina del jugador, Kaplan–Meier y métodos de margen. El análisis de cuotas y los modelos son scripts de Python (pandas, NumPy, SciPy y scikit-learn) en <a href={`${repo}/tree/main/analysis`}>analysis/</a> que genera los JSON que lee la web.
             </p>
             <pre><code>npm install && npm test && npm run build
 pip install -r analysis/requirements.txt
-python analysis/odds/pipeline.py ruta/a/Matches.csv</code></pre>
+python analysis/odds/pipeline.py ruta/a/Matches.csv
+python -m unittest analysis/odds/test_features.py
+python analysis/odds/ml.py ruta/a/Matches.csv</code></pre>
 
             <h2>Límites</h2>
             <ul>
@@ -100,15 +103,18 @@ python analysis/odds/pipeline.py ruta/a/Matches.csv</code></pre>
               <li><strong>Calibration</strong> with 95% Wilson intervals, compared by log-loss and Brier score.</li>
               <li><strong>Bootstrap intervals</strong> (percentile) for the average return of each odds range and each strategy.</li>
               <li><strong>Ordinal logistic regression</strong> on the Elo difference, fitted by maximum likelihood with a time split: trained up to 2015/16, evaluated from 2016/17.</li>
+              <li><strong>Machine learning</strong>: multinomial logistic regression and gradient boosting (scikit-learn) on leakage-free form features, with season-by-season walk-forward validation, hyperparameters chosen on a temporal hold-out, grouped permutation importance and a paired-bootstrap comparison with the market.</li>
             </ul>
 
             <h2>Code</h2>
             <p>
-              The site is built with Astro, React and TypeScript. The charts are hand-built SVG on top of d3 scales, with tooltips, a table view and dark mode. The maths lives in <a href={`${repo}/tree/main/src/lib`}>src/lib</a>, separate from the interface and covered by tests (Vitest): the exact edge of each game, the gambler’s ruin formula, Kaplan–Meier and the margin methods. The odds analysis is a Python script (pandas, NumPy and SciPy) in <a href={`${repo}/tree/main/analysis`}>analysis/</a> that writes the JSON the site reads.
+              The site is built with Astro, React and TypeScript. The charts are hand-built SVG on top of d3 scales, with tooltips, a table view and dark mode. The maths lives in <a href={`${repo}/tree/main/src/lib`}>src/lib</a>, separate from the interface and covered by tests (Vitest): the exact edge of each game, the gambler’s ruin formula, Kaplan–Meier and the margin methods. The odds analysis and the models are Python scripts (pandas, NumPy, SciPy and scikit-learn) in <a href={`${repo}/tree/main/analysis`}>analysis/</a> that write the JSON the site reads.
             </p>
             <pre><code>npm install && npm test && npm run build
 pip install -r analysis/requirements.txt
-python analysis/odds/pipeline.py path/to/Matches.csv</code></pre>
+python analysis/odds/pipeline.py path/to/Matches.csv
+python -m unittest analysis/odds/test_features.py
+python analysis/odds/ml.py path/to/Matches.csv</code></pre>
 
             <h2>Limitations</h2>
             <ul>

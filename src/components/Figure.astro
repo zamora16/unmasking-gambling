@@ -7,11 +7,12 @@ interface Props {
   foot?: string;
   wide?: boolean;
   id?: string;
+  class?: string;
 }
-const { title, sub, subTech, foot, wide = true, id } = Astro.props;
+const { title, sub, subTech, foot, wide = true, id, class: cls } = Astro.props;
 ---
 
-<figure class:list={['figure', wide ? 'wide' : 'measure']} id={id}>
+<figure class:list={['figure', wide ? 'wide' : 'measure', cls]} id={id}>
   <figcaption class="figure-head">
     <p class="figure-title">{title}</p>
     {sub && !subTech && <p class="figure-sub">{sub}</p>}

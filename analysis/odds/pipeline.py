@@ -49,7 +49,10 @@ LEAGUE_NAMES = {
 
 # --------------------------------------------------------------------------- load
 def load(path: str) -> pd.DataFrame:
-    df = pd.read_csv(path, low_memory=False)
+    return clean(pd.read_csv(path, low_memory=False))
+
+
+def clean(df: pd.DataFrame) -> pd.DataFrame:
     df = df.dropna(subset=ODDS + ["FTResult"])
     df = df[(df[ODDS] > 1.0).all(axis=1)]
     df = df[df.FTResult.isin(OUTCOMES)].copy()

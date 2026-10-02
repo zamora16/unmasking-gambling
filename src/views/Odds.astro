@@ -5,7 +5,7 @@ import Figure from '../components/Figure.astro';
 import Stat from '../components/Stat.astro';
 import TechBox from '../components/TechBox.astro';
 import OddsCalculator from '../islands/odds/OddsCalculator';
-import { MarginTrend, LeagueMargins, CalibrationFig, FavouriteLongshot, Strategies } from '../islands/odds/OddsCharts';
+import { MarginTrend, LeagueMargins, CalibrationFig, FavouriteLongshot, Strategies, MlSkill, MlImportance, MlCalibration, MlBetting } from '../islands/odds/OddsCharts';
 import { type Lang, fmt, href } from '../i18n';
 import summary from '../data/odds/summary.json';
 import flb from '../data/odds/favourite-longshot.json';
@@ -13,6 +13,7 @@ import strategies from '../data/odds/strategies.json';
 import model from '../data/odds/elo-vs-market.json';
 import methods from '../data/odds/methods.json';
 import bySeason from '../data/odds/margins-by-season.json';
+import ml from '../data/odds/ml.json';
 
 interface Props {
   lang: Lang;
@@ -32,6 +33,17 @@ const base = methods.find((m) => m.method === 'baseRates')!;
 const prop = methods.find((m) => m.method === 'proportional')!;
 const seasonLabel = (s: number) => `${s}/${String(s + 1).slice(2)}`;
 const years = `${summary.firstDate.slice(0, 4)}–${summary.lastDate.slice(0, 4)}`;
+type Score = { model: string; logLoss: number; share?: number; shareLo?: number; shareHi?: number; vsMarket?: number; vsMarketLo?: number; vsMarketHi?: number };
+const M = Object.fromEntries((ml.scores as Score[]).map((s) => [s.model, s])) as Record<string, Score>;
+const bet = (model: string, thr: number, book = 'reference') => ml.betting.find((b) => b.model === model && b.threshold === thr && b.book === book)!;
+const gbmBets = ml.betting.filter((b) => b.model === 'gbm' && b.book === 'reference');
+const gbmWorst = Math.min(...gbmBets.map((b) => b.roi!));
+const gbmBest = Math.max(...gbmBets.map((b) => b.roi!));
+const mktBets = ml.betting.filter((b) => b.model === 'gbm_market' && b.book === 'reference');
+const mktSignificant = mktBets.filter((b) => b.lo! > 0 || b.hi! < 0);
+const nConfigs = ml.betting.length;
+const tuneG = ml.tuning.gbm;
+const tuneM = ml.tuning.gbm_market;
 ---
 
 <Base
@@ -66,6 +78,7 @@ const years = `${summary.firstDate.slice(0, 4)}–${summary.lastDate.slice(0, 4)
         <li><a href="#longshots">{es ? 'Las sorpresas' : 'Long shots'}</a></li>
         <li><a href="#strategies">{es ? 'Ocho estrategias' : 'Eight strategies'}</a></li>
         <li><a href="#model">{es ? 'Un modelo' : 'A model'}</a></li>
+        <li><a href="#ml">Machine learning</a></li>
         <li><a href="#caveats">{es ? 'Límites' : 'Caveats'}</a></li>
       </ol>
     </nav>
@@ -331,6 +344,151 @@ const years = `${summary.firstDate.slice(0, 4)}–${summary.lastDate.slice(0, 4)
         }
       </TechBox>
 
+      <h2 id="ml">{es ? '¿Y con machine learning?' : 'What about machine learning?'}</h2>
+      {
+        es ? (
+          <p>
+            Ese modelo solo sabía una cosa de cada equipo: su fuerza general. Así que lo intentamos en serio, con las técnicas de <em>machine learning</em> que se usan en la industria. Le dimos al ordenador {ml.nFeatures} datos de cada partido, todos conocidos antes de que empezara: la fuerza de los equipos, sus puntos y goles recientes, sus tiros, cómo juegan en casa y fuera, los días de descanso y la liga. Y lo examinamos como en la vida real: cada temporada, entrenado solo con las anteriores, sin ver nunca el futuro.
+          </p>
+        ) : (
+          <p>
+            That model knew only one thing about each team: its overall strength. So we tried properly, with the <em>machine learning</em> techniques used in industry. We gave the computer {ml.nFeatures} facts about each match, all known before kick-off: team strength, recent points and goals, shots, home and away form, days of rest and league. And we tested it as in real life: each season, trained only on the ones before, never seeing the future.
+          </p>
+        )
+      }
+    </article>
+
+    <Figure
+      wide={false}
+      title={es ? 'El machine learning se acerca a las cuotas, pero no las alcanza' : 'Machine learning gets close to the odds, but does not reach them'}
+      sub={es
+        ? 'Qué parte de lo que «saben» las cuotas consigue saber cada modelo. 100 % sería predecir igual de bien que la casa. Las rayitas negras marcan el margen de error.'
+        : 'How much of what the odds “know” each model manages to learn. 100% would mean predicting as well as the bookmaker. The small black lines show the margin of error.'}
+      subTech={es
+        ? `Fracción de la mejora en log-loss del mercado (Shin) sobre las frecuencias de base que recupera cada modelo: (LL_base − LL_modelo) / (LL_base − LL_mercado). Walk-forward, temporadas ${seasonLabel(ml.testSeasons[0])} a ${seasonLabel(ml.testSeasons[1])}, n = ${f.int(ml.nTest)}. IC 95 % por bootstrap pareado.`
+        : `Share of the market’s (Shin) log-loss improvement over base rates recovered by each model: (LL_base − LL_model) / (LL_base − LL_market). Walk-forward, seasons ${seasonLabel(ml.testSeasons[0])} to ${seasonLabel(ml.testSeasons[1])}, n = ${f.int(ml.nTest)}. 95% paired bootstrap CIs.`}
+    >
+      <MlSkill client:idle lang={lang} />
+    </Figure>
+
+    <article class="measure prose">
+      {
+        es ? (
+          <p>
+            Con los datos de los equipos, el mejor modelo llega al {f.pct(M.logreg.share!, 0)}. Y hay una lección que cualquier científico de datos reconoce: el modelo complejo (<em>gradient boosting</em>) no mejora a una regresión logística, mucho más simple. Los datos no dan para más. El único que iguala a la casa es el que recibe las propias cuotas como dato: llega al {f.pct(M.gbm_market.share!, 1)}. Aprende a copiar a la casa, no a superarla.
+          </p>
+        ) : (
+          <p>
+            With team data, the best model reaches {f.pct(M.logreg.share!, 0)}. And there is a lesson any data scientist will recognise: the complex model (<em>gradient boosting</em>) does no better than a much simpler logistic regression. The data has nothing more to give. The only model that matches the bookmaker is the one given the odds themselves as input: it reaches {f.pct(M.gbm_market.share!, 1)}. It learns to copy the bookmaker, not to beat it.
+          </p>
+        )
+      }
+    </article>
+
+    <Figure
+      wide={false}
+      title={es ? 'Casi todo lo que sabe el modelo es lo fuerte que es cada equipo' : 'Almost everything the model knows is how strong each team is'}
+      sub={es
+        ? 'Cuánto más se equivoca el modelo si le quitamos cada tipo de información.'
+        : 'How much more the model gets wrong when each kind of information is taken away.'}
+      subTech={es
+        ? `Importancia por permutación agrupada: aumento relativo del log-loss al barajar juntas las variables de cada grupo (5 repeticiones, barras ±2 DE). Gradient boosting entrenado hasta ${seasonLabel(ml.importanceSeasons[0] - 1)} y evaluado en ${seasonLabel(ml.importanceSeasons[0])} a ${seasonLabel(ml.importanceSeasons[1])}.`
+        : `Grouped permutation importance: relative rise in log-loss when each group’s features are shuffled together (5 repeats, bars ±2 SD). Gradient boosting trained up to ${seasonLabel(ml.importanceSeasons[0] - 1)} and evaluated on ${seasonLabel(ml.importanceSeasons[0])} to ${seasonLabel(ml.importanceSeasons[1])}.`}
+    >
+      <MlImportance client:idle lang={lang} />
+    </Figure>
+
+    <article class="measure prose">
+      {
+        es ? (
+          <p>
+            La fuerza de cada equipo lo explica casi todo. Los tiros recientes aportan algo. Y la racha de resultados, esa en la que tanta gente se fija para apostar, apenas añade nada: una vez que sabes lo bueno que es un equipo, saber que ha ganado sus tres últimos partidos no te dice casi nada más.
+          </p>
+        ) : (
+          <p>
+            Team strength explains almost everything. Recent shots add a little. And the run of results, the thing so many people look at before betting, adds almost nothing: once you know how good a team is, knowing it won its last three matches tells you hardly anything more.
+          </p>
+        )
+      }
+    </article>
+
+    <Figure
+      wide={false}
+      class="only-tech"
+      title={es ? 'Calibración fuera de muestra: gradient boosting frente al mercado' : 'Out-of-sample calibration: gradient boosting vs the market'}
+      sub={es
+        ? `Diagrama de fiabilidad de las predicciones walk-forward (${f.int(ml.nTest)} partidos × 3 resultados, 20 intervalos, IC 95 % de Wilson). El modelo sin cuotas está bien calibrado: pierde por falta de resolución, no por sesgo.`
+        : `Reliability diagram of the walk-forward predictions (${f.int(ml.nTest)} matches × 3 outcomes, 20 bins, 95% Wilson CIs). The model without odds is well calibrated: it loses on resolution, not on bias.`}
+    >
+      <MlCalibration client:idle lang={lang} />
+    </Figure>
+
+    <article class="measure prose">
+      {
+        es ? (
+          <p>
+            Queda la pregunta que importa: ¿se gana dinero? Pusimos a los dos modelos de machine learning a apostar 1 € cada vez que creían ver una ventaja sobre la cuota de la casa.
+          </p>
+        ) : (
+          <p>
+            That leaves the question that matters: does it make money? We set both machine learning models to bet €1 whenever they thought they saw an edge over the bookmaker’s odds.
+          </p>
+        )
+      }
+    </article>
+
+    <Figure
+      wide={false}
+      title={es ? 'Ningún modelo gana dinero de forma fiable' : 'No model makes money reliably'}
+      sub={es
+        ? 'Ganancia o pérdida media por euro, según la ventaja mínima que el modelo exigía para apostar. Las rayitas negras marcan el margen de error.'
+        : 'Average win or loss per euro, by the minimum edge the model required before betting. The small black lines show the margin of error.'}
+      subTech={es
+        ? `ROI de apostar 1 unidad al resultado con mayor valor esperado p̂·o − 1 cuando supera el umbral. Cuotas de la casa de referencia, ${seasonLabel(ml.testSeasons[0])} a ${seasonLabel(ml.testSeasons[1])}. IC 95 % por bootstrap (1.000 réplicas).`
+        : `ROI of betting 1 unit on the outcome with the highest expected value p̂·o − 1 when it exceeds the threshold. Reference-bookmaker odds, ${seasonLabel(ml.testSeasons[0])} to ${seasonLabel(ml.testSeasons[1])}. 95% bootstrap CIs (1,000 resamples).`}
+      foot={es
+        ? 'Los umbrales más altos (10 %, 15 %, 25 %) y las apuestas a la mejor cuota del mercado están en la tabla. Con tan pocas apuestas, su margen de error es enorme.'
+        : 'Higher thresholds (10%, 15%, 25%) and bets at the best market price are in the table. With so few bets, their margin of error is huge.'}
+    >
+      <MlBetting client:idle lang={lang} />
+    </Figure>
+
+    <article class="measure prose">
+      {
+        es ? (
+          <p>
+            El modelo que solo mira a los equipos pierde entre un {f.pct(-gbmBest, 0)} y un {f.pct(-gbmWorst, 0)}: lo mismo o más que apostar al azar ({f.pct(-S.random.roi, 1)}). Y cuanto más seguro está de haber encontrado una ganga, más pierde, porque sus «gangas» son casi siempre sorpresas, justo donde la casa paga peor. El que también mira las cuotas queda en tablas: a veces sale un poco arriba, a veces un poco abajo, y el margen de error es tan ancho que no se distingue de cero. Si pruebas suficientes variantes, alguna saldrá en positivo por pura suerte. Es lo que venden muchos pronosticadores: la racha buena, elegida entre muchas.
+          </p>
+        ) : (
+          <p>
+            The model that only looks at the teams loses between {f.pct(-gbmBest, 0)} and {f.pct(-gbmWorst, 0)}: as much as or more than betting at random ({f.pct(-S.random.roi, 1)}). And the surer it is of having found a bargain, the more it loses, because its “bargains” are nearly always upsets, exactly where the bookmaker pays worst. The one that also sees the odds breaks even: sometimes a little up, sometimes a little down, and the margin of error is so wide it cannot be told apart from zero. Try enough variants and one will come out positive by pure luck. That is what many tipsters sell: the good run, picked from among many.
+          </p>
+        )
+      }
+      <TechBox lang={lang} title={es ? 'Diseño del experimento de machine learning' : 'Machine learning experiment design'}>
+        {
+          es ? (
+            <ul>
+              <li><strong>Variables.</strong> {ml.nFeatures} por partido, calculadas solo con partidos anteriores de cada equipo (ventanas móviles de 5, 10 y 20 partidos desplazadas una posición): Elo y su tendencia, puntos, goles a favor y en contra, tiros y tiros a puerta, forma en el mismo campo, tasa de empates, días de descanso, experiencia en la muestra y liga ({ml.leagues} categorías). Unos tests unitarios comprueban que cambiar el resultado de un partido no altera sus propias variables ni las de partidos anteriores.</li>
+              <li><strong>Validación.</strong> Walk-forward con ventana expansiva: la temporada <em>s</em> se predice con un modelo entrenado en {ml.trainFrom}–<em>s</em>−1. Los hiperparámetros se eligen una sola vez en un hold-out temporal (entrenamiento {ml.trainFrom}–2012, validación 2013–2015) que no toca los años de test; rejilla de {tuneG.grid} combinaciones. Elegidos: {tuneG.max_iter} árboles, {tuneG.max_leaf_nodes} hojas, mínimo {tuneG.min_samples_leaf} por hoja (sin cuotas) y {tuneM.max_iter} árboles, {tuneM.max_leaf_nodes} hojas (con cuotas); tasa de aprendizaje 0,05 y L2 = 1.</li>
+              <li><strong>Modelos.</strong> Logit ordinal sobre ΔElo; regresión logística multinomial (imputación por la mediana con indicadores de ausencia, estandarización, liga en one-hot); <em>HistGradientBoosting</em> de scikit-learn con valores ausentes y liga categórica nativos. El modelo «+ cuotas» añade las probabilidades de Shin y el margen.</li>
+              <li><strong>Log-loss fuera de muestra</strong> (n = {f.int(ml.nTest)}): mercado {f.num(M.market.logLoss, 4)}; Elo {f.num(M.elo.logLoss, 4)}; logística {f.num(M.logreg.logLoss, 4)}; gradient boosting {f.num(M.gbm.logLoss, 4)}; gradient boosting + cuotas {f.num(M.gbm_market.logLoss, 4)} (diferencia con el mercado {f.num(M.gbm_market.vsMarket!, 4)}, IC 95 % {f.num(M.gbm_market.vsMarketLo!, 4)} a {f.num(M.gbm_market.vsMarketHi!, 4)}).</li>
+              <li><strong>Apuestas.</strong> Se evaluaron {nConfigs} configuraciones. Con cuotas como variable, {mktSignificant.filter((b) => b.lo! > 0).length} de {mktBets.length} intervalos quedan enteros por encima de cero. A la mejor cuota publicada, con umbral del 5 %, el ROI es {f.signedPct(bet('gbm_market', 0.05, 'best').roi!, 1)} (IC {f.signedPct(bet('gbm_market', 0.05, 'best').lo!, 1)} a {f.signedPct(bet('gbm_market', 0.05, 'best').hi!, 1)}): no significativo, sin corregir por comparaciones múltiples, y a precios que en la práctica no siempre se consiguen.</li>
+              <li><strong>Límites.</strong> El bootstrap trata los partidos como independientes e ignora la correlación dentro de una jornada, así que los intervalos son algo optimistas. El Elo solo está disponible para parte de los partidos. No hay alineaciones, lesiones ni cuotas de cierre de varias casas, que es la información que sí usa el mercado.</li>
+            </ul>
+          ) : (
+            <ul>
+              <li><strong>Features.</strong> {ml.nFeatures} per match, computed only from each team’s earlier matches (rolling windows of 5, 10 and 20 matches, shifted by one): Elo and its trend, points, goals for and against, shots and shots on target, same-venue form, draw rate, rest days, experience in the sample and league ({ml.leagues} categories). Unit tests check that changing a match’s result alters neither its own features nor those of earlier matches.</li>
+              <li><strong>Validation.</strong> Walk-forward with an expanding window: season <em>s</em> is predicted by a model trained on {ml.trainFrom}–<em>s</em>−1. Hyperparameters are chosen once on a temporal hold-out (train {ml.trainFrom}–2012, validate 2013–2015) that never touches the test years; grid of {tuneG.grid} combinations. Chosen: {tuneG.max_iter} trees, {tuneG.max_leaf_nodes} leaves, at least {tuneG.min_samples_leaf} per leaf (without odds) and {tuneM.max_iter} trees, {tuneM.max_leaf_nodes} leaves (with odds); learning rate 0.05 and L2 = 1.</li>
+              <li><strong>Models.</strong> Ordinal logit on ΔElo; multinomial logistic regression (median imputation with missing indicators, standardisation, one-hot league); scikit-learn <em>HistGradientBoosting</em> with native missing values and categorical league. The “+ odds” model adds the Shin probabilities and the margin.</li>
+              <li><strong>Out-of-sample log-loss</strong> (n = {f.int(ml.nTest)}): market {f.num(M.market.logLoss, 4)}; Elo {f.num(M.elo.logLoss, 4)}; logistic {f.num(M.logreg.logLoss, 4)}; gradient boosting {f.num(M.gbm.logLoss, 4)}; gradient boosting + odds {f.num(M.gbm_market.logLoss, 4)} (difference from the market {f.num(M.gbm_market.vsMarket!, 4)}, 95% CI {f.num(M.gbm_market.vsMarketLo!, 4)} to {f.num(M.gbm_market.vsMarketHi!, 4)}).</li>
+              <li><strong>Betting.</strong> {nConfigs} configurations were evaluated. With odds as a feature, {mktSignificant.filter((b) => b.lo! > 0).length} of {mktBets.length} intervals lie entirely above zero. At the best published price with a 5% threshold, ROI is {f.signedPct(bet('gbm_market', 0.05, 'best').roi!, 1)} (CI {f.signedPct(bet('gbm_market', 0.05, 'best').lo!, 1)} to {f.signedPct(bet('gbm_market', 0.05, 'best').hi!, 1)}): not significant, uncorrected for multiple comparisons, and at prices that are not always available in practice.</li>
+              <li><strong>Limits.</strong> The bootstrap treats matches as independent and ignores correlation within a matchday, so the intervals are somewhat optimistic. Elo is only available for part of the matches. There are no line-ups, injuries or multi-book closing odds, which is exactly the information the market does use.</li>
+            </ul>
+          )
+        }
+      </TechBox>
+
       <h2 id="caveats">{es ? 'Lo que este análisis no cubre' : 'What this analysis does not cover'}</h2>
       {
         es ? (
@@ -342,8 +500,8 @@ const years = `${summary.firstDate.slice(0, 4)}–${summary.lastDate.slice(0, 4)
               <ul>
                 <li>La casa de referencia es la que recoge Football-Data.co.uk; en las primeras temporadas puede proceder de otras casas.</li>
                 <li>Las cuotas máximas son el mejor precio publicado, no un precio al que siempre se pueda apostar, y no consideran la limitación de cuentas ganadoras.</li>
-                <li>El modelo Elo es deliberadamente sencillo. Uno más rico se acercaría al mercado, pero para ganar dinero tendría que superarlo y además pagar el margen.</li>
-                <li>El análisis es reproducible con <a href="https://github.com/zamora16/unmasking-gambling/tree/main/analysis/odds">analysis/odds/pipeline.py</a>.</li>
+                <li>El modelo Elo es deliberadamente sencillo. Los modelos de machine learning se acercan más al mercado, pero para ganar dinero tendrían que superarlo y además pagar el margen.</li>
+                <li>El análisis es reproducible con <a href="https://github.com/zamora16/unmasking-gambling/tree/main/analysis/odds">analysis/odds/pipeline.py</a> y <a href="https://github.com/zamora16/unmasking-gambling/tree/main/analysis/odds">analysis/odds/ml.py</a>.</li>
               </ul>
             </TechBox>
           </>
@@ -356,8 +514,8 @@ const years = `${summary.firstDate.slice(0, 4)}–${summary.lastDate.slice(0, 4)
               <ul>
                 <li>The reference bookmaker is the one recorded by Football-Data.co.uk; in the earliest seasons it may come from other bookmakers.</li>
                 <li>Maximum odds are the best published price, not a price you can always get, and they ignore the limiting of winning accounts.</li>
-                <li>The Elo model is deliberately simple. A richer one would get closer to the market, but to make money it would have to beat it and pay the margin on top.</li>
-                <li>The analysis is reproducible with <a href="https://github.com/zamora16/unmasking-gambling/tree/main/analysis/odds">analysis/odds/pipeline.py</a>.</li>
+                <li>The Elo model is deliberately simple. The machine learning models get closer to the market, but to make money they would have to beat it and pay the margin on top.</li>
+                <li>The analysis is reproducible with <a href="https://github.com/zamora16/unmasking-gambling/tree/main/analysis/odds">analysis/odds/pipeline.py</a> and <a href="https://github.com/zamora16/unmasking-gambling/tree/main/analysis/odds">analysis/odds/ml.py</a>.</li>
               </ul>
             </TechBox>
           </>
