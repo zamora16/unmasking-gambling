@@ -28,15 +28,86 @@ export interface Question {
   published: string;
 }
 
-export type Group = 'casino' | 'betting' | 'lottery' | 'help';
+export type Group = 'addiction' | 'help' | 'family' | 'casino' | 'betting' | 'lottery';
 export const GROUPS: { key: Group; label: L }[] = [
-  { key: 'help', label: { es: 'Ayuda práctica', en: 'Practical help' } },
+  { key: 'addiction', label: { es: 'Ludopatía', en: 'Gambling addiction' } },
+  { key: 'help', label: { es: 'Autoprohibición y bloqueos', en: 'Self-exclusion and blocking' } },
+  { key: 'family', label: { es: 'Familias', en: 'Families' } },
   { key: 'casino', label: { es: 'Casino y tragaperras', en: 'Casino and slots' } },
   { key: 'betting', label: { es: 'Apuestas y bonos', en: 'Betting and bonuses' } },
   { key: 'lottery', label: { es: 'Loterías', en: 'Lotteries' } },
 ];
 
 export const QUESTIONS: Question[] = [
+  {
+    id: 'test',
+    slug: { es: 'test-de-ludopatia', en: 'gambling-addiction-test' },
+    question: { es: 'Test de ludopatía: ¿tengo un problema con el juego?', en: 'Gambling addiction test: do I have a problem with gambling?' },
+    answer: {
+      es: 'Este test usa el PGSI, nueve preguntas sobre los últimos 12 meses que se usan en investigación de todo el mundo. Tarda dos minutos, es gratis y anónimo, y las respuestas no salen de tu navegador. No es un diagnóstico, pero te dice con criterios reales en qué nivel de riesgo estás.',
+      en: 'This test uses the PGSI, nine questions about the last 12 months used in research worldwide. It takes two minutes, is free and anonymous, and your answers never leave your browser. It is not a diagnosis, but it tells you on real criteria what level of risk you are at.',
+    },
+    kicker: { es: 'Ludopatía', en: 'Gambling addiction' },
+    related: ['way5', 'help', 'way1'],
+    group: 'addiction',
+    nudge: 'help',
+    published: '2026-10-02',
+  },
+  {
+    id: 'ludopatia',
+    slug: { es: 'que-es-la-ludopatia', en: 'what-is-gambling-addiction' },
+    question: { es: '¿Qué es la ludopatía? Síntomas, causas y tratamiento', en: 'What is gambling addiction? Symptoms, causes and treatment' },
+    answer: {
+      es: 'La ludopatía, o trastorno por juego, es una adicción reconocida por la medicina: jugar de forma persistente aunque te esté haciendo daño. Sus señales son jugar cada vez más, intentar recuperar lo perdido, mentir sobre ello y no poder parar. Tiene tratamiento, y la terapia psicológica es la opción con más evidencia.',
+      en: 'Gambling addiction, or gambling disorder, is an addiction recognised by medicine: gambling persistently even though it is harming you. Its signs are gambling more and more, chasing losses, lying about it and being unable to stop. It is treatable, and psychological therapy is the option with the strongest evidence.',
+    },
+    kicker: { es: 'Ludopatía', en: 'Gambling addiction' },
+    related: ['way1', 'way2', 'help'],
+    group: 'addiction',
+    published: '2026-10-02',
+  },
+  {
+    id: 'quit',
+    slug: { es: 'como-dejar-de-apostar', en: 'how-to-stop-gambling' },
+    question: { es: '¿Cómo dejar de apostar? Qué hacer si crees que eres ludópata', en: 'How to stop gambling: what to do if you think you are addicted' },
+    answer: {
+      es: 'Empieza hoy por tres cosas: pon barreras que no dependan de ti (autoprohibición en el RGIAJ, bloqueador, bloqueo en el banco), aleja el dinero y cuéntaselo a una persona. Cuando llegue el impulso, espera 15 minutos antes de hacer nada: suele bajar. Y pide ayuda profesional; es gratuita.',
+      en: 'Start today with three things: put up barriers that do not depend on you (self-exclusion, a blocker, a bank block), put distance between you and the money, and tell one person. When the urge comes, wait 15 minutes before doing anything: it usually fades. And get professional help; it is free.',
+    },
+    kicker: { es: 'Ludopatía', en: 'Gambling addiction' },
+    related: ['way5', 'way4', 'help'],
+    group: 'addiction',
+    nudge: 'help',
+    published: '2026-10-02',
+  },
+  {
+    id: 'debts',
+    slug: { es: 'deudas-por-juego', en: 'gambling-debts' },
+    question: { es: 'Tengo deudas por el juego, ¿qué hago?', en: 'I have gambling debts. What should I do?' },
+    answer: {
+      es: 'Primero, no intentes recuperarlo jugando ni pidas más préstamos para tapar otros: es lo que hace crecer la deuda. Haz una lista de todo lo que debes, prioriza vivienda y suministros, habla con los acreedores para aplazar y pide orientación gratuita antes de firmar nada. Y cuéntaselo a alguien.',
+      en: 'First, do not try to win it back by gambling or take new loans to cover old ones: that is what makes debt grow. List everything you owe, put housing and bills first, talk to creditors about payment plans and get free advice before signing anything. And tell someone.',
+    },
+    kicker: { es: 'Ludopatía', en: 'Gambling addiction' },
+    related: ['help', 'way5', 'way6'],
+    group: 'addiction',
+    nudge: 'help',
+    published: '2026-10-02',
+  },
+  {
+    id: 'kids',
+    slug: { es: 'como-saber-si-mi-hijo-apuesta', en: 'is-my-child-gambling' },
+    question: { es: '¿Cómo saber si mi hijo apuesta?', en: 'How can I tell if my child is gambling?' },
+    answer: {
+      es: 'Fíjate en el dinero que falta o aparece, el móvil escondido durante los partidos y el lenguaje de cuotas y combinadas. El 13 % de los estudiantes de 14 a 18 años en España jugó dinero online en el último año, aunque es ilegal para menores. Habla sin sermones y con datos: cómo gana siempre la casa.',
+      en: 'Watch for money that goes missing or appears, a phone hidden during matches and talk of odds and accumulators. In Spain, 13% of students aged 14 to 18 gambled money online in the past year, even though it is illegal for minors. Talk without lecturing, using facts: how the house always wins.',
+    },
+    kicker: { es: 'Familias', en: 'Families' },
+    related: ['market', 'games', 'help'],
+    group: 'family',
+    nudge: 'family',
+    published: '2026-10-02',
+  },
   {
     id: 'martingale',
     slug: { es: 'funciona-la-martingala', en: 'does-the-martingale-work' },
@@ -144,9 +215,9 @@ export const QUESTIONS: Question[] = [
   {
     id: 'rgiaj',
     slug: { es: 'como-autoexcluirse-del-juego', en: 'how-to-self-exclude-from-gambling-in-spain' },
-    question: { es: '¿Cómo autoexcluirse del juego en España?', en: 'How do you self-exclude from gambling in Spain?' },
+    question: { es: '¿Cómo autoprohibirse del juego en España? (RGIAJ)', en: 'How do you self-exclude from gambling in Spain?' },
     answer: {
-      es: 'Inscribiéndote en el RGIAJ, el registro estatal de prohibidos. Se hace por internet con certificado digital o DNI electrónico, o en persona en un registro público, una oficina de Correos o una comisaría. Es indefinido y te bloquea en todo el juego online con licencia.',
+      es: 'Pidiendo la autoprohibición en el RGIAJ, el registro estatal de personas que no pueden jugar. Se hace por internet con certificado digital o DNI electrónico, o en persona en un registro público, una oficina de Correos o una comisaría. Es indefinido y te bloquea en todo el juego online con licencia.',
       en: 'By registering in the RGIAJ, Spain’s national self-exclusion register. You can do it online with a digital certificate or electronic ID card, or in person at a public registry office, a post office or a police station. It is indefinite and blocks you from all licensed online gambling.',
     },
     kicker: { es: 'Ayuda', en: 'Help' },
@@ -172,14 +243,14 @@ export const QUESTIONS: Question[] = [
   {
     id: 'family',
     slug: { es: 'como-ayudar-a-un-familiar-con-problemas-de-juego', en: 'how-to-help-someone-with-a-gambling-problem' },
-    question: { es: '¿Cómo ayudar a un familiar con problemas de juego?', en: 'How can you help someone with a gambling problem?' },
+    question: { es: '¿Cómo ayudar a un familiar o a tu pareja con ludopatía?', en: 'How can you help a partner or relative with a gambling problem?' },
     answer: {
       es: 'Habla con calma, en un momento tranquilo y sin reproches: describe lo que ves y cómo te afecta. No pagues sus deudas ni le prestes dinero, y protege tus cuentas. Y busca apoyo para ti: las asociaciones de FEJAR tienen grupos para familias.',
       en: 'Talk calmly, at a quiet moment and without blame: describe what you see and how it affects you. Do not pay their debts or lend them money, and protect your own accounts. And get support for yourself: many gambling support services run groups for families.',
     },
     kicker: { es: 'Ayuda', en: 'Help' },
     related: ['help', 'way6', 'way2'],
-    group: 'help',
+    group: 'family',
     nudge: 'family',
     published: '2026-10-02',
   },
@@ -193,7 +264,7 @@ export const QUESTIONS: Question[] = [
     },
     kicker: { es: 'Ayuda', en: 'Help' },
     related: ['way2', 'help', 'way5'],
-    group: 'help',
+    group: 'addiction',
     published: '2026-10-02',
   },
 ];

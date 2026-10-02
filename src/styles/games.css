@@ -564,3 +564,19 @@
     transition: none;
   }
 }
+
+/* Debt organiser */
+.paytable.compare.debt-table {
+  display: table;
+  min-width: 36rem;
+}
+.debt-table input {
+  width: 100%;
+  min-width: 5.5rem;
+}
+.debt-table td:first-child input {
+  min-width: 10rem;
+}
+.debt-table td {
+  padding: 0.3rem 0.35rem;
+}

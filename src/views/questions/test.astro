@@ -1,0 +1,87 @@
+---
+import QuestionPage from '../../components/QuestionPage.astro';
+import TechBox from '../../components/TechBox.astro';
+import Pgsi from '../../islands/camino/Pgsi';
+import { type Lang, href, questionHref } from '../../i18n';
+import { theWayContent } from '../../data/camino/way';
+import { questionById } from '../../data/questions';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const es = lang === 'es';
+const way = theWayContent[lang];
+const ludopatia = questionById('ludopatia');
+const quit = questionById('quit');
+
+const faq = es
+  ? [
+      { q: '¿Es fiable un test de ludopatía online?', a: 'Este usa el PGSI, un cuestionario validado que se emplea en encuestas de salud de muchos países. Es fiable para lo que hace: estimar el nivel de riesgo. No sustituye a una valoración profesional, que es la única que puede dar un diagnóstico.' },
+      { q: '¿Qué significa mi puntuación?', a: '0 puntos: sin problemas con el juego. De 1 a 2: riesgo bajo. De 3 a 7: riesgo moderado, con algunas consecuencias negativas. 8 o más: juego problemático, con consecuencias y posible pérdida de control. Son los puntos de corte publicados por los autores del cuestionario.' },
+      { q: '¿Se guardan mis respuestas?', a: 'Solo en tu navegador, para que el plan personal pueda usarlas. No se envían a ningún servidor, no hay cuentas ni cookies de seguimiento. Puedes borrarlas cuando quieras repitiendo el test.' },
+      { q: 'He sacado una puntuación alta. ¿Y ahora qué?', a: 'No estás solo: es más común de lo que parece y tiene tratamiento. Habla con alguien de confianza, pon barreras para no seguir jugando y pide ayuda profesional: tu médico de cabecera puede derivarte, y FEJAR orienta gratis en el 900 200 225.' },
+    ]
+  : [
+      { q: 'Is an online gambling addiction test reliable?', a: 'This one uses the PGSI, a validated questionnaire used in health surveys in many countries. It is reliable for what it does: estimating the level of risk. It does not replace a professional assessment, which is the only way to get a diagnosis.' },
+      { q: 'What does my score mean?', a: '0 points: no problems with gambling. 1 to 2: low risk. 3 to 7: moderate risk, with some negative consequences. 8 or more: problem gambling, with consequences and possible loss of control. These are the cut-offs published by the questionnaire’s authors.' },
+      { q: 'Are my answers saved?', a: 'Only in your browser, so the personal plan can use them. They are not sent to any server; there are no accounts and no tracking cookies. You can clear them any time by retaking the test.' },
+      { q: 'I got a high score. What now?', a: 'You are not alone: it is more common than it seems and it is treatable. Talk to someone you trust, put barriers in place so you stop gambling, and get professional help; your doctor can refer you, and gambling helplines are free.' },
+    ];
+---
+
+<QuestionPage lang={lang} id="test" faq={faq} sources={['src/islands/camino/Pgsi.tsx', 'src/lib/pgsi.ts']}>
+  <article class="page">
+    <div class="measure prose">
+      <Pgsi client:load t={way.pgsi} planHref={href(lang, 'way5')} />
+
+      {
+        es ? (
+          <>
+            <h2>Qué mide este test</h2>
+            <p>
+              Las nueve preguntas son el Índice de Gravedad del Juego Problemático (PGSI, por sus siglas en inglés), creado por Ferris y Wynne en 2001. Preguntan por los últimos 12 meses: si apuestas más de lo que puedes permitirte, si vuelves para recuperar lo perdido, si has pedido dinero para jugar, si te ha causado problemas de salud o de dinero, si te sientes culpable.
+            </p>
+            <p>
+              No mide cuánto juegas, sino lo que el juego te está costando. Por eso alguien que apuesta poco puede puntuar alto, y al revés.
+            </p>
+
+            <h2>Después del resultado</h2>
+            <p>
+              Con tu puntuación, <a href={href(lang, 'way5')}>el plan personal</a> te propone barreras, tácticas para tus momentos de riesgo y qué hacer cuando lleguen las ganas. Si quieres entender mejor qué es la ludopatía y cómo se trata, lo tienes en <a href={questionHref(lang, ludopatia.slug)}>{ludopatia.question[lang]}</a> Y si ya has decidido parar, los primeros pasos están en <a href={questionHref(lang, quit.slug)}>{quit.question[lang]}</a>
+            </p>
+          </>
+        ) : (
+          <>
+            <h2>What this test measures</h2>
+            <p>
+              The nine questions are the Problem Gambling Severity Index (PGSI), created by Ferris and Wynne in 2001. They ask about the last 12 months: whether you bet more than you can afford, go back to win back losses, borrow money to gamble, whether it has caused you health or money problems, whether you feel guilty.
+            </p>
+            <p>
+              It does not measure how much you gamble, but what gambling is costing you. That is why someone who bets little can score high, and the other way round.
+            </p>
+
+            <h2>After your result</h2>
+            <p>
+              With your score, <a href={href(lang, 'way5')}>the personal plan</a> suggests barriers, tactics for your risky moments and what to do when an urge comes. To understand what gambling addiction is and how it is treated, see <a href={questionHref(lang, ludopatia.slug)}>{ludopatia.question[lang]}</a> And if you have already decided to stop, the first steps are in <a href={questionHref(lang, quit.slug)}>{quit.question[lang]}</a>
+            </p>
+          </>
+        )
+      }
+
+      <TechBox lang={lang} title={es ? 'El instrumento y sus cortes' : 'The instrument and its cut-offs'}>
+        {
+          es ? (
+            <p>
+              PGSI: nueve ítems del Canadian Problem Gambling Index (Ferris y Wynne, 2001), escala 0–3 y total 0–27. Bandas publicadas: 0 sin riesgo · 1–2 riesgo bajo · 3–7 riesgo moderado · 8 o más juego problemático. Es un instrumento de cribado: ordena el riesgo, no diagnostica. El diagnóstico clínico usa los criterios del DSM-5 o la CIE-11. Es el mismo cuestionario del paso 2 de El Camino; el resultado se comparte entre ambas páginas.
+            </p>
+          ) : (
+            <p>
+              PGSI: nine items from the Canadian Problem Gambling Index (Ferris &amp; Wynne, 2001), 0–3 scale, 0–27 total. Published bands: 0 no risk · 1–2 low risk · 3–7 moderate risk · 8 or more problem gambling. It is a screening tool: it ranks risk, it does not diagnose. Clinical diagnosis uses DSM-5 or ICD-11 criteria. It is the same questionnaire as step 2 of The Way; the result is shared between both pages.
+            </p>
+          )
+        }
+      </TechBox>
+    </div>
+  </article>
+</QuestionPage>

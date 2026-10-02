@@ -1,0 +1,92 @@
+---
+import QuestionPage from '../../components/QuestionPage.astro';
+import Figure from '../../components/Figure.astro';
+import DebtList from '../../islands/questions/DebtList';
+import { type Lang, href, questionHref } from '../../i18n';
+import { questionById } from '../../data/questions';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const es = lang === 'es';
+const quit = questionById('quit');
+const cost = questionById('cost');
+
+const faq = es
+  ? [
+      { q: '¿Es buena idea pedir un préstamo para pagar las deudas del juego?', a: 'Casi nunca. Los préstamos rápidos y los microcréditos tienen intereses muy altos y convierten una deuda en varias. Solo tiene sentido reunificar si el nuevo préstamo es claramente más barato, el juego está bajo control y alguien de confianza revisa las condiciones contigo.' },
+      { q: '¿Debo contárselo a mi familia?', a: 'Cuesta mucho, pero suele ser un alivio y casi siempre ayuda. Las deudas ocultas crecen y acaban saliendo en el peor momento. Contarlo permite organizar el dinero entre varias personas y que alguien te ayude a no volver a jugar.' },
+      { q: '¿Dónde puedo pedir orientación gratis?', a: 'Las asociaciones de consumidores y los servicios de orientación jurídica de los colegios de abogados pueden orientarte. Para deudas que no puedes pagar existe un procedimiento legal, conocido como Ley de Segunda Oportunidad; un abogado puede decirte si encaja en tu caso. Desconfía de quien promete hacer desaparecer las deudas a cambio de una cuota.' },
+    ]
+  : [
+      { q: 'Is a loan to pay off gambling debts a good idea?', a: 'Rarely. Payday loans and quick credit carry very high interest and turn one debt into several. Consolidating only makes sense if the new loan is clearly cheaper, the gambling is under control and someone you trust reviews the terms with you.' },
+      { q: 'Should I tell my family?', a: 'It is very hard, but it usually brings relief and nearly always helps. Hidden debts grow and come out at the worst moment. Telling them lets several people organise the money and gives you someone to help you stay away from gambling.' },
+      { q: 'Where can I get free advice?', a: 'Free debt advice services exist in most countries: in the UK, StepChange and Citizens Advice; in Spain, consumer associations and bar association legal aid services. Be wary of anyone promising to make debts disappear for a fee.' },
+    ];
+---
+
+<QuestionPage lang={lang} id="debts" faq={faq} sources={['src/islands/questions/DebtList.tsx', 'src/lib/debts.ts']}>
+  <article class="page">
+    <div class="measure prose">
+      {
+        es ? (
+          <>
+            <h2>Lo primero: que no crezca</h2>
+            <p>
+              Las deudas del juego suelen crecer por la misma idea: «con una buena racha lo arreglo». Es la trampa más cara de todas, porque cada apuesta para recuperar pierde de media como las demás. Para de jugar antes que nada; los primeros pasos están en <a href={questionHref(lang, quit.slug)}>{quit.question[lang]}</a>
+            </p>
+            <p>
+              Y no tapes una deuda con otra. Los préstamos rápidos, las tarjetas revolving y los microcréditos convierten un problema en varios, con intereses que pueden pasar del 20 % anual.
+            </p>
+
+            <h2>Pon la deuda sobre la mesa</h2>
+            <ol>
+              <li><strong>Haz una lista completa.</strong> A quién debes, cuánto, a qué interés y qué cuota pagas. Incluye a familiares y amigos.</li>
+              <li><strong>Prioriza lo esencial.</strong> Vivienda, luz, agua, comida y lo que tenga consecuencias legales graves van primero.</li>
+              <li><strong>Habla con los acreedores.</strong> Antes de dejar de pagar, pide un aplazamiento o una cuota menor. Suele ser posible si lo pides pronto.</li>
+              <li><strong>Pide orientación antes de firmar nada.</strong> Especialmente ante reunificaciones o empresas que prometen cancelar deudas.</li>
+              <li><strong>Deja que otra persona te ayude con el dinero.</strong> Durante un tiempo, que alguien de confianza revise las cuentas contigo.</li>
+            </ol>
+            <p>Apunta abajo lo que debes y lo que puedes pagar al mes. Verás cuánto tardarías y en qué orden conviene pagar.</p>
+          </>
+        ) : (
+          <>
+            <h2>First: stop it growing</h2>
+            <p>
+              Gambling debts tend to grow from the same idea: “one good run and I’ll sort it.” It is the most expensive trap of all, because every bet placed to win money back loses on average like any other. Stop gambling before anything else; the first steps are in <a href={questionHref(lang, quit.slug)}>{quit.question[lang]}</a>
+            </p>
+            <p>
+              And do not cover one debt with another. Payday loans, revolving credit and quick loans turn one problem into several, with interest that can exceed 20% a year.
+            </p>
+
+            <h2>Put the debt on the table</h2>
+            <ol>
+              <li><strong>Make a full list.</strong> Who you owe, how much, at what interest and what you pay each month. Include family and friends.</li>
+              <li><strong>Put essentials first.</strong> Housing, energy, water, food and anything with serious legal consequences come first.</li>
+              <li><strong>Talk to creditors.</strong> Before you miss payments, ask for more time or a lower payment. It is often possible if you ask early.</li>
+              <li><strong>Get advice before signing anything.</strong> Especially consolidation loans or companies promising to cancel debts.</li>
+              <li><strong>Let someone help you with money.</strong> For a while, have someone you trust go through the accounts with you.</li>
+            </ol>
+            <p>List below what you owe and what you can pay each month. You will see how long it would take and which order to pay in.</p>
+          </>
+        )
+      }
+    </div>
+  </article>
+
+  <Figure wide={false} title={es ? 'Tu plan de pago' : 'Your repayment plan'}>
+    <DebtList client:idle lang={lang} />
+  </Figure>
+
+  <article class="page">
+    <div class="measure prose">
+      <p>
+        {es ? 'Para calcular cuánto te ha costado el juego en total: ' : 'To work out what gambling has cost you in total: '}<a href={questionHref(lang, cost.slug)}>{cost.question[lang]}</a>
+      </p>
+      <p>
+        <a href={href(lang, 'help')}>{es ? 'Teléfonos y recursos de ayuda' : 'Helplines and support'} →</a>
+      </p>
+    </div>
+  </article>
+</QuestionPage>

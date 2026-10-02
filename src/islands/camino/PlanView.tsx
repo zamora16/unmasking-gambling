@@ -4,7 +4,7 @@ import type { TheWayStrings } from '../../data/camino/way';
 
 const PLACEHOLDERS = ['la persona acordada', 'the agreed person'];
 
-function withName(text: string, name: string) {
+export function withName(text: string, name: string) {
   if (!name.trim()) return text;
   return PLACEHOLDERS.reduce((s, p) => s.replace(p, name.trim()), text);
 }

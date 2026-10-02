@@ -7,7 +7,10 @@ import { buildPlan, type Channel, type GameKind, type Goal, type TriggerId } fro
 import { loadJourney, nextReviewDate, saveJourney } from '../../lib/journey';
 import { bandForScore } from '../../lib/pgsi';
 import type { TheWayStrings } from '../../data/camino/way';
-import { PlanView } from './PlanView';
+import { PlanView, withName } from './PlanView';
+import PlanExtras from './PlanExtras';
+import UrgeTimer from './UrgeTimer';
+import ProgressTracker from './ProgressTracker';
 
 interface Props {
   t: TheWayStrings['plan'];
@@ -125,7 +128,17 @@ export default function PlanBuilder({ t, pgsiStrings, lang, screeningHref, print
               {t.printCta}
             </a>
           </div>
+          <PlanExtras
+            lang={lang}
+            reviewDate={nextReviewDate(plan.reviewDays)}
+            reviewDays={plan.reviewDays}
+            steps={plan.emergencySteps.map((s) => withName(t.emergencySteps[s], supportName))}
+            supportName={supportName}
+            planUrl={typeof window === 'undefined' ? '' : window.location.href.split('#')[0]}
+          />
           <p className="cam-small">{t.privacyNote}</p>
+          <UrgeTimer lang={lang} />
+          <ProgressTracker lang={lang} />
         </div>
       )}
     </div>

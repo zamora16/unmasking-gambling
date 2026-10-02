@@ -1,0 +1,138 @@
+---
+import QuestionPage from '../../components/QuestionPage.astro';
+import Figure from '../../components/Figure.astro';
+import UrgeTimer from '../../islands/camino/UrgeTimer';
+import ProgressTracker from '../../islands/camino/ProgressTracker';
+import { type Lang, href, questionHref } from '../../i18n';
+import { questionById } from '../../data/questions';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const es = lang === 'es';
+const rgiaj = questionById('rgiaj');
+const block = questionById('block');
+const debts = questionById('debts');
+const test = questionById('test');
+
+const faq = es
+  ? [
+      { q: '¿Se puede dejar de apostar sin ayuda?', a: 'Algunas personas lo consiguen solas, sobre todo si actúan pronto y ponen barreras. Pero con ayuda es más probable: una persona de confianza, un grupo o un profesional. Pedir ayuda no es fracasar; es usar lo que funciona.' },
+      { q: '¿Cuánto duran las ganas de apostar?', a: 'Cada impulso suele subir, llegar a un pico y bajar en cuestión de minutos si no se le hace caso. Con el tiempo aparecen menos y con menos fuerza. Los primeros días y semanas suelen ser los más difíciles.' },
+      { q: '¿Qué hago si recaigo?', a: 'Apúntalo, piensa qué lo desencadenó y ajusta el plan. Una recaída no borra los días que llevas sin jugar ni significa que no puedas conseguirlo. Lo peligroso es pensar «ya da igual» y seguir: para eso sirve hablar con alguien ese mismo día.' },
+      { q: '¿Cómo dejo de pensar en apostar durante los partidos?', a: 'Cambia cómo ves el deporte durante un tiempo: con otras personas, sin el móvil a mano, sin las apps de resultados en directo, o directamente sin verlo. Silencia las cuentas de apuestas y los grupos de pronósticos.' },
+    ]
+  : [
+      { q: 'Can you stop gambling without help?', a: 'Some people manage alone, especially if they act early and put barriers in place. But with help it is more likely: someone you trust, a group or a professional. Asking for help is not failing; it is using what works.' },
+      { q: 'How long does the urge to gamble last?', a: 'Each urge usually rises, peaks and fades within minutes if you do not act on it. Over time they come less often and less strongly. The first days and weeks tend to be the hardest.' },
+      { q: 'What if I relapse?', a: 'Note it, think about what set it off and adjust the plan. A relapse does not erase your days without gambling or mean you cannot do it. The danger is thinking “it doesn’t matter now” and carrying on: that is why talking to someone the same day helps.' },
+      { q: 'How do I stop thinking about betting during matches?', a: 'Change how you watch sport for a while: with other people, without your phone to hand, without live-score apps, or not at all. Mute betting accounts and tips groups.' },
+    ];
+---
+
+<QuestionPage lang={lang} id="quit" faq={faq} sources={['src/islands/camino/UrgeTimer.tsx', 'src/islands/camino/ProgressTracker.tsx', 'src/lib/progress.ts']}>
+  <article class="page">
+    <div class="measure prose">
+      {
+        es ? (
+          <>
+            <h2>Hoy</h2>
+            <ol>
+              <li>
+                <strong>Pon una barrera que no dependa de ti.</strong> La autoprohibición en el RGIAJ te bloquea en todo el juego online con licencia: <a href={questionHref(lang, rgiaj.slug)}>así se pide</a>. Instala también un bloqueador en el móvil.
+              </li>
+              <li>
+                <strong>Aleja el dinero.</strong> Borra las tarjetas guardadas, baja los límites y pide al banco que bloquee los pagos de juego. Si tienes deudas, <a href={questionHref(lang, debts.slug)}>no intentes recuperarlas jugando</a>.
+              </li>
+              <li>
+                <strong>Cuéntaselo a una persona.</strong> No hace falta contarlo todo. Basta con alguien a quien escribir cuando lleguen las ganas.
+              </li>
+            </ol>
+
+            <h2>Esta semana</h2>
+            <ul>
+              <li>Haz el <a href={questionHref(lang, test.slug)}>test de ludopatía</a> y construye tu <a href={href(lang, 'way5')}>plan personal</a>: barreras, tácticas para tus momentos de riesgo y qué hacer cuando lleguen las ganas.</li>
+              <li>Busca qué te empuja a jugar: el aburrimiento, el estrés, el alcohol, el día de cobro, los partidos. Prepara algo concreto para cada uno.</li>
+              <li>Pide ayuda profesional. Tu médico de cabecera puede derivarte, y FEJAR orienta gratis en el 900 200 225.</li>
+            </ul>
+
+            <h2>Cuando lleguen las ganas</h2>
+            <p>
+              Llegarán, sobre todo al principio. No tienes que vencerlas para siempre, solo dejar que pasen. Guarda esta página: el temporizador de abajo te acompaña durante 15 minutos, con una cosa que hacer cada vez.
+            </p>
+          </>
+        ) : (
+          <>
+            <h2>Today</h2>
+            <ol>
+              <li>
+                <strong>Put up a barrier that does not depend on you.</strong> Self-exclusion blocks you from licensed online gambling: in Spain it is the RGIAJ (<a href={questionHref(lang, rgiaj.slug)}>how to apply</a>), in the UK, GAMSTOP. Install a blocker on your phone too.
+              </li>
+              <li>
+                <strong>Put distance between you and the money.</strong> Delete saved cards, lower limits and ask your bank to block gambling payments. If you have debts, <a href={questionHref(lang, debts.slug)}>do not try to win them back</a>.
+              </li>
+              <li>
+                <strong>Tell one person.</strong> You do not have to tell them everything. Just someone to message when the urge comes.
+              </li>
+            </ol>
+
+            <h2>This week</h2>
+            <ul>
+              <li>Take the <a href={questionHref(lang, test.slug)}>gambling addiction test</a> and build your <a href={href(lang, 'way5')}>personal plan</a>: barriers, tactics for risky moments and what to do when the urge comes.</li>
+              <li>Work out what pushes you to gamble: boredom, stress, alcohol, payday, matches. Prepare something concrete for each.</li>
+              <li>Get professional help. Your doctor can refer you, and gambling helplines are free.</li>
+            </ul>
+
+            <h2>When the urge comes</h2>
+            <p>
+              It will, especially at first. You do not have to beat it forever, just let it pass. Bookmark this page: the timer below stays with you for 15 minutes, with one thing to do at a time.
+            </p>
+          </>
+        )
+      }
+    </div>
+  </article>
+
+  <Figure wide={false} title={es ? 'Quince minutos' : 'Fifteen minutes'}>
+    <div class="cam">
+      <UrgeTimer client:idle lang={lang} />
+    </div>
+  </Figure>
+
+  <article class="page">
+    <div class="measure prose">
+      {
+        es ? (
+          <>
+            <h2>Cuenta lo que llevas</h2>
+            <p>
+              Ver los días y el dinero que ya no se va ayuda a sostener la decisión. Si un día juegas, apúntalo: el contador no vuelve a cero, porque un tropiezo no borra lo conseguido.
+            </p>
+          </>
+        ) : (
+          <>
+            <h2>Count what you have done</h2>
+            <p>
+              Seeing the days and the money that no longer goes helps keep the decision. If you gamble one day, note it: the counter does not go back to zero, because one slip does not erase what you have achieved.
+            </p>
+          </>
+        )
+      }
+    </div>
+  </article>
+
+  <Figure wide={false} title={es ? 'Mi progreso' : 'My progress'}>
+    <div class="cam">
+      <ProgressTracker client:idle lang={lang} />
+    </div>
+  </Figure>
+
+  <article class="page">
+    <div class="measure prose">
+      <p>
+        {es ? 'Todas las barreras, una a una: ' : 'Every barrier, one by one: '}<a href={questionHref(lang, block.slug)}>{block.question[lang]}</a>
+      </p>
+    </div>
+  </article>
+</QuestionPage>

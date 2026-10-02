@@ -1,0 +1,119 @@
+---
+import QuestionPage from '../../components/QuestionPage.astro';
+import TechBox from '../../components/TechBox.astro';
+import { type Lang, href, fmt, questionHref } from '../../i18n';
+import { questionById } from '../../data/questions';
+import market from '../../data/market/spain.json';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const es = lang === 'es';
+const f = fmt(lang);
+const st = market.prevalence.students;
+const last = st.years.length - 1;
+const year = st.years[last];
+const tipsters = questionById('tipsters');
+const family = questionById('family');
+
+const faq = es
+  ? [
+      { q: '¿Pueden apostar los menores en España?', a: 'No. La ley del juego prohíbe jugar a los menores de edad, tanto online como en locales. Las webs con licencia deben verificar la identidad y la edad. Aun así, muchos menores apuestan con cuentas de adultos, en locales que no controlan o en webs sin licencia.' },
+      { q: '¿Las cajas de botín de los videojuegos son juego?', a: 'Tienen la misma mecánica: pagas por un premio al azar, a veces con efectos y sonidos parecidos a los de una tragaperras. Hablar de ellas con tus hijos es una buena forma de explicar cómo funciona el azar antes de que llegue el dinero real.' },
+      { q: '¿Qué hago si descubro que mi hijo apuesta?', a: 'Mantén la calma y habla primero, sin castigar de entrada. Averigua cuánto, desde cuándo, con qué dinero y con qué cuenta. Pon límites claros al dinero y a los dispositivos, y si hay pérdidas importantes, deudas o no consigue parar, pide ayuda profesional: el pediatra o el médico de familia y FEJAR (900 200 225).' },
+    ]
+  : [
+      { q: 'Can minors gamble in Spain?', a: 'No. Gambling law bans minors from gambling, online and in venues. Licensed sites must verify identity and age. Even so, many minors bet using adults’ accounts, in venues that do not check, or on unlicensed sites.' },
+      { q: 'Are video game loot boxes gambling?', a: 'They share the mechanics: you pay for a random prize, sometimes with effects and sounds like a slot machine. Talking about them with your children is a good way to explain how chance works before real money is involved.' },
+      { q: 'What do I do if I find out my child is gambling?', a: 'Stay calm and talk first, without punishing straight away. Find out how much, since when, with what money and which account. Set clear limits on money and devices, and if there are big losses, debts or they cannot stop, get professional help from your doctor or a gambling helpline.' },
+    ];
+---
+
+<QuestionPage lang={lang} id="kids" faq={faq}>
+  <article class="page">
+    <div class="measure prose">
+      {
+        es ? (
+          <>
+            <h2>Más común de lo que parece</h2>
+            <p>
+              Según la encuesta ESTUDES {year} del Ministerio de Sanidad, el {f.num(st.online[last], 1)} % de los estudiantes de 14 a 18 años jugó dinero online en el último año: el {f.num(st.onlineBoys[last], 1)} % de los chicos y el {f.num(st.onlineGirls[last], 1)} % de las chicas. En locales, el {f.num(st.inPerson[last], 1)} %. Los juegos online más habituales entre ellos son la ruleta y las apuestas deportivas. Tienes todos los datos en <a href={href(lang, 'market')}>el mercado</a>.
+            </p>
+
+            <h2>Señales</h2>
+            <ul>
+              <li>Dinero que falta en casa, o dinero y regalos que aparecen sin explicación.</li>
+              <li>El móvil escondido o pegado durante los partidos, incluso de ligas que antes no veía.</li>
+              <li>Vocabulario nuevo: cuotas, combinadas, «stake», «tipster», bonos, «cashout».</li>
+              <li>Cambios de humor ligados a resultados deportivos.</li>
+              <li>Amigos que apuestan, grupos de pronósticos en Telegram o Discord, influencers de apuestas.</li>
+              <li>Pide dinero a menudo, vende cosas o tiene cuentas o tarjetas que no conoces.</li>
+            </ul>
+
+            <h2>Cómo hablarlo</h2>
+            <p>
+              Los sermones funcionan mal con adolescentes. Funciona mejor la curiosidad y los datos. Pregúntale qué sabe de las apuestas y de quién lo ha aprendido. Luego mirad juntos cómo gana siempre la casa: el <a href={href(lang, 'roulette')}>simulador de ruleta</a>, <a href={href(lang, 'odds')}>la comisión escondida en las cuotas</a> o <a href={questionHref(lang, tipsters.slug)}>por qué los tipsters parecen expertos</a>. Descubrir el truco por uno mismo convence más que cualquier prohibición.
+            </p>
+
+            <h2>Prevenir</h2>
+            <ul>
+              <li>Activa el control parental en móviles y consolas, y revisa qué tarjetas tienen acceso a las tiendas de apps.</li>
+              <li>Habla de la publicidad de apuestas cuando aparezca: quién paga el anuncio y por qué.</li>
+              <li>Fíjate en tus propios hábitos: los hijos de padres que juegan empiezan antes.</li>
+            </ul>
+            <p>
+              Si el problema es serio, las pautas de <a href={questionHref(lang, family.slug)}>{family.question[lang]}</a> también sirven para hijos.
+            </p>
+          </>
+        ) : (
+          <>
+            <h2>More common than it seems</h2>
+            <p>
+              According to Spain’s ESTUDES {year} survey, {f.num(st.online[last], 1)}% of students aged 14 to 18 gambled money online in the past year: {f.num(st.onlineBoys[last], 1)}% of boys and {f.num(st.onlineGirls[last], 1)}% of girls. In venues, {f.num(st.inPerson[last], 1)}%. Their most common online games are roulette and sports betting. All the data is in <a href={href(lang, 'market')}>the market</a>.
+            </p>
+
+            <h2>Signs</h2>
+            <ul>
+              <li>Money missing at home, or money and gifts appearing with no explanation.</li>
+              <li>A phone hidden away or glued to them during matches, even leagues they never watched.</li>
+              <li>New vocabulary: odds, accumulators, stake, tipster, bonuses, cash-out.</li>
+              <li>Mood swings tied to sports results.</li>
+              <li>Friends who bet, tips groups on Telegram or Discord, betting influencers.</li>
+              <li>Asking for money often, selling things, or accounts and cards you do not know about.</li>
+            </ul>
+
+            <h2>How to talk about it</h2>
+            <p>
+              Lectures work badly with teenagers. Curiosity and facts work better. Ask what they know about betting and who they learnt it from. Then look together at how the house always wins: the <a href={href(lang, 'roulette')}>roulette simulator</a>, <a href={href(lang, 'odds')}>the fee hidden in the odds</a> or <a href={questionHref(lang, tipsters.slug)}>why tipsters look like experts</a>. Working out the trick for yourself convinces more than any ban.
+            </p>
+
+            <h2>Prevention</h2>
+            <ul>
+              <li>Turn on parental controls on phones and consoles, and check which cards are linked to app stores.</li>
+              <li>Talk about betting ads when they come on: who pays for the ad and why.</li>
+              <li>Look at your own habits: children of parents who gamble start earlier.</li>
+            </ul>
+            <p>
+              If the problem is serious, the advice in <a href={questionHref(lang, family.slug)}>{family.question[lang]}</a> also applies to children.
+            </p>
+          </>
+        )
+      }
+
+      <TechBox lang={lang} title={es ? 'Fuentes' : 'Sources'}>
+        {
+          es ? (
+            <p>
+              Observatorio Español de las Drogas y las Adicciones, encuesta ESTUDES {year} sobre uso de drogas en enseñanzas secundarias (estudiantes de 14 a 18 años, juego con dinero en los últimos 12 meses). Ley 13/2011, de regulación del juego, que prohíbe la participación de menores.
+            </p>
+          ) : (
+            <p>
+              Spanish Observatory on Drugs and Addictions, ESTUDES {year} survey of secondary school students (aged 14 to 18, gambling with money in the past 12 months). Spain’s Gambling Act 13/2011, which bans minors from taking part.
+            </p>
+          )
+        }
+      </TechBox>
+    </div>
+  </article>
+</QuestionPage>

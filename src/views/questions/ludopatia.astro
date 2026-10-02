@@ -1,0 +1,141 @@
+---
+import QuestionPage from '../../components/QuestionPage.astro';
+import TechBox from '../../components/TechBox.astro';
+import { type Lang, href, questionHref } from '../../i18n';
+import { questionById } from '../../data/questions';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const es = lang === 'es';
+const test = questionById('test');
+const quit = questionById('quit');
+const family = questionById('family');
+
+const faq = es
+  ? [
+      { q: '¿La ludopatía es una enfermedad?', a: 'Sí. Está reconocida como trastorno mental en las dos clasificaciones que usan los médicos: el DSM-5, que la llama trastorno por juego, y la CIE-11 de la Organización Mundial de la Salud. No es un vicio ni una falta de voluntad.' },
+      { q: '¿Qué diferencia hay entre jugar mucho y ser ludópata?', a: 'No es la cantidad, sino el control y las consecuencias. Lo que define la ludopatía es seguir jugando aunque cause problemas de dinero, de pareja, de trabajo o de salud, y no conseguir parar cuando se intenta.' },
+      { q: '¿Tiene cura la ludopatía?', a: 'Se puede recuperar, y mucha gente lo hace. La terapia psicológica, sobre todo la cognitivo-conductual, tiene buena evidencia. Las recaídas son frecuentes en el proceso y no significan fracasar: forman parte de él.' },
+      { q: '¿Hay síntomas de abstinencia en la ludopatía?', a: 'Sí. Al intentar reducir o dejar el juego aparecen a menudo inquietud, irritabilidad, problemas para dormir y pensamientos constantes sobre jugar. Es uno de los criterios con los que se diagnostica.' },
+      { q: '¿Hay medicamentos para la ludopatía?', a: 'No hay ningún fármaco aprobado específicamente para ella. Algunos, como la naltrexona, se han estudiado con resultados prometedores, pero el tratamiento principal es psicológico. Cualquier medicación debe valorarla un médico.' },
+    ]
+  : [
+      { q: 'Is gambling addiction an illness?', a: 'Yes. It is recognised as a mental disorder in both classifications doctors use: DSM-5, which calls it gambling disorder, and the World Health Organization’s ICD-11. It is not a vice or a lack of willpower.' },
+      { q: 'What is the difference between gambling a lot and being addicted?', a: 'It is not the amount but control and consequences. What defines gambling addiction is carrying on despite money, relationship, work or health problems, and not managing to stop when you try.' },
+      { q: 'Can gambling addiction be cured?', a: 'People recover, and many do. Psychological therapy, especially cognitive behavioural therapy, has good evidence. Relapses are common along the way and do not mean failure: they are part of the process.' },
+      { q: 'Are there withdrawal symptoms?', a: 'Yes. When trying to cut down or stop, people often feel restless, irritable, sleep badly and think about gambling constantly. It is one of the diagnostic criteria.' },
+      { q: 'Is there medication for gambling addiction?', a: 'No drug is approved specifically for it. Some, such as naltrexone, have been studied with promising results, but the main treatment is psychological. Any medication should be assessed by a doctor.' },
+    ];
+---
+
+<QuestionPage lang={lang} id="ludopatia" faq={faq}>
+  <article class="page">
+    <div class="measure prose">
+      {
+        es ? (
+          <>
+            <h2>Qué es</h2>
+            <p>
+              La ludopatía, también llamada juego patológico o trastorno por juego, es una adicción sin sustancia. Quien la sufre sigue jugando aunque le esté haciendo daño, y no consigue parar aunque quiera. El juego deja de ser un entretenimiento y pasa a ocupar el centro: el dinero, el tiempo, los pensamientos.
+            </p>
+            <p>
+              Según la encuesta EDADES de 2024 del Ministerio de Sanidad, en torno al 1,4 % de la población de 15 a 64 años en España muestra un posible juego problemático: el 2,2 % de los hombres y el 0,7 % de las mujeres.
+            </p>
+
+            <h2>Síntomas</h2>
+            <p>Los médicos diagnostican el trastorno cuando se dan al menos cuatro de estas nueve señales durante un año:</p>
+            <ol>
+              <li>Necesitar apostar cada vez más dinero para sentir la misma emoción.</li>
+              <li>Ponerse inquieto o irritable al intentar reducir o dejar el juego.</li>
+              <li>Haber intentado controlarlo o dejarlo varias veces, sin conseguirlo.</li>
+              <li>Pensar en el juego a menudo: revivir apuestas, planear la siguiente, buscar cómo conseguir dinero.</li>
+              <li>Jugar cuando uno se siente mal: con ansiedad, tristeza o culpa.</li>
+              <li>Volver otro día para recuperar lo perdido.</li>
+              <li>Mentir para ocultar cuánto se juega.</li>
+              <li>Haber puesto en peligro o perdido una relación, un trabajo o los estudios por el juego.</li>
+              <li>Depender de otros para salir de apuros económicos causados por el juego.</li>
+            </ol>
+            <p>
+              Con cuatro o cinco se considera leve; con seis o siete, moderado; con ocho o nueve, grave. Si te reconoces en varias, el <a href={questionHref(lang, test.slug)}>test de ludopatía</a> tarda dos minutos.
+            </p>
+
+            <h2>Por qué engancha</h2>
+            <p>
+              El juego de azar está diseñado para enganchar. Los premios llegan de forma impredecible, que es el patrón que más refuerza una conducta. Los casi-premios activan el cerebro casi como un premio real. Y perder empuja a jugar más para recuperarlo. Las apuestas online añaden lo demás: disponibles a cualquier hora, en el móvil, con bonos y publicidad constante. Lo explicamos paso a paso en <a href={href(lang, 'way1')}>por qué engancha</a>.
+            </p>
+            <p>
+              Algunas personas son más vulnerables: los jóvenes, quienes empiezan a jugar pronto, quienes tienen otras adicciones, ansiedad o depresión, y quienes pasan por momentos de mucho estrés.
+            </p>
+
+            <h2>Tratamiento</h2>
+            <p>
+              La ludopatía tiene tratamiento. La terapia cognitivo-conductual es la que tiene más evidencia: ayuda a identificar las situaciones de riesgo, desmontar las creencias erróneas sobre el azar y aprender a manejar las ganas. Los grupos de apoyo también ayudan, a la persona y a su familia.
+            </p>
+            <p>
+              En España, la sanidad pública atiende la ludopatía: tu médico de cabecera puede derivarte a los servicios de adicciones de tu comunidad. Las asociaciones de FEJAR orientan gratis en el 900 200 225. Si quieres empezar ya, los primeros pasos están en <a href={questionHref(lang, quit.slug)}>{quit.question[lang]}</a> Y si es alguien cercano, lee <a href={questionHref(lang, family.slug)}>{family.question[lang]}</a>
+            </p>
+          </>
+        ) : (
+          <>
+            <h2>What it is</h2>
+            <p>
+              Gambling addiction, also called pathological or compulsive gambling or gambling disorder, is an addiction without a substance. People who have it keep gambling even though it harms them, and cannot stop even when they want to. Gambling stops being entertainment and moves to the centre: money, time, thoughts.
+            </p>
+            <p>
+              According to Spain’s 2024 EDADES survey, around 1.4% of people aged 15 to 64 in Spain show possible problem gambling: 2.2% of men and 0.7% of women.
+            </p>
+
+            <h2>Symptoms</h2>
+            <p>Doctors diagnose the disorder when at least four of these nine signs are present over a year:</p>
+            <ol>
+              <li>Needing to gamble with more and more money to feel the same excitement.</li>
+              <li>Feeling restless or irritable when trying to cut down or stop.</li>
+              <li>Having tried to control or stop it several times, without success.</li>
+              <li>Thinking about gambling often: reliving bets, planning the next one, working out how to get money.</li>
+              <li>Gambling when feeling bad: anxious, sad or guilty.</li>
+              <li>Going back another day to win back losses.</li>
+              <li>Lying to hide how much you gamble.</li>
+              <li>Having put at risk or lost a relationship, a job or studies because of gambling.</li>
+              <li>Relying on others to get out of money trouble caused by gambling.</li>
+            </ol>
+            <p>
+              Four or five is considered mild; six or seven, moderate; eight or nine, severe. If you recognise several, the <a href={questionHref(lang, test.slug)}>gambling addiction test</a> takes two minutes.
+            </p>
+
+            <h2>Why it hooks</h2>
+            <p>
+              Gambling is designed to hook. Prizes arrive unpredictably, the pattern that reinforces a behaviour most strongly. Near-misses light up the brain almost like a real win. And losing pushes people to play more to win it back. Online betting adds the rest: available at any hour, on your phone, with bonuses and constant advertising. We explain it step by step in <a href={href(lang, 'way1')}>why it hooks</a>.
+            </p>
+            <p>
+              Some people are more vulnerable: young people, those who start gambling early, people with other addictions, anxiety or depression, and anyone going through a very stressful time.
+            </p>
+
+            <h2>Treatment</h2>
+            <p>
+              Gambling addiction is treatable. Cognitive behavioural therapy has the strongest evidence: it helps identify risky situations, take apart mistaken beliefs about chance and learn to handle urges. Support groups also help, both the person and their family.
+            </p>
+            <p>
+              Your doctor can refer you to addiction services, and gambling helplines give free advice. To start now, the first steps are in <a href={questionHref(lang, quit.slug)}>{quit.question[lang]}</a> And if it is someone close to you, read <a href={questionHref(lang, family.slug)}>{family.question[lang]}</a>
+            </p>
+          </>
+        )
+      }
+
+      <TechBox lang={lang} title={es ? 'Clasificación y fuentes' : 'Classification and sources'}>
+        {
+          es ? (
+            <p>
+              DSM-5 (American Psychiatric Association, 2013): trastorno por juego de apuestas, 4 o más de 9 criterios en 12 meses; gravedad leve (4–5), moderada (6–7) y grave (8–9). CIE-11 (OMS): trastorno por juego de apuestas, 6C50. Prevalencia: Observatorio Español de las Drogas y las Adicciones, Informe sobre adicciones comportamentales 2025, con datos de la encuesta EDADES 2024. La lista de criterios está resumida en lenguaje llano; no sustituye a una valoración clínica.
+            </p>
+          ) : (
+            <p>
+              DSM-5 (American Psychiatric Association, 2013): gambling disorder, 4 or more of 9 criteria over 12 months; severity mild (4–5), moderate (6–7) and severe (8–9). ICD-11 (WHO): gambling disorder, 6C50. Prevalence: Spanish Observatory on Drugs and Addictions, 2025 report on behavioural addictions, using the EDADES 2024 survey. The criteria are summarised in plain language; this does not replace a clinical assessment.
+            </p>
+          )
+        }
+      </TechBox>
+    </div>
+  </article>
+</QuestionPage>

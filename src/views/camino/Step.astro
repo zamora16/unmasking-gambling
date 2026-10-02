@@ -28,7 +28,12 @@ const md = (s: string) => s.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
 const stepWord = es ? 'Paso' : 'Step';
 ---
 
-<Base lang={lang} page={page} title={`${stepWord} ${step}: ${meta.title}`} description={meta.summary}>
+<Base
+  lang={lang}
+  page={page}
+  title={step === 2 ? (es ? 'Test de ludopatía (PGSI): dónde estoy' : 'Gambling addiction test (PGSI): where I stand') : `${stepWord} ${step}: ${meta.title}`}
+  description={step === 2 ? (es ? 'Test de ludopatía gratuito y anónimo: nueve preguntas validadas (PGSI) para saber en qué nivel de riesgo estás. Las respuestas no salen de tu navegador.' : 'Free, anonymous gambling addiction test: nine validated questions (PGSI) to see what level of risk you are at. Answers never leave your browser.') : meta.summary}
+>
   <StepNav lang={lang} current={step} />
   <PageHead lang={lang} modes={step === 2 || step === 5} kicker={`${stepWord} ${step} / 6 · ${meta.minutes} min`} title={meta.title} lede={lede} />
 
