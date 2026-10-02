@@ -11,7 +11,7 @@ import { resolve } from 'node:path';
 import { LANGS, type Lang, type PageKey } from '../../../i18n';
 import { pageMeta } from '../../../i18n/meta';
 
-const PAGES: PageKey[] = ['home', 'lab', 'odds', 'market', 'games', 'roulette', 'slots', 'lottery', 'sports', 'help', 'methods', 'way', 'way1', 'way2', 'way3', 'way4', 'way5', 'way6'];
+const PAGES: PageKey[] = ['home', 'lab', 'odds', 'market', 'games', 'roulette', 'slots', 'lottery', 'sports', 'help', 'methods', 'about', 'way', 'way1', 'way2', 'way3', 'way4', 'way5', 'way6'];
 
 export function getStaticPaths() {
   return LANGS.flatMap((lang) => PAGES.map((page) => ({ params: { lang, page } })));

@@ -1,30 +1,8 @@
+import { SLUGS, type PageKey } from './routes';
+
 export type Lang = 'es' | 'en';
 export const LANGS: Lang[] = ['es', 'en'];
-
-export type PageKey = 'home' | 'lab' | 'odds' | 'market' | 'games' | 'roulette' | 'slots' | 'lottery' | 'sports' | 'help' | 'methods'
-  | 'way' | 'way1' | 'way2' | 'way3' | 'way4' | 'way5' | 'way6' | 'wayPrint';
-
-const SLUGS: Record<PageKey, string> = {
-  home: '',
-  lab: 'ruin-lab/',
-  odds: 'odds/',
-  market: 'market/',
-  games: 'games/',
-  roulette: 'games/roulette/',
-  slots: 'games/slots/',
-  lottery: 'games/lottery/',
-  sports: 'games/sports/',
-  help: 'help/',
-  methods: 'methods/',
-  way: 'the-way/',
-  way1: 'the-way/why-it-hooks/',
-  way2: 'the-way/where-i-stand/',
-  way3: 'the-way/mental-traps/',
-  way4: 'the-way/tools/',
-  way5: 'the-way/my-plan/',
-  way6: 'the-way/not-alone/',
-  wayPrint: 'the-way/my-plan/print/',
-};
+export type { PageKey };
 
 export const WAY_STEPS = ['way1', 'way2', 'way3', 'way4', 'way5', 'way6'] as const;
 export type WayStep = (typeof WAY_STEPS)[number];
@@ -33,7 +11,7 @@ const BASE = import.meta.env.BASE_URL.replace(/\/$/, '');
 
 export function href(lang: Lang, page: PageKey, hash = ''): string {
   const prefix = lang === 'es' ? '' : '/en';
-  return `${BASE}${prefix}/${SLUGS[page]}${hash}`;
+  return `${BASE}${prefix}/${SLUGS[lang][page]}${hash}`;
 }
 
 export function asset(path: string): string {
@@ -44,7 +22,7 @@ export const ui = {
   es: {
     siteName: 'Unmasking Gambling',
     tagline: 'La matemática del juego, con datos',
-    nav: { lab: 'Laboratorio de ruina', odds: 'Las cuotas', market: 'El mercado', games: 'Los juegos', way: 'El Camino', help: 'Pedir ayuda', methods: 'Método' },
+    nav: { lab: 'Laboratorio de ruina', odds: 'Las cuotas', market: 'El mercado', games: 'Los juegos', way: 'El Camino', help: 'Pedir ayuda', methods: 'Método', about: 'Sobre el proyecto' },
     needHelp: '¿Necesitas ayuda?',
     helpLine: 'FEJAR 900 200 225 · Crisis 024',
     langSwitch: 'English',
@@ -65,7 +43,7 @@ export const ui = {
   en: {
     siteName: 'Unmasking Gambling',
     tagline: 'The mathematics of gambling, with data',
-    nav: { lab: 'Ruin Lab', odds: 'The odds', market: 'The market', games: 'The games', way: 'The Way', help: 'Get help', methods: 'Methods' },
+    nav: { lab: 'Ruin Lab', odds: 'The odds', market: 'The market', games: 'The games', way: 'The Way', help: 'Get help', methods: 'Methods', about: 'About' },
     needHelp: 'Need help?',
     helpLine: 'US 1-800-GAMBLER · UK 0808 8020 133',
     langSwitch: 'Español',

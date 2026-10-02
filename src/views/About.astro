@@ -1,0 +1,121 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHead from '../components/PageHead.astro';
+import { type Lang, href } from '../i18n';
+import { author } from '../data/author';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const es = lang === 'es';
+---
+
+<Base
+  lang={lang}
+  page="about"
+  title={es ? 'Sobre el proyecto' : 'About'}
+  description={es
+    ? 'Quién hace Unmasking Gambling, por qué existe y qué no hará nunca: sin publicidad de casas de apuestas, sin afiliados y sin rastreo.'
+    : 'Who makes Unmasking Gambling, why it exists and what it will never do: no gambling ads, no affiliate links and no tracking.'}
+>
+  <PageHead
+    lang={lang}
+    modes={false}
+    kicker={es ? 'Sobre el proyecto' : 'About'}
+    title={es ? 'Quién hace esto y por qué' : 'Who makes this and why'}
+    lede={es
+      ? 'Si hoy buscas cómo funciona una tragaperras o si la martingala sirve, casi todo lo que encuentras lo escribe alguien que gana dinero cuando juegas. Esta web es la otra versión, con los números a la vista.'
+      : 'Search today for how a slot machine works or whether the martingale works, and almost everything you find is written by someone who makes money when you play. This site is the other version, with the numbers in plain sight.'}
+  />
+
+  <article class="page">
+    <div class="measure prose">
+      {
+        es ? (
+          <>
+            <h2>Quién lo hace</h2>
+            <p>
+              Me llamo <strong>{author.name}</strong>. Soy doctor en Psicología y analista de datos. Hago esta web por mi cuenta, sin financiación de nadie. Escribo los textos, programo los simuladores y hago los análisis. Todo el código está en <a href={author.repo}>GitHub</a>.
+            </p>
+
+            <h2>Por qué existe</h2>
+            <p>
+              Las primeras respuestas de Google sobre la ruleta, el RTP o los sistemas de apuestas suelen venir de casinos online, casas de apuestas y webs que cobran comisión por cada jugador que les mandan. Explican el RTP como una forma de elegir mejor a qué jugar, no como lo que es: la parte de cada euro que la casa se queda.
+            </p>
+            <p>
+              Aquí cada afirmación se puede comprobar. Los simuladores usan las reglas reales de cada juego, los análisis usan datos públicos y cualquiera puede repetir los cálculos. Y quien llega preguntándose si el juego le está costando demasiado encuentra un camino concreto para hacer algo al respecto.
+            </p>
+
+            <h2>Lo que esta web no hará nunca</h2>
+            <ul>
+              <li><strong>Publicidad de juego.</strong> Ni anuncios de casas de apuestas, ni casinos, ni loterías.</li>
+              <li><strong>Enlaces de afiliado.</strong> No cobro comisión por mandar a nadie a ningún sitio.</li>
+              <li><strong>Rastrearte.</strong> No hay cookies, ni analítica de terceros, ni píxeles publicitarios. Las tipografías se sirven desde aquí, sin pasar por Google.</li>
+              <li><strong>Guardar tus respuestas.</strong> El cuestionario y el plan personal de <a href={href(lang, 'way')}>El Camino</a> se quedan en tu navegador. No llegan a ningún servidor.</li>
+            </ul>
+
+            <h2>Cómo se trabaja</h2>
+            <ul>
+              <li>Cada cifra enlaza a su fuente. Las fuentes, las técnicas y sus límites están en <a href={href(lang, 'methods')}>Método</a>.</li>
+              <li>Cada página indica cuándo se revisó por última vez.</li>
+              <li>Todo tiene dos versiones: una sencilla, sin jerga, y otra técnica, con fórmulas y código.</li>
+              <li>Cuando algo está mal, se corrige y queda registrado en el historial público del repositorio.</li>
+            </ul>
+
+            <h2>Lo que no es</h2>
+            <p>
+              Esta web informa. No es atención clínica ni sustituye a un profesional. Si el juego te está haciendo daño, en <a href={href(lang, 'help')}>Pedir ayuda</a> tienes teléfonos y recursos gratuitos. Si piensas en hacerte daño, llama al <a href="tel:024">024</a> o al <a href="tel:112">112</a>.
+            </p>
+
+            <h2>Contacto y correcciones</h2>
+            <p>
+              Si ves un error, un dato desactualizado o algo que se pueda explicar mejor, <a href={author.issues}>abre una incidencia en GitHub</a>. Si eres de una asociación, una universidad o un medio y quieres usar el material, puedes hacerlo: el código tiene licencia MIT y los textos se pueden citar enlazando a la página.
+            </p>
+          </>
+        ) : (
+          <>
+            <h2>Who makes it</h2>
+            <p>
+              I am <strong>{author.name}</strong>, PhD in Psychology and data analyst. I make this site on my own, with no funding from anyone. I write the text, code the simulators and run the analyses. All the code is on <a href={author.repo}>GitHub</a>.
+            </p>
+
+            <h2>Why it exists</h2>
+            <p>
+              The top search results on roulette, RTP or betting systems tend to come from online casinos, bookmakers and sites paid a commission for every player they send. They present RTP as a way to choose better what to play, not as what it is: the share of every euro the house keeps.
+            </p>
+            <p>
+              Here every claim can be checked. The simulators use the real rules of each game, the analyses use public data and anyone can rerun the calculations. And anyone who arrives wondering whether gambling is costing them too much finds a concrete path to do something about it.
+            </p>
+
+            <h2>What this site will never do</h2>
+            <ul>
+              <li><strong>Gambling advertising.</strong> No ads for bookmakers, casinos or lotteries.</li>
+              <li><strong>Affiliate links.</strong> I take no commission for sending anyone anywhere.</li>
+              <li><strong>Track you.</strong> No cookies, no third-party analytics, no ad pixels. Fonts are served from here, not from Google.</li>
+              <li><strong>Store your answers.</strong> The questionnaire and the personal plan in <a href={href(lang, 'way')}>The Way</a> stay in your browser. They never reach a server.</li>
+            </ul>
+
+            <h2>How it works</h2>
+            <ul>
+              <li>Every figure links to its source. Sources, techniques and their limits are in <a href={href(lang, 'methods')}>Methods</a>.</li>
+              <li>Every page says when it was last reviewed.</li>
+              <li>Everything comes in two versions: a plain one, without jargon, and a technical one, with formulas and code.</li>
+              <li>When something is wrong, it gets fixed, and the fix is recorded in the repository’s public history.</li>
+            </ul>
+
+            <h2>What it is not</h2>
+            <p>
+              This site informs. It is not clinical care and does not replace a professional. If gambling is hurting you, <a href={href(lang, 'help')}>Get help</a> lists free helplines and resources. If you are thinking of harming yourself, call your local emergency number.
+            </p>
+
+            <h2>Contact and corrections</h2>
+            <p>
+              If you spot a mistake, an outdated figure or something that could be explained better, <a href={author.issues}>open an issue on GitHub</a>. If you are with a charity, a university or the press and want to use the material, go ahead: the code is MIT-licensed and the text can be quoted with a link to the page.
+            </p>
+          </>
+        )
+      }
+    </div>
+  </article>
+</Base>

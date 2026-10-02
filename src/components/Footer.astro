@@ -23,6 +23,7 @@ const t = ui[lang];
         <li><a href={href(lang, 'games')}>{t.nav.games}</a></li>
         <li><a href={href(lang, 'way')}>{t.nav.way}</a></li>
         <li><a href={href(lang, 'methods')}>{t.nav.methods}</a></li>
+        <li><a href={href(lang, 'about')}>{t.nav.about}</a></li>
       </ul>
     </div>
     <div>
@@ -57,7 +58,7 @@ const t = ui[lang];
     <div>
       <p class="head">{t.footer.author}</p>
       <ul>
-        <li><a href="https://zamora16.github.io/angel-zamora-portfolio/">Ángel Zamora Martínez</a></li>
+        <li><a href={href(lang, 'about')}>Ángel Zamora Martínez</a></li>
         <li class="muted">{t.footer.authorRole}</li>
         <li><a href="https://github.com/zamora16/unmasking-gambling">{t.footer.code}</a></li>
       </ul>

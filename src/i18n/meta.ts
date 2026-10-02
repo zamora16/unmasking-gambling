@@ -17,6 +17,7 @@ const base: Record<Lang, Partial<Record<PageKey, Meta>>> = {
     sports: { kicker: 'Simulador', title: 'Apuestas deportivas', text: 'Combinadas, margen y rachas perdedoras.' },
     help: { kicker: 'Ayuda', title: 'Si el juego te está haciendo daño', text: 'Teléfonos, autoexclusión y pasos concretos. FEJAR 900 200 225 · Crisis 024.' },
     methods: { kicker: 'Método', title: 'Fuentes, técnicas y límites', text: 'Datos, estadística y código reproducible del proyecto.' },
+    about: { kicker: 'Sobre el proyecto', title: 'Quién hace esto y por qué', text: 'Un recurso independiente: sin publicidad de casas de apuestas, sin afiliados y sin rastreo.' },
   },
   en: {
     home: { kicker: 'Unmasking Gambling', title: 'The mathematics of gambling, with data', text: 'Simulations and real-data analysis showing why the house always wins.' },
@@ -30,6 +31,7 @@ const base: Record<Lang, Partial<Record<PageKey, Meta>>> = {
     sports: { kicker: 'Simulator', title: 'Sports betting', text: 'Accumulators, margins and losing streaks.' },
     help: { kicker: 'Help', title: 'If gambling is hurting you', text: 'Helplines, self-exclusion and practical steps.' },
     methods: { kicker: 'Methods', title: 'Sources, techniques and limits', text: 'Data, statistics and reproducible code.' },
+    about: { kicker: 'About', title: 'Who makes this and why', text: 'An independent resource: no gambling ads, no affiliate links and no tracking.' },
   },
 };
 

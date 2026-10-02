@@ -4,7 +4,11 @@ import '../styles/games.css';
 import '../styles/camino.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import { type Lang, type PageKey, href, asset } from '../i18n';
+import { type Lang, type PageKey, href, asset, ui } from '../i18n';
+import { pageMeta } from '../i18n/meta';
+import { author } from '../data/author';
+import { SOURCES, breadcrumbTrail, pageSchema, type Faq } from '../lib/seo';
+import { lastModified } from '../utils/lastModified';
 
 interface Props {
   lang: Lang;
@@ -12,13 +16,34 @@ interface Props {
   title: string;
   description: string;
   noindex?: boolean;
+  /** Questions and answers shown on the page, mirrored as FAQPage schema. */
+  faq?: Faq[];
 }
-const { lang, page, title, description, noindex = false } = Astro.props;
+const { lang, page, title, description, noindex = false, faq } = Astro.props;
 const other: Lang = lang === 'es' ? 'en' : 'es';
 const fullTitle = page === 'home' ? title : `${title} · Unmasking Gambling`;
 const canonical = new URL(href(lang, page), Astro.site).toString();
 const ogPage = page === 'wayPrint' ? 'way' : page;
 const ogImage = new URL(asset(`og/${lang}/${ogPage}.png`), Astro.site).toString();
+const abs = (p: PageKey) => new URL(href(lang, p), Astro.site).toString();
+const modified = lastModified(SOURCES[page]);
+const nav = ui[lang].nav as Partial<Record<PageKey, string>>;
+const crumbName = (p: PageKey) => (p === 'home' ? (lang === 'es' ? 'Inicio' : 'Home') : (nav[p] ?? pageMeta(lang, p)?.title ?? title));
+const schema = pageSchema({
+  lang,
+  page,
+  title,
+  description,
+  url: canonical,
+  siteUrl: abs('home'),
+  aboutUrl: abs('about'),
+  image: ogImage,
+  modified,
+  crumbs: breadcrumbTrail(page, crumbName, abs),
+  faq,
+});
+const showByline = page !== 'home' && page !== 'wayPrint';
+const longDate = new Intl.DateTimeFormat(lang === 'es' ? 'es-ES' : 'en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' }).format(new Date(modified));
 ---
 
 <!doctype html>
@@ -35,7 +60,7 @@ const ogImage = new URL(asset(`og/${lang}/${ogPage}.png`), Astro.site).toString(
     <link rel="icon" type="image/svg+xml" href={asset('favicon.svg')} />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={page === 'home' ? 'website' : 'article'} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={ogImage} />
     <meta property="og:image:width" content="1200" />
@@ -45,6 +70,9 @@ const ogImage = new URL(asset(`og/${lang}/${ogPage}.png`), Astro.site).toString(
     <link rel="alternate" hreflang="x-default" href={new URL(href('es', page), Astro.site).toString()} />
     <link rel="sitemap" href={asset('sitemap-index.xml')} />
     <meta name="theme-color" content="#0e1d16" />
+    <meta name="author" content={author.name} />
+    {page !== 'home' && <meta property="article:modified_time" content={modified} />}
+    <script type="application/ld+json" set:html={JSON.stringify(schema)} />
     <script is:inline>
       try {
         const t = localStorage.getItem('ug-theme');
@@ -61,6 +89,21 @@ const ogImage = new URL(asset(`og/${lang}/${ogPage}.png`), Astro.site).toString(
     <Header lang={lang} page={page} />
     <main id="main">
       <slot />
+      {
+        showByline && (
+          <aside class="byline page" aria-label={lang === 'es' ? 'Autoría' : 'Authorship'}>
+            <p>
+              {lang === 'es' ? 'Por ' : 'By '}
+              <a href={href(lang, 'about')} rel="author">{author.name}</a>, {lang === 'es' ? author.role.es.charAt(0).toLowerCase() + author.role.es.slice(1) : author.role.en}.{' '}
+              {lang === 'es' ? 'Última revisión: ' : 'Last reviewed: '}
+              <time datetime={modified}>{longDate}</time>.{' '}
+              <a href={href(lang, 'methods')}>{lang === 'es' ? 'Cómo está hecho' : 'How it is made'}</a>
+              {' · '}
+              <a href={author.issues}>{lang === 'es' ? '¿Has visto un error?' : 'Spotted a mistake?'}</a>
+            </p>
+          </aside>
+        )
+      }
     </main>
     <Footer lang={lang} />
   </body>
@@ -81,5 +124,21 @@ const ogImage = new URL(asset(`og/${lang}/${ogPage}.png`), Astro.site).toString(
   }
   .skip:focus {
     top: 1rem;
+  }
+  .byline {
+    margin-top: 4rem;
+  }
+  .byline p {
+    max-width: 50rem;
+    margin: 0;
+    padding-top: 1.1rem;
+    border-top: 1px solid var(--rule);
+    font-family: var(--sans);
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: var(--ink-3);
+  }
+  .byline a {
+    color: var(--ink-2);
   }
 </style>

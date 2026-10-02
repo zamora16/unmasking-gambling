@@ -1,6 +1,7 @@
 import { defineConfig } from 'astro/config';
 import react from '@astrojs/react';
 import sitemap from '@astrojs/sitemap';
+import { legacyRedirects } from './src/i18n/routes.ts';
 
 // GitHub Pages by default. To host on your own domain (e.g. Vercel), set
 // SITE_URL=https://your-domain and BASE_PATH=/ at build time.
@@ -17,17 +18,16 @@ export default defineConfig({
     sitemap({
       i18n: { defaultLocale: 'es', locales: { es: 'es', en: 'en' } },
       // the printable plan is a personal document, not a page to index
-      filter: (page) => !page.includes('/print/'),
+      filter: (page) => !page.includes('/print/') && !page.includes('/imprimir/'),
     }),
   ],
   // old URLs from earlier versions of the site
   redirects: {
-    '/ayuda': to('help/'),
-    '/el-camino': to('the-way/'),
-    '/slots': to('games/slots/'),
-    '/roulette': to('games/roulette/'),
-    '/lottery': to('games/lottery/'),
-    '/sports': to('games/sports/'),
+    ...legacyRedirects(BASE),
+    '/slots': to('juegos/tragaperras/'),
+    '/roulette': to('juegos/ruleta/'),
+    '/lottery': to('juegos/loteria/'),
+    '/sports': to('juegos/apuestas-deportivas/'),
   },
   i18n: {
     defaultLocale: 'es',
