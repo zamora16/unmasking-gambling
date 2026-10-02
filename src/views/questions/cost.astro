@@ -1,0 +1,74 @@
+---
+import QuestionPage from '../../components/QuestionPage.astro';
+import Figure from '../../components/Figure.astro';
+import LossCalc from '../../islands/questions/LossCalc';
+import { type Lang, href } from '../../i18n';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const es = lang === 'es';
+
+const faq = es
+  ? [
+      { q: '¿Por qué creo que he perdido menos de lo que dice el banco?', a: 'Porque los premios se recuerdan y las pérdidas se difuminan. Un premio de 300 € es un momento concreto; perder 20 € cuarenta veces no lo es. Además, muchos «premios» de las tragaperras son menores que lo apostado, pero suenan y se celebran como si fueran ganancias.' },
+      { q: '¿Cuenta como pérdida lo que gané y volví a jugar?', a: 'Ya está dentro de la cuenta. Si ingresaste 1.000 €, retiraste 200 € y no queda nada en la cuenta de juego, has perdido 800 €, da igual cuántas veces ganaras por el camino.' },
+      { q: 'Me he asustado con la cifra. ¿Qué hago ahora?', a: 'Lo primero, no intentes recuperarlo jugando: es la forma más rápida de que la cifra crezca. Cuéntaselo a alguien de confianza, pon barreras para no seguir y, si hay deudas, pide orientación antes de firmar nada. El 900 200 225 de FEJAR es gratuito.' },
+    ]
+  : [
+      { q: 'Why do I think I lost less than my bank says?', a: 'Because wins are remembered and losses blur. A €300 win is one specific moment; losing €20 forty times is not. On top of that, many slot “wins” are smaller than the stake, yet they ring and get celebrated as if they were gains.' },
+      { q: 'Does money I won and played again count as a loss?', a: 'It is already in the sum. If you deposited €1,000, withdrew €200 and nothing is left in your gambling account, you lost €800, however many times you won along the way.' },
+      { q: 'The figure scared me. What now?', a: 'First, do not try to win it back by gambling: that is the fastest way to make the figure grow. Tell someone you trust, put barriers in place so you do not carry on, and if there are debts, get advice before signing anything.' },
+    ];
+---
+
+<QuestionPage lang={lang} id="cost" faq={faq} sources={['src/islands/questions/LossCalc.tsx']}>
+  <article class="page">
+    <div class="measure prose">
+      {
+        es ? (
+          <>
+            <h2>Por qué cuesta saberlo</h2>
+            <p>
+              Casi nadie lleva la cuenta de lo que juega. El dinero entra y sale en pequeñas cantidades, se mezcla con los premios y se vuelve a apostar. Lo que queda en la memoria son los buenos momentos. Por eso la primera vez que alguien suma de verdad, la cifra suele sorprender.
+            </p>
+            <p>
+              Esta calculadora te ayuda a estimarlo con lo que recuerdes. Debajo tienes cómo sacar la cifra exacta. Nada de lo que escribas sale de tu navegador.
+            </p>
+          </>
+        ) : (
+          <>
+            <h2>Why it is hard to know</h2>
+            <p>
+              Hardly anyone keeps track of what they gamble. Money goes in and out in small amounts, mixes with prizes and gets staked again. What stays in memory are the good moments. That is why the first time someone really adds it up, the figure tends to come as a surprise.
+            </p>
+            <p>
+              This calculator helps you estimate it from what you remember. Below it is how to get the exact figure. Nothing you type leaves your browser.
+            </p>
+          </>
+        )
+      }
+    </div>
+  </article>
+
+  <Figure wide={false} title={es ? 'Lo que te ha costado el juego' : 'What gambling has cost you'}>
+    <LossCalc client:idle lang={lang} />
+  </Figure>
+
+  <article class="page">
+    <div class="measure prose">
+      {
+        es ? (
+          <p>
+            Si la cifra te preocupa, en <a href={href(lang, 'way')}>El Camino</a> tienes seis pasos para entender qué está pasando y hacer un plan. Y si necesitas hablar con alguien ahora, en <a href={href(lang, 'help')}>Pedir ayuda</a> están los teléfonos gratuitos.
+          </p>
+        ) : (
+          <p>
+            If the figure worries you, <a href={href(lang, 'way')}>The Way</a> has six steps to understand what is happening and make a plan. And if you need to talk to someone now, <a href={href(lang, 'help')}>Get help</a> lists free helplines.
+          </p>
+        )
+      }
+    </div>
+  </article>
+</QuestionPage>

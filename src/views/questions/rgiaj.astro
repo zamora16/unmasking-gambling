@@ -1,0 +1,120 @@
+---
+import QuestionPage from '../../components/QuestionPage.astro';
+import TechBox from '../../components/TechBox.astro';
+import { type Lang, href, questionHref } from '../../i18n';
+import { questionById } from '../../data/questions';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const es = lang === 'es';
+const block = questionById('block');
+const RGIAJ = 'https://www.ordenacionjuego.es/participantes-juego/juego-seguro/rgiaj';
+
+const faq = es
+  ? [
+      { q: '¿Cuánto dura la autoexclusión?', a: 'La inscripción en el RGIAJ es por tiempo indefinido. Puedes pedir que se cancele, pero no antes de que hayan pasado seis meses desde la inscripción.' },
+      { q: '¿Me bloquea también en salones, bingos y casinos?', a: 'Los locales de juego presencial dependen de cada comunidad autónoma, que tiene su propio registro. Muchas comunidades tienen convenios con la DGOJ para reconocer las inscripciones del otro registro, pero lo más seguro es inscribirse en los dos el mismo día.' },
+      { q: '¿Funciona con las webs de juego sin licencia?', a: 'No. Las webs sin licencia española no consultan el RGIAJ. Por eso conviene añadir un bloqueador en el móvil y el ordenador, y bloquear los pagos de juego en el banco.' },
+      { q: '¿Se entera alguien de que me he inscrito?', a: 'Es un registro administrativo confidencial. Los operadores con licencia lo consultan para impedirte el acceso, pero no es público.' },
+    ]
+  : [
+      { q: 'How long does self-exclusion last?', a: 'Registration in the RGIAJ is indefinite. You can ask for it to be cancelled, but not until six months have passed since you registered.' },
+      { q: 'Does it also block arcades, bingo halls and casinos?', a: 'In-person gambling venues are run under each Spanish region’s rules, and each region has its own register. Many regions have agreements with the national regulator to recognise each other’s registrations, but the safest option is to join both on the same day.' },
+      { q: 'Does it work on unlicensed gambling sites?', a: 'No. Sites without a Spanish licence do not check the RGIAJ. That is why it is worth adding a blocker on your phone and computer, and blocking gambling payments at your bank.' },
+      { q: 'Will anyone find out I signed up?', a: 'It is a confidential administrative register. Licensed operators check it to refuse you access, but it is not public.' },
+    ];
+---
+
+<QuestionPage lang={lang} id="rgiaj" faq={faq}>
+  <article class="page">
+    <div class="measure prose">
+      {
+        es ? (
+          <>
+            <h2>Qué es el RGIAJ</h2>
+            <p>
+              El Registro General de Interdicciones de Acceso al Juego es el registro estatal de personas que no pueden jugar. Lo gestiona la Dirección General de Ordenación del Juego (DGOJ). Cuando te inscribes, todas las webs y apps de juego con licencia en España están obligadas a impedirte el acceso. También te bloquea en las loterías presenciales en las que se pide identificación.
+            </p>
+            <p>
+              Es la barrera más eficaz que existe por una razón sencilla: una vez hecha, no depende de tu fuerza de voluntad en el peor momento.
+            </p>
+
+            <h2>Cómo inscribirse, paso a paso</h2>
+            <ol>
+              <li>
+                <strong>Por internet.</strong> Entra en la sede electrónica de la DGOJ desde la <a href={RGIAJ}>página del RGIAJ</a> e identifícate con certificado digital o DNI electrónico. Rellena la solicitud y envíala.
+              </li>
+              <li>
+                <strong>Con el móvil.</strong> La app «DNIe autoprohibidos», para Android, permite hacerlo con un DNI 3.0 y un móvil con NFC.
+              </li>
+              <li>
+                <strong>En persona o por correo.</strong> Descarga el formulario de la misma página y preséntalo en cualquier registro público, en una oficina de Correos o en una comisaría. Desde el extranjero, en una embajada o consulado.
+              </li>
+              <li>
+                <strong>Haz lo mismo en tu comunidad autónoma.</strong> Para los salones, bingos y casinos físicos, inscríbete también en el registro de prohibidos de tu comunidad.
+              </li>
+            </ol>
+
+            <h2>Lo que no cubre</h2>
+            <p>
+              Las webs sin licencia española no consultan el registro. Tampoco lo hacen los juegos privados ni las apuestas entre amigos. Por eso el RGIAJ funciona mejor como primera capa de varias: un bloqueador en los dispositivos, el bloqueo de pagos en el banco y una persona de confianza. Las tienes todas en <a href={questionHref(lang, block.slug)}>{block.question[lang]}</a>
+            </p>
+          </>
+        ) : (
+          <>
+            <h2>What the RGIAJ is</h2>
+            <p>
+              The Registro General de Interdicciones de Acceso al Juego is Spain’s national register of people barred from gambling, run by the gambling regulator (DGOJ). Once you register, every gambling website and app licensed in Spain must refuse you access. It also blocks you from in-person lotteries where ID is checked.
+            </p>
+            <p>
+              It is the most effective barrier there is, for a simple reason: once it is done, it no longer depends on your willpower at the worst moment.
+            </p>
+
+            <h2>How to register, step by step</h2>
+            <ol>
+              <li>
+                <strong>Online.</strong> Go to the DGOJ electronic office from the <a href={RGIAJ}>RGIAJ page</a> and identify yourself with a digital certificate or electronic ID card. Fill in the application and submit it.
+              </li>
+              <li>
+                <strong>On your phone.</strong> The “DNIe autoprohibidos” Android app lets you do it with a version 3.0 Spanish ID card and a phone with NFC.
+              </li>
+              <li>
+                <strong>In person or by post.</strong> Download the form from the same page and hand it in at any public registry office, a post office or a police station. From abroad, at a Spanish embassy or consulate.
+              </li>
+              <li>
+                <strong>Do the same in your region.</strong> For arcades, bingo halls and casinos, also join your region’s register of barred people.
+              </li>
+            </ol>
+            <p>
+              Outside Spain, the equivalents are national schemes such as GAMSTOP in the UK, or state self-exclusion programmes in the US.
+            </p>
+
+            <h2>What it does not cover</h2>
+            <p>
+              Sites without a Spanish licence do not check the register. Nor do private games or bets between friends. That is why the RGIAJ works best as the first of several layers: a blocker on your devices, a payment block at your bank and someone you trust. They are all in <a href={questionHref(lang, block.slug)}>{block.question[lang]}</a>
+            </p>
+          </>
+        )
+      }
+
+      <TechBox lang={lang} title={es ? 'Fuentes' : 'Sources'}>
+        {
+          es ? (
+            <p>
+              Dirección General de Ordenación del Juego, página del RGIAJ (consultada en octubre de 2026): canales de inscripción, duración indefinida y cancelación a partir de seis meses. Convenios de reconocimiento mutuo con comunidades autónomas publicados en el BOE, por ejemplo el de Aragón (BOE-A-2025-2569). Los trámites cambian: comprueba siempre la página oficial.
+            </p>
+          ) : (
+            <p>
+              Spanish gambling regulator (DGOJ), RGIAJ page (checked October 2026): registration channels, indefinite duration and cancellation after six months. Mutual-recognition agreements with regions published in the Spanish Official Gazette, for example Aragón’s (BOE-A-2025-2569). Procedures change: always check the official page.
+            </p>
+          )
+        }
+      </TechBox>
+      <p>
+        <a href={href(lang, 'help')}>{es ? 'Todos los teléfonos y recursos de ayuda' : 'All helplines and resources'} →</a>
+      </p>
+    </div>
+  </article>
+</QuestionPage>

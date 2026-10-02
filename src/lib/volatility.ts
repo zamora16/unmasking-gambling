@@ -68,7 +68,7 @@ export function hitFrequency(volatility: Volatility): number {
     .reduce((sum, [, p]) => sum + p, 0);
 }
 
-function spin(table: Outcome[], random: () => number): number {
+export function spin(table: Outcome[], random: () => number): number {
   let roll = random();
   for (const outcome of table) {
     roll -= outcome.probability;

@@ -24,7 +24,9 @@ interface Props {
 const { lang, id, faq = [], sources = [] } = Astro.props;
 const es = lang === 'es';
 const q = questionById(id);
-const others = QUESTIONS.filter((x) => x.id !== id);
+const nudge = q.nudge ?? 'screening';
+// same topic first, then the rest, six at most
+const others = [...QUESTIONS.filter((x) => x.id !== id && x.group === q.group), ...QUESTIONS.filter((x) => x.group !== q.group)].slice(0, 6);
 const doc = {
   slugs: { es: `${SLUGS.es.questions}${q.slug.es}/`, en: `${SLUGS.en.questions}${q.slug.en}/` },
   sources: [`src/views/questions/${id}.astro`, ...sources],
@@ -67,15 +69,39 @@ const doc = {
 
   <section class="page">
     <aside class="check measure">
-      <p class="check-title">{es ? '¿Y si la pregunta es por ti?' : 'What if the question is about you?'}</p>
-      <p>
-        {
-          es
-            ? 'Buscar un sistema para recuperar lo perdido es muy común, y también es una de las señales de que el juego empieza a costar más de la cuenta. Hay un cuestionario de nueve preguntas que se usa en investigación para ver dónde estás. Tarda dos minutos y las respuestas no salen de tu navegador.'
-            : 'Looking for a system to win back what you lost is very common, and it is also one of the signs that gambling is starting to cost too much. There is a nine-question questionnaire used in research to see where you stand. It takes two minutes and your answers never leave your browser.'
-        }
-      </p>
-      <a class="btn" href={href(lang, 'way2')}>{es ? 'Hacer el cuestionario' : 'Take the questionnaire'} →</a>
+      {
+        nudge === 'help' ? (
+          <>
+            <p class="check-title">{es ? 'Si necesitas hablar con alguien' : 'If you need to talk to someone'}</p>
+            <p>
+              {es
+                ? 'FEJAR orienta gratis sobre recursos cerca de ti en el 900 200 225. Si estás pasando por un momento muy difícil, llama al 024, también gratis y a cualquier hora.'
+                : 'In Spain, FEJAR gives free guidance on local resources on 900 200 225. In the UK, the National Gambling Helpline is 0808 8020 133; in the US, 1-800-GAMBLER.'}
+            </p>
+            <a class="btn" href={href(lang, 'help')}>{es ? 'Ver todos los recursos' : 'See all resources'} →</a>
+          </>
+        ) : nudge === 'family' ? (
+          <>
+            <p class="check-title">{es ? 'Para ti también hay ayuda' : 'There is help for you too'}</p>
+            <p>
+              {es
+                ? 'Puedes llamar a FEJAR (900 200 225) aunque no seas tú quien juega: te orientan sobre asociaciones y grupos de familias cerca de ti. Y si quieres entender qué le está pasando, El Camino explica por qué engancha el juego paso a paso.'
+                : 'You can call a gambling helpline even if you are not the one gambling: they can point you to family groups near you. And to understand what is happening to them, The Way explains step by step why gambling hooks people.'}
+            </p>
+            <a class="btn" href={href(lang, 'way1')}>{es ? 'Por qué engancha' : 'Why it hooks'} →</a>
+          </>
+        ) : (
+          <>
+            <p class="check-title">{es ? '¿Y si la pregunta es por ti?' : 'What if the question is about you?'}</p>
+            <p>
+              {es
+                ? 'Buscar una forma de ganar o de recuperar lo perdido es muy común, y también una de las señales de que el juego empieza a costar más de la cuenta. Hay un cuestionario de nueve preguntas que se usa en investigación para ver dónde estás. Tarda dos minutos y las respuestas no salen de tu navegador.'
+                : 'Looking for a way to win, or to win back what you lost, is very common, and it is also one of the signs that gambling is starting to cost too much. There is a nine-question questionnaire used in research to see where you stand. It takes two minutes and your answers never leave your browser.'}
+            </p>
+            <a class="btn" href={href(lang, 'way2')}>{es ? 'Hacer el cuestionario' : 'Take the questionnaire'} →</a>
+          </>
+        )
+      }
     </aside>
   </section>
 

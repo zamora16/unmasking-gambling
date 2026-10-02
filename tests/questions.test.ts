@@ -76,3 +76,34 @@ describe('question registry', () => {
     }
   });
 });
+
+import { PROGRAMME, NAVIDAD, afterTax, chanceOfGordo, simulateLives } from '../src/lib/navidad';
+
+describe('christmas lottery', () => {
+  it('the prize programme pays exactly 70 % of each series', () => {
+    const perSeries = PROGRAMME.reduce((s, r) => s + r.count * r.perDecimo * 10, 0);
+    expect(perSeries).toBe(14_000_000);
+    expect(perSeries / (100_000 * 200)).toBeCloseTo(0.7, 12);
+  });
+
+  it('the simulated per-décimo distribution keeps the exact mean', () => {
+    const total = NAVIDAD.dist.reduce((s, d) => s + d.p, 0);
+    expect(total).toBeCloseTo(1, 9);
+    expect(NAVIDAD.ev).toBeCloseTo(14, 6);
+  });
+
+  it('taxes only the part of a décimo prize above 40,000 €', () => {
+    expect(afterTax(20_000)).toBe(20_000);
+    expect(afterTax(400_000)).toBe(328_000);
+    expect(afterTax(125_000)).toBe(108_000);
+  });
+
+  it('a lifetime of décimos', () => {
+    expect(chanceOfGordo(1)).toBeCloseTo(1e-5, 12);
+    const r = simulateLives(3, 50, 2000, 7);
+    expect(r.spent).toBe(3000);
+    // mean loss ≈ (20 − 13.09) × 150 ≈ 1,036 €, within simulation noise
+    expect(r.meanNet).toBeLessThan(-600);
+    expect(r.shareAhead).toBeLessThan(0.05);
+  });
+});

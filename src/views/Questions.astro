@@ -2,7 +2,7 @@
 import Base from '../layouts/Base.astro';
 import PageHead from '../components/PageHead.astro';
 import { type Lang, questionHref } from '../i18n';
-import { QUESTIONS } from '../data/questions';
+import { QUESTIONS, GROUPS } from '../data/questions';
 
 interface Props {
   lang: Lang;
@@ -25,28 +25,36 @@ const es = lang === 'es';
     kicker={es ? 'Preguntas' : 'Questions'}
     title={es ? 'Lo que la gente pregunta sobre el juego' : 'What people ask about gambling'}
     lede={es
-      ? 'Respuestas directas a lo que se busca sobre ruleta, tragaperras, apuestas y loterías. Cada una lleva sus números y una herramienta para comprobarlo tú.'
-      : 'Straight answers to what people search for about roulette, slots, betting and lotteries. Each comes with its numbers and a tool to check it yourself.'}
+      ? 'Respuestas directas a lo que se busca sobre ruleta, tragaperras, apuestas y loterías. Con números exactos, fuentes y, casi siempre, una herramienta para comprobarlo tú.'
+      : 'Straight answers to what people search for about roulette, slots, betting and lotteries. With exact numbers, sources and, almost always, a tool to check it yourself.'}
   />
 
-  <section class="page">
-    <ol class="q-list">
-      {
-        QUESTIONS.map((q) => (
-          <li>
-            <a href={questionHref(lang, q.slug)}>
-              <span class="q-kicker">{q.kicker[lang]}</span>
-              <span class="q-title">{q.question[lang]}</span>
-              <span class="q-answer">{q.answer[lang]}</span>
-            </a>
-          </li>
-        ))
-      }
-    </ol>
-  </section>
+  {
+    GROUPS.map((g) => (
+      <section class="page group" aria-labelledby={`g-${g.key}`}>
+        <h2 class="g-title" id={`g-${g.key}`}>{g.label[lang]}</h2>
+        <ol class="q-list">
+          {QUESTIONS.filter((q) => q.group === g.key).map((q) => (
+            <li>
+              <a href={questionHref(lang, q.slug)}>
+                <span class="q-kicker">{q.kicker[lang]}</span>
+                <span class="q-title">{q.question[lang]}</span>
+                <span class="q-answer">{q.answer[lang]}</span>
+              </a>
+            </li>
+          ))}
+        </ol>
+      </section>
+    ))
+  }
 </Base>
 
 <style>
+  .g-title {
+    font-size: 1.9rem;
+    font-weight: 600;
+    margin: 1.5rem 0 1rem;
+  }
   .q-list {
     list-style: none;
     padding: 0;

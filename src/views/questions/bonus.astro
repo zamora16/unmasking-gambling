@@ -1,0 +1,113 @@
+---
+import QuestionPage from '../../components/QuestionPage.astro';
+import Figure from '../../components/Figure.astro';
+import TechBox from '../../components/TechBox.astro';
+import BonusCalc from '../../islands/questions/BonusCalc';
+import { type Lang, href } from '../../i18n';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const es = lang === 'es';
+
+const faq = es
+  ? [
+      { q: '¿Qué es el requisito de apuesta o rollover?', a: 'Es cuántas veces tienes que apostar el bono (o el bono más el depósito) antes de poder retirar ese dinero. Un bono de 100 € con un rollover de 35x obliga a apostar 3.500 €. Hasta entonces, el bono y lo que ganes con él no son tuyos.' },
+      { q: '¿Puedo retirar el dinero sin cumplir el requisito?', a: 'Normalmente puedes retirar tu dinero real, pero pierdes el bono y lo que hayas ganado con él. Cada casa lo regula en sus condiciones, y conviene leerlas antes de aceptar nada.' },
+      { q: '¿Y las apuestas gratis de las casas de apuestas?', a: 'En una apuesta gratis, si aciertas cobras la ganancia pero no el importe apostado. Así que valen bastante menos de lo que anuncian: una apuesta gratis de 10 € a cuota 2,00 te da 10 € si aciertas, no 20 €.' },
+      { q: '¿Están permitidos los bonos de bienvenida en España?', a: 'Estuvieron prohibidos por el Real Decreto 958/2020 hasta que el Tribunal Supremo anuló esa parte en abril de 2024. Desde entonces las casas pueden volver a ofrecerlos, con las condiciones que fija la regulación.' },
+    ]
+  : [
+      { q: 'What is a wagering requirement or rollover?', a: 'It is how many times you must stake the bonus (or bonus plus deposit) before you can withdraw that money. A €100 bonus with a 35× rollover means staking €3,500. Until then, the bonus and anything you win with it are not yours.' },
+      { q: 'Can I withdraw without meeting the requirement?', a: 'You can usually withdraw your own money, but you lose the bonus and whatever you won with it. Each operator sets this in its terms, which are worth reading before accepting anything.' },
+      { q: 'What about free bets?', a: 'With a free bet, if you win you get the winnings but not the stake. So they are worth a good deal less than advertised: a €10 free bet at odds of 2.00 pays €10 if it wins, not €20.' },
+      { q: 'Are welcome bonuses allowed in Spain?', a: 'They were banned by Royal Decree 958/2020 until the Supreme Court struck that part down in April 2024. Since then operators can offer them again, under the conditions set by regulation.' },
+    ];
+---
+
+<QuestionPage lang={lang} id="bonus" faq={faq} sources={['src/islands/questions/BonusCalc.tsx', 'src/lib/bonus.ts']}>
+  <article class="page">
+    <div class="measure prose">
+      {
+        es ? (
+          <>
+            <h2>Dinero que no es tuyo todavía</h2>
+            <p>
+              «Te duplicamos tu primer depósito». Suena a regalo, pero el bono no se puede retirar: antes hay que apostarlo muchas veces. Ese requisito de apuesta, o <em>rollover</em>, es la letra pequeña que lo cambia todo.
+            </p>
+            <p>
+              Mientras cumples el requisito, juegas con tu dinero y con el del bono mezclados, y cada apuesta paga la ventaja de la casa. Con los requisitos habituales, la mayoría se queda sin saldo antes de terminar y pierde también lo que depositó.
+            </p>
+            <p>
+              Prueba abajo con las condiciones de cualquier bono. La simulación juega mil veces hasta cumplir el requisito o quedarse sin saldo.
+            </p>
+          </>
+        ) : (
+          <>
+            <h2>Money that is not yours yet</h2>
+            <p>
+              “We’ll double your first deposit.” It sounds like a gift, but the bonus cannot be withdrawn: first you have to stake it many times. That wagering requirement, or rollover, is the small print that changes everything.
+            </p>
+            <p>
+              While you work through the requirement, your money and the bonus are mixed together, and every bet pays the house edge. With typical requirements, most people run out of balance before they finish and lose their deposit as well.
+            </p>
+            <p>
+              Try it below with the terms of any bonus. The simulation plays a thousand times until the requirement is met or the balance runs out.
+            </p>
+          </>
+        )
+      }
+    </div>
+  </article>
+
+  <Figure
+    wide={false}
+    title={es ? 'Lo que pasa cuando aceptas un bono' : 'What happens when you accept a bonus'}
+    sub={es ? 'Cambia el depósito, el bono, el requisito y el juego. Los valores por defecto son un bono típico de casino.' : 'Change the deposit, the bonus, the requirement and the game. The defaults are a typical casino bonus.'}
+  >
+    <BonusCalc client:idle lang={lang} />
+  </Figure>
+
+  <article class="page">
+    <div class="measure prose">
+      {
+        es ? (
+          <>
+            <h2>Para qué sirven de verdad</h2>
+            <p>
+              Los bonos no están pensados para que ganes, sino para que empieces a jugar y te quedes. Funcionan: según el Ministerio de Consumo, el número de jugadores de juego online creció un 21,6 % en 2024, el año en que los bonos de bienvenida volvieron a estar permitidos. En <a href={href(lang, 'market')}>el mercado</a> tienes cuánto gastan las casas en bonos y publicidad cada año.
+            </p>
+            <p>
+              Si un bono te ha hecho abrir una cuenta que no pensabas abrir, ese era su trabajo.
+            </p>
+          </>
+        ) : (
+          <>
+            <h2>What they are really for</h2>
+            <p>
+              Bonuses are not designed for you to win, but for you to start playing and stay. They work: according to Spain’s Ministry of Consumer Affairs, the number of online gamblers grew 21.6% in 2024, the year welcome bonuses were allowed again. <a href={href(lang, 'market')}>The market</a> shows how much operators spend on bonuses and advertising every year.
+            </p>
+            <p>
+              If a bonus got you to open an account you were not planning to open, it did its job.
+            </p>
+          </>
+        )
+      }
+
+      <TechBox lang={lang} title={es ? 'Por qué la media engaña' : 'Why the average misleads'}>
+        {
+          es ? (
+            <p>
+              La pérdida esperada por la ventaja es requisito × (1 − RTP), pero el resultado medio de la simulación puede salir mejor: quien se arruina deja de apostar y no paga el resto del requisito, y el bono absorbe las primeras pérdidas. Con volatilidad alta, la media puede incluso ser positiva aunque la mayoría pierda su depósito. Por eso las condiciones reales incluyen apuesta máxima por tirada, tope de retirada, juegos que cuentan menos o no cuentan y plazos: existen para cerrar ese hueco. Fuentes: Real Decreto 958/2020; sentencia del Tribunal Supremo de 19 de abril de 2024 (BOE-A-2024-11619); nota de prensa del Ministerio de Derechos Sociales, Consumo y Agenda 2030, 4 de agosto de 2025.
+            </p>
+          ) : (
+            <p>
+              The expected loss to the edge is requirement × (1 − RTP), but the simulation’s average result can come out better: those who go bust stop betting and never pay the rest of the requirement, and the bonus absorbs the first losses. With high volatility the average can even be positive while most people lose their deposit. That is why real terms include a maximum bet per spin, a withdrawal cap, games that count less or not at all, and deadlines: they exist to close that gap. Sources: Royal Decree 958/2020; Spanish Supreme Court ruling of 19 April 2024 (BOE-A-2024-11619); Ministry of Consumer Affairs press release, 4 August 2025.
+            </p>
+          )
+        }
+      </TechBox>
+    </div>
+  </article>
+</QuestionPage>

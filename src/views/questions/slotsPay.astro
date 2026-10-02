@@ -1,0 +1,113 @@
+---
+import QuestionPage from '../../components/QuestionPage.astro';
+import Figure from '../../components/Figure.astro';
+import TechBox from '../../components/TechBox.astro';
+import SlotDrought from '../../islands/questions/SlotDrought';
+import { type Lang, href, questionHref } from '../../i18n';
+import { questionById } from '../../data/questions';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const es = lang === 'es';
+const rtp = questionById('rtp');
+
+const faq = es
+  ? [
+      { q: '¿Hay horas en las que las tragaperras pagan más?', a: 'No. Ni las online ni las de bar cambian su probabilidad según la hora, el día o cuánta gente esté jugando. Lo que sí cambia con la hora es cuánta gente juega, y por tanto cuántos premios ves caer.' },
+      { q: '¿Una máquina que acaba de dar un premio grande tarda más en volver a pagar?', a: 'En una tragaperras online, no: la siguiente tirada no sabe nada de la anterior. En una de bar, el mínimo se exige sobre todo un ciclo de miles de partidas, así que un premio concreto no te dice qué vendrá en las siguientes.' },
+      { q: '¿Qué son los casi-premios?', a: 'Son tiradas en las que el símbolo grande se queda justo al lado de la línea. Dan la sensación de haber estado cerca, aunque perder por poco y perder por mucho es exactamente lo mismo. Las máquinas los producen a propósito, porque animan a seguir jugando.' },
+    ]
+  : [
+      { q: 'Are there times when slots pay more?', a: 'No. Neither online slots nor bar machines change their odds by hour, day or how many people are playing. What changes with the time is how many people play, and so how many prizes you see land.' },
+      { q: 'Does a machine that just paid a big prize take longer to pay again?', a: 'Not an online slot: the next spin knows nothing of the last one. For a Spanish bar machine, the minimum applies over a whole cycle of thousands of games, so one prize tells you nothing about the next few.' },
+      { q: 'What are near-misses?', a: 'Spins where the big symbol stops just next to the line. They feel close, even though losing by a little and losing by a lot are exactly the same. Machines produce them on purpose, because they encourage people to keep playing.' },
+    ];
+---
+
+<QuestionPage lang={lang} id="slotsPay" faq={faq} sources={['src/islands/questions/SlotDrought.tsx']}>
+  <article class="page">
+    <div class="measure prose">
+      {
+        es ? (
+          <>
+            <h2>Las tragaperras online: sin memoria</h2>
+            <p>
+              Cada tirada de una tragaperras online la decide un generador de números aleatorios en el momento en que pulsas el botón. No hay una cola de premios esperando, ni una máquina «caliente» o «fría». Llevar doscientas tiradas sin premio no hace más probable el siguiente.
+            </p>
+            <p>
+              La sensación de que «tiene que caer» es una de las trampas mentales más estudiadas: la falacia del jugador. Abajo puedes comprobarlo con 200.000 tiradas de nuestra tragaperras simulada.
+            </p>
+          </>
+        ) : (
+          <>
+            <h2>Online slots: no memory</h2>
+            <p>
+              Every spin of an online slot is decided by a random number generator the moment you press the button. There is no queue of prizes waiting, no “hot” or “cold” machine. Two hundred spins without a prize do not make the next one more likely.
+            </p>
+            <p>
+              The feeling that “it has to come” is one of the most studied mental traps: the gambler’s fallacy. Below you can check it with 200,000 spins of our simulated slot.
+            </p>
+          </>
+        )
+      }
+    </div>
+  </article>
+
+  <Figure
+    wide={false}
+    title={es ? 'Llevar tiempo sin premio no acerca el siguiente' : 'Going without a prize does not bring the next one closer'}
+    sub={es ? 'Probabilidad de premio en la tirada siguiente, según cuántas tiradas seguidas llevaba la máquina sin pagar.' : 'Chance of a prize on the next spin, by how many spins in a row the machine had gone without paying.'}
+  >
+    <SlotDrought client:idle lang={lang} />
+  </Figure>
+
+  <article class="page">
+    <div class="measure prose">
+      {
+        es ? (
+          <>
+            <h2>Las tragaperras de bar: un ciclo que no puedes ver</h2>
+            <p>
+              Las máquinas de los bares y salones de España (las «tipo B») funcionan distinto. Cada comunidad autónoma tiene su reglamento, y suelen exigir que la máquina devuelva un porcentaje mínimo de lo jugado a lo largo de un ciclo de partidas: por ejemplo, al menos el 75 % en cada ciclo de 20.000 partidas, o el 70 % en ciclos de 40.000, según la norma.
+            </p>
+            <p>
+              De ahí viene la creencia de que una máquina que lleva mucho sin pagar «está a punto». Tiene un fondo de verdad, pero no sirve para nada en la práctica. No sabes en qué punto del ciclo está, cuánto ha jugado la gente antes que tú ni cuánto ha pagado ya. El ciclo son decenas de miles de partidas. Y aunque cumpla su mínimo, la máquina puede quedarse con hasta un 25 % o un 30 % de todo lo que se mete en ella.
+            </p>
+            <p>
+              Lo que cuesta jugar, en euros por hora, lo explica <a href={questionHref(lang, rtp.slug)}>{rtp.question[lang]}</a> Y en la <a href={href(lang, 'slots')}>tragaperras simulada</a> verás cómo se fabrican los casi-premios.
+            </p>
+          </>
+        ) : (
+          <>
+            <h2>Spanish bar machines: a cycle you cannot see</h2>
+            <p>
+              The machines in Spanish bars and arcades (“type B”) work differently. Each region has its own rules, and they usually require the machine to return a minimum share of what is played over a cycle of games: for example, at least 75% in every cycle of 20,000 games, or 70% over 40,000, depending on the rules.
+            </p>
+            <p>
+              That is where the belief comes from that a machine that has not paid for a while “is about to”. There is a grain of truth in it, but it is useless in practice. You do not know where in the cycle it is, how much people played before you or how much it has already paid out. The cycle is tens of thousands of games. And even meeting its minimum, the machine can keep up to 25% or 30% of everything put into it.
+            </p>
+            <p>
+              What playing costs, in euros per hour, is explained in <a href={questionHref(lang, rtp.slug)}>{rtp.question[lang]}</a> And in the <a href={href(lang, 'slots')}>simulated slot</a> you can see how near-misses are made.
+            </p>
+          </>
+        )
+      }
+
+      <TechBox lang={lang} title={es ? 'Fuentes' : 'Sources'}>
+        {
+          es ? (
+            <p>
+              El Real Decreto 2110/1998 (Reglamento de Máquinas Recreativas y de Azar) exige en su artículo 6 que las máquinas tipo B devuelvan al menos el 75 % en todo ciclo de 20.000 partidas consecutivas; hoy se aplica directamente solo en Ceuta y Melilla. Las comunidades autónomas tienen reglamentos propios con valores parecidos, como el 70 % en ciclos de 40.000 partidas. La tabla de arriba usa la tragaperras de esta web, con RTP exacto y tiradas independientes, como las online.
+            </p>
+          ) : (
+            <p>
+              Spain’s Royal Decree 2110/1998 (Gaming Machines Regulation) requires in article 6 that type B machines return at least 75% over every cycle of 20,000 consecutive games; today it applies directly only in Ceuta and Melilla. The regions have their own rules with similar values, such as 70% over cycles of 40,000 games. The table above uses this site’s slot, with an exact RTP and independent spins, like online slots.
+            </p>
+          )
+        }
+      </TechBox>
+    </div>
+  </article>
+</QuestionPage>

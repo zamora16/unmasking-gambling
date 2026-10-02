@@ -1,4 +1,5 @@
 ---
+import RelatedQuestions from '../components/RelatedQuestions.astro';
 import Base from '../layouts/Base.astro';
 import PageHead from '../components/PageHead.astro';
 import { type Lang, href } from '../i18n';
@@ -177,6 +178,7 @@ const steps = es
       <p class="note">{es ? 'Esta página es informativa y no sustituye la atención de un profesional sanitario.' : 'This page is for information and does not replace care from a health professional.'}</p>
     </section>
   </div>
+  <RelatedQuestions lang={lang} ids={['rgiaj', 'block', 'family', 'cost']} title={es ? 'Guías paso a paso' : 'Step-by-step guides'} />
 </Base>
 
 <style>

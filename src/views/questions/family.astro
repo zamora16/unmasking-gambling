@@ -1,0 +1,102 @@
+---
+import QuestionPage from '../../components/QuestionPage.astro';
+import { type Lang, href } from '../../i18n';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const es = lang === 'es';
+
+const faq = es
+  ? [
+      { q: '¿Debo pagar sus deudas de juego?', a: 'No como primera respuesta. Pagar las deudas sin un plan suele aliviar la presión justo cuando esa presión podría llevar a pedir ayuda, y a menudo libera dinero para seguir jugando. Si hay que afrontar una deuda, mejor hacerlo con un plan acordado y, si es posible, con orientación profesional.' },
+      { q: '¿Y si niega que tenga un problema?', a: 'Es lo más habitual al principio. No hace falta que lo reconozca en la primera conversación. Di lo que has visto y cómo te afecta, deja la puerta abierta y vuelve a intentarlo más adelante. Mientras tanto, protege tu dinero y busca apoyo para ti.' },
+      { q: '¿Qué hago si habla de hacerse daño?', a: 'Tómalo en serio y no lo dejes solo. Llama al 024, la línea de atención a la conducta suicida, gratuita y disponible a cualquier hora, o al 112 si hay peligro inmediato.' },
+    ]
+  : [
+      { q: 'Should I pay their gambling debts?', a: 'Not as a first response. Paying debts without a plan tends to ease the pressure exactly when that pressure might lead them to seek help, and often frees money to keep gambling. If a debt has to be dealt with, do it with an agreed plan and, if possible, professional advice.' },
+      { q: 'What if they deny there is a problem?', a: 'That is very common at first. They do not need to admit it in the first conversation. Say what you have seen and how it affects you, leave the door open and try again later. Meanwhile, protect your money and get support for yourself.' },
+      { q: 'What if they talk about harming themselves?', a: 'Take it seriously and do not leave them alone. Call your local crisis line or emergency number straight away: 024 or 112 in Spain, 988 in the US, Samaritans on 116 123 in the UK.' },
+    ];
+---
+
+<QuestionPage lang={lang} id="family" faq={faq}>
+  <article class="page">
+    <div class="measure prose">
+      {
+        es ? (
+          <>
+            <h2>Señales que suelen aparecer</h2>
+            <ul>
+              <li>Falta dinero sin explicación, o pide prestado cada vez más a menudo.</li>
+              <li>Pasa mucho tiempo con el móvil a escondidas, sobre todo durante partidos.</li>
+              <li>Cambios de humor ligados a resultados deportivos o a días concretos.</li>
+              <li>Mentiras pequeñas sobre dónde ha estado o en qué ha gastado.</li>
+              <li>Habla de recuperar lo perdido, o de un método que esta vez sí funciona.</li>
+            </ul>
+            <p>Ninguna prueba nada por sí sola. Varias juntas, y durante un tiempo, merecen una conversación.</p>
+
+            <h2>Cómo hablarlo</h2>
+            <ol>
+              <li><strong>Elige el momento.</strong> Con calma, en privado, sin prisas, y nunca justo después de una pérdida o de una discusión.</li>
+              <li><strong>Habla de lo que ves y de cómo te afecta.</strong> «He visto que falta dinero de la cuenta y me preocupa» funciona mejor que «eres un ludópata».</li>
+              <li><strong>Escucha.</strong> Detrás del juego suele haber vergüenza, deudas que no se atreve a contar o una forma de escapar de algo.</li>
+              <li><strong>Propón un paso concreto.</strong> Llamar juntos a una línea de ayuda, hacer el <a href={href(lang, 'way2')}>cuestionario de nueve preguntas</a> o pedir cita con el médico de cabecera.</li>
+            </ol>
+
+            <h2>Lo que no ayuda</h2>
+            <ul>
+              <li>Pagar sus deudas sin un plan, o prestarle dinero.</li>
+              <li>Cubrirle ante otras personas o justificar sus ausencias.</li>
+              <li>Los sermones, las amenazas que no vas a cumplir y los interrogatorios.</li>
+            </ul>
+
+            <h2>Protégete tú</h2>
+            <p>
+              Separa tus cuentas, cambia las claves que conozca, no firmes préstamos ni avales y guarda copia de los documentos importantes. No es desconfianza: es lo que permite que el problema de una persona no se convierta en el de toda la familia.
+            </p>
+            <p>
+              Y busca apoyo para ti. Las asociaciones de FEJAR tienen grupos para familiares, y hablar con gente que ha pasado por lo mismo cambia mucho. Puedes llamar al 900 200 225 aunque no seas tú quien juega.
+            </p>
+          </>
+        ) : (
+          <>
+            <h2>Signs that tend to show up</h2>
+            <ul>
+              <li>Money goes missing with no explanation, or they borrow more and more often.</li>
+              <li>They spend a lot of time on their phone out of sight, especially during matches.</li>
+              <li>Mood swings tied to sports results or particular days.</li>
+              <li>Small lies about where they have been or what they spent money on.</li>
+              <li>Talk of winning back what was lost, or of a method that will work this time.</li>
+            </ul>
+            <p>None of these proves anything alone. Several together, over time, deserve a conversation.</p>
+
+            <h2>How to bring it up</h2>
+            <ol>
+              <li><strong>Pick the moment.</strong> Calmly, in private, with time, and never right after a loss or an argument.</li>
+              <li><strong>Talk about what you see and how it affects you.</strong> “I’ve noticed money missing from the account and I’m worried” works better than “you’re an addict”.</li>
+              <li><strong>Listen.</strong> Behind the gambling there is often shame, debts they dare not mention, or a way of escaping something.</li>
+              <li><strong>Suggest one concrete step.</strong> Calling a helpline together, taking the <a href={href(lang, 'way2')}>nine-question questionnaire</a> or booking a doctor’s appointment.</li>
+            </ol>
+
+            <h2>What does not help</h2>
+            <ul>
+              <li>Paying their debts without a plan, or lending them money.</li>
+              <li>Covering for them or making excuses for their absences.</li>
+              <li>Lectures, threats you will not carry out, and interrogations.</li>
+            </ul>
+
+            <h2>Protect yourself</h2>
+            <p>
+              Separate your accounts, change passwords they know, do not sign loans or guarantees, and keep copies of important documents. It is not mistrust: it is what stops one person’s problem from becoming the whole family’s.
+            </p>
+            <p>
+              And get support for yourself. Many gambling support services run groups for families, and talking to people who have been through the same thing makes a real difference. In the UK, GamCare (0808 8020 133) also supports family members; in Spain, FEJAR on 900 200 225.
+            </p>
+          </>
+        )
+      }
+    </div>
+  </article>
+</QuestionPage>

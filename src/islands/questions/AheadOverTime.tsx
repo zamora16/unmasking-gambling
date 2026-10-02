@@ -102,7 +102,7 @@ export default function AheadOverTime({ lang }: { lang: Lang }) {
           ariaLabel={t.chart}
         />
 
-        <div className="ug-table-scroll">
+        <div className="ug-table-scroll full">
           <table className="paytable compare">
             <thead>
               <tr>

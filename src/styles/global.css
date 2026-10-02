@@ -412,6 +412,10 @@ p {
   border: 1px solid var(--rule);
   border-radius: 6px;
 }
+/* tables that are the content itself, not a data dump: show every row */
+.ug-table-scroll.full {
+  max-height: none;
+}
 .ug-table {
   border-collapse: collapse;
   width: 100%;

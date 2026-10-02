@@ -1,0 +1,107 @@
+---
+import QuestionPage from '../../components/QuestionPage.astro';
+import Figure from '../../components/Figure.astro';
+import TechBox from '../../components/TechBox.astro';
+import TipsterSim from '../../islands/questions/TipsterSim';
+import { type Lang, href, questionHref } from '../../i18n';
+import { questionById } from '../../data/questions';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const es = lang === 'es';
+const betting = questionById('betting');
+
+const faq = es
+  ? [
+      { q: '¿Cómo saber si un tipster es bueno de verdad?', a: 'Necesitas su historial completo, publicado antes de cada partido y verificado por un tercero, con miles de pronósticos, no decenas. Mira el rendimiento sobre todo lo apostado, no el porcentaje de aciertos, y desconfía de las capturas de pantalla.' },
+      { q: '¿De qué viven los tipsters?', a: 'Muchos, de las suscripciones a sus grupos de pago, y otros como afiliados de casas de apuestas, que a menudo pagan una parte de lo que pierden los jugadores que les mandan. En ambos casos ganan aunque sus pronósticos no ganen.' },
+      { q: '¿Y los pronósticos con inteligencia artificial?', a: 'Un modelo no cambia la comisión de la casa. Probamos modelos de machine learning con más de 200.000 partidos: se acercan a la precisión de las cuotas, pero no la superan.' },
+    ]
+  : [
+      { q: 'How can you tell if a tipster is really good?', a: 'You need their complete record, published before each match and verified by a third party, with thousands of tips, not dozens. Look at return on everything staked, not hit rate, and be wary of screenshots.' },
+      { q: 'How do tipsters make money?', a: 'Many from subscriptions to paid groups, others as bookmaker affiliates, often paid a share of what the players they refer lose. Either way they earn whether or not their tips win.' },
+      { q: 'What about AI predictions?', a: 'A model does not change the bookmaker’s fee. We tested machine learning models on over 200,000 matches: they get close to the accuracy of the odds but do not beat it.' },
+    ];
+---
+
+<QuestionPage lang={lang} id="tipsters" faq={faq} sources={['src/islands/questions/TipsterSim.tsx', 'src/lib/tipsters.ts']}>
+  <article class="page">
+    <div class="measure prose">
+      {
+        es ? (
+          <>
+            <h2>El azar fabrica expertos</h2>
+            <p>
+              Imagina mil personas que pronostican partidos sin saber nada de fútbol, lanzando una moneda. Al final de la temporada, alguna habrá acertado bastante más de la mitad. Si esa persona abre un canal de pronósticos y enseña sus resultados, parecerá un experto. Las otras novecientas y pico no abren nada.
+            </p>
+            <p>
+              Eso es lo que muestra la simulación. Ninguno de estos mil tipsters tiene ninguna habilidad, y aun así los mejores de una temporada tienen números espectaculares. La pregunta es qué pasa la temporada siguiente.
+            </p>
+          </>
+        ) : (
+          <>
+            <h2>Chance manufactures experts</h2>
+            <p>
+              Picture a thousand people tipping matches with no knowledge of football, tossing a coin. By the end of the season, some will have got well over half right. If one of them opens a tips channel and shows their results, they will look like an expert. The other nine hundred or so open nothing.
+            </p>
+            <p>
+              That is what the simulation shows. None of these thousand tipsters has any skill, and still the best of one season have spectacular numbers. The question is what happens the next season.
+            </p>
+          </>
+        )
+      }
+    </div>
+  </article>
+
+  <Figure
+    wide={false}
+    title={es ? 'Los mejores de una temporada, en la siguiente' : 'The best of one season, in the next'}
+    sub={es ? 'Mil tipsters sin ninguna habilidad. Se ordenan por la primera temporada y se mira qué hacen en la segunda.' : 'A thousand tipsters with no skill at all. Ranked on season one, then watched in season two.'}
+  >
+    <TipsterSim client:idle lang={lang} />
+  </Figure>
+
+  <article class="page">
+    <div class="measure prose">
+      {
+        es ? (
+          <>
+            <h2>Lo que hace falta para saberlo</h2>
+            <p>
+              Distinguir habilidad de suerte exige muchísimas apuestas. Con una ventaja real del 3 % a cuotas en torno a 2, hacen falta unas cuatro mil apuestas para que el historial lo demuestre con cierta seguridad. Lo explicamos con una calculadora en <a href={questionHref(lang, betting.slug)}>{betting.question[lang]}</a>
+            </p>
+            <p>
+              En el <a href={href(lang, 'sports')}>simulador de apuestas deportivas</a> puedes ver también lo largas que llegan a ser las rachas por puro azar.
+            </p>
+          </>
+        ) : (
+          <>
+            <h2>What it takes to know</h2>
+            <p>
+              Telling skill from luck takes a huge number of bets. With a real 3% edge at odds around 2, it takes about four thousand bets before the record proves it with reasonable confidence. We go through it with a calculator in <a href={questionHref(lang, betting.slug)}>{betting.question[lang]}</a>
+            </p>
+            <p>
+              In the <a href={href(lang, 'sports')}>sports betting simulator</a> you can also see how long streaks get by pure chance.
+            </p>
+          </>
+        )
+      }
+
+      <TechBox lang={lang} title={es ? 'Regresión a la media' : 'Regression to the mean'}>
+        {
+          es ? (
+            <p>
+              El ROI de cada tipster en una temporada es ruido alrededor de −5,3 %. Al quedarnos con los diez primeros de una población de mil, seleccionamos la cola derecha de ese ruido. La segunda temporada es independiente de la primera, así que su media vuelve a −5,3 %. Es el mismo mecanismo que hace que el mejor fondo de inversión de un año rara vez repita.
+            </p>
+          ) : (
+            <p>
+              Each tipster’s ROI over a season is noise around −5.3%. Keeping the top ten out of a thousand selects the right tail of that noise. Season two is independent of season one, so its mean falls back to −5.3%. It is the same mechanism that means the best investment fund of one year rarely repeats.
+            </p>
+          )
+        }
+      </TechBox>
+    </div>
+  </article>
+</QuestionPage>

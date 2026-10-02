@@ -1,0 +1,88 @@
+---
+import QuestionPage from '../../components/QuestionPage.astro';
+import Figure from '../../components/Figure.astro';
+import BarrierChecklist from '../../islands/questions/BarrierChecklist';
+import { type Lang, href, questionHref } from '../../i18n';
+import { questionById } from '../../data/questions';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const es = lang === 'es';
+const rgiaj = questionById('rgiaj');
+
+const faq = es
+  ? [
+      { q: '¿Qué bloqueador de apuestas es mejor?', a: 'BetBlocker es gratuito y funciona en móvil y ordenador. Gamban es de pago. Más que cuál elijas, importa que la contraseña o la desinstalación queden en manos de otra persona, para que no puedas quitarlo en un momento de impulso.' },
+      { q: '¿Puede mi banco bloquear las apuestas?', a: 'Algunos bancos permiten bloquear los pagos a comercios de juego desde la app, y si no aparece la opción puedes pedirlo por teléfono. Los pagos de juego llevan un código de comercio propio (7995), que es lo que el banco bloquea.' },
+      { q: '¿Cómo dejo de ver anuncios de apuestas?', a: 'En Google, «Mi centro de anuncios» permite limitar los anuncios de juegos de azar. En redes sociales, deja de seguir casas de apuestas, tipsters y cuentas de pronósticos, y silencia los grupos donde se comparten apuestas.' },
+    ]
+  : [
+      { q: 'Which gambling blocker is best?', a: 'BetBlocker is free and works on phones and computers. Gamban is paid. More than which one you choose, what matters is that someone else controls the password or the uninstall, so you cannot remove it in a moment of impulse.' },
+      { q: 'Can my bank block gambling?', a: 'Some banks let you block payments to gambling merchants in their app, and if the option is not there you can ask by phone. Gambling payments carry their own merchant code (7995), which is what the bank blocks.' },
+      { q: 'How do I stop seeing betting ads?', a: 'On Google, “My Ad Center” lets you limit gambling ads. On social media, unfollow bookmakers, tipsters and tips accounts, and mute groups where bets are shared.' },
+    ];
+---
+
+<QuestionPage lang={lang} id="block" faq={faq} sources={['src/islands/questions/BarrierChecklist.tsx']}>
+  <article class="page">
+    <div class="measure prose">
+      {
+        es ? (
+          <>
+            <h2>Por qué varias capas</h2>
+            <p>
+              El impulso de jugar llega en el peor momento: de noche, después de una mala noticia, con el móvil en la mano. Una sola barrera se puede saltar en ese momento. Varias juntas convierten un clic en un camino largo, y ese tiempo extra es muchas veces lo que deja pasar el impulso.
+            </p>
+            <p>
+              La lista de abajo empieza por las barreras que, una vez puestas, ya no dependen de ti. Marca las que ya tienes. Se quedan guardadas en tu navegador para que puedas volver a ellas.
+            </p>
+          </>
+        ) : (
+          <>
+            <h2>Why several layers</h2>
+            <p>
+              The urge to gamble comes at the worst moment: at night, after bad news, phone in hand. A single barrier can be got round in that moment. Several together turn one click into a long road, and that extra time is often what lets the urge pass.
+            </p>
+            <p>
+              The list below starts with the barriers that, once in place, no longer depend on you. Tick the ones you already have. They stay saved in your browser so you can come back to them.
+            </p>
+          </>
+        )
+      }
+    </div>
+  </article>
+
+  <Figure wide={false} title={es ? 'Tus barreras contra el juego' : 'Your barriers against gambling'}>
+    <BarrierChecklist client:idle lang={lang} />
+  </Figure>
+
+  <article class="page">
+    <div class="measure prose">
+      {
+        es ? (
+          <>
+            <h2>El primer paso: la autoexclusión</h2>
+            <p>
+              Si solo vas a hacer una cosa hoy, que sea esta. El paso a paso está en <a href={questionHref(lang, rgiaj.slug)}>{rgiaj.question[lang]}</a>
+            </p>
+            <p>
+              Y si quieres un plan completo, con tus desencadenantes y qué hacer cuando llegue el impulso, en <a href={href(lang, 'way5')}>El Camino</a> puedes construirlo e imprimirlo.
+            </p>
+          </>
+        ) : (
+          <>
+            <h2>The first step: self-exclusion</h2>
+            <p>
+              If you only do one thing today, make it this. The step-by-step guide for Spain is in <a href={questionHref(lang, rgiaj.slug)}>{rgiaj.question[lang]}</a>
+            </p>
+            <p>
+              And for a full plan, with your triggers and what to do when the urge comes, you can build and print one in <a href={href(lang, 'way5')}>The Way</a>.
+            </p>
+          </>
+        )
+      }
+    </div>
+  </article>
+</QuestionPage>

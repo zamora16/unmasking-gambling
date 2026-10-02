@@ -162,7 +162,7 @@ export default function MartingaleCalc({ lang }: { lang: Lang }) {
         {ok && (
           <>
             <p className="panel-label">{t.seq}</p>
-            <div className="ug-table-scroll">
+            <div className="ug-table-scroll full">
               <table className="paytable compare">
                 <thead>
                   <tr>

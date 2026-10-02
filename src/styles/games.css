@@ -510,3 +510,57 @@
 .paytable.compare thead th:not(:first-child) {
   text-align: right;
 }
+
+/* Barrier checklist (question pages) */
+.barriers .bar-track {
+  height: 6px;
+  border-radius: 3px;
+  background: var(--rule);
+  overflow: hidden;
+}
+.barriers .bar-fill {
+  height: 100%;
+  background: var(--gold);
+  transition: width 0.3s ease;
+}
+.checklist {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 0.5rem;
+}
+.checklist label {
+  display: flex;
+  gap: 0.8rem;
+  align-items: flex-start;
+  padding: 0.8rem 0.9rem;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  cursor: pointer;
+}
+.checklist li.on label {
+  border-color: var(--gold);
+  background: var(--gold-soft);
+}
+.checklist input {
+  margin-top: 0.25rem;
+  width: 1.1rem;
+  height: 1.1rem;
+  accent-color: var(--gold);
+  flex: none;
+}
+.checklist strong {
+  display: block;
+}
+.checklist .how {
+  display: block;
+  font-size: 0.9rem;
+  color: var(--ink-2);
+  margin-top: 0.2rem;
+}
+@media (prefers-reduced-motion: reduce) {
+  .barriers .bar-fill {
+    transition: none;
+  }
+}

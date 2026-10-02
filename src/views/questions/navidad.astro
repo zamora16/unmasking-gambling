@@ -1,0 +1,127 @@
+---
+import QuestionPage from '../../components/QuestionPage.astro';
+import Figure from '../../components/Figure.astro';
+import TechBox from '../../components/TechBox.astro';
+import NavidadCalc from '../../islands/questions/NavidadCalc';
+import { type Lang, href, fmt } from '../../i18n';
+import { NAVIDAD } from '../../lib/navidad';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const es = lang === 'es';
+const f = fmt(lang);
+
+const faq = es
+  ? [
+      { q: '¿Cuánto se paga a Hacienda si toca el Gordo?', a: 'Cada décimo tributa por separado: los primeros 40.000 € están exentos y el resto paga un 20 %. Un décimo del Gordo (400.000 €) deja 72.000 € a Hacienda y 328.000 € al ganador. El segundo premio deja 108.000 € netos y el tercero, 48.000 €. Los demás premios por décimo no pagan nada.' },
+      { q: '¿Hay números o administraciones con más suerte?', a: 'No. Todos los números tienen la misma probabilidad. Las administraciones que venden muchos décimos reparten más premios porque venden más, no porque sus décimos toquen más: la probabilidad de cada décimo es la misma, se compre donde se compre.' },
+      { q: '¿Da igual elegir un número que juega mucha gente?', a: 'En la Lotería de Navidad, sí da igual. A diferencia de la Primitiva, el premio no se reparte entre los acertantes: cada décimo cobra su cantidad. Elegir una fecha o una terminación popular no cambia ni la probabilidad ni el premio.' },
+      { q: '¿Qué probabilidad hay de que toque algo?', a: `Un décimo cobra algún premio en torno al ${f.pct(NAVIDAD.pAny, 0)} de las veces, pero la mayoría de esas veces es el reintegro: te devuelven los 20 €. Cobrar más de lo que costó pasa en torno al ${f.pct(NAVIDAD.pProfit, 0)} de los décimos, casi siempre 100 €.` },
+      { q: '¿Compensa comprar más décimos?', a: 'Cada décimo añade lo mismo a tu probabilidad y lo mismo a tu pérdida media: unos 7 € por décimo después de impuestos. Comprar diez décimos multiplica por diez las dos cosas.' },
+    ]
+  : [
+      { q: 'How much tax do you pay on the Gordo?', a: 'Each décimo is taxed separately: the first €40,000 is tax-free and the rest pays 20%. A Gordo décimo (€400,000) leaves €72,000 to the tax office and €328,000 to the winner. The second prize leaves €108,000 net and the third €48,000. Smaller prizes per décimo pay nothing.' },
+      { q: 'Are some numbers or shops luckier?', a: 'No. Every number has the same chance. Shops that sell many décimos hand out more prizes because they sell more, not because their tickets win more often: each décimo has the same odds wherever it is bought.' },
+      { q: 'Does it matter if many people play my number?', a: 'Not in the Christmas Lottery. Unlike lotto games, the prize is not shared between winners: each décimo collects its own amount. Picking a date or a popular ending changes neither the odds nor the prize.' },
+      { q: 'What is the chance of winning anything?', a: `A décimo wins some prize about ${f.pct(NAVIDAD.pAny, 0)} of the time, but most of those are the refund: you get your €20 back. Winning more than it cost happens to about ${f.pct(NAVIDAD.pProfit, 0)} of décimos, nearly always €100.` },
+      { q: 'Is it worth buying more décimos?', a: 'Each décimo adds the same to your chance and the same to your expected loss: about €7 per décimo after tax. Buying ten multiplies both by ten.' },
+    ];
+---
+
+<QuestionPage lang={lang} id="navidad" faq={faq} sources={['src/islands/questions/NavidadCalc.tsx', 'src/lib/navidad.ts', 'src/data/navidad.json']}>
+  <article class="page">
+    <div class="measure prose">
+      {
+        es ? (
+          <>
+            <h2>Cómo funciona</h2>
+            <p>
+              El sorteo del 22 de diciembre usa 100.000 números, del 00000 al 99999. Cada número se imprime en muchas series, y cada billete de una serie se divide en diez décimos de 20 €. En 2025 se pusieron a la venta 198 series: 198 millones de décimos.
+            </p>
+            <p>
+              De todo lo que se vende, el 70 % vuelve en premios. El 30 % restante no vuelve a los jugadores: paga las comisiones de venta y los gastos, y lo que sobra es beneficio para el Estado, aparte de los impuestos sobre los premios grandes. Ese 70 % es la cifra que importa: de cada 20 € que pagas, vuelven de media 14 €.
+            </p>
+
+            <h2>La ilusión de la pedrea</h2>
+            <p>
+              Hay muchos premios pequeños: la pedrea, las centenas, las terminaciones, el reintegro. Hacen que mucha gente «gane algo» casi cada año. Pero el reintegro solo te devuelve lo que pagaste, y la mayoría de los demás son 100 € por décimo. Los premios que cambian una vida son unos pocos entre 100.000 números.
+            </p>
+            <p>
+              En la tabla tienes cada premio con su probabilidad exacta. Debajo puedes simular toda una vida comprando décimos cada Navidad.
+            </p>
+          </>
+        ) : (
+          <>
+            <h2>How it works</h2>
+            <p>
+              The 22 December draw uses 100,000 numbers, from 00000 to 99999. Each number is printed in many series, and each ticket in a series is split into ten décimos of €20. In 2025, 198 series went on sale: 198 million décimos.
+            </p>
+            <p>
+              Of everything sold, 70% comes back as prizes. The other 30% never comes back to players: it pays sales commissions and costs, and the rest is profit for the State, on top of the tax on big prizes. That 70% is the figure that matters: of every €20 you pay, €14 comes back on average.
+            </p>
+
+            <h2>The illusion of small prizes</h2>
+            <p>
+              There are many small prizes: the pedrea, matching hundreds, matching endings, the refund. They make lots of people “win something” almost every year. But the refund only gives you back what you paid, and most of the rest are €100 per décimo. Life-changing prizes are a handful among 100,000 numbers.
+            </p>
+            <p>
+              The table shows every prize with its exact odds. Below it you can simulate a lifetime of buying décimos every Christmas.
+            </p>
+          </>
+        )
+      }
+    </div>
+  </article>
+
+  <Figure
+    wide={false}
+    title={es ? 'Lo que vale de verdad un décimo' : 'What a décimo is really worth'}
+    sub={es ? 'Premios por décimo del sorteo de Navidad, con el programa de premios de 2025.' : 'Prizes per décimo in the Christmas draw, using the 2025 prize programme.'}
+  >
+    <NavidadCalc client:idle lang={lang} />
+  </Figure>
+
+  <article class="page">
+    <div class="measure prose">
+      {
+        es ? (
+          <>
+            <h2>Jugar sabiendo lo que se paga</h2>
+            <p>
+              Comprar un décimo para compartir la ilusión con la familia o el trabajo es, para mucha gente, parte de la Navidad. No hay nada malo en ello si se ve como lo que es: un gasto de unos 7 € por décimo a cambio de esa ilusión. El problema empieza cuando se compran décimos pensando que esta vez sí, o para recuperar lo de otros años.
+            </p>
+            <p>
+              Para el resto de loterías (Primitiva, Bonoloto, Euromillones), en el <a href={href(lang, 'lottery')}>simulador de loterías</a> puedes calcular sus probabilidades y jugar una vida entera en un clic.
+            </p>
+          </>
+        ) : (
+          <>
+            <h2>Playing knowing what you pay</h2>
+            <p>
+              Buying a décimo to share the excitement with family or colleagues is, for many people, part of Christmas. There is nothing wrong with it if you see it for what it is: about €7 per décimo spent on that excitement. The problem starts when people buy décimos thinking this time it will happen, or to make up for previous years.
+            </p>
+            <p>
+              For other lotteries (lotto, EuroMillions), the <a href={href(lang, 'lottery')}>lottery simulator</a> works out their odds and plays a whole lifetime in one click.
+            </p>
+          </>
+        )
+      }
+
+      <TechBox lang={lang} title={es ? 'Cómo se ha calculado' : 'How it was calculated'}>
+        {
+          es ? (
+            <p>
+              Cada serie reparte 14.000.000 € en premios sobre 20.000.000 € vendidos. Un mismo número puede cobrar varios premios (por ejemplo, centena y reintegro), así que la distribución de lo que cobra un décimo no es la tabla de premios: la obtenemos simulando {f.int(NAVIDAD.draws)} sorteos completos y evaluando los 100.000 números en cada uno. El valor esperado sale exacto, 14,00 € brutos y {f.eur(NAVIDAD.evNet, 2)} netos con el gravamen del 20 % por encima de 40.000 € por décimo. Código: <a href="https://github.com/zamora16/unmasking-gambling/blob/main/analysis/navidad/prizes.py">analysis/navidad/prizes.py</a>. Programa de premios: Sociedad Estatal Loterías y Apuestas del Estado (SELAE); fiscalidad: Agencia Tributaria.
+            </p>
+          ) : (
+            <p>
+              Each series pays €14,000,000 in prizes out of €20,000,000 sold. One number can collect several prizes (for example, a matching hundred and the refund), so the distribution of what a décimo pays is not the prize table: we get it by simulating {f.int(NAVIDAD.draws)} full draws and evaluating all 100,000 numbers in each. The expected value comes out exact, €14.00 gross and {f.eur(NAVIDAD.evNet, 2)} net of the 20% levy above €40,000 per décimo. Code: <a href="https://github.com/zamora16/unmasking-gambling/blob/main/analysis/navidad/prizes.py">analysis/navidad/prizes.py</a>. Prize programme: SELAE; tax: Spanish Tax Agency.
+            </p>
+          )
+        }
+      </TechBox>
+    </div>
+  </article>
+</QuestionPage>
