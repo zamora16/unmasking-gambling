@@ -107,3 +107,21 @@ describe('christmas lottery', () => {
     expect(r.shareAhead).toBeLessThan(0.05);
   });
 });
+
+import { REGIONS } from '../src/data/ccaa';
+
+describe('regional self-exclusion data', () => {
+  it('covers the 17 regions and 2 autonomous cities, each with the essentials', () => {
+    expect(REGIONS).toHaveLength(19);
+    expect(new Set(REGIONS.map((r) => r.dgoj)).size).toBe(19);
+    expect(new Set(REGIONS.map((r) => r.id)).size).toBe(19);
+    for (const r of REGIONS) {
+      for (const field of [r.where, r.covers, r.fee, r.minimum, r.length]) expect(field.length).toBeGreaterThan(3);
+      if (r.convenio) expect(r.convenio.boe).toMatch(/^BOE-A-\d{4}-\d+$/);
+    }
+  });
+
+  it('the registry slug used by the checklist matches the question', () => {
+    expect(QUESTIONS.find((q) => q.id === 'ccaa')!.slug).toEqual({ es: 'autoprohibicion-juego-comunidades-autonomas', en: 'gambling-self-exclusion-by-region-spain' });
+  });
+});

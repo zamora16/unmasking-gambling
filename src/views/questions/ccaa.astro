@@ -1,0 +1,272 @@
+---
+import QuestionPage from '../../components/QuestionPage.astro';
+import TechBox from '../../components/TechBox.astro';
+import { type Lang, questionHref } from '../../i18n';
+import { questionById } from '../../data/questions';
+import { REGIONS, CHECKED, dgojSheet, boeUrl } from '../../data/ccaa';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const es = lang === 'es';
+const rgiaj = questionById('rgiaj');
+const linked = REGIONS.filter((r) => r.convenio).length;
+const checked = new Intl.DateTimeFormat(es ? 'es-ES' : 'en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' }).format(new Date(CHECKED));
+
+const L = es
+  ? {
+      pick: 'Elige tu comunidad',
+      link: 'Conexión con el registro estatal',
+      mutuo: (y: number) => `Tiene convenio de reconocimiento mutuo con el RGIAJ desde ${y}.`,
+      integrado: (y: number) => `Su registro está integrado con el RGIAJ desde ${y}.`,
+      none: 'No consta convenio con el RGIAJ: pide las dos inscripciones.',
+      min: 'Duración mínima',
+      length: 'Duración',
+      covers: 'Te bloquea en',
+      notCovered: 'No te bloquea en',
+      fee: 'Para cancelarla',
+      where: 'Dónde pedirla',
+      online: 'Trámite oficial por internet',
+      info: 'Información oficial',
+      phone: 'Teléfono',
+      sheet: 'Ficha de la DGOJ',
+      convenio: 'Convenio en el BOE',
+    }
+  : {
+      pick: 'Choose your region',
+      link: 'Link with the national register',
+      mutuo: (y: number) => `Mutual-recognition agreement with the RGIAJ since ${y}.`,
+      integrado: (y: number) => `Its register has been integrated with the RGIAJ since ${y}.`,
+      none: 'No agreement with the RGIAJ on record: apply to both.',
+      min: 'Minimum length',
+      length: 'Length',
+      covers: 'Blocks you from',
+      notCovered: 'Does not block you from',
+      fee: 'To cancel it',
+      where: 'Where to apply',
+      online: 'Official online procedure',
+      info: 'Official information',
+      phone: 'Phone',
+      sheet: 'DGOJ fact sheet',
+      convenio: 'Agreement in the BOE',
+    };
+
+const faq = es
+  ? [
+      { q: '¿El RGIAJ me prohíbe la entrada en salones y casinos?', a: `El RGIAJ cubre todo el juego online con licencia estatal. Los locales físicos dependen de cada comunidad. ${linked} comunidades y ciudades tienen convenio para reconocer las inscripciones del registro estatal, pero la puesta en marcha puede tardar, así que lo más seguro es inscribirse también en el registro autonómico.` },
+      { q: '¿La autoprohibición me impide jugar en las máquinas de los bares?', a: 'No. En todas las comunidades, las máquinas de los bares y restaurantes son de acceso libre: nadie pide identificación. Si juegas en ellas, hacen falta otras barreras: dinero en efectivo limitado, otra ruta a casa, evitar ciertos bares y contárselo a alguien.' },
+      { q: '¿Cuesta dinero autoprohibirse?', a: 'Las fichas oficiales no recogen ninguna tasa por inscribirse, y en Cantabria consta expresamente que es gratis. Algunas comunidades cobran una tasa al cancelar: por ejemplo, 172,89 € en Madrid o 234,75 € en Baleares. En otras, como Andalucía, Cataluña o el País Vasco, no hay tasa.' },
+      { q: '¿Cómo se cancela la autoprohibición?', a: 'Pasado el tiempo mínimo, se pide la cancelación al mismo organismo donde te inscribiste. Si la inscripción llegó a otro registro por un convenio, solo puede cancelarla quien la hizo. Antes de cancelarla, háblalo con alguien de confianza o con tu terapeuta.' },
+    ]
+  : [
+      { q: 'Does the RGIAJ ban me from arcades and casinos?', a: `The RGIAJ covers all state-licensed online gambling. Physical venues are run by each region. ${linked} regions have agreements to recognise national registrations, but implementation can take time, so the safest option is to join the regional register too.` },
+      { q: 'Does self-exclusion stop me playing bar machines?', a: 'No. In every region, machines in bars and restaurants are open access: nobody checks ID. If you play them, you need other barriers: limited cash, a different route home, avoiding certain bars and telling someone.' },
+      { q: 'Does self-exclusion cost money?', a: 'The official sheets list no fee for registering, and Cantabria states explicitly that it is free. Some regions charge a fee to cancel: for example €172.89 in Madrid or €234.75 in the Balearic Islands. Others, such as Andalusia, Catalonia or the Basque Country, charge nothing.' },
+      { q: 'How do you cancel self-exclusion?', a: 'Once the minimum period has passed, you ask the same body you registered with. If the registration reached another register through an agreement, only the one that made it can cancel it. Before cancelling, talk it over with someone you trust or your therapist.' },
+    ];
+---
+
+<QuestionPage lang={lang} id="ccaa" faq={faq} sources={['src/data/ccaa.ts']}>
+  <article class="page">
+    <div class="measure prose">
+      {
+        es ? (
+          <>
+            <h2>Dos registros, dos inscripciones</h2>
+            <p>
+              En España hay dos tipos de autoprohibición. La estatal, en el RGIAJ, te bloquea en todo el juego online con licencia: <a href={questionHref(lang, rgiaj.slug)}>así se pide</a>. La autonómica te bloquea en los locales de tu comunidad: salones, bingos, casinos y locales de apuestas, donde te piden el DNI en la entrada.
+            </p>
+            <p>
+              {linked} comunidades y ciudades tienen convenio para que una inscripción sirva en los dos registros. Aun así, lo más seguro es pedir las dos el mismo día. Y ten en cuenta que ninguna te bloquea en las máquinas de los bares.
+            </p>
+          </>
+        ) : (
+          <>
+            <h2>Two registers, two applications</h2>
+            <p>
+              Spain has two kinds of self-exclusion. The national one, the RGIAJ, blocks you from all licensed online gambling: <a href={questionHref(lang, rgiaj.slug)}>how to apply</a>. The regional one blocks you from venues in your region: arcades, bingo halls, casinos and betting shops, which check ID at the door.
+            </p>
+            <p>
+              {linked} regions have agreements so that one registration counts in both registers. Even so, the safest option is to apply to both on the same day. And bear in mind that none of them blocks bar machines. The details below are the official Spanish wording.
+            </p>
+          </>
+        )
+      }
+
+      <form class="pick" action="#" onsubmit="return false">
+        <label>
+          <span>{L.pick}</span>
+          <select id="ccaa-pick">
+            <option value="">—</option>
+            {REGIONS.map((r) => <option value={r.id}>{r.name}</option>)}
+          </select>
+        </label>
+      </form>
+
+      {
+        REGIONS.map((r) => (
+          <section class="region" id={r.id} aria-labelledby={`h-${r.id}`}>
+            <h2 id={`h-${r.id}`}>{es ? `Autoprohibición del juego en ${r.name}` : r.name}</h2>
+            <p class:list={['link', r.convenio ? 'ok' : 'warn']}>
+              {r.convenio ? (r.convenio.kind === 'integrado' ? L.integrado(r.convenio.year) : L.mutuo(r.convenio.year)) : L.none}
+            </p>
+            <dl>
+              <dt>{L.where}</dt>
+              <dd>{r.where}</dd>
+              <dt>{L.covers}</dt>
+              <dd>{r.covers}</dd>
+              <dt>{L.notCovered}</dt>
+              <dd>{r.notCovered}</dd>
+              <dt>{L.min}</dt>
+              <dd>{r.minimum}</dd>
+              <dt>{L.length}</dt>
+              <dd>{r.length}</dd>
+              <dt>{L.fee}</dt>
+              <dd>{r.fee}</dd>
+              {r.phone && (
+                <>
+                  <dt>{L.phone}</dt>
+                  <dd>
+                    <a href={`tel:${r.phone.replace(/\s/g, '')}`}>{r.phone}</a>
+                  </dd>
+                </>
+              )}
+            </dl>
+            {r.extra && <p class="extra">{r.extra}</p>}
+            <p class="links">
+              {r.online && (
+                <a class="btn" href={r.online} rel="noopener">
+                  {L.online} ↗
+                </a>
+              )}
+              {r.info && (
+                <a href={r.info} rel="noopener">
+                  {L.info} ↗
+                </a>
+              )}
+              <a href={dgojSheet(r.dgoj)} rel="noopener">
+                {L.sheet} ↗
+              </a>
+              {r.convenio && (
+                <a href={boeUrl(r.convenio.boe)} rel="noopener">
+                  {L.convenio} ↗
+                </a>
+              )}
+            </p>
+          </section>
+        ))
+      }
+
+      <TechBox lang={lang} title={es ? 'Fuentes y fecha' : 'Sources and date'}>
+        {
+          es ? (
+            <p>
+              Fichas de autoprohibición por comunidad de la Dirección General de Ordenación del Juego, consultadas el {checked}, y convenios publicados en el BOE. Los trámites, enlaces y tasas cambian: antes de presentar nada, comprueba la ficha oficial de tu comunidad. Si ves algún dato desactualizado, avísanos.
+            </p>
+          ) : (
+            <p>
+              Regional self-exclusion fact sheets from Spain’s gambling regulator (DGOJ), checked on {checked}, and agreements published in the Official State Gazette (BOE). Procedures, links and fees change: before applying, check your region’s official sheet. If you spot something out of date, let us know.
+            </p>
+          )
+        }
+      </TechBox>
+    </div>
+  </article>
+</QuestionPage>
+
+<script>
+  const sel = document.getElementById('ccaa-pick') as HTMLSelectElement | null;
+  sel?.addEventListener('change', () => {
+    if (!sel.value) return;
+    const el = document.getElementById(sel.value);
+    el?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    history.replaceState(null, '', `#${sel.value}`);
+    el?.querySelector('h2')?.setAttribute('tabindex', '-1');
+    (el?.querySelector('h2') as HTMLElement | null)?.focus({ preventScroll: true });
+  });
+</script>
+
+<style>
+  .pick {
+    margin: 2rem 0 1rem;
+    padding: 1rem 1.2rem;
+    border: 1px solid var(--rule-strong);
+    border-radius: var(--radius);
+    background: var(--paper-2);
+  }
+  .pick label {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.6rem 1rem;
+    font-family: var(--sans);
+    font-weight: 600;
+  }
+  .pick select {
+    font: inherit;
+    font-weight: 400;
+    padding: 0.45rem 0.6rem;
+    border-radius: var(--radius);
+    border: 1px solid var(--rule-strong);
+    background: var(--paper);
+    color: var(--ink);
+    min-width: 14rem;
+  }
+  .region {
+    margin-top: 2.5rem;
+    scroll-margin-top: 5rem;
+  }
+  .region h2 {
+    font-size: 1.7rem;
+  }
+  .link {
+    font-family: var(--sans);
+    font-size: 0.92rem;
+    padding: 0.5rem 0.8rem;
+    border-radius: var(--radius);
+    border-left: 3px solid var(--gold);
+    background: var(--gold-soft);
+  }
+  .link.warn {
+    border-left-color: var(--accent);
+    background: color-mix(in srgb, var(--accent) 12%, transparent);
+  }
+  .region dl {
+    display: grid;
+    grid-template-columns: minmax(8rem, 12rem) 1fr;
+    gap: 0.45rem 1rem;
+    margin: 1rem 0;
+    font-size: 0.97rem;
+  }
+  .region dt {
+    font-family: var(--sans);
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--ink-3);
+    padding-top: 0.15rem;
+  }
+  .region dd {
+    margin: 0;
+  }
+  @media (max-width: 34rem) {
+    .region dl {
+      grid-template-columns: 1fr;
+      gap: 0.15rem;
+    }
+    .region dd {
+      margin-bottom: 0.6rem;
+    }
+  }
+  .extra {
+    font-size: 0.95rem;
+  }
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.6rem 1.2rem;
+    font-family: var(--sans);
+    font-size: 0.9rem;
+  }
+</style>

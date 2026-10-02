@@ -1,5 +1,8 @@
 import { useEffect, useState } from 'react';
-import type { Lang } from '../../i18n';
+import { questionHref, type Lang } from '../../i18n';
+
+// slug of the regional self-exclusion page (src/data/questions.ts, id 'ccaa')
+const CCAA = { es: 'autoprohibicion-juego-comunidades-autonomas', en: 'gambling-self-exclusion-by-region-spain' };
 
 const KEY = 'ug-barriers';
 
@@ -18,7 +21,7 @@ const T: Record<Lang, { title: string; progress: (d: number, n: number) => strin
         how: 'Bloquea todo el juego online con licencia en España y las loterías presenciales donde se pide identificación.',
         link: { label: 'Sede de la DGOJ', url: 'https://www.ordenacionjuego.es/participantes-juego/juego-seguro/rgiaj' },
       },
-      { id: 'regional', title: 'Inscribirme en el registro de mi comunidad autónoma', how: 'Salones, bingos y casinos físicos dependen de cada comunidad. Muchas están conectadas con el RGIAJ, pero conviene pedir las dos inscripciones.' },
+      { id: 'regional', title: 'Inscribirme en el registro de mi comunidad autónoma', how: 'Salones, bingos y casinos físicos dependen de cada comunidad. Muchas están conectadas con el RGIAJ, pero conviene pedir las dos inscripciones.', link: { label: 'Trámite de cada comunidad', url: questionHref('es', CCAA) } },
       { id: 'accounts', title: 'Cerrar mis cuentas en casas de apuestas y casinos', how: 'Pide la autoexclusión o el cierre en cada una. Mientras tanto, pon el límite de depósito al mínimo.' },
       { id: 'blocker', title: 'Instalar un bloqueador en el móvil y el ordenador', how: 'BetBlocker es gratuito; Gamban es de pago. Deja la contraseña en manos de otra persona.', link: { label: 'BetBlocker', url: 'https://betblocker.org' } },
       { id: 'bank', title: 'Bloquear los pagos de juego en mi banco', how: 'Busca la opción en la app o pídelo por teléfono: bloqueo de pagos a comercios de juego y apuestas (código de comercio 7995). Baja también los límites de la tarjeta.' },
@@ -34,7 +37,7 @@ const T: Record<Lang, { title: string; progress: (d: number, n: number) => strin
     note: 'The boxes are saved only in this browser.',
     items: [
       { id: 'rgiaj', title: 'Join my national self-exclusion scheme', how: 'RGIAJ in Spain, GAMSTOP in the UK. It blocks licensed online gambling across the country.' },
-      { id: 'regional', title: 'Exclude myself from venues', how: 'Arcades, bingo halls and casinos often have separate schemes, by region or by operator. Ask at each one.' },
+      { id: 'regional', title: 'Exclude myself from venues', how: 'Arcades, bingo halls and casinos often have separate schemes, by region or by operator. Ask at each one.', link: { label: 'Spain, region by region', url: questionHref('en', CCAA) } },
       { id: 'accounts', title: 'Close my betting and casino accounts', how: 'Ask each one for self-exclusion or closure. In the meantime, set the deposit limit to the minimum.' },
       { id: 'blocker', title: 'Install a blocker on my phone and computer', how: 'BetBlocker is free; Gamban is paid. Let someone else hold the password.', link: { label: 'BetBlocker', url: 'https://betblocker.org' } },
       { id: 'bank', title: 'Block gambling payments at my bank', how: 'Look for the option in your banking app or ask by phone: a block on payments to gambling merchants (merchant code 7995). Lower your card limits too.' },

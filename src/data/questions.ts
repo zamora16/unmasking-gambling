@@ -227,6 +227,20 @@ export const QUESTIONS: Question[] = [
     published: '2026-10-02',
   },
   {
+    id: 'ccaa',
+    slug: { es: 'autoprohibicion-juego-comunidades-autonomas', en: 'gambling-self-exclusion-by-region-spain' },
+    question: { es: 'Autoprohibición del juego en tu comunidad autónoma: cómo pedirla', en: 'Gambling self-exclusion in each Spanish region: how to apply' },
+    answer: {
+      es: 'Los salones, bingos, casinos y locales de apuestas dependen de cada comunidad, que tiene su propio registro de prohibidos. Doce comunidades y ciudades tienen convenio con el registro estatal (RGIAJ), pero lo más seguro es inscribirse en los dos. Aquí tienes el trámite oficial de cada una.',
+      en: 'Arcades, bingo halls, casinos and betting shops in Spain are regulated by each region, which keeps its own register. Twelve regions have an agreement with the national register (RGIAJ), but the safest option is to join both. Here is the official procedure for each one.',
+    },
+    kicker: { es: 'Autoprohibición', en: 'Self-exclusion' },
+    related: ['help', 'way4', 'way5'],
+    group: 'help',
+    nudge: 'help',
+    published: '2026-10-02',
+  },
+  {
     id: 'block',
     slug: { es: 'como-bloquear-las-apuestas', en: 'how-to-block-gambling' },
     question: { es: '¿Cómo bloquear las apuestas y el juego online?', en: 'How do you block betting and online gambling?' },
